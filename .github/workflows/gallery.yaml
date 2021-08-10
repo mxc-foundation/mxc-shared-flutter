@@ -1,6 +1,7 @@
 name: Gallery CI/CD
 
 on:
+  workflow_dispatch:
   push:
     branches: [ master ]
 
@@ -15,7 +16,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - uses: subosito/flutter-action@v1.3.0
+    - uses: subosito/flutter-action@v1.5.3
       with:
         channel: beta
 
@@ -26,7 +27,7 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
         name: web-build
-        path: ./build/web
+        path: ./ui/example/build/web
         
   deploy:
     runs-on: ubuntu-latest
