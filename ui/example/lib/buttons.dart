@@ -59,13 +59,13 @@ class ButtonsRow extends StatelessWidget {
             height: double.infinity,
             width: 10,
             decoration: BoxDecoration(
-              color: MxcScopedTheme.of(context)?.primaryColor ??
-                  ColorsTheme.of(context).mxcBlue,
+              color: MxcScopedTheme.of(context).primaryColor,
               borderRadius: BorderRadius.circular(15),
             ),
           ),
           SizedBox(width: 16),
           Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 children: [
@@ -129,6 +129,42 @@ class ButtonsRow extends StatelessWidget {
                       title: 'Outlined Button Disabled',
                       onTap: null,
                     ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 16),
+              Row(
+                children: [
+                  MxcCircleButton.image(
+                    key: null,
+                    image: ImagesTheme.of(context).fuel,
+                    filled: true,
+                    onTap: () {},
+                  ),
+                  SizedBox(width: 19),
+                  MxcCircleButton.image(
+                    key: null,
+                    image: ImagesTheme.of(context).iconMine,
+                    onTap: () {},
+                  ),
+                  SizedBox(width: 19),
+                  MxcCircleButton.icon(
+                    key: null,
+                    icon: Icons.arrow_forward,
+                    onTap: null,
+                  ),
+                  SizedBox(width: 19),
+                  MxcCircleButton.icon(
+                    key: null,
+                    icon: Icons.arrow_forward_ios,
+                    onTap: () {},
+                  ),
+                  SizedBox(width: 19),
+                  MxcCircleButton.image(
+                    key: null,
+                    image: ImagesTheme.of(context).gateways,
+                    filled: true,
+                    onTap: () {},
                   ),
                 ],
               ),

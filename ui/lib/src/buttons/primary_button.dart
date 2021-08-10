@@ -25,9 +25,8 @@ class _MxcPrimaryButtonState extends State<MxcPrimaryButton> {
 
   @override
   Widget build(BuildContext context) {
-    final primaryColor = widget.color ??
-        MxcScopedTheme.of(context)?.primaryColor ??
-        ColorsTheme.of(context).mxcBlue;
+    final primaryColor =
+        widget.color ?? MxcScopedTheme.of(context).primaryColor;
 
     var buttonColor = primaryColor;
 

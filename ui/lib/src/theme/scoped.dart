@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:mxc_ui/mxc_ui.dart';
 import 'package:provider/provider.dart';
 
 class MxcScopedThemeData {
-  final Color? primaryColor;
+  final Color primaryColor;
 
-  MxcScopedThemeData({this.primaryColor});
+  MxcScopedThemeData({required this.primaryColor});
 }
 
 class MxcScopedTheme extends StatelessWidget {
@@ -19,11 +20,12 @@ class MxcScopedTheme extends StatelessWidget {
     required this.child,
   }) : super(key: key);
 
-  static MxcScopedThemeData? of(BuildContext context, {bool listen = true}) {
+  static MxcScopedThemeData of(BuildContext context, {bool listen = true}) {
     try {
       return Provider.of<MxcScopedThemeData>(context, listen: listen);
     } on ProviderNotFoundException {
-      return null;
+      return MxcScopedThemeData(
+          primaryColor: ColorsTheme.of(context, listen: listen).mxcBlue);
     }
   }
 
