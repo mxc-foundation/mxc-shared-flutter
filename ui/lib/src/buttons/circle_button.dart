@@ -61,7 +61,7 @@ abstract class MxcCircleButton extends StatelessWidget {
       color: fillColor,
       shape: CircleBorder(),
       child: InkWell(
-        onTap: () {},
+        onTap: onTap,
         customBorder: CircleBorder(),
         child: Container(
           alignment: Alignment.center,

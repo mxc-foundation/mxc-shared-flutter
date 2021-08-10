@@ -166,6 +166,43 @@ class ButtonsRow extends StatelessWidget {
                     filled: true,
                     onTap: () {},
                   ),
+                  SizedBox(width: 19),
+                  MxcSwitch(
+                    key: null,
+                    value: false,
+                    onChanged: (_) {},
+                  ),
+                  MxcSwitch(
+                    key: null,
+                    value: true,
+                    onChanged: (_) {},
+                  ),
+                  MxcSwitch(
+                    key: null,
+                    value: true,
+                    onChanged: null,
+                  ),
+                  MxcCheckbox(
+                    key: null,
+                    value: false,
+                    onChanged: (_) {},
+                  ),
+                  MxcCheckbox(
+                    key: null,
+                    value: null,
+                    tristate: true,
+                    onChanged: (_) {},
+                  ),
+                  MxcCheckbox(
+                    key: null,
+                    value: true,
+                    onChanged: (_) {},
+                  ),
+                  MxcCheckbox(
+                    key: null,
+                    value: true,
+                    onChanged: null,
+                  ),
                 ],
               ),
             ],
