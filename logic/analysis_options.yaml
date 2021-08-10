@@ -13,3 +13,5 @@ linter:
   rules:
     sort_pub_dependencies: false
     avoid_dynamic_calls: true
+    invariant_booleans: true
+    require_trailing_commas: true
