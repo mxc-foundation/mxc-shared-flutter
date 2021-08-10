@@ -17,3 +17,18 @@ dev_dependencies:
     sdk: flutter
 
 flutter:
+  assets:
+    - assets/images/app/
+    - assets/images/login/
+    - assets/images/splash/
+    - assets/images/home/
+    - assets/images/deposit/
+    - assets/images/withdraw/
+    - assets/images/stake/
+    - assets/images/wallet/
+    - assets/images/device/
+    - assets/images/gateway/
+    - assets/images/calculator/currencies/
+    - assets/images/connectivity/
+    - assets/images/settings/
+    - assets/images/maintenance/
