@@ -31,7 +31,8 @@ class _MxcOutlinedButtonState extends State<MxcOutlinedButton> {
     }
 
     return MouseRegion(
-      cursor: SystemMouseCursors.click,
+      cursor:
+          widget.onTap == null ? MouseCursor.defer : SystemMouseCursors.click,
       onEnter: (e) {
         if (!hovering) {
           setState(() => hovering = true);
