@@ -1,44 +1,79 @@
-import 'package:example/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:mxc_ui/mxc_ui.dart';
 
-class ButtonsPage extends StatelessWidget {
+class ButtonsPage extends StatefulWidget {
   const ButtonsPage({Key? key}) : super(key: key);
 
   @override
+  State<ButtonsPage> createState() => _ButtonsPageState();
+}
+
+class _ButtonsPageState extends State<ButtonsPage> {
+  bool darkMode = false;
+
+  @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Padding(
-          padding: EdgeInsets.all(32),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+    return MxcTheme.fromOption(
+      option: darkMode ? MxcThemeOption.night : MxcThemeOption.day,
+      child: Builder(
+        builder: (context) => Container(
+          color: darkMode
+              ? ColorsTheme.of(context).secondaryBackground
+              : Color(0xFFE5E5E5),
+          child: Stack(
             children: [
-              MxcScopedTheme(
-                data: MxcScopedThemeData(
-                    primaryColor: ColorsTheme.of(context).mxcBlue),
-                child: ButtonsRow(),
+              SingleChildScrollView(
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Padding(
+                    padding: EdgeInsets.all(32),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        MxcScopedTheme(
+                          data: MxcScopedThemeData(
+                            primaryColor: ColorsTheme.of(context).mxcBlue,
+                          ),
+                          child: ButtonsRow(),
+                        ),
+                        SizedBox(height: 48),
+                        MxcScopedTheme(
+                          data: MxcScopedThemeData(
+                            primaryColor: ColorsTheme.of(context).dhxBlue,
+                          ),
+                          child: ButtonsRow(),
+                        ),
+                        SizedBox(height: 48),
+                        MxcScopedTheme(
+                          data: MxcScopedThemeData(
+                            primaryColor: ColorsTheme.of(context).dhxPurple,
+                          ),
+                          child: ButtonsRow(),
+                        ),
+                        SizedBox(height: 48),
+                        MxcScopedTheme(
+                          data: MxcScopedThemeData(
+                            primaryColor:
+                                ColorsTheme.of(context).minerHealthRed,
+                          ),
+                          child: ButtonsRow(),
+                        ),
+                        SizedBox(height: 48),
+                      ],
+                    ),
+                  ),
+                ),
               ),
-              SizedBox(height: 48),
-              MxcScopedTheme(
-                data: MxcScopedThemeData(
-                    primaryColor: ColorsTheme.of(context).dhxBlue),
-                child: ButtonsRow(),
+              Positioned(
+                top: 10,
+                right: 10,
+                child: MxcCircleButton.icon(
+                  key: null,
+                  icon: Icons.dark_mode,
+                  onTap: () => setState(() => darkMode = !darkMode),
+                  filled: true,
+                ),
               ),
-              SizedBox(height: 48),
-              MxcScopedTheme(
-                data: MxcScopedThemeData(
-                    primaryColor: ColorsTheme.of(context).dhxPurple),
-                child: ButtonsRow(),
-              ),
-              SizedBox(height: 48),
-              MxcScopedTheme(
-                data: MxcScopedThemeData(
-                    primaryColor: ColorsTheme.of(context).minerHealthRed),
-                child: ButtonsRow(),
-              ),
-              SizedBox(height: 48),
             ],
           ),
         ),
@@ -135,6 +170,28 @@ class ButtonsRow extends StatelessWidget {
               SizedBox(height: 16),
               Row(
                 children: [
+                  SizedBox(
+                    width: 250,
+                    child: SegmentationTab(
+                      key: null,
+                      labels: ['lorem', 'ipsum'],
+                      onChanged: (_) {},
+                    ),
+                  ),
+                  SizedBox(
+                    width: 250,
+                    child: PageIndicator(
+                      key: null,
+                      length: 5,
+                      selectedPage: 3,
+                      onSelected: (_) {},
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 16),
+              Row(
+                children: [
                   MxcCircleButton.image(
                     key: null,
                     image: ImagesTheme.of(context).fuel,
@@ -202,6 +259,36 @@ class ButtonsRow extends StatelessWidget {
                     key: null,
                     value: true,
                     onChanged: null,
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  SizedBox(
+                    width: 200,
+                    child: MxcSlider(
+                      key: null,
+                      value: 0.12,
+                      onChanged: (_) {},
+                    ),
+                  ),
+                  SizedBox(width: 15),
+                  SizedBox(
+                    width: 200,
+                    child: MxcSlider.loading(
+                      key: null,
+                    ),
+                  ),
+                  SizedBox(width: 15),
+                  SizedBox(
+                    width: 200,
+                    child: MxcSlider(
+                      key: null,
+                      value: 0.5,
+                      onChanged: (_) {},
+                      divisions: 2,
+                      labels: ['0%', '50%', '100%'],
+                    ),
                   ),
                 ],
               ),
