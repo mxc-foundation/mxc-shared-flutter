@@ -23,44 +23,40 @@ class _ButtonsPageState extends State<ButtonsPage> {
           child: Stack(
             children: [
               SingleChildScrollView(
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Padding(
-                    padding: EdgeInsets.all(32),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        MxcScopedTheme(
-                          data: MxcScopedThemeData(
-                            primaryColor: ColorsTheme.of(context).mxcBlue,
-                          ),
-                          child: ButtonsRow(),
+                child: Padding(
+                  padding: EdgeInsets.all(32),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      MxcScopedTheme(
+                        data: MxcScopedThemeData(
+                          primaryColor: ColorsTheme.of(context).mxcBlue,
                         ),
-                        SizedBox(height: 48),
-                        MxcScopedTheme(
-                          data: MxcScopedThemeData(
-                            primaryColor: ColorsTheme.of(context).dhxBlue,
-                          ),
-                          child: ButtonsRow(),
+                        child: ButtonsRow(),
+                      ),
+                      SizedBox(height: 48),
+                      MxcScopedTheme(
+                        data: MxcScopedThemeData(
+                          primaryColor: ColorsTheme.of(context).dhxBlue,
                         ),
-                        SizedBox(height: 48),
-                        MxcScopedTheme(
-                          data: MxcScopedThemeData(
-                            primaryColor: ColorsTheme.of(context).dhxPurple,
-                          ),
-                          child: ButtonsRow(),
+                        child: ButtonsRow(),
+                      ),
+                      SizedBox(height: 48),
+                      MxcScopedTheme(
+                        data: MxcScopedThemeData(
+                          primaryColor: ColorsTheme.of(context).dhxPurple,
                         ),
-                        SizedBox(height: 48),
-                        MxcScopedTheme(
-                          data: MxcScopedThemeData(
-                            primaryColor:
-                                ColorsTheme.of(context).minerHealthRed,
-                          ),
-                          child: ButtonsRow(),
+                        child: ButtonsRow(),
+                      ),
+                      SizedBox(height: 48),
+                      MxcScopedTheme(
+                        data: MxcScopedThemeData(
+                          primaryColor: ColorsTheme.of(context).minerHealthRed,
                         ),
-                        SizedBox(height: 48),
-                      ],
-                    ),
+                        child: ButtonsRow(),
+                      ),
+                      SizedBox(height: 48),
+                    ],
                   ),
                 ),
               ),
@@ -99,200 +95,208 @@ class ButtonsRow extends StatelessWidget {
             ),
           ),
           SizedBox(width: 16),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  SizedBox(
-                    width: 343,
-                    child: MxcPrimaryButton(
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Wrap(
+                  runSpacing: 5,
+                  children: [
+                    SizedBox(
+                      width: 343,
+                      child: MxcPrimaryButton(
+                        key: null,
+                        title: 'Primary Button',
+                        onTap: () {},
+                      ),
+                    ),
+                    SizedBox(width: 19),
+                    SizedBox(
+                      width: 343,
+                      child: MxcPrimaryButton(
+                        key: null,
+                        title: 'Primary Button Disabled',
+                        onTap: null,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 16),
+                Wrap(
+                  runSpacing: 5,
+                  children: [
+                    SizedBox(
+                      width: 343,
+                      child: MxcSecondaryButton(
+                        key: null,
+                        title: 'Secondary Button',
+                        onTap: () {},
+                      ),
+                    ),
+                    SizedBox(width: 19),
+                    SizedBox(
+                      width: 343,
+                      child: MxcSecondaryButton(
+                        key: null,
+                        title: 'Secondary Button Disabled',
+                        onTap: null,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 16),
+                Wrap(
+                  runSpacing: 5,
+                  children: [
+                    SizedBox(
+                      width: 343,
+                      child: MxcOutlinedButton(
+                        key: null,
+                        title: 'Outlined Button',
+                        onTap: () {},
+                      ),
+                    ),
+                    SizedBox(width: 19),
+                    SizedBox(
+                      width: 343,
+                      child: MxcOutlinedButton(
+                        key: null,
+                        title: 'Outlined Button Disabled',
+                        onTap: null,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 16),
+                Wrap(
+                  runSpacing: 5,
+                  children: [
+                    SizedBox(
+                      width: 250,
+                      child: SegmentationTab(
+                        key: null,
+                        labels: ['lorem', 'ipsum'],
+                        onChanged: (_) {},
+                      ),
+                    ),
+                    SizedBox(
+                      width: 250,
+                      child: PageIndicator(
+                        key: null,
+                        length: 5,
+                        selectedPage: 3,
+                        onSelected: (_) {},
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 16),
+                Wrap(
+                  runSpacing: 5,
+                  children: [
+                    MxcCircleButton.image(
                       key: null,
-                      title: 'Primary Button',
+                      image: ImagesTheme.of(context).fuel,
+                      filled: true,
                       onTap: () {},
                     ),
-                  ),
-                  SizedBox(width: 19),
-                  SizedBox(
-                    width: 343,
-                    child: MxcPrimaryButton(
+                    SizedBox(width: 19),
+                    MxcCircleButton.image(
                       key: null,
-                      title: 'Primary Button Disabled',
-                      onTap: null,
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 16),
-              Row(
-                children: [
-                  SizedBox(
-                    width: 343,
-                    child: MxcSecondaryButton(
-                      key: null,
-                      title: 'Secondary Button',
+                      image: ImagesTheme.of(context).iconMine,
                       onTap: () {},
                     ),
-                  ),
-                  SizedBox(width: 19),
-                  SizedBox(
-                    width: 343,
-                    child: MxcSecondaryButton(
+                    SizedBox(width: 19),
+                    MxcCircleButton.icon(
                       key: null,
-                      title: 'Secondary Button Disabled',
+                      icon: Icons.arrow_forward,
                       onTap: null,
                     ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 16),
-              Row(
-                children: [
-                  SizedBox(
-                    width: 343,
-                    child: MxcOutlinedButton(
+                    SizedBox(width: 19),
+                    MxcCircleButton.icon(
                       key: null,
-                      title: 'Outlined Button',
+                      icon: Icons.arrow_forward_ios,
                       onTap: () {},
                     ),
-                  ),
-                  SizedBox(width: 19),
-                  SizedBox(
-                    width: 343,
-                    child: MxcOutlinedButton(
+                    SizedBox(width: 19),
+                    MxcCircleButton.image(
                       key: null,
-                      title: 'Outlined Button Disabled',
-                      onTap: null,
+                      image: ImagesTheme.of(context).gateways,
+                      filled: true,
+                      onTap: () {},
                     ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 16),
-              Row(
-                children: [
-                  SizedBox(
-                    width: 250,
-                    child: SegmentationTab(
+                    SizedBox(width: 19),
+                    MxcSwitch(
                       key: null,
-                      labels: ['lorem', 'ipsum'],
+                      value: false,
                       onChanged: (_) {},
                     ),
-                  ),
-                  SizedBox(
-                    width: 250,
-                    child: PageIndicator(
+                    MxcSwitch(
                       key: null,
-                      length: 5,
-                      selectedPage: 3,
-                      onSelected: (_) {},
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 16),
-              Row(
-                children: [
-                  MxcCircleButton.image(
-                    key: null,
-                    image: ImagesTheme.of(context).fuel,
-                    filled: true,
-                    onTap: () {},
-                  ),
-                  SizedBox(width: 19),
-                  MxcCircleButton.image(
-                    key: null,
-                    image: ImagesTheme.of(context).iconMine,
-                    onTap: () {},
-                  ),
-                  SizedBox(width: 19),
-                  MxcCircleButton.icon(
-                    key: null,
-                    icon: Icons.arrow_forward,
-                    onTap: null,
-                  ),
-                  SizedBox(width: 19),
-                  MxcCircleButton.icon(
-                    key: null,
-                    icon: Icons.arrow_forward_ios,
-                    onTap: () {},
-                  ),
-                  SizedBox(width: 19),
-                  MxcCircleButton.image(
-                    key: null,
-                    image: ImagesTheme.of(context).gateways,
-                    filled: true,
-                    onTap: () {},
-                  ),
-                  SizedBox(width: 19),
-                  MxcSwitch(
-                    key: null,
-                    value: false,
-                    onChanged: (_) {},
-                  ),
-                  MxcSwitch(
-                    key: null,
-                    value: true,
-                    onChanged: (_) {},
-                  ),
-                  MxcSwitch(
-                    key: null,
-                    value: true,
-                    onChanged: null,
-                  ),
-                  MxcCheckbox(
-                    key: null,
-                    value: false,
-                    onChanged: (_) {},
-                  ),
-                  MxcCheckbox(
-                    key: null,
-                    value: null,
-                    tristate: true,
-                    onChanged: (_) {},
-                  ),
-                  MxcCheckbox(
-                    key: null,
-                    value: true,
-                    onChanged: (_) {},
-                  ),
-                  MxcCheckbox(
-                    key: null,
-                    value: true,
-                    onChanged: null,
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  SizedBox(
-                    width: 200,
-                    child: MxcSlider(
-                      key: null,
-                      value: 0.12,
+                      value: true,
                       onChanged: (_) {},
                     ),
-                  ),
-                  SizedBox(width: 15),
-                  SizedBox(
-                    width: 200,
-                    child: MxcSlider.loading(
+                    MxcSwitch(
                       key: null,
+                      value: true,
+                      onChanged: null,
                     ),
-                  ),
-                  SizedBox(width: 15),
-                  SizedBox(
-                    width: 200,
-                    child: MxcSlider(
+                    MxcCheckbox(
                       key: null,
-                      value: 0.5,
+                      value: false,
                       onChanged: (_) {},
-                      divisions: 2,
-                      labels: ['0%', '50%', '100%'],
                     ),
-                  ),
-                ],
-              ),
-            ],
+                    MxcCheckbox(
+                      key: null,
+                      value: null,
+                      tristate: true,
+                      onChanged: (_) {},
+                    ),
+                    MxcCheckbox(
+                      key: null,
+                      value: true,
+                      onChanged: (_) {},
+                    ),
+                    MxcCheckbox(
+                      key: null,
+                      value: true,
+                      onChanged: null,
+                    ),
+                  ],
+                ),
+                Wrap(
+                  runSpacing: 5,
+                  children: [
+                    SizedBox(
+                      width: 200,
+                      child: MxcSlider(
+                        key: null,
+                        value: 0.12,
+                        onChanged: (_) {},
+                      ),
+                    ),
+                    SizedBox(width: 15),
+                    SizedBox(
+                      width: 200,
+                      child: MxcSlider.loading(
+                        key: null,
+                      ),
+                    ),
+                    SizedBox(width: 15),
+                    SizedBox(
+                      width: 200,
+                      child: MxcSlider(
+                        key: null,
+                        value: 0.5,
+                        onChanged: (_) {},
+                        divisions: 2,
+                        labels: ['0%', '50%', '100%'],
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ],
       ),
