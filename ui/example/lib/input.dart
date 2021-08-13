@@ -66,10 +66,13 @@ class _InputPageState extends State<InputPage> {
         child: Container(
           color: ColorsTheme.of(context).boxComponents,
           padding: const EdgeInsets.only(
-            top: 40,
+            top: 50,
             bottom: 45,
             left: 32,
             right: 32,
+          ),
+          constraints: BoxConstraints(
+            minHeight: MediaQuery.of(context).size.height,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,9 +81,10 @@ class _InputPageState extends State<InputPage> {
                 padding: const EdgeInsets.only(left: 46),
                 child: Text(
                   'Inputs',
-                  style: FontTheme.of(context).veryBig(),
+                  style: FontTheme.of(context).veryBig().copyWith(fontSize: 48),
                 ),
               ),
+              SizedBox(height: 20),
               Row(
                 children: [
                   Expanded(
@@ -128,11 +132,6 @@ class InputPageCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'Standard',
-            style: FontTheme.of(context).big(),
-          ),
-          SizedBox(height: 20),
           Text(
             'Default',
             style: FontTheme.of(context).big(),
