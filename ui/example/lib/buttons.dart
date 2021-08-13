@@ -28,6 +28,42 @@ class _ButtonsPageState extends State<ButtonsPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      MxcAppBar.back(text: 'Title'),
+                      MxcAppBar.close(text: 'Title'),
+                      MxcAppBar.back(
+                        text: 'Long Title ' * 100,
+                        action: AppBarButton.text(
+                          'Skip',
+                          onTap: () {},
+                        ),
+                      ),
+                      MxcAppBar(
+                        text: 'Long Title ' * 100,
+                        leading: AppBarButton.icon(
+                          FontAwesomeIcons.calculator,
+                          onTap: () {},
+                        ),
+                        action: AppBarButton.icon(
+                          Icons.settings,
+                          onTap: () {},
+                        ),
+                      ),
+                      MxcAppBar.custom(
+                        title: Center(
+                          child: Image(
+                            image: ImagesTheme.of(context).logoMxc,
+                            height: 40,
+                          ),
+                        ),
+                        leading: AppBarButton.icon(
+                          FontAwesomeIcons.calculator,
+                          onTap: () {},
+                        ),
+                        action: AppBarButton.icon(
+                          Icons.settings,
+                          onTap: () {},
+                        ),
+                      ),
                       MxcScopedTheme(
                         data: MxcScopedThemeData(
                           primaryColor: ColorsTheme.of(context).mxcBlue,
