@@ -10,3 +10,4 @@ export 'src/checkbox.dart';
 export 'src/tabs/tabs.dart';
 export 'src/slider.dart';
 export 'src/app_bar.dart';
+export 'src/text_field.dart';

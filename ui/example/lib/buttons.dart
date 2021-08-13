@@ -28,40 +28,47 @@ class _ButtonsPageState extends State<ButtonsPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      MxcAppBar.back(text: 'Title'),
-                      MxcAppBar.close(text: 'Title'),
-                      MxcAppBar.back(
-                        text: 'Long Title ' * 100,
-                        action: AppBarButton.text(
-                          'Skip',
-                          onTap: () {},
-                        ),
-                      ),
-                      MxcAppBar(
-                        text: 'Long Title ' * 100,
-                        leading: AppBarButton.icon(
-                          FontAwesomeIcons.calculator,
-                          onTap: () {},
-                        ),
-                        action: AppBarButton.icon(
-                          Icons.settings,
-                          onTap: () {},
-                        ),
-                      ),
-                      MxcAppBar.custom(
-                        title: Center(
-                          child: Image(
-                            image: ImagesTheme.of(context).logoMxc,
-                            height: 40,
-                          ),
-                        ),
-                        leading: AppBarButton.icon(
-                          FontAwesomeIcons.calculator,
-                          onTap: () {},
-                        ),
-                        action: AppBarButton.icon(
-                          Icons.settings,
-                          onTap: () {},
+                      SizedBox(
+                        width: 400,
+                        child: Column(
+                          children: [
+                            MxcAppBar.back(text: 'Title'),
+                            MxcAppBar.close(text: 'Title'),
+                            MxcAppBar.back(
+                              text: 'Long Title ' * 100,
+                              action: AppBarButton.text(
+                                'Skip',
+                                onTap: () {},
+                              ),
+                            ),
+                            MxcAppBar(
+                              text: 'Long Title ' * 100,
+                              leading: AppBarButton.icon(
+                                FontAwesomeIcons.calculator,
+                                onTap: () {},
+                              ),
+                              action: AppBarButton.icon(
+                                Icons.settings,
+                                onTap: () {},
+                              ),
+                            ),
+                            MxcAppBar.custom(
+                              title: Center(
+                                child: Image(
+                                  image: ImagesTheme.of(context).logoMxc,
+                                  height: 40,
+                                ),
+                              ),
+                              leading: AppBarButton.icon(
+                                FontAwesomeIcons.calculator,
+                                onTap: () {},
+                              ),
+                              action: AppBarButton.icon(
+                                Icons.settings,
+                                onTap: () {},
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                       MxcScopedTheme(
@@ -330,6 +337,21 @@ class ButtonsRow extends StatelessWidget {
                       ),
                     ),
                   ],
+                ),
+                MxcTextField(
+                  key: null,
+                  label: 'Label',
+                  controller: TextEditingController(),
+                ),
+                MxcTextField(
+                  key: null,
+                  label: 'Label',
+                  controller: TextEditingController(),
+                  hint: 'Hint',
+                  button: MxcTextFieldButton(
+                    icon: Icons.ac_unit,
+                    onTap: () {},
+                  ),
                 ),
               ],
             ),

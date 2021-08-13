@@ -42,7 +42,7 @@ class FontTheme {
         TextStyle(
           color: _colorsTheme.textPrimaryAndIcons,
           fontFamily: "Roboto",
-          fontSize: 15,
+          fontSize: 16,
           height: 1.33333,
           decoration: TextDecoration.none,
         ),

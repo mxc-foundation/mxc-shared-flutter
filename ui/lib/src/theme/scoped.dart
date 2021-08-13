@@ -33,7 +33,13 @@ class MxcScopedTheme extends StatelessWidget {
   Widget build(BuildContext context) {
     return Provider.value(
       value: data,
-      child: child,
+      child: Theme(
+        data: ThemeData(
+          primaryColor: data.primaryColor,
+          primaryColorDark: data.primaryColor,
+        ),
+        child: child,
+      ),
     );
   }
 }
