@@ -22,24 +22,28 @@ class _InputPageState extends State<InputPage> {
         color: theme.colors.boxComponents,
         child: Stack(
           children: [
-            Padding(
+            SingleChildScrollView(
               padding: const EdgeInsets.only(
                 top: 40,
                 left: 8,
                 right: 8,
+                bottom: 80,
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 46),
-                    child: Text(
-                      'Inputs',
-                      style: theme.fonts.veryBig(),
+              child: SizedBox(
+                width: double.infinity,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 46),
+                      child: Text(
+                        'Inputs',
+                        style: theme.fonts.veryBig(),
+                      ),
                     ),
-                  ),
-                  InputPageCard(showBackground: false),
-                ],
+                    InputPageCard(showBackground: false),
+                  ],
+                ),
               ),
             ),
             Positioned(
@@ -58,38 +62,40 @@ class _InputPageState extends State<InputPage> {
     );
   }
 
-  Widget desktopView() => Container(
-        color: ColorsTheme.of(context).boxComponents,
-        padding: const EdgeInsets.only(
-          top: 80,
-          bottom: 45,
-          left: 32,
-          right: 32,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 46),
-              child: Text(
-                'Inputs',
-                style: FontTheme.of(context).veryBig(),
-              ),
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: InputPageCard(),
+  Widget desktopView() => SingleChildScrollView(
+        child: Container(
+          color: ColorsTheme.of(context).boxComponents,
+          padding: const EdgeInsets.only(
+            top: 40,
+            bottom: 45,
+            left: 32,
+            right: 32,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 46),
+                child: Text(
+                  'Inputs',
+                  style: FontTheme.of(context).veryBig(),
                 ),
-                Expanded(
-                  child: MxcTheme.fromOption(
-                    option: MxcThemeOption.night,
+              ),
+              Row(
+                children: [
+                  Expanded(
                     child: InputPageCard(),
                   ),
-                ),
-              ],
-            ),
-          ],
+                  Expanded(
+                    child: MxcTheme.fromOption(
+                      option: MxcThemeOption.night,
+                      child: InputPageCard(),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       );
 
