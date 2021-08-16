@@ -19,19 +19,22 @@ class PageIndicator extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         for (var i = 0; i < length; i++)
-          GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onTap: () => onSelected(i),
-            child: Padding(
-              padding: EdgeInsets.all(8),
-              child: Container(
-                height: 12,
-                width: 12,
-                decoration: BoxDecoration(
-                  color: i == selectedPage
-                      ? MxcScopedTheme.of(context).primaryColor
-                      : ColorsTheme.of(context).textLabel,
-                  shape: BoxShape.circle,
+          MouseRegion(
+            cursor: SystemMouseCursors.click,
+            child: GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onTap: () => onSelected(i),
+              child: Padding(
+                padding: EdgeInsets.all(8),
+                child: Container(
+                  height: 12,
+                  width: 12,
+                  decoration: BoxDecoration(
+                    color: i == selectedPage
+                        ? MxcScopedTheme.of(context).primaryColor
+                        : ColorsTheme.of(context).textLabel,
+                    shape: BoxShape.circle,
+                  ),
                 ),
               ),
             ),

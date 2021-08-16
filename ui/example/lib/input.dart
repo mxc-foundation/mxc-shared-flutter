@@ -112,7 +112,7 @@ class _InputPageState extends State<InputPage> {
   }
 }
 
-class InputPageCard extends StatelessWidget {
+class InputPageCard extends StatefulWidget {
   final bool showBackground;
   const InputPageCard({
     Key? key,
@@ -120,9 +120,24 @@ class InputPageCard extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<InputPageCard> createState() => _InputPageCardState();
+}
+
+class _InputPageCardState extends State<InputPageCard> {
+  final TextEditingController controller1 = TextEditingController();
+  final TextEditingController controller2 =
+      TextEditingController(text: 'Entered text');
+
+  void dispose() {
+    controller1.dispose();
+    controller2.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: showBackground
+      decoration: widget.showBackground
           ? BoxDecoration(
               color: ColorsTheme.of(context).boxComponents,
               borderRadius: BorderRadius.circular(15),
@@ -141,7 +156,7 @@ class InputPageCard extends StatelessWidget {
             key: null,
             label: 'Label text',
             hint: 'Hint text',
-            controller: TextEditingController(),
+            controller: controller1,
           ),
           MxcTextField(
             key: null,
@@ -151,7 +166,7 @@ class InputPageCard extends StatelessWidget {
               icon: FontAwesomeIcons.addressBook,
               onTap: () {},
             ),
-            controller: TextEditingController(),
+            controller: controller1,
           ),
           SizedBox(height: 30),
           Text(
@@ -164,7 +179,7 @@ class InputPageCard extends StatelessWidget {
             label: 'Label text',
             hint: 'Hint text',
             focusNode: AlwaysFocusedNode(),
-            controller: TextEditingController(),
+            controller: controller1,
           ),
           MxcTextField(
             key: null,
@@ -175,7 +190,7 @@ class InputPageCard extends StatelessWidget {
               icon: FontAwesomeIcons.addressBook,
               onTap: () {},
             ),
-            controller: TextEditingController(),
+            controller: controller1,
           ),
           Text(
             'If you place cursor, it will be here forever. This happens because of always focus hack',
@@ -191,7 +206,7 @@ class InputPageCard extends StatelessWidget {
             key: null,
             label: 'Label text',
             hint: 'Hint text',
-            controller: TextEditingController(text: 'Entered text'),
+            controller: controller2,
           ),
           MxcTextField(
             key: null,
@@ -201,7 +216,7 @@ class InputPageCard extends StatelessWidget {
               icon: FontAwesomeIcons.addressBook,
               onTap: () {},
             ),
-            controller: TextEditingController(text: 'Entered text'),
+            controller: controller2,
           ),
         ],
       ),

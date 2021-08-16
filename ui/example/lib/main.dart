@@ -1,3 +1,4 @@
+import 'package:example/app_bar.dart';
 import 'package:example/colors.dart';
 import 'package:example/input.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +42,7 @@ class _MyHomePageState extends State<MyHomePage>
   @override
   void initState() {
     super.initState();
-    controller = TabController(length: 3, vsync: this);
+    controller = TabController(length: 4, vsync: this);
   }
 
   @override
@@ -53,6 +54,7 @@ class _MyHomePageState extends State<MyHomePage>
         children: [
           ColorsPage(),
           InputPage(),
+          AppBarPage(),
           ButtonsPage(),
         ],
         physics: NeverScrollableScrollPhysics(),

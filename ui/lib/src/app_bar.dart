@@ -50,7 +50,7 @@ class MxcAppBar extends StatelessWidget {
     this.centerTitle = true,
   })  : title = _textTitle(text, centerTitle),
         leading = Builder(
-          builder: (context) => AppBarButton.icon(
+          builder: (context) => MxcAppBarButton.icon(
             Icons.arrow_back_ios,
             onTap: () => Navigator.of(context).pop(),
           ),
@@ -69,7 +69,7 @@ class MxcAppBar extends StatelessWidget {
     this.centerTitle = true,
   })  : title = _textTitle(text, centerTitle),
         action = Builder(
-          builder: (context) => AppBarButton.icon(
+          builder: (context) => MxcAppBarButton.icon(
             Icons.close,
             onTap: () => Navigator.of(context).pop(),
           ),
@@ -109,17 +109,17 @@ class MxcAppBar extends StatelessWidget {
   }
 }
 
-class AppBarButton extends StatelessWidget {
+class MxcAppBarButton extends StatelessWidget {
   final VoidCallback onTap;
   final Widget child;
 
-  const AppBarButton({
+  const MxcAppBarButton({
     Key? key,
     required this.child,
     required this.onTap,
   }) : super(key: key);
 
-  AppBarButton.text(
+  MxcAppBarButton.text(
     String text, {
     Key? key,
     required this.onTap,
@@ -131,7 +131,7 @@ class AppBarButton extends StatelessWidget {
         ),
         super(key: key);
 
-  AppBarButton.icon(
+  MxcAppBarButton.icon(
     IconData icon, {
     Key? key,
     required this.onTap,
