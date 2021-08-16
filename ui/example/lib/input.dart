@@ -62,43 +62,43 @@ class _InputPageState extends State<InputPage> {
     );
   }
 
-  Widget desktopView() => SingleChildScrollView(
-        child: Container(
-          color: ColorsTheme.of(context).boxComponents,
-          padding: const EdgeInsets.only(
-            top: 50,
-            bottom: 45,
-            left: 32,
-            right: 32,
-          ),
-          constraints: BoxConstraints(
-            minHeight: MediaQuery.of(context).size.height,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 46),
-                child: Text(
-                  'Inputs',
-                  style: FontTheme.of(context).veryBig().copyWith(fontSize: 48),
-                ),
-              ),
-              SizedBox(height: 20),
-              Row(
-                children: [
-                  Expanded(
-                    child: InputPageCard(),
+  Widget desktopView() => ColoredBox(
+        color: ColorsTheme.of(context).boxComponents,
+        child: SingleChildScrollView(
+          child: Container(
+            padding: const EdgeInsets.only(
+              top: 50,
+              bottom: 45,
+              left: 32,
+              right: 32,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 46),
+                  child: Text(
+                    'Inputs',
+                    style:
+                        FontTheme.of(context).veryBig().copyWith(fontSize: 48),
                   ),
-                  Expanded(
-                    child: MxcTheme.fromOption(
-                      option: MxcThemeOption.night,
+                ),
+                SizedBox(height: 20),
+                Row(
+                  children: [
+                    Expanded(
                       child: InputPageCard(),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                    Expanded(
+                      child: MxcTheme.fromOption(
+                        option: MxcThemeOption.night,
+                        child: InputPageCard(),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       );

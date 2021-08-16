@@ -9,46 +9,45 @@ class AppBarPage extends StatefulWidget {
 }
 
 class _AppBarPageState extends State<AppBarPage> {
-  Widget adaptiveView() => SingleChildScrollView(
-        child: Container(
-          color: ColorsTheme.of(context).boxComponents,
-          padding: const EdgeInsets.only(
-            top: 50,
-            bottom: 45,
-            left: 60,
-            right: 32,
-          ),
-          constraints: BoxConstraints(
-            minHeight: MediaQuery.of(context).size.height,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'App bars',
-                style: FontTheme.of(context).veryBig().copyWith(fontSize: 48),
-              ),
-              SizedBox(height: 20),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Standard / based on background color',
-                    style: FontTheme.of(context).big(),
-                  ),
-                  AppBarView(),
-                  SizedBox(height: 50),
-                  Text(
-                    'Dark theme',
-                    style: FontTheme.of(context).big(),
-                  ),
-                  MxcTheme.fromOption(
-                    option: MxcThemeOption.night,
-                    child: AppBarView(),
-                  ),
-                ],
-              ),
-            ],
+  Widget adaptiveView() => ColoredBox(
+        color: ColorsTheme.of(context).boxComponents,
+        child: SingleChildScrollView(
+          child: Container(
+            padding: const EdgeInsets.only(
+              top: 50,
+              bottom: 45,
+              left: 60,
+              right: 32,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'App bars',
+                  style: FontTheme.of(context).veryBig().copyWith(fontSize: 48),
+                ),
+                SizedBox(height: 20),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Standard / based on background color',
+                      style: FontTheme.of(context).big(),
+                    ),
+                    AppBarView(),
+                    SizedBox(height: 50),
+                    Text(
+                      'Dark theme',
+                      style: FontTheme.of(context).big(),
+                    ),
+                    MxcTheme.fromOption(
+                      option: MxcThemeOption.night,
+                      child: AppBarView(),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       );
