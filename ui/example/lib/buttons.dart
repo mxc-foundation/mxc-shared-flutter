@@ -24,8 +24,8 @@ class _ButtonsPageState extends State<ButtonsPage> {
                 child: Padding(
                   padding: const EdgeInsets.only(
                     top: 50,
-                    bottom: 45,
                     right: 32,
+                    bottom: 80,
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,8 +49,8 @@ class _ButtonsPageState extends State<ButtonsPage> {
                 ),
               ),
               Positioned(
-                top: 10,
-                right: 10,
+                bottom: 20,
+                left: 30,
                 child: MxcCircleButton.icon(
                   key: null,
                   icon: Icons.dark_mode,
