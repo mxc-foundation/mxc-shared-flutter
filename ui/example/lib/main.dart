@@ -48,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFE5E5E5),
+      backgroundColor: Color(0xFFE5E5E5),
       body: TabBarView(
         controller: controller,
         physics: const NeverScrollableScrollPhysics(),
