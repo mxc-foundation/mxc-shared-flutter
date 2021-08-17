@@ -32,7 +32,7 @@ jobs:
       working-directory: ${{ matrix.folder }}
 
     - name: Check are there any warnings/infos/errors
-      run: flutter analyze --no-pub --suppress-analytics
+      run: flutter --suppress-analytics analyze --no-pub
       working-directory: ${{ matrix.folder }}
       
   format:
@@ -52,4 +52,4 @@ jobs:
           ${{ env.cache-name }}
 
     - name: Check is code formatted well
-      run: flutter format --show changed  --set-exit-if-changed . -o none --summary none --suppress-analytics
+      run: flutter --suppress-analytics format --show changed  --set-exit-if-changed . -o none --summary none
