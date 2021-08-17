@@ -8,6 +8,7 @@ environment:
 dependencies:
   chopper: ^4.0.1
   decimal: ^1.3.0
+  meta: ^1.7.0
 
 dev_dependencies:
   lint: ^1.5.3
