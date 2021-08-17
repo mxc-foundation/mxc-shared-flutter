@@ -84,16 +84,18 @@ class StakeRepository {
       currency: currency?.toData(),
     );
     return res.body!.actStake!
-        .map((e) => Stake(
-              id: e.id!,
-              active: e.active!,
-              amount: e.amount.toDecimal(),
-              boost: e.boost.toDouble(),
-              endTime: e.endTime,
-              lockTill: e.lockTill,
-              revenue: e.revenue.toDouble(),
-              startTime: e.startTime!,
-            ))
+        .map(
+          (e) => Stake(
+            id: e.id!,
+            active: e.active!,
+            amount: e.amount.toDecimal(),
+            boost: e.boost.toDouble(),
+            endTime: e.endTime,
+            lockTill: e.lockTill,
+            revenue: e.revenue.toDouble(),
+            startTime: e.startTime!,
+          ),
+        )
         .toList();
   }
 

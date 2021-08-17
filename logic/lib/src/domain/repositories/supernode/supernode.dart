@@ -1,20 +1,30 @@
 import 'package:mxc_logic/src/data/data.dart';
 
+import 'api/auth.dart';
 import 'api/dhx.dart';
+import 'api/external_accounts.dart';
 import 'api/gateway.dart';
 import 'api/network_server.dart';
 import 'api/organization.dart';
+import 'api/registration.dart';
 import 'api/stake.dart';
 import 'api/topup.dart';
+import 'api/totp.dart';
+import 'api/user.dart';
 import 'api/wallet.dart';
 import 'api/withdraw.dart';
 
+export 'api/auth.dart';
 export 'api/dhx.dart';
+export 'api/external_accounts.dart';
 export 'api/gateway.dart';
 export 'api/network_server.dart';
 export 'api/organization.dart';
+export 'api/registration.dart';
 export 'api/stake.dart';
 export 'api/topup.dart';
+export 'api/totp.dart';
+export 'api/user.dart';
 export 'api/wallet.dart';
 export 'api/withdraw.dart';
 
@@ -28,8 +38,10 @@ abstract class SupernodeRepository {
   WithdrawRepository get withdraw;
   OrganizationRepository get organization;
   NetworkServerRepository get networkServer;
-
-  void changeSupernode();
+  AuthenticationRepository get auth;
+  ExternalAccountsRepository get externalAccounts;
+  TotpRepository get totp;
+  RegistrationRepository get register;
 }
 
 class ApiSupernodeRepository implements SupernodeRepository {
@@ -64,8 +76,20 @@ class ApiSupernodeRepository implements SupernodeRepository {
   OrganizationRepository get organization => OrganizationRepository(_client);
 
   @override
-  NetworkServerRepository get networkServer =>
-      NetworkServerRepository(_client!);
+  NetworkServerRepository get networkServer => NetworkServerRepository(_client);
+
+  @override
+  AuthenticationRepository get auth => AuthenticationRepository(_client);
+
+  @override
+  ExternalAccountsRepository get externalAccounts =>
+      ExternalAccountsRepository(_client);
+
+  @override
+  RegistrationRepository get register => RegistrationRepository(_client);
+
+  @override
+  TotpRepository get totp => TotpRepository(_client);
 }
 
 /*

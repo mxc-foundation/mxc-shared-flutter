@@ -32,6 +32,7 @@ class DhxDemoRepository implements DhxRepository {
     return CreateCouncilResult('demo-council', 'demo-stake');
   }
 
+  @override
   Future<String> createStake({
     required double amount,
     required double boost,

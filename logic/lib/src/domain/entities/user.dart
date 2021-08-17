@@ -16,21 +16,34 @@ class RegistrationResult {
 
 class LoginResult {
   final bool is2faRequired;
-  final String jwt;
-  final SupernodeJwt jwtInfo;
+  final SupernodeTokenDetails token;
 
   LoginResult({
-    required this.jwt,
-    required this.jwtInfo,
+    required this.token,
     required this.is2faRequired,
   });
 }
 
-class SupernodeJwt {
+class WeChatLoginResult {
+  final SupernodeTokenDetails token;
+  final bool isBindingRequired;
+
+  WeChatLoginResult({
+    required this.token,
+    required this.isBindingRequired,
+  });
+}
+
+class SupernodeTokenDetails {
   final int userId;
   final String username;
+  final String source;
 
-  SupernodeJwt(this.userId, this.username);
+  SupernodeTokenDetails(
+    this.userId,
+    this.username,
+    this.source,
+  );
 }
 
 class ProfileResult {

@@ -1,6 +1,7 @@
 import 'package:decimal/decimal.dart';
 import 'package:mxc_logic/mxc_logic.dart';
 import 'package:mxc_logic/src/data/data.dart';
+import 'package:mxc_logic/src/domain/repositories/internal/jwt_parser.dart';
 
 void utils;
 
@@ -58,4 +59,13 @@ extension TokenMapper on Token {
 
 extension DateTimeMapper on DateTime {
   String toData() => toUtc().toIso8601String();
+}
+
+abstract class Mappers {
+  static SupernodeTokenDetails stringToSupernodeJwt(String jwt) {
+    final parsedJwt = parseJwt(jwt);
+    final userId = parsedJwt['userId'] as int;
+    final username = parsedJwt['username'] as String;
+    return SupernodeTokenDetails(userId, username, jwt);
+  }
 }

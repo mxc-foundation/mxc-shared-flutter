@@ -8,7 +8,8 @@ class ChopperErrorConverter extends ErrorConverter {
     final error = response.error;
     if (error is Map<String, dynamic>) {
       throw ApiException(
-          (error['message'] ?? error['error'] ?? 'Unknown error') as String);
+        (error['message'] ?? error['error'] ?? 'Unknown error') as String,
+      );
     }
     throw ApiException('Unknown error');
   }

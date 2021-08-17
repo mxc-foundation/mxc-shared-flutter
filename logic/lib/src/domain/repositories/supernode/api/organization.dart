@@ -34,10 +34,12 @@ class OrganizationRepository {
       limit: limit.toString(),
     );
     return res.body!.result!
-        .map((e) => Organization(
-              name: e.name!,
-              displayName: e.displayName!,
-            ))
+        .map(
+          (e) => Organization(
+            name: e.name!,
+            displayName: e.displayName!,
+          ),
+        )
         .toList();
   }
 }

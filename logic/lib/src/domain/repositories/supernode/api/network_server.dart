@@ -18,10 +18,12 @@ class NetworkServerRepository {
       organizationID: orgId,
     );
     return res.body!.result!
-        .map((e) => NetworkServer(
-              name: e.name!,
-              server: e.server!,
-            ))
+        .map(
+          (e) => NetworkServer(
+            name: e.name!,
+            server: e.server!,
+          ),
+        )
         .toList();
   }
 
