@@ -9,13 +9,11 @@ class MxcSlider extends StatelessWidget {
 
   const MxcSlider({
     required Key? key,
-    required double value,
-    required void Function(double) onChanged,
+    required double this.value,
+    required void Function(double) this.onChanged,
     this.labels,
     this.divisions,
-  })  : value = value,
-        onChanged = onChanged,
-        assert(labels == null || labels.length >= 3),
+  })  : assert(labels == null || labels.length >= 3),
         super(key: key);
 
   const MxcSlider.loading({
@@ -30,7 +28,7 @@ class MxcSlider extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: 5),
+        const SizedBox(height: 5),
         SizedBox(
           height: 20,
           child: SliderTheme(
@@ -93,6 +91,7 @@ class MxcSlider extends StatelessWidget {
 }
 
 class CustomTrackShape extends RoundedRectSliderTrackShape {
+  @override
   Rect getPreferredRect({
     required RenderBox parentBox,
     Offset offset = Offset.zero,

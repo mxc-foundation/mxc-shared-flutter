@@ -31,7 +31,7 @@ class _ButtonsPageState extends State<ButtonsPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: EdgeInsets.only(left: 60),
+                        padding: const EdgeInsets.only(left: 60),
                         child: Text(
                           'Buttons and more',
                           style: FontTheme.of(context)
@@ -39,8 +39,8 @@ class _ButtonsPageState extends State<ButtonsPage> {
                               .copyWith(fontSize: 48),
                         ),
                       ),
-                      SizedBox(height: 55),
-                      Padding(
+                      const SizedBox(height: 55),
+                      const Padding(
                         padding: EdgeInsets.only(left: 35),
                         child: ButtonsRow(),
                       ),
@@ -114,7 +114,7 @@ class _ButtonsRowState extends State<ButtonsRow> {
               borderRadius: BorderRadius.circular(15),
             ),
           ),
-          SizedBox(width: 16),
+          const SizedBox(width: 16),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -140,18 +140,19 @@ class _ButtonsRowState extends State<ButtonsRow> {
                                   : null,
                               boxShadow: [
                                 MxcBoxShadow(
-                                    color: ColorsTheme.of(context).mxcBlue05),
+                                  color: ColorsTheme.of(context).mxcBlue05,
+                                ),
                               ],
                               color: optionToColor(i),
                             ),
                           ),
                         ),
-                        SizedBox(width: 20)
+                        const SizedBox(width: 20)
                       ],
                     ],
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 MxcScopedTheme(
                   data: MxcScopedThemeData(primaryColor: optionToColor(option)),
                   child: Column(
@@ -168,8 +169,8 @@ class _ButtonsRowState extends State<ButtonsRow> {
                               onTap: () {},
                             ),
                           ),
-                          SizedBox(width: 19),
-                          SizedBox(
+                          const SizedBox(width: 19),
+                          const SizedBox(
                             width: 343,
                             child: MxcPrimaryButton(
                               key: null,
@@ -179,7 +180,7 @@ class _ButtonsRowState extends State<ButtonsRow> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
                       Wrap(
                         runSpacing: 5,
                         children: [
@@ -191,8 +192,8 @@ class _ButtonsRowState extends State<ButtonsRow> {
                               onTap: () {},
                             ),
                           ),
-                          SizedBox(width: 19),
-                          SizedBox(
+                          const SizedBox(width: 19),
+                          const SizedBox(
                             width: 343,
                             child: MxcSecondaryButton(
                               key: null,
@@ -202,13 +203,13 @@ class _ButtonsRowState extends State<ButtonsRow> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
                       Wrap(
                         runSpacing: 5,
                         children: [
                           Container(
                             width: 343,
-                            padding: EdgeInsets.all(10),
+                            padding: const EdgeInsets.all(10),
                             color: ColorsTheme.of(context).textLabel,
                             child: MxcOutlinedButton(
                               key: null,
@@ -216,11 +217,11 @@ class _ButtonsRowState extends State<ButtonsRow> {
                               onTap: () {},
                             ),
                           ),
-                          SizedBox(width: 19),
+                          const SizedBox(width: 19),
                           Container(
                             width: 343,
-                            padding: EdgeInsets.all(10),
-                            child: MxcOutlinedButton(
+                            padding: const EdgeInsets.all(10),
+                            child: const MxcOutlinedButton(
                               key: null,
                               title: 'Outlined Button Disabled',
                               onTap: null,
@@ -228,7 +229,7 @@ class _ButtonsRowState extends State<ButtonsRow> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
                       Wrap(
                         runSpacing: 5,
                         children: [
@@ -236,7 +237,7 @@ class _ButtonsRowState extends State<ButtonsRow> {
                             width: 250,
                             child: SegmentationTab(
                               key: null,
-                              labels: ['lorem', 'ipsum'],
+                              labels: const ['lorem', 'ipsum'],
                               onChanged: (_) {},
                             ),
                           ),
@@ -251,7 +252,7 @@ class _ButtonsRowState extends State<ButtonsRow> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
                       Wrap(
                         runSpacing: 5,
                         children: [
@@ -261,32 +262,32 @@ class _ButtonsRowState extends State<ButtonsRow> {
                             filled: true,
                             onTap: () {},
                           ),
-                          SizedBox(width: 19),
+                          const SizedBox(width: 19),
                           MxcCircleButton.image(
                             key: null,
                             image: ImagesTheme.of(context).iconMine,
                             onTap: () {},
                           ),
-                          SizedBox(width: 19),
-                          MxcCircleButton.icon(
+                          const SizedBox(width: 19),
+                          const MxcCircleButton.icon(
                             key: null,
                             icon: Icons.arrow_forward,
                             onTap: null,
                           ),
-                          SizedBox(width: 19),
+                          const SizedBox(width: 19),
                           MxcCircleButton.icon(
                             key: null,
                             icon: Icons.arrow_forward_ios,
                             onTap: () {},
                           ),
-                          SizedBox(width: 19),
+                          const SizedBox(width: 19),
                           MxcCircleButton.image(
                             key: null,
                             image: ImagesTheme.of(context).gateways,
                             filled: true,
                             onTap: () {},
                           ),
-                          SizedBox(width: 19),
+                          const SizedBox(width: 19),
                           MxcSwitch(
                             key: null,
                             value: false,
@@ -297,7 +298,7 @@ class _ButtonsRowState extends State<ButtonsRow> {
                             value: true,
                             onChanged: (_) {},
                           ),
-                          MxcSwitch(
+                          const MxcSwitch(
                             key: null,
                             value: true,
                             onChanged: null,
@@ -318,7 +319,7 @@ class _ButtonsRowState extends State<ButtonsRow> {
                             value: true,
                             onChanged: (_) {},
                           ),
-                          MxcCheckbox(
+                          const MxcCheckbox(
                             key: null,
                             value: true,
                             onChanged: null,
@@ -336,14 +337,14 @@ class _ButtonsRowState extends State<ButtonsRow> {
                               onChanged: (_) {},
                             ),
                           ),
-                          SizedBox(width: 15),
-                          SizedBox(
+                          const SizedBox(width: 15),
+                          const SizedBox(
                             width: 200,
                             child: MxcSlider.loading(
                               key: null,
                             ),
                           ),
-                          SizedBox(width: 15),
+                          const SizedBox(width: 15),
                           SizedBox(
                             width: 200,
                             child: MxcSlider(
@@ -351,7 +352,7 @@ class _ButtonsRowState extends State<ButtonsRow> {
                               value: 0.5,
                               onChanged: (_) {},
                               divisions: 2,
-                              labels: ['0%', '50%', '100%'],
+                              labels: const ['0%', '50%', '100%'],
                             ),
                           ),
                         ],

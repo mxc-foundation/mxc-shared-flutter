@@ -6,14 +6,14 @@ import 'theme.dart';
 const _packageName = 'mxc_ui';
 
 class ImagesTheme {
-  ImagesTheme._();
+  const ImagesTheme._();
 
   factory ImagesTheme.fromOption(MxcThemeOption option) {
     switch (option) {
       case MxcThemeOption.day:
-        return ImagesTheme._();
+        return const ImagesTheme._();
       case MxcThemeOption.night:
-        return ImagesThemeDark._();
+        return const ImagesThemeDark._();
     }
   }
 
@@ -21,414 +21,411 @@ class ImagesTheme {
     return Provider.of<ImagesTheme>(context, listen: listen);
   }
 
-  final ImageProvider logoMxc = AssetImage(
-    'assets/images/wallet/logo-mxc.png',
-    package: _packageName,
-  );
-  final ImageProvider logoDhx = AssetImage(
-    'assets/images/wallet/logo-dhx.png',
-    package: _packageName,
-  );
-  final ImageProvider logoBtc = AssetImage(
-    'assets/images/wallet/logo-btc.png',
-    package: _packageName,
-  );
-  final ImageProvider logoNft = AssetImage(
-    'assets/images/wallet/logo-nft.png',
-    package: _packageName,
-  );
+  ImageProvider get logoMxc => const AssetImage(
+        'assets/images/wallet/logo-mxc.png',
+        package: _packageName,
+      );
+  ImageProvider get logoDhx => const AssetImage(
+        'assets/images/wallet/logo-dhx.png',
+        package: _packageName,
+      );
+  ImageProvider get logoBtc => const AssetImage(
+        'assets/images/wallet/logo-btc.png',
+        package: _packageName,
+      );
+  ImageProvider get logoNft => const AssetImage(
+        'assets/images/wallet/logo-nft.png',
+        package: _packageName,
+      );
 
   //splash
-  final ImageProvider splashLogo = AssetImage(
-    'assets/images/splash/logo.png',
-    package: _packageName,
-  );
+  ImageProvider get splashLogo => const AssetImage(
+        'assets/images/splash/logo.png',
+        package: _packageName,
+      );
 
   //home
-  final ImageProvider blueCircle = AssetImage(
-    'assets/images/home/bluecircle.png',
-    package: _packageName,
-  );
-  final ImageProvider gateways = AssetImage(
-    'assets/images/home/gateways.png',
-    package: _packageName,
-  );
-  final ImageProvider devices = AssetImage(
-    'assets/images/home/devices.png',
-    package: _packageName,
-  );
+  ImageProvider get blueCircle => const AssetImage(
+        'assets/images/home/bluecircle.png',
+        package: _packageName,
+      );
+  ImageProvider get gateways => const AssetImage(
+        'assets/images/home/gateways.png',
+        package: _packageName,
+      );
+  ImageProvider get devices => const AssetImage(
+        'assets/images/home/devices.png',
+        package: _packageName,
+      );
 
-  final Map<String, ImageProvider> bottomBarMenus = {
-    'home': AssetImage(
-      'assets/images/home/home.png',
-      package: _packageName,
-    ),
-    'gateway': AssetImage(
-      'assets/images/home/gateways.png',
-      package: _packageName,
-    ),
-    'device': AssetImage(
-      'assets/images/home/devices.png',
-      package: _packageName,
-    ),
-    'wallet': AssetImage(
-      'assets/images/home/wallet.png',
-      package: _packageName,
-    ),
-  };
+  Map<String, ImageProvider> get bottomBarMenus => const {
+        'home': AssetImage(
+          'assets/images/home/home.png',
+          package: _packageName,
+        ),
+        'gateway': AssetImage(
+          'assets/images/home/gateways.png',
+          package: _packageName,
+        ),
+        'device': AssetImage(
+          'assets/images/home/devices.png',
+          package: _packageName,
+        ),
+        'wallet': AssetImage(
+          'assets/images/home/wallet.png',
+          package: _packageName,
+        ),
+      };
 
   //app
-  final ImageProvider close = AssetImage(
-    'assets/images/app/close.png',
-    package: _packageName,
-  );
+  ImageProvider get close => const AssetImage(
+        'assets/images/app/close.png',
+        package: _packageName,
+      );
 
-  final ImageProvider done = AssetImage(
-    'assets/images/app/done.png',
-    package: _packageName,
-  );
+  ImageProvider get done => const AssetImage(
+        'assets/images/app/done.png',
+        package: _packageName,
+      );
 
-  final ImageProvider noData = AssetImage(
-    'assets/images/app/no-data.png',
-    package: _packageName,
-  );
+  ImageProvider get noData => const AssetImage(
+        'assets/images/app/no-data.png',
+        package: _packageName,
+      );
 
-  final ImageProvider circleLogo = AssetImage(
-    'assets/images/app/logo-circle.png',
-    package: _packageName,
-  );
+  ImageProvider get circleLogo => const AssetImage(
+        'assets/images/app/logo-circle.png',
+        package: _packageName,
+      );
 
-  final ImageProvider questionCircle = AssetImage(
-    'assets/images/app/ic-question-circle.png',
-    package: _packageName,
-  );
+  ImageProvider get questionCircle => const AssetImage(
+        'assets/images/app/ic-question-circle.png',
+        package: _packageName,
+      );
 
   //deposit
-  final ImageProvider qrcode = AssetImage(
-    'assets/images/deposit/qrcode.png',
-    package: _packageName,
-  );
+  ImageProvider get qrcode => const AssetImage(
+        'assets/images/deposit/qrcode.png',
+        package: _packageName,
+      );
 
   //gateway
-  final ImageProvider infoDownlinkPrice = AssetImage(
-    'assets/images/gateway/info-downloadlink_price.png',
-    package: _packageName,
-  );
+  ImageProvider get infoDownlinkPrice => const AssetImage(
+        'assets/images/gateway/info-downloadlink_price.png',
+        package: _packageName,
+      );
 
-  final ImageProvider uptime = AssetImage(
-    'assets/images/gateway/uptime.png',
-    package: _packageName,
-  );
+  ImageProvider get uptime => const AssetImage(
+        'assets/images/gateway/uptime.png',
+        package: _packageName,
+      );
 
-  final ImageProvider gps = AssetImage(
-    'assets/images/gateway/gps.png',
-    package: _packageName,
-  );
+  ImageProvider get gps => const AssetImage(
+        'assets/images/gateway/gps.png',
+        package: _packageName,
+      );
 
-  final ImageProvider gps_disabled = AssetImage(
-    'assets/images/gateway/gps_disabled.png',
-    package: _packageName,
-  );
+  ImageProvider get gpsDisabled => const AssetImage(
+        'assets/images/gateway/gps_disabled.png',
+        package: _packageName,
+      );
 
-  final ImageProvider altitude = AssetImage(
-    'assets/images/gateway/altitude.png',
-    package: _packageName,
-  );
+  ImageProvider get altitude => const AssetImage(
+        'assets/images/gateway/altitude.png',
+        package: _packageName,
+      );
 
-  final ImageProvider altitude_disabled = AssetImage(
-    'assets/images/gateway/altitude_disabled.png',
-    package: _packageName,
-  );
+  ImageProvider get altitudeDisabled => const AssetImage(
+        'assets/images/gateway/altitude_disabled.png',
+        package: _packageName,
+      );
 
-  final ImageProvider orientation = AssetImage(
-    'assets/images/gateway/orientation.png',
-    package: _packageName,
-  );
+  ImageProvider get orientation => const AssetImage(
+        'assets/images/gateway/orientation.png',
+        package: _packageName,
+      );
 
-  final ImageProvider orientation_disabled = AssetImage(
-    'assets/images/gateway/orientation_disabled.png',
-    package: _packageName,
-  );
+  ImageProvider get orientationDisabled => const AssetImage(
+        'assets/images/gateway/orientation_disabled.png',
+        package: _packageName,
+      );
 
-  final ImageProvider proximity = AssetImage(
-    'assets/images/gateway/proximity.png',
-    package: _packageName,
-  );
+  ImageProvider get proximity => const AssetImage(
+        'assets/images/gateway/proximity.png',
+        package: _packageName,
+      );
 
-  final ImageProvider proximity_disabled = AssetImage(
-    'assets/images/gateway/proximity_disabled.png',
-    package: _packageName,
-  );
+  ImageProvider get proximityDisabled => const AssetImage(
+        'assets/images/gateway/proximity_disabled.png',
+        package: _packageName,
+      );
 
-  final ImageProvider fuel = AssetImage(
-    'assets/images/gateway/fuel.png',
-    package: _packageName,
-  );
+  ImageProvider get fuel => const AssetImage(
+        'assets/images/gateway/fuel.png',
+        package: _packageName,
+      );
 
-  final ImageProvider fuelCircle = AssetImage(
-    'assets/images/gateway/fuel_circle.png',
-    package: _packageName,
-  );
+  ImageProvider get fuelCircle => const AssetImage(
+        'assets/images/gateway/fuel_circle.png',
+        package: _packageName,
+      );
 
-  final ImageProvider sendCircle = AssetImage(
-    'assets/images/gateway/send_circle.png',
-    package: _packageName,
-  );
+  ImageProvider get sendCircle => const AssetImage(
+        'assets/images/gateway/send_circle.png',
+        package: _packageName,
+      );
 
-  final ImageProvider addMinerSuccess = AssetImage(
-    'assets/images/gateway/add_miner_success.png',
-    package: _packageName,
-  );
+  ImageProvider get addMinerSuccess => const AssetImage(
+        'assets/images/gateway/add_miner_success.png',
+        package: _packageName,
+      );
 
-  final ImageProvider addMinerFailure = AssetImage(
-    'assets/images/gateway/add_miner_failure.png',
-    package: _packageName,
-  );
+  ImageProvider get addMinerFailure => const AssetImage(
+        'assets/images/gateway/add_miner_failure.png',
+        package: _packageName,
+      );
 
-  final ImageProvider addMinerWarning = AssetImage(
-    'assets/images/gateway/add_miner_warning.png',
-    package: _packageName,
-  );
+  ImageProvider get addMinerWarning => const AssetImage(
+        'assets/images/gateway/add_miner_warning.png',
+        package: _packageName,
+      );
 
   // login
-  final ImageProvider supernode_placeholder = AssetImage(
-    "assets/images/login/supernode_placeholder.png",
-    package: _packageName,
-  );
+  ImageProvider get supernodePlaceholder => const AssetImage(
+        "assets/images/login/supernode_placeholder.png",
+        package: _packageName,
+      );
 
-  final ImageProvider placeholder = AssetImage(
-    "assets/images/login/placeholder.png",
-    package: _packageName,
-  );
+  ImageProvider get placeholder => const AssetImage(
+        "assets/images/login/placeholder.png",
+        package: _packageName,
+      );
 
-  final ImageProvider email = AssetImage(
-    'assets/images/login/email.png',
-    package: _packageName,
-  );
+  ImageProvider get email => const AssetImage(
+        'assets/images/login/email.png',
+        package: _packageName,
+      );
 
-  final ImageProvider wechat = AssetImage(
-    'assets/images/login/wechat.png',
-    package: _packageName,
-  );
+  ImageProvider get wechat => const AssetImage(
+        'assets/images/login/wechat.png',
+        package: _packageName,
+      );
 
-  final ImageProvider datadash = AssetImage(
-    'assets/images/login/datadash.png',
-    package: _packageName,
-  );
+  ImageProvider get datadash => const AssetImage(
+        'assets/images/login/datadash.png',
+        package: _packageName,
+      );
 
-  final ImageProvider dhx = AssetImage(
-    'assets/images/login/dhx.png',
-    package: _packageName,
-  );
+  ImageProvider get dhx => const AssetImage(
+        'assets/images/login/dhx.png',
+        package: _packageName,
+      );
 
-  final ImageProvider mxc = AssetImage(
-    'assets/images/login/mxc.png',
-    package: _packageName,
-  );
+  ImageProvider get mxc => const AssetImage(
+        'assets/images/login/mxc.png',
+        package: _packageName,
+      );
 
-  final ImageProvider mxcSite1 = AssetImage(
-    'assets/images/login/mxc_1.png',
-    package: _packageName,
-  );
+  ImageProvider get mxcSite1 => const AssetImage(
+        'assets/images/login/mxc_1.png',
+        package: _packageName,
+      );
 
-  final ImageProvider mxcSite2 = AssetImage(
-    'assets/images/login/mxc_2.png',
-    package: _packageName,
-  );
+  ImageProvider get mxcSite2 => const AssetImage(
+        'assets/images/login/mxc_2.png',
+        package: _packageName,
+      );
 
-  final ImageProvider mxcSite3 = AssetImage(
-    'assets/images/login/mxc_3.png',
-    package: _packageName,
-  );
+  ImageProvider get mxcSite3 => const AssetImage(
+        'assets/images/login/mxc_3.png',
+        package: _packageName,
+      );
 
-  final ImageProvider dhxSite = AssetImage(
-    'assets/images/login/dhx_site.png',
-    package: _packageName,
-  );
+  ImageProvider get dhxSite => const AssetImage(
+        'assets/images/login/dhx_site.png',
+        package: _packageName,
+      );
 
-  final ImageProvider medium = AssetImage(
-    'assets/images/login/medium.png',
-    package: _packageName,
-  );
+  ImageProvider get medium => const AssetImage(
+        'assets/images/login/medium.png',
+        package: _packageName,
+      );
 
   // wallet
+  ImageProvider get iconMine => const AssetImage(
+        'assets/images/wallet/icon-mine.png',
+        package: _packageName,
+      );
 
-  final ImageProvider iconMine = AssetImage(
-    'assets/images/wallet/icon-mine.png',
-    package: _packageName,
-  );
+  ImageProvider get iconBond => const AssetImage(
+        'assets/images/wallet/bond.png',
+        package: _packageName,
+      );
 
-  final ImageProvider iconBond = AssetImage(
-    'assets/images/wallet/bond.png',
-    package: _packageName,
-  );
+  ImageProvider get iconLearn => const AssetImage(
+        'assets/images/wallet/learn.png',
+        package: _packageName,
+      );
 
-  final ImageProvider iconLearn = AssetImage(
-    'assets/images/wallet/learn.png',
-    package: _packageName,
-  );
+  ImageProvider get iconUnbond => const AssetImage(
+        'assets/images/wallet/unbond.png',
+        package: _packageName,
+      );
 
-  final ImageProvider iconUnbond = AssetImage(
-    'assets/images/wallet/unbond.png',
-    package: _packageName,
-  );
+  ImageProvider get iconCouncil => const AssetImage(
+        'assets/images/wallet/icon-council.png',
+        package: _packageName,
+      );
 
-  final ImageProvider iconCouncil = AssetImage(
-    'assets/images/wallet/icon-council.png',
-    package: _packageName,
-  );
+  ImageProvider get council => const AssetImage(
+        'assets/images/wallet/council.png',
+        package: _packageName,
+      );
 
-  final ImageProvider council = AssetImage(
-    'assets/images/wallet/council.png',
-    package: _packageName,
-  );
+  ImageProvider get infoMXCVault => const AssetImage(
+        'assets/images/wallet/info-mxc-vault.png',
+        package: _packageName,
+      );
 
-  final ImageProvider infoMXCVault = AssetImage(
-    'assets/images/wallet/info-mxc-vault.png',
-    package: _packageName,
-  );
+  ImageProvider get infoCurrentTransactionFee => const AssetImage(
+        'assets/images/wallet/info-current-transaction-fee.png',
+        package: _packageName,
+      );
 
-  final ImageProvider infoCurrentTransactionFee = AssetImage(
-    'assets/images/wallet/info-current-transaction-fee.png',
-    package: _packageName,
-  );
+  ImageProvider get mcxBubble => const AssetImage(
+        'assets/images/wallet/mxc_bubble.png',
+        package: _packageName,
+      );
 
-  final ImageProvider mcxBubble = AssetImage(
-    'assets/images/wallet/mxc_bubble.png',
-    package: _packageName,
-  );
+  ImageProvider get minerBubble => const AssetImage(
+        'assets/images/wallet/miner_bubble.png',
+        package: _packageName,
+      );
 
-  final ImageProvider minerBubble = AssetImage(
-    'assets/images/wallet/miner_bubble.png',
-    package: _packageName,
-  );
+  ImageProvider get dhxMiningDiagram => const AssetImage(
+        'assets/images/wallet/dhx_mining_diagram.png',
+        package: _packageName,
+      );
 
-  final ImageProvider dhxMiningDiagram = AssetImage(
-    'assets/images/wallet/dhx_mining_diagram.png',
-    package: _packageName,
-  );
+  ImageProvider get rocket => const AssetImage(
+        'assets/images/wallet/rocket.png',
+        package: _packageName,
+      );
 
-  final ImageProvider rocket = AssetImage(
-    'assets/images/wallet/rocket.png',
-    package: _packageName,
-  );
+  ImageProvider get minerBoostGraph => const AssetImage(
+        'assets/images/wallet/mining_boost_graph.png',
+        package: _packageName,
+      );
 
-  final ImageProvider minerBoostGraph = AssetImage(
-    'assets/images/wallet/mining_boost_graph.png',
-    package: _packageName,
-  );
+  ImageProvider get calendar1 => const AssetImage(
+        'assets/images/wallet/calendar1.png',
+        package: _packageName,
+      );
 
-  final ImageProvider calendar1 = AssetImage(
-    'assets/images/wallet/calendar1.png',
-    package: _packageName,
-  );
+  ImageProvider get calendar2 => const AssetImage(
+        'assets/images/wallet/calendar2.png',
+        package: _packageName,
+      );
 
-  final ImageProvider calendar2 = AssetImage(
-    'assets/images/wallet/calendar2.png',
-    package: _packageName,
-  );
-
-  final ImageProvider calendar3 = AssetImage(
-    'assets/images/wallet/calendar3.png',
-    package: _packageName,
-  );
+  ImageProvider get calendar3 => const AssetImage(
+        'assets/images/wallet/calendar3.png',
+        package: _packageName,
+      );
 
   //settings
-  final ImageProvider warningRobot = AssetImage(
-    'assets/images/settings/robot_warning.png',
-    package: _packageName,
-  );
+  ImageProvider get warningRobot => const AssetImage(
+        'assets/images/settings/robot_warning.png',
+        package: _packageName,
+      );
 
-  final ImageProvider weChat = AssetImage(
-    'assets/images/settings/wechat.png',
-    package: _packageName,
-  );
+  ImageProvider get weChat => const AssetImage(
+        'assets/images/settings/wechat.png',
+        package: _packageName,
+      );
 
-  final ImageProvider weChatQRCode = AssetImage(
-    'assets/images/settings/wechat_qr_code.png',
-    package: _packageName,
-  );
+  ImageProvider get weChatQRCode => const AssetImage(
+        'assets/images/settings/wechat_qr_code.png',
+        package: _packageName,
+      );
 }
 
 class ImagesThemeDark extends ImagesTheme {
-  ImagesThemeDark._() : super._();
+  const ImagesThemeDark._() : super._();
 
   @override
-  final ImageProvider logoMxc = AssetImage(
-    'assets/images/wallet/logo-mxc-dark.png',
-    package: _packageName,
-  );
+  ImageProvider get logoMxc => const AssetImage(
+        'assets/images/wallet/logo-mxc-dark.png',
+        package: _packageName,
+      );
 
   @override
-  final ImageProvider logoDhx = AssetImage(
-    'assets/images/wallet/logo-dhx-dark.png',
-    package: _packageName,
-  );
+  ImageProvider get logoDhx => const AssetImage(
+        'assets/images/wallet/logo-dhx-dark.png',
+        package: _packageName,
+      );
 
   @override
-  final ImageProvider logoBtc = AssetImage(
-    'assets/images/wallet/logo-btc-dark.png',
-    package: _packageName,
-  );
+  ImageProvider get logoBtc => const AssetImage(
+        'assets/images/wallet/logo-btc-dark.png',
+        package: _packageName,
+      );
 
   //splash
   @override
-  final ImageProvider splashLogo = AssetImage(
-    'assets/images/splash/logo-dark.png',
-    package: _packageName,
-  );
+  ImageProvider get splashLogo => const AssetImage(
+        'assets/images/splash/logo-dark.png',
+        package: _packageName,
+      );
 
   // login
+  @override
+  ImageProvider get datadash => const AssetImage(
+        'assets/images/login/datadash-dark.png',
+        package: _packageName,
+      );
 
   @override
-  final ImageProvider datadash = AssetImage(
-    'assets/images/login/datadash-dark.png',
-    package: _packageName,
-  );
+  ImageProvider get dhx => const AssetImage(
+        'assets/images/login/dhx-dark.png',
+        package: _packageName,
+      );
 
   @override
-  final ImageProvider dhx = AssetImage(
-    'assets/images/login/dhx-dark.png',
-    package: _packageName,
-  );
-
-  @override
-  final ImageProvider mxc = AssetImage(
-    'assets/images/login/mxc-dark.png',
-    package: _packageName,
-  );
+  ImageProvider get mxc => const AssetImage(
+        'assets/images/login/mxc-dark.png',
+        package: _packageName,
+      );
 
   // wallet
+  @override
+  ImageProvider get minerBoostGraph => const AssetImage(
+        'assets/images/wallet/mining_boost_graph-dark.png',
+        package: _packageName,
+      );
 
   @override
-  final ImageProvider minerBoostGraph = AssetImage(
-    'assets/images/wallet/mining_boost_graph-dark.png',
-    package: _packageName,
-  );
+  ImageProvider get dhxMiningDiagram => const AssetImage(
+        'assets/images/wallet/dhx_mining_diagram-dark.png',
+        package: _packageName,
+      );
 
   @override
-  final ImageProvider dhxMiningDiagram = AssetImage(
-    'assets/images/wallet/dhx_mining_diagram-dark.png',
-    package: _packageName,
-  );
+  ImageProvider get calendar1 => const AssetImage(
+        'assets/images/wallet/calendar1-dark.png',
+        package: _packageName,
+      );
 
   @override
-  final ImageProvider calendar1 = AssetImage(
-    'assets/images/wallet/calendar1-dark.png',
-    package: _packageName,
-  );
+  ImageProvider get calendar2 => const AssetImage(
+        'assets/images/wallet/calendar2-dark.png',
+        package: _packageName,
+      );
 
   @override
-  final ImageProvider calendar2 = AssetImage(
-    'assets/images/wallet/calendar2-dark.png',
-    package: _packageName,
-  );
-
-  @override
-  final ImageProvider calendar3 = AssetImage(
-    'assets/images/wallet/calendar3-dark.png',
-    package: _packageName,
-  );
+  ImageProvider get calendar3 => const AssetImage(
+        'assets/images/wallet/calendar3-dark.png',
+        package: _packageName,
+      );
 }
 
 extension ImageProviderExt on ImageProvider {

@@ -2,31 +2,30 @@ import 'package:flutter/material.dart';
 import 'package:mxc_ui/mxc_ui.dart';
 
 abstract class MxcCircleButton extends StatelessWidget {
-  //final Widget child;
   final bool filled;
   final VoidCallback? onTap;
 
-  MxcCircleButton._({
-    required Key? key,
-    required this.onTap,
-    this.filled = false,
-  });
-
-  factory MxcCircleButton({
+  const factory MxcCircleButton({
     required Key? key,
     required Widget child,
     required VoidCallback? onTap,
     bool filled,
   }) = _MxcCircleChildButton;
 
-  factory MxcCircleButton.image({
+  const MxcCircleButton._({
+    required Key? key,
+    required this.onTap,
+    this.filled = false,
+  }) : super(key: key);
+
+  const factory MxcCircleButton.image({
     required Key? key,
     required ImageProvider image,
     required VoidCallback? onTap,
     bool filled,
   }) = _MxcCircleImageButton;
 
-  factory MxcCircleButton.icon({
+  const factory MxcCircleButton.icon({
     required Key? key,
     required IconData icon,
     required VoidCallback? onTap,
@@ -59,13 +58,13 @@ abstract class MxcCircleButton extends StatelessWidget {
     }
     return Material(
       color: fillColor,
-      shape: CircleBorder(),
+      shape: const CircleBorder(),
       child: InkWell(
         onTap: onTap,
-        customBorder: CircleBorder(),
+        customBorder: const CircleBorder(),
         child: Container(
           alignment: Alignment.center,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             shape: BoxShape.circle,
           ),
           width: 52,
@@ -80,7 +79,7 @@ abstract class MxcCircleButton extends StatelessWidget {
 class _MxcCircleChildButton extends MxcCircleButton {
   final Widget child;
 
-  _MxcCircleChildButton({
+  const _MxcCircleChildButton({
     required Key? key,
     required this.child,
     required VoidCallback? onTap,
@@ -94,7 +93,7 @@ class _MxcCircleChildButton extends MxcCircleButton {
 class _MxcCircleImageButton extends MxcCircleButton {
   final ImageProvider image;
 
-  _MxcCircleImageButton({
+  const _MxcCircleImageButton({
     required Key? key,
     required this.image,
     required VoidCallback? onTap,
@@ -111,7 +110,7 @@ class _MxcCircleImageButton extends MxcCircleButton {
 class _MxcCircleIconButton extends MxcCircleButton {
   final IconData icon;
 
-  _MxcCircleIconButton({
+  const _MxcCircleIconButton({
     required Key? key,
     required this.icon,
     required VoidCallback? onTap,

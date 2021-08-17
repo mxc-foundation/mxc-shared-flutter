@@ -28,7 +28,7 @@ class _MxcSecondaryButtonState extends State<MxcSecondaryButton> {
     final primaryColor =
         widget.color ?? MxcScopedTheme.of(context).primaryColor;
 
-    var textColor = primaryColor;
+    final textColor = primaryColor;
     var buttonColor = primaryColor.withOpacity(0.2);
 
     if (widget.onTap == null) {

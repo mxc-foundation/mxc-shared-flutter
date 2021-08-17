@@ -25,7 +25,7 @@ class PageIndicator extends StatelessWidget {
               behavior: HitTestBehavior.opaque,
               onTap: () => onSelected(i),
               child: Padding(
-                padding: EdgeInsets.all(8),
+                padding: const EdgeInsets.all(8),
                 child: Container(
                   height: 12,
                   width: 12,

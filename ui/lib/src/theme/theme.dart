@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:mxc_ui/mxc_ui.dart';
 import 'package:provider/provider.dart';
 
-import 'images.dart';
 import 'colors.dart';
 import 'font.dart';
+import 'images.dart';
 
-export 'images.dart';
 export 'colors.dart';
 export 'font.dart';
+export 'images.dart';
 export 'scoped.dart';
 
 enum MxcThemeOption { day, night }

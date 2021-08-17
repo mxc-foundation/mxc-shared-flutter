@@ -27,7 +27,7 @@ class ColorsPage extends StatelessWidget {
                 titleColor: MxcThemeData.fromOption(MxcThemeOption.night)
                     .colors
                     .boxComponents,
-                backgroundColor: Color(0xFF292929),
+                backgroundColor: const Color(0xFF292929),
               ),
             ),
           ),
@@ -51,7 +51,7 @@ class ColorsPagePallet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: backgroundColor,
-      padding: EdgeInsets.all(32),
+      padding: const EdgeInsets.all(32),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -59,27 +59,27 @@ class ColorsPagePallet extends StatelessWidget {
             'Background',
             backgroundColor: titleColor,
           ),
-          SizedBox(height: 32),
+          const SizedBox(height: 32),
           ColorsPageSample(
             name: 'primaryBackground',
             color: ColorsTheme.of(context).primaryBackground,
           ),
-          SizedBox(height: 32),
+          const SizedBox(height: 32),
           ColorsPageSample(
             name: 'secondaryBackground',
             color: ColorsTheme.of(context).secondaryBackground,
           ),
-          SizedBox(height: 32),
+          const SizedBox(height: 32),
           ColorsPageTitle(
             'Components',
             backgroundColor: titleColor,
           ),
-          SizedBox(height: 32),
+          const SizedBox(height: 32),
           ColorsPageSample(
             name: 'boxComponents',
             color: ColorsTheme.of(context).boxComponents,
           ),
-          SizedBox(height: 32),
+          const SizedBox(height: 32),
           ColorsPageSample(
             name: 'mxcBlue',
             color: ColorsTheme.of(context).mxcBlue,
@@ -91,7 +91,7 @@ class ColorsPagePallet extends StatelessWidget {
               ColorsTheme.of(context).mxcBlue05,
             ],
           ),
-          SizedBox(height: 32),
+          const SizedBox(height: 32),
           ColorsPageSample(
             name: 'dhxBlue',
             color: ColorsTheme.of(context).dhxBlue,
@@ -102,7 +102,7 @@ class ColorsPagePallet extends StatelessWidget {
               ColorsTheme.of(context).dhxBlue20,
             ],
           ),
-          SizedBox(height: 32),
+          const SizedBox(height: 32),
           ColorsPageSample(
             name: 'dhxPurple',
             color: ColorsTheme.of(context).dhxPurple,
@@ -113,7 +113,7 @@ class ColorsPagePallet extends StatelessWidget {
               ColorsTheme.of(context).dhxPurple20,
             ],
           ),
-          SizedBox(height: 32),
+          const SizedBox(height: 32),
           ColorsPageSample(
             name: 'minerHealthRed',
             color: ColorsTheme.of(context).minerHealthRed,
@@ -122,7 +122,7 @@ class ColorsPagePallet extends StatelessWidget {
               ColorsTheme.of(context).minerHealthRed20,
             ],
           ),
-          SizedBox(height: 32),
+          const SizedBox(height: 32),
           ColorsPageSample(
             name: 'btcYellow',
             color: ColorsTheme.of(context).btcYellow,
@@ -133,7 +133,7 @@ class ColorsPagePallet extends StatelessWidget {
               ColorsTheme.of(context).btcYellow20,
             ],
           ),
-          SizedBox(height: 32),
+          const SizedBox(height: 32),
           ColorsPageSample(
             name: 'success',
             color: ColorsTheme.of(context).success,
@@ -141,22 +141,22 @@ class ColorsPagePallet extends StatelessWidget {
               ColorsTheme.of(context).success20,
             ],
           ),
-          SizedBox(height: 32),
+          const SizedBox(height: 32),
           ColorsPageTitle(
             'Text',
             backgroundColor: titleColor,
           ),
-          SizedBox(height: 32),
+          const SizedBox(height: 32),
           ColorsPageSample(
             name: 'textPrimaryAndIcons',
             color: ColorsTheme.of(context).textPrimaryAndIcons,
           ),
-          SizedBox(height: 32),
+          const SizedBox(height: 32),
           ColorsPageSample(
             name: 'textLabel',
             color: ColorsTheme.of(context).textLabel,
           ),
-          SizedBox(height: 32),
+          const SizedBox(height: 32),
           ColorsPageSample(
             name: 'buttonIconTextColor',
             color: ColorsTheme.of(context).buttonIconTextColor,
@@ -180,14 +180,16 @@ class ColorsPageTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(
+      padding: const EdgeInsets.only(
         left: 27,
         bottom: 18,
         top: 18,
       ),
       width: double.infinity,
       decoration: BoxDecoration(
-          color: backgroundColor, borderRadius: BorderRadius.circular(8)),
+        color: backgroundColor,
+        borderRadius: BorderRadius.circular(8),
+      ),
       child: Text(
         text,
         style: Theme.of(context).textTheme.bodyText2,
@@ -227,17 +229,17 @@ class ColorsPageSample extends StatelessWidget {
           '#${color.value.toRadixString(16)} $name',
           style: FontTheme.of(context).small.label(),
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         SizedBox(
           height: 96,
           child: ListView(
             scrollDirection: Axis.horizontal,
             children: [
               colorSquare(color),
-              SizedBox(width: 13),
+              const SizedBox(width: 13),
               for (final shade in shades) ...[
                 colorSquare(shade),
-                SizedBox(width: 13),
+                const SizedBox(width: 13),
               ]
             ],
           ),

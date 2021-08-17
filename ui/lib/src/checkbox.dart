@@ -27,10 +27,6 @@ class MxcCheckbox extends StatelessWidget {
         value: value,
         activeColor: primaryColor,
         tristate: tristate,
-        // activeTrackColor:
-        //     MxcScopedTheme.of(context).primaryColor.withOpacity(0.5),
-        // inactiveThumbColor: ColorsTheme.of(context).textLabel,
-        // inactiveTrackColor: ColorsTheme.of(context).textLabel.withOpacity(0.5),
       ),
     );
   }

@@ -41,7 +41,7 @@ class _InputPageState extends State<InputPage> {
                         style: theme.fonts.veryBig(),
                       ),
                     ),
-                    InputPageCard(showBackground: false),
+                    const InputPageCard(showBackground: false),
                   ],
                 ),
               ),
@@ -83,16 +83,16 @@ class _InputPageState extends State<InputPage> {
                         FontTheme.of(context).veryBig().copyWith(fontSize: 48),
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Row(
                   children: [
-                    Expanded(
+                    const Expanded(
                       child: InputPageCard(),
                     ),
                     Expanded(
                       child: MxcTheme.fromOption(
                         option: MxcThemeOption.night,
-                        child: InputPageCard(),
+                        child: const InputPageCard(),
                       ),
                     ),
                   ],
@@ -128,6 +128,7 @@ class _InputPageCardState extends State<InputPageCard> {
   final TextEditingController controller2 =
       TextEditingController(text: 'Entered text');
 
+  @override
   void dispose() {
     controller1.dispose();
     controller2.dispose();
@@ -143,7 +144,7 @@ class _InputPageCardState extends State<InputPageCard> {
               borderRadius: BorderRadius.circular(15),
             )
           : null,
-      padding: EdgeInsets.all(46),
+      padding: const EdgeInsets.all(46),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -151,7 +152,7 @@ class _InputPageCardState extends State<InputPageCard> {
             'Default',
             style: FontTheme.of(context).big(),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           MxcTextField(
             key: null,
             label: 'Label text',
@@ -168,12 +169,12 @@ class _InputPageCardState extends State<InputPageCard> {
             ),
             controller: controller1,
           ),
-          SizedBox(height: 30),
+          const SizedBox(height: 30),
           Text(
             'Selected',
             style: FontTheme.of(context).big(),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           MxcTextField(
             key: null,
             label: 'Label text',
@@ -196,12 +197,12 @@ class _InputPageCardState extends State<InputPageCard> {
             'If you place cursor, it will be here forever. This happens because of always focus hack',
             style: FontTheme.of(context).small.label(),
           ),
-          SizedBox(height: 30),
+          const SizedBox(height: 30),
           Text(
             'Entered',
             style: FontTheme.of(context).big(),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           MxcTextField(
             key: null,
             label: 'Label text',

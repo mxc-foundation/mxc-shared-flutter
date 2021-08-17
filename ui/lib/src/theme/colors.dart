@@ -74,53 +74,115 @@ class ColorsThemeDark implements ColorsTheme {
   ColorsThemeDark._();
 
   // background
+  @override
   final primaryBackground = const Color(0xFF111111);
+
+  @override
   final secondaryBackground = const Color(0xFF1C1C1E);
 
   // components
+  @override
   final boxComponents = const Color(0xFF2C2C2E);
 
+  @override
   final mxcBlue = const Color(0xFF30A78B);
+
+  @override
   final mxcBlue80 = const Color(0xFF30A78B).withOpacity(0.8);
+
+  @override
   final mxcBlue60 = const Color(0xFF30A78B).withOpacity(0.6);
+
+  @override
   final mxcBlue40 = const Color(0xFF30A78B).withOpacity(0.4);
+
+  @override
   final mxcBlue20 = const Color(0xFF30A78B).withOpacity(0.2);
+
+  @override
   final mxcBlue05 = const Color(0xFF30A78B).withOpacity(0.05);
 
+  @override
   final dhxBlue = const Color(0xFF7B90E9);
+
+  @override
   final dhxBlue80 = const Color(0xFF7B90E9).withOpacity(0.8);
+
+  @override
   final dhxBlue60 = const Color(0xFF7B90E9).withOpacity(0.6);
+
+  @override
   final dhxBlue40 = const Color(0xFF7B90E9).withOpacity(0.4);
+
+  @override
   final dhxBlue20 = const Color(0xFF7B90E9).withOpacity(0.2);
 
+  @override
   final dhxPurple = const Color(0xFFD164FF);
+
+  @override
   final dhxPurple80 = const Color(0xFFD164FF).withOpacity(0.80);
+
+  @override
   final dhxPurple60 = const Color(0xFFD164FF).withOpacity(0.60);
+
+  @override
   final dhxPurple40 = const Color(0xFFD164FF).withOpacity(0.40);
+
+  @override
   final dhxPurple20 = const Color(0xFFD164FF).withOpacity(0.20);
 
+  @override
   final minerHealthRed = const Color(0xFFFF7878);
+
+  @override
   final minerHealthRed80 = const Color(0xFFFF7878).withOpacity(0.8);
+
+  @override
   final minerHealthRed20 = const Color(0xFFFF7878).withOpacity(0.2);
 
+  @override
   final btcYellow = const Color(0xFFB1742A);
+
+  @override
   final btcYellow80 = const Color(0xFFB1742A).withOpacity(0.80);
+
+  @override
   final btcYellow60 = const Color(0xFFB1742A).withOpacity(0.60);
+
+  @override
   final btcYellow40 = const Color(0xFFB1742A).withOpacity(0.40);
+
+  @override
   final btcYellow20 = const Color(0xFFB1742A).withOpacity(0.20);
 
+  @override
   final success = const Color(0xFF30A78B);
+
+  @override
   final success20 = const Color(0xFF30A78B).withOpacity(0.2);
 
+  @override
   final textPrimaryAndIcons = Colors.white;
+
+  @override
   final textSecondary = const Color(0xFFEBEFF2);
+
+  @override
   final textLabel = const Color(0xFF98A6AD);
+
+  @override
   final textError = const Color(0xFFFF5B5B);
 
+  @override
   final buttonIconTextColor = Colors.white;
 
+  @override
   final transparent = Colors.transparent;
 
+  @override
   Color get shadow => mxcBlue20;
+
+  @override
   Color get shadow2 => Colors.black.withOpacity(10.7);
 }

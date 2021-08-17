@@ -36,7 +36,7 @@ class FontTheme {
         ),
       );
 
-  /// FontSize: 15
+  /// FontSize: 16
   TextStylePack get big => TextStylePack(
         _colorsTheme,
         TextStyle(
@@ -90,10 +90,12 @@ class TextStylePack {
       DecoratableTextStyle(_primary.copyWith(color: colorsTheme.dhxBlue));
 
   DecoratableTextStyle get button => DecoratableTextStyle(
-      _primary.copyWith(color: colorsTheme.buttonIconTextColor));
+        _primary.copyWith(color: colorsTheme.buttonIconTextColor),
+      );
 
   DecoratableTextStyle get health => DecoratableTextStyle(
-      _primary.copyWith(color: colorsTheme.minerHealthRed));
+        _primary.copyWith(color: colorsTheme.minerHealthRed),
+      );
 
   DecoratableTextStyle get transparent =>
       DecoratableTextStyle(_primary.copyWith(color: colorsTheme.transparent));
@@ -106,9 +108,11 @@ class DecoratableTextStyle {
 
   TextStyle call() => _inner;
 
-  DecoratableTextStyle get underline => DecoratableTextStyle(_inner.copyWith(
-        decoration: TextDecoration.underline,
-      ));
+  DecoratableTextStyle get underline => DecoratableTextStyle(
+        _inner.copyWith(
+          decoration: TextDecoration.underline,
+        ),
+      );
 
   DecoratableTextStyle get bold =>
       DecoratableTextStyle(_inner.copyWith(fontWeight: FontWeight.w600));

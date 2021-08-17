@@ -16,11 +16,6 @@ class MxcSwitch extends StatelessWidget {
     return Switch(
       onChanged: onChanged,
       value: value,
-      // activeColor: MxcScopedTheme.of(context).primaryColor,
-      // activeTrackColor:
-      //     MxcScopedTheme.of(context).primaryColor.withOpacity(0.5),
-      // inactiveThumbColor: ColorsTheme.of(context).textLabel,
-      // inactiveTrackColor: ColorsTheme.of(context).textLabel.withOpacity(0.5),
       thumbColor: MaterialStateProperty.resolveWith((states) {
         if (states.contains(MaterialState.disabled)) {
           return ColorsTheme.of(context).textLabel;

@@ -23,7 +23,7 @@ class MxcAppBar extends StatelessWidget {
   })  : title = _textTitle(text, centerTitle),
         super(key: key);
 
-  MxcAppBar.custom({
+  const MxcAppBar.custom({
     Key? key,
     required this.title,
     this.padding = const EdgeInsets.only(
@@ -54,7 +54,8 @@ class MxcAppBar extends StatelessWidget {
             Icons.arrow_back_ios,
             onTap: () => Navigator.of(context).pop(),
           ),
-        );
+        ),
+        super(key: key);
 
   MxcAppBar.close({
     Key? key,
@@ -73,7 +74,8 @@ class MxcAppBar extends StatelessWidget {
             Icons.close,
             onTap: () => Navigator.of(context).pop(),
           ),
-        );
+        ),
+        super(key: key);
 
   static Widget _textTitle(String text, bool centerTitle) => Builder(
         builder: (context) => Text(
@@ -125,7 +127,7 @@ class MxcAppBarButton extends StatelessWidget {
     required this.onTap,
   })  : child = Builder(
           builder: (context) => Text(
-            'Skip',
+            text,
             style: FontTheme.of(context).big.primary(),
           ),
         ),
@@ -155,7 +157,6 @@ class MxcAppBarButton extends StatelessWidget {
       onTap: onTap,
       child: Align(
         child: child,
-        alignment: Alignment.center,
       ),
     );
   }

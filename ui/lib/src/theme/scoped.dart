@@ -25,7 +25,8 @@ class MxcScopedTheme extends StatelessWidget {
       return Provider.of<MxcScopedThemeData>(context, listen: listen);
     } on ProviderNotFoundException {
       return MxcScopedThemeData(
-          primaryColor: ColorsTheme.of(context, listen: listen).mxcBlue);
+        primaryColor: ColorsTheme.of(context, listen: listen).mxcBlue,
+      );
     }
   }
 

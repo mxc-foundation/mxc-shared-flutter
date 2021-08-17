@@ -26,7 +26,7 @@ class _AppBarPageState extends State<AppBarPage> {
                   'App bars',
                   style: FontTheme.of(context).veryBig().copyWith(fontSize: 48),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -34,15 +34,15 @@ class _AppBarPageState extends State<AppBarPage> {
                       'Standard / based on background color',
                       style: FontTheme.of(context).big(),
                     ),
-                    AppBarView(),
-                    SizedBox(height: 50),
+                    const AppBarView(),
+                    const SizedBox(height: 50),
                     Text(
                       'Dark theme',
                       style: FontTheme.of(context).big(),
                     ),
                     MxcTheme.fromOption(
                       option: MxcThemeOption.night,
-                      child: AppBarView(),
+                      child: const AppBarView(),
                     ),
                   ],
                 ),
@@ -66,21 +66,21 @@ class AppBarView extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(height: 50),
+        const SizedBox(height: 50),
         ConstrainedBox(
-          constraints: BoxConstraints(minWidth: 1000),
+          constraints: const BoxConstraints(minWidth: 1000),
           child: Wrap(
             runAlignment: WrapAlignment.spaceBetween,
             alignment: WrapAlignment.spaceBetween,
             runSpacing: 20,
             children: [
               Container(
-                constraints: BoxConstraints(maxWidth: 350),
+                constraints: const BoxConstraints(maxWidth: 350),
                 color: ColorsTheme.of(context).secondaryBackground,
                 child: MxcAppBar.back(text: 'Title'),
               ),
               Container(
-                constraints: BoxConstraints(maxWidth: 350),
+                constraints: const BoxConstraints(maxWidth: 350),
                 color: ColorsTheme.of(context).secondaryBackground,
                 child: MxcAppBar.back(
                   text: 'Title',
@@ -90,16 +90,16 @@ class AppBarView extends StatelessWidget {
             ],
           ),
         ),
-        SizedBox(height: 50),
+        const SizedBox(height: 50),
         ConstrainedBox(
-          constraints: BoxConstraints(minWidth: 1000),
+          constraints: const BoxConstraints(minWidth: 1000),
           child: Wrap(
             runAlignment: WrapAlignment.spaceBetween,
             alignment: WrapAlignment.spaceBetween,
             runSpacing: 20,
             children: [
               Container(
-                constraints: BoxConstraints(maxWidth: 350),
+                constraints: const BoxConstraints(maxWidth: 350),
                 color: ColorsTheme.of(context).primaryBackground,
                 child: MxcAppBar.back(
                   text: 'Title',
@@ -110,7 +110,7 @@ class AppBarView extends StatelessWidget {
                 ),
               ),
               Container(
-                constraints: BoxConstraints(maxWidth: 350),
+                constraints: const BoxConstraints(maxWidth: 350),
                 color: ColorsTheme.of(context).primaryBackground,
                 child: MxcAppBar.custom(
                   padding: const EdgeInsets.only(

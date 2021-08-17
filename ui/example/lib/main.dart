@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         builder: (context) => MaterialApp(
           title: 'Flutter Demo',
           theme: MxcTheme.of(context).toThemeData(),
-          home: MyHomePage(title: 'Flutter Demo Home Page'),
+          home: const MyHomePage(title: 'Flutter Demo Home Page'),
         ),
       ),
     );
@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, required this.title}) : super(key: key);
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
@@ -48,16 +48,16 @@ class _MyHomePageState extends State<MyHomePage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFE5E5E5),
+      backgroundColor: const Color(0xFFE5E5E5),
       body: TabBarView(
         controller: controller,
-        children: [
+        physics: const NeverScrollableScrollPhysics(),
+        children: const [
           ColorsPage(),
           InputPage(),
           AppBarPage(),
           ButtonsPage(),
         ],
-        physics: NeverScrollableScrollPhysics(),
       ),
       floatingActionButton: Container(
         decoration: BoxDecoration(

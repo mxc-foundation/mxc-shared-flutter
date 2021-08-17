@@ -78,10 +78,10 @@ class _MxcTextFieldState extends State<MxcTextField> {
       width: widget.width,
       child: Column(
         children: [
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           if (widget.label != null)
             AnimatedContainer(
-              duration: Duration(milliseconds: 200),
+              duration: const Duration(milliseconds: 200),
               padding: EdgeInsets.only(
                 top: focused ? 6 : 3,
                 bottom: focused ? 3 : 6,
@@ -89,10 +89,11 @@ class _MxcTextFieldState extends State<MxcTextField> {
               alignment: Alignment.centerLeft,
               height: 24,
               child: AnimatedDefaultTextStyle(
-                duration: Duration(milliseconds: 200),
+                duration: const Duration(milliseconds: 200),
                 style: focused
                     ? FontTheme.of(context).small().copyWith(
-                        color: MxcScopedTheme.of(context).primaryColor)
+                          color: MxcScopedTheme.of(context).primaryColor,
+                        )
                     : FontTheme.of(context).middle(),
                 child: Text(
                   widget.label!,
@@ -101,7 +102,7 @@ class _MxcTextFieldState extends State<MxcTextField> {
               ),
             ),
           AnimatedContainer(
-            duration: Duration(milliseconds: 200),
+            duration: const Duration(milliseconds: 200),
             decoration: BoxDecoration(
               border: Border(
                 bottom: BorderSide(
@@ -112,7 +113,7 @@ class _MxcTextFieldState extends State<MxcTextField> {
                 ),
               ),
             ),
-            padding: EdgeInsets.symmetric(vertical: 2),
+            padding: const EdgeInsets.symmetric(vertical: 2),
             child: Row(
               children: [
                 Expanded(
@@ -126,7 +127,7 @@ class _MxcTextFieldState extends State<MxcTextField> {
                     cursorColor: ColorsTheme.of(context).textPrimaryAndIcons,
                     style: FontTheme.of(context).big(),
                     decoration: InputDecoration(
-                      contentPadding: EdgeInsets.fromLTRB(0, 0, 0, 10),
+                      contentPadding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
                       isDense: true,
                       floatingLabelBehavior: FloatingLabelBehavior.always,
                       hintText: widget.hint,
@@ -151,7 +152,7 @@ class _MxcTextFieldState extends State<MxcTextField> {
               ],
             ),
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
         ],
       ),
     );
@@ -172,7 +173,7 @@ class MxcTextFieldButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 5, vertical: 3),
+        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 3),
         child: Icon(
           icon,
           size: 16,
