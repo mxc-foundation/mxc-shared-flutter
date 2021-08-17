@@ -8,13 +8,36 @@ on:
 
 
 jobs:
-  build:
+  lint:
     runs-on: ubuntu-latest
     container: cirrusci/flutter:beta
     strategy:
-      fail-fast: false
-      matrix:
-        folder: [ ui, logic ]
+       fail-fast: false
+       matrix:
+         folder: [ ui, logic ]
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Cache node modules
+      uses: actions/cache@v2
+      env:
+        cache-name: cache-pub-deps
+      with:
+        path: ~/.pub-cache/hosted/
+        key: ${{ env.cache-name }}-${{ hashFiles('**/pubspec.lock') }}
+        restore-keys: |
+          ${{ env.cache-name }}
+    
+    - run: flutter pub get
+      working-directory: ${{ matrix.folder }}
+
+    - name: Check are there any warnings/infos/errors
+      run: flutter analyze --no-pub --suppress-analytics
+      working-directory: ${{ matrix.folder }}
+      
+  format:
+    runs-on: ubuntu-latest
+    container: cirrusci/flutter:beta
     steps:
     - uses: actions/checkout@v2
 
@@ -28,17 +51,5 @@ jobs:
         restore-keys: |
           ${{ env.cache-name }}
 
-    - run: flutter pub get
-      working-directory: ${{ matrix.folder }}
-
-    - name: Check are there any ERROR level warnings
-      run: flutter analyze
-      working-directory: ${{ matrix.folder }}
-
-    - name: Check are there any WARNING level warnings
-      run: flutter analyze --fatal-warnings
-      working-directory: ${{ matrix.folder }}
-
-    - name: Check are there any INFO level warnings
-      run: flutter analyze --fatal-infos
-      working-directory: ${{ matrix.folder }}
+    - name: Check is code formatted well
+      run: flutter format --show changed  --set-exit-if-changed . -o none --summary none --suppress-analytics
