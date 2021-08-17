@@ -1,4 +1,7 @@
 class CacheManager {
-  Future<T?> read<T>(String key) {}
-  Future<T> write<T>(String key, T? value) {}
+  Future<T?> read<T>(String key) async {
+    return null;
+  }
+
+  Future<void> write<T>(String key, T? value) async {}
 }

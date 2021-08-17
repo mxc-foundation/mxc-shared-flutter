@@ -9,4 +9,4 @@ targets:
         options:
           with_base_url: false
           input_folder: swagger
-          output_folder: lib/src/api/supernode/
+          output_folder: lib/src/data/api/supernode/

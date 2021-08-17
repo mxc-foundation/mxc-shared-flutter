@@ -1,5 +1,6 @@
 import 'package:mxc_logic/mxc_logic.dart';
-import 'package:mxc_logic/src/repositories/supernode/supernode.dart';
+
+import '../supernode.dart';
 
 class DhxDemoRepository implements DhxRepository {
   @override

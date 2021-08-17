@@ -1,7 +1,7 @@
 import 'package:chopper/chopper.dart';
 import 'package:mxc_logic/mxc_logic.dart';
 import 'package:mxc_logic/src/data/data.dart';
-import 'package:mxc_logic/src/domain/repositories/shared_mappers.dart';
+import 'package:mxc_logic/src/domain/repositories/internal/shared_mappers.dart';
 
 class TopupRepository {
   final ChopperClient _client;

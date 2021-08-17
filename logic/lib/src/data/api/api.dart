@@ -8,11 +8,17 @@ export 'supernode/client_index.dart';
 export 'supernode/supernode.swagger.dart';
 
 @internal
-ChopperClient createClient(String baseUrl) {
-  return ChopperClient(
-    baseUrl: baseUrl,
-    converter: const JsonConverter(),
-    services: [...supernodeServices],
-    errorConverter: ChopperErrorConverter(),
-  );
+class SupernodeClient extends ChopperClient {
+  SupernodeClient({
+    required String Function() getSupernodeAddress,
+  })  : _getBaseUrl = getSupernodeAddress,
+        super(
+          converter: const JsonConverter(),
+          services: [...supernodeServices],
+          errorConverter: ChopperErrorConverter(),
+        );
+
+  final String Function() _getBaseUrl;
+  @override
+  String get baseUrl => _getBaseUrl();
 }

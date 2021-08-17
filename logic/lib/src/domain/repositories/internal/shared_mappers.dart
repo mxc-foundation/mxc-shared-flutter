@@ -20,6 +20,10 @@ extension NumMapper on num? {
   T orDefault<T extends num>() => 0 as T;
 }
 
+extension BooleanMapper on bool? {
+  bool orDefault() => false;
+}
+
 extension LocationMapper on CommonLocation? {
   Location? toDomain() => this?.latitude == null || this?.longitude == null
       ? null

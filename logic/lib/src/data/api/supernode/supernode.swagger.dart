@@ -34,281 +34,461 @@ abstract class ApplicationService extends ChopperService {
   ///@param organizationID ID of the organization to filter on.
   ///@param search Search on name (optional).
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/applications')
   Future<chopper.Response<ExtapiListApplicationResponse>> list(
-      {@Query('limit') String? limit,
-      @Query('offset') String? offset,
-      @Query('organizationID') String? organizationID,
-      @Query('search') String? search,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Query('limit')
+          String? limit,
+      @Query('offset')
+          String? offset,
+      @Query('organizationID')
+          String? organizationID,
+      @Query('search')
+          String? search,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Create creates the given application.
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/applications')
   Future<chopper.Response<ExtapiCreateApplicationResponse>> create(
-      {@Body() @required ExtapiCreateApplicationRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Body()
+      @required
+          ExtapiCreateApplicationRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Update updates the given application.
   ///@param application.id Application ID. This will be automatically assigned on create.
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Put(path: '/api/applications/{application.id}')
   Future<chopper.Response> update(
-      {@Path('application.id') @required String? id,
-      @Body() @required ExtapiUpdateApplicationRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('application.id')
+      @required
+          String? id,
+      @Body()
+      @required
+          ExtapiUpdateApplicationRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///ListIntegrations lists all configured integrations.
   ///@param applicationID The id of the application.
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/applications/{applicationID}/integrations')
   Future<chopper.Response<ExtapiListIntegrationResponse>> listIntegrations(
-      {@Path('applicationID') @required String? applicationID,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('applicationID')
+      @required
+          String? applicationID,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///DeleteIntegration deletes the HTTP application-integration.
   ///@param applicationID The id of the application.
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Delete(path: '/api/applications/{applicationID}/integrations/http')
   Future<chopper.Response> deleteHTTPIntegration(
-      {@Path('applicationID') @required String? applicationID,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('applicationID')
+      @required
+          String? applicationID,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///GetHTTPIntegration returns the HTTP application-integration.
   ///@param applicationID Application ID.
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/applications/{applicationID}/integrations/http')
   Future<chopper.Response<ExtapiGetHTTPIntegrationResponse>> getHTTPIntegration(
-      {@Path('applicationID') @required String? applicationID,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('applicationID')
+      @required
+          String? applicationID,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///DeleteInfluxDBIntegration deletes the InfluxDB application-integration.
   ///@param applicationID Application ID.
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Delete(path: '/api/applications/{applicationID}/integrations/influxdb')
   Future<chopper.Response> deleteInfluxDBIntegration(
-      {@Path('applicationID') @required String? applicationID,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('applicationID')
+      @required
+          String? applicationID,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///GetInfluxDBIntegration returns the InfluxDB application-integration.
   ///@param applicationID Application ID.
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/applications/{applicationID}/integrations/influxdb')
   Future<chopper.Response<ExtapiGetInfluxDBIntegrationResponse>>
       getInfluxDBIntegration(
-          {@Path('applicationID') @required String? applicationID,
-          @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+          {@Path('applicationID')
+          @required
+              String? applicationID,
+          @Header('Grpc-Metadata-X-OTP')
+              String? grpcMetadataXOTP,
+          @Header('Grpc-Metadata-Authorization')
+              String? grpcMetadataAuthorization});
 
   ///DeleteLoRaCloudIntegration deletes the LoRaCloud application-integration.
   ///@param applicationID Application ID.
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Delete(path: '/api/applications/{applicationID}/integrations/loracloud')
   Future<chopper.Response> deleteLoRaCloudIntegration(
-      {@Path('applicationID') @required String? applicationID,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('applicationID')
+      @required
+          String? applicationID,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///GetLoRaCloudIntegration returns the LoRaCloud application-integration.
   ///@param applicationID Application ID.
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/applications/{applicationID}/integrations/loracloud')
   Future<chopper.Response<ExtapiGetLoRaCloudIntegrationResponse>>
       getLoRaCloudIntegration(
-          {@Path('applicationID') @required String? applicationID,
-          @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+          {@Path('applicationID')
+          @required
+              String? applicationID,
+          @Header('Grpc-Metadata-X-OTP')
+              String? grpcMetadataXOTP,
+          @Header('Grpc-Metadata-Authorization')
+              String? grpcMetadataAuthorization});
 
   ///DeleteMyDevicesIntegration deletes the MyDevices application-integration.
   ///@param applicationID Application ID.
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Delete(path: '/api/applications/{applicationID}/integrations/mydevices')
   Future<chopper.Response> deleteMyDevicesIntegration(
-      {@Path('applicationID') @required String? applicationID,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('applicationID')
+      @required
+          String? applicationID,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///GetMyDevicesIntegration returns the MyDevices application-integration.
   ///@param applicationID Application ID.
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/applications/{applicationID}/integrations/mydevices')
   Future<chopper.Response<ExtapiGetMyDevicesIntegrationResponse>>
       getMyDevicesIntegration(
-          {@Path('applicationID') @required String? applicationID,
-          @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+          {@Path('applicationID')
+          @required
+              String? applicationID,
+          @Header('Grpc-Metadata-X-OTP')
+              String? grpcMetadataXOTP,
+          @Header('Grpc-Metadata-Authorization')
+              String? grpcMetadataAuthorization});
 
   ///DeleteThingsBoardIntegration deletes the ThingsBoard application-integration.
   ///@param applicationID Application ID.
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Delete(path: '/api/applications/{applicationID}/integrations/thingsboard')
   Future<chopper.Response> deleteThingsBoardIntegration(
-      {@Path('applicationID') @required String? applicationID,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('applicationID')
+      @required
+          String? applicationID,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///GetThingsBoardIntegration returns the ThingsBoard application-integration.
   ///@param applicationID Application ID.
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/applications/{applicationID}/integrations/thingsboard')
   Future<chopper.Response<ExtapiGetThingsBoardIntegrationResponse>>
       getThingsBoardIntegration(
-          {@Path('applicationID') @required String? applicationID,
-          @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+          {@Path('applicationID')
+          @required
+              String? applicationID,
+          @Header('Grpc-Metadata-X-OTP')
+              String? grpcMetadataXOTP,
+          @Header('Grpc-Metadata-Authorization')
+              String? grpcMetadataAuthorization});
 
   ///Delete deletes the given application.
   ///@param id Application ID.
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Delete(path: '/api/applications/{id}')
   Future<chopper.Response> delete(
-      {@Path('id') @required String? id,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('id')
+      @required
+          String? id,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Get returns the requested application.
   ///@param id Application ID.
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/applications/{id}')
   Future<chopper.Response<ExtapiGetApplicationResponse>> get(
-      {@Path('id') @required String? id,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('id')
+      @required
+          String? id,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///CreateHTTPIntegration creates a HTTP application-integration.
   ///@param integration.applicationID The id of the application.
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/applications/{integration.applicationID}/integrations/http')
   Future<chopper.Response> createHTTPIntegration(
-      {@Path('integration.applicationID') @required String? applicationID,
-      @Body() @required ExtapiCreateHTTPIntegrationRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('integration.applicationID')
+      @required
+          String? applicationID,
+      @Body()
+      @required
+          ExtapiCreateHTTPIntegrationRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///UpdateHTTPIntegration updates the HTTP application-integration.
   ///@param integration.applicationID The id of the application.
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Put(path: '/api/applications/{integration.applicationID}/integrations/http')
   Future<chopper.Response> updateHTTPIntegration(
-      {@Path('integration.applicationID') @required String? applicationID,
-      @Body() @required ExtapiUpdateHTTPIntegrationRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('integration.applicationID')
+      @required
+          String? applicationID,
+      @Body()
+      @required
+          ExtapiUpdateHTTPIntegrationRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///CreateInfluxDBIntegration create an InfluxDB application-integration.
   ///@param integration.applicationID Application ID.
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(
       path:
           '/api/applications/{integration.applicationID}/integrations/influxdb')
   Future<chopper.Response> createInfluxDBIntegration(
-      {@Path('integration.applicationID') @required String? applicationID,
-      @Body() @required ExtapiCreateInfluxDBIntegrationRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('integration.applicationID')
+      @required
+          String? applicationID,
+      @Body()
+      @required
+          ExtapiCreateInfluxDBIntegrationRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///UpdateInfluxDBIntegration updates the InfluxDB application-integration.
   ///@param integration.applicationID Application ID.
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Put(
       path:
           '/api/applications/{integration.applicationID}/integrations/influxdb')
   Future<chopper.Response> updateInfluxDBIntegration(
-      {@Path('integration.applicationID') @required String? applicationID,
-      @Body() @required ExtapiUpdateInfluxDBIntegrationRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('integration.applicationID')
+      @required
+          String? applicationID,
+      @Body()
+      @required
+          ExtapiUpdateInfluxDBIntegrationRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///CreateLoRaCloudIntegration creates A LoRaCloud application-integration.
   ///@param integration.applicationID Application ID.
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(
       path:
           '/api/applications/{integration.applicationID}/integrations/loracloud')
   Future<chopper.Response> createLoRaCloudIntegration(
-      {@Path('integration.applicationID') @required String? applicationID,
-      @Body() @required ExtapiCreateLoRaCloudIntegrationRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('integration.applicationID')
+      @required
+          String? applicationID,
+      @Body()
+      @required
+          ExtapiCreateLoRaCloudIntegrationRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///UpdateLoRaCloudIntegration updates the LoRaCloud application-integration.
   ///@param integration.applicationID Application ID.
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Put(
       path:
           '/api/applications/{integration.applicationID}/integrations/loracloud')
   Future<chopper.Response> updateLoRaCloudIntegration(
-      {@Path('integration.applicationID') @required String? applicationID,
-      @Body() @required ExtapiUpdateLoRaCloudIntegrationRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('integration.applicationID')
+      @required
+          String? applicationID,
+      @Body()
+      @required
+          ExtapiUpdateLoRaCloudIntegrationRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///CreateMyDevicesIntegration creates a MyDevices application-integration.
   ///@param integration.applicationID Application ID.
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(
       path:
           '/api/applications/{integration.applicationID}/integrations/mydevices')
   Future<chopper.Response> createMyDevicesIntegration(
-      {@Path('integration.applicationID') @required String? applicationID,
-      @Body() @required ExtapiCreateMyDevicesIntegrationRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('integration.applicationID')
+      @required
+          String? applicationID,
+      @Body()
+      @required
+          ExtapiCreateMyDevicesIntegrationRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///UpdateMyDevicesIntegration updates the MyDevices application-integration.
   ///@param integration.applicationID Application ID.
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Put(
       path:
           '/api/applications/{integration.applicationID}/integrations/mydevices')
   Future<chopper.Response> updateMyDevicesIntegration(
-      {@Path('integration.applicationID') @required String? applicationID,
-      @Body() @required ExtapiUpdateMyDevicesIntegrationRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('integration.applicationID')
+      @required
+          String? applicationID,
+      @Body()
+      @required
+          ExtapiUpdateMyDevicesIntegrationRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///CreateThingsBoardIntegration creates a ThingsBoard application-integration.
   ///@param integration.applicationID Application ID.
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(
       path:
           '/api/applications/{integration.applicationID}/integrations/thingsboard')
   Future<chopper.Response> createThingsBoardIntegration(
-      {@Path('integration.applicationID') @required String? applicationID,
-      @Body() @required ExtapiCreateThingsBoardIntegrationRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('integration.applicationID')
+      @required
+          String? applicationID,
+      @Body()
+      @required
+          ExtapiCreateThingsBoardIntegrationRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///UpdateThingsBoardIntegration updates the ThingsBoard application-integration.
   ///@param integration.applicationID Application ID.
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Put(
       path:
           '/api/applications/{integration.applicationID}/integrations/thingsboard')
   Future<chopper.Response> updateThingsBoardIntegration(
-      {@Path('integration.applicationID') @required String? applicationID,
-      @Body() @required ExtapiUpdateThingsBoardIntegrationRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('integration.applicationID')
+      @required
+          String? applicationID,
+      @Body()
+      @required
+          ExtapiUpdateThingsBoardIntegrationRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 }
 
 @ChopperApi()
@@ -328,69 +508,111 @@ abstract class ExternalUserService extends ChopperService {
   ///ConfirmBindingEmail checks given token and bind
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/confirm-external-email')
   Future<chopper.Response<ExtapiConfirmBindingEmailResponse>>
       confirmBindingEmail(
-          {@Body() @required ExtapiConfirmBindingEmailRequest? body,
-          @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+          {@Body()
+          @required
+              ExtapiConfirmBindingEmailRequest? body,
+          @Header('Grpc-Metadata-X-OTP')
+              String? grpcMetadataXOTP,
+          @Header('Grpc-Metadata-Authorization')
+              String? grpcMetadataAuthorization});
 
   ///AuthenticateWeChatUser interacts with wechat open platform to authenticate wechat user then check binding status of this wechat user
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/external-login/authenticate-wechat-user')
   Future<chopper.Response<ExtapiAuthenticateWeChatUserResponse>>
       authenticateWeChatUser(
-          {@Body() @required ExtapiAuthenticateWeChatUserRequest? body,
-          @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+          {@Body()
+          @required
+              ExtapiAuthenticateWeChatUserRequest? body,
+          @Header('Grpc-Metadata-X-OTP')
+              String? grpcMetadataXOTP,
+          @Header('Grpc-Metadata-Authorization')
+              String? grpcMetadataAuthorization});
 
   ///BindExternalUser binds external user id to supernode user
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/external-login/bind-external-user')
   Future<chopper.Response<ExtapiBindExternalUserResponse>> bindExternalUser(
-      {@Body() @required ExtapiBindExternalUserRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Body()
+      @required
+          ExtapiBindExternalUserRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///DebugAuthenticateWeChatUser will only be called by debug mode
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/external-login/debug-authenticate-wechat-user')
   Future<chopper.Response<ExtapiAuthenticateWeChatUserResponse>>
       debugAuthenticateWeChatUser(
-          {@Body() @required ExtapiAuthenticateWeChatUserRequest? body,
-          @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+          {@Body()
+          @required
+              ExtapiAuthenticateWeChatUserRequest? body,
+          @Header('Grpc-Metadata-X-OTP')
+              String? grpcMetadataXOTP,
+          @Header('Grpc-Metadata-Authorization')
+              String? grpcMetadataAuthorization});
 
   ///RegisterExternalUser creates new supernode account then bind it with external user id
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/external-login/register-external-user')
   Future<chopper.Response<ExtapiRegisterExternalUserResponse>>
       registerExternalUser(
-          {@Body() @required ExtapiRegisterExternalUserRequest? body,
-          @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+          {@Body()
+          @required
+              ExtapiRegisterExternalUserRequest? body,
+          @Header('Grpc-Metadata-X-OTP')
+              String? grpcMetadataXOTP,
+          @Header('Grpc-Metadata-Authorization')
+              String? grpcMetadataAuthorization});
 
   ///UnbindExternalUser unbinds external user and supernode user account
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/external-login/unbind-external-user')
   Future<chopper.Response<ExtapiUnbindExternalUserResponse>> unbindExternalUser(
-      {@Body() @required ExtapiUnbindExternalUserRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Body()
+      @required
+          ExtapiUnbindExternalUserRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///VerifyEmail sends email with confirmation message to given address
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/verify-external-email')
   Future<chopper.Response<ExtapiVerifyEmailResponse>> verifyEmail(
-      {@Body() @required ExtapiVerifyEmailRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Body()
+      @required
+          ExtapiVerifyEmailRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 }
 
 @ChopperApi()
@@ -413,52 +635,86 @@ abstract class DeviceProfileService extends ChopperService {
   ///@param organizationID Organization id to filter on.
   ///@param applicationID Application id to filter on.
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/device-profiles')
   Future<chopper.Response<ExtapiListDeviceProfileResponse>> list(
-      {@Query('limit') String? limit,
-      @Query('offset') String? offset,
-      @Query('organizationID') String? organizationID,
-      @Query('applicationID') String? applicationID,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Query('limit')
+          String? limit,
+      @Query('offset')
+          String? offset,
+      @Query('organizationID')
+          String? organizationID,
+      @Query('applicationID')
+          String? applicationID,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Create creates the given device-profile.
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/device-profiles')
   Future<chopper.Response<ExtapiCreateDeviceProfileResponse>> create(
-      {@Body() @required ExtapiCreateDeviceProfileRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Body()
+      @required
+          ExtapiCreateDeviceProfileRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Update updates the given device-profile.
   ///@param deviceProfile.id Device-profile ID (UUID string).
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Put(path: '/api/device-profiles/{deviceProfile.id}')
   Future<chopper.Response> update(
-      {@Path('deviceProfile.id') @required String? id,
-      @Body() @required ExtapiUpdateDeviceProfileRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('deviceProfile.id')
+      @required
+          String? id,
+      @Body()
+      @required
+          ExtapiUpdateDeviceProfileRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Delete deletes the device-profile matching the given id.
   ///@param id Device-profile ID (UUID string).
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Delete(path: '/api/device-profiles/{id}')
   Future<chopper.Response> delete(
-      {@Path('id') @required String? id,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('id')
+      @required
+          String? id,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Get returns the device-profile matching the given id.
   ///@param id Device-profile ID (UUID string).
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/device-profiles/{id}')
   Future<chopper.Response<ExtapiGetDeviceProfileResponse>> get(
-      {@Path('id') @required String? id,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('id')
+      @required
+          String? id,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 }
 
 @ChopperApi()
@@ -478,11 +734,17 @@ abstract class DeviceProvisioningService extends ChopperService {
   ///Create - creates the given provisioned device.
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/device-provision')
   Future<chopper.Response<ExtapiCreateResponse>> create(
-      {@Body() @required ExtapiCreateRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Body()
+      @required
+          ExtapiCreateRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 }
 
 @ChopperApi()
@@ -505,51 +767,87 @@ abstract class DeviceService extends ChopperService {
   ///@param offset
   ///@param limit
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/device/{orgId}/device-history/{devId}')
   Future<chopper.Response<ExtapiGetDeviceHistoryResponse>> getDeviceHistory(
-      {@Path('orgId') @required String? orgId,
-      @Path('devId') @required String? devId,
-      @Query('offset') String? offset,
-      @Query('limit') String? limit,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('orgId')
+      @required
+          String? orgId,
+      @Path('devId')
+      @required
+          String? devId,
+      @Query('offset')
+          String? offset,
+      @Query('limit')
+          String? limit,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///
   ///@param orgId
   ///@param offset
   ///@param limit
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/device/{orgId}/device-list')
   Future<chopper.Response<ExtapiGetDeviceListResponse>> getDeviceList(
-      {@Path('orgId') @required String? orgId,
-      @Query('offset') String? offset,
-      @Query('limit') String? limit,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('orgId')
+      @required
+          String? orgId,
+      @Query('offset')
+          String? offset,
+      @Query('limit')
+          String? limit,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///
   ///@param orgId
   ///@param devId
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/device/{orgId}/device-mode/{devId}')
   Future<chopper.Response<ExtapiSetDeviceModeResponse>> setDeviceMode(
-      {@Path('orgId') @required String? orgId,
-      @Path('devId') @required String? devId,
-      @Body() @required ExtapiSetDeviceModeRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('orgId')
+      @required
+          String? orgId,
+      @Path('devId')
+      @required
+          String? devId,
+      @Body()
+      @required
+          ExtapiSetDeviceModeRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///
   ///@param orgId
   ///@param devId
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/device/{orgId}/device-profile/{devId}')
   Future<chopper.Response<ExtapiGetDSDeviceProfileResponse>> getDeviceProfile(
-      {@Path('orgId') @required String? orgId,
-      @Path('devId') @required String? devId,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('orgId')
+      @required
+          String? orgId,
+      @Path('devId')
+      @required
+          String? devId,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///List returns the available devices.
   ///@param limit Max number of devices to return in the result-set.
@@ -559,152 +857,250 @@ abstract class DeviceService extends ChopperService {
   ///@param multicastGroupID Multicast-group ID to filter on (string formatted UUID).
   ///@param serviceProfileID Service-profile ID to filter on (string formatted UUID).
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/devices')
   Future<chopper.Response<ExtapiListDeviceResponse>> list(
-      {@Query('limit') String? limit,
-      @Query('offset') String? offset,
-      @Query('applicationID') String? applicationID,
-      @Query('search') String? search,
-      @Query('multicastGroupID') String? multicastGroupID,
-      @Query('serviceProfileID') String? serviceProfileID,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Query('limit')
+          String? limit,
+      @Query('offset')
+          String? offset,
+      @Query('applicationID')
+          String? applicationID,
+      @Query('search')
+          String? search,
+      @Query('multicastGroupID')
+          String? multicastGroupID,
+      @Query('serviceProfileID')
+          String? serviceProfileID,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Create creates the given device.
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/devices')
   Future<chopper.Response> create(
-      {@Body() @required ExtapiCreateDeviceRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Body()
+      @required
+          ExtapiCreateDeviceRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Delete deletes the device matching the given DevEUI.
   ///@param devEUI Device EUI (HEX encoded).
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Delete(path: '/api/devices/{devEUI}')
   Future<chopper.Response> delete(
-      {@Path('devEUI') @required String? devEUI,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('devEUI')
+      @required
+          String? devEUI,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Get returns the device matching the given DevEUI.
   ///@param devEUI Device EUI (HEX encoded).
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/devices/{devEUI}')
   Future<chopper.Response<ExtapiGetDeviceResponse>> get(
-      {@Path('devEUI') @required String? devEUI,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('devEUI')
+      @required
+          String? devEUI,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Deactivate de-activates the device.
   ///@param devEUI Device EUI (HEX encoded).
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Delete(path: '/api/devices/{devEUI}/activation')
   Future<chopper.Response> deactivate(
-      {@Path('devEUI') @required String? devEUI,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('devEUI')
+      @required
+          String? devEUI,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///GetActivation returns the current activation details of the device (OTAA and ABP).
   ///@param devEUI Device EUI (HEX encoded).
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/devices/{devEUI}/activation')
   Future<chopper.Response<ExtapiGetDeviceActivationResponse>> getActivation(
-      {@Path('devEUI') @required String? devEUI,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('devEUI')
+      @required
+          String? devEUI,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///StreamEventLogs stream the device events (uplink payloads, ACKs, joins, errors).   * This endpoint is intended for debugging only.   * This endpoint does not work from a web-browser.
   ///@param devEUI Device EUI (HEX encoded).
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/devices/{devEUI}/events')
   Future<chopper.Response<ApiDevicesDevEUIEventsGet$Response>> streamEventLogs(
-      {@Path('devEUI') @required String? devEUI,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('devEUI')
+      @required
+          String? devEUI,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///StreamFrameLogs streams the uplink and downlink frame-logs for the given DevEUI.   * These are the raw LoRaWAN frames and this endpoint is intended for debugging only.   * This endpoint does not work from a web-browser.
   ///@param devEUI Device EUI (HEX encoded).
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/devices/{devEUI}/frames')
   Future<chopper.Response<ApiDevicesDevEUIFramesGet$Response>> streamFrameLogs(
-      {@Path('devEUI') @required String? devEUI,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('devEUI')
+      @required
+          String? devEUI,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///GetRandomDevAddr returns a random DevAddr taking the NwkID prefix into account.
   ///@param devEUI Device EUI (HEX encoded).
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
   ///@param body
 
   @Post(path: '/api/devices/{devEUI}/getRandomDevAddr')
   Future<chopper.Response<ExtapiGetRandomDevAddrResponse>> getRandomDevAddr(
       {@Path('devEUI') @required String? devEUI,
       @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization') String? grpcMetadataAuthorization,
       @Body() @required Object? body});
 
   ///DeleteKeys deletes the device-keys for the given DevEUI.
   ///@param devEUI Device EUI (HEX encoded).
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Delete(path: '/api/devices/{devEUI}/keys')
   Future<chopper.Response> deleteKeys(
-      {@Path('devEUI') @required String? devEUI,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('devEUI')
+      @required
+          String? devEUI,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///GetKeys returns the device-keys for the given DevEUI.
   ///@param devEUI Device EUI (HEX encoded).
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/devices/{devEUI}/keys')
   Future<chopper.Response<ExtapiGetDeviceKeysResponse>> getKeys(
-      {@Path('devEUI') @required String? devEUI,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('devEUI')
+      @required
+          String? devEUI,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Update updates the device matching the given DevEUI.
   ///@param device.devEUI Device EUI (HEX encoded).
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Put(path: '/api/devices/{device.devEUI}')
   Future<chopper.Response> update(
-      {@Path('device.devEUI') @required String? devEUI,
-      @Body() @required ExtapiUpdateDeviceRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('device.devEUI')
+      @required
+          String? devEUI,
+      @Body()
+      @required
+          ExtapiUpdateDeviceRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Activate (re)activates the device (only when ABP is set to true).
   ///@param deviceActivation.devEUI Device EUI (HEX encoded).
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/devices/{deviceActivation.devEUI}/activate')
   Future<chopper.Response> activate(
-      {@Path('deviceActivation.devEUI') @required String? devEUI,
-      @Body() @required ExtapiActivateDeviceRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('deviceActivation.devEUI')
+      @required
+          String? devEUI,
+      @Body()
+      @required
+          ExtapiActivateDeviceRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///CreateKeys creates the given device-keys.
   ///@param deviceKeys.devEUI Device EUI (HEX encoded).
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/devices/{deviceKeys.devEUI}/keys')
   Future<chopper.Response> createKeys(
-      {@Path('deviceKeys.devEUI') @required String? devEUI,
-      @Body() @required ExtapiCreateDeviceKeysRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('deviceKeys.devEUI')
+      @required
+          String? devEUI,
+      @Body()
+      @required
+          ExtapiCreateDeviceKeysRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///UpdateKeys updates the device-keys.
   ///@param deviceKeys.devEUI Device EUI (HEX encoded).
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Put(path: '/api/devices/{deviceKeys.devEUI}/keys')
   Future<chopper.Response> updateKeys(
-      {@Path('deviceKeys.devEUI') @required String? devEUI,
-      @Body() @required ExtapiUpdateDeviceKeysRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('deviceKeys.devEUI')
+      @required
+          String? devEUI,
+      @Body()
+      @required
+          ExtapiUpdateDeviceKeysRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 }
 
 @ChopperApi()
@@ -725,13 +1121,21 @@ abstract class FUOTADeploymentService extends ChopperService {
   ///@param devEUI Device EUI (HEX encoded).
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/devices/{devEUI}/fuota-deployments')
   Future<chopper.Response<ExtapiCreateFUOTADeploymentForDeviceResponse>>
       createForDevice(
-          {@Path('devEUI') @required String? devEUI,
-          @Body() @required ExtapiCreateFUOTADeploymentForDeviceRequest? body,
-          @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+          {@Path('devEUI')
+          @required
+              String? devEUI,
+          @Body()
+          @required
+              ExtapiCreateFUOTADeploymentForDeviceRequest? body,
+          @Header('Grpc-Metadata-X-OTP')
+              String? grpcMetadataXOTP,
+          @Header('Grpc-Metadata-Authorization')
+              String? grpcMetadataAuthorization});
 
   ///List lists the fuota deployments.
   ///@param limit Max number of deployments to return in the result-set.
@@ -739,49 +1143,79 @@ abstract class FUOTADeploymentService extends ChopperService {
   ///@param applicationID Application ID to filter on (optional).
   ///@param devEUI Device EUI (HEX encoded) (optional).
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/fuota-deployments')
   Future<chopper.Response<ExtapiListFUOTADeploymentResponse>> list(
-      {@Query('limit') String? limit,
-      @Query('offset') String? offset,
-      @Query('applicationID') String? applicationID,
-      @Query('devEUI') String? devEUI,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Query('limit')
+          String? limit,
+      @Query('offset')
+          String? offset,
+      @Query('applicationID')
+          String? applicationID,
+      @Query('devEUI')
+          String? devEUI,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///ListDeploymentDevices lists the devices (and status) for the given fuota deployment ID.
   ///@param fuotaDeploymentID ID of the deployment (string formatted UUID). This value will be automatically assigned on create.
   ///@param limit Max number of items to return.
   ///@param offset Offset in the result-set (for pagination).
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/fuota-deployments/{fuotaDeploymentID}/devices')
   Future<chopper.Response<ExtapiListFUOTADeploymentDevicesResponse>>
       listDeploymentDevices(
-          {@Path('fuotaDeploymentID') @required String? fuotaDeploymentID,
-          @Query('limit') String? limit,
-          @Query('offset') String? offset,
-          @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+          {@Path('fuotaDeploymentID')
+          @required
+              String? fuotaDeploymentID,
+          @Query('limit')
+              String? limit,
+          @Query('offset')
+              String? offset,
+          @Header('Grpc-Metadata-X-OTP')
+              String? grpcMetadataXOTP,
+          @Header('Grpc-Metadata-Authorization')
+              String? grpcMetadataAuthorization});
 
   ///GetDeploymentDevice returns the deployment device.
   ///@param fuotaDeploymentID ID of the deployment (string formatted UUID). This value will be automatically assigned on create.
   ///@param devEUI Device EUI (HEX encoded).
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/fuota-deployments/{fuotaDeploymentID}/devices/{devEUI}')
   Future<chopper.Response<ExtapiGetFUOTADeploymentDeviceResponse>>
       getDeploymentDevice(
-          {@Path('fuotaDeploymentID') @required String? fuotaDeploymentID,
-          @Path('devEUI') @required String? devEUI,
-          @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+          {@Path('fuotaDeploymentID')
+          @required
+              String? fuotaDeploymentID,
+          @Path('devEUI')
+          @required
+              String? devEUI,
+          @Header('Grpc-Metadata-X-OTP')
+              String? grpcMetadataXOTP,
+          @Header('Grpc-Metadata-Authorization')
+              String? grpcMetadataAuthorization});
 
   ///Get returns the fuota deployment for the given id.
   ///@param id ID of the deployment (string formatted UUID). This value will be automatically assigned on create.
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/fuota-deployments/{id}')
   Future<chopper.Response<ExtapiGetFUOTADeploymentResponse>> get(
-      {@Path('id') @required String? id,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('id')
+      @required
+          String? id,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 }
 
 @ChopperApi()
@@ -801,31 +1235,51 @@ abstract class DeviceQueueService extends ChopperService {
   ///Flush flushes the downlink device-queue.
   ///@param devEUI Device EUI (HEX encoded).
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Delete(path: '/api/devices/{devEUI}/queue')
   Future<chopper.Response> flush(
-      {@Path('devEUI') @required String? devEUI,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('devEUI')
+      @required
+          String? devEUI,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///List lists the items in the device-queue.
   ///@param devEUI Device EUI (HEX encoded).
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/devices/{devEUI}/queue')
   Future<chopper.Response<ExtapiListDeviceQueueItemsResponse>> list(
-      {@Path('devEUI') @required String? devEUI,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('devEUI')
+      @required
+          String? devEUI,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Enqueue adds the given item to the device-queue.
   ///@param deviceQueueItem.devEUI Device EUI (HEX encoded).
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/devices/{deviceQueueItem.devEUI}/queue')
   Future<chopper.Response<ExtapiEnqueueDeviceQueueItemResponse>> enqueue(
-      {@Path('deviceQueueItem.devEUI') @required String? devEUI,
-      @Body() @required ExtapiEnqueueDeviceQueueItemRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('deviceQueueItem.devEUI')
+      @required
+          String? devEUI,
+      @Body()
+      @required
+          ExtapiEnqueueDeviceQueueItemRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 }
 
 @ChopperApi()
@@ -844,34 +1298,51 @@ abstract class DFIService extends ChopperService {
 
   ///AuthenticateUser authenticates user with given jwt, return necessary user info for DFI service
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/dfi/profile')
   Future<chopper.Response<ExtapiDFIAuthenticateUserResponse>> authenticateUser(
-      {@Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///TopUp allows user to top up DFI margin wallet from DD wallet/supernode wallet
   ///@param organizationID returned after call of authenticate user request, represent user's DD wallet.
   ///@param amount the amount that user wants to top up margin wallet from DD wallet.
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/dfi/top-up')
   Future<chopper.Response<ExtapiTopUpResponse>> topUp(
-      {@Query('organizationID') String? organizationID,
-      @Query('amount') String? amount,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Query('organizationID')
+          String? organizationID,
+      @Query('amount')
+          String? amount,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Withdraw allows user to withdraw from DFI margin wallet to DD wallet/supernode wallet
   ///@param organizationID
   ///@param amount
   ///@param DFIPoolBalance
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/dfi/withdraw')
   Future<chopper.Response<ExtapiWithdrawResponse>> withdraw(
-      {@Query('organizationID') String? organizationID,
-      @Query('amount') String? amount,
-      @Query('DFIPoolBalance') String? dFIPoolBalance,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Query('organizationID')
+          String? organizationID,
+      @Query('amount')
+          String? amount,
+      @Query('DFIPoolBalance')
+          String? dFIPoolBalance,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 }
 
 @ChopperApi()
@@ -891,96 +1362,153 @@ abstract class DHXServcie extends ChopperService {
   ///Bond DHX to mine DHX
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/dhx-mining/bond')
   Future<chopper.Response<ExtapiDHXBondResponse>> dHXBond(
-      {@Body() @required ExtapiDHXBondRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Body()
+      @required
+          ExtapiDHXBondRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Get info about bonded, cooling off and unbonding DHX
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/dhx-mining/bond-info')
   Future<chopper.Response<ExtapiDHXBondInfoResponse>> dHXBondInfo(
-      {@Body() @required ExtapiDHXBondInfoRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Body()
+      @required
+          ExtapiDHXBondInfoRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Request to create a new council
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/dhx-mining/create-council')
   Future<chopper.Response<ExtapiDHXCreateCouncilResponse>> dHXCreateCouncil(
-      {@Body() @required ExtapiDHXCreateCouncilRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Body()
+      @required
+          ExtapiDHXCreateCouncilRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Request to lockdrop for DHX pre-mining
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/dhx-mining/create-stake')
   Future<chopper.Response<ExtapiDHXCreateStakeResponse>> dHXCreateStake(
-      {@Body() @required ExtapiDHXCreateStakeRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Body()
+      @required
+          ExtapiDHXCreateStakeRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///DHXEstimateMining estimates organization's mining based on lockdrops, bonded DHX and number of gateways
   ///@param orgId id of the organization for which estimates should be calculated.
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/dhx-mining/estimate')
   Future<chopper.Response<ExtapiDHXEstimateMiningResponse>> dHXEstimateMining(
-      {@Query('orgId') String? orgId,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Query('orgId')
+          String? orgId,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Return info about DHX mining during the specified period
   ///@param orgId organization for which the history is returned.
   ///@param from the first day of the period.
   ///@param till the last day of the period.
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/dhx-mining/history')
   Future<chopper.Response<ExtapiDHXMiningHistoryResponse>> dHXMiningHistory(
-      {@Query('orgId') String? orgId,
-      @Query('from') String? from,
-      @Query('till') String? till,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Query('orgId')
+          String? orgId,
+      @Query('from')
+          String? from,
+      @Query('till')
+          String? till,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Return info about the last paid day of DHX mining
   ///@param orgId organization id. If specified return details for the given organization and the council it chairs.
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/dhx-mining/last-mining')
   Future<chopper.Response<ExtapiDHXGetLastMiningResponse>> dHXGetLastMining(
-      {@Query('orgId') String? orgId,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Query('orgId')
+          String? orgId,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///List all existing councils
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/dhx-mining/list-councils')
   Future<chopper.Response<ExtapiDHXListCouncilsResponse>> dHXListCouncils(
-      {@Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///List all dhx stakes for the organization
   ///@param chairOrgId if not 0 then return stakes for the council chaired by the specified org. Only the council chair should be able to request this.
   ///@param organizationId if not 0 then return stakes of the given organization. Only the org user should be able to request this.
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/dhx-mining/list-stakes')
   Future<chopper.Response<ExtapiDHXListStakesResponse>> dHXListStakes(
-      {@Query('chairOrgId') String? chairOrgId,
-      @Query('organizationId') String? organizationId,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Query('chairOrgId')
+          String? chairOrgId,
+      @Query('organizationId')
+          String? organizationId,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Unbond bonded DHX
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/dhx-mining/unbond')
   Future<chopper.Response<ExtapiDHXUnbondResponse>> dHXUnbond(
-      {@Body() @required ExtapiDHXUnbondRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Body()
+      @required
+          ExtapiDHXUnbondRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 }
 
 @ChopperApi()
@@ -1002,51 +1530,84 @@ abstract class GatewayProfileService extends ChopperService {
   ///@param offset Offset in the result-set (for pagination).
   ///@param networkServerID Network-server ID to filter on (optional).
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/gateway-profiles')
   Future<chopper.Response<ExtapiListGatewayProfilesResponse>> list(
-      {@Query('limit') String? limit,
-      @Query('offset') String? offset,
-      @Query('networkServerID') String? networkServerID,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Query('limit')
+          String? limit,
+      @Query('offset')
+          String? offset,
+      @Query('networkServerID')
+          String? networkServerID,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Create creates the given gateway-profile.
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/gateway-profiles')
   Future<chopper.Response<ExtapiCreateGatewayProfileResponse>> create(
-      {@Body() @required ExtapiCreateGatewayProfileRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Body()
+      @required
+          ExtapiCreateGatewayProfileRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Update updates the given gateway-profile.
   ///@param gatewayProfile.id Gateway-profile ID (UUID string).
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Put(path: '/api/gateway-profiles/{gatewayProfile.id}')
   Future<chopper.Response> update(
-      {@Path('gatewayProfile.id') @required String? id,
-      @Body() @required ExtapiUpdateGatewayProfileRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('gatewayProfile.id')
+      @required
+          String? id,
+      @Body()
+      @required
+          ExtapiUpdateGatewayProfileRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Delete deletes the gateway-profile matching the given id.
   ///@param id Gateway-profile id (UUID string).
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Delete(path: '/api/gateway-profiles/{id}')
   Future<chopper.Response> delete(
-      {@Path('id') @required String? id,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('id')
+      @required
+          String? id,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Get returns the gateway-profile matching the given id.
   ///@param id Gateway-profile ID (UUID string).
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/gateway-profiles/{id}')
   Future<chopper.Response<ExtapiGetGatewayProfileResponse>> get(
-      {@Path('id') @required String? id,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('id')
+      @required
+          String? id,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 }
 
 @ChopperApi()
@@ -1066,12 +1627,18 @@ abstract class GatewayService extends ChopperService {
   ///
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/gateway/update-firmware')
   Future<chopper.Response<ExtapiManualTriggerUpdateFirmwareResponse>>
       manualTriggerUpdateFirmware(
-          {@Body() @required ExtapiManualTriggerUpdateFirmwareRequest? body,
-          @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+          {@Body()
+          @required
+              ExtapiManualTriggerUpdateFirmwareRequest? body,
+          @Header('Grpc-Metadata-X-OTP')
+              String? grpcMetadataXOTP,
+          @Header('Grpc-Metadata-Authorization')
+              String? grpcMetadataAuthorization});
 
   ///
   ///@param orgId
@@ -1079,40 +1646,68 @@ abstract class GatewayService extends ChopperService {
   ///@param offset
   ///@param limit
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/gateway/{orgId}/gateway-history/{gwId}')
   Future<chopper.Response<ExtapiGetGatewayHistoryResponse>> getGatewayHistory(
-      {@Path('orgId') @required String? orgId,
-      @Path('gwId') @required String? gwId,
-      @Query('offset') String? offset,
-      @Query('limit') String? limit,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('orgId')
+      @required
+          String? orgId,
+      @Path('gwId')
+      @required
+          String? gwId,
+      @Query('offset')
+          String? offset,
+      @Query('limit')
+          String? limit,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///
   ///@param orgId
   ///@param offset
   ///@param limit
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/gateway/{orgId}/gateway-list')
   Future<chopper.Response<ExtapiGetGatewayListResponse>> getGatewayList(
-      {@Path('orgId') @required String? orgId,
-      @Query('offset') String? offset,
-      @Query('limit') String? limit,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('orgId')
+      @required
+          String? orgId,
+      @Query('offset')
+          String? offset,
+      @Query('limit')
+          String? limit,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///
   ///@param orgId
   ///@param gwId
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/gateway/{orgId}/gateway-mode/{gwId}')
   Future<chopper.Response<ExtapiSetGatewayModeResponse>> setGatewayMode(
-      {@Path('orgId') @required String? orgId,
-      @Path('gwId') @required String? gwId,
-      @Body() @required ExtapiSetGatewayModeRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('orgId')
+      @required
+          String? orgId,
+      @Path('gwId')
+      @required
+          String? gwId,
+      @Body()
+      @required
+          ExtapiSetGatewayModeRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///
   ///@param orgId
@@ -1120,14 +1715,24 @@ abstract class GatewayService extends ChopperService {
   ///@param offset
   ///@param limit
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/gateway/{orgId}/gateway-profile/{gwId}')
   Future<chopper.Response<ExtapiGetGSGatewayProfileResponse>> getGatewayProfile(
-      {@Path('orgId') @required String? orgId,
-      @Path('gwId') @required String? gwId,
-      @Query('offset') String? offset,
-      @Query('limit') String? limit,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('orgId')
+      @required
+          String? orgId,
+      @Path('gwId')
+      @required
+          String? gwId,
+      @Query('offset')
+          String? offset,
+      @Query('limit')
+          String? limit,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///List lists the gateways.
   ///@param limit Max number of nodes to return in the result-set.
@@ -1135,173 +1740,282 @@ abstract class GatewayService extends ChopperService {
   ///@param organizationID ID of the organization for which to filter on, when left blank the response will return all gateways to which the user has access to.
   ///@param search Search on name or gateway MAC (optional).
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/gateways')
   Future<chopper.Response<ExtapiListGatewayResponse>> list(
-      {@Query('limit') int? limit,
-      @Query('offset') int? offset,
-      @Query('organizationID') String? organizationID,
-      @Query('search') String? search,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Query('limit')
+          int? limit,
+      @Query('offset')
+          int? offset,
+      @Query('organizationID')
+          String? organizationID,
+      @Query('search')
+          String? search,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Create creates the given gateway.
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/gateways')
   Future<chopper.Response> create(
-      {@Body() @required ExtapiCreateGatewayRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Body()
+      @required
+          ExtapiCreateGatewayRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///ListLocations lists the gateways locations.
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/gateways-loc')
   Future<chopper.Response<ExtapiListGatewayLocationsResponse>> listLocations(
-      {@Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/gateways/default-config/add')
   Future<chopper.Response<ExtapiInsertNewDefaultGatewayConfigResponse>>
       insertNewDefaultGatewayConfig(
-          {@Body() @required ExtapiInsertNewDefaultGatewayConfigRequest? body,
-          @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+          {@Body()
+          @required
+              ExtapiInsertNewDefaultGatewayConfigRequest? body,
+          @Header('Grpc-Metadata-X-OTP')
+              String? grpcMetadataXOTP,
+          @Header('Grpc-Metadata-Authorization')
+              String? grpcMetadataAuthorization});
 
   ///
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Put(path: '/api/gateways/default-config/batch-reset')
   Future<chopper.Response<ExtapiBatchResetDefaultGatewatConfigResponse>>
       batchResetDefaultGatewatConfig(
-          {@Body() @required ExtapiBatchResetDefaultGatewatConfigRequest? body,
-          @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+          {@Body()
+          @required
+              ExtapiBatchResetDefaultGatewatConfigRequest? body,
+          @Header('Grpc-Metadata-X-OTP')
+              String? grpcMetadataXOTP,
+          @Header('Grpc-Metadata-Authorization')
+              String? grpcMetadataAuthorization});
 
   ///
   ///@param model
   ///@param region
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/gateways/default-config/get')
   Future<chopper.Response<ExtapiGetDefaultGatewayConfigResponse>>
       getDefaultGatewayConfig(
-          {@Query('model') String? model,
-          @Query('region') String? region,
-          @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+          {@Query('model')
+              String? model,
+          @Query('region')
+              String? region,
+          @Header('Grpc-Metadata-X-OTP')
+              String? grpcMetadataXOTP,
+          @Header('Grpc-Metadata-Authorization')
+              String? grpcMetadataAuthorization});
 
   ///
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Put(path: '/api/gateways/default-config/reset')
   Future<chopper.Response<ExtapiResetDefaultGatewatConfigByIDResponse>>
       resetDefaultGatewatConfigByID(
-          {@Body() @required ExtapiResetDefaultGatewatConfigByIDRequest? body,
-          @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+          {@Body()
+          @required
+              ExtapiResetDefaultGatewatConfigByIDRequest? body,
+          @Header('Grpc-Metadata-X-OTP')
+              String? grpcMetadataXOTP,
+          @Header('Grpc-Metadata-Authorization')
+              String? grpcMetadataAuthorization});
 
   ///
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Put(path: '/api/gateways/default-config/update')
   Future<chopper.Response<ExtapiUpdateDefaultGatewayConfigResponse>>
       updateDefaultGatewayConfig(
-          {@Body() @required ExtapiUpdateDefaultGatewayConfigRequest? body,
-          @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+          {@Body()
+          @required
+              ExtapiUpdateDefaultGatewayConfigRequest? body,
+          @Header('Grpc-Metadata-X-OTP')
+              String? grpcMetadataXOTP,
+          @Header('Grpc-Metadata-Authorization')
+              String? grpcMetadataAuthorization});
 
   ///
   ///@param gatewayId
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/gateways/getconfig/{gatewayId}')
   Future<chopper.Response<ExtapiGetGwConfigResponse>> getGwConfig(
-      {@Path('gatewayId') @required String? gatewayId,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('gatewayId')
+      @required
+          String? gatewayId,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///
   ///@param gatewayId
   ///@param sn
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/gateways/getpassword/{gatewayId}')
   Future<chopper.Response<ExtapiGetGwPwdResponse>> getGwPwd(
-      {@Path('gatewayId') @required String? gatewayId,
-      @Query('sn') String? sn,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('gatewayId')
+      @required
+          String? gatewayId,
+      @Query('sn')
+          String? sn,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/gateways/register')
   Future<chopper.Response<ExtapiRegisterResponse>> register(
-      {@Body() @required ExtapiRegisterRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Body()
+      @required
+          ExtapiRegisterRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/gateways/register-reseller')
   Future<chopper.Response<ExtapiRegisterResellerResponse>> registerReseller(
-      {@Body() @required ExtapiRegisterResellerRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Body()
+      @required
+          ExtapiRegisterResellerRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///
   ///@param gatewayId
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Put(path: '/api/gateways/set-auto-update/{gatewayId}')
   Future<chopper.Response<ExtapiSetAutoUpdateFirmwareResponse>>
       setAutoUpdateFirmware(
-          {@Path('gatewayId') @required String? gatewayId,
-          @Body() @required ExtapiSetAutoUpdateFirmwareRequest? body,
-          @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+          {@Path('gatewayId')
+          @required
+              String? gatewayId,
+          @Body()
+          @required
+              ExtapiSetAutoUpdateFirmwareRequest? body,
+          @Header('Grpc-Metadata-X-OTP')
+              String? grpcMetadataXOTP,
+          @Header('Grpc-Metadata-Authorization')
+              String? grpcMetadataAuthorization});
 
   ///
   ///@param gatewayId
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Put(path: '/api/gateways/updateconfig/{gatewayId}')
   Future<chopper.Response<ExtapiUpdateGwConfigResponse>> updateGwConfig(
-      {@Path('gatewayId') @required String? gatewayId,
-      @Body() @required ExtapiUpdateGwConfigRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('gatewayId')
+      @required
+          String? gatewayId,
+      @Body()
+      @required
+          ExtapiUpdateGwConfigRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Update updates the gateway matching the given mac address.
   ///@param gateway.id Gateway ID (HEX encoded).
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Put(path: '/api/gateways/{gateway.id}')
   Future<chopper.Response> update(
-      {@Path('gateway.id') @required String? id,
-      @Body() @required ExtapiUpdateGatewayRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('gateway.id')
+      @required
+          String? id,
+      @Body()
+      @required
+          ExtapiUpdateGatewayRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///StreamFrameLogs streams the uplink and downlink frame-logs for the given gateway ID. Notes:   * These are the raw LoRaWAN frames and this endpoint is intended for debugging only.   * This endpoint does not work from a web-browser.
   ///@param gatewayID Gateway ID (HEX encoded).
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/gateways/{gatewayID}/frames')
   Future<chopper.Response<ApiGatewaysGatewayIDFramesGet$Response>>
       streamFrameLogs(
-          {@Path('gatewayID') @required String? gatewayID,
-          @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+          {@Path('gatewayID')
+          @required
+              String? gatewayID,
+          @Header('Grpc-Metadata-X-OTP')
+              String? grpcMetadataXOTP,
+          @Header('Grpc-Metadata-Authorization')
+              String? grpcMetadataAuthorization});
 
   ///GetLastPing returns the last emitted ping and gateways receiving this ping.
   ///@param gatewayID Gateway ID (HEX encoded).
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/gateways/{gatewayID}/pings/last')
   Future<chopper.Response<ExtapiGetLastPingResponse>> getLastPing(
-      {@Path('gatewayID') @required String? gatewayID,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('gatewayID')
+      @required
+          String? gatewayID,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///GetStats lists the gateway stats given the query parameters.
   ///@param gatewayID Gateway ID (HEX encoded).
@@ -1309,32 +2023,53 @@ abstract class GatewayService extends ChopperService {
   ///@param startTimestamp Timestamp to start from.
   ///@param endTimestamp Timestamp until to get from.
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/gateways/{gatewayID}/stats')
   Future<chopper.Response<ExtapiGetGatewayStatsResponse>> getStats(
-      {@Path('gatewayID') @required String? gatewayID,
-      @Query('interval') String? interval,
-      @Query('startTimestamp') String? startTimestamp,
-      @Query('endTimestamp') String? endTimestamp,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('gatewayID')
+      @required
+          String? gatewayID,
+      @Query('interval')
+          String? interval,
+      @Query('startTimestamp')
+          String? startTimestamp,
+      @Query('endTimestamp')
+          String? endTimestamp,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Delete deletes the gateway matching the given mac address.
   ///@param id Gateway ID (HEX encoded).
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Delete(path: '/api/gateways/{id}')
   Future<chopper.Response> delete(
-      {@Path('id') @required String? id,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('id')
+      @required
+          String? id,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Get returns the gateway for the requested mac address.
   ///@param id Gateway ID (HEX encoded).
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/gateways/{id}')
   Future<chopper.Response<ExtapiGetGatewayResponse>> get(
-      {@Path('id') @required String? id,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('id')
+      @required
+          String? id,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///List lists the gateways.
   ///@param limit Max number of nodes to return in the result-set.
@@ -1342,14 +2077,22 @@ abstract class GatewayService extends ChopperService {
   ///@param organizationID ID of the organization for which to filter on, when left blank the response will return all gateways to which the user has access to.
   ///@param search Search on name or gateway MAC (optional).
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/new-gateways')
   Future<chopper.Response<ExtapiListGatewayResponse>> listNewGateways(
-      {@Query('limit') int? limit,
-      @Query('offset') int? offset,
-      @Query('organizationID') String? organizationID,
-      @Query('search') String? search,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Query('limit')
+          int? limit,
+      @Query('offset')
+          int? offset,
+      @Query('organizationID')
+          String? organizationID,
+      @Query('search')
+          String? search,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 }
 
 @ChopperApi()
@@ -1368,148 +2111,239 @@ abstract class InternalService extends ChopperService {
 
   ///Get the branding for the UI
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/internal/branding')
   Future<chopper.Response<ExtapiBrandingResponse>> branding(
-      {@Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/internal/confirm-password-reset')
   Future<chopper.Response<ExtapiPasswordResetResp>> confirmPasswordReset(
-      {@Body() @required ExtapiConfirmPasswordResetReq? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Body()
+      @required
+          ExtapiConfirmPasswordResetReq? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Log the user in, returns JWT
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/internal/login')
   Future<chopper.Response<ExtapiLoginResponse>> login(
-      {@Body() @required ExtapiLoginRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Body()
+      @required
+          ExtapiLoginRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Validate OTP, returns JWT
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/internal/login-2fa')
   Future<chopper.Response<ExtapiLoginResponse>> login2FA(
-      {@Body() @required ExtapiLogin2FARequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Body()
+      @required
+          ExtapiLogin2FARequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Get the current user's profile
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/internal/profile')
   Future<chopper.Response<ExtapiProfileResponse>> profile(
-      {@Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/internal/registration')
   Future<chopper.Response> registerUser(
-      {@Body() @required ExtapiRegisterUserRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Body()
+      @required
+          ExtapiRegisterUserRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/internal/registration-confirm')
   Future<chopper.Response<ExtapiConfirmRegistrationResponse>>
       confirmRegistration(
-          {@Body() @required ExtapiConfirmRegistrationRequest? body,
-          @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+          {@Body()
+          @required
+              ExtapiConfirmRegistrationRequest? body,
+          @Header('Grpc-Metadata-X-OTP')
+              String? grpcMetadataXOTP,
+          @Header('Grpc-Metadata-Authorization')
+              String? grpcMetadataAuthorization});
 
   ///
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/internal/registration-finish')
   Future<chopper.Response> finishRegistration(
-      {@Body() @required ExtapiFinishRegistrationRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Body()
+      @required
+          ExtapiFinishRegistrationRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/internal/request-password-reset')
   Future<chopper.Response<ExtapiPasswordResetResp>> requestPasswordReset(
-      {@Body() @required ExtapiPasswordResetReq? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Body()
+      @required
+          ExtapiPasswordResetReq? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Perform a global search.
   ///@param search Search query.
   ///@param limit Max number of results to return.
   ///@param offset Offset offset of the result-set (for pagination).
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/internal/search')
   Future<chopper.Response<ExtapiGlobalSearchResponse>> globalSearch(
-      {@Query('search') String? search,
-      @Query('limit') String? limit,
-      @Query('offset') String? offset,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Query('search')
+          String? search,
+      @Query('limit')
+          String? limit,
+      @Query('offset')
+          String? offset,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/internal/totp-configuration')
   Future<chopper.Response<ExtapiGetTOTPConfigurationResponse>>
       getTOTPConfiguration(
-          {@Body() @required ExtapiGetTOTPConfigurationRequest? body,
-          @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+          {@Body()
+          @required
+              ExtapiGetTOTPConfigurationRequest? body,
+          @Header('Grpc-Metadata-X-OTP')
+              String? grpcMetadataXOTP,
+          @Header('Grpc-Metadata-Authorization')
+              String? grpcMetadataAuthorization});
 
   ///
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/internal/totp-disable')
   Future<chopper.Response<ExtapiTOTPStatusResponse>> disableTOTP(
-      {@Body() @required ExtapiTOTPStatusRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Body()
+      @required
+          ExtapiTOTPStatusRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/internal/totp-enable')
   Future<chopper.Response<ExtapiTOTPStatusResponse>> enableTOTP(
-      {@Body() @required ExtapiTOTPStatusRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Body()
+      @required
+          ExtapiTOTPStatusRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/internal/totp-recovery-codes')
   Future<chopper.Response<ExtapiGetRecoveryCodesResponse>> getRecoveryCodes(
-      {@Body() @required ExtapiGetRecoveryCodesRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Body()
+      @required
+          ExtapiGetRecoveryCodesRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/internal/totp-status')
   Future<chopper.Response<ExtapiTOTPStatusResponse>> getTOTPStatus(
-      {@Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/internal/verify-g-recaptcha')
   Future<chopper.Response<ExtapiGoogleRecaptchaResponse>>
       getVerifyingGoogleRecaptcha(
-          {@Body() @required ExtapiGoogleRecaptchaRequest? body,
-          @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+          {@Body()
+          @required
+              ExtapiGoogleRecaptchaRequest? body,
+          @Header('Grpc-Metadata-X-OTP')
+              String? grpcMetadataXOTP,
+          @Header('Grpc-Metadata-Authorization')
+              String? grpcMetadataAuthorization});
 }
 
 @ChopperApi()
@@ -1529,65 +2363,101 @@ abstract class MosquittoAuthService extends ChopperService {
   ///This will be called by mosquitto auth plugin JWT backend, request and response are also defined there
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/mosquitto-auth/acl-check')
   Future<chopper.Response<ExtapiCheckACLResponse>> checkACL(
-      {@Body() @required ExtapiCheckACLRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Body()
+      @required
+          ExtapiCheckACLRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///This will be called by mosquitto auth plugin JWT backend, request and response are also defined there
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/mosquitto-auth/get-user')
   Future<chopper.Response<ExtapiJWTAuthenticationResponse>> jWTAuthentication(
-      {@Body() @required ExtapiJWTAuthenticationRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Body()
+      @required
+          ExtapiJWTAuthenticationRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Get JWT for mosquitto auth with given org id Only accessible for authenticated supernode user
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/mosquitto-auth/login')
   Future<chopper.Response<ExtapiGetJWTResponse>> getJWT(
-      {@Body() @required ExtapiGetJWTRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Body()
+      @required
+          ExtapiGetJWTRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///SendCommandToDevice takes device eui as request paramter, returns topics that can be used to send command to a specific device
   ///@param devEui
   ///@param organizationId
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/mosquitto-auth/send-command')
   Future<chopper.Response<ExtapiSendCommandToDeviceResponse>>
       sendCommandToDevice(
-          {@Query('devEui') String? devEui,
-          @Query('organizationId') String? organizationId,
-          @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+          {@Query('devEui')
+              String? devEui,
+          @Query('organizationId')
+              String? organizationId,
+          @Header('Grpc-Metadata-X-OTP')
+              String? grpcMetadataXOTP,
+          @Header('Grpc-Metadata-Authorization')
+              String? grpcMetadataAuthorization});
 
   ///SubsribeApplication takes application id as request parameter, returns topics that can be used to subscribe to all devices' events under same application
   ///@param applicationId
   ///@param organizationId
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/mosquitto-auth/subscribe-application-events')
   Future<chopper.Response<ExtapiSubsribeApplicationEventsResponse>>
       subsribeApplicationEvents(
-          {@Query('applicationId') String? applicationId,
-          @Query('organizationId') String? organizationId,
-          @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+          {@Query('applicationId')
+              String? applicationId,
+          @Query('organizationId')
+              String? organizationId,
+          @Header('Grpc-Metadata-X-OTP')
+              String? grpcMetadataXOTP,
+          @Header('Grpc-Metadata-Authorization')
+              String? grpcMetadataAuthorization});
 
   ///SubsribeDeviceEvents takes device eui as request parameter, returns topis that can be used to subscribe to all device events or one specific event
   ///@param devEui
   ///@param organizationId
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/mosquitto-auth/subscribe-device-events')
   Future<chopper.Response<ExtapiSubsribeDeviceEventsResponse>>
       subsribeDeviceEvents(
-          {@Query('devEui') String? devEui,
-          @Query('organizationId') String? organizationId,
-          @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+          {@Query('devEui')
+              String? devEui,
+          @Query('organizationId')
+              String? organizationId,
+          @Header('Grpc-Metadata-X-OTP')
+              String? grpcMetadataXOTP,
+          @Header('Grpc-Metadata-Authorization')
+              String? grpcMetadataAuthorization});
 }
 
 @ChopperApi()
@@ -1612,100 +2482,165 @@ abstract class MulticastGroupService extends ChopperService {
   ///@param serviceProfileID Service-profile ID to filter on.
   ///@param search Search can be used to search on the multicast-group name.
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/multicast-groups')
   Future<chopper.Response<ExtapiListMulticastGroupResponse>> list(
-      {@Query('limit') String? limit,
-      @Query('offset') String? offset,
-      @Query('organizationID') String? organizationID,
-      @Query('devEUI') String? devEUI,
-      @Query('serviceProfileID') String? serviceProfileID,
-      @Query('search') String? search,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Query('limit')
+          String? limit,
+      @Query('offset')
+          String? offset,
+      @Query('organizationID')
+          String? organizationID,
+      @Query('devEUI')
+          String? devEUI,
+      @Query('serviceProfileID')
+          String? serviceProfileID,
+      @Query('search')
+          String? search,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Create creates the given multicast-group.
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/multicast-groups')
   Future<chopper.Response<ExtapiCreateMulticastGroupResponse>> create(
-      {@Body() @required ExtapiCreateMulticastGroupRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Body()
+      @required
+          ExtapiCreateMulticastGroupRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Delete deletes a multicast-group given an ID.
   ///@param id ID (string formatted UUID).
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Delete(path: '/api/multicast-groups/{id}')
   Future<chopper.Response> delete(
-      {@Path('id') @required String? id,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('id')
+      @required
+          String? id,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Get returns a multicast-group given an ID.
   ///@param id ID (string formatted UUID).
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/multicast-groups/{id}')
   Future<chopper.Response<ExtapiGetMulticastGroupResponse>> get(
-      {@Path('id') @required String? id,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('id')
+      @required
+          String? id,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Update updates the given multicast-group.
   ///@param multicastGroup.id ID (string formatted UUID). This will be generated automatically on create.
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Put(path: '/api/multicast-groups/{multicastGroup.id}')
   Future<chopper.Response> update(
-      {@Path('multicastGroup.id') @required String? id,
-      @Body() @required ExtapiUpdateMulticastGroupRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('multicastGroup.id')
+      @required
+          String? id,
+      @Body()
+      @required
+          ExtapiUpdateMulticastGroupRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///AddDevice adds the given device to the multicast-group.
   ///@param multicastGroupID Multicast-group ID (string formatted UUID).
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/multicast-groups/{multicastGroupID}/devices')
   Future<chopper.Response> addDevice(
-      {@Path('multicastGroupID') @required String? multicastGroupID,
-      @Body() @required ExtapiAddDeviceToMulticastGroupRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('multicastGroupID')
+      @required
+          String? multicastGroupID,
+      @Body()
+      @required
+          ExtapiAddDeviceToMulticastGroupRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///RemoveDevice removes the given device from the multicast-group.
   ///@param multicastGroupID Multicast-group ID (string formatted UUID).
   ///@param devEUI Device EUI (HEX encoded string).
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Delete(path: '/api/multicast-groups/{multicastGroupID}/devices/{devEUI}')
   Future<chopper.Response> removeDevice(
-      {@Path('multicastGroupID') @required String? multicastGroupID,
-      @Path('devEUI') @required String? devEUI,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('multicastGroupID')
+      @required
+          String? multicastGroupID,
+      @Path('devEUI')
+      @required
+          String? devEUI,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///FlushQueue flushes the multicast-group queue.
   ///@param multicastGroupID Multicast-group ID (string formatted UUID).
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Delete(path: '/api/multicast-groups/{multicastGroupID}/queue')
   Future<chopper.Response> flushQueue(
-      {@Path('multicastGroupID') @required String? multicastGroupID,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('multicastGroupID')
+      @required
+          String? multicastGroupID,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///ListQueue lists the items in the multicast-group queue.
   ///@param multicastGroupID Multicast-group ID (string formatted UUID).
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/multicast-groups/{multicastGroupID}/queue')
   Future<chopper.Response<ExtapiListMulticastGroupQueueItemsResponse>>
       listQueue(
-          {@Path('multicastGroupID') @required String? multicastGroupID,
-          @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+          {@Path('multicastGroupID')
+          @required
+              String? multicastGroupID,
+          @Header('Grpc-Metadata-X-OTP')
+              String? grpcMetadataXOTP,
+          @Header('Grpc-Metadata-Authorization')
+              String? grpcMetadataAuthorization});
 
   ///Enqueue adds the given item to the multicast-queue.
   ///@param multicastQueueItem.multicastGroupID Multicast-group ID (string formatted UUID).
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(
       path: '/api/multicast-groups/{multicastQueueItem.multicastGroupID}/queue')
@@ -1717,7 +2652,9 @@ abstract class MulticastGroupService extends ChopperService {
       @required
           ExtapiEnqueueMulticastQueueItemRequest? body,
       @Header('Grpc-Metadata-X-OTP')
-          String? grpcMetadataXOTP});
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 }
 
 @ChopperApi()
@@ -1739,51 +2676,84 @@ abstract class NetworkServerService extends ChopperService {
   ///@param offset Offset in the result-set (for pagination).
   ///@param organizationID Organization id to filter on.
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/network-servers')
   Future<chopper.Response<ExtapiListNetworkServerResponse>> list(
-      {@Query('limit') String? limit,
-      @Query('offset') String? offset,
-      @Query('organizationID') String? organizationID,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Query('limit')
+          String? limit,
+      @Query('offset')
+          String? offset,
+      @Query('organizationID')
+          String? organizationID,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Create creates the given network-server.
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/network-servers')
   Future<chopper.Response<ExtapiCreateNetworkServerResponse>> create(
-      {@Body() @required ExtapiCreateNetworkServerRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Body()
+      @required
+          ExtapiCreateNetworkServerRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Delete deletes the network-server matching the given id.
   ///@param id Network-server ID.
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Delete(path: '/api/network-servers/{id}')
   Future<chopper.Response> delete(
-      {@Path('id') @required String? id,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('id')
+      @required
+          String? id,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Get returns the network-server matching the given id.
   ///@param id Network-server ID.
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/network-servers/{id}')
   Future<chopper.Response<ExtapiGetNetworkServerResponse>> get(
-      {@Path('id') @required String? id,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('id')
+      @required
+          String? id,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Update updates the given network-server.
   ///@param networkServer.id Network-server ID.
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Put(path: '/api/network-servers/{networkServer.id}')
   Future<chopper.Response> update(
-      {@Path('networkServer.id') @required String? id,
-      @Body() @required ExtapiUpdateNetworkServerRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('networkServer.id')
+      @required
+          String? id,
+      @Body()
+      @required
+          ExtapiUpdateNetworkServerRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 }
 
 @ChopperApi()
@@ -1805,91 +2775,149 @@ abstract class OrganizationService extends ChopperService {
   ///@param offset Offset in the result-set (for pagination).
   ///@param search When provided, the given string will be used to search on displayName.
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/organizations')
   Future<chopper.Response<ExtapiListOrganizationResponse>> list(
-      {@Query('limit') String? limit,
-      @Query('offset') String? offset,
-      @Query('search') String? search,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Query('limit')
+          String? limit,
+      @Query('offset')
+          String? offset,
+      @Query('search')
+          String? search,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Create a new organization.
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/organizations')
   Future<chopper.Response<ExtapiCreateOrganizationResponse>> create(
-      {@Body() @required ExtapiCreateOrganizationRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Body()
+      @required
+          ExtapiCreateOrganizationRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Delete an organization.
   ///@param id Organization ID.
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Delete(path: '/api/organizations/{id}')
   Future<chopper.Response> delete(
-      {@Path('id') @required String? id,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('id')
+      @required
+          String? id,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Get data for a particular organization.
   ///@param id Organization ID.
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/organizations/{id}')
   Future<chopper.Response<ExtapiGetOrganizationResponse>> get(
-      {@Path('id') @required String? id,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('id')
+      @required
+          String? id,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Update an existing organization.
   ///@param organization.id Organization ID.
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Put(path: '/api/organizations/{organization.id}')
   Future<chopper.Response> update(
-      {@Path('organization.id') @required String? id,
-      @Body() @required ExtapiUpdateOrganizationRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('organization.id')
+      @required
+          String? id,
+      @Body()
+      @required
+          ExtapiUpdateOrganizationRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Get organization's user list.
   ///@param organizationID Organization ID.
   ///@param limit Max number of users to return in the result-set.
   ///@param offset Offset in the result-set (for pagination).
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/organizations/{organizationID}/users')
   Future<chopper.Response<ExtapiListOrganizationUsersResponse>> listUsers(
-      {@Path('organizationID') @required String? organizationID,
-      @Query('limit') int? limit,
-      @Query('offset') int? offset,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('organizationID')
+      @required
+          String? organizationID,
+      @Query('limit')
+          int? limit,
+      @Query('offset')
+          int? offset,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Delete a user from an organization.
   ///@param organizationID Organization ID.
   ///@param userID User ID.
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Delete(path: '/api/organizations/{organizationID}/users/{userID}')
   Future<chopper.Response> deleteUser(
-      {@Path('organizationID') @required String? organizationID,
-      @Path('userID') @required String? userID,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('organizationID')
+      @required
+          String? organizationID,
+      @Path('userID')
+      @required
+          String? userID,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Get data for a particular organization user.
   ///@param organizationID Organization ID.
   ///@param userID User ID.
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/organizations/{organizationID}/users/{userID}')
   Future<chopper.Response<ExtapiGetOrganizationUserResponse>> getUser(
-      {@Path('organizationID') @required String? organizationID,
-      @Path('userID') @required String? userID,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('organizationID')
+      @required
+          String? organizationID,
+      @Path('userID')
+      @required
+          String? userID,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Add a new user to an organization.
   ///@param organizationUser.organizationID Organization ID.
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/organizations/{organizationUser.organizationID}/users')
   Future<chopper.Response> addUser(
@@ -1900,13 +2928,16 @@ abstract class OrganizationService extends ChopperService {
       @required
           ExtapiAddOrganizationUserRequest? body,
       @Header('Grpc-Metadata-X-OTP')
-          String? grpcMetadataXOTP});
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Update a user in an organization.
   ///@param organizationUser.organizationID Organization ID.
   ///@param organizationUser.userID User ID.
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Put(
       path:
@@ -1922,7 +2953,9 @@ abstract class OrganizationService extends ChopperService {
       @required
           ExtapiUpdateOrganizationUserRequest? body,
       @Header('Grpc-Metadata-X-OTP')
-          String? grpcMetadataXOTP});
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 }
 
 @ChopperApi()
@@ -1947,17 +2980,27 @@ abstract class ReportService extends ChopperService {
   ///@param end
   ///@param decimals
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/report/mining-income/csv')
   Future<chopper.Response<ApiReportMiningIncomeCsvGet$Response>>
       miningReportCSV(
-          {@Query('organizationId') String? organizationId,
-          @Query('currency') List<String>? currency,
-          @Query('fiatCurrency') String? fiatCurrency,
-          @Query('start') String? start,
-          @Query('end') String? end,
-          @Query('decimals') int? decimals,
-          @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+          {@Query('organizationId')
+              String? organizationId,
+          @Query('currency')
+              List<String>? currency,
+          @Query('fiatCurrency')
+              String? fiatCurrency,
+          @Query('start')
+              String? start,
+          @Query('end')
+              String? end,
+          @Query('decimals')
+              int? decimals,
+          @Header('Grpc-Metadata-X-OTP')
+              String? grpcMetadataXOTP,
+          @Header('Grpc-Metadata-Authorization')
+              String? grpcMetadataAuthorization});
 
   ///Request to download miningReport in pdf filtered by date
   ///@param organizationId
@@ -1967,25 +3010,39 @@ abstract class ReportService extends ChopperService {
   ///@param end
   ///@param decimals
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/report/mining-income/pdf')
   Future<chopper.Response<ApiReportMiningIncomePdfGet$Response>>
       miningReportPDF(
-          {@Query('organizationId') String? organizationId,
-          @Query('currency') List<String>? currency,
-          @Query('fiatCurrency') String? fiatCurrency,
-          @Query('start') String? start,
-          @Query('end') String? end,
-          @Query('decimals') int? decimals,
-          @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+          {@Query('organizationId')
+              String? organizationId,
+          @Query('currency')
+              List<String>? currency,
+          @Query('fiatCurrency')
+              String? fiatCurrency,
+          @Query('start')
+              String? start,
+          @Query('end')
+              String? end,
+          @Query('decimals')
+              int? decimals,
+          @Header('Grpc-Metadata-X-OTP')
+              String? grpcMetadataXOTP,
+          @Header('Grpc-Metadata-Authorization')
+              String? grpcMetadataAuthorization});
 
   ///Get support fiat currency list
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/report/supported-fiat-currencies')
   Future<chopper.Response<ExtapiGetFiatCurrencyListResponse>>
       getFiatCurrencyList(
-          {@Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+          {@Header('Grpc-Metadata-X-OTP')
+              String? grpcMetadataXOTP,
+          @Header('Grpc-Metadata-Authorization')
+              String? grpcMetadataAuthorization});
 }
 
 @ChopperApi()
@@ -2004,26 +3061,38 @@ abstract class ServerInfoService extends ChopperService {
 
   ///get version
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/server-info/appserver-version')
   Future<chopper.Response<ExtapiGetAppserverVersionResponse>>
       getAppserverVersion(
-          {@Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+          {@Header('Grpc-Metadata-X-OTP')
+              String? grpcMetadataXOTP,
+          @Header('Grpc-Metadata-Authorization')
+              String? grpcMetadataAuthorization});
 
   ///
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/server-info/mxprotocol-server-version')
   Future<chopper.Response<ExtapiGetMxprotocolServerVersionResponse>>
       getMxprotocolServerVersion(
-          {@Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+          {@Header('Grpc-Metadata-X-OTP')
+              String? grpcMetadataXOTP,
+          @Header('Grpc-Metadata-Authorization')
+              String? grpcMetadataAuthorization});
 
   ///
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/server-info/server-region')
   Future<chopper.Response<ExtapiGetServerRegionResponse>> getServerRegion(
-      {@Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 }
 
 @ChopperApi()
@@ -2045,51 +3114,84 @@ abstract class ServiceProfileService extends ChopperService {
   ///@param offset Offset in the result-set (for pagination).
   ///@param organizationID Organization id to filter on.
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/service-profiles')
   Future<chopper.Response<ExtapiListServiceProfileResponse>> list(
-      {@Query('limit') String? limit,
-      @Query('offset') String? offset,
-      @Query('organizationID') String? organizationID,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Query('limit')
+          String? limit,
+      @Query('offset')
+          String? offset,
+      @Query('organizationID')
+          String? organizationID,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Create creates the given service-profile.
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/service-profiles')
   Future<chopper.Response<ExtapiCreateServiceProfileResponse>> create(
-      {@Body() @required ExtapiCreateServiceProfileRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Body()
+      @required
+          ExtapiCreateServiceProfileRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Delete deletes the service-profile matching the given id.
   ///@param id Service-profile ID (UUID string).
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Delete(path: '/api/service-profiles/{id}')
   Future<chopper.Response> delete(
-      {@Path('id') @required String? id,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('id')
+      @required
+          String? id,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Get returns the service-profile matching the given id.
   ///@param id Service-profile ID (UUID string).
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/service-profiles/{id}')
   Future<chopper.Response<ExtapiGetServiceProfileResponse>> get(
-      {@Path('id') @required String? id,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('id')
+      @required
+          String? id,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Update updates the given serviceprofile.
   ///@param serviceProfile.id Service-profile ID (UUID string). This will be automatically set on create.
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Put(path: '/api/service-profiles/{serviceProfile.id}')
   Future<chopper.Response> update(
-      {@Path('serviceProfile.id') @required String? id,
-      @Body() @required ExtapiUpdateServiceProfileRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('serviceProfile.id')
+      @required
+          String? id,
+      @Body()
+      @required
+          ExtapiUpdateServiceProfileRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 }
 
 @ChopperApi()
@@ -2108,19 +3210,29 @@ abstract class SettingsService extends ChopperService {
 
   ///
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/settings')
   Future<chopper.Response<ExtapiGetSettingsResponse>> getSettings(
-      {@Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Put(path: '/api/settings')
   Future<chopper.Response<ExtapiModifySettingsResponse>> modifySettings(
-      {@Body() @required ExtapiModifySettingsRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Body()
+      @required
+          ExtapiModifySettingsRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 }
 
 @ChopperApi()
@@ -2140,11 +3252,16 @@ abstract class ShopifyIntegration extends ChopperService {
   ///GetOrdersByUser returns a list of shopify orders filtered by given email, this API is only open for global admin user
   ///@param email user's email address for supernode account.
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/shopify-integration/orders')
   Future<chopper.Response<ExtapiGetOrdersByUserResponse>> getOrdersByUser(
-      {@Query('email') String? email,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Query('email')
+          String? email,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 }
 
 @ChopperApi()
@@ -2164,23 +3281,35 @@ abstract class StakingService extends ChopperService {
   ///Get information about staking percentage and boosts for lockin stake
   ///@param currency int64 org_id = 1;.
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/staking/staking_percentage')
   Future<chopper.Response<ExtapiStakingPercentageResponse>>
       getStakingPercentage(
-          {@Query('currency') String? currency,
-          @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+          {@Query('currency')
+              String? currency,
+          @Header('Grpc-Metadata-X-OTP')
+              String? grpcMetadataXOTP,
+          @Header('Grpc-Metadata-Authorization')
+              String? grpcMetadataAuthorization});
 
   ///Get list of active stakes
   ///@param orgId
   ///@param currency
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/staking/{orgId}/activestakes')
   Future<chopper.Response<ExtapiGetActiveStakesResponse>> getActiveStakes(
-      {@Path('orgId') @required String? orgId,
-      @Query('currency') String? currency,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('orgId')
+      @required
+          String? orgId,
+      @Query('currency')
+          String? currency,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///
   ///@param orgId
@@ -2188,14 +3317,23 @@ abstract class StakingService extends ChopperService {
   ///@param from
   ///@param till
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/staking/{orgId}/history')
   Future<chopper.Response<ExtapiStakingHistoryResponse>> getStakingHistory(
-      {@Path('orgId') @required String? orgId,
-      @Query('currency') String? currency,
-      @Query('from') String? from,
-      @Query('till') String? till,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('orgId')
+      @required
+          String? orgId,
+      @Query('currency')
+          String? currency,
+      @Query('from')
+          String? from,
+      @Query('till')
+          String? till,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///
   ///@param orgId
@@ -2203,47 +3341,79 @@ abstract class StakingService extends ChopperService {
   ///@param from
   ///@param till
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/staking/{orgId}/revenue')
   Future<chopper.Response<ExtapiStakingRevenueResponse>> getStakingRevenue(
-      {@Path('orgId') @required String? orgId,
-      @Query('currency') String? currency,
-      @Query('from') String? from,
-      @Query('till') String? till,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('orgId')
+      @required
+          String? orgId,
+      @Query('currency')
+          String? currency,
+      @Query('from')
+          String? from,
+      @Query('till')
+          String? till,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Make new stake
   ///@param orgId
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/staking/{orgId}/stake')
   Future<chopper.Response<ExtapiStakeResponse>> stake(
-      {@Path('orgId') @required String? orgId,
-      @Body() @required ExtapiStakeRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('orgId')
+      @required
+          String? orgId,
+      @Body()
+      @required
+          ExtapiStakeRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Returns info about the stake, including all the revenues
   ///@param orgId organization id that owns the stake
   ///@param stakeId the stake ID.
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/staking/{orgId}/stake-info')
   Future<chopper.Response<ExtapiStakeInfoResponse>> stakeInfo(
-      {@Path('orgId') @required String? orgId,
-      @Query('stakeId') String? stakeId,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('orgId')
+      @required
+          String? orgId,
+      @Query('stakeId')
+          String? stakeId,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Unstake existing stake
   ///@param orgId
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/staking/{orgId}/unstake')
   Future<chopper.Response<ExtapiUnstakeResponse>> unstake(
-      {@Path('orgId') @required String? orgId,
-      @Body() @required ExtapiUnstakeRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('orgId')
+      @required
+          String? orgId,
+      @Body()
+      @required
+          ExtapiUnstakeRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 }
 
 @ChopperApi()
@@ -2264,22 +3434,34 @@ abstract class TopUpService extends ChopperService {
   ///@param orgId
   ///@param currency
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/top-up/account')
   Future<chopper.Response<ExtapiGetTopUpDestinationResponse>>
       getTopUpDestination(
-          {@Query('orgId') String? orgId,
-          @Query('currency') String? currency,
-          @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+          {@Query('orgId')
+              String? orgId,
+          @Query('currency')
+              String? currency,
+          @Header('Grpc-Metadata-X-OTP')
+              String? grpcMetadataXOTP,
+          @Header('Grpc-Metadata-Authorization')
+              String? grpcMetadataAuthorization});
 
   ///
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/top-up/history')
   Future<chopper.Response<ExtapiGetTopUpHistoryResponse>> getTopUpHistory(
-      {@Body() @required ExtapiGetTopUpHistoryRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Body()
+      @required
+          ExtapiGetTopUpHistoryRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 }
 
 @ChopperApi()
@@ -2300,79 +3482,131 @@ abstract class UserService extends ChopperService {
   ///@param limit Max number of user to return in the result-set.
   ///@param offset Offset in the result-set (for pagination).
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/users')
   Future<chopper.Response<ExtapiListUserResponse>> list(
-      {@Query('limit') String? limit,
-      @Query('offset') String? offset,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Query('limit')
+          String? limit,
+      @Query('offset')
+          String? offset,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Create a new user.
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/users')
   Future<chopper.Response<ExtapiCreateUserResponse>> create(
-      {@Body() @required ExtapiCreateUserRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Body()
+      @required
+          ExtapiCreateUserRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///
   ///@param userEmail
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/users/email/{userEmail}')
   Future<chopper.Response<ExtapiGetUserEmailResponse>> getUserEmail(
-      {@Path('userEmail') @required String? userEmail,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('userEmail')
+      @required
+          String? userEmail,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///
   ///@param userEmail
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/users/otp/{userEmail}')
   Future<chopper.Response<ExtapiGetOTPCodeResponse>> getOTPCode(
-      {@Path('userEmail') @required String? userEmail,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('userEmail')
+      @required
+          String? userEmail,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Delete a user.
   ///@param id User ID.
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Delete(path: '/api/users/{id}')
   Future<chopper.Response> delete(
-      {@Path('id') @required String? id,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('id')
+      @required
+          String? id,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Get data for a particular user.
   ///@param id User ID.
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/users/{id}')
   Future<chopper.Response<ExtapiGetUserResponse>> get(
-      {@Path('id') @required String? id,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('id')
+      @required
+          String? id,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///Update an existing user.
   ///@param user.id User ID. Will be set automatically on create.
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Put(path: '/api/users/{user.id}')
   Future<chopper.Response<ExtapiUpdateUserResponse>> update(
-      {@Path('user.id') @required String? id,
-      @Body() @required ExtapiUpdateUserRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('user.id')
+      @required
+          String? id,
+      @Body()
+      @required
+          ExtapiUpdateUserRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///UpdatePassword updates a password.
   ///@param userId User ID.
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Put(path: '/api/users/{userId}/password')
   Future<chopper.Response> updatePassword(
-      {@Path('userId') @required String? userId,
-      @Body() @required ExtapiUpdateUserPasswordRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('userId')
+      @required
+          String? userId,
+      @Body()
+      @required
+          ExtapiUpdateUserPasswordRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 }
 
 @ChopperApi()
@@ -2394,25 +3628,38 @@ abstract class WalletService extends ChopperService {
   ///@param orgId
   ///@param currency
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/wallet/balance')
   Future<chopper.Response<ExtapiGetWalletBalanceResponse>> getWalletBalance(
-      {@Query('userId') String? userId,
-      @Query('orgId') String? orgId,
-      @Query('currency') String? currency,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Query('userId')
+          String? userId,
+      @Query('orgId')
+          String? orgId,
+      @Query('currency')
+          String? currency,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///
   ///@param orgId organization_id.
   ///@param gatewayMac list of gateways for which the health should be returned. If empty, then health of all the gateways of the organization will be returned.
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/wallet/mining_health')
   Future<chopper.Response<ExtapiGetGatewayMiningHealthResponse>>
       getGatewayMiningHealth(
-          {@Query('orgId') String? orgId,
-          @Query('gatewayMac') List<String>? gatewayMac,
-          @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+          {@Query('orgId')
+              String? orgId,
+          @Query('gatewayMac')
+              List<String>? gatewayMac,
+          @Header('Grpc-Metadata-X-OTP')
+              String? grpcMetadataXOTP,
+          @Header('Grpc-Metadata-Authorization')
+              String? grpcMetadataAuthorization});
 
   ///
   ///@param orgId
@@ -2420,15 +3667,23 @@ abstract class WalletService extends ChopperService {
   ///@param from
   ///@param till
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/wallet/mining_income')
   Future<chopper.Response<ExtapiGetWalletMiningIncomeResponse>>
       getWalletMiningIncome(
-          {@Query('orgId') String? orgId,
-          @Query('currency') String? currency,
-          @Query('from') String? from,
-          @Query('till') String? till,
-          @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+          {@Query('orgId')
+              String? orgId,
+          @Query('currency')
+              String? currency,
+          @Query('from')
+              String? from,
+          @Query('till')
+              String? till,
+          @Header('Grpc-Metadata-X-OTP')
+              String? grpcMetadataXOTP,
+          @Header('Grpc-Metadata-Authorization')
+              String? grpcMetadataAuthorization});
 
   ///return daily and total mining amounts for the given gateway and period of time
   ///@param gatewayMac MAC address of the gateway.
@@ -2436,47 +3691,73 @@ abstract class WalletService extends ChopperService {
   ///@param fromDate Return mining stats for the period starting at from_date and ending at till_date inclusive.
   ///@param tillDate
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/wallet/mining_income_gw')
   Future<chopper.Response<ExtapiGetGatewayMiningIncomeResponse>>
       getGatewayMiningIncome(
-          {@Query('gatewayMac') String? gatewayMac,
-          @Query('orgId') String? orgId,
-          @Query('fromDate') String? fromDate,
-          @Query('tillDate') String? tillDate,
-          @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+          {@Query('gatewayMac')
+              String? gatewayMac,
+          @Query('orgId')
+              String? orgId,
+          @Query('fromDate')
+              String? fromDate,
+          @Query('tillDate')
+              String? tillDate,
+          @Header('Grpc-Metadata-X-OTP')
+              String? grpcMetadataXOTP,
+          @Header('Grpc-Metadata-Authorization')
+              String? grpcMetadataAuthorization});
 
   ///
   ///@param orgId
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/wallet/mining_info')
   Future<chopper.Response<ExtapiGetMiningInfoResponse>> getMiningInfo(
-      {@Query('orgId') String? orgId,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Query('orgId')
+          String? orgId,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///
   ///@param userId
   ///@param orgId
   ///@param mxcPrice
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/wallet/mxc_price')
   Future<chopper.Response<ExtapiGetMXCpriceResponse>> getMXCprice(
-      {@Query('userId') String? userId,
-      @Query('orgId') String? orgId,
-      @Query('mxcPrice') String? mxcPrice,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Query('userId')
+          String? userId,
+      @Query('orgId')
+          String? orgId,
+      @Query('mxcPrice')
+          String? mxcPrice,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/wallet/top-up-mining-fuel')
   Future<chopper.Response<ExtapiTopUpGatewayMiningFuelResponse>>
       topUpGatewayMiningFuel(
-          {@Body() @required ExtapiTopUpGatewayMiningFuelRequest? body,
-          @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+          {@Body()
+          @required
+              ExtapiTopUpGatewayMiningFuelRequest? body,
+          @Header('Grpc-Metadata-X-OTP')
+              String? grpcMetadataXOTP,
+          @Header('Grpc-Metadata-Authorization')
+              String? grpcMetadataAuthorization});
 
   ///
   ///@param orgId organization id.
@@ -2485,48 +3766,77 @@ abstract class WalletService extends ChopperService {
   ///@param till
   ///@param paymentType if non-empty list of payment types is given only transactions of these types will be returned.
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/wallet/tx-history')
   Future<chopper.Response<ExtapiGetTransactionHistoryResponse>>
       getTransactionHistory(
-          {@Query('orgId') String? orgId,
-          @Query('currency') String? currency,
-          @Query('from') String? from,
-          @Query('till') String? till,
-          @Query('paymentType') List<String>? paymentType,
-          @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+          {@Query('orgId')
+              String? orgId,
+          @Query('currency')
+              String? currency,
+          @Query('from')
+              String? from,
+          @Query('till')
+              String? till,
+          @Query('paymentType')
+              List<String>? paymentType,
+          @Header('Grpc-Metadata-X-OTP')
+              String? grpcMetadataXOTP,
+          @Header('Grpc-Metadata-Authorization')
+              String? grpcMetadataAuthorization});
 
   ///
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/wallet/withdraw-mining-fuel')
   Future<chopper.Response<ExtapiWithdrawGatewayMiningFuelResponse>>
       withdrawGatewayMiningFuel(
-          {@Body() @required ExtapiWithdrawGatewayMiningFuelRequest? body,
-          @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+          {@Body()
+          @required
+              ExtapiWithdrawGatewayMiningFuelRequest? body,
+          @Header('Grpc-Metadata-X-OTP')
+              String? grpcMetadataXOTP,
+          @Header('Grpc-Metadata-Authorization')
+              String? grpcMetadataAuthorization});
 
   ///
   ///@param orgId
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/wallet/{orgId}/downlink_price')
   Future<chopper.Response<ExtapiGetDownLinkPriceResponse>> getDlPrice(
-      {@Path('orgId') @required String? orgId,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('orgId')
+      @required
+          String? orgId,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///
   ///@param orgId
   ///@param offset
   ///@param limit
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/wallet/{orgId}/tx-history')
   Future<chopper.Response<ExtapiGetVmxcTxHistoryResponse>> getVmxcTxHistory(
-      {@Path('orgId') @required String? orgId,
-      @Query('offset') String? offset,
-      @Query('limit') String? limit,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Path('orgId')
+      @required
+          String? orgId,
+      @Query('offset')
+          String? offset,
+      @Query('limit')
+          String? limit,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///
   ///@param orgId
@@ -2534,15 +3844,24 @@ abstract class WalletService extends ChopperService {
   ///@param from
   ///@param till
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/wallet/{orgId}/usage-history')
   Future<chopper.Response<ExtapiGetNetworkUsageHistResponse>>
       getNetworkUsageHist(
-          {@Path('orgId') @required String? orgId,
-          @Query('currency') String? currency,
-          @Query('from') String? from,
-          @Query('till') String? till,
-          @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+          {@Path('orgId')
+          @required
+              String? orgId,
+          @Query('currency')
+              String? currency,
+          @Query('from')
+              String? from,
+          @Query('till')
+              String? till,
+          @Header('Grpc-Metadata-X-OTP')
+              String? grpcMetadataXOTP,
+          @Header('Grpc-Metadata-Authorization')
+              String? grpcMetadataAuthorization});
 }
 
 @ChopperApi()
@@ -2562,11 +3881,16 @@ abstract class WithdrawService extends ChopperService {
   ///GetWithdrawFee data for current withdraw fee
   ///@param currency type of crypto currency.
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/withdraw/get-withdraw-fee')
   Future<chopper.Response<ExtapiGetWithdrawFeeResponse>> getWithdrawFee(
-      {@Query('currency') String? currency,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Query('currency')
+          String? currency,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///
   ///@param orgId
@@ -2574,32 +3898,52 @@ abstract class WithdrawService extends ChopperService {
   ///@param from
   ///@param till
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/withdraw/history')
   Future<chopper.Response<ExtapiGetWithdrawHistoryResponse>> getWithdrawHistory(
-      {@Query('orgId') String? orgId,
-      @Query('currency') String? currency,
-      @Query('from') String? from,
-      @Query('till') String? till,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Query('orgId')
+          String? orgId,
+      @Query('currency')
+          String? currency,
+      @Query('from')
+          String? from,
+      @Query('till')
+          String? till,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Put(path: '/api/withdraw/modify-withdraw-fee')
   Future<chopper.Response<ExtapiModifyWithdrawFeeResponse>> modifyWithdrawFee(
-      {@Body() @required ExtapiModifyWithdrawFeeRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Body()
+      @required
+          ExtapiModifyWithdrawFeeRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 
   ///after user clicks withdraw, send withdraw request to cobo directly
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/withdraw/req')
   Future<chopper.Response<ExtapiGetWithdrawResponse>> getWithdraw(
-      {@Body() @required ExtapiGetWithdrawRequest? body,
-      @Header('Grpc-Metadata-X-OTP') String? grpcMetadataXOTP});
+      {@Body()
+      @required
+          ExtapiGetWithdrawRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 }
 
 extension SwaggerExtension on ChopperClient {
