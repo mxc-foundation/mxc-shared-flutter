@@ -28,6 +28,9 @@ jobs:
         restore-keys: |
           ${{ env.cache-name }}
     
+    - name: Inject .env
+      run: printf "%s" "$TESTS_DOTENV" > "logic/test/.env"
+
     - run: flutter pub get
       working-directory: ${{ matrix.folder }}
 
