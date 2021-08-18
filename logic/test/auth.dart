@@ -29,11 +29,6 @@ class MockTokenRepository implements TokenRepository {
   Future<String> refresh(SupernodeRepository repository) {
     return refreshMock(repository);
   }
-
-  @override
-  FutureOr<void> save(String token) {
-    this.token = token;
-  }
 }
 
 void main() {
