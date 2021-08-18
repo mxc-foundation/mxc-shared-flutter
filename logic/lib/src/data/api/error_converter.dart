@@ -11,6 +11,11 @@ class ChopperErrorConverter extends ErrorConverter {
         (error['message'] ?? error['error'] ?? 'Unknown error') as String,
       );
     }
+    if (response.statusCode == 404) {
+      throw ApiException(
+        'Resource not found: ${response.base.request?.url.toString()}',
+      );
+    }
     throw ApiException('Unknown error');
   }
 }

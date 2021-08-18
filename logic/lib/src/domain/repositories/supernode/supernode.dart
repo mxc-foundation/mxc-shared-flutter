@@ -1,4 +1,5 @@
 import 'package:mxc_logic/src/data/data.dart';
+import 'package:mxc_logic/src/domain/repositories/supernode/api/token.dart';
 
 import 'api/auth.dart';
 import 'api/dhx.dart';
@@ -22,6 +23,7 @@ export 'api/network_server.dart';
 export 'api/organization.dart';
 export 'api/registration.dart';
 export 'api/stake.dart';
+export 'api/token.dart';
 export 'api/topup.dart';
 export 'api/totp.dart';
 export 'api/user.dart';
@@ -47,7 +49,17 @@ abstract class SupernodeRepository {
 class ApiSupernodeRepository implements SupernodeRepository {
   ApiSupernodeRepository({
     required String Function() getSupernodeAddress,
-  }) : _client = SupernodeClient(getSupernodeAddress: getSupernodeAddress);
+    required TokenRepository tokenRepository,
+  }) : _client = SupernodeClient(
+          getSupernodeAddress: getSupernodeAddress,
+          getToken: tokenRepository.get,
+          refreshToken: (client) => tokenRepository
+              .refresh(ApiSupernodeRepository.withClient(client: client)),
+        );
+
+  ApiSupernodeRepository.withClient({
+    required SupernodeClient client,
+  }) : _client = client;
 
   final SupernodeClient _client;
 
