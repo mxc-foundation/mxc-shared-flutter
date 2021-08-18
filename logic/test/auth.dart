@@ -32,10 +32,13 @@ class MockTokenRepository implements TokenRepository {
 }
 
 void main() {
+  initSecure();
+
   final tokenRepository = MockTokenRepository(
     login: login,
     password: password,
   );
+
   final supernodeRepository = ApiSupernodeRepository(
     getSupernodeAddress: () => supernodeAddress,
     tokenRepository: tokenRepository,
