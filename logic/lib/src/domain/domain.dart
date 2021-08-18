@@ -10,3 +10,5 @@ export 'entities/topup.dart';
 export 'entities/totp.dart';
 export 'entities/user.dart';
 export 'entities/withdraw.dart';
+
+export 'repositories/supernode/supernode.dart';
