@@ -48,7 +48,7 @@ extension TokenMapper on Token {
       case Token.parachainDhx:
         return 'DHX';
       case Token.mxc:
-        return 'MXC';
+        return 'ETH_MXC';
       case Token.btc:
         return 'BTC';
       case Token.nft:
