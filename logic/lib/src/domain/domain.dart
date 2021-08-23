@@ -11,4 +11,5 @@ export 'entities/totp.dart';
 export 'entities/user.dart';
 export 'entities/withdraw.dart';
 
+export 'features/auth/auth_use_case.dart';
 export 'repositories/supernode/supernode.dart';

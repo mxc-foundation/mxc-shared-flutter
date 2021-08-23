@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:chopper/chopper.dart';
 import 'package:meta/meta.dart';
 
-import 'api.dart';
+import 'client.dart';
 
 void _addAuthHeader(
   Map<String, String> map,
@@ -21,7 +21,7 @@ void _addAuthHeader(
 class SupernodeAuthenticator extends Authenticator {
   late final SupernodeClient client;
 
-  final Future<String> Function(SupernodeClient) refreshToken;
+  final Future<String?> Function(SupernodeClient) refreshToken;
   final String Function() getSupernodeAddress;
 
   SupernodeAuthenticator({
@@ -44,8 +44,9 @@ class SupernodeAuthenticator extends Authenticator {
     return _authenticate(request, response);
   }
 
-  Future<Request> _authenticate(Request request, Response response) async {
+  Future<Request?> _authenticate(Request request, Response response) async {
     final newToken = await refreshToken(client);
+    if (newToken == null) return null;
     _addAuthHeader(request.headers, newToken, override: true);
     return request;
   }

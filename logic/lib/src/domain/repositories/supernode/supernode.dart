@@ -1,5 +1,4 @@
 import 'package:mxc_logic/src/data/data.dart';
-import 'package:mxc_logic/src/domain/repositories/supernode/api/token.dart';
 
 import 'api/auth.dart';
 import 'api/dhx.dart';
@@ -14,6 +13,8 @@ import 'api/totp.dart';
 import 'api/user.dart';
 import 'api/wallet.dart';
 import 'api/withdraw.dart';
+import 'common/supernode_setup.dart';
+import 'common/token_refresher.dart';
 
 export 'api/auth.dart';
 export 'api/dhx.dart';
@@ -23,12 +24,13 @@ export 'api/network_server.dart';
 export 'api/organization.dart';
 export 'api/registration.dart';
 export 'api/stake.dart';
-export 'api/token.dart';
 export 'api/topup.dart';
 export 'api/totp.dart';
 export 'api/user.dart';
 export 'api/wallet.dart';
 export 'api/withdraw.dart';
+export 'common/supernode_setup.dart';
+export 'common/token_refresher.dart';
 
 abstract class SupernodeRepository {
   WalletRepository get wallet;
@@ -48,12 +50,14 @@ abstract class SupernodeRepository {
 
 class ApiSupernodeRepository implements SupernodeRepository {
   ApiSupernodeRepository({
-    required String Function() getSupernodeAddress,
-    required TokenRepository tokenRepository,
+    required SupernodeSetupRepository setupRepository,
+    required TokenRefresher tokenRefresher,
   }) : _client = SupernodeClient(
-          getSupernodeAddress: getSupernodeAddress,
-          getToken: tokenRepository.get,
-          refreshToken: (client) => tokenRepository
+          getSupernodeAddress: () =>
+              setupRepository.supernodeAddress ??
+              (throw Exception('Supernode address has not been picked')),
+          getToken: () => setupRepository.token,
+          refreshToken: (client) => tokenRefresher
               .refresh(ApiSupernodeRepository.withClient(client: client)),
         );
 
@@ -61,7 +65,7 @@ class ApiSupernodeRepository implements SupernodeRepository {
     required SupernodeClient client,
   }) : _client = client;
 
-  final SupernodeClient _client;
+  late final SupernodeClient _client;
 
   @override
   DhxRepository get dhx => DhxRepository(_client);

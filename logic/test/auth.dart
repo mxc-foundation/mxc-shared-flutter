@@ -1,6 +1,7 @@
 import 'dart:async';
 
-import 'package:mxc_logic/src/domain/repositories/supernode/supernode.dart';
+import 'package:mxc_logic/internal.dart';
+import 'package:mxc_logic/mxc_logic.dart';
 import 'package:test/test.dart';
 
 import 'secure.dart';
@@ -9,47 +10,54 @@ import 'secure.dart';
 // [v] TEST: Can send request aftern authorization (to test token injection)
 // [ ] TEST: Check token refreshing
 
-class MockTokenRepository implements TokenRepository {
-  final String login;
-  final String password;
-  String? token;
+final memoryMap = <String, dynamic>{};
 
-  late Future<String> Function(SupernodeRepository repository) refreshMock;
+class MemoryCacheManager implements CacheManager {
+  final Map<String, dynamic> map;
 
-  MockTokenRepository({
-    required this.login,
-    required this.password,
-    this.token,
-  });
+  MemoryCacheManager(this.map);
 
   @override
-  String? get() => token;
+  CacheManager withZone(String name) {
+    return MemoryCacheManager(
+      memoryMap[name] as Map<String, dynamic>? ??
+          (memoryMap[name] = <String, dynamic>{}),
+    );
+  }
 
   @override
-  Future<String> refresh(SupernodeRepository repository) {
-    return refreshMock(repository);
+  Future<dynamic> read(String key) {
+    return Future<dynamic>.value(map[key]);
+  }
+
+  @override
+  Future<void> write(String key, dynamic value) {
+    return Future<dynamic>.value(map[key] = value);
   }
 }
 
-void main() {
+Future<void> main() async {
   initSecure();
 
-  final tokenRepository = MockTokenRepository(
-    login: login,
-    password: password,
+  final cacheManager = MemoryCacheManager(memoryMap);
+  final supernodeSetupRepository =
+      await SupernodeSetupRepository.load(cacheManager);
+  final tokenRefresher = TokenRefresher(supernodeSetupRepository);
+  final supernodeRepository = ApiSupernodeRepository(
+    tokenRefresher: tokenRefresher,
+    setupRepository: supernodeSetupRepository,
   );
 
-  final supernodeRepository = ApiSupernodeRepository(
-    getSupernodeAddress: () => supernodeAddress,
-    tokenRepository: tokenRepository,
-  );
+  final authUseCase =
+      AuthUseCase(supernodeRepository, supernodeSetupRepository);
+
   group('A group of tests', () {
     test('Can login', () async {
-      final token = await supernodeRepository.auth.login(
-        username: login,
-        password: password,
+      await authUseCase.login(
+        supernodeAddress,
+        login,
+        password,
       );
-      tokenRepository.token = token.token.source;
     });
     test('Can send request after login', () async {
       await supernodeRepository.user.profile();
