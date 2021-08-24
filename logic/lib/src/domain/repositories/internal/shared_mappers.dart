@@ -64,7 +64,7 @@ extension DateTimeMapper on DateTime {
 abstract class Mappers {
   static SupernodeTokenDetails stringToSupernodeJwt(String jwt) {
     final parsedJwt = parseJwt(jwt);
-    final userId = parsedJwt['userId'] as int;
+    final userId = parsedJwt['userId'].toString();
     final username = parsedJwt['username'] as String;
     return SupernodeTokenDetails(userId, username, jwt);
   }

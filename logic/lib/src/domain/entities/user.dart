@@ -35,7 +35,7 @@ class WeChatLoginResult {
 }
 
 class SupernodeTokenDetails {
-  final int userId;
+  final String userId;
   final String username;
   final String source;
 
