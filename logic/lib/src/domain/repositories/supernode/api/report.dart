@@ -33,7 +33,7 @@ class ReportRepository {
     switch (format) {
       case ReportFormat.csv:
         final res = await client.reportService.miningReportCSV(
-          currency: ["ETH_MXC"],
+          currency: [Token.mxc.toData()],
           decimals: decimals,
           fiatCurrency: fiatCurrency.id,
           organizationId: organizationId,
@@ -44,7 +44,7 @@ class ReportRepository {
         return content;
       case ReportFormat.pdf:
         final res = await client.reportService.miningReportPDF(
-          currency: ["ETH_MXC"],
+          currency: [Token.mxc.toData()],
           decimals: decimals,
           fiatCurrency: fiatCurrency.id,
           organizationId: organizationId,

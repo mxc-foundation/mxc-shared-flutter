@@ -20,7 +20,7 @@ class UserRepository {
       organizations: res.body!.organizations!
           .map(
             (e) => UserOrganization(
-              organizationID: e.organizationID!,
+              organizationId: e.organizationID!,
               organizationName: e.organizationName!,
               organizationDisplayName: e.organizationDisplayName.orDefault(),
               isAdmin: e.isAdmin.orDefault(),

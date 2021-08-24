@@ -1,3 +1,4 @@
+import 'package:decimal/decimal.dart';
 import 'package:mxc_logic/mxc_logic.dart';
 
 class Council {
@@ -44,13 +45,17 @@ class DhxStake {
 
 class DhxBondInfo {
   final double bonded;
-  final ListWithTotal<DhxUnbonding> unbonding;
-  final ListWithTotal<DhxCoolingOff> coolingOff;
+  final List<DhxUnbonding> unbonding;
+  final Decimal totalUnbonded;
+  final List<DhxCoolingOff> coolingOff;
+  final Decimal totalCooledOff;
 
   DhxBondInfo({
     required this.bonded,
     required this.unbonding,
     required this.coolingOff,
+    required this.totalCooledOff,
+    required this.totalUnbonded,
   });
 }
 

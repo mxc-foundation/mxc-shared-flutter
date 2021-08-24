@@ -50,7 +50,9 @@ class DhxRepository {
         .toList();
   }
 
-  Future<DhxBondInfo> bondInfo({String organizationId = '0'}) async {
+  Future<DhxBondInfo> bondInfo({
+    required String organizationId,
+  }) async {
     final res = await _client.dHXServcie.dHXBondInfo(
       body: ExtapiDHXBondInfoRequest(orgId: organizationId),
     );
@@ -63,8 +65,8 @@ class DhxRepository {
               e.created!,
             ),
           )
-          .toList()
-          .withTotal(res.body!.dhxUnbondingTotal.toInt()),
+          .toList(),
+      totalUnbonded: res.body!.dhxUnbondingTotal.toDecimal(),
       coolingOff: res.body!.dhxCoolingOff!
           .map(
             (e) => DhxCoolingOff(
@@ -72,8 +74,8 @@ class DhxRepository {
               e.created!,
             ),
           )
-          .toList()
-          .withTotal(res.body!.dhxCoolingOffTotal.toInt()),
+          .toList(),
+      totalCooledOff: res.body!.dhxCoolingOffTotal.toDecimal(),
     );
   }
 
@@ -109,7 +111,7 @@ class DhxRepository {
         lockMonths: lockMonths.toString(),
         name: name,
         organizationId: organizationId,
-        currency: 'ETH_MXC',
+        currency: Token.mxc.toData(),
       ),
     );
     return CreateCouncilResult(res.body!.councilId!, res.body!.stakeId!);
@@ -129,7 +131,7 @@ class DhxRepository {
         councilId: councilId,
         lockMonths: lockMonths.toString(),
         organizationId: organizationId,
-        currency: 'ETH_MXC',
+        currency: Token.mxc.toData(),
       ),
     );
     return res.body!.stakeId!;

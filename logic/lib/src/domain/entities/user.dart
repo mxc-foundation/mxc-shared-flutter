@@ -73,7 +73,7 @@ class User {
 }
 
 class UserOrganization {
-  final String organizationID;
+  final String organizationId;
   final String organizationName;
   final String organizationDisplayName;
   final bool isAdmin;
@@ -83,7 +83,7 @@ class UserOrganization {
   final DateTime? updatedAt;
 
   UserOrganization({
-    required this.organizationID,
+    required this.organizationId,
     required this.organizationName,
     required this.organizationDisplayName,
     required this.isAdmin,
