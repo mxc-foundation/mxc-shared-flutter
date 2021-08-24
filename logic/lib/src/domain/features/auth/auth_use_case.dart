@@ -11,6 +11,8 @@ class AuthUseCase {
     String username,
     String password,
   ) async {
+    // save* methods set variables to RAM storage syncronously and then save them
+    // to cache asynchronously. We don't need to wait until it's cached
     // ignore: unawaited_futures
     setupRepository.saveSupernodeAddress(supernodeAddress);
     final res = await repository.auth.login(
