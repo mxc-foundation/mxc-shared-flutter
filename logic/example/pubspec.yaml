@@ -1,0 +1,22 @@
+name: example
+description: A new Flutter project.
+version: 1.0.0+1
+publish_to: none
+
+environment:
+  sdk: ">=2.14.0-0.0.beta <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  hooks_riverpod: ^1.0.0-dev.7
+  mxc_logic: 
+    path: ..
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^1.0.0
+
+flutter:
+  uses-material-design: true
