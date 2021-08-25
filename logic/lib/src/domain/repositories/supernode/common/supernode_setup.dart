@@ -15,6 +15,8 @@ abstract class SupernodeSetupRepository {
 
   String? get supernodeAddress;
   Future<void> saveSupernodeAddress(String? address);
+
+  Future<void> clean();
 }
 
 ///
@@ -105,5 +107,19 @@ class SupernodeSetupRepositoryImpl implements SupernodeSetupRepository {
   Future<void> saveToken(String? token) {
     _token = token;
     return cacheManager.write(_SupernodeSetupKeys.token, token);
+  }
+
+  @override
+  Future<void> clean() {
+    _username = null;
+    _password = null;
+    _token = null;
+    _supernodeAddress = null;
+    return Future.wait([
+      cacheManager.write(_SupernodeSetupKeys.username, null),
+      cacheManager.write(_SupernodeSetupKeys.password, null),
+      cacheManager.write(_SupernodeSetupKeys.token, null),
+      cacheManager.write(_SupernodeSetupKeys.supernodeAddress, null),
+    ]);
   }
 }

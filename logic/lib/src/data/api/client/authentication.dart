@@ -47,8 +47,9 @@ class SupernodeAuthenticator extends Authenticator {
   Future<Request?> _authenticate(Request request, Response response) async {
     final newToken = await refreshToken(client);
     if (newToken == null) return null;
-    _addAuthHeader(request.headers, newToken, override: true);
-    return request;
+    final headers = {...request.headers};
+    _addAuthHeader(headers, newToken, override: true);
+    return request.copyWith(headers: headers);
   }
 }
 
@@ -63,7 +64,11 @@ class TokenInterceptor implements RequestInterceptor {
   @override
   Future<Request> onRequest(Request request) async {
     final token = getToken();
-    if (token != null) _addAuthHeader(request.headers, token);
+    if (token != null) {
+      final headers = {...request.headers};
+      _addAuthHeader(headers, token);
+      return request.copyWith(headers: headers);
+    }
     return request;
   }
 }

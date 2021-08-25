@@ -1,15 +1,16 @@
 import 'package:mxc_logic/mxc_logic.dart';
 import 'package:mxc_logic/src/data/api/supernode_list_api.dart';
 import 'package:mxc_logic/src/data/data.dart';
-import 'package:mxc_logic/src/domain/repositories/supernode/api/report.dart';
 
 import 'api/auth.dart';
+import 'api/device.dart';
 import 'api/dhx.dart';
 import 'api/external_accounts.dart';
 import 'api/gateway.dart';
 import 'api/network_server.dart';
 import 'api/organization.dart';
 import 'api/registration.dart';
+import 'api/report.dart';
 import 'api/stake.dart';
 import 'api/topup.dart';
 import 'api/totp.dart';
@@ -20,12 +21,14 @@ import 'common/supernode_setup.dart';
 import 'common/token_refresher.dart';
 
 export 'api/auth.dart';
+export 'api/device.dart';
 export 'api/dhx.dart';
 export 'api/external_accounts.dart';
 export 'api/gateway.dart';
 export 'api/network_server.dart';
 export 'api/organization.dart';
 export 'api/registration.dart';
+export 'api/report.dart';
 export 'api/stake.dart';
 export 'api/topup.dart';
 export 'api/totp.dart';
@@ -50,6 +53,7 @@ abstract class SupernodeRepository {
   TotpRepository get totp;
   RegistrationRepository get register;
   ReportRepository get report;
+  DeviceRepository get device;
   Future<Map<String, Supernode>> listSupernodes();
 }
 
@@ -114,6 +118,9 @@ class ApiSupernodeRepository implements SupernodeRepository {
 
   @override
   ReportRepository get report => ReportRepository(_client);
+
+  @override
+  DeviceRepository get device => DeviceRepository(_client);
 
   @override
   Future<Map<String, Supernode>> listSupernodes() {

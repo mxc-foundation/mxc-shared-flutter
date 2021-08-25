@@ -37,7 +37,11 @@ class CacheManagerSembast implements CacheManager {
 
   @override
   Future<void> write(String key, dynamic value) async {
-    await store.record(key).put(db, value);
+    if (value == null) {
+      await store.record(key).delete(db);
+    } else {
+      await store.record(key).put(db, value);
+    }
   }
 
   @override

@@ -28,4 +28,11 @@ class AuthUseCase {
     // ignore: unawaited_futures
     setupRepository.saveToken(res.token.source);
   }
+
+  bool loggedIn() => setupRepository.token != null;
+
+  void logOut() {
+    // ignore: unawaited_futures
+    setupRepository.clean();
+  }
 }
