@@ -31,26 +31,15 @@ class UserRepository {
             ),
           )
           .toList(),
-      externalAccounts: res.body!.externalUserAccounts!.map(
-        (e) {
-          late final ExternalAccountType type;
-          switch (e.service) {
-            case "wechat":
-              type = ExternalAccountType.wechat;
-              break;
-            case "shopify":
-              type = ExternalAccountType.shopify;
-              break;
-            default:
-              type = ExternalAccountType.unknown;
-          }
-          return ExternalAccount(
-            externalUserId: e.externalUserId.orDefault(),
-            externalUsername: e.externalUsername.orDefault(),
-            service: type,
-          );
-        },
-      ).toList(),
+      externalAccounts: res.body!.externalUserAccounts!
+          .map(
+            (e) => ExternalAccount(
+              externalUserId: e.externalUserId.orDefault(),
+              externalUsername: e.externalUsername.orDefault(),
+              service: Mappers.stringToExternalAccountType(e.service!),
+            ),
+          )
+          .toList(),
     );
   }
 

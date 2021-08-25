@@ -61,11 +61,35 @@ extension DateTimeMapper on DateTime {
   String toData() => toUtc().toIso8601String();
 }
 
+extension ExternalAccountTypeMapper on ExternalAccountType {
+  String toData() {
+    switch (this) {
+      case ExternalAccountType.wechat:
+        return 'wechat';
+      case ExternalAccountType.shopify:
+        return 'shopify';
+      case ExternalAccountType.unknown:
+        throw Exception('Unknown external type passed');
+    }
+  }
+}
+
 abstract class Mappers {
   static SupernodeTokenDetails stringToSupernodeJwt(String jwt) {
     final parsedJwt = parseJwt(jwt);
     final userId = parsedJwt['userId'].toString();
     final username = parsedJwt['username'] as String;
     return SupernodeTokenDetails(userId, username, jwt);
+  }
+
+  static ExternalAccountType stringToExternalAccountType(String type) {
+    switch (type) {
+      case "wechat":
+        return ExternalAccountType.wechat;
+      case "shopify":
+        return ExternalAccountType.shopify;
+      default:
+        return ExternalAccountType.unknown;
+    }
   }
 }

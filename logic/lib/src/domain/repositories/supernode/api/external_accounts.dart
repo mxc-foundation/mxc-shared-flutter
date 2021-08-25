@@ -23,12 +23,12 @@ class ExternalAccountsRepository {
 
   Future<void> unbind({
     required String organizationId,
-    required String service,
+    required ExternalAccountType service,
   }) async {
     await client.externalUserService.unbindExternalUser(
       body: ExtapiUnbindExternalUserRequest(
         organizationId: organizationId,
-        service: service,
+        service: service.toData(),
       ),
     );
   }
