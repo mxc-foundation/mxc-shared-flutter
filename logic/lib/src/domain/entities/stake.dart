@@ -22,6 +22,7 @@ class Stake {
   final DateTime? lockTill;
   final double boost;
   final double revenue;
+  final int? months;
 
   Stake({
     required this.id,
@@ -32,6 +33,7 @@ class Stake {
     required this.lockTill,
     required this.boost,
     required this.revenue,
+    required this.months,
   });
 }
 

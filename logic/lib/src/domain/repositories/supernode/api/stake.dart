@@ -69,6 +69,11 @@ class StakeRepository {
               lockTill: e.stake!.lockTill,
               boost: e.stake!.boost.toDouble(),
               revenue: e.stake!.revenue.toDouble(),
+              months: e.stake!.lockTill == null
+                  ? null
+                  : (e.stake!.lockTill!.difference(e.stake!.startTime!).inDays /
+                          30)
+                      .floor(),
             ),
           ),
         )
@@ -94,6 +99,9 @@ class StakeRepository {
             lockTill: e.lockTill,
             revenue: e.revenue.toDouble(),
             startTime: e.startTime!,
+            months: e.lockTill == null
+                ? null
+                : (e.lockTill!.difference(e.startTime!).inDays / 30).floor(),
           ),
         )
         .toList();
