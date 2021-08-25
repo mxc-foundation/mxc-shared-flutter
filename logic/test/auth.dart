@@ -52,6 +52,10 @@ Future<void> main() async {
       AuthUseCase(supernodeRepository, supernodeSetupRepository);
 
   group('A group of tests', () {
+    test('Can get supernodes', () async {
+      final supernodes = await authUseCase.listSupernodes();
+      expect(supernodes, isNotEmpty);
+    });
     test('Can login', () async {
       await authUseCase.login(
         supernodeAddress,
