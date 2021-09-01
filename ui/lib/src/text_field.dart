@@ -7,9 +7,11 @@ class MxcTextField extends StatefulWidget {
   final String? hint;
   final FormFieldValidator<String>? validator;
   final TextInputAction? action;
+  final TextInputType? keyboardType;
   final double width;
   final FocusNode? focusNode;
   final MxcTextFieldButton? button;
+  final String? suffixText;
 
   final TextEditingController? _controller;
   final String? _initialText;
@@ -25,6 +27,8 @@ class MxcTextField extends StatefulWidget {
     this.button,
     this.width = 340,
     this.focusNode,
+    this.keyboardType,
+    this.suffixText,
   })  : _controller = controller,
         _initialText = null,
         super(key: key);
@@ -39,6 +43,8 @@ class MxcTextField extends StatefulWidget {
     this.button,
     this.width = 340,
     this.focusNode,
+    this.keyboardType,
+    this.suffixText,
   })  : _initialText = text,
         readOnly = true,
         _controller = null,
@@ -120,6 +126,7 @@ class _MxcTextFieldState extends State<MxcTextField> {
                   child: TextFormField(
                     readOnly: widget.readOnly,
                     initialValue: widget._initialText,
+                    keyboardType: widget.keyboardType,
                     focusNode: focusNode,
                     textInputAction: widget.action,
                     validator: widget.validator,
@@ -137,6 +144,7 @@ class _MxcTextFieldState extends State<MxcTextField> {
                       errorBorder: InputBorder.none,
                       focusedErrorBorder: InputBorder.none,
                       disabledBorder: InputBorder.none,
+                      suffixText: widget.suffixText,
                     ),
                   ),
                 ),
@@ -172,15 +180,15 @@ class MxcTextFieldButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      onTap: onTap,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 3),
+        padding: const EdgeInsets.only(left: 5, right: 5, bottom: 6),
         child: Icon(
           icon,
           size: 16,
           color: MxcScopedTheme.of(context).primaryColor,
         ),
       ),
-      onTap: () {},
     );
   }
 }
