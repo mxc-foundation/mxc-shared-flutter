@@ -20,7 +20,7 @@ class MxcAppBar extends StatelessWidget {
     this.action,
     this.leading,
     this.centerTitle = true,
-  })  : title = _textTitle(text, centerTitle),
+  })  : title = MxcAppBarTextTitle(text, centerTitle: centerTitle),
         super(key: key);
 
   const MxcAppBar.custom({
@@ -48,7 +48,7 @@ class MxcAppBar extends StatelessWidget {
     ),
     this.action,
     this.centerTitle = true,
-  })  : title = _textTitle(text, centerTitle),
+  })  : title = MxcAppBarTextTitle(text, centerTitle: centerTitle),
         leading = Builder(
           builder: (context) => MxcAppBarButton.icon(
             Icons.arrow_back_ios,
@@ -68,7 +68,7 @@ class MxcAppBar extends StatelessWidget {
     ),
     this.leading,
     this.centerTitle = true,
-  })  : title = _textTitle(text, centerTitle),
+  })  : title = MxcAppBarTextTitle(text, centerTitle: centerTitle),
         action = Builder(
           builder: (context) => MxcAppBarButton.icon(
             Icons.close,
@@ -76,17 +76,6 @@ class MxcAppBar extends StatelessWidget {
           ),
         ),
         super(key: key);
-
-  static Widget _textTitle(String text, bool centerTitle) => Builder(
-        builder: (context) => Text(
-          text,
-          textAlign: centerTitle ? TextAlign.center : TextAlign.left,
-          style: FontTheme.of(context).big(),
-          softWrap: true,
-          overflow: TextOverflow.ellipsis,
-          maxLines: 1,
-        ),
-      );
 
   @override
   Widget build(BuildContext context) {
@@ -158,6 +147,29 @@ class MxcAppBarButton extends StatelessWidget {
       child: Align(
         child: child,
       ),
+    );
+  }
+}
+
+class MxcAppBarTextTitle extends StatelessWidget {
+  final bool centerTitle;
+  final String text;
+
+  const MxcAppBarTextTitle(
+    this.text, {
+    Key? key,
+    this.centerTitle = true,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      textAlign: centerTitle ? TextAlign.center : TextAlign.left,
+      style: FontTheme.of(context).big(),
+      softWrap: true,
+      overflow: TextOverflow.ellipsis,
+      maxLines: 1,
     );
   }
 }
