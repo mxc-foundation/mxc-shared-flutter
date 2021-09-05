@@ -93,7 +93,6 @@ class _MxcTextFieldState extends State<MxcTextField> {
                 bottom: focused ? 3 : 6,
               ),
               alignment: Alignment.centerLeft,
-              height: 24,
               child: AnimatedDefaultTextStyle(
                 duration: const Duration(milliseconds: 200),
                 style: focused
@@ -119,7 +118,7 @@ class _MxcTextFieldState extends State<MxcTextField> {
                 ),
               ),
             ),
-            padding: const EdgeInsets.symmetric(vertical: 2),
+            padding: const EdgeInsets.only(bottom: 2),
             child: Row(
               children: [
                 Expanded(
