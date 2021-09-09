@@ -19,7 +19,7 @@ class SupernodeGithubApi {
 
   final ChopperClient client;
 
-  Future<Map<String, Supernode>> listSupernodes() async {
+  Future<Map<String, List<Supernode>>> listSupernodes() async {
     final res = await client.get<dynamic, dynamic>(
       'https://raw.githubusercontent.com/mxc-foundation/supernode-list/master/supernode.json',
       parameters: <String, dynamic>{
@@ -32,14 +32,18 @@ class SupernodeGithubApi {
 
     final body = Map<String, dynamic>.from(jsonDecode(res.bodyString) as Map);
 
-    return body.map(
-      (key, dynamic value) => MapEntry(
-        key,
-        _supernodeMapper(<String, dynamic>{
-          ...Map<String, dynamic>.from(value as Map),
-          'name': key,
-        }),
-      ),
+    final supernodesList = body.entries.map(
+      (entry) => _supernodeMapper(<String, dynamic>{
+        ...Map<String, dynamic>.from(entry.value as Map),
+        'name': entry.key,
+      }),
     );
+
+    final supernodesByRegion = <String, List<Supernode>>{};
+    for (final supernode in supernodesList) {
+      supernodesByRegion[supernode.region] ??= [];
+      supernodesByRegion[supernode.region]!.add(supernode);
+    }
+    return supernodesByRegion;
   }
 }
