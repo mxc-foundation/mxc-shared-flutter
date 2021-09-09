@@ -9,14 +9,16 @@ class DeviceRepository {
   DeviceRepository(this._client);
 
   Future<ListWithTotal<Device>> list({
-    int offset = 0,
     required int limit,
+    required String applicationId,
+    int offset = 0,
     String? search,
   }) async {
     final res = await _client.deviceService.list(
       offset: offset.toString(),
       limit: limit.toString(),
       search: search,
+      applicationID: applicationId,
     );
     return res.body!.result!
         .map(
