@@ -15,6 +15,7 @@ class MxcTextField extends StatefulWidget {
 
   final TextEditingController? _controller;
   final String? _initialText;
+  final bool obscure;
 
   const MxcTextField({
     required Key? key,
@@ -29,6 +30,7 @@ class MxcTextField extends StatefulWidget {
     this.focusNode,
     this.keyboardType,
     this.suffixText,
+    this.obscure = false,
   })  : _controller = controller,
         _initialText = null,
         super(key: key);
@@ -45,6 +47,7 @@ class MxcTextField extends StatefulWidget {
     this.focusNode,
     this.keyboardType,
     this.suffixText,
+    this.obscure = false,
   })  : _initialText = text,
         readOnly = true,
         _controller = null,
@@ -132,6 +135,7 @@ class _MxcTextFieldState extends State<MxcTextField> {
                     controller: widget._controller,
                     cursorColor: ColorsTheme.of(context).textPrimaryAndIcons,
                     style: FontTheme.of(context).big(),
+                    obscureText: widget.obscure,
                     decoration: InputDecoration(
                       contentPadding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
                       isDense: true,
