@@ -37,12 +37,12 @@ class CacheField<T> {
     return _NullableCacheField<T>(manager, name);
   }
 
-  bool loaded = false;
+  bool _loaded = false;
 
   final T _defaultValue;
   T _value;
   T get value {
-    if (!loaded) {
+    if (!_loaded) {
       throw Exception(
         'Call CacheFieldManager.loadFields() before using field!',
       );
@@ -52,6 +52,7 @@ class CacheField<T> {
 
   Future<void> _load() async {
     _value = _manager.read(_name) as T? ?? _defaultValue;
+    _loaded = true;
   }
 
   Future<void> save(T value) {
@@ -63,4 +64,17 @@ class CacheField<T> {
 class _NullableCacheField<T> extends CacheField<T?> {
   _NullableCacheField(CacheManager manager, String name)
       : super._withDefault(manager, name, null);
+}
+
+class CachedRepositoryLoader {
+  final CacheManager manager;
+  final String zoneName;
+  const CachedRepositoryLoader(this.manager, this.zoneName);
+
+  Future<T> load<T>(T Function(CacheFieldManager m) builder) async {
+    final fieldManager = CacheFieldManager(zoneName, manager);
+    final repository = builder(fieldManager);
+    await fieldManager.loadFields();
+    return repository;
+  }
 }
