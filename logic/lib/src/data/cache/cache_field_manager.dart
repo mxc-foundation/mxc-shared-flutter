@@ -51,7 +51,7 @@ class CacheField<T> {
   }
 
   Future<void> _load() async {
-    _value = _manager.read(_name) as T? ?? _defaultValue;
+    _value = await _manager.read(_name) as T? ?? _defaultValue;
     _loaded = true;
   }
 
