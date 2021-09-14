@@ -26,7 +26,7 @@ class MxcTextField extends StatefulWidget {
     this.action,
     this.readOnly = false,
     this.button,
-    this.width = 340,
+    this.width = double.infinity,
     this.focusNode,
     this.keyboardType,
     this.suffixText,
