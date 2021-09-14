@@ -1,5 +1,7 @@
 import 'package:mxc_logic/internal.dart';
+import 'package:path/path.dart';
 import 'package:sembast/sembast.dart';
+
 import 'sembast_factory.dart'
     if (dart.library.io) "sembast_factory_io.dart"
     if (dart.library.js) "sembast_factory_web.dart";
@@ -15,8 +17,9 @@ class CacheManagerSembast implements CacheManager {
   CacheManagerSembast(this.db, [this.storeName = _defaultCacheStore])
       : store = StoreRef<String, dynamic>(storeName);
 
-  static Future<CacheManagerSembast> load() async {
-    final db = await sembastFactory.openDatabase(sembastDbName);
+  static Future<CacheManagerSembast> load(String dbDirectory) async {
+    final path = join(dbDirectory, sembastDbName);
+    final db = await sembastFactory.openDatabase(path);
     return CacheManagerSembast(db);
   }
 

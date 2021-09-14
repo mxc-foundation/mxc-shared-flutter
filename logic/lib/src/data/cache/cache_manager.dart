@@ -1,7 +1,8 @@
 import 'cache_manager_sembast.dart';
 
 abstract class CacheManager {
-  static Future<CacheManagerSembast> load() => CacheManagerSembast.load();
+  static Future<CacheManagerSembast> load([String dbDirectory = './']) =>
+      CacheManagerSembast.load(dbDirectory);
 
   CacheManager withZone(String name);
 
