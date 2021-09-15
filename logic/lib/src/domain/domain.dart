@@ -1,3 +1,4 @@
+export 'entities/application.dart';
 export 'entities/common.dart';
 export 'entities/currencies.dart';
 export 'entities/device.dart';

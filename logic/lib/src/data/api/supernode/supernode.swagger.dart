@@ -799,9 +799,9 @@ abstract class DeviceService extends ChopperService {
       @required
           String? orgId,
       @Query('offset')
-          String? offset,
+          int? offset,
       @Query('limit')
-          String? limit,
+          int? limit,
       @Header('Grpc-Metadata-X-OTP')
           String? grpcMetadataXOTP,
       @Header('Grpc-Metadata-Authorization')
@@ -852,7 +852,7 @@ abstract class DeviceService extends ChopperService {
   ///List returns the available devices.
   ///@param limit Max number of devices to return in the result-set.
   ///@param offset Offset in the result-set (for pagination).
-  ///@param applicationID Application ID to filter on.
+  ///@param organizationID Application ID to filter on.
   ///@param search Search on name or DevEUI.
   ///@param multicastGroupID Multicast-group ID to filter on (string formatted UUID).
   ///@param serviceProfileID Service-profile ID to filter on (string formatted UUID).
@@ -865,8 +865,8 @@ abstract class DeviceService extends ChopperService {
           String? limit,
       @Query('offset')
           String? offset,
-      @Query('applicationID')
-          String? applicationID,
+      @Query('organizationID')
+          String? organizationID,
       @Query('search')
           String? search,
       @Query('multicastGroupID')

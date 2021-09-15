@@ -19,6 +19,38 @@ dev_dependencies:
     sdk: flutter
 
 flutter:
+  uses-material-design: true
+  fonts:
+    - family: Quicksand
+      fonts:
+        - asset: assets/fonts/Quicksand-Light.ttf
+          weight: 200
+        - asset: assets/fonts/Quicksand-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Quicksand-SemiBold.ttf
+          weight: 500
+        - asset: assets/fonts/Quicksand-Medium.ttf
+          weight: 600
+        - asset: assets/fonts/Quicksand-Bold.ttf
+          weight: 700
+
+    - family: Lato
+      fonts:
+        - asset: assets/fonts/Lato-Thin.ttf
+          weight: 200
+        - asset: assets/fonts/Lato-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Lato-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Lato-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Lato-Black.ttf
+          weight: 800
+
+    - family: OpenSansEmoji
+      fonts:
+        - asset: assets/fonts/OpenSansEmoji.ttf
+
   assets:
     - assets/images/app/
     - assets/images/login/
@@ -34,3 +66,6 @@ flutter:
     - assets/images/connectivity/
     - assets/images/settings/
     - assets/images/maintenance/
+    - assets/images/web/main_menu/
+    - assets/images/web/nav/
+    - assets/images/web/device/

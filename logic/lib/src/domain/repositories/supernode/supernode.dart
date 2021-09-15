@@ -1,6 +1,10 @@
+import 'package:chopper/chopper.dart';
 import 'package:mxc_logic/mxc_logic.dart';
 import 'package:mxc_logic/src/data/api/supernode_list_api.dart';
 import 'package:mxc_logic/src/data/data.dart';
+import 'package:mxc_logic/src/domain/repositories/supernode/api/application.dart';
+import 'package:mxc_logic/src/domain/repositories/supernode/demo/application.dart';
+import 'package:mxc_logic/src/domain/repositories/supernode/demo/device.dart';
 
 import 'api/auth.dart';
 import 'api/device.dart';
@@ -54,6 +58,7 @@ abstract class SupernodeRepository {
   RegistrationRepository get register;
   ReportRepository get report;
   DeviceRepository get device;
+  ApplicationRepository get application;
   Future<Map<String, Supernode>> listSupernodes();
 }
 
@@ -123,49 +128,54 @@ class ApiSupernodeRepository implements SupernodeRepository {
   DeviceRepository get device => DeviceRepository(_client);
 
   @override
+  ApplicationRepository get application => ApplicationRepository(_client);
+
+  @override
   Future<Map<String, Supernode>> listSupernodes() {
     return SupernodeGithubApi(_client).listSupernodes();
   }
 }
 
-/*
-class DemoSupernodeRepository implements SupernodeRepository {
-  DemoSupernodeRepository();
+class SupernodeDemoRepository {//implements SupernodeRepository {
+  SupernodeDemoRepository();
 
-  final ChopperClient _client;
+  // @override
+  DeviceDemoRepository get device => DeviceDemoRepository();
 
-  @override
-  DemoDhxDao get dhx => DemoDhxDao();
+  // @override
+  ApplicationDemoRepository get application => ApplicationDemoRepository();
 
-  @override
-  DemoGatewaysDao get gateways => DemoGatewaysDao();
+  // @override
+  // DemoDhxDao get dhx => DemoDhxDao();
 
-  @override
-  DemoStakeDao get stake => DemoStakeDao();
+  // @override
+  // DemoGatewaysDao get gateways => DemoGatewaysDao();
 
-  @override
-  DemoTopupDao get topup => DemoTopupDao();
+  // @override
+  // DemoStakeDao get stake => DemoStakeDao();
 
-  @override
-  DemoUserDao get user => DemoUserDao();
+  // @override
+  // DemoTopupDao get topup => DemoTopupDao();
 
-  @override
-  DemoWalletDao get wallet => DemoWalletDao();
+  // @override
+  // DemoUserDao get user => DemoUserDao();
 
-  @override
-  DemoWithdrawDao get withdraw => DemoWithdrawDao();
+  // @override
+  // DemoWalletDao get wallet => DemoWalletDao();
 
-  @override
-  DemoServerInfoDao get serverInfo => DemoServerInfoDao();
+  // @override
+  // DemoWithdrawDao get withdraw => DemoWithdrawDao();
+
+  // @override
+  // DemoServerInfoDao get serverInfo => DemoServerInfoDao();
 
 // No demo wrappers:
-  @override
-  GatewaysLocationDao get gatewaysLocation => GatewaysLocationDao(client);
+  // @override
+  // GatewaysLocationDao get gatewaysLocation => GatewaysLocationDao(client);
 
-  @override
-  OrganizationDao get organization => OrganizationDao(client);
+  // @override
+  // OrganizationDao get organization => OrganizationDao(client);
 
-  @override
-  NetworkServerDao get networkServer => NetworkServerDao(client);
+  // @override
+  // NetworkServerDao get networkServer => NetworkServerDao(client);
 }
-*/

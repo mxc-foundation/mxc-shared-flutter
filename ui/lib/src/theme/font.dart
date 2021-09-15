@@ -17,10 +17,14 @@ class FontTheme {
         _colorsTheme,
         TextStyle(
           color: _colorsTheme.textPrimaryAndIcons,
-          fontFamily: "Roboto",
+          fontFamily: "Lato",
           fontSize: 12,
           height: 1.33333,
           decoration: TextDecoration.none,
+          letterSpacing: 0,
+          fontFamilyFallback: const [
+            "OpenSansEmoji",
+          ],
         ),
       );
 
@@ -29,10 +33,14 @@ class FontTheme {
         _colorsTheme,
         TextStyle(
           color: _colorsTheme.textPrimaryAndIcons,
-          fontFamily: "Roboto",
+          fontFamily: "Lato",
           fontSize: 14,
           height: 1.33333,
           decoration: TextDecoration.none,
+          letterSpacing: 0,
+          fontFamilyFallback: const [
+            "OpenSansEmoji",
+          ],
         ),
       );
 
@@ -41,10 +49,30 @@ class FontTheme {
         _colorsTheme,
         TextStyle(
           color: _colorsTheme.textPrimaryAndIcons,
-          fontFamily: "Roboto",
+          fontFamily: "Lato",
           fontSize: 16,
           height: 1.33333,
           decoration: TextDecoration.none,
+          letterSpacing: 0,
+          fontFamilyFallback: const [
+            "OpenSansEmoji",
+          ],
+        ),
+      );
+  
+  /// FontSize: 20
+  TextStylePack get xbig => TextStylePack(
+        _colorsTheme,
+        TextStyle(
+          color: _colorsTheme.textPrimaryAndIcons,
+          fontFamily: "Lato",
+          fontSize: 20,
+          height: 1.33333,
+          decoration: TextDecoration.none,
+          letterSpacing: 0,
+          fontFamilyFallback: const [
+            "OpenSansEmoji",
+          ],
         ),
       );
 
@@ -53,7 +81,7 @@ class FontTheme {
         _colorsTheme,
         TextStyle(
           color: _colorsTheme.textPrimaryAndIcons,
-          fontFamily: "Roboto",
+          fontFamily: "Lato",
           fontSize: 24,
           height: 1.33333,
           decoration: TextDecoration.none,
