@@ -59,7 +59,7 @@ abstract class SupernodeRepository {
   ReportRepository get report;
   DeviceRepository get device;
   ApplicationRepository get application;
-  Future<Map<String, Supernode>> listSupernodes();
+  Future<Map<String, List<Supernode>>> listSupernodes();
 }
 
 class ApiSupernodeRepository implements SupernodeRepository {
@@ -131,7 +131,7 @@ class ApiSupernodeRepository implements SupernodeRepository {
   ApplicationRepository get application => ApplicationRepository(_client);
 
   @override
-  Future<Map<String, Supernode>> listSupernodes() {
+  Future<Map<String, List<Supernode>>> listSupernodes() {
     return SupernodeGithubApi(_client).listSupernodes();
   }
 }

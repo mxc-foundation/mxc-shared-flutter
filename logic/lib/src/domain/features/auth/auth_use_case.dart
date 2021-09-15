@@ -6,7 +6,7 @@ class AuthUseCase {
 
   AuthUseCase(this.repository, this.setupRepository);
 
-  Future<Map<String, Supernode>> listSupernodes() {
+  Future<Map<String, List<Supernode>>> listSupernodes() {
     return repository.listSupernodes();
   }
 

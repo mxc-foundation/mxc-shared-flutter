@@ -14,6 +14,8 @@ extension StringMapper on String? {
   Decimal toDecimal([String defaultValue = '0']) =>
       Decimal.parse(this ?? defaultValue);
 
+  DateTime? toDateTime() => this == null ? null : DateTime.parse(this!);
+
   String orDefault() => this ?? '';
 }
 

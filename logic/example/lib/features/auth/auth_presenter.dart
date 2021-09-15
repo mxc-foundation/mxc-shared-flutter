@@ -53,7 +53,9 @@ class AuthPresenter extends StateNotifier<AuthState> {
     state = state.copyWith(loggedIn: _useCase.loggedIn());
     if (state.loggedIn) return;
     final supernodes = await _useCase.listSupernodes();
-    state = state.copyWith(supernodes: supernodes.values.toList());
+    state = state.copyWith(
+      supernodes: supernodes.values.expand((e) => e).toList(),
+    );
   }
 
   void pickSupernode(Supernode? supernode) =>

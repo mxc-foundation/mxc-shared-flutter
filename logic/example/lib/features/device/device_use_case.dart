@@ -6,6 +6,7 @@ class DeviceUseCase {
   DeviceUseCase(this.supernodeRepository);
 
   Future<ListWithTotal<Device>> listDevices({String? search}) {
-    return supernodeRepository.device.list(limit: 10, search: search);
+    return supernodeRepository.device
+        .list(limit: 10, search: search, applicationId: '');
   }
 }

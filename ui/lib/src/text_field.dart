@@ -7,12 +7,15 @@ class MxcTextField extends StatefulWidget {
   final String? hint;
   final FormFieldValidator<String>? validator;
   final TextInputAction? action;
+  final TextInputType? keyboardType;
   final double width;
   final FocusNode? focusNode;
   final MxcTextFieldButton? button;
+  final String? suffixText;
 
   final TextEditingController? _controller;
   final String? _initialText;
+  final bool obscure;
 
   const MxcTextField({
     required Key? key,
@@ -23,8 +26,11 @@ class MxcTextField extends StatefulWidget {
     this.action,
     this.readOnly = false,
     this.button,
-    this.width = 340,
+    this.width = double.infinity,
     this.focusNode,
+    this.keyboardType,
+    this.suffixText,
+    this.obscure = false,
   })  : _controller = controller,
         _initialText = null,
         super(key: key);
@@ -39,6 +45,9 @@ class MxcTextField extends StatefulWidget {
     this.button,
     this.width = 340,
     this.focusNode,
+    this.keyboardType,
+    this.suffixText,
+    this.obscure = false,
   })  : _initialText = text,
         readOnly = true,
         _controller = null,
@@ -87,7 +96,6 @@ class _MxcTextFieldState extends State<MxcTextField> {
                 bottom: focused ? 3 : 6,
               ),
               alignment: Alignment.centerLeft,
-              height: 24,
               child: AnimatedDefaultTextStyle(
                 duration: const Duration(milliseconds: 200),
                 style: focused
@@ -113,19 +121,21 @@ class _MxcTextFieldState extends State<MxcTextField> {
                 ),
               ),
             ),
-            padding: const EdgeInsets.symmetric(vertical: 2),
+            padding: const EdgeInsets.only(bottom: 2),
             child: Row(
               children: [
                 Expanded(
                   child: TextFormField(
                     readOnly: widget.readOnly,
                     initialValue: widget._initialText,
+                    keyboardType: widget.keyboardType,
                     focusNode: focusNode,
                     textInputAction: widget.action,
                     validator: widget.validator,
                     controller: widget._controller,
                     cursorColor: ColorsTheme.of(context).textPrimaryAndIcons,
                     style: FontTheme.of(context).big(),
+                    obscureText: widget.obscure,
                     decoration: InputDecoration(
                       contentPadding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
                       isDense: true,
@@ -137,6 +147,7 @@ class _MxcTextFieldState extends State<MxcTextField> {
                       errorBorder: InputBorder.none,
                       focusedErrorBorder: InputBorder.none,
                       disabledBorder: InputBorder.none,
+                      suffixText: widget.suffixText,
                     ),
                   ),
                 ),
@@ -172,15 +183,15 @@ class MxcTextFieldButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      onTap: onTap,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 3),
+        padding: const EdgeInsets.only(left: 5, right: 5, bottom: 6),
         child: Icon(
           icon,
           size: 16,
           color: MxcScopedTheme.of(context).primaryColor,
         ),
       ),
-      onTap: () {},
     );
   }
 }

@@ -36,7 +36,9 @@ class SupernodeAuthenticator extends Authenticator {
   }
 
   bool tokenExpired(Response response) =>
-      response.statusCode == 401 && !response.bodyString.contains('OTP');
+      response.statusCode == 401 &&
+      !response.bodyString.contains('OTP') &&
+      !response.bodyString.contains('global admin');
 
   @override
   FutureOr<Request?> authenticate(Request request, Response response) {

@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:mxc_ui/mxc_ui.dart';
 
 class MxcCard extends StatelessWidget {
-  final Widget? child;
+  final Widget child;
 
   const MxcCard({
     Key? key,
-    this.child
+    required this.child,
   }) : super(key: key);
 
   @override

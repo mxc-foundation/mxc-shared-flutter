@@ -13,14 +13,13 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MxcTheme.fromOption(
-      option: MxcThemeOption.day,
-      child: Builder(
-        builder: (context) => MaterialApp(
-          title: 'Flutter Demo',
-          theme: MxcTheme.of(context).toThemeData(),
-          home: const MyHomePage(title: 'Flutter Demo Home Page'),
-        ),
+    final mxcThemeData = MxcThemeData.fromOption(MxcThemeOption.day);
+    return MxcTheme(
+      data: mxcThemeData,
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: mxcThemeData.toThemeData(),
+        home: const MyHomePage(title: 'Flutter Demo Home Page'),
       ),
     );
   }
