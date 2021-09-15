@@ -5,13 +5,23 @@ class MxcCheckbox extends StatelessWidget {
   final void Function(bool?)? onChanged;
   final bool? value;
   final bool tristate;
+  final Widget? title;
 
   const MxcCheckbox({
     required Key? key,
     required this.onChanged,
     required this.value,
     this.tristate = false,
+    this.title,
   }) : super(key: key);
+
+  Widget _checkbox(Color primaryColor) => Checkbox(
+        onChanged: onChanged,
+        value: value,
+        activeColor: primaryColor,
+        tristate: tristate,
+        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -22,12 +32,16 @@ class MxcCheckbox extends StatelessWidget {
       data: Theme.of(context).copyWith(
         unselectedWidgetColor: primaryColor,
       ),
-      child: Checkbox(
-        onChanged: onChanged,
-        value: value,
-        activeColor: primaryColor,
-        tristate: tristate,
-      ),
+      child: title == null
+          ? _checkbox(primaryColor)
+          : Row(
+              children: [
+                Expanded(
+                  child: title!,
+                ),
+                _checkbox(primaryColor),
+              ],
+            ),
     );
   }
 }
