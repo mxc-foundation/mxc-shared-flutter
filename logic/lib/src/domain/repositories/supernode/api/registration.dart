@@ -46,7 +46,7 @@ class RegistrationRepository {
       id: res.body!.id!,
       isAdmin: res.body!.isAdmin.orDefault(),
       isActive: res.body!.isActive.orDefault(),
-      jwt: res.body!.jwt!,
+      token: Mappers.stringToSupernodeJwt(res.body!.jwt!),
       username: res.body!.username!,
     );
   }

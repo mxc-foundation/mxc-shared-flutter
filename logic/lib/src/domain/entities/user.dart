@@ -2,14 +2,14 @@ class RegistrationResult {
   final String id;
   final bool isAdmin;
   final bool isActive;
-  final String jwt;
+  final SupernodeTokenDetails token;
   final String username;
 
   RegistrationResult({
     required this.id,
     required this.isAdmin,
     required this.isActive,
-    required this.jwt,
+    required this.token,
     required this.username,
   });
 }
