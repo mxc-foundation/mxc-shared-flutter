@@ -11,14 +11,14 @@ class MxcCapsuleButton extends StatefulWidget {
 
   /// MXC Capsule button
   /// [key] marked as required, because it's often needed for testing purposes
-  const MxcCapsuleButton({
-    required Key? key,
-    required this.title,
-    required this.onTap,
-    this.icon,
-    this.color,
-    this.textColor
-  }) : super(key: key);
+  const MxcCapsuleButton(
+      {required Key? key,
+      required this.title,
+      required this.onTap,
+      this.icon,
+      this.color,
+      this.textColor})
+      : super(key: key);
 
   @override
   _MxcCapsuleButtonState createState() => _MxcCapsuleButtonState();
@@ -59,13 +59,13 @@ class _MxcCapsuleButtonState extends State<MxcCapsuleButton> {
           alignment: Alignment.center,
           child: Row(
             children: [
-              if(_icon != null)
-                Row(
-                  children: [
-                    Icon(_icon, size: 12),
-                    const SizedBox(width: 10,)
-                  ]
-                ),
+              if (_icon != null)
+                Row(children: [
+                  Icon(_icon, size: 12),
+                  const SizedBox(
+                    width: 10,
+                  )
+                ]),
               Text(
                 widget.title,
                 style: widget.onTap != null

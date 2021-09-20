@@ -2,7 +2,6 @@ import 'package:mxc_logic/mxc_logic.dart';
 import 'package:mxc_logic/src/domain/entities/application.dart';
 
 class ApplicationDemoRepository {
-
   ApplicationDemoRepository();
 
   Future<ListWithTotal<Application>> list({

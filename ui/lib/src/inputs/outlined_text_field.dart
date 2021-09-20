@@ -120,14 +120,14 @@ class _MxcOutlinedTextFieldState extends State<MxcOutlinedTextField> {
             padding: const EdgeInsets.symmetric(vertical: 2),
             child: Row(
               children: [
-                if(widget.prefixIcon != null) ...{
+                if (widget.prefixIcon != null) ...{
                   Padding(
                     padding: const EdgeInsets.all(5),
                     child: Icon(
                       widget.prefixIcon,
                       color: focused
-                      ? MxcScopedTheme.of(context).primaryColor
-                      : ColorsTheme.of(context).textPrimaryAndIcons,
+                          ? MxcScopedTheme.of(context).primaryColor
+                          : ColorsTheme.of(context).textPrimaryAndIcons,
                     ),
                   )
                 },

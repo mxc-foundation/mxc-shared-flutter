@@ -1,5 +1,6 @@
 class Device {
   final String applicationID;
+
   /// Name of the device.
   final String name;
   final String? description;
@@ -13,18 +14,17 @@ class Device {
   final int? deviceStatusMargin;
   final DateTime? lastSeen;
 
-  Device({
-    required this.applicationID,
-    required this.name,
-    this.description,
-    this.devEUI,
-    this.deviceProfileID,
-    this.deviceProfileName,
-    this.deviceStatusBattery,
-    this.deviceStatusBatteryLevel,
-    this.deviceStatusBatteryLevelUnavailable,
-    this.deviceStatusExternalPowerSource,
-    this.deviceStatusMargin,
-    this.lastSeen
-  });
+  Device(
+      {required this.applicationID,
+      required this.name,
+      this.description,
+      this.devEUI,
+      this.deviceProfileID,
+      this.deviceProfileName,
+      this.deviceStatusBattery,
+      this.deviceStatusBatteryLevel,
+      this.deviceStatusBatteryLevelUnavailable,
+      this.deviceStatusExternalPowerSource,
+      this.deviceStatusMargin,
+      this.lastSeen});
 }

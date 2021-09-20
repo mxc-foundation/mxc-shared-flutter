@@ -136,7 +136,8 @@ class ApiSupernodeRepository implements SupernodeRepository {
   }
 }
 
-class SupernodeDemoRepository {//implements SupernodeRepository {
+class SupernodeDemoRepository {
+  //implements SupernodeRepository {
   SupernodeDemoRepository();
 
   // @override

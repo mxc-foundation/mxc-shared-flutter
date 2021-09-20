@@ -59,7 +59,7 @@ class FontTheme {
           ],
         ),
       );
-  
+
   /// FontSize: 20
   TextStylePack get xbig => TextStylePack(
         _colorsTheme,
