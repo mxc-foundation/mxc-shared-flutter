@@ -15,7 +15,7 @@ class ApplicationDemoRepository {
       Application(
         description: "description1",
         id: "applicationID1",
-        name: "name1",
+        name: "category_name1",
         organizationID: "organizationID1",
         serviceProfileID: "serviceProfileID1",
         serviceProfileName: "serviceProfileName1",
@@ -23,7 +23,7 @@ class ApplicationDemoRepository {
       Application(
         description: "description2",
         id: "applicationID2",
-        name: "name2",
+        name: "catagory_name2",
         organizationID: "organizationID2",
         serviceProfileID: "serviceProfileID2",
         serviceProfileName: "serviceProfileName2",

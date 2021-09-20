@@ -808,8 +808,8 @@ class _$DeviceService extends DeviceService {
   @override
   Future<Response<ExtapiGetDeviceListResponse>> getDeviceList(
       {String? orgId,
-      int? offset,
-      int? limit,
+      String? offset,
+      String? limit,
       String? grpcMetadataXOTP,
       String? grpcMetadataAuthorization}) {
     final $url = '/api/device/$orgId/device-list';
@@ -869,7 +869,7 @@ class _$DeviceService extends DeviceService {
   Future<Response<ExtapiListDeviceResponse>> list(
       {String? limit,
       String? offset,
-      String? organizationID,
+      String? applicationID,
       String? search,
       String? multicastGroupID,
       String? serviceProfileID,
@@ -879,7 +879,7 @@ class _$DeviceService extends DeviceService {
     final $params = <String, dynamic>{
       'limit': limit,
       'offset': offset,
-      'organizationID': organizationID,
+      'applicationID': applicationID,
       'search': search,
       'multicastGroupID': multicastGroupID,
       'serviceProfileID': serviceProfileID

@@ -15,6 +15,7 @@ class DeviceDemoRepository {
     return [
       Device(
         applicationID: "applicationID1",
+        name: "device_name1",
         description: "description1",
         devEUI: "devEUI1",
         deviceProfileID: "deviceProfileID1",
@@ -28,6 +29,7 @@ class DeviceDemoRepository {
       ),
        Device(
         applicationID: "applicationID2",
+        name: "name2",
         description: "description2",
         devEUI: "devEUI2",
         deviceProfileID: "deviceProfileID2",

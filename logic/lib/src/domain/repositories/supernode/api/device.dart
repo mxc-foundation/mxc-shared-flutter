@@ -19,7 +19,7 @@ class DeviceRepository {
     final res = await _client.deviceService.list(
       offset: offset.toString(),
       limit: limit.toString(),
-      organizationID: organizationID,
+      //organizationID: organizationID,
       search: search,
       multicastGroupID: multicastGroupID,
       serviceProfileID: serviceProfileID

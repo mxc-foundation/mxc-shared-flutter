@@ -17,7 +17,7 @@ class FontTheme {
         _colorsTheme,
         TextStyle(
           color: _colorsTheme.textPrimaryAndIcons,
-          fontFamily: "Lato",
+          fontFamily: "Roboto",
           fontSize: 12,
           height: 1.33333,
           decoration: TextDecoration.none,
@@ -33,7 +33,7 @@ class FontTheme {
         _colorsTheme,
         TextStyle(
           color: _colorsTheme.textPrimaryAndIcons,
-          fontFamily: "Lato",
+          fontFamily: "Roboto",
           fontSize: 14,
           height: 1.33333,
           decoration: TextDecoration.none,
@@ -49,7 +49,7 @@ class FontTheme {
         _colorsTheme,
         TextStyle(
           color: _colorsTheme.textPrimaryAndIcons,
-          fontFamily: "Lato",
+          fontFamily: "Roboto",
           fontSize: 16,
           height: 1.33333,
           decoration: TextDecoration.none,
@@ -65,7 +65,7 @@ class FontTheme {
         _colorsTheme,
         TextStyle(
           color: _colorsTheme.textPrimaryAndIcons,
-          fontFamily: "Lato",
+          fontFamily: "Roboto",
           fontSize: 20,
           height: 1.33333,
           decoration: TextDecoration.none,
@@ -81,7 +81,7 @@ class FontTheme {
         _colorsTheme,
         TextStyle(
           color: _colorsTheme.textPrimaryAndIcons,
-          fontFamily: "Lato",
+          fontFamily: "Roboto",
           fontSize: 24,
           height: 1.33333,
           decoration: TextDecoration.none,
