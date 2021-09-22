@@ -100,8 +100,8 @@ class _MxcTextFieldState extends State<MxcTextField> {
                 duration: const Duration(milliseconds: 200),
                 style: focused
                     ? FontTheme.of(context).small().copyWith(
-                          color: MxcScopedTheme.of(context).primaryColor,
-                        )
+                  color: MxcScopedTheme.of(context).primaryColor,
+                )
                     : FontTheme.of(context).middle(),
                 child: Text(
                   widget.label!,
@@ -182,7 +182,7 @@ class _MxcTextFieldState extends State<MxcTextField> {
                         ),
                         child: Padding(
                           padding: const EdgeInsets.only(bottom: 20),
-                          child: widget.button!,
+                          child: widget.button,
                         ),
                       ),
                   ],
