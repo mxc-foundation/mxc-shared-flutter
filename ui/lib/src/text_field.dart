@@ -100,8 +100,8 @@ class _MxcTextFieldState extends State<MxcTextField> {
                 duration: const Duration(milliseconds: 200),
                 style: focused
                     ? FontTheme.of(context).small().copyWith(
-                  color: MxcScopedTheme.of(context).primaryColor,
-                )
+                          color: MxcScopedTheme.of(context).primaryColor,
+                        )
                     : FontTheme.of(context).middle(),
                 child: Text(
                   widget.label!,
@@ -154,11 +154,13 @@ class _MxcTextFieldState extends State<MxcTextField> {
                         textInputAction: widget.action,
                         validator: widget.validator,
                         controller: widget._controller,
-                        cursorColor: ColorsTheme.of(context).textPrimaryAndIcons,
+                        cursorColor:
+                            ColorsTheme.of(context).textPrimaryAndIcons,
                         style: FontTheme.of(context).big(),
                         obscureText: widget.obscure,
                         decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                          contentPadding:
+                              const EdgeInsets.fromLTRB(0, 0, 0, 10),
                           isDense: true,
                           floatingLabelBehavior: FloatingLabelBehavior.always,
                           helperText: ' ',
