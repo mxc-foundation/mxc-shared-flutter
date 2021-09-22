@@ -3,10 +3,10 @@ class Device {
 
   /// Name of the device.
   final String name;
+  final String deviceProfileID;
+  final String deviceProfileName;
   final String? description;
   final String? devEUI;
-  final String? deviceProfileID;
-  final String? deviceProfileName;
   final int? deviceStatusBattery;
   final double? deviceStatusBatteryLevel;
   final bool? deviceStatusBatteryLevelUnavailable;
@@ -17,10 +17,10 @@ class Device {
   Device(
       {required this.applicationID,
       required this.name,
+      required this.deviceProfileID,
+      required this.deviceProfileName,
       this.description,
       this.devEUI,
-      this.deviceProfileID,
-      this.deviceProfileName,
       this.deviceStatusBattery,
       this.deviceStatusBatteryLevel,
       this.deviceStatusBatteryLevelUnavailable,
