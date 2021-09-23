@@ -1,6 +1,6 @@
 import 'package:mxc_logic/mxc_logic.dart';
 
-class DeviceDemoRepository implements DeviceRepository{
+class DeviceDemoRepository implements DeviceRepository {
   DeviceDemoRepository();
 
   @override
@@ -41,4 +41,10 @@ class DeviceDemoRepository implements DeviceRepository{
           lastSeen: DateTime.now()),
     ].withTotal(2);
   }
+
+  @override
+  Future<void> delete(String id) async {}
+
+  @override
+  Future<void> deleteDevices(List<String> ids) async {}
 }
