@@ -46,5 +46,5 @@ class DeviceDemoRepository implements DeviceRepository {
   Future<void> delete(String id) async {}
 
   @override
-  Future<void> deleteDevices(List<String> ids) async {}
+  Future<void> batchToDelete(List<String> ids) async {}
 }

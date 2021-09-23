@@ -48,7 +48,7 @@ class DeviceRepository {
     await _client.deviceService.delete(devEUI: id);
   }
 
-  Future<void> deleteDevices(List<String> ids) async {
+  Future<void> batchToDelete(List<String> ids) async {
     /// Now there only has the single deleting a device.
     for (String id in ids) {
       await _client.deviceService.delete(devEUI: id);
