@@ -9,9 +9,9 @@ class DeviceRepository {
   DeviceRepository(this._client);
 
   Future<ListWithTotal<Device>> list(
-      {int limit = 0,
-      int offset = 10,
-      String? organizationID,
+      {int offset = 0,
+      int limit = 10,
+      String? applicationID,
       String? search,
       String? multicastGroupID,
       String? serviceProfileID}) async {

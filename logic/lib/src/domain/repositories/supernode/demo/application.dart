@@ -1,12 +1,13 @@
 import 'package:mxc_logic/mxc_logic.dart';
 import 'package:mxc_logic/src/domain/entities/application.dart';
+import 'package:mxc_logic/src/domain/repositories/supernode/api/application.dart';
 
-class ApplicationDemoRepository {
+class ApplicationDemoRepository implements ApplicationRepository{
   ApplicationDemoRepository();
 
   Future<ListWithTotal<Application>> list({
-    required int offset,
-    required int limit,
+    int offset = 0,
+    int limit = 10,
     String? organizationID,
     String? search,
   }) async {

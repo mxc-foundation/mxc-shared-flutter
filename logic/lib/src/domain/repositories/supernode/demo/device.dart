@@ -1,12 +1,12 @@
 import 'package:mxc_logic/mxc_logic.dart';
 
-class DeviceDemoRepository {
+class DeviceDemoRepository implements DeviceRepository{
   DeviceDemoRepository();
 
   @override
   Future<ListWithTotal<Device>> list(
       {int offset = 0,
-      required int limit,
+      int limit = 10,
       String? applicationID,
       String? search,
       String? multicastGroupID,

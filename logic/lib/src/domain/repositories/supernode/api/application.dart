@@ -11,7 +11,7 @@ class ApplicationRepository {
 
   Future<ListWithTotal<Application>> list({
     int offset = 0,
-    required int limit,
+    int limit = 10,
     String? organizationID,
     String? search,
   }) async {
