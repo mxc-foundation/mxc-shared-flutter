@@ -24,7 +24,7 @@ class DeviceDemoRepository {
         deviceStatusBatteryLevelUnavailable: true,
         deviceStatusExternalPowerSource: false,
         deviceStatusMargin: 1,
-        lastSeen: DateTime.now(),
+        lastSeen: DateTime.now().subtract(const Duration(days: 1)),
       ),
       Device(
           applicationID: "applicationID2",
