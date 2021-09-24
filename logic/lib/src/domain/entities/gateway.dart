@@ -106,10 +106,12 @@ class GatewayAverageHealth {
 class GatewayHealthSummary {
   final List<GatewayHealth> gatewayHealths;
   final GatewayAverageHealth average;
+  final Decimal totalFueled;
 
   GatewayHealthSummary({
     required this.gatewayHealths,
     required this.average,
+    required this.totalFueled,
   });
 }
 

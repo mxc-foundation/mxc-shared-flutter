@@ -29,3 +29,8 @@ class Location {
 
   Location(this.latitude, this.longitude);
 }
+
+abstract class Field<T> {
+  T get value;
+  set value(T value);
+}

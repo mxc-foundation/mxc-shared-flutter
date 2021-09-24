@@ -1,4 +1,5 @@
 import 'package:chopper/chopper.dart';
+import 'package:decimal/decimal.dart';
 import 'package:mxc_logic/mxc_logic.dart';
 import 'package:mxc_logic/src/data/data.dart';
 import 'package:mxc_logic/src/domain/repositories/internal/shared_mappers.dart';
@@ -182,9 +183,14 @@ class GatewayRepository {
       uptimeHealth: res.body!.miningHealthAverage!.uptimeHealth.orDefault(),
       health: res.body!.miningHealthAverage!.overall.orDefault(),
     );
+    var totalFuel = Decimal.zero;
+    for (final health in gatewayHealths) {
+      totalFuel += health.miningFuel;
+    }
     return GatewayHealthSummary(
       gatewayHealths: gatewayHealths,
       average: gatewayAvgHealth,
+      totalFueled: totalFuel,
     );
   }
 

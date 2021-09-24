@@ -13,7 +13,7 @@ class MxcAppBar extends StatelessWidget {
     required String text,
     this.padding = const EdgeInsets.only(
       top: 22,
-      bottom: 33,
+      bottom: 14,
       left: 20,
       right: 20,
     ),
@@ -28,7 +28,7 @@ class MxcAppBar extends StatelessWidget {
     required this.title,
     this.padding = const EdgeInsets.only(
       top: 22,
-      bottom: 33,
+      bottom: 14,
       left: 20,
       right: 20,
     ),
@@ -42,7 +42,7 @@ class MxcAppBar extends StatelessWidget {
     required String text,
     this.padding = const EdgeInsets.only(
       top: 22,
-      bottom: 33,
+      bottom: 14,
       left: 20,
       right: 20,
     ),
@@ -62,7 +62,7 @@ class MxcAppBar extends StatelessWidget {
     required String text,
     this.padding = const EdgeInsets.only(
       top: 22,
-      bottom: 33,
+      bottom: 14,
       left: 20,
       right: 20,
     ),

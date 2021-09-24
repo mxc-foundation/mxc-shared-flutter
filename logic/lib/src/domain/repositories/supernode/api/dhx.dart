@@ -1,4 +1,5 @@
 import 'package:chopper/chopper.dart';
+import 'package:decimal/decimal.dart';
 import 'package:mxc_logic/mxc_logic.dart';
 import 'package:mxc_logic/src/data/data.dart';
 import 'package:mxc_logic/src/domain/repositories/internal/shared_mappers.dart';
@@ -57,7 +58,7 @@ class DhxRepository {
       body: ExtapiDHXBondInfoRequest(orgId: organizationId),
     );
     return DhxBondInfo(
-      bonded: res.body!.dhxBonded.toDouble(),
+      bonded: Decimal.parse(res.body!.dhxBonded!),
       unbonding: res.body!.dhxUnbonding!
           .map(
             (e) => DhxUnbonding(

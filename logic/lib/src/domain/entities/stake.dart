@@ -1,9 +1,11 @@
 import 'package:decimal/decimal.dart';
 
+enum StakeHistoryType { staking, unstaking, unknown }
+
 class StakeHistoryFrame {
   final DateTime timestamp;
   final Decimal amount;
-  final String type;
+  final StakeHistoryType type;
   final Stake stake;
   StakeHistoryFrame({
     required this.timestamp,
@@ -23,6 +25,13 @@ class Stake {
   final double boost;
   final double revenue;
   final int? months;
+
+  bool get locked =>
+      endTime == null &&
+      (lockTill == null || lockTill!.isAfter(DateTime.now()));
+
+  int get durationInDays =>
+      (endTime ?? DateTime.now()).difference(startTime).inDays.abs();
 
   Stake({
     required this.id,

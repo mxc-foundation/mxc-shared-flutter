@@ -6,21 +6,29 @@ import 'package:mxc_logic/src/domain/repositories/internal/jwt_parser.dart';
 void utils;
 
 extension StringMapper on String? {
-  double toDouble([String defaultValue = '0']) =>
-      double.parse(this ?? defaultValue);
+  String? get _emptyToNull => (this?.isEmpty ?? false) ? null : this;
 
-  int toInt([String defaultValue = '0']) => int.parse(this ?? defaultValue);
+  double toDouble([String defaultValue = '0']) =>
+      double.parse(_emptyToNull ?? defaultValue);
+
+  int toInt([String defaultValue = '0']) =>
+      int.parse(_emptyToNull ?? defaultValue);
 
   Decimal toDecimal([String defaultValue = '0']) =>
-      Decimal.parse(this ?? defaultValue);
+      Decimal.parse(_emptyToNull ?? defaultValue);
 
-  DateTime? toDateTime() => this == null ? null : DateTime.parse(this!);
+  DateTime? toDateTime() => _emptyToNull == null ? null : DateTime.parse(this!);
 
   String orDefault() => this ?? '';
 }
 
 extension NumMapper on num? {
-  T orDefault<T extends num>() => 0 as T;
+  T orDefault<T extends num>() {
+    if (T == double) {
+      return 0.0 as T;
+    }
+    return 0 as T;
+  }
 }
 
 extension BooleanMapper on bool? {
@@ -94,4 +102,20 @@ abstract class Mappers {
         return ExternalAccountType.unknown;
     }
   }
+
+  static StakeHistoryType stringToStakeHistoryType(String? type) {
+    switch (type) {
+      case "STAKING":
+        return StakeHistoryType.staking;
+      case "UNSTAKING":
+        return StakeHistoryType.unstaking;
+      default:
+        return StakeHistoryType.unknown;
+    }
+  }
+}
+
+abstract class Values {
+  static final DateTime dateMin = DateTime(1);
+  static final DateTime dateMax = DateTime(3000);
 }

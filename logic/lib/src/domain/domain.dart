@@ -16,3 +16,4 @@ export 'entities/withdraw.dart';
 export 'features/auth/auth_use_case.dart';
 
 export 'repositories/supernode/supernode.dart';
+export 'repositories/cache_repository.dart';

@@ -67,7 +67,7 @@ class ColorsTheme {
   final transparent = Colors.transparent;
 
   Color get shadow => mxcBlue20;
-  Color get shadow2 => Colors.black.withOpacity(10.7);
+  Color get shadow2 => Colors.black.withOpacity(0.107);
 }
 
 class ColorsThemeDark implements ColorsTheme {
@@ -184,5 +184,5 @@ class ColorsThemeDark implements ColorsTheme {
   Color get shadow => mxcBlue20;
 
   @override
-  Color get shadow2 => Colors.black.withOpacity(10.7);
+  Color get shadow2 => Colors.black.withOpacity(0.107);
 }

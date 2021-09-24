@@ -44,7 +44,7 @@ class DhxStake {
 }
 
 class DhxBondInfo {
-  final double bonded;
+  final Decimal bonded;
   final List<DhxUnbonding> unbonding;
   final Decimal totalUnbonded;
   final List<DhxCoolingOff> coolingOff;

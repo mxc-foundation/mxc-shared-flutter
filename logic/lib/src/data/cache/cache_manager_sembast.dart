@@ -8,14 +8,37 @@ import 'sembast_factory.dart'
 
 const String _defaultCacheStore = 'cache';
 
+class _CacheManagerSerializersBucket {
+  Map<Type, Serializer> _serializers = {};
+  Map<Type, Deserializer> _deserializers = {};
+
+  void registerType<T>({
+    required Serializer<T> serializer,
+    required Deserializer<T> deserializer,
+  }) {
+    final castedSerializer = (dynamic t) => serializer(t as T);
+    _registerType<T>(serializer: castedSerializer, deserializer: deserializer);
+    _registerType<T?>(serializer: castedSerializer, deserializer: deserializer);
+  }
+
+  void _registerType<T>({
+    required Serializer serializer,
+    required Deserializer deserializer,
+  }) {
+    _serializers[T] = (dynamic t) => serializer(t as T);
+    _deserializers[T] = deserializer;
+  }
+}
+
 class CacheManagerSembast implements CacheManager {
-  final String storeName;
-
-  final StoreRef<String, dynamic> store;
   final Database db;
+  final _CacheManagerSerializersBucket _serializersBucket;
 
-  CacheManagerSembast(this.db, [this.storeName = _defaultCacheStore])
-      : store = StoreRef<String, dynamic>(storeName);
+  CacheManagerSembast(
+    this.db, [
+    _CacheManagerSerializersBucket? serializersBucket,
+  ]) : _serializersBucket =
+            serializersBucket ?? _CacheManagerSerializersBucket();
 
   static Future<CacheManagerSembast> load(String dbDirectory) async {
     final path = join(dbDirectory, sembastDbName);
@@ -24,24 +47,83 @@ class CacheManagerSembast implements CacheManager {
   }
 
   @override
-  Future<dynamic> read(String key) {
-    return store.record(key).get(db);
+  void registerType<T extends Object>({
+    required Serializer<T> serializer,
+    required Deserializer<T> deserializer,
+  }) {
+    _serializersBucket.registerType(
+        serializer: serializer, deserializer: deserializer);
   }
 
   @override
-  Future<void> write(String key, dynamic value) async {
-    if (value == null) {
-      await store.record(key).delete(db);
-    } else {
-      await store.record(key).put(db, value);
-    }
-  }
-
-  @override
-  CacheManager withZone(String name) {
-    return CacheManagerSembast(
+  Future<CacheZoneSembast> loadZone(String name) async {
+    return CacheZoneSembast.load(
       db,
       '$_defaultCacheStore-$name-${name.hashCode}',
+      _serializersBucket,
     );
+  }
+}
+
+class CacheZoneSembast implements CacheZone {
+  final StoreRef<String, dynamic> _store;
+  final Database _db;
+  final _CacheManagerSerializersBucket _serializersBucket;
+
+  final Map<String, dynamic> _inMemory;
+
+  CacheZoneSembast(
+    this._db,
+    this._store,
+    this._inMemory,
+    this._serializersBucket,
+  );
+
+  static Future<CacheZoneSembast> load(
+    Database db,
+    String storeName,
+    _CacheManagerSerializersBucket _cacheManagerSerializersBucket,
+  ) async {
+    final store = StoreRef<String, dynamic>(storeName);
+    final snapshots = await store.query().getSnapshots(db);
+    return CacheZoneSembast(
+      db,
+      store,
+      snapshots.asMap().map<String, dynamic>(
+            (key, ref) => MapEntry<String, dynamic>(ref.key, ref.value),
+          ),
+      _cacheManagerSerializersBucket,
+    );
+  }
+
+  @override
+  T? read<T>(
+    String key, [
+    Deserializer<T>? deserializer,
+  ]) {
+    deserializer ??= _serializersBucket._deserializers[T] as Deserializer<T>?;
+    dynamic raw = _inMemory[key];
+    if (raw == null) return null;
+    if (deserializer != null) {
+      raw = deserializer(raw);
+    }
+    return raw as T;
+  }
+
+  @override
+  Future<void> write<T>(
+    String key,
+    T value, [
+    Serializer<T>? serializer,
+  ]) async {
+    serializer ??= _serializersBucket._serializers[T];
+    if (value == null) {
+      _inMemory.remove(key);
+      await _store.record(key).delete(_db);
+    } else {
+      final dynamic raw = serializer != null ? serializer(value) : value;
+      _inMemory[key] = raw;
+      await _store.record(key).put(_db, raw);
+    }
   }
 }

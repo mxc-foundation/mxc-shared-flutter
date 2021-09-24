@@ -11,11 +11,9 @@ class WalletRepository {
 
   Future<Decimal> balance({
     required String orgId,
-    required String userId,
     Token? currency,
   }) async {
     final res = await _client.walletService.getWalletBalance(
-      userId: userId,
       orgId: orgId,
       currency: currency?.toData() ?? '',
     );

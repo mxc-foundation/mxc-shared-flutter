@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:mxc_logic/src/data/data.dart';
+import 'package:mxc_logic/internal.dart';
 
 abstract class SupernodeSetupRepository {
   static Future<SupernodeSetupRepository> load(CacheManager cacheManager) =>
@@ -20,10 +20,27 @@ abstract class SupernodeSetupRepository {
 }
 
 class SupernodeSetupRepositoryImpl implements SupernodeSetupRepository {
-  final CacheField<String?> _username;
-  final CacheField<String?> _password;
-  final CacheField<String?> _supernodeAddress;
-  final CacheField<String?> _token;
+  final CacheZone _zone;
+
+  SupernodeSetupRepositoryImpl(this._zone);
+
+  static Future<SupernodeSetupRepository> load(
+    CacheManager cacheManager,
+  ) async =>
+      SupernodeSetupRepositoryImpl(
+        await cacheManager.loadZone('supernode-setup'),
+      );
+
+  late final CacheField<String?> _username =
+      CacheField.nullable(_zone, 'username');
+
+  late final CacheField<String?> _password =
+      CacheField.nullable(_zone, 'password');
+
+  late final CacheField<String?> _supernodeAddress =
+      CacheField.nullable(_zone, 'supernode-address');
+
+  late final CacheField<String?> _token = CacheField.nullable(_zone, 'token');
 
   @override
   String? get username => _username.value;
@@ -36,30 +53,6 @@ class SupernodeSetupRepositoryImpl implements SupernodeSetupRepository {
 
   @override
   String? get token => _token.value;
-
-  SupernodeSetupRepositoryImpl({
-    required CacheField<String?> username,
-    required CacheField<String?> password,
-    required CacheField<String?> token,
-    required CacheField<String?> supernodeAddress,
-  })  : _username = username,
-        _password = password,
-        _token = token,
-        _supernodeAddress = supernodeAddress;
-
-  static Future<SupernodeSetupRepository> load(
-    CacheManager cacheManager,
-  ) async {
-    final fieldManager = CacheFieldManager('supernode-setup', cacheManager);
-    final repository = SupernodeSetupRepositoryImpl(
-      username: fieldManager.field('username'),
-      password: fieldManager.field('password'),
-      token: fieldManager.field('token'),
-      supernodeAddress: fieldManager.field('supernode-address'),
-    );
-    await fieldManager.loadFields();
-    return repository;
-  }
 
   @override
   Future<void> saveCredentials(String username, String password) =>

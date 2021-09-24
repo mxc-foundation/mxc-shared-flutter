@@ -114,6 +114,9 @@ class DecoratableTextStyle {
         ),
       );
 
+  DecoratableTextStyle get semibold =>
+      DecoratableTextStyle(_inner.copyWith(fontWeight: FontWeight.w500));
+
   DecoratableTextStyle get bold =>
       DecoratableTextStyle(_inner.copyWith(fontWeight: FontWeight.w600));
 }

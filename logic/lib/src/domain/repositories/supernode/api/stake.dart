@@ -51,15 +51,15 @@ class StakeRepository {
     final res = await _client.stakingService.getStakingHistory(
       orgId: orgId,
       currency: currency?.toData(),
-      from: from?.toData(),
-      till: till?.toData(),
+      from: (from ?? Values.dateMin).toData(),
+      till: (till ?? Values.dateMax).toData(),
     );
     return res.body!.stakingHist!
         .map(
           (e) => StakeHistoryFrame(
             timestamp: e.timestamp!,
             amount: e.amount.toDecimal(),
-            type: e.type!,
+            type: Mappers.stringToStakeHistoryType(e.type),
             stake: Stake(
               id: e.stake!.id!,
               startTime: e.stake!.startTime!,
