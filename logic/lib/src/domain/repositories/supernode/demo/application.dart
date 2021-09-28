@@ -5,6 +5,7 @@ import 'package:mxc_logic/src/domain/repositories/supernode/api/application.dart
 class ApplicationDemoRepository implements ApplicationRepository {
   ApplicationDemoRepository();
 
+  @override
   Future<ListWithTotal<Application>> list({
     int offset = 0,
     int limit = 10,

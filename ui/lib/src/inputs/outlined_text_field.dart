@@ -190,8 +190,8 @@ class MxcOutlinedTextFieldButton extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 3),
         child: Icon(
           icon,
-          size: 16,
-          color: MxcScopedTheme.of(context).primaryColor,
+          size: 32,
+          color: ColorsTheme.of(context).mxcBlue,
         ),
       ),
       onTap: () {},

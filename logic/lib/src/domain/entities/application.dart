@@ -9,11 +9,12 @@ class Application {
   final String? serviceProfileID;
   final String? serviceProfileName;
 
-  Application(
-      {required this.id,
-      required this.name,
-      this.description,
-      this.organizationID,
-      this.serviceProfileID,
-      this.serviceProfileName});
+  Application({
+    required this.id,
+    required this.name,
+    this.description,
+    this.organizationID,
+    this.serviceProfileID,
+    this.serviceProfileName,
+  });
 }

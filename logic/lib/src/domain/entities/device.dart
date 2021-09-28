@@ -14,17 +14,18 @@ class Device {
   final int? deviceStatusMargin;
   final DateTime? lastSeen;
 
-  Device(
-      {required this.applicationID,
-      required this.name,
-      required this.deviceProfileID,
-      required this.deviceProfileName,
-      this.description,
-      this.devEUI,
-      this.deviceStatusBattery,
-      this.deviceStatusBatteryLevel,
-      this.deviceStatusBatteryLevelUnavailable,
-      this.deviceStatusExternalPowerSource,
-      this.deviceStatusMargin,
-      this.lastSeen});
+  Device({
+    required this.applicationID,
+    required this.name,
+    required this.deviceProfileID,
+    required this.deviceProfileName,
+    this.description,
+    this.devEUI,
+    this.deviceStatusBattery,
+    this.deviceStatusBatteryLevel,
+    this.deviceStatusBatteryLevelUnavailable,
+    this.deviceStatusExternalPowerSource,
+    this.deviceStatusMargin,
+    this.lastSeen,
+  });
 }
