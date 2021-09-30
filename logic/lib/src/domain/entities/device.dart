@@ -1,12 +1,10 @@
 class Device {
-  final String applicationID;
-
-  /// Name of the device.
-  final String name;
-  final String deviceProfileID;
-  final String deviceProfileName;
+  late final String applicationID;
+  late final String name; // Name of the device.
+  late final String deviceProfileID;
+  late final String deviceProfileName;
   final String? description;
-  final String? devEUI;
+  late final String? devEUI;
   final int? deviceStatusBattery;
   final double? deviceStatusBatteryLevel;
   final bool? deviceStatusBatteryLevelUnavailable;
@@ -28,4 +26,8 @@ class Device {
     this.deviceStatusMargin,
     this.lastSeen,
   });
+
+  // set deviceProfileID(String id){
+  //   deviceProfileID = id;
+  // }
 }

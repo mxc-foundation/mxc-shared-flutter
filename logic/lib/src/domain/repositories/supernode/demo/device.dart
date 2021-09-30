@@ -1,7 +1,7 @@
 import 'package:mxc_logic/mxc_logic.dart';
 
-class DeviceDemoRepository implements DeviceRepository {
-  DeviceDemoRepository();
+class DemoDeviceRepository implements DeviceRepository {
+  DemoDeviceRepository();
 
   @override
   Future<ListWithTotal<Device>> list({
@@ -15,7 +15,7 @@ class DeviceDemoRepository implements DeviceRepository {
     return [
       Device(
         applicationID: "applicationID1",
-        name: "device_name1",
+        name: "deviceName1",
         description: "description1",
         devEUI: "devEUI1",
         deviceProfileID: "deviceProfileID1",
@@ -29,7 +29,7 @@ class DeviceDemoRepository implements DeviceRepository {
       ),
       Device(
         applicationID: "applicationID2",
-        name: "name2",
+        name: "deviceName2",
         description: "description2",
         devEUI: "devEUI2",
         deviceProfileID: "deviceProfileID2",

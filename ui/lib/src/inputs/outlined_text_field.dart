@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:mxc_ui/mxc_ui.dart';
 
 class MxcOutlinedTextField extends StatefulWidget {
   final String? label;
   final bool readOnly;
   final String? hint;
+  final String? initialValue;
   final FormFieldValidator<String>? validator;
   final TextInputAction? action;
   final double width;
   final FocusNode? focusNode;
   final MxcOutlinedTextFieldButton? button;
   final IconData? prefixIcon;
+  final void Function(FocusNode)? onFocusCreated;
+  final void Function(bool)? onFocusChanged;
+  final void Function(String)? onChanged;
 
   final TextEditingController? _controller;
   final String? _initialText;
@@ -20,12 +25,16 @@ class MxcOutlinedTextField extends StatefulWidget {
     required TextEditingController controller,
     this.label,
     this.hint,
+    this.initialValue,
     this.validator,
     this.action,
     this.readOnly = false,
     this.button,
     this.width = 340,
     this.focusNode,
+    this.onFocusCreated,
+    this.onFocusChanged,
+    this.onChanged,
     this.prefixIcon,
   })  : _controller = controller,
         _initialText = null,
@@ -36,11 +45,15 @@ class MxcOutlinedTextField extends StatefulWidget {
     required String text,
     this.label,
     this.hint,
+    this.initialValue,
     this.validator,
     this.action,
     this.button,
     this.width = 340,
     this.focusNode,
+    this.onFocusCreated,
+    this.onFocusChanged,
+    this.onChanged,
     this.prefixIcon,
   })  : _initialText = text,
         readOnly = true,
@@ -58,15 +71,30 @@ class _MxcOutlinedTextFieldState extends State<MxcOutlinedTextField> {
   @override
   void initState() {
     super.initState();
-    focusNode = widget.focusNode ?? FocusNode();
+    focusNode = widget.focusNode ??
+        FocusNode(
+          debugLabel: widget.label,
+          onKey: (FocusNode node, RawKeyEvent evt) {
+            if (evt is RawKeyDownEvent) {
+              if (evt.logicalKey == LogicalKeyboardKey.escape) {
+                return KeyEventResult.handled;
+              }
+            }
+            return KeyEventResult.ignored;
+          },
+        );
     focused = focusNode.hasFocus;
     focusNode.addListener(_focusNodeListener);
+
+    widget.onFocusCreated?.call(focusNode);
   }
 
   void _focusNodeListener() {
     if (focusNode.hasFocus != focused) {
       setState(() => focused = focusNode.hasFocus);
     }
+
+    widget.onFocusChanged?.call(focused);
   }
 
   @override
@@ -141,6 +169,7 @@ class _MxcOutlinedTextFieldState extends State<MxcOutlinedTextField> {
                     controller: widget._controller,
                     cursorColor: ColorsTheme.of(context).textPrimaryAndIcons,
                     style: FontTheme.of(context).big(),
+                    onChanged: widget.onChanged,
                     decoration: InputDecoration(
                       isDense: true,
                       floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -186,6 +215,7 @@ class MxcOutlinedTextFieldButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      onTap: onTap,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 3),
         child: Icon(
@@ -194,7 +224,6 @@ class MxcOutlinedTextFieldButton extends StatelessWidget {
           color: ColorsTheme.of(context).mxcBlue,
         ),
       ),
-      onTap: () {},
     );
   }
 }

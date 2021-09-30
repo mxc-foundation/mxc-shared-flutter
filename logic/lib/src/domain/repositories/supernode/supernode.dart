@@ -4,6 +4,7 @@ import 'package:mxc_logic/src/data/data.dart';
 import 'package:mxc_logic/src/domain/repositories/supernode/api/application.dart';
 import 'package:mxc_logic/src/domain/repositories/supernode/demo/application.dart';
 import 'package:mxc_logic/src/domain/repositories/supernode/demo/device.dart';
+import 'package:mxc_logic/src/domain/repositories/supernode/demo/gateway.dart';
 
 import 'api/auth.dart';
 import 'api/device.dart';
@@ -135,15 +136,18 @@ class ApiSupernodeRepository implements SupernodeRepository {
   }
 }
 
-class SupernodeDemoRepository {
+class DemoSupernodeRepository {
   //implements SupernodeRepository {
-  SupernodeDemoRepository();
+  DemoSupernodeRepository();
 
   // @override
-  DeviceDemoRepository get device => DeviceDemoRepository();
+  DemoDeviceRepository get device => DemoDeviceRepository();
 
   // @override
-  ApplicationDemoRepository get application => ApplicationDemoRepository();
+  DemoApplicationRepository get application => DemoApplicationRepository();
+
+  // @override
+  DemoGatewaysRepository get gateways => DemoGatewaysRepository();
 
   // @override
   // DemoDhxDao get dhx => DemoDhxDao();

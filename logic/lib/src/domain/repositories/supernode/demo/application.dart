@@ -2,8 +2,8 @@ import 'package:mxc_logic/mxc_logic.dart';
 import 'package:mxc_logic/src/domain/entities/application.dart';
 import 'package:mxc_logic/src/domain/repositories/supernode/api/application.dart';
 
-class ApplicationDemoRepository implements ApplicationRepository {
-  ApplicationDemoRepository();
+class DemoApplicationRepository implements ApplicationRepository {
+  DemoApplicationRepository();
 
   @override
   Future<ListWithTotal<Application>> list({
@@ -16,7 +16,7 @@ class ApplicationDemoRepository implements ApplicationRepository {
       Application(
         description: "description1",
         id: "applicationID1",
-        name: "category_name1",
+        name: "catagory_name1",
         organizationID: "organizationID1",
         serviceProfileID: "serviceProfileID1",
         serviceProfileName: "serviceProfileName1",
