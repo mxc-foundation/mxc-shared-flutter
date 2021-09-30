@@ -36,8 +36,8 @@ class WithdrawRepository {
   }) async {
     final res = await _client.withdrawService.getWithdrawHistory(
       currency: currency?.toData(),
-      from: from?.toData(),
-      till: till?.toData(),
+      from: (from ?? Values.dateMin).toData(),
+      till: (till ?? Values.dateMax).toData(),
       orgId: orgId,
     );
     return res.body!.withdrawHistory!

@@ -12,6 +12,7 @@ class MxcTextField extends StatefulWidget {
   final FocusNode? focusNode;
   final MxcTextFieldButton? button;
   final String? suffixText;
+  final AutovalidateMode? autovalidateMode;
 
   final TextEditingController? _controller;
   final String? _initialText;
@@ -31,6 +32,7 @@ class MxcTextField extends StatefulWidget {
     this.keyboardType,
     this.suffixText,
     this.obscure = false,
+    this.autovalidateMode,
   })  : _controller = controller,
         _initialText = null,
         super(key: key);
@@ -51,6 +53,7 @@ class MxcTextField extends StatefulWidget {
   })  : _initialText = text,
         readOnly = true,
         _controller = null,
+        autovalidateMode = null,
         super(key: key);
 
   @override
@@ -136,6 +139,7 @@ class _MxcTextFieldState extends State<MxcTextField> {
                     cursorColor: ColorsTheme.of(context).textPrimaryAndIcons,
                     style: FontTheme.of(context).big(),
                     obscureText: widget.obscure,
+                    autovalidateMode: widget.autovalidateMode,
                     decoration: InputDecoration(
                       contentPadding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
                       isDense: true,

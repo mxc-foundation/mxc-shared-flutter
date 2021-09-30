@@ -80,6 +80,17 @@ class StakeRepository {
         .toList();
   }
 
+  Future<List<Stake>> list({required String orgId}) async {
+    final history = await this.history(orgId: orgId);
+    return history
+        .map((e) => e.stake)
+        .toList()
+        .asMap()
+        .map((key, value) => MapEntry(value.id, value))
+        .values
+        .toList();
+  }
+
   Future<List<Stake>> listActive({
     required String orgId,
     Token? currency,
@@ -118,15 +129,37 @@ class StakeRepository {
     return res.body!.amount.toDecimal();
   }
 
-  Future<StakingPercentage> stakingPercentage({Token? currency}) async {
+  Future<StakeBoostBundle> stakingPercentage({Token? currency}) async {
     final res = await _client.stakingService.getStakingPercentage(
       currency: currency?.toData(),
     );
-    return StakingPercentage(
-      interest: res.body!.stakingInterest!,
-      periodToBoost: res.body!.lockBoosts!
-          .asMap()
-          .map((_, e) => MapEntry(e.lockPeriods!, e.boost.toDouble())),
+    final monthToOption = StakeOption.values.asMap().map(
+          (_, e) => MapEntry(e.months?.toString(), e),
+        );
+    final realRates = res.body!.lockBoosts!.asMap().map(
+          (_, e) => MapEntry(
+            monthToOption[e.lockPeriods!]!,
+            e.boost.toDouble(),
+          ),
+        );
+    realRates[StakeOption.flex] = res.body!.stakingInterest!;
+
+    final flexPercent = res.body!.stakingInterest! * 100;
+
+    final rates = realRates.map(
+      (key, value) => MapEntry(
+        key,
+        StakeBoostRate(
+          realRate: value,
+          marketingRate:
+              (((value + 1) / (realRates[StakeOption.m12]! + 1)) * 100 - 100)
+                  .round(),
+          estimatedRate:
+              (flexPercent + (flexPercent * value) * 1000).floorToDouble() /
+                  1000,
+        ),
+      ),
     );
+    return rates;
   }
 }

@@ -17,8 +17,8 @@ class TopupRepository {
     final history = await _client.topUpService.getTopUpHistory(
       body: ExtapiGetTopUpHistoryRequest(
         currency: currency?.toData(),
-        from: from,
-        till: till,
+        from: (from ?? Values.dateMin).toUtc(),
+        till: (till ?? Values.dateMax).toUtc(),
         orgId: orgId,
       ),
     );

@@ -5,7 +5,6 @@ class MxcBoxShadow extends BoxShadow {
       : super(
           blurRadius: 7,
           color: color,
-          offset: const Offset(0, 1),
         );
   @override
   Paint toPaint() {

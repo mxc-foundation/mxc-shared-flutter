@@ -33,6 +33,8 @@ class Stake {
   int get durationInDays =>
       (endTime ?? DateTime.now()).difference(startTime).inDays.abs();
 
+  bool get unstaked => endTime != null;
+
   Stake({
     required this.id,
     required this.startTime,
@@ -46,12 +48,35 @@ class Stake {
   });
 }
 
-class StakingPercentage {
-  final Map<String, double> periodToBoost;
-  final double interest;
+enum StakeOption { flex, m6, m9, m12, m24 }
 
-  StakingPercentage({
-    required this.periodToBoost,
-    required this.interest,
+extension StakeExt on StakeOption {
+  int? get months {
+    switch (this) {
+      case StakeOption.flex:
+        return null;
+      case StakeOption.m6:
+        return 6;
+      case StakeOption.m9:
+        return 9;
+      case StakeOption.m12:
+        return 12;
+      case StakeOption.m24:
+        return 24;
+    }
+  }
+}
+
+typedef StakeBoostBundle = Map<StakeOption, StakeBoostRate>;
+
+class StakeBoostRate {
+  final double realRate;
+  final int marketingRate;
+  final double estimatedRate;
+
+  StakeBoostRate({
+    required this.realRate,
+    required this.marketingRate,
+    required this.estimatedRate,
   });
 }

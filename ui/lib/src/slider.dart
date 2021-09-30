@@ -3,6 +3,7 @@ import 'package:mxc_ui/mxc_ui.dart';
 
 class MxcSlider extends StatelessWidget {
   final double? value;
+  final double? max;
   final void Function(double)? onChanged;
   final List<String>? labels;
   final int? divisions;
@@ -13,6 +14,7 @@ class MxcSlider extends StatelessWidget {
     required void Function(double) this.onChanged,
     this.labels,
     this.divisions,
+    this.max,
   })  : assert(labels == null || labels.length >= 3),
         super(key: key);
 
@@ -22,6 +24,7 @@ class MxcSlider extends StatelessWidget {
         onChanged = null,
         labels = null,
         divisions = null,
+        max = null,
         super(key: key);
 
   @override
@@ -50,6 +53,7 @@ class MxcSlider extends StatelessWidget {
                 : Slider(
                     value: value!,
                     onChanged: onChanged,
+                    max: max ?? 1,
                     activeColor: MxcScopedTheme.of(context).primaryColor,
                     divisions: divisions,
                     inactiveColor: MxcScopedTheme.of(context)
