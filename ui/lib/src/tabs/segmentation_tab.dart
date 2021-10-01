@@ -7,17 +7,19 @@ class MxcSegmentationTab extends StatefulWidget {
     required Key? key,
     required this.labels,
     required this.onChanged,
+    this.initialPage = 0,
   }) : super(key: key);
 
   final List<String> labels;
   final void Function(int) onChanged;
+  final int initialPage;
 
   @override
   State<MxcSegmentationTab> createState() => _MxcSegmentationTabState();
 }
 
 class _MxcSegmentationTabState extends State<MxcSegmentationTab> {
-  int selectedTab = 0;
+  late int selectedTab = widget.initialPage;
 
   @override
   Widget build(BuildContext context) {

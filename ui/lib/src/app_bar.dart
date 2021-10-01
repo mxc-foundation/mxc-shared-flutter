@@ -77,6 +77,30 @@ class MxcAppBar extends StatelessWidget {
         ),
         super(key: key);
 
+  MxcAppBar.backAndClose({
+    Key? key,
+    required String text,
+    this.centerTitle = true,
+    required VoidCallback onClose,
+  })  : title = MxcAppBarTextTitle(text, centerTitle: centerTitle),
+        leading = Builder(
+          builder: (context) => MxcAppBarButton.icon(
+            Icons.arrow_back_ios,
+            onTap: () => Navigator.of(context).pop(),
+          ),
+        ),
+        action = MxcAppBarButton.icon(
+          Icons.close,
+          onTap: onClose,
+        ),
+        padding = const EdgeInsets.only(
+          top: 22,
+          bottom: 14,
+          left: 20,
+          right: 20,
+        ),
+        super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Padding(

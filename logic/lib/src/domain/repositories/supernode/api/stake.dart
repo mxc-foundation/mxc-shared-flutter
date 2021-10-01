@@ -9,6 +9,14 @@ class StakeRepository {
 
   StakeRepository(this._client);
 
+  static StakeOption _mapStakeOption(DateTime? startTime, DateTime? lockTill) {
+    return StakeOption(
+      lockTill == null
+          ? null
+          : (lockTill.difference(startTime!).inDays / 30).floor(),
+    );
+  }
+
   Future<String> stake({
     required String orgId,
     required Decimal amount,
@@ -69,11 +77,7 @@ class StakeRepository {
               lockTill: e.stake!.lockTill,
               boost: e.stake!.boost.toDouble(),
               revenue: e.stake!.revenue.toDouble(),
-              months: e.stake!.lockTill == null
-                  ? null
-                  : (e.stake!.lockTill!.difference(e.stake!.startTime!).inDays /
-                          30)
-                      .floor(),
+              option: _mapStakeOption(e.stake!.startTime, e.stake!.lockTill),
             ),
           ),
         )
@@ -110,9 +114,7 @@ class StakeRepository {
             lockTill: e.lockTill,
             revenue: e.revenue.toDouble(),
             startTime: e.startTime!,
-            months: e.lockTill == null
-                ? null
-                : (e.lockTill!.difference(e.startTime!).inDays / 30).floor(),
+            option: _mapStakeOption(e.startTime, e.lockTill),
           ),
         )
         .toList();

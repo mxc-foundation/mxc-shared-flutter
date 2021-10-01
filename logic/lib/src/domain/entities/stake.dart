@@ -24,7 +24,9 @@ class Stake {
   final DateTime? lockTill;
   final double boost;
   final double revenue;
-  final int? months;
+  final StakeOption option;
+
+  late final Decimal totalSum = amount + Decimal.parse(revenue.toString());
 
   bool get locked =>
       endTime == null &&
@@ -44,27 +46,21 @@ class Stake {
     required this.lockTill,
     required this.boost,
     required this.revenue,
-    required this.months,
+    required this.option,
   });
 }
 
-enum StakeOption { flex, m6, m9, m12, m24 }
+class StakeOption {
+  final int? months;
 
-extension StakeExt on StakeOption {
-  int? get months {
-    switch (this) {
-      case StakeOption.flex:
-        return null;
-      case StakeOption.m6:
-        return 6;
-      case StakeOption.m9:
-        return 9;
-      case StakeOption.m12:
-        return 12;
-      case StakeOption.m24:
-        return 24;
-    }
-  }
+  const StakeOption(this.months);
+
+  static const flex = StakeOption(null);
+  static const m6 = StakeOption(6);
+  static const m9 = StakeOption(9);
+  static const m12 = StakeOption(12);
+  static const m24 = StakeOption(24);
+  static const values = [flex, m6, m9, m12, m24];
 }
 
 typedef StakeBoostBundle = Map<StakeOption, StakeBoostRate>;
