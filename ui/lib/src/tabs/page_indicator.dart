@@ -7,6 +7,7 @@ class PageIndicator extends StatelessWidget {
   final int length;
   final int selectedPage;
   final void Function(int) onSelected;
+
   const PageIndicator({
     required Key? key,
     required this.length,

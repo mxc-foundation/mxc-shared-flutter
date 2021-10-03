@@ -23,9 +23,9 @@ class DhxRepository {
         .toList();
   }
 
-  Future<List<DhxStake>> listStakes({
-    required String chairOrgId,
+  Future<List<Lock>> listLocks({
     required String organizationId,
+    String? chairOrgId,
   }) async {
     final res = await _client.dHXServcie.dHXListStakes(
       chairOrgId: chairOrgId,
@@ -34,9 +34,9 @@ class DhxRepository {
     final list = res.body!.stake;
     return list!
         .map(
-          (e) => DhxStake(
+          (e) => Lock(
             id: e.id!,
-            created: e.created!,
+            startTime: e.created!,
             organizationId: e.organizationId.orDefault(),
             amount: e.amount.toDouble(),
             boost: e.boost.toDouble(),
@@ -45,7 +45,10 @@ class DhxRepository {
             councilName: e.councilName.orDefault(),
             currency: Token.mxc,
             dhxMined: e.dhxMined.toDouble(),
-            lockTill: e.lockTill,
+            lockTill: e.lockTill!,
+            option: LockOption(
+              (e.lockTill!.difference(e.created!).inDays / 30).floor(),
+            ),
           ),
         )
         .toList();

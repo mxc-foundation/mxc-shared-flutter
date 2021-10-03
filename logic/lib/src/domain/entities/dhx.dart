@@ -15,32 +15,50 @@ class Council {
   });
 }
 
-class DhxStake {
+class Lock {
   final String id;
   final double amount;
   final double boost;
   final bool closed;
   final String councilId;
   final String councilName;
-  final DateTime created;
+  final DateTime startTime;
   final Token currency;
   final double dhxMined;
-  final DateTime? lockTill;
+  final DateTime lockTill;
   final String organizationId;
+  final LockOption option;
 
-  DhxStake({
+  bool get unlockable => lockTill.isBefore(DateTime.now());
+
+  int get durationInDays => DateTime.now().difference(startTime).inDays.abs();
+
+  Lock({
     required this.id,
     required this.amount,
     required this.boost,
     required this.closed,
     required this.councilId,
     required this.councilName,
-    required this.created,
+    required this.startTime,
     required this.currency,
     required this.dhxMined,
     required this.lockTill,
     required this.organizationId,
+    required this.option,
   });
+}
+
+class LockOption {
+  final int months;
+
+  const LockOption(this.months);
+
+  static const m3 = LockOption(3);
+  static const m9 = LockOption(9);
+  static const m12 = LockOption(12);
+  static const m24 = LockOption(24);
+  static const values = [m3, m9, m12, m24];
 }
 
 class DhxBondInfo {
