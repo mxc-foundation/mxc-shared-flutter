@@ -9,6 +9,19 @@ class DhxRepository {
 
   DhxRepository(this._client);
 
+  static late final Map<int, LockOption> _monthsToOption = {
+    for (final o in LockOption.values) o.months: o,
+  };
+
+  static LockOption _mapLockOption(DateTime lockTill, DateTime created) {
+    final months = (lockTill.difference(created).inDays / 30).floor();
+    return _monthsToOption[months] ??
+        LockOption(
+          months,
+          const LockBoostRate(0),
+        );
+  }
+
   Future<List<Council>> listCouncils() async {
     final res = await _client.dHXServcie.dHXListCouncils();
     return res.body!.council!
@@ -46,9 +59,7 @@ class DhxRepository {
             currency: Token.mxc,
             dhxMined: e.dhxMined.toDouble(),
             lockTill: e.lockTill!,
-            option: LockOption(
-              (e.lockTill!.difference(e.created!).inDays / 30).floor(),
-            ),
+            option: _mapLockOption(e.lockTill!, e.created!),
           ),
         )
         .toList();
@@ -83,7 +94,10 @@ class DhxRepository {
     );
   }
 
-  Future<void> bondDhx(double amount, String organizationId) async {
+  Future<void> bondDhx({
+    required Decimal amount,
+    required String organizationId,
+  }) async {
     await _client.dHXServcie.dHXBond(
       body: ExtapiDHXBondRequest(
         amount: amount.toString(),
@@ -92,7 +106,10 @@ class DhxRepository {
     );
   }
 
-  Future<void> unbondDhx(double amount, String organizationId) async {
+  Future<void> unbondDhx({
+    required Decimal amount,
+    required String organizationId,
+  }) async {
     await _client.dHXServcie.dHXUnbond(
       body: ExtapiDHXUnbondRequest(
         amount: amount.toString(),
@@ -102,7 +119,7 @@ class DhxRepository {
   }
 
   Future<CreateCouncilResult> createCouncil({
-    required double amount,
+    required Decimal amount,
     required double boost,
     required int lockMonths,
     required String name,
@@ -122,7 +139,7 @@ class DhxRepository {
   }
 
   Future<String> createStake({
-    required double amount,
+    required Decimal amount,
     required double boost,
     required String councilId,
     required int lockMonths,
@@ -141,12 +158,13 @@ class DhxRepository {
     return res.body!.stakeId!;
   }
 
-  Future<YesterdayMining> lastMining() async {
+  Future<YesterdayMining?> lastMining() async {
     final res = await _client.dHXServcie.dHXGetLastMining();
+    if (res.body == null || res.body?.date == null) return null;
     return YesterdayMining(
       res.body!.date!,
-      res.body!.dhxAllocated.toDouble(),
-      res.body!.miningPower.toDouble(),
+      res.body!.dhxAllocated.toDecimal(),
+      res.body!.miningPower.toDecimal(),
     );
   }
 }

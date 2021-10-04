@@ -31,7 +31,7 @@ class _MxcPrimaryButtonState extends State<MxcPrimaryButton> {
     var buttonColor = primaryColor;
 
     if (widget.onTap == null) {
-      buttonColor = ColorsTheme.of(context).primaryBackground;
+      buttonColor = ColorsTheme.of(context).boxComponents;
     } else if (hovering) {
       buttonColor = buttonColor.withOpacity(0.8);
     }

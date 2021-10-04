@@ -51,14 +51,21 @@ class Lock {
 
 class LockOption {
   final int months;
+  final LockBoostRate boost;
 
-  const LockOption(this.months);
+  const LockOption(this.months, this.boost);
 
-  static const m3 = LockOption(3);
-  static const m9 = LockOption(9);
-  static const m12 = LockOption(12);
-  static const m24 = LockOption(24);
+  static const m3 = LockOption(3, LockBoostRate(0));
+  static const m9 = LockOption(9, LockBoostRate(0.1));
+  static const m12 = LockOption(12, LockBoostRate(0.2));
+  static const m24 = LockOption(24, LockBoostRate(0.4));
   static const values = [m3, m9, m12, m24];
+}
+
+class LockBoostRate {
+  final double realRate;
+
+  const LockBoostRate(this.realRate);
 }
 
 class DhxBondInfo {
@@ -100,8 +107,8 @@ class CreateCouncilResult {
 
 class YesterdayMining {
   final DateTime date;
-  final double dhx;
-  final double mpower;
+  final Decimal dhx;
+  final Decimal mpower;
 
   YesterdayMining(this.date, this.dhx, this.mpower);
 }
