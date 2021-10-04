@@ -62,9 +62,13 @@ class _MxcCapsuleButtonState extends State<MxcCapsuleButton> {
               if (_icon != null)
                 Row(
                   children: [
-                    Icon(_icon, size: 12),
+                    Icon(
+                      _icon,
+                      color: primaryColor,
+                      size: 18,
+                    ),
                     const SizedBox(
-                      width: 10,
+                      width: 5,
                     )
                   ],
                 ),
