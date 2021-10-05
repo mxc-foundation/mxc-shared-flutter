@@ -16,6 +16,7 @@ class MxcOutlinedTextField extends StatefulWidget {
   final void Function(FocusNode)? onFocusCreated;
   final void Function(bool)? onFocusChanged;
   final void Function(String)? onChanged;
+  final void Function(int)? onCountChanged;
 
   final TextEditingController? _controller;
   final String? _initialText;
@@ -36,6 +37,7 @@ class MxcOutlinedTextField extends StatefulWidget {
     this.onFocusChanged,
     this.onChanged,
     this.prefixIcon,
+    this.onCountChanged,
   })  : _controller = controller,
         _initialText = null,
         super(key: key);
@@ -55,6 +57,7 @@ class MxcOutlinedTextField extends StatefulWidget {
     this.onFocusChanged,
     this.onChanged,
     this.prefixIcon,
+    this.onCountChanged,
   })  : _initialText = text,
         readOnly = true,
         _controller = null,
@@ -192,6 +195,9 @@ class _MxcOutlinedTextFieldState extends State<MxcOutlinedTextField> {
                     ),
                     child: widget.button!,
                   ),
+                if (widget.onCountChanged != null)
+                  MxcDigtalChangedButton(
+                      onCountChanged: (value) => widget.onCountChanged!(value))
               ],
             ),
           ),
@@ -224,6 +230,75 @@ class MxcOutlinedTextFieldButton extends StatelessWidget {
           color: ColorsTheme.of(context).mxcBlue,
         ),
       ),
+    );
+  }
+}
+
+class MxcDigtalChangedButton extends StatefulWidget {
+  final int step;
+  final void Function(int) onCountChanged;
+
+  const MxcDigtalChangedButton({
+    Key? key,
+    required this.onCountChanged,
+    this.step = 1,
+  }) : super(key: key);
+
+  @override
+  _MxcDigtalChangedButtonState createState() => _MxcDigtalChangedButtonState();
+}
+
+class _MxcDigtalChangedButtonState extends State<MxcDigtalChangedButton> {
+  int get _step => widget.step;
+  int _count = 0;
+
+  void subtract() {
+    if (_count == 0) return;
+
+    _count = _count - _step;
+    setState(() {});
+    widget.onCountChanged(_count);
+  }
+
+  void add() {
+    _count = _count + _step;
+    setState(() {});
+    widget.onCountChanged(_count);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        InkWell(
+          onTap: subtract,
+          child: MxcCard(
+            color: ColorsTheme.of(context).mxcBlue20,
+            child: Padding(
+              padding: const EdgeInsets.all(5),
+              child: Icon(
+                Icons.remove,
+                size: 32,
+                color: ColorsTheme.of(context).mxcBlue,
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(width: 10),
+        InkWell(
+            onTap: add,
+            child: MxcCard(
+              color: ColorsTheme.of(context).mxcBlue20,
+              child: Padding(
+                padding: const EdgeInsets.all(5),
+                child: Icon(
+                  Icons.add,
+                  size: 32,
+                  color: ColorsTheme.of(context).mxcBlue,
+                ),
+              ),
+            ))
+      ],
     );
   }
 }
