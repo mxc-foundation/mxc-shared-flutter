@@ -145,14 +145,15 @@ class _MxcOutlinedTextFieldState extends State<MxcOutlinedTextField> {
           AnimatedContainer(
             duration: const Duration(milliseconds: 200),
             decoration: BoxDecoration(
-              border: widget.border ?? Border(
-                bottom: BorderSide(
-                  width: focused ? 2 : 1,
-                  color: focused
-                      ? MxcScopedTheme.of(context).primaryColor
-                      : ColorsTheme.of(context).textPrimaryAndIcons,
-                ),
-              ),
+              border: widget.border ??
+                  Border(
+                    bottom: BorderSide(
+                      width: focused ? 2 : 1,
+                      color: focused
+                          ? MxcScopedTheme.of(context).primaryColor
+                          : ColorsTheme.of(context).textPrimaryAndIcons,
+                    ),
+                  ),
             ),
             padding: const EdgeInsets.symmetric(vertical: 2),
             child: Row(
@@ -205,7 +206,9 @@ class _MxcOutlinedTextFieldState extends State<MxcOutlinedTextField> {
                 if (widget.onStepperChanged != null)
                   MxcStepperButton(
                     controller: widget._controller,
-                    onStepperChanged: (value) => widget.onStepperChanged!(value),)
+                    onStepperChanged: (value) =>
+                        widget.onStepperChanged!(value),
+                  )
               ],
             ),
           ),
@@ -255,7 +258,8 @@ class MxcStepperButton extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _MxcStepperChangedButtonState createState() => _MxcStepperChangedButtonState();
+  _MxcStepperChangedButtonState createState() =>
+      _MxcStepperChangedButtonState();
 }
 
 class _MxcStepperChangedButtonState extends State<MxcStepperButton> {
@@ -309,19 +313,19 @@ class _MxcStepperChangedButtonState extends State<MxcStepperButton> {
         ),
         const SizedBox(width: 10),
         InkWell(
-            onTap: add,
-            child: MxcCard(
-              color: ColorsTheme.of(context).mxcBlue20,
-              child: Padding(
-                padding: const EdgeInsets.all(5),
-                child: Icon(
-                  Icons.add,
-                  size: 32,
-                  color: ColorsTheme.of(context).mxcBlue,
-                ),
+          onTap: add,
+          child: MxcCard(
+            color: ColorsTheme.of(context).mxcBlue20,
+            child: Padding(
+              padding: const EdgeInsets.all(5),
+              child: Icon(
+                Icons.add,
+                size: 32,
+                color: ColorsTheme.of(context).mxcBlue,
               ),
             ),
-          )
+          ),
+        )
       ],
     );
   }
