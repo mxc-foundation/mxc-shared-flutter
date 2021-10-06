@@ -11,12 +11,14 @@ class MxcOutlinedTextField extends StatefulWidget {
   final TextInputAction? action;
   final double width;
   final FocusNode? focusNode;
+  final int? maxLines;
   final MxcOutlinedTextFieldButton? button;
   final IconData? prefixIcon;
+  final Border? border;
   final void Function(FocusNode)? onFocusCreated;
   final void Function(bool)? onFocusChanged;
   final void Function(String)? onChanged;
-  final void Function(int)? onCountChanged;
+  final void Function(int)? onStepperChanged;
 
   final TextEditingController? _controller;
   final String? _initialText;
@@ -30,14 +32,16 @@ class MxcOutlinedTextField extends StatefulWidget {
     this.validator,
     this.action,
     this.readOnly = false,
+    this.maxLines = 1,
     this.button,
     this.width = 340,
     this.focusNode,
+    this.border,
     this.onFocusCreated,
     this.onFocusChanged,
     this.onChanged,
     this.prefixIcon,
-    this.onCountChanged,
+    this.onStepperChanged,
   })  : _controller = controller,
         _initialText = null,
         super(key: key);
@@ -50,14 +54,16 @@ class MxcOutlinedTextField extends StatefulWidget {
     this.initialValue,
     this.validator,
     this.action,
+    this.maxLines = 1,
     this.button,
     this.width = 340,
     this.focusNode,
+    this.border,
     this.onFocusCreated,
     this.onFocusChanged,
     this.onChanged,
     this.prefixIcon,
-    this.onCountChanged,
+    this.onStepperChanged,
   })  : _initialText = text,
         readOnly = true,
         _controller = null,
@@ -139,7 +145,7 @@ class _MxcOutlinedTextFieldState extends State<MxcOutlinedTextField> {
           AnimatedContainer(
             duration: const Duration(milliseconds: 200),
             decoration: BoxDecoration(
-              border: Border(
+              border: widget.border ?? Border(
                 bottom: BorderSide(
                   width: focused ? 2 : 1,
                   color: focused
@@ -167,6 +173,7 @@ class _MxcOutlinedTextFieldState extends State<MxcOutlinedTextField> {
                     readOnly: widget.readOnly,
                     initialValue: widget._initialText,
                     focusNode: focusNode,
+                    maxLines: widget.maxLines,
                     textInputAction: widget.action,
                     validator: widget.validator,
                     controller: widget._controller,
@@ -195,9 +202,10 @@ class _MxcOutlinedTextFieldState extends State<MxcOutlinedTextField> {
                     ),
                     child: widget.button!,
                   ),
-                if (widget.onCountChanged != null)
-                  MxcDigtalChangedButton(
-                      onCountChanged: (value) => widget.onCountChanged!(value))
+                if (widget.onStepperChanged != null)
+                  MxcStepperButton(
+                    controller: widget._controller,
+                    onStepperChanged: (value) => widget.onStepperChanged!(value),)
               ],
             ),
           ),
@@ -234,36 +242,51 @@ class MxcOutlinedTextFieldButton extends StatelessWidget {
   }
 }
 
-class MxcDigtalChangedButton extends StatefulWidget {
+class MxcStepperButton extends StatefulWidget {
   final int step;
-  final void Function(int) onCountChanged;
+  final TextEditingController? controller;
+  final void Function(int) onStepperChanged;
 
-  const MxcDigtalChangedButton({
+  const MxcStepperButton({
     Key? key,
-    required this.onCountChanged,
+    required this.onStepperChanged,
     this.step = 1,
+    this.controller,
   }) : super(key: key);
 
   @override
-  _MxcDigtalChangedButtonState createState() => _MxcDigtalChangedButtonState();
+  _MxcStepperChangedButtonState createState() => _MxcStepperChangedButtonState();
 }
 
-class _MxcDigtalChangedButtonState extends State<MxcDigtalChangedButton> {
+class _MxcStepperChangedButtonState extends State<MxcStepperButton> {
   int get _step => widget.step;
+  TextEditingController? get _controller => widget.controller;
   int _count = 0;
 
   void subtract() {
+    if (_controller != null && _controller!.text.isNotEmpty) {
+      _count = int.tryParse(_controller!.text)!;
+    }
+
     if (_count == 0) return;
 
     _count = _count - _step;
+    _controller!.text = _count.toString();
     setState(() {});
-    widget.onCountChanged(_count);
+
+    widget.onStepperChanged(_count);
   }
 
   void add() {
+    if (_controller != null && _controller!.text.isNotEmpty) {
+      _count = int.tryParse(_controller!.text)!;
+    }
+
     _count = _count + _step;
+    _controller!.text = _count.toString();
     setState(() {});
-    widget.onCountChanged(_count);
+
+    widget.onStepperChanged(_count);
   }
 
   @override
@@ -297,7 +320,8 @@ class _MxcDigtalChangedButtonState extends State<MxcDigtalChangedButton> {
                   color: ColorsTheme.of(context).mxcBlue,
                 ),
               ),
-            ))
+            ),
+          )
       ],
     );
   }
