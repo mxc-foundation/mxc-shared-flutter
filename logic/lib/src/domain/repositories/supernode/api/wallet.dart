@@ -2,6 +2,7 @@ import 'package:chopper/chopper.dart';
 import 'package:decimal/decimal.dart';
 import 'package:mxc_logic/mxc_logic.dart';
 import 'package:mxc_logic/src/data/data.dart';
+import 'package:mxc_logic/src/domain/entities/wallet.dart';
 import 'package:mxc_logic/src/domain/repositories/internal/shared_mappers.dart';
 
 class WalletRepository {
@@ -89,5 +90,34 @@ class WalletRepository {
   Future<double> downlinkPrice(String orgId) async {
     final res = await _client.walletService.getDlPrice(orgId: orgId);
     return res.body!.downLinkPrice!;
+  }
+
+  void btcAddLocks(
+      {required String durationDays,
+      required List<String> listMac,
+      required String orgId,
+      required String sessionId,
+      required String totalAmount}) {
+    _client.bTCMining.bTCAddLocks(
+        body: ExtapiBTCAddLocksRequest(
+            durationDays: durationDays,
+            gatewayMac: listMac,
+            orgId: orgId,
+            sessionId: sessionId,
+            totalAmount: totalAmount));
+  }
+
+  Future<BtcMiningSession> bTCMiningSession() async {
+    final res = await _client.bTCMining.bTCMiningSession();
+    return BtcMiningSession(
+        sessionId: res.body!.sessionId!,
+        mxcLockAmount: res.body!.mxcLockAmount!,
+        mxcLockDurationDays: res.body!.mxcLockDurationDays!);
+  }
+
+  Future<List<String>> bTCListLocks(String orgId) async {
+    final res = await _client.bTCMining.bTCListLocks(orgId: orgId);
+
+    return res.body!.lock!.map((e) => e.gatewayMac!).toList();
   }
 }

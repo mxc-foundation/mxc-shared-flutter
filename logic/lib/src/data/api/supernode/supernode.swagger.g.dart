@@ -149,6 +149,107 @@ Map<String, dynamic> _$ExtapiAuthenticateWeChatUserResponseToJson(
       'jwt': instance.jwt,
     };
 
+ExtapiBTCAddLocksRequest _$ExtapiBTCAddLocksRequestFromJson(
+    Map<String, dynamic> json) {
+  return ExtapiBTCAddLocksRequest(
+    durationDays: json['durationDays'] as String?,
+    gatewayMac: (json['gatewayMac'] as List<dynamic>?)
+            ?.map((e) => e as String)
+            .toList() ??
+        [],
+    orgId: json['orgId'] as String?,
+    sessionId: json['sessionId'] as String?,
+    totalAmount: json['totalAmount'] as String?,
+  );
+}
+
+Map<String, dynamic> _$ExtapiBTCAddLocksRequestToJson(
+        ExtapiBTCAddLocksRequest instance) =>
+    <String, dynamic>{
+      'durationDays': instance.durationDays,
+      'gatewayMac': instance.gatewayMac,
+      'orgId': instance.orgId,
+      'sessionId': instance.sessionId,
+      'totalAmount': instance.totalAmount,
+    };
+
+ExtapiBTCAddLocksResponse _$ExtapiBTCAddLocksResponseFromJson(
+    Map<String, dynamic> json) {
+  return ExtapiBTCAddLocksResponse();
+}
+
+Map<String, dynamic> _$ExtapiBTCAddLocksResponseToJson(
+        ExtapiBTCAddLocksResponse instance) =>
+    <String, dynamic>{};
+
+ExtapiBTCListLocksResponse _$ExtapiBTCListLocksResponseFromJson(
+    Map<String, dynamic> json) {
+  return ExtapiBTCListLocksResponse(
+    lock: (json['lock'] as List<dynamic>?)
+            ?.map((e) => ExtapiBTCLock.fromJson(e as Map<String, dynamic>))
+            .toList() ??
+        [],
+  );
+}
+
+Map<String, dynamic> _$ExtapiBTCListLocksResponseToJson(
+        ExtapiBTCListLocksResponse instance) =>
+    <String, dynamic>{
+      'lock': instance.lock?.map((e) => e.toJson()).toList(),
+    };
+
+ExtapiBTCLock _$ExtapiBTCLockFromJson(Map<String, dynamic> json) {
+  return ExtapiBTCLock(
+    amount: json['amount'] as String?,
+    btcRevenue: json['btcRevenue'] as String?,
+    created: json['created'] == null
+        ? null
+        : DateTime.parse(json['created'] as String),
+    gatewayMac: json['gatewayMac'] as String?,
+    id: json['id'] as String?,
+    lockTill: json['lockTill'] == null
+        ? null
+        : DateTime.parse(json['lockTill'] as String),
+    sessionId: json['sessionId'] as String?,
+  );
+}
+
+Map<String, dynamic> _$ExtapiBTCLockToJson(ExtapiBTCLock instance) =>
+    <String, dynamic>{
+      'amount': instance.amount,
+      'btcRevenue': instance.btcRevenue,
+      'created': instance.created?.toIso8601String(),
+      'gatewayMac': instance.gatewayMac,
+      'id': instance.id,
+      'lockTill': instance.lockTill?.toIso8601String(),
+      'sessionId': instance.sessionId,
+    };
+
+ExtapiBTCMiningSessionResponse _$ExtapiBTCMiningSessionResponseFromJson(
+    Map<String, dynamic> json) {
+  return ExtapiBTCMiningSessionResponse(
+    endDate: json['endDate'] == null
+        ? null
+        : DateTime.parse(json['endDate'] as String),
+    mxcLockAmount: json['mxcLockAmount'] as String?,
+    mxcLockDurationDays: json['mxcLockDurationDays'] as String?,
+    sessionId: json['sessionId'] as String?,
+    startDate: json['startDate'] == null
+        ? null
+        : DateTime.parse(json['startDate'] as String),
+  );
+}
+
+Map<String, dynamic> _$ExtapiBTCMiningSessionResponseToJson(
+        ExtapiBTCMiningSessionResponse instance) =>
+    <String, dynamic>{
+      'endDate': instance.endDate?.toIso8601String(),
+      'mxcLockAmount': instance.mxcLockAmount,
+      'mxcLockDurationDays': instance.mxcLockDurationDays,
+      'sessionId': instance.sessionId,
+      'startDate': instance.startDate?.toIso8601String(),
+    };
+
 ExtapiBatchResetDefaultGatewatConfigRequest
     _$ExtapiBatchResetDefaultGatewatConfigRequestFromJson(
         Map<String, dynamic> json) {
@@ -2424,6 +2525,7 @@ Map<String, dynamic> _$ExtapiGetInfluxDBIntegrationResponseToJson(
 ExtapiGetJWTRequest _$ExtapiGetJWTRequestFromJson(Map<String, dynamic> json) {
   return ExtapiGetJWTRequest(
     organizationId: json['organizationId'] as String?,
+    ttlInSeconds: json['ttlInSeconds'] as String?,
   );
 }
 
@@ -2431,6 +2533,7 @@ Map<String, dynamic> _$ExtapiGetJWTRequestToJson(
         ExtapiGetJWTRequest instance) =>
     <String, dynamic>{
       'organizationId': instance.organizationId,
+      'ttlInSeconds': instance.ttlInSeconds,
     };
 
 ExtapiGetJWTResponse _$ExtapiGetJWTResponseFromJson(Map<String, dynamic> json) {

@@ -491,6 +491,70 @@ class _$ApplicationService extends ApplicationService {
 }
 
 // ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations
+class _$BTCMining extends BTCMining {
+  _$BTCMining([ChopperClient? client]) {
+    if (client == null) return;
+    this.client = client;
+  }
+
+  @override
+  final definitionType = BTCMining;
+
+  @override
+  Future<Response<ExtapiBTCListLocksResponse>> bTCListLocks(
+      {String? orgId,
+      String? grpcMetadataXOTP,
+      String? grpcMetadataAuthorization}) {
+    final $url = '/api/btc-mining/list-locks';
+    final $params = <String, dynamic>{'orgId': orgId};
+    final $headers = {
+      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
+      if (grpcMetadataAuthorization != null)
+        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
+    };
+
+    final $request = Request('GET', $url, client.baseUrl,
+        parameters: $params, headers: $headers);
+    return client
+        .send<ExtapiBTCListLocksResponse, ExtapiBTCListLocksResponse>($request);
+  }
+
+  @override
+  Future<Response<ExtapiBTCAddLocksResponse>> bTCAddLocks(
+      {ExtapiBTCAddLocksRequest? body,
+      String? grpcMetadataXOTP,
+      String? grpcMetadataAuthorization}) {
+    final $url = '/api/btc-mining/lock';
+    final $headers = {
+      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
+      if (grpcMetadataAuthorization != null)
+        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
+    };
+
+    final $body = body;
+    final $request =
+        Request('POST', $url, client.baseUrl, body: $body, headers: $headers);
+    return client
+        .send<ExtapiBTCAddLocksResponse, ExtapiBTCAddLocksResponse>($request);
+  }
+
+  @override
+  Future<Response<ExtapiBTCMiningSessionResponse>> bTCMiningSession(
+      {String? grpcMetadataXOTP, String? grpcMetadataAuthorization}) {
+    final $url = '/api/btc-mining/session';
+    final $headers = {
+      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
+      if (grpcMetadataAuthorization != null)
+        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
+    };
+
+    final $request = Request('GET', $url, client.baseUrl, headers: $headers);
+    return client.send<ExtapiBTCMiningSessionResponse,
+        ExtapiBTCMiningSessionResponse>($request);
+  }
+}
+
+// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations
 class _$ExternalUserService extends ExternalUserService {
   _$ExternalUserService([ChopperClient? client]) {
     if (client == null) return;
