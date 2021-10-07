@@ -111,13 +111,15 @@ class WalletRepository {
     final res = await _client.bTCMining.bTCMiningSession();
     return BtcMiningSession(
         sessionId: res.body!.sessionId!,
-        mxcLockAmount: res.body!.mxcLockAmount!,
-        mxcLockDurationDays: res.body!.mxcLockDurationDays!);
+        mxcLockAmount: res.body!.mxcLockAmount!.toInt(),
+        mxcLockDurationDays: res.body!.mxcLockDurationDays!.toInt());
   }
 
-  Future<List<String>> bTCListLocks(String orgId) async {
+  Future<List<BtcLock>> bTCListLocks(String orgId) async {
     final res = await _client.bTCMining.bTCListLocks(orgId: orgId);
 
-    return res.body!.lock!.map((e) => e.gatewayMac!).toList();
+    return res.body!.lock!
+        .map((e) => BtcLock(gatewayMac: e.gatewayMac!, sessionId: e.sessionId!))
+        .toList();
   }
 }
