@@ -92,13 +92,13 @@ class WalletRepository {
     return res.body!.downLinkPrice!;
   }
 
-  void btcAddLocks(
+  Future<void> btcAddLocks(
       {required String durationDays,
       required List<String> listMac,
       required String orgId,
       required String sessionId,
-      required String totalAmount}) {
-    _client.bTCMining.bTCAddLocks(
+      required String totalAmount}) async {
+    await _client.bTCMining.bTCAddLocks(
         body: ExtapiBTCAddLocksRequest(
             durationDays: durationDays,
             gatewayMac: listMac,
