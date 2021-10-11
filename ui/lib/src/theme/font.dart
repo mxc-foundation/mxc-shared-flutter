@@ -93,6 +93,9 @@ class TextStylePack {
   DecoratableTextStyle get dhx =>
       DecoratableTextStyle(_primary.copyWith(color: colorsTheme.dhxBlue));
 
+  DecoratableTextStyle get btc =>
+      DecoratableTextStyle(_primary.copyWith(color: colorsTheme.btcYellow));
+
   DecoratableTextStyle get button => DecoratableTextStyle(
         _primary.copyWith(color: colorsTheme.buttonIconTextColor),
       );
