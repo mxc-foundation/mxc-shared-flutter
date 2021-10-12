@@ -112,6 +112,8 @@ class WalletRepository {
     return BtcMiningSession(
         sessionId: res.body!.sessionId!,
         mxcLockAmount: res.body!.mxcLockAmount!.toInt(),
+        startSession: res.body!.startDate!,
+        endSession: res.body!.endDate!,
         mxcLockDurationDays: res.body!.mxcLockDurationDays!.toInt());
   }
 
