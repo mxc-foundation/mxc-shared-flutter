@@ -17,7 +17,6 @@ import 'api/totp.dart';
 import 'api/user.dart';
 import 'api/wallet.dart';
 import 'api/withdraw.dart';
-import 'common/supernode_setup.dart';
 import 'common/token_refresher.dart';
 
 export 'api/auth.dart';
@@ -35,7 +34,6 @@ export 'api/totp.dart';
 export 'api/user.dart';
 export 'api/wallet.dart';
 export 'api/withdraw.dart';
-export 'common/supernode_setup.dart';
 export 'common/token_refresher.dart';
 
 abstract class SupernodeRepository {
@@ -48,31 +46,40 @@ abstract class SupernodeRepository {
   WithdrawRepository get withdraw;
   OrganizationRepository get organization;
   NetworkServerRepository get networkServer;
-  AuthenticationRepository get auth;
+  LoginRepository get auth;
   ExternalAccountsRepository get externalAccounts;
   TotpRepository get totp;
   RegistrationRepository get register;
   ReportRepository get report;
   DeviceRepository get device;
   Future<Map<String, List<Supernode>>> listSupernodes();
+
+  Future<Supernode> getSupernode();
 }
 
 class ApiSupernodeRepository implements SupernodeRepository {
+  final SupernodeSetupStore _setupStore;
+
   ApiSupernodeRepository({
-    required SupernodeSetupRepository setupRepository,
+    required SupernodeSetupStore setupStore,
     required TokenRefresher tokenRefresher,
-  }) : _client = SupernodeClient(
+  })  : _setupStore = setupStore,
+        _client = SupernodeClient(
           getSupernodeAddress: () =>
-              setupRepository.supernodeAddress ??
+              setupStore.supernodeAddress ??
               (throw Exception('Supernode address has not been picked')),
-          getToken: () => setupRepository.token,
-          refreshToken: (client) => tokenRefresher
-              .refresh(ApiSupernodeRepository.withClient(client: client)),
+          getDefaultOrganizationId: () => setupStore.organizationId,
+          getToken: () => setupStore.token,
+          refreshToken: (client) => tokenRefresher.refresh(
+              ApiSupernodeRepository.withClient(
+                  client: client, setupStore: setupStore)),
         );
 
   ApiSupernodeRepository.withClient({
     required SupernodeClient client,
-  }) : _client = client;
+    required SupernodeSetupStore setupStore,
+  })  : _client = client,
+        _setupStore = setupStore;
 
   late final SupernodeClient _client;
 
@@ -104,7 +111,7 @@ class ApiSupernodeRepository implements SupernodeRepository {
   NetworkServerRepository get networkServer => NetworkServerRepository(_client);
 
   @override
-  AuthenticationRepository get auth => AuthenticationRepository(_client);
+  LoginRepository get auth => LoginRepository(_client);
 
   @override
   ExternalAccountsRepository get externalAccounts =>
@@ -125,6 +132,15 @@ class ApiSupernodeRepository implements SupernodeRepository {
   @override
   Future<Map<String, List<Supernode>>> listSupernodes() {
     return SupernodeGithubApi(_client).listSupernodes();
+  }
+
+  @override
+  Future<Supernode> getSupernode() async {
+    final api = SupernodeGithubApi(_client);
+    final supernodes = await api.listSupernodes();
+    return supernodes.values
+        .reduce((a, b) => [...a, ...b])
+        .firstWhere((e) => e.url == _setupStore.supernodeAddress);
   }
 }
 

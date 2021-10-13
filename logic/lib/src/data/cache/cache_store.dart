@@ -1,0 +1,85 @@
+import 'package:meta/meta.dart';
+import 'package:mxc_logic/internal.dart';
+import 'package:mxc_logic/mxc_logic.dart';
+
+abstract class BaseCacheStore {
+  CacheZone get _zone;
+
+  @protected
+  String get zone;
+
+  @protected
+  Field<T?> field<T>(
+    String name, {
+    Serializer<T>? serializer,
+    Deserializer<T>? deserializer,
+  }) =>
+      CacheField.nullable<T>(
+        _zone,
+        name,
+        serializer: serializer,
+        deserializer: deserializer,
+      );
+
+  @protected
+  Field<T> fieldWithDefault<T>(
+    String name,
+    T defaultValue, {
+    Serializer<T>? serializer,
+    Deserializer<T>? deserializer,
+  }) =>
+      CacheField.withDefault(
+        _zone,
+        name,
+        defaultValue,
+        serializer: serializer,
+        deserializer: deserializer,
+      );
+
+  @protected
+  Future<void> cleanFields(List<Field> fields) {
+    return Future.wait(fields.whereType<CacheField>().map((e) => e.save(null)));
+  }
+}
+
+abstract class GlobalCacheStore extends BaseCacheStore {
+  @override
+  late final CacheZone _zone;
+
+  Future<void> load(CacheManager manager) async {
+    _zone = await manager.loadZone(zone);
+  }
+}
+
+abstract class ControlledCacheStore extends BaseCacheStore {
+  CacheZone? _backedZone;
+
+  @override
+  CacheZone get _zone =>
+      _backedZone ?? (throw Exception('Zone has not been loaded.'));
+
+  Future<void> _load(CacheManager manager, String key) async {
+    _backedZone = await manager.loadZone('$key/$zone');
+  }
+
+  void unload() => _backedZone = null;
+}
+
+class CacheController {
+  final List<ControlledCacheStore> _innerRepositories = [];
+
+  final CacheManager _manager;
+  final String prefixKey;
+
+  CacheController(this._manager, this.prefixKey);
+
+  void register(ControlledCacheStore repository) {
+    _innerRepositories.add(repository);
+  }
+
+  void unload() => _innerRepositories.map((e) => e.unload());
+
+  Future<void> load(String key) => Future.wait(
+        _innerRepositories.map((e) => e._load(_manager, '$prefixKey/$key')),
+      );
+}

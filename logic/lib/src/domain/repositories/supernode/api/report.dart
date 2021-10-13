@@ -1,10 +1,9 @@
-import 'package:chopper/chopper.dart';
 import 'package:mxc_logic/mxc_logic.dart';
 import 'package:mxc_logic/src/data/data.dart';
 import 'package:mxc_logic/src/domain/repositories/internal/shared_mappers.dart';
 
 class ReportRepository {
-  final ChopperClient client;
+  final SupernodeClient client;
 
   ReportRepository(this.client);
 
@@ -23,11 +22,11 @@ class ReportRepository {
   /// Gets mining income report and returns base64-encoded report
   Future<String> miningIncomeReport({
     required ReportFormat format,
-    required String organizationId,
     required FiatCurrency fiatCurrency,
     required DateTime start,
     required DateTime end,
     required int decimals,
+    String? organizationId,
   }) async {
     late final String content;
     switch (format) {
@@ -36,7 +35,7 @@ class ReportRepository {
           currency: [Token.mxc.toData()],
           decimals: decimals,
           fiatCurrency: fiatCurrency.id,
-          organizationId: organizationId,
+          organizationId: organizationId ?? client.defaultOrganizationId,
           start: start.toUtc().toIso8601String(),
           end: end.toUtc().toIso8601String(),
         );

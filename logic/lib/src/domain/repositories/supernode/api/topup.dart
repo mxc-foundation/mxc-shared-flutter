@@ -1,10 +1,9 @@
-import 'package:chopper/chopper.dart';
 import 'package:mxc_logic/mxc_logic.dart';
 import 'package:mxc_logic/src/data/data.dart';
 import 'package:mxc_logic/src/domain/repositories/internal/shared_mappers.dart';
 
 class TopupRepository {
-  final ChopperClient _client;
+  final SupernodeClient _client;
 
   TopupRepository(this._client);
 
@@ -12,14 +11,14 @@ class TopupRepository {
     Token? currency,
     DateTime? from,
     DateTime? till,
-    required String orgId,
+    String? orgId,
   }) async {
     final history = await _client.topUpService.getTopUpHistory(
       body: ExtapiGetTopUpHistoryRequest(
         currency: currency?.toData(),
         from: (from ?? Values.dateMin).toUtc(),
         till: (till ?? Values.dateMax).toUtc(),
-        orgId: orgId,
+        orgId: orgId ?? _client.defaultOrganizationId,
       ),
     );
     return history.body!.topupHistory!
@@ -34,11 +33,11 @@ class TopupRepository {
   }
 
   Future<String> account({
-    required String orgId,
+    String? orgId,
     Token? currency,
   }) async {
     final account = await _client.topUpService.getTopUpDestination(
-      orgId: orgId,
+      orgId: orgId ?? _client.defaultOrganizationId,
       currency: currency?.toData(),
     );
     return account.body!.activeAccount!;

@@ -9,14 +9,14 @@ import 'sembast_factory.dart'
 const String _defaultCacheStore = 'cache';
 
 class _CacheManagerSerializersBucket {
-  Map<Type, Serializer> _serializers = {};
-  Map<Type, Deserializer> _deserializers = {};
+  final Map<Type, Serializer> _serializers = {};
+  final Map<Type, Deserializer> _deserializers = {};
 
   void registerType<T>({
     required Serializer<T> serializer,
     required Deserializer<T> deserializer,
   }) {
-    final castedSerializer = (dynamic t) => serializer(t as T);
+    dynamic castedSerializer(dynamic t) => serializer(t as T);
     _registerType<T>(serializer: castedSerializer, deserializer: deserializer);
     _registerType<T?>(serializer: castedSerializer, deserializer: deserializer);
   }

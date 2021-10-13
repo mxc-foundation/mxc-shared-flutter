@@ -118,4 +118,5 @@ abstract class Mappers {
 abstract class Values {
   static final DateTime dateMin = DateTime(1);
   static final DateTime dateMax = DateTime(3000);
+  static const int intMax = 9999999999;
 }

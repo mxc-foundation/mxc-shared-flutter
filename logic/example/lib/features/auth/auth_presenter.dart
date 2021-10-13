@@ -69,7 +69,7 @@ class AuthPresenter extends StateNotifier<AuthState> {
   }
 
   void logOut() {
-    _useCase.logOut();
+    //_useCase.logOut();
     _navigator.pop();
   }
 }
