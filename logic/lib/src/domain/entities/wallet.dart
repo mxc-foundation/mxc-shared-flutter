@@ -23,3 +23,13 @@ class BtcLock {
     required this.sessionId,
   });
 }
+
+class NoBtcMiningSessionException implements Exception {
+  final Uri? url;
+  final String message;
+
+  NoBtcMiningSessionException(this.url, this.message);
+
+  @override
+  String toString() => '$message for $url';
+}

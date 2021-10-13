@@ -1,5 +1,6 @@
 import 'package:decimal/decimal.dart';
 import 'package:mxc_logic/mxc_logic.dart';
+import 'package:mxc_logic/src/data/api/client/error_converter.dart';
 import 'package:mxc_logic/src/data/data.dart';
 import 'package:mxc_logic/src/domain/entities/wallet.dart';
 import 'package:mxc_logic/src/domain/repositories/internal/shared_mappers.dart';
@@ -106,13 +107,23 @@ class WalletRepository {
   }
 
   Future<BtcMiningSession> bTCMiningSession() async {
-    final res = await _client.bTCMining.bTCMiningSession();
-    return BtcMiningSession(
-        sessionId: res.body!.sessionId!,
-        mxcLockAmount: res.body!.mxcLockAmount!.toInt(),
-        startSession: res.body!.startDate!,
-        endSession: res.body!.endDate!,
-        mxcLockDurationDays: res.body!.mxcLockDurationDays!.toInt());
+    try {
+      final res = await _client.bTCMining.bTCMiningSession();
+      return BtcMiningSession(
+          sessionId: res.body!.sessionId!,
+          mxcLockAmount: res.body!.mxcLockAmount!.toInt(),
+          startSession: res.body!.startDate!,
+          endSession: res.body!.endDate!,
+          mxcLockDurationDays: res.body!.mxcLockDurationDays!.toInt());
+    } on ApiException catch (e) {
+      final Object? error = e.source;
+      if (error != null &&
+          error is Map<String, dynamic> &&
+          error['code'] == 5) {
+        throw NoBtcMiningSessionException(e.url, e.message);
+      }
+      rethrow;
+    }
   }
 
   Future<List<BtcLock>> bTCListLocks(String orgId) async {
