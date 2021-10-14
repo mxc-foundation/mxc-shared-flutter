@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:mxc_logic/internal.dart';
 import 'package:path/path.dart';
 import 'package:sembast/sembast.dart';
@@ -101,13 +103,18 @@ class CacheZoneSembast implements CacheZone {
     String key, [
     Deserializer<T>? deserializer,
   ]) {
-    deserializer ??= _serializersBucket._deserializers[T] as Deserializer<T>?;
-    dynamic raw = _inMemory[key];
-    if (raw == null) return null;
-    if (deserializer != null) {
-      raw = deserializer(raw);
+    try {
+      deserializer ??= _serializersBucket._deserializers[T] as Deserializer<T>?;
+      dynamic raw = _inMemory[key];
+      if (raw == null) return null;
+      if (deserializer != null) {
+        raw = deserializer(raw);
+      }
+      return raw as T;
+    } catch (e, s) {
+      log('Cant load field of type $T. Returning default...');
+      return null;
     }
-    return raw as T;
   }
 
   @override
