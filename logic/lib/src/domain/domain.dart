@@ -11,6 +11,7 @@ export 'entities/supernode.dart';
 export 'entities/totp.dart';
 export 'entities/transaction.dart';
 export 'entities/user.dart';
+export 'entities/wallet.dart';
 export 'exceptions.dart';
 export 'features/auth/auth.dart';
 export 'repositories/supernode/supernode.dart';
