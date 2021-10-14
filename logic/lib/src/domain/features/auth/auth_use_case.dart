@@ -1,10 +1,12 @@
 import 'package:mxc_logic/mxc_logic.dart';
 
-class AuthUseCase {
-  final SupernodeRepository repository;
-  final SupernodeSetupRepository setupRepository;
+import 'auth_repository.dart';
 
-  AuthUseCase(this.repository, this.setupRepository);
+class LoginUseCase {
+  final SupernodeRepository repository;
+  final AuthenticationRepository authRepository;
+
+  LoginUseCase(this.repository, this.authRepository);
 
   Future<Map<String, List<Supernode>>> listSupernodes() {
     return repository.listSupernodes();
@@ -15,24 +17,17 @@ class AuthUseCase {
     String username,
     String password,
   ) async {
-    // save* methods set variables to RAM storage syncronously and then save them
-    // to cache asynchronously. We don't need to wait until it's cached
-    // ignore: unawaited_futures
-    setupRepository.saveSupernodeAddress(supernodeAddress);
+    authRepository.supernodeAddress = supernodeAddress;
     final res = await repository.auth.login(
       username: username,
       password: password,
     );
-    // ignore: unawaited_futures
-    setupRepository.saveCredentials(username, password);
-    // ignore: unawaited_futures
-    setupRepository.saveToken(res.token.source);
+
+    await authRepository.saveCredentials(username, password, res.token.source);
+
+    final profile = await repository.user.profile();
+    authRepository.organizationId = profile.organizations.first.organizationId;
   }
 
-  bool loggedIn() => setupRepository.token != null;
-
-  void logOut() {
-    // ignore: unawaited_futures
-    setupRepository.clean();
-  }
+  bool loggedIn() => authRepository.loggedIn;
 }

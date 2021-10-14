@@ -9,12 +9,17 @@ import 'error_converter.dart';
 @internal
 class SupernodeClient extends ChopperClient {
   final String Function() _getBaseUrl;
+  final String? Function() _getDefaultOrganizationId;
+  final String? Function() _getToken;
 
   SupernodeClient({
     required String Function() getSupernodeAddress,
     required String? Function()? getToken,
     required Future<String?> Function(SupernodeClient)? refreshToken,
+    required String? Function()? getDefaultOrganizationId,
   })  : _getBaseUrl = getSupernodeAddress,
+        _getDefaultOrganizationId = getDefaultOrganizationId ?? (() {}),
+        _getToken = getToken ?? (() {}),
         super(
           converter: JsonSerializableConverter(),
           services: [...supernodeServices],
@@ -33,4 +38,8 @@ class SupernodeClient extends ChopperClient {
 
   @override
   String get baseUrl => _getBaseUrl();
+
+  String? get defaultOrganizationId => _getDefaultOrganizationId();
+
+  String? get token => _getToken();
 }

@@ -1,3 +1,5 @@
+import 'package:mxc_logic/mxc_logic.dart';
+
 class RegistrationResult {
   final String id;
   final bool isAdmin;
@@ -50,11 +52,13 @@ class ProfileResult {
   final User user;
   final List<UserOrganization> organizations;
   final List<ExternalAccount> externalAccounts;
+  final UserOrganization? currentOrganization;
 
   ProfileResult({
     required this.user,
     required this.organizations,
     required this.externalAccounts,
+    required this.currentOrganization,
   });
 }
 
@@ -72,25 +76,29 @@ class User {
   });
 }
 
-class UserOrganization {
+class UserOrganization implements Organization {
+  @override
+  final String name;
+
+  @override
+  final String displayName;
+
   final String organizationId;
-  final String organizationName;
-  final String organizationDisplayName;
-  final bool isAdmin;
-  final bool isDeviceAdmin;
-  final bool isGatewayAdmin;
+  final bool isUserAdmin;
+  final bool isUserDeviceAdmin;
+  final bool isUserGatewayAdmin;
   final DateTime createdAt;
   final DateTime? updatedAt;
 
   UserOrganization({
     required this.organizationId,
-    required this.organizationName,
-    required this.organizationDisplayName,
-    required this.isAdmin,
-    required this.isDeviceAdmin,
+    required this.name,
+    required this.displayName,
+    required this.isUserAdmin,
+    required this.isUserDeviceAdmin,
+    required this.isUserGatewayAdmin,
     required this.createdAt,
     required this.updatedAt,
-    required this.isGatewayAdmin,
   });
 }
 

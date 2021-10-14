@@ -3,10 +3,10 @@ import 'package:mxc_logic/mxc_logic.dart';
 import 'package:mxc_logic/src/data/data.dart';
 import 'package:mxc_logic/src/domain/repositories/internal/shared_mappers.dart';
 
-class AuthenticationRepository {
+class LoginRepository {
   final ChopperClient client;
 
-  AuthenticationRepository(this.client);
+  LoginRepository(this.client);
 
   Future<LoginResult> login({
     required String username,

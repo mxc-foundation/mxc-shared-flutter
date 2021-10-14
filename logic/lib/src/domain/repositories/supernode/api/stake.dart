@@ -1,11 +1,10 @@
-import 'package:chopper/chopper.dart';
 import 'package:decimal/decimal.dart';
 import 'package:mxc_logic/mxc_logic.dart';
 import 'package:mxc_logic/src/data/data.dart';
 import 'package:mxc_logic/src/domain/repositories/internal/shared_mappers.dart';
 
 class StakeRepository {
-  final ChopperClient _client;
+  final SupernodeClient _client;
 
   StakeRepository(this._client);
 
@@ -18,13 +17,13 @@ class StakeRepository {
   }
 
   Future<String> stake({
-    required String orgId,
     required Decimal amount,
     required double? boostRate,
     required int? lockMonths,
+    String? orgId,
   }) async {
     final res = await _client.stakingService.stake(
-      orgId: orgId,
+      orgId: orgId ?? _client.defaultOrganizationId,
       body: ExtapiStakeRequest(
         amount: amount.toString(),
         boost: boostRate?.toString(),
@@ -35,15 +34,15 @@ class StakeRepository {
   }
 
   Future<String> unstake({
-    required String orgId,
     required String stakeId,
     required String otpCode,
+    String? orgId,
   }) async {
     final res = await _client.stakingService.unstake(
-      orgId: orgId,
+      orgId: orgId ?? _client.defaultOrganizationId,
       grpcMetadataXOTP: otpCode,
       body: ExtapiUnstakeRequest(
-        orgId: orgId,
+        orgId: orgId ?? _client.defaultOrganizationId,
         stakeId: stakeId,
       ),
     );
@@ -51,13 +50,13 @@ class StakeRepository {
   }
 
   Future<List<StakeHistoryFrame>> history({
-    required String orgId,
+    String? orgId,
     Token? currency,
     DateTime? from,
     DateTime? till,
   }) async {
     final res = await _client.stakingService.getStakingHistory(
-      orgId: orgId,
+      orgId: orgId ?? _client.defaultOrganizationId,
       currency: currency?.toData(),
       from: (from ?? Values.dateMin).toData(),
       till: (till ?? Values.dateMax).toData(),
@@ -84,8 +83,10 @@ class StakeRepository {
         .toList();
   }
 
-  Future<List<Stake>> list({required String orgId}) async {
-    final history = await this.history(orgId: orgId);
+  Future<List<Stake>> list({String? orgId}) async {
+    final history = await this.history(
+      orgId: orgId ?? _client.defaultOrganizationId,
+    );
     return history
         .map((e) => e.stake)
         .toList()
@@ -96,11 +97,11 @@ class StakeRepository {
   }
 
   Future<List<Stake>> listActive({
-    required String orgId,
+    String? orgId,
     Token? currency,
   }) async {
     final res = await _client.stakingService.getActiveStakes(
-      orgId: orgId,
+      orgId: orgId ?? _client.defaultOrganizationId,
       currency: currency?.toData(),
     );
     return res.body!.actStake!
@@ -121,11 +122,11 @@ class StakeRepository {
   }
 
   Future<Decimal> revenue({
-    required String orgId,
+    String? orgId,
     DateTime? till,
   }) async {
     final res = await _client.stakingService.getStakingRevenue(
-      orgId: orgId,
+      orgId: orgId ?? _client.defaultOrganizationId,
       till: till?.toData(),
     );
     return res.body!.amount.toDecimal();

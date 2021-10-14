@@ -45,7 +45,7 @@ class MxcTextField extends StatefulWidget {
     this.validator,
     this.action,
     this.button,
-    this.width = 340,
+    this.width = double.infinity,
     this.focusNode,
     this.keyboardType,
     this.suffixText,

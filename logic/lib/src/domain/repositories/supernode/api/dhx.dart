@@ -1,13 +1,25 @@
-import 'package:chopper/chopper.dart';
 import 'package:decimal/decimal.dart';
 import 'package:mxc_logic/mxc_logic.dart';
 import 'package:mxc_logic/src/data/data.dart';
 import 'package:mxc_logic/src/domain/repositories/internal/shared_mappers.dart';
 
 class DhxRepository {
-  final ChopperClient _client;
+  final SupernodeClient _client;
 
   DhxRepository(this._client);
+
+  static late final Map<int, LockOption> _monthsToOption = {
+    for (final o in LockOption.values) o.months: o,
+  };
+
+  static LockOption _mapLockOption(DateTime lockTill, DateTime created) {
+    final months = (lockTill.difference(created).inDays / 30).floor();
+    return _monthsToOption[months] ??
+        LockOption(
+          months,
+          const LockBoostRate(0),
+        );
+  }
 
   Future<List<Council>> listCouncils() async {
     final res = await _client.dHXServcie.dHXListCouncils();
@@ -24,12 +36,12 @@ class DhxRepository {
   }
 
   Future<List<Lock>> listLocks({
-    required String organizationId,
+    String? organizationId,
     String? chairOrgId,
   }) async {
     final res = await _client.dHXServcie.dHXListStakes(
       chairOrgId: chairOrgId,
-      organizationId: organizationId,
+      organizationId: organizationId ?? _client.defaultOrganizationId,
     );
     final list = res.body!.stake;
     return list!
@@ -46,19 +58,18 @@ class DhxRepository {
             currency: Token.mxc,
             dhxMined: e.dhxMined.toDouble(),
             lockTill: e.lockTill!,
-            option: LockOption(
-              (e.lockTill!.difference(e.created!).inDays / 30).floor(),
-            ),
+            option: _mapLockOption(e.lockTill!, e.created!),
           ),
         )
         .toList();
   }
 
   Future<DhxBondInfo> bondInfo({
-    required String organizationId,
+    String? organizationId,
   }) async {
     final res = await _client.dHXServcie.dHXBondInfo(
-      body: ExtapiDHXBondInfoRequest(orgId: organizationId),
+      body: ExtapiDHXBondInfoRequest(
+          orgId: organizationId ?? _client.defaultOrganizationId),
     );
     return DhxBondInfo(
       bonded: Decimal.parse(res.body!.dhxBonded!),
@@ -83,30 +94,36 @@ class DhxRepository {
     );
   }
 
-  Future<void> bondDhx(double amount, String organizationId) async {
+  Future<void> bondDhx({
+    required Decimal amount,
+    String? organizationId,
+  }) async {
     await _client.dHXServcie.dHXBond(
       body: ExtapiDHXBondRequest(
         amount: amount.toString(),
-        orgId: organizationId,
+        orgId: organizationId ?? _client.defaultOrganizationId,
       ),
     );
   }
 
-  Future<void> unbondDhx(double amount, String organizationId) async {
+  Future<void> unbondDhx({
+    required Decimal amount,
+    String? organizationId,
+  }) async {
     await _client.dHXServcie.dHXUnbond(
       body: ExtapiDHXUnbondRequest(
         amount: amount.toString(),
-        orgId: organizationId,
+        orgId: organizationId ?? _client.defaultOrganizationId,
       ),
     );
   }
 
   Future<CreateCouncilResult> createCouncil({
-    required double amount,
+    required Decimal amount,
     required double boost,
     required int lockMonths,
     required String name,
-    required String organizationId,
+    String? organizationId,
   }) async {
     final res = await _client.dHXServcie.dHXCreateCouncil(
       body: ExtapiDHXCreateCouncilRequest(
@@ -114,7 +131,7 @@ class DhxRepository {
         boost: boost.toString(),
         lockMonths: lockMonths.toString(),
         name: name,
-        organizationId: organizationId,
+        organizationId: organizationId ?? _client.defaultOrganizationId,
         currency: Token.mxc.toData(),
       ),
     );
@@ -122,11 +139,11 @@ class DhxRepository {
   }
 
   Future<String> createStake({
-    required double amount,
+    required Decimal amount,
     required double boost,
     required String councilId,
     required int lockMonths,
-    required String organizationId,
+    String? organizationId,
   }) async {
     final res = await _client.dHXServcie.dHXCreateStake(
       body: ExtapiDHXCreateStakeRequest(
@@ -134,19 +151,20 @@ class DhxRepository {
         boost: boost.toString(),
         councilId: councilId,
         lockMonths: lockMonths.toString(),
-        organizationId: organizationId,
+        organizationId: organizationId ?? _client.defaultOrganizationId,
         currency: Token.mxc.toData(),
       ),
     );
     return res.body!.stakeId!;
   }
 
-  Future<YesterdayMining> lastMining() async {
+  Future<YesterdayMining?> lastMining() async {
     final res = await _client.dHXServcie.dHXGetLastMining();
+    if (res.body == null || res.body?.date == null) return null;
     return YesterdayMining(
       res.body!.date!,
-      res.body!.dhxAllocated.toDouble(),
-      res.body!.miningPower.toDouble(),
+      res.body!.dhxAllocated.toDecimal(),
+      res.body!.miningPower.toDecimal(),
     );
   }
 }

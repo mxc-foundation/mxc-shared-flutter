@@ -1,10 +1,9 @@
-import 'package:chopper/chopper.dart';
 import 'package:mxc_logic/mxc_logic.dart';
 import 'package:mxc_logic/src/data/data.dart';
 import 'package:mxc_logic/src/domain/repositories/internal/shared_mappers.dart';
 
 class ExternalAccountsRepository {
-  final ChopperClient client;
+  final SupernodeClient client;
 
   ExternalAccountsRepository(this.client);
 
@@ -22,12 +21,12 @@ class ExternalAccountsRepository {
   }
 
   Future<void> unbind({
-    required String organizationId,
     required ExternalAccountType service,
+    String? organizationId,
   }) async {
     await client.externalUserService.unbindExternalUser(
       body: ExtapiUnbindExternalUserRequest(
-        organizationId: organizationId,
+        organizationId: organizationId ?? client.defaultOrganizationId,
         service: service.toData(),
       ),
     );
@@ -36,25 +35,25 @@ class ExternalAccountsRepository {
   Future<void> verifyEmail({
     required String email,
     required String language,
-    required String orgId,
+    String? orgId,
   }) async {
     await client.externalUserService.verifyEmail(
       body: ExtapiVerifyEmailRequest(
         email: email,
         language: language,
-        organizationId: orgId,
+        organizationId: orgId ?? client.defaultOrganizationId,
       ),
     );
   }
 
   Future<void> confirmEmail({
     required String token,
-    required String orgId,
+    String? orgId,
   }) async {
     await client.externalUserService.confirmBindingEmail(
       body: ExtapiConfirmBindingEmailRequest(
         token: token,
-        organizationId: orgId,
+        organizationId: orgId ?? client.defaultOrganizationId,
       ),
     );
   }

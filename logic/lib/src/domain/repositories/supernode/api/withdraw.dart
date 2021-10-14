@@ -1,16 +1,15 @@
-import 'package:chopper/chopper.dart';
 import 'package:decimal/decimal.dart';
 import 'package:mxc_logic/mxc_logic.dart';
 import 'package:mxc_logic/src/data/data.dart';
 import 'package:mxc_logic/src/domain/repositories/internal/shared_mappers.dart';
 
 class WithdrawRepository {
-  final ChopperClient _client;
+  final SupernodeClient _client;
 
   WithdrawRepository(this._client);
 
   Future<bool> withdraw({
-    required String orgId,
+    String? orgId,
     required Decimal amount,
     required Token currency,
     required String address,
@@ -21,7 +20,7 @@ class WithdrawRepository {
         amount: amount.toString(),
         currency: currency.toData(),
         ethAddress: address,
-        orgId: orgId,
+        orgId: orgId ?? _client.defaultOrganizationId,
       ),
       grpcMetadataXOTP: otp,
     );
@@ -32,13 +31,13 @@ class WithdrawRepository {
     Token? currency,
     DateTime? from,
     DateTime? till,
-    required String orgId,
+    String? orgId,
   }) async {
     final res = await _client.withdrawService.getWithdrawHistory(
       currency: currency?.toData(),
       from: (from ?? Values.dateMin).toData(),
       till: (till ?? Values.dateMax).toData(),
-      orgId: orgId,
+      orgId: orgId ?? _client.defaultOrganizationId,
     );
     return res.body!.withdrawHistory!
         .map(

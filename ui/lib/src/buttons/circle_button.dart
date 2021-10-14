@@ -4,18 +4,23 @@ import 'package:mxc_ui/mxc_ui.dart';
 abstract class MxcCircleButton extends StatelessWidget {
   final bool filled;
   final VoidCallback? onTap;
+  final String? title;
+  final Color? color;
 
   const factory MxcCircleButton({
     required Key? key,
     required Widget child,
     required VoidCallback? onTap,
     bool filled,
+    String? title,
   }) = _MxcCircleChildButton;
 
   const MxcCircleButton._({
     required Key? key,
     required this.onTap,
     this.filled = false,
+    this.title,
+    this.color,
   }) : super(key: key);
 
   const factory MxcCircleButton.image({
@@ -23,6 +28,8 @@ abstract class MxcCircleButton extends StatelessWidget {
     required ImageProvider image,
     required VoidCallback? onTap,
     bool filled,
+    String? title,
+    Color? color,
   }) = _MxcCircleImageButton;
 
   const factory MxcCircleButton.icon({
@@ -30,6 +37,8 @@ abstract class MxcCircleButton extends StatelessWidget {
     required IconData icon,
     required VoidCallback? onTap,
     bool filled,
+    String? title,
+    Color? color,
   }) = _MxcCircleIconButton;
 
   Color _contentColor(BuildContext context) {
@@ -39,7 +48,7 @@ abstract class MxcCircleButton extends StatelessWidget {
     } else if (filled) {
       color = ColorsTheme.of(context).buttonIconTextColor;
     } else {
-      color = MxcScopedTheme.of(context).primaryColor;
+      color = this.color ?? MxcScopedTheme.of(context).primaryColor;
     }
     return color;
   }
@@ -52,11 +61,11 @@ abstract class MxcCircleButton extends StatelessWidget {
     if (onTap == null) {
       fillColor = ColorsTheme.of(context).primaryBackground;
     } else if (filled) {
-      fillColor = MxcScopedTheme.of(context).primaryColor;
+      fillColor = color ?? MxcScopedTheme.of(context).primaryColor;
     } else {
       fillColor = ColorsTheme.of(context).boxComponents;
     }
-    return Material(
+    Widget widget = Material(
       color: fillColor,
       shape: const CircleBorder(),
       child: InkWell(
@@ -73,6 +82,22 @@ abstract class MxcCircleButton extends StatelessWidget {
         ),
       ),
     );
+
+    if (title != null) {
+      widget = Column(
+        children: [
+          widget,
+          const SizedBox(height: 6),
+          Text(
+            title!,
+            textAlign: TextAlign.center,
+            style: FontTheme.of(context).middle(),
+          ),
+        ],
+      );
+    }
+
+    return widget;
   }
 }
 
@@ -84,7 +109,14 @@ class _MxcCircleChildButton extends MxcCircleButton {
     required this.child,
     required VoidCallback? onTap,
     bool filled = false,
-  }) : super._(key: key, filled: filled, onTap: onTap);
+    String? title,
+  }) : super._(
+          key: key,
+          filled: filled,
+          onTap: onTap,
+          title: title,
+          color: null,
+        );
 
   @override
   Widget buildChild(BuildContext context) => child;
@@ -98,7 +130,15 @@ class _MxcCircleImageButton extends MxcCircleButton {
     required this.image,
     required VoidCallback? onTap,
     bool filled = false,
-  }) : super._(key: key, filled: filled, onTap: onTap);
+    String? title,
+    Color? color,
+  }) : super._(
+          key: key,
+          filled: filled,
+          onTap: onTap,
+          title: title,
+          color: color,
+        );
 
   @override
   Widget buildChild(BuildContext context) => Image(
@@ -115,7 +155,15 @@ class _MxcCircleIconButton extends MxcCircleButton {
     required this.icon,
     required VoidCallback? onTap,
     bool filled = false,
-  }) : super._(key: key, filled: filled, onTap: onTap);
+    String? title,
+    Color? color,
+  }) : super._(
+          key: key,
+          filled: filled,
+          onTap: onTap,
+          title: title,
+          color: color,
+        );
 
   @override
   Widget buildChild(BuildContext context) => Icon(

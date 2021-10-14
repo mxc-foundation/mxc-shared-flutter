@@ -63,6 +63,19 @@ class FontTheme {
           decoration: TextDecoration.none,
         ),
       );
+
+  /// FontSize: 30
+  TextStylePack get extraBig => TextStylePack(
+        _colorsTheme,
+        TextStyle(
+          color: _colorsTheme.textPrimaryAndIcons,
+          fontFamily: "Roboto",
+          fontWeight: FontWeight.w400,
+          fontSize: 30,
+          height: 1.33333,
+          decoration: TextDecoration.none,
+        ),
+      );
 }
 
 class TextStylePack {

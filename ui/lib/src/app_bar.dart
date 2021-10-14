@@ -168,7 +168,9 @@ class MxcAppBarButton extends StatelessWidget {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: onTap,
-      child: Align(
+      child: Container(
+        alignment: Alignment.center,
+        padding: const EdgeInsets.all(5),
         child: child,
       ),
     );

@@ -12,6 +12,7 @@ class Gateway {
   final String name;
   final String networkServerID;
   final String organizationID;
+  final bool reseller;
 
   Gateway({
     required this.id,
@@ -24,6 +25,7 @@ class Gateway {
     required this.name,
     required this.networkServerID,
     required this.organizationID,
+    required this.reseller,
   });
 }
 

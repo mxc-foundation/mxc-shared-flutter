@@ -6,6 +6,7 @@ export 'src/app_bar.dart';
 export 'src/buttons/buttons.dart';
 export 'src/card.dart';
 export 'src/checkbox.dart';
+export 'src/circle_widget.dart';
 export 'src/dialogs/dialogs.dart';
 export 'src/shadow.dart';
 export 'src/slider.dart';

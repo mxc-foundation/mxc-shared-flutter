@@ -15,8 +15,7 @@ class CacheField<T> implements Field<T> {
     T defaultValue, {
     Serializer<T>? serializer,
     Deserializer<T>? deserializer,
-  })  : _value = defaultValue,
-        _defaultValue = defaultValue,
+  })  : _defaultValue = defaultValue,
         _serializer = serializer,
         _deserializer = deserializer;
 
@@ -34,22 +33,17 @@ class CacheField<T> implements Field<T> {
     );
   }
 
-  bool _loaded = false;
-
   final T _defaultValue;
-  late T _value;
+
+  @override
   T get value {
-    if (!_loaded) {
-      _value = _cache.read(_name, _deserializer) ?? _defaultValue;
-      _loaded = true;
-    }
-    return _value;
+    return _cache.read(_name, _deserializer) ?? _defaultValue;
   }
 
+  @override
   set value(T value) => save(value);
 
   Future<void> save(T value) {
-    _value = value;
     return _cache.write(_name, value, _serializer);
   }
 }

@@ -1,11 +1,10 @@
-import 'package:chopper/chopper.dart';
 import 'package:decimal/decimal.dart';
 import 'package:mxc_logic/mxc_logic.dart';
 import 'package:mxc_logic/src/data/data.dart';
 import 'package:mxc_logic/src/domain/repositories/internal/shared_mappers.dart';
 
 class GatewayRepository {
-  final ChopperClient _client;
+  final SupernodeClient _client;
 
   GatewayRepository(this._client);
 
@@ -13,8 +12,9 @@ class GatewayRepository {
     String? search,
     int? limit,
     int? offset,
-    required String organizationId,
+    String? organizationId,
   }) async {
+    organizationId ??= _client.defaultOrganizationId;
     final res = await _client.gatewayService.list(
       search: search,
       limit: limit,
@@ -34,6 +34,7 @@ class GatewayRepository {
             name: e.name.orDefault(),
             networkServerID: e.networkServerID!,
             organizationID: e.organizationID!,
+            reseller: e.organizationID != organizationId,
           ),
         )
         .toList()
@@ -52,10 +53,10 @@ class GatewayRepository {
     required String name,
     required String description,
     required double altitude,
-    required String orgId,
     required bool discoveryEnabled,
     required String networkServerId,
-    required String profileId,
+    required String? profileId,
+    String? orgId,
   }) async {
     await _client.gatewayService.create(
       body: ExtapiCreateGatewayRequest(
@@ -63,7 +64,7 @@ class GatewayRepository {
           id: id,
           name: name,
           description: description,
-          organizationID: orgId,
+          organizationID: orgId ?? _client.defaultOrganizationId,
           discoveryEnabled: discoveryEnabled,
           networkServerID: networkServerId,
           gatewayProfileID: profileId,
@@ -81,11 +82,11 @@ class GatewayRepository {
 
   Future<GatewayRegisterResult> register({
     required String serialNumber,
-    required String orgId,
+    String? orgId,
   }) async {
     final res = await _client.gatewayService.register(
       body: ExtapiRegisterRequest(
-        organizationId: orgId,
+        organizationId: orgId ?? _client.defaultOrganizationId,
         sn: serialNumber,
       ),
     );
@@ -94,11 +95,11 @@ class GatewayRepository {
 
   Future<GatewayRegisterResult> registerReseller({
     required String serialNumber,
-    required String orgId,
+    String? orgId,
   }) async {
     final res = await _client.gatewayService.registerReseller(
       body: ExtapiRegisterResellerRequest(
-        organizationId: orgId,
+        organizationId: orgId ?? _client.defaultOrganizationId,
         manufacturerNr: serialNumber,
       ),
     );
@@ -113,8 +114,8 @@ class GatewayRepository {
   }) async {
     final res = await _client.gatewayProfileService.list(
       networkServerID: networkServerId,
-      limit: limit?.toString(),
-      offset: offset?.toString(),
+      limit: (limit ?? Values.intMax).toString(),
+      offset: (offset ?? 0).toString(),
     );
     return res.body!.result!
         .map(
@@ -159,10 +160,11 @@ class GatewayRepository {
   }
 
   Future<GatewayHealthSummary> health({
-    required String orgId,
+    String? orgId,
   }) async {
-    final res =
-        await _client.walletService.getGatewayMiningHealth(orgId: orgId);
+    final res = await _client.walletService.getGatewayMiningHealth(
+      orgId: orgId ?? _client.defaultOrganizationId,
+    );
     final gatewayHealths = res.body!.gatewayHealth!
         .map(
           (e) => GatewayHealth(
@@ -196,13 +198,13 @@ class GatewayRepository {
 
   Future<GatewayMiningIncomeSummary> miningIncome({
     required String gatewayMac,
-    required String orgId,
+    String? orgId,
     DateTime? fromDate,
     DateTime? tillDate,
   }) async {
     final res = await _client.walletService.getGatewayMiningIncome(
       gatewayMac: gatewayMac,
-      orgId: orgId,
+      orgId: orgId ?? _client.defaultOrganizationId,
       fromDate: fromDate?.toData(),
       tillDate: tillDate?.toData(),
     );
