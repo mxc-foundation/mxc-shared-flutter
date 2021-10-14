@@ -26,8 +26,4 @@ class Device {
     this.deviceStatusMargin,
     this.lastSeen,
   });
-
-  // set deviceProfileID(String id){
-  //   deviceProfileID = id;
-  // }
 }

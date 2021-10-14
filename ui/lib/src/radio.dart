@@ -7,10 +7,10 @@ class MxcRadio extends StatelessWidget {
   final int groupValue;
 
   const MxcRadio(
-      {required Key? key,
+      {Key? key,
       required this.onChanged,
       required this.value,
-      required this.groupValue})
+      required this.groupValue,})
       : super(key: key);
 
   @override

@@ -15,17 +15,17 @@ class MxcOutlinedTextField extends StatefulWidget {
   final MxcOutlinedTextFieldButton? button;
   final IconData? prefixIcon;
   final Border? border;
+  final bool autoFocus;
   final void Function(FocusNode)? onFocusCreated;
   final void Function(bool)? onFocusChanged;
   final void Function(String)? onChanged;
   final void Function(int)? onStepperChanged;
 
-  final TextEditingController? _controller;
-  final String? _initialText;
+  final TextEditingController? controller;
 
   const MxcOutlinedTextField({
-    required Key? key,
-    required TextEditingController controller,
+    Key? key,
+    this.controller,
     this.label,
     this.hint,
     this.initialValue,
@@ -37,21 +37,20 @@ class MxcOutlinedTextField extends StatefulWidget {
     this.width = 340,
     this.focusNode,
     this.border,
+    this.autoFocus = false,
     this.onFocusCreated,
     this.onFocusChanged,
     this.onChanged,
     this.prefixIcon,
     this.onStepperChanged,
-  })  : _controller = controller,
-        _initialText = null,
-        super(key: key);
+  })  : super(key: key);
 
   const MxcOutlinedTextField.viewOnly({
     Key? key,
-    required String text,
     this.label,
     this.hint,
     this.initialValue,
+    this.controller,
     this.validator,
     this.action,
     this.maxLines = 1,
@@ -59,14 +58,13 @@ class MxcOutlinedTextField extends StatefulWidget {
     this.width = 340,
     this.focusNode,
     this.border,
+    this.autoFocus = false,
     this.onFocusCreated,
     this.onFocusChanged,
     this.onChanged,
     this.prefixIcon,
     this.onStepperChanged,
-  })  : _initialText = text,
-        readOnly = true,
-        _controller = null,
+  })  : readOnly = true,
         super(key: key);
 
   @override
@@ -74,13 +72,14 @@ class MxcOutlinedTextField extends StatefulWidget {
 }
 
 class _MxcOutlinedTextFieldState extends State<MxcOutlinedTextField> {
-  late final FocusNode focusNode;
-  late bool focused;
+  late final FocusNode _focusNode;
+  late bool _focused;
+  late TextEditingController _textController;
 
   @override
   void initState() {
     super.initState();
-    focusNode = widget.focusNode ??
+    _focusNode = widget.focusNode ??
         FocusNode(
           debugLabel: widget.label,
           onKey: (FocusNode node, RawKeyEvent evt) {
@@ -92,24 +91,28 @@ class _MxcOutlinedTextFieldState extends State<MxcOutlinedTextField> {
             return KeyEventResult.ignored;
           },
         );
-    focused = focusNode.hasFocus;
-    focusNode.addListener(_focusNodeListener);
+    _focused = _focusNode.hasFocus;
+    _focusNode.addListener(_focusNodeListener);
 
-    widget.onFocusCreated?.call(focusNode);
+    widget.onFocusCreated?.call(_focusNode);
+
+    _textController = TextEditingController(text: widget.initialValue);
   }
 
   void _focusNodeListener() {
-    if (focusNode.hasFocus != focused) {
-      setState(() => focused = focusNode.hasFocus);
+    if (_focusNode.hasFocus != _focused) {
+      setState(() => _focused = _focusNode.hasFocus);
     }
 
-    widget.onFocusChanged?.call(focused);
+    widget.onFocusChanged?.call(_focused);
   }
 
   @override
   void dispose() {
     super.dispose();
-    if (widget.focusNode == null) focusNode.dispose();
+    if (widget.focusNode == null) _focusNode.dispose();
+
+    _textController.dispose();
   }
 
   @override
@@ -123,24 +126,29 @@ class _MxcOutlinedTextFieldState extends State<MxcOutlinedTextField> {
             AnimatedContainer(
               duration: const Duration(milliseconds: 200),
               padding: EdgeInsets.only(
-                top: focused ? 6 : 3,
-                bottom: focused ? 3 : 6,
+                top: _focused ? 6 : 3,
+                bottom: _focused ? 3 : 6,
               ),
               alignment: Alignment.centerLeft,
-              height: 24,
-              child: AnimatedDefaultTextStyle(
-                duration: const Duration(milliseconds: 200),
-                style: focused
-                    ? FontTheme.of(context).small().copyWith(
-                          color: MxcScopedTheme.of(context).primaryColor,
-                        )
-                    : FontTheme.of(context).middle(),
-                child: Text(
-                  widget.label!,
-                  maxLines: 1,
+              child: widget.readOnly ? 
+                Text(
+                    widget.label!,
+                    maxLines: 1,
+                    style: FontTheme.of(context).middle.label(),
+                ) :
+                AnimatedDefaultTextStyle(
+                  duration: const Duration(milliseconds: 200),
+                  style: _focused
+                      ? FontTheme.of(context).small().copyWith(
+                            color: MxcScopedTheme.of(context).primaryColor,
+                          )
+                      : FontTheme.of(context).middle(),
+                  child: Text(
+                    widget.label!,
+                    maxLines: 1,
+                  ),
                 ),
-              ),
-            )
+            ),
           },
           AnimatedContainer(
             duration: const Duration(milliseconds: 200),
@@ -148,8 +156,8 @@ class _MxcOutlinedTextFieldState extends State<MxcOutlinedTextField> {
               border: widget.border ??
                   Border(
                     bottom: BorderSide(
-                      width: focused ? 2 : 1,
-                      color: focused
+                      width: _focused && !widget.readOnly ? 2 : 1,
+                      color: _focused
                           ? MxcScopedTheme.of(context).primaryColor
                           : ColorsTheme.of(context).textPrimaryAndIcons,
                     ),
@@ -163,7 +171,7 @@ class _MxcOutlinedTextFieldState extends State<MxcOutlinedTextField> {
                     padding: const EdgeInsets.all(5),
                     child: Icon(
                       widget.prefixIcon,
-                      color: focused
+                      color: _focused
                           ? MxcScopedTheme.of(context).primaryColor
                           : ColorsTheme.of(context).textPrimaryAndIcons,
                     ),
@@ -172,15 +180,15 @@ class _MxcOutlinedTextFieldState extends State<MxcOutlinedTextField> {
                 Expanded(
                   child: TextFormField(
                     readOnly: widget.readOnly,
-                    initialValue: widget._initialText,
-                    focusNode: focusNode,
+                    focusNode: _focusNode,
                     maxLines: widget.maxLines,
                     textInputAction: widget.action,
                     validator: widget.validator,
-                    controller: widget._controller,
+                    controller: widget.controller ?? _textController,
                     cursorColor: ColorsTheme.of(context).textPrimaryAndIcons,
                     style: FontTheme.of(context).big(),
                     onChanged: widget.onChanged,
+                    autofocus: widget.autoFocus,
                     decoration: InputDecoration(
                       isDense: true,
                       floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -197,7 +205,7 @@ class _MxcOutlinedTextFieldState extends State<MxcOutlinedTextField> {
                 if (widget.button != null)
                   MxcScopedTheme(
                     data: MxcScopedThemeData(
-                      primaryColor: focused
+                      primaryColor: _focused
                           ? MxcScopedTheme.of(context).primaryColor
                           : ColorsTheme.of(context).textPrimaryAndIcons,
                     ),
@@ -205,7 +213,7 @@ class _MxcOutlinedTextFieldState extends State<MxcOutlinedTextField> {
                   ),
                 if (widget.onStepperChanged != null)
                   MxcStepperButton(
-                    controller: widget._controller,
+                    controller: _textController,
                     onStepperChanged: (value) =>
                         widget.onStepperChanged!(value),
                   )
