@@ -7,7 +7,6 @@ export 'src/buttons/buttons.dart';
 export 'src/card.dart';
 export 'src/checkbox.dart';
 export 'src/dialogs/dialogs.dart';
-export 'src/inputs/inputs.dart';
 export 'src/radio.dart';
 export 'src/shadow.dart';
 export 'src/slider.dart';

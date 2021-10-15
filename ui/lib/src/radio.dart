@@ -6,12 +6,12 @@ class MxcRadio extends StatelessWidget {
   final int value;
   final int groupValue;
 
-  const MxcRadio(
-      {Key? key,
-      required this.onChanged,
-      required this.value,
-      required this.groupValue,})
-      : super(key: key);
+  const MxcRadio({
+    Key? key,
+    required this.onChanged,
+    required this.value,
+    required this.groupValue,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
