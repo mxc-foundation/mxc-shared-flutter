@@ -60,7 +60,7 @@ class DemoGatewaysRepository implements GatewayRepository {
         id: "profileId1",
         createdAt: DateTime.now(),
         updatedAt: DateTime.now(),
-        name: "profileName1",
+        name: "(OTAA_1.0.0) Device profile name",
         networkServerID: "networkServerID1",
         networkServerName: "networkServerName1",
       ),
@@ -68,7 +68,7 @@ class DemoGatewaysRepository implements GatewayRepository {
         id: "profileId2",
         createdAt: DateTime.now(),
         updatedAt: DateTime.now(),
-        name: "profileName2",
+        name: "(OTAA_1.0.0) Device profile name",
         networkServerID: "networkServerID1",
         networkServerName: "networkServerName1",
       ),
@@ -76,7 +76,7 @@ class DemoGatewaysRepository implements GatewayRepository {
         id: "profileId3",
         createdAt: DateTime.now(),
         updatedAt: DateTime.now(),
-        name: "profileName3",
+        name: "(ABP_1.0.0) Device profile name",
         networkServerID: "networkServerID3",
         networkServerName: "networkServerName3",
       ),
@@ -84,27 +84,11 @@ class DemoGatewaysRepository implements GatewayRepository {
         id: "profileId4",
         createdAt: DateTime.now(),
         updatedAt: DateTime.now(),
-        name: "profileName4",
+        name: "(ABP_1.1.0) Device profile name",
         networkServerID: "networkServerID4",
         networkServerName: "networkServerName4",
       ),
-      GatewayProfile(
-        id: "profileId5",
-        createdAt: DateTime.now(),
-        updatedAt: DateTime.now(),
-        name: "profileName5",
-        networkServerID: "networkServerID5",
-        networkServerName: "networkServerName5",
-      ),
-      GatewayProfile(
-        id: "profileId6",
-        createdAt: DateTime.now(),
-        updatedAt: DateTime.now(),
-        name: "profileName6",
-        networkServerID: "networkServerID6",
-        networkServerName: "networkServerName6",
-      )
-    ].withTotal(2);
+    ].withTotal(4);
   }
 
   @override
