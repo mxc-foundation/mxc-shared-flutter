@@ -27,6 +27,7 @@ class MxcCard extends StatelessWidget {
   Widget build(BuildContext context) {
     Widget widget = Container(
       padding: padding ?? const EdgeInsets.all(16),
+      clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         color: color ?? ColorsTheme.of(context).boxComponents,

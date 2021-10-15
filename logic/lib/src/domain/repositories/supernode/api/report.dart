@@ -29,13 +29,14 @@ class ReportRepository {
     String? organizationId,
   }) async {
     late final String content;
+    organizationId ??= client.defaultOrganizationId;
     switch (format) {
       case ReportFormat.csv:
         final res = await client.reportService.miningReportCSV(
           currency: [Token.mxc.toData()],
           decimals: decimals,
           fiatCurrency: fiatCurrency.id,
-          organizationId: organizationId ?? client.defaultOrganizationId,
+          organizationId: organizationId,
           start: start.toUtc().toIso8601String(),
           end: end.toUtc().toIso8601String(),
         );

@@ -57,6 +57,11 @@ abstract class MxcCircleWidget extends StatelessWidget {
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         color: fillColor,
+        boxShadow: [
+          MxcBoxShadow(
+            color: ColorsTheme.of(context).shadow2,
+          ),
+        ],
       ),
       width: 44,
       height: 44,
