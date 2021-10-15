@@ -69,7 +69,8 @@ class DhxRepository {
   }) async {
     final res = await _client.dHXServcie.dHXBondInfo(
       body: ExtapiDHXBondInfoRequest(
-          orgId: organizationId ?? _client.defaultOrganizationId),
+        orgId: organizationId ?? _client.defaultOrganizationId,
+      ),
     );
     return DhxBondInfo(
       bonded: Decimal.parse(res.body!.dhxBonded!),

@@ -54,7 +54,9 @@ class CacheManagerSembast implements CacheManager {
     required Deserializer<T> deserializer,
   }) {
     _serializersBucket.registerType(
-        serializer: serializer, deserializer: deserializer);
+      serializer: serializer,
+      deserializer: deserializer,
+    );
   }
 
   @override
@@ -111,7 +113,7 @@ class CacheZoneSembast implements CacheZone {
         raw = deserializer(raw);
       }
       return raw as T;
-    } catch (e, s) {
+    } catch (e) {
       log('Cant load field of type $T. Returning default...');
       return null;
     }

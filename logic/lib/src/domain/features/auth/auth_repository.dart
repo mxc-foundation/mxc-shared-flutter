@@ -1,9 +1,8 @@
 import 'package:mxc_logic/internal.dart';
-import 'package:mxc_logic/mxc_logic.dart';
 
 class AuthenticationRepository {
   final SupernodeSetupStore _supernodeSetupStore;
-  final CacheController _supernodeCacheController;
+  final CacheController? _supernodeCacheController;
 
   AuthenticationRepository(
     this._supernodeSetupStore,
@@ -21,7 +20,7 @@ class AuthenticationRepository {
   ) async {
     _supernodeSetupStore.credentials = Credentials(username, password);
     _supernodeSetupStore.token = token;
-    await _supernodeCacheController.load(username);
+    await _supernodeCacheController?.load(username);
   }
 
   String get organizationId =>

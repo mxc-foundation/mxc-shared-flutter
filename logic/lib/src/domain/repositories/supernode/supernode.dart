@@ -71,8 +71,11 @@ class ApiSupernodeRepository implements SupernodeRepository {
           getDefaultOrganizationId: () => setupStore.organizationId,
           getToken: () => setupStore.token,
           refreshToken: (client) => tokenRefresher.refresh(
-              ApiSupernodeRepository.withClient(
-                  client: client, setupStore: setupStore)),
+            ApiSupernodeRepository.withClient(
+              client: client,
+              setupStore: setupStore,
+            ),
+          ),
         );
 
   ApiSupernodeRepository.withClient({

@@ -46,7 +46,7 @@ class AuthPresenter extends StateNotifier<AuthState> {
 
   final ProviderRefBase _ref;
 
-  AuthUseCase get _useCase => _ref.read(authUseCaseProvider);
+  LoginUseCase get _useCase => _ref.read(authUseCaseProvider);
   NavigatorState get _navigator => _ref.read(navigatorProvider);
 
   Future<void> initState() async {

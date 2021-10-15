@@ -26,7 +26,7 @@ class PickFeaturePresenter extends StateNotifier<PickFeatureState> {
 
   final ProviderRefBase _ref;
 
-  AuthUseCase get _authUseCase => _ref.read(authUseCaseProvider);
+  LoginUseCase get _authUseCase => _ref.read(authUseCaseProvider);
 
   NavigatorState get _navigator => _ref.read(navigatorProvider);
 

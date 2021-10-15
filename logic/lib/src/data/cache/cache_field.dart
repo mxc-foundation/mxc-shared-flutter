@@ -58,7 +58,7 @@ class _NullableCacheField<T> extends CacheField<T?> {
           cache,
           name,
           null,
-          serializer: serializer == null ? null : (t) => serializer(t!),
+          serializer: serializer == null ? null : (t) => serializer(t as T),
           deserializer: deserializer,
         );
 }

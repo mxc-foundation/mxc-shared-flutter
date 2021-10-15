@@ -235,7 +235,7 @@ class _ButtonsRowState extends State<ButtonsRow> {
                         children: [
                           SizedBox(
                             width: 250,
-                            child: SegmentationTab(
+                            child: MxcSegmentationTab(
                               key: null,
                               labels: const ['lorem', 'ipsum'],
                               onChanged: (_) {},

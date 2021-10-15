@@ -7,8 +7,13 @@ abstract class Transaction {
 }
 
 class Topup implements Transaction {
+  @override
   final Decimal amount;
+
+  @override
   final DateTime timestamp;
+
+  @override
   final String txHash;
 
   Topup({
@@ -19,9 +24,15 @@ class Topup implements Transaction {
 }
 
 class Withdraw implements Transaction {
+  @override
   final Decimal amount;
+
+  @override
   final DateTime timestamp;
+
+  @override
   final String txHash;
+
   final String txStatus;
   final Decimal withdrawFee;
   final String? failReason;

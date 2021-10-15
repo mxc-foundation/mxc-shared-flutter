@@ -12,52 +12,62 @@ import 'secure.dart';
 
 final memoryMap = <String, dynamic>{};
 
+class MemoryCacheZone implements CacheZone {
+  late final Map<String, dynamic> map = <String, dynamic>{};
+
+  @override
+  T? read<T>(
+    String key, [
+    Deserializer<T>? deserializer,
+  ]) =>
+      map[key] as T;
+
+  @override
+  Future<void> write<T>(
+    String key,
+    T value, [
+    Serializer<T>? serializer,
+  ]) async =>
+      map[key] = value;
+}
+
 class MemoryCacheManager implements CacheManager {
-  final Map<String, dynamic> map;
-
-  MemoryCacheManager(this.map);
-
   @override
-  CacheManager withZone(String name) {
-    return MemoryCacheManager(
-      memoryMap[name] as Map<String, dynamic>? ??
-          (memoryMap[name] = <String, dynamic>{}),
-    );
+  Future<CacheZone> loadZone(String name) async {
+    return MemoryCacheZone();
   }
 
   @override
-  Future<dynamic> read(String key) {
-    return Future<dynamic>.value(map[key]);
-  }
-
-  @override
-  Future<void> write(String key, dynamic value) {
-    return Future<dynamic>.value(map[key] = value);
-  }
+  void registerType<T extends Object>({
+    required Serializer<T> serializer,
+    required Deserializer<T> deserializer,
+  }) {}
 }
 
 Future<void> main() async {
   initSecure();
 
-  final cacheManager = MemoryCacheManager(memoryMap);
-  final supernodeSetupRepository =
-      await SupernodeSetupRepository.load(cacheManager);
-  final tokenRefresher = TokenRefresher(supernodeSetupRepository);
+  final cacheManager = MemoryCacheManager();
+  final supernodeSetupStore = SupernodeSetupStore();
+  await supernodeSetupStore.load(cacheManager);
+  final tokenRefresher = TokenRefresher(supernodeSetupStore);
   final supernodeRepository = ApiSupernodeRepository(
     tokenRefresher: tokenRefresher,
-    setupRepository: supernodeSetupRepository,
+    setupStore: supernodeSetupStore,
   );
 
-  final authUseCase =
-      AuthUseCase(supernodeRepository, supernodeSetupRepository);
+  final loginUseCase = LoginUseCase(
+    supernodeRepository,
+    AuthenticationRepository(supernodeSetupStore, null),
+  );
 
   group('A group of tests', () {
     test('Can get supernodes', () async {
-      final supernodes = await authUseCase.listSupernodes();
+      final supernodes = await loginUseCase.listSupernodes();
       expect(supernodes, isNotEmpty);
     });
     test('Can login', () async {
-      await authUseCase.login(
+      await loginUseCase.login(
         supernodeAddress,
         login,
         password,

@@ -13,12 +13,12 @@ typedef PresenterProvider<Presenter extends StateNotifier<State>, State>
 
 late final Provider<CacheManager> cacheManagerProvider;
 late final Provider<SupernodeRepository> supernodeRepositoryProvider;
-late final Provider<SupernodeSetupRepository> supernodeSetupRepositoryProvider;
+late final Provider<AuthenticationRepository> authenticationRepositoryProvider;
 late final Provider<NavigatorState> navigatorProvider;
 
-Provider<AuthUseCase> authUseCaseProvider = Provider((ref) => AuthUseCase(
+Provider<LoginUseCase> authUseCaseProvider = Provider((ref) => LoginUseCase(
       ref.watch(supernodeRepositoryProvider),
-      ref.watch(supernodeSetupRepositoryProvider),
+      ref.watch(authenticationRepositoryProvider),
     ));
 
 Provider<DeviceUseCase> deviceUseCaseProvider = Provider((ref) => DeviceUseCase(
@@ -27,19 +27,24 @@ Provider<DeviceUseCase> deviceUseCaseProvider = Provider((ref) => DeviceUseCase(
 
 Future<void> loadProviders(GlobalKey<NavigatorState> navigatorKey) async {
   final cacheManager = await CacheManager.load();
-  final supernodeSetupRepository =
-      await SupernodeSetupRepository.load(cacheManager);
-  final tokenRefresher = TokenRefresher(supernodeSetupRepository);
+  final supernodeSetupStore = SupernodeSetupStore();
+  await supernodeSetupStore.load(cacheManager);
+  final tokenRefresher = TokenRefresher(supernodeSetupStore);
   final supernodeRepository = ApiSupernodeRepository(
-    setupRepository: supernodeSetupRepository,
+    setupStore: supernodeSetupStore,
     tokenRefresher: tokenRefresher,
   );
+
+  final supernodeCacheController = CacheController(cacheManager, 'supernode');
 
   cacheManagerProvider = Provider(
     (ref) => cacheManager,
   );
-  supernodeSetupRepositoryProvider = Provider(
-    (ref) => supernodeSetupRepository,
+  authenticationRepositoryProvider = Provider(
+    (ref) => AuthenticationRepository(
+      supernodeSetupStore,
+      supernodeCacheController,
+    ),
   );
   supernodeRepositoryProvider = Provider(
     (ref) => supernodeRepository,
