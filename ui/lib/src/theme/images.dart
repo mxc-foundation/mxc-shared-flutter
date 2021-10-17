@@ -347,58 +347,6 @@ class ImagesTheme {
         'assets/images/settings/wechat_qr_code.png',
         package: _packageName,
       );
-
-  /// web
-  // main_menu
-  ImageProvider get dashboard => const AssetImage(
-        'assets/images/web/main_menu/dashboard.png',
-        package: _packageName,
-      );
-
-  ImageProvider get device => const AssetImage(
-        'assets/images/web/main_menu/device.png',
-        package: _packageName,
-      );
-
-  ImageProvider get profile => const AssetImage(
-        'assets/images/web/main_menu/profile.png',
-        package: _packageName,
-      );
-
-  ImageProvider get organization => const AssetImage(
-        'assets/images/web/main_menu/organization.png',
-        package: _packageName,
-      );
-
-  ImageProvider get setting => const AssetImage(
-        'assets/images/web/main_menu/setting.png',
-        package: _packageName,
-      );
-
-  ImageProvider get net => const AssetImage(
-        'assets/images/web/nav/net.png',
-        package: _packageName,
-      );
-
-  ImageProvider get person => const AssetImage(
-        'assets/images/web/nav/person.png',
-        package: _packageName,
-      );
-
-  ImageProvider get arrowDown => const AssetImage(
-        'assets/images/web/device/arrow_down.png',
-        package: _packageName,
-      );
-
-  ImageProvider get arrowUp => const AssetImage(
-        'assets/images/web/device/arrow_up.png',
-        package: _packageName,
-      );
-
-  ImageProvider get file => const AssetImage(
-        'assets/images/web/device/file.png',
-        package: _packageName,
-      );
 }
 
 class ImagesThemeDark extends ImagesTheme {

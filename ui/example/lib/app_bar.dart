@@ -121,7 +121,7 @@ class AppBarView extends StatelessWidget {
                   ),
                   title: Center(
                     child: Image(
-                      image: ImagesTheme.of(context).logoMxc,
+                      image: StyledIcons.logoMxc,
                       height: 40,
                     ),
                   ),

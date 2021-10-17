@@ -258,14 +258,14 @@ class _ButtonsRowState extends State<ButtonsRow> {
                         children: [
                           MxcCircleButton.image(
                             key: null,
-                            image: ImagesTheme.of(context).fuel,
+                            image: StyledIcons.fuel,
                             filled: true,
                             onTap: () {},
                           ),
                           const SizedBox(width: 19),
                           MxcCircleButton.image(
                             key: null,
-                            image: ImagesTheme.of(context).iconMine,
+                            image: StyledIcons.iconMine,
                             onTap: () {},
                           ),
                           const SizedBox(width: 19),
@@ -283,7 +283,7 @@ class _ButtonsRowState extends State<ButtonsRow> {
                           const SizedBox(width: 19),
                           MxcCircleButton.image(
                             key: null,
-                            image: ImagesTheme.of(context).gateways,
+                            image: StyledIcons.gateways,
                             filled: true,
                             onTap: () {},
                           ),
