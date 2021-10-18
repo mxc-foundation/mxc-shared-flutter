@@ -130,7 +130,11 @@ class WalletRepository {
     final res = await _client.bTCMining.bTCListLocks(orgId: orgId);
 
     return res.body!.lock!
-        .map((e) => BtcLock(gatewayMac: e.gatewayMac!, sessionId: e.sessionId!))
+        .map((e) => BtcLock(
+            gatewayMac: e.gatewayMac!,
+            sessionId: e.sessionId!,
+            amountLocked: e.amount!.toInt(),
+            btcRevenue: Decimal.tryParse(e.btcRevenue!) ?? Decimal.zero))
         .toList();
   }
 }

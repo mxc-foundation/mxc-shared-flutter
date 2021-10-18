@@ -1,3 +1,5 @@
+import 'package:decimal/decimal.dart';
+
 class BtcMiningSession {
   final String sessionId;
   final int mxcLockAmount;
@@ -17,10 +19,14 @@ class BtcMiningSession {
 class BtcLock {
   final String gatewayMac;
   final String sessionId;
+  final int amountLocked;
+  final Decimal btcRevenue;
 
   BtcLock({
     required this.gatewayMac,
     required this.sessionId,
+    required this.amountLocked,
+    required this.btcRevenue,
   });
 }
 
