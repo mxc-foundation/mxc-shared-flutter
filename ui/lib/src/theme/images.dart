@@ -25,6 +25,10 @@ class ImagesTheme {
         'assets/images/wallet/logo-mxc.png',
         package: _packageName,
       );
+  ImageProvider get logoMxcBig => const AssetImage(
+        'assets/images/wallet/logo-mxc-big.png',
+        package: _packageName,
+      );
   ImageProvider get logoDhx => const AssetImage(
         'assets/images/wallet/logo-dhx.png',
         package: _packageName,
@@ -364,6 +368,12 @@ class ImagesThemeDark extends ImagesTheme {
   @override
   ImageProvider get logoMxc => const AssetImage(
         'assets/images/wallet/logo-mxc-dark.png',
+        package: _packageName,
+      );
+
+  @override
+  ImageProvider get logoMxcBig => const AssetImage(
+        'assets/images/wallet/logo-mxc-big-dark.png',
         package: _packageName,
       );
 
