@@ -44,7 +44,7 @@ class DhxRepository {
       organizationId: organizationId ?? _client.defaultOrganizationId,
     );
     final list = res.body!.stake;
-    return list!
+    final resList = list!
         .map(
           (e) => Lock(
             id: e.id!,
@@ -62,6 +62,9 @@ class DhxRepository {
           ),
         )
         .toList();
+
+    resList.sort((a, b) => b.id.compareTo(a.id));
+    return resList;
   }
 
   Future<DhxBondInfo> bondInfo({
