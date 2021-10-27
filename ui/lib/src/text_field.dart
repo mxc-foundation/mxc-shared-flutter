@@ -1,29 +1,100 @@
 import 'package:flutter/material.dart';
 import 'package:mxc_ui/mxc_ui.dart';
 
-class MxcTextField extends StatefulWidget {
+class MxcTextField extends FormField<String> {
+  MxcTextField({
+    required Key? key,
+    String? label,
+    required TextEditingController controller,
+    String? hint,
+    FormFieldValidator<String>? validator,
+    TextInputAction? action,
+    bool readOnly = false,
+    MxcTextFieldButton? button,
+    double width = double.infinity,
+    FocusNode? focusNode,
+    TextInputType? keyboardType,
+    String? suffixText,
+    bool obscure = false,
+    AutovalidateMode? autovalidateMode,
+  }) : super(
+          key: key,
+          initialValue: controller.text,
+          validator: validator,
+          autovalidateMode: autovalidateMode,
+          builder: (field) {
+            void onChangedHandler(String value) => field.didChange(value);
+
+            return _MxcNonFormTextField(
+              key: null,
+              label: label,
+              controller: controller,
+              action: action,
+              button: button,
+              focusNode: focusNode,
+              hint: hint,
+              keyboardType: keyboardType,
+              obscure: obscure,
+              readOnly: readOnly,
+              suffixText: suffixText,
+              width: width,
+              onChanged: onChangedHandler,
+              errorText: field.errorText,
+            );
+          },
+        );
+
+  MxcTextField.viewOnly({
+    Key? key,
+    String? label,
+    required String text,
+    String? hint,
+    TextInputAction? action,
+    MxcTextFieldButton? button,
+    double width = double.infinity,
+    FocusNode? focusNode,
+    TextInputType? keyboardType,
+    String? suffixText,
+    bool obscure = false,
+  }) : super(
+          key: key,
+          builder: (s) => _MxcNonFormTextField.viewOnly(
+            label: label,
+            text: text,
+            action: action,
+            button: button,
+            focusNode: focusNode,
+            hint: hint,
+            keyboardType: keyboardType,
+            obscure: obscure,
+            suffixText: suffixText,
+            width: width,
+          ),
+        );
+}
+
+class _MxcNonFormTextField extends StatefulWidget {
   final String? label;
   final bool readOnly;
   final String? hint;
-  final FormFieldValidator<String>? validator;
   final TextInputAction? action;
   final TextInputType? keyboardType;
   final double width;
   final FocusNode? focusNode;
   final MxcTextFieldButton? button;
   final String? suffixText;
-  final AutovalidateMode? autovalidateMode;
 
   final TextEditingController? _controller;
-  final String? _initialText;
   final bool obscure;
+  final String? _initialValue;
+  final String? errorText;
+  final ValueChanged<String>? onChanged;
 
-  const MxcTextField({
+  const _MxcNonFormTextField({
     required Key? key,
     required this.label,
     required TextEditingController controller,
     this.hint,
-    this.validator,
     this.action,
     this.readOnly = false,
     this.button,
@@ -32,37 +103,45 @@ class MxcTextField extends StatefulWidget {
     this.keyboardType,
     this.suffixText,
     this.obscure = false,
-    this.autovalidateMode,
+    this.errorText,
+    this.onChanged,
   })  : _controller = controller,
-        _initialText = null,
+        _initialValue = null,
         super(key: key);
 
-  const MxcTextField.viewOnly({
+  const _MxcNonFormTextField.viewOnly({
     Key? key,
     required this.label,
     required String text,
     this.hint,
-    this.validator,
     this.action,
     this.button,
-    this.width = 340,
+    this.width = double.infinity,
     this.focusNode,
     this.keyboardType,
     this.suffixText,
     this.obscure = false,
-  })  : _initialText = text,
+  })  : _initialValue = text,
         readOnly = true,
         _controller = null,
-        autovalidateMode = null,
+        errorText = null,
+        onChanged = null,
         super(key: key);
 
   @override
-  State<MxcTextField> createState() => _MxcTextFieldState();
+  State<_MxcNonFormTextField> createState() => _MxcNonFormTextFieldState();
 }
 
-class _MxcTextFieldState extends State<MxcTextField> {
+class _MxcNonFormTextFieldState extends State<_MxcNonFormTextField> {
   late final FocusNode focusNode;
   late bool focused;
+  TextEditingController? _internalController;
+
+  TextEditingController get controller {
+    if (widget._controller != null) return widget._controller!;
+    return _internalController ??=
+        TextEditingController(text: widget._initialValue);
+  }
 
   @override
   void initState() {
@@ -81,6 +160,7 @@ class _MxcTextFieldState extends State<MxcTextField> {
   @override
   void dispose() {
     super.dispose();
+    _internalController?.dispose();
     if (widget.focusNode == null) focusNode.dispose();
   }
 
@@ -112,90 +192,69 @@ class _MxcTextFieldState extends State<MxcTextField> {
                 ),
               ),
             ),
-          Stack(
-            children: [
-              AnimatedContainer(
-                duration: const Duration(milliseconds: 200),
-                decoration: BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(
-                      width: focused ? 2 : 1,
-                      color: focused
+          AnimatedContainer(
+            duration: const Duration(milliseconds: 200),
+            decoration: BoxDecoration(
+              border: Border(
+                bottom: BorderSide(
+                  width: focused ? 2 : 1,
+                  color: focused
+                      ? MxcScopedTheme.of(context).primaryColor
+                      : ColorsTheme.of(context).textPrimaryAndIcons,
+                ),
+              ),
+            ),
+            padding: const EdgeInsets.only(bottom: 2),
+            child: Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    readOnly: widget.readOnly,
+                    keyboardType: widget.keyboardType,
+                    focusNode: focusNode,
+                    textInputAction: widget.action,
+                    controller: controller,
+                    cursorColor: ColorsTheme.of(context).textPrimaryAndIcons,
+                    style: FontTheme.of(context).big(),
+                    obscureText: widget.obscure,
+                    onChanged: widget.onChanged,
+                    decoration: InputDecoration(
+                      contentPadding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                      isDense: true,
+                      floatingLabelBehavior: FloatingLabelBehavior.always,
+                      hintText: widget.hint,
+                      hintStyle: FontTheme.of(context).middle.label(),
+                      enabledBorder: InputBorder.none,
+                      focusedBorder: InputBorder.none,
+                      errorBorder: InputBorder.none,
+                      focusedErrorBorder: InputBorder.none,
+                      disabledBorder: InputBorder.none,
+                      suffixText: widget.suffixText,
+                    ),
+                  ),
+                ),
+                if (widget.button != null)
+                  MxcScopedTheme(
+                    data: MxcScopedThemeData(
+                      primaryColor: focused
                           ? MxcScopedTheme.of(context).primaryColor
                           : ColorsTheme.of(context).textPrimaryAndIcons,
                     ),
+                    child: widget.button!,
                   ),
-                ),
-                padding: const EdgeInsets.only(bottom: 2),
-                child: TextFormField(
-                  readOnly: true,
-                  style: FontTheme.of(context).big(),
-                  decoration: InputDecoration(
-                    contentPadding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
-                    isDense: true,
-                    floatingLabelBehavior: FloatingLabelBehavior.always,
-                    hintStyle: FontTheme.of(context).middle.transparent(),
-                    enabledBorder: InputBorder.none,
-                    focusedBorder: InputBorder.none,
-                    errorBorder: InputBorder.none,
-                    focusedErrorBorder: InputBorder.none,
-                    disabledBorder: InputBorder.none,
-                  ),
-                ),
-              ),
-              AnimatedContainer(
-                duration: const Duration(milliseconds: 200),
-                padding: const EdgeInsets.only(bottom: 2),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: TextFormField(
-                        readOnly: widget.readOnly,
-                        initialValue: widget._initialText,
-                        keyboardType: widget.keyboardType,
-                        focusNode: focusNode,
-                        textInputAction: widget.action,
-                        validator: widget.validator,
-                        controller: widget._controller,
-                        cursorColor:
-                            ColorsTheme.of(context).textPrimaryAndIcons,
-                        style: FontTheme.of(context).big(),
-                        obscureText: widget.obscure,
-                        autovalidateMode: widget.autovalidateMode,
-                        decoration: InputDecoration(
-                          contentPadding:
-                              const EdgeInsets.fromLTRB(0, 0, 0, 10),
-                          isDense: true,
-                          floatingLabelBehavior: FloatingLabelBehavior.always,
-                          helperText: ' ',
-                          hintText: widget.hint,
-                          hintStyle: FontTheme.of(context).middle.label(),
-                          enabledBorder: InputBorder.none,
-                          focusedBorder: InputBorder.none,
-                          errorBorder: InputBorder.none,
-                          focusedErrorBorder: InputBorder.none,
-                          disabledBorder: InputBorder.none,
-                          suffixText: widget.suffixText,
-                        ),
-                      ),
-                    ),
-                    if (widget.button != null)
-                      MxcScopedTheme(
-                        data: MxcScopedThemeData(
-                          primaryColor: focused
-                              ? MxcScopedTheme.of(context).primaryColor
-                              : ColorsTheme.of(context).textPrimaryAndIcons,
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.only(bottom: 20),
-                          child: widget.button,
-                        ),
-                      ),
-                  ],
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
+          if (widget.errorText != null) ...[
+            const SizedBox(height: 4),
+            SizedBox(
+              width: double.infinity,
+              child: Text(
+                widget.errorText!,
+                style: FontTheme.of(context).small.error(),
+              ),
+            ),
+          ],
           const SizedBox(height: 8),
         ],
       ),
