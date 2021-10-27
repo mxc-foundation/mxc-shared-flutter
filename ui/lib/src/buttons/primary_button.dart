@@ -6,6 +6,7 @@ class MxcPrimaryButton extends StatefulWidget {
   final String title;
   final Color? color;
   final VoidCallback? onTap;
+  final bool fillWidth;
 
   /// MXC Primary button
   /// [key] marked as required, because it's often needed for testing purposes
@@ -13,6 +14,7 @@ class MxcPrimaryButton extends StatefulWidget {
     required Key? key,
     required this.title,
     required this.onTap,
+    this.fillWidth = true,
     this.color,
   }) : super(key: key);
 
@@ -47,10 +49,11 @@ class _MxcPrimaryButtonState extends State<MxcPrimaryButton> {
           }
         },
         child: Container(
-          height: 48,
-          alignment: Alignment.center,
+          padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 32),
+          width: widget.fillWidth ? double.infinity : null,
           child: Text(
             widget.title,
+            textAlign: TextAlign.center,
             style: widget.onTap != null
                 ? FontTheme.of(context).big.button()
                 : FontTheme.of(context).big.label(),

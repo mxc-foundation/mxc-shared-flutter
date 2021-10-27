@@ -6,6 +6,7 @@ abstract class MxcCircleButton extends StatelessWidget {
   final VoidCallback? onTap;
   final String? title;
   final Color? color;
+  final TextStyle? titleStyle;
 
   const factory MxcCircleButton({
     required Key? key,
@@ -21,6 +22,7 @@ abstract class MxcCircleButton extends StatelessWidget {
     this.filled = false,
     this.title,
     this.color,
+    this.titleStyle,
   }) : super(key: key);
 
   const factory MxcCircleButton.image({
@@ -39,6 +41,7 @@ abstract class MxcCircleButton extends StatelessWidget {
     bool filled,
     String? title,
     Color? color,
+    TextStyle? titleStyle,
   }) = _MxcCircleIconButton;
 
   Color _contentColor(BuildContext context) {
@@ -91,7 +94,7 @@ abstract class MxcCircleButton extends StatelessWidget {
           Text(
             title!,
             textAlign: TextAlign.center,
-            style: FontTheme.of(context).middle(),
+            style: titleStyle ?? FontTheme.of(context).middle(),
           ),
         ],
       );
@@ -157,12 +160,14 @@ class _MxcCircleIconButton extends MxcCircleButton {
     bool filled = false,
     String? title,
     Color? color,
+    TextStyle? titleStyle,
   }) : super._(
           key: key,
           filled: filled,
           onTap: onTap,
           title: title,
           color: color,
+          titleStyle: titleStyle,
         );
 
   @override
