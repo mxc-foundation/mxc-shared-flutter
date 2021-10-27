@@ -45,7 +45,7 @@ class MxcTextField extends StatefulWidget {
     this.validator,
     this.action,
     this.button,
-    this.width = double.infinity,
+    this.width = 340,
     this.focusNode,
     this.keyboardType,
     this.suffixText,
@@ -95,8 +95,8 @@ class _MxcTextFieldState extends State<MxcTextField> {
             AnimatedContainer(
               duration: const Duration(milliseconds: 200),
               padding: EdgeInsets.only(
-                top: focused ? 6 : 3,
-                bottom: focused ? 3 : 6,
+                top: focused ? 1 : 3,
+                bottom: focused ? 8 : 4,
               ),
               alignment: Alignment.centerLeft,
               child: AnimatedDefaultTextStyle(
@@ -112,60 +112,89 @@ class _MxcTextFieldState extends State<MxcTextField> {
                 ),
               ),
             ),
-          AnimatedContainer(
-            duration: const Duration(milliseconds: 200),
-            decoration: BoxDecoration(
-              border: Border(
-                bottom: BorderSide(
-                  width: focused ? 2 : 1,
-                  color: focused
-                      ? MxcScopedTheme.of(context).primaryColor
-                      : ColorsTheme.of(context).textPrimaryAndIcons,
-                ),
-              ),
-            ),
-            padding: const EdgeInsets.only(bottom: 2),
-            child: Row(
-              children: [
-                Expanded(
-                  child: TextFormField(
-                    readOnly: widget.readOnly,
-                    initialValue: widget._initialText,
-                    keyboardType: widget.keyboardType,
-                    focusNode: focusNode,
-                    textInputAction: widget.action,
-                    validator: widget.validator,
-                    controller: widget._controller,
-                    cursorColor: ColorsTheme.of(context).textPrimaryAndIcons,
-                    style: FontTheme.of(context).big(),
-                    obscureText: widget.obscure,
-                    autovalidateMode: widget.autovalidateMode,
-                    decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
-                      isDense: true,
-                      floatingLabelBehavior: FloatingLabelBehavior.always,
-                      hintText: widget.hint,
-                      hintStyle: FontTheme.of(context).middle.label(),
-                      enabledBorder: InputBorder.none,
-                      focusedBorder: InputBorder.none,
-                      errorBorder: InputBorder.none,
-                      focusedErrorBorder: InputBorder.none,
-                      disabledBorder: InputBorder.none,
-                      suffixText: widget.suffixText,
-                    ),
-                  ),
-                ),
-                if (widget.button != null)
-                  MxcScopedTheme(
-                    data: MxcScopedThemeData(
-                      primaryColor: focused
+          Stack(
+            children: [
+              AnimatedContainer(
+                duration: const Duration(milliseconds: 200),
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(
+                      width: focused ? 2 : 1,
+                      color: focused
                           ? MxcScopedTheme.of(context).primaryColor
                           : ColorsTheme.of(context).textPrimaryAndIcons,
                     ),
-                    child: widget.button!,
                   ),
-              ],
-            ),
+                ),
+                padding: const EdgeInsets.only(bottom: 2),
+                child: TextFormField(
+                  readOnly: true,
+                  style: FontTheme.of(context).big(),
+                  decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                    isDense: true,
+                    floatingLabelBehavior: FloatingLabelBehavior.always,
+                    hintStyle: FontTheme.of(context).middle.transparent(),
+                    enabledBorder: InputBorder.none,
+                    focusedBorder: InputBorder.none,
+                    errorBorder: InputBorder.none,
+                    focusedErrorBorder: InputBorder.none,
+                    disabledBorder: InputBorder.none,
+                  ),
+                ),
+              ),
+              AnimatedContainer(
+                duration: const Duration(milliseconds: 200),
+                padding: const EdgeInsets.only(bottom: 2),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: TextFormField(
+                        readOnly: widget.readOnly,
+                        initialValue: widget._initialText,
+                        keyboardType: widget.keyboardType,
+                        focusNode: focusNode,
+                        textInputAction: widget.action,
+                        validator: widget.validator,
+                        controller: widget._controller,
+                        cursorColor:
+                            ColorsTheme.of(context).textPrimaryAndIcons,
+                        style: FontTheme.of(context).big(),
+                        obscureText: widget.obscure,
+                        autovalidateMode: widget.autovalidateMode,
+                        decoration: InputDecoration(
+                          contentPadding:
+                              const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                          isDense: true,
+                          floatingLabelBehavior: FloatingLabelBehavior.always,
+                          helperText: ' ',
+                          hintText: widget.hint,
+                          hintStyle: FontTheme.of(context).middle.label(),
+                          enabledBorder: InputBorder.none,
+                          focusedBorder: InputBorder.none,
+                          errorBorder: InputBorder.none,
+                          focusedErrorBorder: InputBorder.none,
+                          disabledBorder: InputBorder.none,
+                          suffixText: widget.suffixText,
+                        ),
+                      ),
+                    ),
+                    if (widget.button != null)
+                      MxcScopedTheme(
+                        data: MxcScopedThemeData(
+                          primaryColor: focused
+                              ? MxcScopedTheme.of(context).primaryColor
+                              : ColorsTheme.of(context).textPrimaryAndIcons,
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.only(bottom: 20),
+                          child: widget.button,
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+            ],
           ),
           const SizedBox(height: 8),
         ],
