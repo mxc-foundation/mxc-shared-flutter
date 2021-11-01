@@ -19,7 +19,7 @@ import 'api/demo/withdraw.dart';
 class DemoSupernodeRepository implements SupernodeRepository {
   const DemoSupernodeRepository();
 
-  static final Supernode _supernode = Supernode(
+  static final Supernode _supernode = const Supernode(
     region: "Test",
     url: "https://lora.test.cloud.mxc.org",
     logo: "https://lora.test.cloud.mxc.org/branding.png",
@@ -29,51 +29,51 @@ class DemoSupernodeRepository implements SupernodeRepository {
   );
 
   @override
-  DemoDhxRepository get dhx => DemoDhxRepository();
+  DemoDhxRepository get dhx => const DemoDhxRepository();
 
   @override
-  DemoGatewayRepository get gateways => DemoGatewayRepository();
+  DemoGatewayRepository get gateways => const DemoGatewayRepository();
 
   @override
-  DemoStakeRepository get stake => DemoStakeRepository();
+  DemoStakeRepository get stake => const DemoStakeRepository();
 
   @override
-  DemoTopupRepository get topup => DemoTopupRepository();
+  DemoTopupRepository get topup => const DemoTopupRepository();
 
   @override
-  DemoUserRepository get user => DemoUserRepository();
+  DemoUserRepository get user => const DemoUserRepository();
 
   @override
-  DemoWalletRepository get wallet => DemoWalletRepository();
+  DemoWalletRepository get wallet => const DemoWalletRepository();
 
   @override
-  DemoWithdrawRepository get withdraw => DemoWithdrawRepository();
+  DemoWithdrawRepository get withdraw => const DemoWithdrawRepository();
 
   @override
-  DemoOrganizationRepository get organization => DemoOrganizationRepository();
+  DemoOrganizationRepository get organization => const DemoOrganizationRepository();
 
   @override
   DemoNetworkServerRepository get networkServer =>
-      DemoNetworkServerRepository();
+      const DemoNetworkServerRepository();
 
   @override
-  DemoLoginRepository get auth => DemoLoginRepository();
+  DemoLoginRepository get auth => const DemoLoginRepository();
 
   @override
   DemoExternalAccountsRepository get externalAccounts =>
-      DemoExternalAccountsRepository();
+      const DemoExternalAccountsRepository();
 
   @override
-  DemoRegistrationRepository get register => DemoRegistrationRepository();
+  DemoRegistrationRepository get register => const DemoRegistrationRepository();
 
   @override
-  DemoTotpRepository get totp => DemoTotpRepository();
+  DemoTotpRepository get totp => const DemoTotpRepository();
 
   @override
-  DemoReportRepository get report => DemoReportRepository();
+  DemoReportRepository get report => const DemoReportRepository();
 
   @override
-  DemoDeviceRepository get device => DemoDeviceRepository();
+  DemoDeviceRepository get device => const DemoDeviceRepository();
 
   @override
   Future<Map<String, List<Supernode>>> listSupernodes() async => {

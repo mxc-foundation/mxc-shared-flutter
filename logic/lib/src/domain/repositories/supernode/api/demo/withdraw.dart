@@ -27,7 +27,7 @@ class DemoWithdrawRepository implements WithdrawRepository {
       Withdraw(
         amount: "1000".toDecimal(),
         failReason: "DemoFailReason1",
-        timestamp: DateTime.now().add(Duration(days: -2)),
+        timestamp: DateTime.now().add(const Duration(days: -2)),
         txHash: "X10000000000000",
         txStatus: "DemoStatus1",
         withdrawFee: "500".toDecimal(),
@@ -35,7 +35,7 @@ class DemoWithdrawRepository implements WithdrawRepository {
       Withdraw(
         amount: "2000".toDecimal(),
         failReason: "DemoFailReason2",
-        timestamp: DateTime.now().add(Duration(days: -1)),
+        timestamp: DateTime.now().add(const Duration(days: -1)),
         txHash: "X20000000000000",
         txStatus: "DemoStatus2",
         withdrawFee: "500".toDecimal(),
@@ -43,7 +43,7 @@ class DemoWithdrawRepository implements WithdrawRepository {
       Withdraw(
         amount: "3000".toDecimal(),
         failReason: "DemoFailReason3",
-        timestamp: DateTime.now().add(Duration(days: -2)),
+        timestamp: DateTime.now().add(const Duration(days: -2)),
         txHash: "X30000000000000",
         txStatus: "DemoStatus3",
         withdrawFee: "500".toDecimal(),

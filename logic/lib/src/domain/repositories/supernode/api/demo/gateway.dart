@@ -15,9 +15,9 @@ class DemoGatewayRepository implements GatewayRepository {
     return [
       Gateway(
         id: "DemoId1",
-        createdAt: DateTime.now().add(Duration(days: -2)),
+        createdAt: DateTime.now().add(const Duration(days: -2)),
         description: "DemoDescription1",
-        firstSeenAt: DateTime.now().add(Duration(days: -2)),
+        firstSeenAt: DateTime.now().add(const Duration(days: -2)),
         lastSeenAt: DateTime.now(),
         updatedAt: DateTime.now(),
         location: Location(0.0, 0.0),
@@ -28,9 +28,9 @@ class DemoGatewayRepository implements GatewayRepository {
       ),
       Gateway(
         id: "DemoId2",
-        createdAt: DateTime.now().add(Duration(days: -1)),
+        createdAt: DateTime.now().add(const Duration(days: -1)),
         description: "DemoDescription2",
-        firstSeenAt: DateTime.now().add(Duration(days: -1)),
+        firstSeenAt: DateTime.now().add(const Duration(days: -1)),
         lastSeenAt: DateTime.now(),
         updatedAt: DateTime.now(),
         location: Location(0.0, 0.0),
@@ -103,16 +103,16 @@ class DemoGatewayRepository implements GatewayRepository {
     return [
       GatewayProfile(
         id: "DemoId1",
-        createdAt: DateTime.now().add(Duration(days: -2)),
-        updatedAt: DateTime.now().add(Duration(days: -2)),
+        createdAt: DateTime.now().add(const Duration(days: -2)),
+        updatedAt: DateTime.now().add(const Duration(days: -2)),
         name: "DemoName1",
         networkServerID: "DemoNetworkServerId1",
         networkServerName: "DemoNetworkName1",
       ),
       GatewayProfile(
         id: "DemoId2",
-        createdAt: DateTime.now().add(Duration(days: -1)),
-        updatedAt: DateTime.now().add(Duration(days: -1)),
+        createdAt: DateTime.now().add(const Duration(days: -1)),
+        updatedAt: DateTime.now().add(const Duration(days: -1)),
         name: "DemoName2",
         networkServerID: "DemoNetworkServerId2",
         networkServerName: "DemoNetworkName2",
@@ -140,13 +140,13 @@ class DemoGatewayRepository implements GatewayRepository {
         txPacketsEmitted: 100,
         txPacketsReceived: 200,
         rxPacketsReceivedOK: 200,
-        timestamp: DateTime.now().add(Duration(days: -2)),
+        timestamp: DateTime.now().add(const Duration(days: -2)),
       ),
       GatewayStatisticFrame(
         txPacketsEmitted: 300,
         txPacketsReceived: 400,
         rxPacketsReceivedOK: 200,
-        timestamp: DateTime.now().add(Duration(days: -1)),
+        timestamp: DateTime.now().add(const Duration(days: -1)),
       ),
       GatewayStatisticFrame(
         txPacketsEmitted: 500,
@@ -224,13 +224,13 @@ class DemoGatewayRepository implements GatewayRepository {
       daily: [
         GatewayDailyMiningIncome(
           amount: "100".toDecimal(),
-          date: DateTime.now().add(Duration(days: -2)),
+          date: DateTime.now().add(const Duration(days: -2)),
           health: 100,
           onlineSeconds: 100,
         ),
         GatewayDailyMiningIncome(
           amount: "200".toDecimal(),
-          date: DateTime.now().add(Duration(days: -1)),
+          date: DateTime.now().add(const Duration(days: -1)),
           health: 200,
           onlineSeconds: 200,
         ),

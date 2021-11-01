@@ -5,9 +5,7 @@ class DemoTotpRepository implements TotpRepository {
   const DemoTotpRepository();
 
   @override
-  Future<bool> getTotpStatus() async {
-    return true;
-  }
+  Future<bool> getTotpStatus() async => true;
 
   @override
   Future<TotpConfiguration> getTotpConfig({required int qrCodeSize}) async {

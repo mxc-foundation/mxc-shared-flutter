@@ -14,12 +14,12 @@ class DemoTopupRepository implements TopupRepository {
     return [
       Topup(
         amount: "1000".toDecimal(),
-        timestamp: DateTime.now().add(Duration(days: -2)),
+        timestamp: DateTime.now().add(const Duration(days: -2)),
         txHash: "DemoTxHash123456789",
       ),
       Topup(
         amount: "2000".toDecimal(),
-        timestamp: DateTime.now().add(Duration(days: -1)),
+        timestamp: DateTime.now().add(const Duration(days: -1)),
         txHash: "DemoTxHash123456789",
       ),
       Topup(

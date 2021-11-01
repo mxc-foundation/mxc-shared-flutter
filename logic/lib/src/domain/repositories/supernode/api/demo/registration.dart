@@ -6,14 +6,14 @@ class DemoRegistrationRepository implements RegistrationRepository {
   const DemoRegistrationRepository();
 
   /// [languageCode] can be taken from [Locale.languageCode]
-
-  /// @override
+  @override
   Future<void> withEmail({
     required String email,
     required String languageCode,
   }) =>
       throw UnimplementedError();
-
+  
+  @override
   Future<SupernodeTokenDetails> withExternalUser({
     required String email,
     required String orgName,

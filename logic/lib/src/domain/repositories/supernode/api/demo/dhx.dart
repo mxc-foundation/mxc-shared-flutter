@@ -44,7 +44,7 @@ class DemoDhxRepository implements DhxRepository {
     return [
       Lock(
         id: 'DemoId1',
-        startTime: DateTime.now().add(Duration(days: -1)),
+        startTime: DateTime.now().add(const Duration(days: -1)),
         organizationId: 'DemoOrgId1',
         amount: 100000.0,
         boost: 200000.0,
@@ -56,12 +56,12 @@ class DemoDhxRepository implements DhxRepository {
         lockTill: DateTime.now(),
         option: _mapLockOption(
           DateTime.now(),
-          DateTime.now().add(Duration(days: -2)),
+          DateTime.now().add(const Duration(days: -2)),
         ),
       ),
       Lock(
         id: 'DemoId2',
-        startTime: DateTime.now().add(Duration(days: -1)),
+        startTime: DateTime.now().add(const Duration(days: -1)),
         organizationId: 'DemoOrgId2',
         amount: 100000.0,
         boost: 200000.0,
@@ -73,12 +73,12 @@ class DemoDhxRepository implements DhxRepository {
         lockTill: DateTime.now(),
         option: _mapLockOption(
           DateTime.now(),
-          DateTime.now().add(Duration(days: -2)),
+          DateTime.now().add(const Duration(days: -2)),
         ),
       ),
       Lock(
         id: 'DemoId3',
-        startTime: DateTime.now().add(Duration(days: -1)),
+        startTime: DateTime.now().add(const Duration(days: -1)),
         organizationId: 'DemoOrgId3',
         amount: 100000.0,
         boost: 200000.0,
@@ -90,7 +90,7 @@ class DemoDhxRepository implements DhxRepository {
         lockTill: DateTime.now(),
         option: _mapLockOption(
           DateTime.now(),
-          DateTime.now().add(Duration(days: -2)),
+          DateTime.now().add(const Duration(days: -2)),
         ),
       )
     ];
@@ -105,11 +105,11 @@ class DemoDhxRepository implements DhxRepository {
       unbonding: [
         DhxUnbonding(
           100000.0,
-          DateTime.now().add(Duration(days: -2)),
+          DateTime.now().add(const Duration(days: -2)),
         ),
         DhxUnbonding(
           200000.0,
-          DateTime.now().add(Duration(days: -1)),
+          DateTime.now().add(const Duration(days: -1)),
         ),
         DhxUnbonding(
           300000.0,
@@ -120,11 +120,11 @@ class DemoDhxRepository implements DhxRepository {
       coolingOff: [
         DhxCoolingOff(
           100000.0,
-          DateTime.now().add(Duration(days: -2)),
+          DateTime.now().add(const Duration(days: -2)),
         ),
         DhxCoolingOff(
           200000.0,
-          DateTime.now().add(Duration(days: -1)),
+          DateTime.now().add(const Duration(days: -1)),
         ),
         DhxCoolingOff(
           300000.0,

@@ -14,12 +14,12 @@ class DemoDeviceRepository implements DeviceRepository {
       Device(
         name: "DemoName1",
         category: "DemoCateory1",
-        lastSeen: DateTime.now().add(Duration(days: -2)),
+        lastSeen: DateTime.now().add(const Duration(days: -2)),
       ),
       Device(
         name: "DemoName2",
         category: "DemoCateory2",
-        lastSeen: DateTime.now().add(Duration(days: -1)),
+        lastSeen: DateTime.now().add(const Duration(days: -1)),
       ),
       Device(
         name: "DemoName3",

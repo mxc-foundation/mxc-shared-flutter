@@ -22,7 +22,7 @@ class DemoUserRepository implements UserRepository {
           isUserAdmin: true,
           isUserDeviceAdmin: true,
           isUserGatewayAdmin: true,
-          createdAt: DateTime.now().add(Duration(days: -2)),
+          createdAt: DateTime.now().add(const Duration(days: -2)),
           updatedAt: DateTime.now(),
         )
       ],
@@ -40,7 +40,7 @@ class DemoUserRepository implements UserRepository {
         isUserAdmin: true,
         isUserDeviceAdmin: true,
         isUserGatewayAdmin: true,
-        createdAt: DateTime.now().add(Duration(days: -2)),
+        createdAt: DateTime.now().add(const Duration(days: -2)),
         updatedAt: DateTime.now(),
       ),
     );
