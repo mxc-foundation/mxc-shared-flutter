@@ -2,8 +2,9 @@ import 'package:mxc_logic/mxc_logic.dart';
 import 'package:mxc_logic/src/data/api/client/client.dart';
 
 class DemoReportRepository implements ReportRepository {
-  DemoReportRepository();
+  const DemoReportRepository();
 
+  @override
   Future<List<FiatCurrency>> supportedFiatCurrencies() async {
     return [
       FiatCurrency(
@@ -22,6 +23,7 @@ class DemoReportRepository implements ReportRepository {
   }
 
   /// Gets mining income report and returns base64-encoded report
+  @override
   Future<String> miningIncomeReport({
     required ReportFormat format,
     required FiatCurrency fiatCurrency,

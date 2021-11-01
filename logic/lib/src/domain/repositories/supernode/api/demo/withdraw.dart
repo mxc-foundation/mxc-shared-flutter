@@ -3,8 +3,9 @@ import 'package:mxc_logic/mxc_logic.dart';
 import 'package:mxc_logic/src/domain/repositories/internal/shared_mappers.dart';
 
 class DemoWithdrawRepository implements WithdrawRepository {
-  DemoWithdrawRepository();
+  const DemoWithdrawRepository();
 
+  @override
   Future<bool> withdraw({
     String? orgId,
     required Decimal amount,
@@ -15,6 +16,7 @@ class DemoWithdrawRepository implements WithdrawRepository {
     return true;
   }
 
+  @override
   Future<List<Withdraw>> history({
     Token? currency,
     DateTime? from,
@@ -49,6 +51,7 @@ class DemoWithdrawRepository implements WithdrawRepository {
     ];
   }
 
+  @override
   Future<Decimal> fee({Token currency = Token.mxc}) async {
     return "300".toDecimal();
   }

@@ -2,8 +2,9 @@ import 'package:mxc_logic/mxc_logic.dart';
 import 'package:mxc_logic/src/domain/repositories/internal/shared_mappers.dart';
 
 class DemoTopupRepository implements TopupRepository {
-  DemoTopupRepository();
+  const DemoTopupRepository();
 
+  @override
   Future<List<Topup>> history({
     Token? currency,
     DateTime? from,
@@ -29,6 +30,7 @@ class DemoTopupRepository implements TopupRepository {
     ];
   }
 
+  @override
   Future<String> account({
     String? orgId,
     Token? currency,

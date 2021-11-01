@@ -1,15 +1,17 @@
 import 'package:mxc_logic/mxc_logic.dart';
 
 class DemoOrganizationRepository implements OrganizationRepository {
-  DemoOrganizationRepository();
+  const DemoOrganizationRepository();
 
+  @override
   Future<void> update({
     required String id,
     required String displayName,
     required String name,
   }) =>
       throw UnimplementedError();
-
+      
+  @override
   Future<List<Organization>> list({
     required int offset,
     required int limit,

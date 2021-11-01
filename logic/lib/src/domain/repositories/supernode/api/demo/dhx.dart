@@ -3,7 +3,7 @@ import 'package:mxc_logic/mxc_logic.dart';
 import 'package:mxc_logic/src/domain/repositories/internal/shared_mappers.dart';
 
 class DemoDhxRepository implements DhxRepository {
-  DemoDhxRepository();
+  const DemoDhxRepository();
 
   static late final Map<int, LockOption> _monthsToOption = {
     for (final o in LockOption.values) o.months: o,
@@ -18,6 +18,7 @@ class DemoDhxRepository implements DhxRepository {
         );
   }
 
+  @override
   Future<List<Council>> listCouncils() async {
     return [
       Council(
@@ -35,6 +36,7 @@ class DemoDhxRepository implements DhxRepository {
     ];
   }
 
+  @override
   Future<List<Lock>> listLocks({
     String? organizationId,
     String? chairOrgId,
@@ -88,6 +90,7 @@ class DemoDhxRepository implements DhxRepository {
     ];
   }
 
+  @override
   Future<DhxBondInfo> bondInfo({
     String? organizationId,
   }) async {
@@ -126,18 +129,21 @@ class DemoDhxRepository implements DhxRepository {
     );
   }
 
+  @override
   Future<void> bondDhx({
     required Decimal amount,
     String? organizationId,
   }) =>
       throw UnimplementedError();
 
+  @override
   Future<void> unbondDhx({
     required Decimal amount,
     String? organizationId,
   }) =>
       throw UnimplementedError();
 
+  @override
   Future<CreateCouncilResult> createCouncil({
     required Decimal amount,
     required double boost,
@@ -148,6 +154,7 @@ class DemoDhxRepository implements DhxRepository {
     return CreateCouncilResult('DemoCouncilId1', 'DemoStakeId1');
   }
 
+  @override
   Future<String> createStake({
     required Decimal amount,
     required double boost,
@@ -158,6 +165,7 @@ class DemoDhxRepository implements DhxRepository {
     return 'DemoStakeId1';
   }
 
+  @override
   Future<YesterdayMining?> lastMining() async {
     return YesterdayMining(
       DateTime.now(),

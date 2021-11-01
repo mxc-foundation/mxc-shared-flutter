@@ -1,9 +1,9 @@
-import 'package:chopper/chopper.dart';
 import 'package:mxc_logic/mxc_logic.dart';
 
 class DemoDeviceRepository implements DeviceRepository {
-  DemoDeviceRepository();
+  const DemoDeviceRepository();
 
+  @override
   Future<ListWithTotal<Device>> list({
     required int limit,
     required String applicationId,

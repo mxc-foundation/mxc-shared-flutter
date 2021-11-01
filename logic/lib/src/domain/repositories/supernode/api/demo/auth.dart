@@ -3,8 +3,9 @@ import 'package:mxc_logic/mxc_logic.dart';
 import 'package:mxc_logic/src/domain/repositories/internal/shared_mappers.dart';
 
 class DemoLoginRepository implements LoginRepository {
-  DemoLoginRepository();
+  const DemoLoginRepository();
 
+  @override
   Future<LoginResult> login({
     required String username,
     required String password,
@@ -15,6 +16,7 @@ class DemoLoginRepository implements LoginRepository {
     );
   }
 
+  @override
   Future<WeChatLoginResult> loginWeChat(String code) async {
     return WeChatLoginResult(
       isBindingRequired: false,
@@ -22,6 +24,7 @@ class DemoLoginRepository implements LoginRepository {
     );
   }
 
+  @override
   Future<WeChatLoginResult> loginWeChatDebug(
     String code,
   ) async {
@@ -32,12 +35,14 @@ class DemoLoginRepository implements LoginRepository {
   }
 
   /// [languageCode] can be taken from [Locale.languageCode]
+  @override
   Future<void> resetPassword({
     required String username,
     required String languageCode,
   }) =>
       throw UnimplementedError();
 
+  @override
   Future<void> resetPasswordConfirm({
     required String newPassword,
     required String otp,

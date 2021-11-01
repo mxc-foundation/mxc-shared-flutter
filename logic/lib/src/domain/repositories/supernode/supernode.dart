@@ -43,7 +43,7 @@ abstract class SupernodeRepository {
 }
 
 class MainSupernodeRepository implements SupernodeRepository {
-  MainSupernodeRepository(this._client, this._setupStore);
+  const MainSupernodeRepository(this._client, this._setupStore);
 
   final SupernodeClient _client;
   final SupernodeSetupStore _setupStore;

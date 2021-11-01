@@ -3,8 +3,9 @@ import 'package:mxc_logic/mxc_logic.dart';
 import 'package:mxc_logic/src/domain/repositories/internal/shared_mappers.dart';
 
 class DemoGatewayRepository implements GatewayRepository {
-  DemoGatewayRepository();
+  const DemoGatewayRepository();
 
+  @override
   Future<ListWithTotal<Gateway>> list({
     String? search,
     int? limit,
@@ -54,6 +55,7 @@ class DemoGatewayRepository implements GatewayRepository {
     ].withTotal(3);
   }
 
+  @override
   Future<List<Location>> locations() async {
     return [
       Location(0.0, 0.0),
@@ -62,6 +64,7 @@ class DemoGatewayRepository implements GatewayRepository {
     ];
   }
 
+  @override
   Future<void> add({
     required String id,
     required String name,
@@ -74,6 +77,7 @@ class DemoGatewayRepository implements GatewayRepository {
   }) =>
       throw UnimplementedError();
 
+  @override
   Future<GatewayRegisterResult> register({
     required String serialNumber,
     String? orgId,
@@ -81,6 +85,7 @@ class DemoGatewayRepository implements GatewayRepository {
     return GatewayRegisterResult(status: "DemoGatewayRegisterStatus");
   }
 
+  @override
   Future<GatewayRegisterResult> registerReseller({
     required String serialNumber,
     String? orgId,
@@ -88,6 +93,7 @@ class DemoGatewayRepository implements GatewayRepository {
     return GatewayRegisterResult(status: "DemoGatewayRegisterResellerStatus");
   }
 
+  @override
   Future<List<GatewayProfile>> profiles({
     required String networkServerId,
     String? search,
@@ -122,6 +128,7 @@ class DemoGatewayRepository implements GatewayRepository {
     ];
   }
 
+  @override
   Future<List<GatewayStatisticFrame>> statistic(
     String gatewayId, {
     required FramesInterval interval,
@@ -150,8 +157,10 @@ class DemoGatewayRepository implements GatewayRepository {
     ];
   }
 
+  @override
   Future<void> delete(String id) => throw UnimplementedError();
 
+  @override
   Future<GatewayHealthSummary> health({
     String? orgId,
   }) async {
@@ -204,6 +213,7 @@ class DemoGatewayRepository implements GatewayRepository {
     );
   }
 
+  @override
   Future<GatewayMiningIncomeSummary> miningIncome({
     required String gatewayMac,
     String? orgId,

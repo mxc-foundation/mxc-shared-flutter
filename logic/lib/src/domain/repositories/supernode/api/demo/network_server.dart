@@ -1,8 +1,9 @@
 import 'package:mxc_logic/mxc_logic.dart';
 
 class DemoNetworkServerRepository implements NetworkServerRepository {
-  DemoNetworkServerRepository();
+  const DemoNetworkServerRepository();
 
+  @override
   Future<List<NetworkServer>> list({
     String? orgId,
     int? limit,
@@ -27,6 +28,7 @@ class DemoNetworkServerRepository implements NetworkServerRepository {
     ];
   }
 
+  @override
   Future<String> version() async {
     return "2.0.0";
   }

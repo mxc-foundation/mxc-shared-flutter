@@ -4,8 +4,9 @@ import 'package:mxc_logic/src/domain/entities/user.dart';
 import 'package:mxc_logic/src/domain/repositories/internal/shared_mappers.dart';
 
 class DemoUserRepository implements UserRepository {
-  DemoUserRepository();
+  const DemoUserRepository();
 
+  @override
   Future<ProfileResult> profile() async {
     return ProfileResult(
       user: User(
@@ -46,12 +47,15 @@ class DemoUserRepository implements UserRepository {
     );
   }
 
+  @override
   String? id() => client.token == null
       ? null
       : Mappers.stringToSupernodeJwt(client.token!).userId;
 
+  @override
   String? orgId() => client.defaultOrganizationId;
 
+  @override
   Future<SupernodeTokenDetails> update({
     required String id,
     required String email,
@@ -64,6 +68,7 @@ class DemoUserRepository implements UserRepository {
     return Mappers.stringToSupernodeJwt("DemoToken");
   }
 
+  @override
   Future<void> changePassword({
     required String userId,
     required String password,

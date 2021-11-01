@@ -3,7 +3,7 @@ import 'package:mxc_logic/mxc_logic.dart';
 import 'package:mxc_logic/src/domain/repositories/internal/shared_mappers.dart';
 
 class DemoStakeRepository implements StakeRepository {
-  DemoStakeRepository();
+  const DemoStakeRepository();
 
   static StakeOption _mapStakeOption(DateTime? startTime, DateTime? lockTill) {
     return StakeOption(
@@ -13,6 +13,7 @@ class DemoStakeRepository implements StakeRepository {
     );
   }
 
+  @override
   Future<String> stake({
     required Decimal amount,
     required double? boostRate,
@@ -22,6 +23,7 @@ class DemoStakeRepository implements StakeRepository {
     return "DemoStakeStatus";
   }
 
+  @override
   Future<String> unstake({
     required String stakeId,
     required String otpCode,
@@ -30,6 +32,7 @@ class DemoStakeRepository implements StakeRepository {
     return "DemoUnstakeStatus";
   }
 
+  @override
   Future<List<StakeHistoryFrame>> history({
     String? orgId,
     Token? currency,
@@ -74,6 +77,7 @@ class DemoStakeRepository implements StakeRepository {
     ];
   }
 
+  @override
   Future<List<Stake>> list({String? orgId}) async {
     return [
       Stake(
@@ -103,6 +107,7 @@ class DemoStakeRepository implements StakeRepository {
     ];
   }
 
+  @override
   Future<List<Stake>> listActive({
     String? orgId,
     Token? currency,
@@ -135,6 +140,7 @@ class DemoStakeRepository implements StakeRepository {
     ];
   }
 
+  @override
   Future<Decimal> revenue({
     String? orgId,
     DateTime? till,
@@ -142,6 +148,7 @@ class DemoStakeRepository implements StakeRepository {
     return "123456".toDecimal();
   }
 
+  @override
   Future<StakeBoostBundle> stakingPercentage({Token? currency}) async {
     return {
       StakeOption.flex: StakeBoostRate(

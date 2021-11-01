@@ -17,9 +17,9 @@ import 'api/demo/wallet.dart';
 import 'api/demo/withdraw.dart';
 
 class DemoSupernodeRepository implements SupernodeRepository {
-  DemoSupernodeRepository();
+  const DemoSupernodeRepository();
 
-  final Supernode _supernode = Supernode(
+  static Supernode _supernode = Supernode(
     region: "Test",
     url: "https://lora.test.cloud.mxc.org",
     logo: "https://lora.test.cloud.mxc.org/branding.png",
