@@ -50,7 +50,8 @@ class DemoSupernodeRepository implements SupernodeRepository {
   DemoWithdrawRepository get withdraw => const DemoWithdrawRepository();
 
   @override
-  DemoOrganizationRepository get organization => const DemoOrganizationRepository();
+  DemoOrganizationRepository get organization =>
+      const DemoOrganizationRepository();
 
   @override
   DemoNetworkServerRepository get networkServer =>

@@ -12,7 +12,7 @@ class DemoRegistrationRepository implements RegistrationRepository {
     required String languageCode,
   }) =>
       throw UnimplementedError();
-  
+
   @override
   Future<SupernodeTokenDetails> withExternalUser({
     required String email,

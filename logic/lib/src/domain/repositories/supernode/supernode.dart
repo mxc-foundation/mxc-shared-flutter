@@ -138,7 +138,8 @@ class ApiSupernodeRepository implements SupernodeRepository {
 
   late final SupernodeClient _client;
 
-  DemoSupernodeRepository get _demoRepository => const DemoSupernodeRepository();
+  DemoSupernodeRepository get _demoRepository =>
+      const DemoSupernodeRepository();
   MainSupernodeRepository get _mainRepository =>
       MainSupernodeRepository(_client, _setupStore);
   SupernodeRepository get _currentRepository =>
