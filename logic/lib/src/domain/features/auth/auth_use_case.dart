@@ -12,6 +12,13 @@ class LoginUseCase {
     return repository.listSupernodes();
   }
 
+  Future<void> loginDemo() async {
+    await authRepository.saveCredentials("DemoUser", "", "DemoToken");
+
+    final profile = await repository.user.profile();
+    authRepository.organizationId = profile.organizations.first.organizationId;
+  }
+
   Future<void> login(
     String supernodeAddress,
     String username,

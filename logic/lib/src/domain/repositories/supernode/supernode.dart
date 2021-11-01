@@ -2,22 +2,7 @@ import 'package:mxc_logic/mxc_logic.dart';
 import 'package:mxc_logic/src/data/api/supernode_list_api.dart';
 import 'package:mxc_logic/src/data/data.dart';
 
-import 'api/auth.dart';
-import 'api/device.dart';
-import 'api/dhx.dart';
-import 'api/external_accounts.dart';
-import 'api/gateway.dart';
-import 'api/network_server.dart';
-import 'api/organization.dart';
-import 'api/registration.dart';
-import 'api/report.dart';
-import 'api/stake.dart';
-import 'api/topup.dart';
-import 'api/totp.dart';
-import 'api/user.dart';
-import 'api/wallet.dart';
-import 'api/withdraw.dart';
-import 'common/token_refresher.dart';
+import 'demo_supernode.dart';
 
 export 'api/auth.dart';
 export 'api/device.dart';
@@ -57,34 +42,11 @@ abstract class SupernodeRepository {
   Future<Supernode> getSupernode();
 }
 
-class ApiSupernodeRepository implements SupernodeRepository {
+class MainSupernodeRepository implements SupernodeRepository {
+  MainSupernodeRepository(this._client, this._setupStore);
+
+  final SupernodeClient _client;
   final SupernodeSetupStore _setupStore;
-
-  ApiSupernodeRepository({
-    required SupernodeSetupStore setupStore,
-    required TokenRefresher tokenRefresher,
-  })  : _setupStore = setupStore,
-        _client = SupernodeClient(
-          getSupernodeAddress: () =>
-              setupStore.supernodeAddress ??
-              (throw Exception('Supernode address has not been picked')),
-          getDefaultOrganizationId: () => setupStore.organizationId,
-          getToken: () => setupStore.token,
-          refreshToken: (client) => tokenRefresher.refresh(
-            ApiSupernodeRepository.withClient(
-              client: client,
-              setupStore: setupStore,
-            ),
-          ),
-        );
-
-  ApiSupernodeRepository.withClient({
-    required SupernodeClient client,
-    required SupernodeSetupStore setupStore,
-  })  : _client = client,
-        _setupStore = setupStore;
-
-  late final SupernodeClient _client;
 
   @override
   DhxRepository get dhx => DhxRepository(_client);
@@ -147,44 +109,93 @@ class ApiSupernodeRepository implements SupernodeRepository {
   }
 }
 
-/*
-class DemoSupernodeRepository implements SupernodeRepository {
-  DemoSupernodeRepository();
+class ApiSupernodeRepository implements SupernodeRepository {
+  final SupernodeSetupStore _setupStore;
 
-  final ChopperClient _client;
+  ApiSupernodeRepository({
+    required SupernodeSetupStore setupStore,
+    required TokenRefresher tokenRefresher,
+  })  : _setupStore = setupStore,
+        _client = SupernodeClient(
+          getSupernodeAddress: () =>
+              setupStore.supernodeAddress ??
+              (throw Exception('Supernode address has not been picked')),
+          getDefaultOrganizationId: () => setupStore.organizationId,
+          getToken: () => setupStore.token,
+          refreshToken: (client) => tokenRefresher.refresh(
+            ApiSupernodeRepository.withClient(
+              client: client,
+              setupStore: setupStore,
+            ),
+          ),
+        );
+
+  ApiSupernodeRepository.withClient({
+    required SupernodeClient client,
+    required SupernodeSetupStore setupStore,
+  })  : _client = client,
+        _setupStore = setupStore;
+
+  late final SupernodeClient _client;
+
+  DemoSupernodeRepository get _demoRepository => DemoSupernodeRepository();
+  MainSupernodeRepository get _mainRepository =>
+      MainSupernodeRepository(_client, _setupStore);
+  SupernodeRepository get _currentRepository =>
+      _setupStore.token!.toLowerCase().contains("demo")
+          ? _demoRepository
+          : _mainRepository;
 
   @override
-  DemoDhxDao get dhx => DemoDhxDao();
+  DhxRepository get dhx => _currentRepository.dhx;
 
   @override
-  DemoGatewaysDao get gateways => DemoGatewaysDao();
+  GatewayRepository get gateways => _currentRepository.gateways;
 
   @override
-  DemoStakeDao get stake => DemoStakeDao();
+  StakeRepository get stake => _currentRepository.stake;
 
   @override
-  DemoTopupDao get topup => DemoTopupDao();
+  TopupRepository get topup => _currentRepository.topup;
 
   @override
-  DemoUserDao get user => DemoUserDao();
+  UserRepository get user => _currentRepository.user;
 
   @override
-  DemoWalletDao get wallet => DemoWalletDao();
+  WalletRepository get wallet => _currentRepository.wallet;
 
   @override
-  DemoWithdrawDao get withdraw => DemoWithdrawDao();
+  WithdrawRepository get withdraw => _currentRepository.withdraw;
 
   @override
-  DemoServerInfoDao get serverInfo => DemoServerInfoDao();
-
-// No demo wrappers:
-  @override
-  GatewaysLocationDao get gatewaysLocation => GatewaysLocationDao(client);
+  OrganizationRepository get organization => _currentRepository.organization;
 
   @override
-  OrganizationDao get organization => OrganizationDao(client);
+  NetworkServerRepository get networkServer => _currentRepository.networkServer;
 
   @override
-  NetworkServerDao get networkServer => NetworkServerDao(client);
+  LoginRepository get auth => _currentRepository.auth;
+
+  @override
+  ExternalAccountsRepository get externalAccounts =>
+      _currentRepository.externalAccounts;
+
+  @override
+  RegistrationRepository get register => _currentRepository.register;
+
+  @override
+  TotpRepository get totp => _currentRepository.totp;
+
+  @override
+  ReportRepository get report => _currentRepository.report;
+
+  @override
+  DeviceRepository get device => _currentRepository.device;
+
+  @override
+  Future<Map<String, List<Supernode>>> listSupernodes() =>
+      _currentRepository.listSupernodes();
+
+  @override
+  Future<Supernode> getSupernode() => _currentRepository.getSupernode();
 }
-*/
