@@ -19,7 +19,7 @@ import 'api/demo/withdraw.dart';
 class DemoSupernodeRepository implements SupernodeRepository {
   const DemoSupernodeRepository();
 
-  static Supernode _supernode = Supernode(
+  static final Supernode _supernode = Supernode(
     region: "Test",
     url: "https://lora.test.cloud.mxc.org",
     logo: "https://lora.test.cloud.mxc.org/branding.png",

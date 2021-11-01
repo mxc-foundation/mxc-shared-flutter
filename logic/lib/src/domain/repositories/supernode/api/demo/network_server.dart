@@ -29,7 +29,5 @@ class DemoNetworkServerRepository implements NetworkServerRepository {
   }
 
   @override
-  Future<String> version() async {
-    return "2.0.0";
-  }
+  Future<String> version() async => "2.0.0";
 }

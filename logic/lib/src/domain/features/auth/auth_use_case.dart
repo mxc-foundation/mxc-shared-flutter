@@ -1,7 +1,5 @@
 import 'package:mxc_logic/mxc_logic.dart';
 
-import 'auth_repository.dart';
-
 class LoginUseCase {
   final SupernodeRepository repository;
   final AuthenticationRepository authRepository;

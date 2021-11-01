@@ -54,7 +54,9 @@ class DemoStakeRepository implements StakeRepository {
           boost: 10000,
           revenue: "10000".toDouble(),
           option: _mapStakeOption(
-              DateTime.now().add(Duration(days: -2)), DateTime.now()),
+            DateTime.now().add(Duration(days: -2)),
+            DateTime.now(),
+          ),
         ),
       ),
       StakeHistoryFrame(
@@ -71,7 +73,9 @@ class DemoStakeRepository implements StakeRepository {
           boost: 10000,
           revenue: "20000".toDouble(),
           option: _mapStakeOption(
-              DateTime.now().add(Duration(days: -1)), DateTime.now()),
+            DateTime.now().add(Duration(days: -1)),
+            DateTime.now(),
+          ),
         ),
       ),
     ];
@@ -90,7 +94,9 @@ class DemoStakeRepository implements StakeRepository {
         boost: 10000,
         revenue: "10000".toDouble(),
         option: _mapStakeOption(
-            DateTime.now().add(Duration(days: -1)), DateTime.now()),
+          DateTime.now().add(Duration(days: -1)),
+          DateTime.now(),
+        ),
       ),
       Stake(
         id: "DemoStakeId2",
@@ -102,7 +108,9 @@ class DemoStakeRepository implements StakeRepository {
         boost: 10000,
         revenue: "20000".toDouble(),
         option: _mapStakeOption(
-            DateTime.now().add(Duration(days: -1)), DateTime.now()),
+          DateTime.now().add(Duration(days: -1)),
+          DateTime.now(),
+        ),
       ),
     ];
   }
@@ -123,7 +131,9 @@ class DemoStakeRepository implements StakeRepository {
         boost: 10000,
         revenue: "10000".toDouble(),
         option: _mapStakeOption(
-            DateTime.now().add(Duration(days: -1)), DateTime.now()),
+          DateTime.now().add(Duration(days: -1)),
+          DateTime.now(),
+        ),
       ),
       Stake(
         id: "DemoStakeId2",
@@ -135,7 +145,9 @@ class DemoStakeRepository implements StakeRepository {
         boost: 10000,
         revenue: "20000".toDouble(),
         option: _mapStakeOption(
-            DateTime.now().add(Duration(days: -1)), DateTime.now()),
+          DateTime.now().add(Duration(days: -1)),
+          DateTime.now(),
+        ),
       ),
     ];
   }

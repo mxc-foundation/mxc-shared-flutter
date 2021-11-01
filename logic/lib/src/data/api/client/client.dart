@@ -2,7 +2,6 @@ import 'package:chopper/chopper.dart';
 import 'package:meta/meta.dart';
 import 'package:mxc_logic/src/data/api/client/authentication.dart';
 
-import '../supernode/client_index.dart';
 import '../supernode/supernode.swagger.dart';
 import 'error_converter.dart';
 

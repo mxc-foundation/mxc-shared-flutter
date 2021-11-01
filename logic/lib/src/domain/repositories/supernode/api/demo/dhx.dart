@@ -55,7 +55,9 @@ class DemoDhxRepository implements DhxRepository {
         dhxMined: 3000000.0,
         lockTill: DateTime.now(),
         option: _mapLockOption(
-            DateTime.now(), DateTime.now().add(Duration(days: -2))),
+          DateTime.now(),
+          DateTime.now().add(Duration(days: -2)),
+        ),
       ),
       Lock(
         id: 'DemoId2',
@@ -70,7 +72,9 @@ class DemoDhxRepository implements DhxRepository {
         dhxMined: 3000000.0,
         lockTill: DateTime.now(),
         option: _mapLockOption(
-            DateTime.now(), DateTime.now().add(Duration(days: -2))),
+          DateTime.now(),
+          DateTime.now().add(Duration(days: -2)),
+        ),
       ),
       Lock(
         id: 'DemoId3',
@@ -85,7 +89,9 @@ class DemoDhxRepository implements DhxRepository {
         dhxMined: 3000000.0,
         lockTill: DateTime.now(),
         option: _mapLockOption(
-            DateTime.now(), DateTime.now().add(Duration(days: -2))),
+          DateTime.now(),
+          DateTime.now().add(Duration(days: -2)),
+        ),
       )
     ];
   }

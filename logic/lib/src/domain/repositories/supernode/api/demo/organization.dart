@@ -10,7 +10,7 @@ class DemoOrganizationRepository implements OrganizationRepository {
     required String name,
   }) =>
       throw UnimplementedError();
-      
+
   @override
   Future<List<Organization>> list({
     required int offset,
