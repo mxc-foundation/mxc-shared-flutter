@@ -19,7 +19,7 @@ class SupernodeClient extends ChopperClient {
         super(
           converter: JsonSerializableConverter(),
           services: [...supernodeServices],
-          client: IOClient(createHttpClientWithCert(cert: isrgx1)),
+          client: IOClient(createHttpClientWithCert(isrgx1)),
           authenticator: refreshToken == null
               ? null
               : SupernodeAuthenticator(

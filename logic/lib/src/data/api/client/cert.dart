@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
-// ignore: leading_newlines_in_multiline_strings
-const String isrgx1 = '''-----BEGIN CERTIFICATE-----
+const String isrgx1 = '''
+-----BEGIN CERTIFICATE-----
 MIIFazCCA1OgAwIBAgIRAIIQz7DSQONZRGPgu2OCiwAwDQYJKoZIhvcNAQELBQAw
 TzELMAkGA1UEBhMCVVMxKTAnBgNVBAoTIEludGVybmV0IFNlY3VyaXR5IFJlc2Vh
 cmNoIEdyb3VwMRUwEwYDVQQDEwxJU1JHIFJvb3QgWDEwHhcNMTUwNjA0MTEwNDM4
@@ -35,13 +35,11 @@ mRGunUHBcnWEvgJBQl9nJEiU0Zsnvgc/ubhPgXRR4Xq37Z0j4r7g1SgEEzwxA57d
 emyPxgcYxn/eR44/KJ4EBs+lVDR3veyJm+kXQ99b21/+jh5Xos1AnX5iItreGCc=
 -----END CERTIFICATE-----''';
 
-HttpClient createHttpClientWithCert({String? cert}) {
+HttpClient createHttpClientWithCert(String cert) {
   final context = SecurityContext.defaultContext;
   try {
-    if (cert != null) {
-      final bytes = utf8.encode(cert);
-      context.setTrustedCertificatesBytes(bytes);
-    }
+    final bytes = utf8.encode(cert);
+    context.setTrustedCertificatesBytes(bytes);
     log('createHttpClient() - cert added!');
   } on TlsException catch (e) {
     if (e.osError?.message != null &&
