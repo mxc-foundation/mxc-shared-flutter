@@ -2,10 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mxc_ui/mxc_ui.dart';
 import 'package:provider/provider.dart';
 
-import 'colors.dart';
-import 'font.dart';
-import 'images.dart';
-
 export 'colors.dart';
 export 'font.dart';
 export 'images.dart';
