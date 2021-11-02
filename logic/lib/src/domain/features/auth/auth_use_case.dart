@@ -1,6 +1,10 @@
 import 'package:mxc_logic/mxc_logic.dart';
 
+<<<<<<< HEAD
 class AuthUseCase {
+=======
+class LoginUseCase {
+>>>>>>> d651b8d (another fix linter)
   final SupernodeRepository repository;
   final SupernodeSetupRepository setupRepository;
 
