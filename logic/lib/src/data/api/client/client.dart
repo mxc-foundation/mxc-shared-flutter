@@ -3,17 +3,17 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:chopper/chopper.dart';
+import 'package:http/io_client.dart';
 import 'package:meta/meta.dart';
 import 'package:mxc_logic/src/data/api/client/authentication.dart';
-import 'package:http/http.dart' as http;
-import 'package:http/io_client.dart';
 
 import '../supernode/supernode.swagger.dart';
 import 'error_converter.dart';
 
 @internal
 class SupernodeClient extends ChopperClient {
-  static const String ISRG_X1 = """-----BEGIN CERTIFICATE-----
+  // ignore: leading_newlines_in_multiline_strings
+  static const String isrgx1 = '''-----BEGIN CERTIFICATE-----
 MIIFazCCA1OgAwIBAgIRAIIQz7DSQONZRGPgu2OCiwAwDQYJKoZIhvcNAQELBQAw
 TzELMAkGA1UEBhMCVVMxKTAnBgNVBAoTIEludGVybmV0IFNlY3VyaXR5IFJlc2Vh
 cmNoIEdyb3VwMRUwEwYDVQQDEwxJU1JHIFJvb3QgWDEwHhcNMTUwNjA0MTEwNDM4
@@ -43,7 +43,7 @@ oyi3B43njTOQ5yOf+1CceWxG1bQVs5ZufpsMljq4Ui0/1lvh+wjChP4kqKOJ2qxq
 4RgqsahDYVvTH9w7jXbyLeiNdd8XM2w9U/t7y0Ff/9yi0GE44Za4rF2LN9d11TPA
 mRGunUHBcnWEvgJBQl9nJEiU0Zsnvgc/ubhPgXRR4Xq37Z0j4r7g1SgEEzwxA57d
 emyPxgcYxn/eR44/KJ4EBs+lVDR3veyJm+kXQ99b21/+jh5Xos1AnX5iItreGCc=
------END CERTIFICATE-----""";
+-----END CERTIFICATE-----''';
 
   final String Function() _getBaseUrl;
   final String? Function() _getDefaultOrganizationId;
@@ -60,7 +60,7 @@ emyPxgcYxn/eR44/KJ4EBs+lVDR3veyJm+kXQ99b21/+jh5Xos1AnX5iItreGCc=
         super(
           converter: JsonSerializableConverter(),
           services: [...supernodeServices],
-          client: _createLEClient(),
+          client: IOClient(_customHttpClient(cert: isrgx1)),
           authenticator: refreshToken == null
               ? null
               : SupernodeAuthenticator(
@@ -82,7 +82,7 @@ emyPxgcYxn/eR44/KJ4EBs+lVDR3veyJm+kXQ99b21/+jh5Xos1AnX5iItreGCc=
   String? get token => _getToken();
 
   static HttpClient _customHttpClient({String? cert}) {
-    SecurityContext context = SecurityContext.defaultContext;
+    final context = SecurityContext.defaultContext;
     try {
       if (cert != null) {
         final bytes = utf8.encode(cert);
@@ -99,11 +99,5 @@ emyPxgcYxn/eR44/KJ4EBs+lVDR3veyJm+kXQ99b21/+jh5Xos1AnX5iItreGCc=
       }
     } finally {}
     return HttpClient(context: context);
-  }
-
-  static http.Client _createLEClient() {
-    IOClient ioClient;
-    ioClient = IOClient(_customHttpClient(cert: ISRG_X1));
-    return ioClient;
   }
 }
