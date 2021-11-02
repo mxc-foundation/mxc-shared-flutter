@@ -157,9 +157,8 @@ class StakeRepository {
           marketingRate:
               (((boost + 1) / (realRates[StakeOption.m12]! + 1)) * 100 - 100)
                   .round(),
-          estimatedRate: (stakingInterest + (stakingInterest * boost) * 1000)
-                  .floorToDouble() /
-              1000,
+          estimatedRate:
+              (stakingInterest * (1 + boost) * 1000).floorToDouble() / 1000,
         ),
       ),
     );
