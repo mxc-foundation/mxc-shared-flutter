@@ -78,15 +78,15 @@ emyPxgcYxn/eR44/KJ4EBs+lVDR3veyJm+kXQ99b21/+jh5Xos1AnX5iItreGCc=
       }
       log('createHttpClient() - cert added!');
     } on TlsException catch (e) {
-      final fuck =
-          e.osError?.message.contains('CERT_ALREADY_IN_HASH_TABLE') ?? false;
-      if (e.osError?.message != null && fuck) {
+      if (e.osError?.message != null &&
+          (e.osError?.message.contains('CERT_ALREADY_IN_HASH_TABLE') ??
+              false)) {
         log('createHttpClient() - cert already trusted! Skipping.');
       } else {
         log('createHttpClient().setTrustedCertificateBytes EXCEPTION: $e');
         rethrow;
       }
-    } finally {}
+    }
     return HttpClient(context: context);
   }
 
