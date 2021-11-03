@@ -1,7 +1,5 @@
 import 'package:mxc_logic/mxc_logic.dart';
 
-import '../supernode.dart';
-
 class DhxDemoRepository implements DhxRepository {
   @override
   Future<List<Council>> listCouncils() async {

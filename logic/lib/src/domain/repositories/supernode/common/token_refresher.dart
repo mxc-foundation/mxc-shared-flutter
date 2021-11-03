@@ -1,5 +1,4 @@
 import 'package:mxc_logic/mxc_logic.dart';
-import 'package:mxc_logic/src/domain/repositories/supernode/common/supernode_setup.dart';
 
 abstract class TokenRefresher {
   factory TokenRefresher(SupernodeSetupRepository setupRepository) =
