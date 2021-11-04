@@ -24,6 +24,7 @@ extension StringMapper on String? {
 
 extension NumMapper on num? {
   T orDefault<T extends num>() {
+    if (this != null) return this! as T;
     if (T == double) {
       return 0.0 as T;
     }
