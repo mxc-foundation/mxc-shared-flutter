@@ -1,9 +1,10 @@
 import 'package:chopper/chopper.dart';
+import 'package:http/io_client.dart';
 import 'package:meta/meta.dart';
 import 'package:mxc_logic/src/data/api/client/authentication.dart';
 
-import '../supernode/client_index.dart';
 import '../supernode/supernode.swagger.dart';
+import 'cert.dart';
 import 'error_converter.dart';
 
 @internal
@@ -23,6 +24,7 @@ class SupernodeClient extends ChopperClient {
         super(
           converter: JsonSerializableConverter(),
           services: [...supernodeServices],
+          client: IOClient(createHttpClientWithCert(isrgx1)),
           authenticator: refreshToken == null
               ? null
               : SupernodeAuthenticator(
