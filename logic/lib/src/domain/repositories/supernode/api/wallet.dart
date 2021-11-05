@@ -94,14 +94,13 @@ class WalletRepository {
   Future<void> btcAddLocks(
       {required String durationDays,
       required List<String> listMac,
-      required String orgId,
       required String sessionId,
       required String totalAmount}) async {
     await _client.bTCMining.bTCAddLocks(
         body: ExtapiBTCAddLocksRequest(
             durationDays: durationDays,
             gatewayMac: listMac,
-            orgId: orgId,
+            orgId: _client.defaultOrganizationId,
             sessionId: sessionId,
             totalAmount: totalAmount));
   }
@@ -126,8 +125,9 @@ class WalletRepository {
     }
   }
 
-  Future<List<BtcLock>> bTCListLocks(String orgId) async {
-    final res = await _client.bTCMining.bTCListLocks(orgId: orgId);
+  Future<List<BtcLock>> bTCListLocks() async {
+    final res = await _client.bTCMining
+        .bTCListLocks(orgId: _client.defaultOrganizationId);
 
     return res.body!.lock!
         .map((e) => BtcLock(
