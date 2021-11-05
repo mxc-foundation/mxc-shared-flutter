@@ -1,9 +1,6 @@
 import 'package:mxc_logic/mxc_logic.dart';
 import 'package:mxc_logic/src/data/data.dart';
 
-import 'api_supernode.dart';
-import 'demo_supernode.dart';
-
 export 'api/auth.dart';
 export 'api/device.dart';
 export 'api/dhx.dart';
