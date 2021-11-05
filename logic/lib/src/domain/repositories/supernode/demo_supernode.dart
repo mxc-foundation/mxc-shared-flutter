@@ -19,7 +19,7 @@ import 'api/demo/withdraw.dart';
 class DemoSupernodeRepository implements SupernodeRepository {
   const DemoSupernodeRepository();
 
-  static final Supernode _supernode = const Supernode(
+  static const Supernode _supernode = Supernode(
     region: "Test",
     url: "https://lora.test.cloud.mxc.org",
     logo: "https://lora.test.cloud.mxc.org/branding.png",
@@ -83,4 +83,12 @@ class DemoSupernodeRepository implements SupernodeRepository {
 
   @override
   Future<Supernode> getSupernode() async => _supernode;
+
+  @override
+  void logOut() {
+    throw UnimplementedError();
+  }
+
+  @override
+  bool get loggedIn => true;
 }
