@@ -1,4 +1,3 @@
-import 'package:chopper/src/base.dart';
 import 'package:mxc_logic/mxc_logic.dart';
 import 'package:mxc_logic/src/domain/repositories/internal/shared_mappers.dart';
 
@@ -43,7 +42,4 @@ class DemoRegistrationRepository implements RegistrationRepository {
     String? authToken,
   }) =>
       throw UnimplementedError();
-
-  @override
-  ChopperClient get client => throw UnimplementedError();
 }

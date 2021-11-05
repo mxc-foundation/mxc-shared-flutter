@@ -7,8 +7,11 @@ class LoginUseCase {
   final AuthenticationStorageRepository authStorageRepository;
   final AuthenticationCacheRepository? authCacheRepository;
 
-  LoginUseCase(this.repository, this.authStorageRepository,
-      [this.authCacheRepository]);
+  LoginUseCase(
+    this.repository,
+    this.authStorageRepository, [
+    this.authCacheRepository,
+  ]);
 
   Future<Map<String, List<Supernode>>> listSupernodes() {
     return repository.listSupernodes();
