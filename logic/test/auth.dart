@@ -58,7 +58,7 @@ Future<void> main() async {
 
   final loginUseCase = LoginUseCase(
     supernodeRepository,
-    AuthenticationRepository(supernodeSetupStore, null),
+    AuthenticationStorageRepository(supernodeSetupStore),
   );
 
   group('A group of tests', () {
