@@ -1,7 +1,7 @@
 import 'package:mxc_logic/mxc_logic.dart';
-import 'package:mxc_logic/src/data/api/supernode_list_api.dart';
 import 'package:mxc_logic/src/data/data.dart';
 
+import 'api_supernode.dart';
 import 'demo_supernode.dart';
 
 export 'api/auth.dart';
@@ -40,112 +40,31 @@ abstract class SupernodeRepository {
   Future<Map<String, List<Supernode>>> listSupernodes();
 
   Future<Supernode> getSupernode();
+
+  bool get loggedIn;
+  void logOut();
 }
 
-class MainSupernodeRepository implements SupernodeRepository {
-  const MainSupernodeRepository(this._client, this._setupStore);
-
-  final SupernodeClient _client;
-  final SupernodeSetupStore _setupStore;
-
-  @override
-  DhxRepository get dhx => DhxRepository(_client);
-
-  @override
-  GatewayRepository get gateways => GatewayRepository(_client);
-
-  @override
-  StakeRepository get stake => StakeRepository(_client);
-
-  @override
-  TopupRepository get topup => TopupRepository(_client);
-
-  @override
-  UserRepository get user => UserRepository(_client);
-
-  @override
-  WalletRepository get wallet => WalletRepository(_client);
-
-  @override
-  WithdrawRepository get withdraw => WithdrawRepository(_client);
-
-  @override
-  OrganizationRepository get organization => OrganizationRepository(_client);
-
-  @override
-  NetworkServerRepository get networkServer => NetworkServerRepository(_client);
-
-  @override
-  LoginRepository get auth => LoginRepository(_client);
-
-  @override
-  ExternalAccountsRepository get externalAccounts =>
-      ExternalAccountsRepository(_client);
-
-  @override
-  RegistrationRepository get register => RegistrationRepository(_client);
-
-  @override
-  TotpRepository get totp => TotpRepository(_client);
-
-  @override
-  ReportRepository get report => ReportRepository(_client);
-
-  @override
-  DeviceRepository get device => DeviceRepository(_client);
-
-  @override
-  Future<Map<String, List<Supernode>>> listSupernodes() {
-    return SupernodeGithubApi(_client).listSupernodes();
-  }
-
-  @override
-  Future<Supernode> getSupernode() async {
-    final api = SupernodeGithubApi(_client);
-    final supernodes = await api.listSupernodes();
-    return supernodes.values
-        .reduce((a, b) => [...a, ...b])
-        .firstWhere((e) => e.url == _setupStore.supernodeAddress);
-  }
-}
-
-class ApiSupernodeRepository implements SupernodeRepository {
-  final SupernodeSetupStore _setupStore;
-
-  ApiSupernodeRepository({
+/// This supernode repository gives you access to [ApiSupernodeRepository] or [DemoSupernodeRepository]
+/// depending on [demoMode] field.
+class SupernodeRepositoryDemoDecorator implements SupernodeRepository {
+  SupernodeRepositoryDemoDecorator({
     required SupernodeSetupStore setupStore,
     required TokenRefresher tokenRefresher,
-  })  : _setupStore = setupStore,
-        _client = SupernodeClient(
-          getSupernodeAddress: () =>
-              setupStore.supernodeAddress ??
-              (throw Exception('Supernode address has not been picked')),
-          getDefaultOrganizationId: () => setupStore.organizationId,
-          getToken: () => setupStore.token,
-          refreshToken: (client) => tokenRefresher.refresh(
-            ApiSupernodeRepository.withClient(
-              client: client,
-              setupStore: setupStore,
-            ),
-          ),
+  }) : _apiRepository = ApiSupernodeRepository(
+          setupStore: setupStore,
+          tokenRefresher: tokenRefresher,
         );
 
-  ApiSupernodeRepository.withClient({
-    required SupernodeClient client,
-    required SupernodeSetupStore setupStore,
-  })  : _client = client,
-        _setupStore = setupStore;
+  final ApiSupernodeRepository _apiRepository;
 
-  late final SupernodeClient _client;
-
-  DemoSupernodeRepository get _demoRepository =>
+  final DemoSupernodeRepository _demoRepository =
       const DemoSupernodeRepository();
-  MainSupernodeRepository get _mainRepository =>
-      MainSupernodeRepository(_client, _setupStore);
+
+  bool demoMode = false;
+
   SupernodeRepository get _currentRepository =>
-      _setupStore.token!.toLowerCase().contains("demo")
-          ? _demoRepository
-          : _mainRepository;
+      demoMode ? _demoRepository : _apiRepository;
 
   @override
   DhxRepository get dhx => _currentRepository.dhx;
@@ -199,4 +118,16 @@ class ApiSupernodeRepository implements SupernodeRepository {
 
   @override
   Future<Supernode> getSupernode() => _currentRepository.getSupernode();
+
+  @override
+  void logOut() {
+    if (demoMode) {
+      demoMode = false;
+    } else {
+      _apiRepository.logOut();
+    }
+  }
+
+  @override
+  bool get loggedIn => _currentRepository.loggedIn;
 }

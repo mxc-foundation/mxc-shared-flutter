@@ -13,12 +13,13 @@ typedef PresenterProvider<Presenter extends StateNotifier<State>, State>
 
 late final Provider<CacheManager> cacheManagerProvider;
 late final Provider<SupernodeRepository> supernodeRepositoryProvider;
-late final Provider<AuthenticationRepository> authenticationRepositoryProvider;
+late final Provider<AuthenticationStorageRepository>
+    authenticationStorageRepositoryProvider;
 late final Provider<NavigatorState> navigatorProvider;
 
 Provider<LoginUseCase> authUseCaseProvider = Provider((ref) => LoginUseCase(
       ref.watch(supernodeRepositoryProvider),
-      ref.watch(authenticationRepositoryProvider),
+      ref.watch(authenticationStorageRepositoryProvider),
     ));
 
 Provider<DeviceUseCase> deviceUseCaseProvider = Provider((ref) => DeviceUseCase(
@@ -35,16 +36,11 @@ Future<void> loadProviders(GlobalKey<NavigatorState> navigatorKey) async {
     tokenRefresher: tokenRefresher,
   );
 
-  final supernodeCacheController = CacheController(cacheManager, 'supernode');
-
   cacheManagerProvider = Provider(
     (ref) => cacheManager,
   );
-  authenticationRepositoryProvider = Provider(
-    (ref) => AuthenticationRepository(
-      supernodeSetupStore,
-      supernodeCacheController,
-    ),
+  authenticationStorageRepositoryProvider = Provider(
+    (ref) => AuthenticationStorageRepository(supernodeSetupStore),
   );
   supernodeRepositoryProvider = Provider(
     (ref) => supernodeRepository,

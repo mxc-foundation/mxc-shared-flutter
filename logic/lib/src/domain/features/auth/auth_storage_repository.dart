@@ -1,13 +1,9 @@
 import 'package:mxc_logic/internal.dart';
 
-class AuthenticationRepository {
+class AuthenticationStorageRepository {
   final SupernodeSetupStore _supernodeSetupStore;
-  final CacheController? _supernodeCacheController;
 
-  AuthenticationRepository(
-    this._supernodeSetupStore,
-    this._supernodeCacheController,
-  );
+  AuthenticationStorageRepository(this._supernodeSetupStore);
 
   String? get supernodeAddress => _supernodeSetupStore.supernodeAddress;
   set supernodeAddress(String? supernodeAddress) =>
@@ -20,7 +16,6 @@ class AuthenticationRepository {
   ) async {
     _supernodeSetupStore.credentials = Credentials(username, password);
     _supernodeSetupStore.token = token;
-    await _supernodeCacheController?.load(username);
   }
 
   String get organizationId =>
