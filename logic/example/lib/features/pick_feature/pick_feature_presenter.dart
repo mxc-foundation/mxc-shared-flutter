@@ -24,7 +24,7 @@ class PickFeaturePresenter extends StateNotifier<PickFeatureState> {
 
   static ActionsProvider get actions => store.notifier;
 
-  final ProviderRefBase _ref;
+  final Ref _ref;
 
   LoginUseCase get _authUseCase => _ref.read(authUseCaseProvider);
 

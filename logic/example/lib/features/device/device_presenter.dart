@@ -31,7 +31,7 @@ class DevicePresenter extends StateNotifier<DeviceState> {
 
   static ActionsProvider get actions => store.notifier;
 
-  final ProviderRefBase _ref;
+  final Ref _ref;
 
   DeviceUseCase get _useCase => _ref.read(deviceUseCaseProvider);
 
