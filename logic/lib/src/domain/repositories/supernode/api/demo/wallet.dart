@@ -48,4 +48,26 @@ class DemoWalletRepository implements WalletRepository {
   Future<double> downlinkPrice({String? orgId}) async {
     return 1000.123;
   }
+
+  @override
+  Future<List<BtcLock>> bTCListLocks() {
+    // TODO: implement bTCListLocks
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<BtcMiningSession> bTCMiningSession() {
+    // TODO: implement bTCMiningSession
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> btcAddLocks(
+      {required String durationDays,
+      required List<String> listMac,
+      required String sessionId,
+      required String totalAmount}) {
+    // TODO: implement btcAddLocks
+    throw UnimplementedError();
+  }
 }

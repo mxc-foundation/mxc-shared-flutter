@@ -492,6 +492,61 @@ abstract class ApplicationService extends ChopperService {
 }
 
 @ChopperApi()
+abstract class BTCMining extends ChopperService {
+  static BTCMining createService([ChopperClient? client]) {
+    if (client != null) {
+      return _$BTCMining(client);
+    }
+
+    final newClient = ChopperClient(
+      services: [_$BTCMining()],
+      converter: chopper.JsonConverter(), /*baseUrl: YOUR_BASE_URL*/
+    );
+    return _$BTCMining(newClient);
+  }
+
+  ///List the locks that are still open
+  ///@param orgId org for which the locks must be returned.
+  ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
+
+  @Get(path: '/api/btc-mining/list-locks')
+  Future<chopper.Response<ExtapiBTCListLocksResponse>> bTCListLocks(
+      {@Query('orgId')
+          String? orgId,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
+
+  ///Create locks for current or upcoming mining session
+  ///@param body
+  ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
+
+  @Post(path: '/api/btc-mining/lock')
+  Future<chopper.Response<ExtapiBTCAddLocksResponse>> bTCAddLocks(
+      {@Body()
+      @required
+          ExtapiBTCAddLocksRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
+
+  ///Request information about the current or upcoming mining session
+  ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
+
+  @Get(path: '/api/btc-mining/session')
+  Future<chopper.Response<ExtapiBTCMiningSessionResponse>> bTCMiningSession(
+      {@Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
+}
+
+@ChopperApi()
 abstract class ExternalUserService extends ChopperService {
   static ExternalUserService createService([ChopperClient? client]) {
     if (client != null) {
@@ -3948,6 +4003,7 @@ abstract class WithdrawService extends ChopperService {
 
 extension SwaggerExtension on ChopperClient {
   ApplicationService get applicationService => getService<ApplicationService>();
+  BTCMining get bTCMining => getService<BTCMining>();
   ExternalUserService get externalUserService =>
       getService<ExternalUserService>();
   DeviceProfileService get deviceProfileService =>
@@ -3987,6 +4043,7 @@ extension SwaggerExtension on ChopperClient {
 
 List<ChopperService> get supernodeServices => [
       ApplicationService.createService(),
+      BTCMining.createService(),
       ExternalUserService.createService(),
       DeviceProfileService.createService(),
       DeviceProvisioningService.createService(),
@@ -4028,6 +4085,12 @@ final Map<Type, Object Function(Map<String, dynamic>)>
       ExtapiAuthenticateWeChatUserRequest.fromJsonFactory,
   ExtapiAuthenticateWeChatUserResponse:
       ExtapiAuthenticateWeChatUserResponse.fromJsonFactory,
+  ExtapiBTCAddLocksRequest: ExtapiBTCAddLocksRequest.fromJsonFactory,
+  ExtapiBTCAddLocksResponse: ExtapiBTCAddLocksResponse.fromJsonFactory,
+  ExtapiBTCListLocksResponse: ExtapiBTCListLocksResponse.fromJsonFactory,
+  ExtapiBTCLock: ExtapiBTCLock.fromJsonFactory,
+  ExtapiBTCMiningSessionResponse:
+      ExtapiBTCMiningSessionResponse.fromJsonFactory,
   ExtapiBatchResetDefaultGatewatConfigRequest:
       ExtapiBatchResetDefaultGatewatConfigRequest.fromJsonFactory,
   ExtapiBatchResetDefaultGatewatConfigResponse:
@@ -4891,6 +4954,257 @@ extension $ExtapiAuthenticateWeChatUserResponseExtension
     return ExtapiAuthenticateWeChatUserResponse(
         bindingIsRequired: bindingIsRequired ?? this.bindingIsRequired,
         jwt: jwt ?? this.jwt);
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class ExtapiBTCAddLocksRequest {
+  ExtapiBTCAddLocksRequest({
+    this.durationDays,
+    this.gatewayMac,
+    this.orgId,
+    this.sessionId,
+    this.totalAmount,
+  });
+
+  factory ExtapiBTCAddLocksRequest.fromJson(Map<String, dynamic> json) =>
+      _$ExtapiBTCAddLocksRequestFromJson(json);
+
+  @JsonKey(name: 'durationDays')
+  final String? durationDays;
+  @JsonKey(name: 'gatewayMac', defaultValue: <String>[])
+  final List<String>? gatewayMac;
+  @JsonKey(name: 'orgId')
+  final String? orgId;
+  @JsonKey(name: 'sessionId')
+  final String? sessionId;
+  @JsonKey(name: 'totalAmount')
+  final String? totalAmount;
+  static const fromJsonFactory = _$ExtapiBTCAddLocksRequestFromJson;
+  static const toJsonFactory = _$ExtapiBTCAddLocksRequestToJson;
+  Map<String, dynamic> toJson() => _$ExtapiBTCAddLocksRequestToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is ExtapiBTCAddLocksRequest &&
+            (identical(other.durationDays, durationDays) ||
+                const DeepCollectionEquality()
+                    .equals(other.durationDays, durationDays)) &&
+            (identical(other.gatewayMac, gatewayMac) ||
+                const DeepCollectionEquality()
+                    .equals(other.gatewayMac, gatewayMac)) &&
+            (identical(other.orgId, orgId) ||
+                const DeepCollectionEquality().equals(other.orgId, orgId)) &&
+            (identical(other.sessionId, sessionId) ||
+                const DeepCollectionEquality()
+                    .equals(other.sessionId, sessionId)) &&
+            (identical(other.totalAmount, totalAmount) ||
+                const DeepCollectionEquality()
+                    .equals(other.totalAmount, totalAmount)));
+  }
+}
+
+extension $ExtapiBTCAddLocksRequestExtension on ExtapiBTCAddLocksRequest {
+  ExtapiBTCAddLocksRequest copyWith(
+      {String? durationDays,
+      List<String>? gatewayMac,
+      String? orgId,
+      String? sessionId,
+      String? totalAmount}) {
+    return ExtapiBTCAddLocksRequest(
+        durationDays: durationDays ?? this.durationDays,
+        gatewayMac: gatewayMac ?? this.gatewayMac,
+        orgId: orgId ?? this.orgId,
+        sessionId: sessionId ?? this.sessionId,
+        totalAmount: totalAmount ?? this.totalAmount);
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class ExtapiBTCAddLocksResponse {
+  ExtapiBTCAddLocksResponse();
+
+  factory ExtapiBTCAddLocksResponse.fromJson(Map<String, dynamic> json) =>
+      _$ExtapiBTCAddLocksResponseFromJson(json);
+
+  static const fromJsonFactory = _$ExtapiBTCAddLocksResponseFromJson;
+  static const toJsonFactory = _$ExtapiBTCAddLocksResponseToJson;
+  Map<String, dynamic> toJson() => _$ExtapiBTCAddLocksResponseToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class ExtapiBTCListLocksResponse {
+  ExtapiBTCListLocksResponse({
+    this.lock,
+  });
+
+  factory ExtapiBTCListLocksResponse.fromJson(Map<String, dynamic> json) =>
+      _$ExtapiBTCListLocksResponseFromJson(json);
+
+  @JsonKey(name: 'lock', defaultValue: <ExtapiBTCLock>[])
+  final List<ExtapiBTCLock>? lock;
+  static const fromJsonFactory = _$ExtapiBTCListLocksResponseFromJson;
+  static const toJsonFactory = _$ExtapiBTCListLocksResponseToJson;
+  Map<String, dynamic> toJson() => _$ExtapiBTCListLocksResponseToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is ExtapiBTCListLocksResponse &&
+            (identical(other.lock, lock) ||
+                const DeepCollectionEquality().equals(other.lock, lock)));
+  }
+}
+
+extension $ExtapiBTCListLocksResponseExtension on ExtapiBTCListLocksResponse {
+  ExtapiBTCListLocksResponse copyWith({List<ExtapiBTCLock>? lock}) {
+    return ExtapiBTCListLocksResponse(lock: lock ?? this.lock);
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class ExtapiBTCLock {
+  ExtapiBTCLock({
+    this.amount,
+    this.btcRevenue,
+    this.created,
+    this.gatewayMac,
+    this.id,
+    this.lockTill,
+    this.sessionId,
+  });
+
+  factory ExtapiBTCLock.fromJson(Map<String, dynamic> json) =>
+      _$ExtapiBTCLockFromJson(json);
+
+  @JsonKey(name: 'amount')
+  final String? amount;
+  @JsonKey(name: 'btcRevenue')
+  final String? btcRevenue;
+  @JsonKey(name: 'created')
+  final DateTime? created;
+  @JsonKey(name: 'gatewayMac')
+  final String? gatewayMac;
+  @JsonKey(name: 'id')
+  final String? id;
+  @JsonKey(name: 'lockTill')
+  final DateTime? lockTill;
+  @JsonKey(name: 'sessionId')
+  final String? sessionId;
+  static const fromJsonFactory = _$ExtapiBTCLockFromJson;
+  static const toJsonFactory = _$ExtapiBTCLockToJson;
+  Map<String, dynamic> toJson() => _$ExtapiBTCLockToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is ExtapiBTCLock &&
+            (identical(other.amount, amount) ||
+                const DeepCollectionEquality().equals(other.amount, amount)) &&
+            (identical(other.btcRevenue, btcRevenue) ||
+                const DeepCollectionEquality()
+                    .equals(other.btcRevenue, btcRevenue)) &&
+            (identical(other.created, created) ||
+                const DeepCollectionEquality()
+                    .equals(other.created, created)) &&
+            (identical(other.gatewayMac, gatewayMac) ||
+                const DeepCollectionEquality()
+                    .equals(other.gatewayMac, gatewayMac)) &&
+            (identical(other.id, id) ||
+                const DeepCollectionEquality().equals(other.id, id)) &&
+            (identical(other.lockTill, lockTill) ||
+                const DeepCollectionEquality()
+                    .equals(other.lockTill, lockTill)) &&
+            (identical(other.sessionId, sessionId) ||
+                const DeepCollectionEquality()
+                    .equals(other.sessionId, sessionId)));
+  }
+}
+
+extension $ExtapiBTCLockExtension on ExtapiBTCLock {
+  ExtapiBTCLock copyWith(
+      {String? amount,
+      String? btcRevenue,
+      DateTime? created,
+      String? gatewayMac,
+      String? id,
+      DateTime? lockTill,
+      String? sessionId}) {
+    return ExtapiBTCLock(
+        amount: amount ?? this.amount,
+        btcRevenue: btcRevenue ?? this.btcRevenue,
+        created: created ?? this.created,
+        gatewayMac: gatewayMac ?? this.gatewayMac,
+        id: id ?? this.id,
+        lockTill: lockTill ?? this.lockTill,
+        sessionId: sessionId ?? this.sessionId);
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class ExtapiBTCMiningSessionResponse {
+  ExtapiBTCMiningSessionResponse({
+    this.endDate,
+    this.mxcLockAmount,
+    this.mxcLockDurationDays,
+    this.sessionId,
+    this.startDate,
+  });
+
+  factory ExtapiBTCMiningSessionResponse.fromJson(Map<String, dynamic> json) =>
+      _$ExtapiBTCMiningSessionResponseFromJson(json);
+
+  @JsonKey(name: 'endDate')
+  final DateTime? endDate;
+  @JsonKey(name: 'mxcLockAmount')
+  final String? mxcLockAmount;
+  @JsonKey(name: 'mxcLockDurationDays')
+  final String? mxcLockDurationDays;
+  @JsonKey(name: 'sessionId')
+  final String? sessionId;
+  @JsonKey(name: 'startDate')
+  final DateTime? startDate;
+  static const fromJsonFactory = _$ExtapiBTCMiningSessionResponseFromJson;
+  static const toJsonFactory = _$ExtapiBTCMiningSessionResponseToJson;
+  Map<String, dynamic> toJson() => _$ExtapiBTCMiningSessionResponseToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is ExtapiBTCMiningSessionResponse &&
+            (identical(other.endDate, endDate) ||
+                const DeepCollectionEquality()
+                    .equals(other.endDate, endDate)) &&
+            (identical(other.mxcLockAmount, mxcLockAmount) ||
+                const DeepCollectionEquality()
+                    .equals(other.mxcLockAmount, mxcLockAmount)) &&
+            (identical(other.mxcLockDurationDays, mxcLockDurationDays) ||
+                const DeepCollectionEquality()
+                    .equals(other.mxcLockDurationDays, mxcLockDurationDays)) &&
+            (identical(other.sessionId, sessionId) ||
+                const DeepCollectionEquality()
+                    .equals(other.sessionId, sessionId)) &&
+            (identical(other.startDate, startDate) ||
+                const DeepCollectionEquality()
+                    .equals(other.startDate, startDate)));
+  }
+}
+
+extension $ExtapiBTCMiningSessionResponseExtension
+    on ExtapiBTCMiningSessionResponse {
+  ExtapiBTCMiningSessionResponse copyWith(
+      {DateTime? endDate,
+      String? mxcLockAmount,
+      String? mxcLockDurationDays,
+      String? sessionId,
+      DateTime? startDate}) {
+    return ExtapiBTCMiningSessionResponse(
+        endDate: endDate ?? this.endDate,
+        mxcLockAmount: mxcLockAmount ?? this.mxcLockAmount,
+        mxcLockDurationDays: mxcLockDurationDays ?? this.mxcLockDurationDays,
+        sessionId: sessionId ?? this.sessionId,
+        startDate: startDate ?? this.startDate);
   }
 }
 
@@ -10779,6 +11093,7 @@ extension $ExtapiGetInfluxDBIntegrationResponseExtension
 class ExtapiGetJWTRequest {
   ExtapiGetJWTRequest({
     this.organizationId,
+    this.ttlInSeconds,
   });
 
   factory ExtapiGetJWTRequest.fromJson(Map<String, dynamic> json) =>
@@ -10786,6 +11101,8 @@ class ExtapiGetJWTRequest {
 
   @JsonKey(name: 'organizationId')
   final String? organizationId;
+  @JsonKey(name: 'ttlInSeconds')
+  final String? ttlInSeconds;
   static const fromJsonFactory = _$ExtapiGetJWTRequestFromJson;
   static const toJsonFactory = _$ExtapiGetJWTRequestToJson;
   Map<String, dynamic> toJson() => _$ExtapiGetJWTRequestToJson(this);
@@ -10796,14 +11113,18 @@ class ExtapiGetJWTRequest {
         (other is ExtapiGetJWTRequest &&
             (identical(other.organizationId, organizationId) ||
                 const DeepCollectionEquality()
-                    .equals(other.organizationId, organizationId)));
+                    .equals(other.organizationId, organizationId)) &&
+            (identical(other.ttlInSeconds, ttlInSeconds) ||
+                const DeepCollectionEquality()
+                    .equals(other.ttlInSeconds, ttlInSeconds)));
   }
 }
 
 extension $ExtapiGetJWTRequestExtension on ExtapiGetJWTRequest {
-  ExtapiGetJWTRequest copyWith({String? organizationId}) {
+  ExtapiGetJWTRequest copyWith({String? organizationId, String? ttlInSeconds}) {
     return ExtapiGetJWTRequest(
-        organizationId: organizationId ?? this.organizationId);
+        organizationId: organizationId ?? this.organizationId,
+        ttlInSeconds: ttlInSeconds ?? this.ttlInSeconds);
   }
 }
 
