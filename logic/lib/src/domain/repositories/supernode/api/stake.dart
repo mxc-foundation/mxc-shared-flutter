@@ -145,21 +145,20 @@ class StakeRepository {
             e.boost.toDouble(),
           ),
         );
-    realRates[StakeOption.flex] = res.body!.stakingInterest!;
+    realRates[StakeOption.flex] = 0;
 
-    final flexPercent = res.body!.stakingInterest! * 100;
+    final stakingInterest = res.body!.stakingInterest! * 100;
 
     final rates = realRates.map(
-      (key, value) => MapEntry(
+      (key, boost) => MapEntry(
         key,
         StakeBoostRate(
-          realRate: value,
+          realRate: boost,
           marketingRate:
-              (((value + 1) / (realRates[StakeOption.m12]! + 1)) * 100 - 100)
+              (((boost + 1) / (realRates[StakeOption.m12]! + 1)) * 100 - 100)
                   .round(),
           estimatedRate:
-              (flexPercent + (flexPercent * value) * 1000).floorToDouble() /
-                  1000,
+              (stakingInterest * (1 + boost) * 1000).floorToDouble() / 1000,
         ),
       ),
     );

@@ -16,4 +16,6 @@ export 'exceptions.dart';
 export 'exceptions.dart';
 export 'features/auth/auth.dart';
 export 'features/auth/auth_use_case.dart';
+export 'repositories/supernode/api_supernode.dart';
+export 'repositories/supernode/demo_supernode.dart';
 export 'repositories/supernode/supernode.dart';

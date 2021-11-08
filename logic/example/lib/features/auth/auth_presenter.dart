@@ -44,7 +44,7 @@ class AuthPresenter extends StateNotifier<AuthState> {
 
   static ActionsProvider get actions => store.notifier;
 
-  final ProviderRefBase _ref;
+  final Ref _ref;
 
   LoginUseCase get _useCase => _ref.read(authUseCaseProvider);
   NavigatorState get _navigator => _ref.read(navigatorProvider);

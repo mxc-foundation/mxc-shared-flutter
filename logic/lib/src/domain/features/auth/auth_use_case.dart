@@ -2,9 +2,14 @@ import 'package:mxc_logic/mxc_logic.dart';
 
 class LoginUseCase {
   final SupernodeRepository repository;
-  final AuthenticationRepository authRepository;
+  final AuthenticationStorageRepository authStorageRepository;
+  final AuthenticationCacheRepository? authCacheRepository;
 
-  LoginUseCase(this.repository, this.authRepository);
+  LoginUseCase(
+    this.repository,
+    this.authStorageRepository, [
+    this.authCacheRepository,
+  ]);
 
   Future<Map<String, List<Supernode>>> listSupernodes() {
     return repository.listSupernodes();
@@ -15,17 +20,25 @@ class LoginUseCase {
     String username,
     String password,
   ) async {
-    authRepository.supernodeAddress = supernodeAddress;
+    authStorageRepository.supernodeAddress = supernodeAddress;
     final res = await repository.auth.login(
       username: username,
       password: password,
     );
 
-    await authRepository.saveCredentials(username, password, res.token.source);
+    await authStorageRepository.saveCredentials(
+      username,
+      password,
+      res.token.source,
+    );
+
+    await authCacheRepository?.loadCache(username);
 
     final profile = await repository.user.profile();
-    authRepository.organizationId = profile.organizations.first.organizationId;
+
+    authStorageRepository.organizationId =
+        profile.organizations.first.organizationId;
   }
 
-  bool loggedIn() => authRepository.loggedIn;
+  bool loggedIn() => repository.loggedIn;
 }

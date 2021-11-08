@@ -76,8 +76,13 @@ abstract class MxcCircleButton extends StatelessWidget {
         customBorder: const CircleBorder(),
         child: Container(
           alignment: Alignment.center,
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             shape: BoxShape.circle,
+            boxShadow: [
+              MxcBoxShadow(
+                color: ColorsTheme.of(context).shadow2,
+              ),
+            ],
           ),
           width: 52,
           height: 52,
