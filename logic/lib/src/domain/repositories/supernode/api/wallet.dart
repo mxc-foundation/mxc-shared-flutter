@@ -106,6 +106,7 @@ class WalletRepository {
   }
 
   Future<BtcMiningSession> bTCMiningSession() async {
+    const int errorCodeNoSession = 5;
     try {
       final res = await _client.bTCMining.bTCMiningSession();
       return BtcMiningSession(
@@ -118,7 +119,7 @@ class WalletRepository {
       final Object? error = e.source;
       if (error != null &&
           error is Map<String, dynamic> &&
-          error['code'] == 5) {
+          error['code'] == errorCodeNoSession) {
         throw NoBtcMiningSessionException(e.url, e.message);
       }
       rethrow;
