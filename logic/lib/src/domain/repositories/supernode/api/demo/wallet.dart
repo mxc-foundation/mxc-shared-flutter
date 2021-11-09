@@ -62,11 +62,12 @@ class DemoWalletRepository implements WalletRepository {
   }
 
   @override
-  Future<void> btcAddLocks(
-      {required String durationDays,
-      required List<String> listMac,
-      required String sessionId,
-      required String totalAmount}) {
+  Future<void> btcAddLocks({
+    required String durationDays,
+    required List<String> listMac,
+    required String sessionId,
+    required String totalAmount,
+  }) {
     // TODO: implement btcAddLocks
     throw UnimplementedError();
   }

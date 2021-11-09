@@ -2,7 +2,6 @@ import 'package:decimal/decimal.dart';
 import 'package:mxc_logic/mxc_logic.dart';
 import 'package:mxc_logic/src/data/api/client/error_converter.dart';
 import 'package:mxc_logic/src/data/data.dart';
-import 'package:mxc_logic/src/domain/entities/wallet.dart';
 import 'package:mxc_logic/src/domain/repositories/internal/shared_mappers.dart';
 
 class WalletRepository {
@@ -91,18 +90,21 @@ class WalletRepository {
     return res.body!.downLinkPrice!;
   }
 
-  Future<void> btcAddLocks(
-      {required String durationDays,
-      required List<String> listMac,
-      required String sessionId,
-      required String totalAmount}) async {
+  Future<void> btcAddLocks({
+    required String durationDays,
+    required List<String> listMac,
+    required String sessionId,
+    required String totalAmount,
+  }) async {
     await _client.bTCMining.bTCAddLocks(
-        body: ExtapiBTCAddLocksRequest(
-            durationDays: durationDays,
-            gatewayMac: listMac,
-            orgId: _client.defaultOrganizationId,
-            sessionId: sessionId,
-            totalAmount: totalAmount));
+      body: ExtapiBTCAddLocksRequest(
+        durationDays: durationDays,
+        gatewayMac: listMac,
+        orgId: _client.defaultOrganizationId,
+        sessionId: sessionId,
+        totalAmount: totalAmount,
+      ),
+    );
   }
 
   Future<BtcMiningSession> bTCMiningSession() async {
@@ -110,11 +112,12 @@ class WalletRepository {
     try {
       final res = await _client.bTCMining.bTCMiningSession();
       return BtcMiningSession(
-          sessionId: res.body!.sessionId!,
-          mxcLockAmount: res.body!.mxcLockAmount!.toInt(),
-          startSession: res.body!.startDate!,
-          endSession: res.body!.endDate!,
-          mxcLockDurationDays: res.body!.mxcLockDurationDays!.toInt());
+        sessionId: res.body!.sessionId!,
+        mxcLockAmount: res.body!.mxcLockAmount!.toInt(),
+        startSession: res.body!.startDate!,
+        endSession: res.body!.endDate!,
+        mxcLockDurationDays: res.body!.mxcLockDurationDays!.toInt(),
+      );
     } on ApiException catch (e) {
       final Object? error = e.source;
       if (error != null &&
@@ -131,11 +134,14 @@ class WalletRepository {
         .bTCListLocks(orgId: _client.defaultOrganizationId);
 
     return res.body!.lock!
-        .map((e) => BtcLock(
+        .map(
+          (e) => BtcLock(
             gatewayMac: e.gatewayMac!,
             sessionId: e.sessionId!,
             amountLocked: e.amount!.toInt(),
-            btcRevenue: Decimal.tryParse(e.btcRevenue!) ?? Decimal.zero))
+            btcRevenue: Decimal.tryParse(e.btcRevenue!) ?? Decimal.zero,
+          ),
+        )
         .toList();
   }
 }
