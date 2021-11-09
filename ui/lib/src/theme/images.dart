@@ -25,12 +25,20 @@ class ImagesTheme {
         'assets/images/wallet/logo-mxc.png',
         package: _packageName,
       );
+  ImageProvider get logoMxcBig => const AssetImage(
+        'assets/images/wallet/logo-mxc-big.png',
+        package: _packageName,
+      );
   ImageProvider get logoDhx => const AssetImage(
         'assets/images/wallet/logo-dhx.png',
         package: _packageName,
       );
   ImageProvider get logoBtc => const AssetImage(
         'assets/images/wallet/logo-btc.png',
+        package: _packageName,
+      );
+  ImageProvider get logoBtcBig => const AssetImage(
+        'assets/images/wallet/logo-btc-big.png',
         package: _packageName,
       );
   ImageProvider get logoNft => const AssetImage(
@@ -332,6 +340,11 @@ class ImagesTheme {
         package: _packageName,
       );
 
+  ImageProvider get iconYellowMiner => const AssetImage(
+        'assets/images/wallet/btc_yellow_miner.png',
+        package: _packageName,
+      );
+
   //settings
   ImageProvider get warningRobot => const AssetImage(
         'assets/images/settings/robot_warning.png',
@@ -359,6 +372,12 @@ class ImagesThemeDark extends ImagesTheme {
       );
 
   @override
+  ImageProvider get logoMxcBig => const AssetImage(
+        'assets/images/wallet/logo-mxc-big-dark.png',
+        package: _packageName,
+      );
+
+  @override
   ImageProvider get logoDhx => const AssetImage(
         'assets/images/wallet/logo-dhx-dark.png',
         package: _packageName,
@@ -367,6 +386,12 @@ class ImagesThemeDark extends ImagesTheme {
   @override
   ImageProvider get logoBtc => const AssetImage(
         'assets/images/wallet/logo-btc-dark.png',
+        package: _packageName,
+      );
+
+  @override
+  ImageProvider get logoBtcBig => const AssetImage(
+        'assets/images/wallet/logo-btc-big-dark.png',
         package: _packageName,
       );
 
