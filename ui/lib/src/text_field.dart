@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:mxc_ui/mxc_ui.dart';
 
 class MxcTextField extends FormField<String> {
+  final TextEditingController? controller;
+
   MxcTextField({
     required Key? key,
     String? label,
-    required TextEditingController controller,
+    required TextEditingController this.controller,
     String? hint,
     FormFieldValidator<String>? validator,
     TextInputAction? action,
@@ -23,8 +25,6 @@ class MxcTextField extends FormField<String> {
           validator: validator,
           autovalidateMode: autovalidateMode,
           builder: (field) {
-            void onChangedHandler(String value) => field.didChange(value);
-
             return _MxcNonFormTextField(
               key: null,
               label: label,
@@ -38,7 +38,6 @@ class MxcTextField extends FormField<String> {
               readOnly: readOnly,
               suffixText: suffixText,
               width: width,
-              onChanged: onChangedHandler,
               errorText: field.errorText,
             );
           },
@@ -56,7 +55,8 @@ class MxcTextField extends FormField<String> {
     TextInputType? keyboardType,
     String? suffixText,
     bool obscure = false,
-  }) : super(
+  })  : controller = null,
+        super(
           key: key,
           builder: (s) => _MxcNonFormTextField.viewOnly(
             label: label,
@@ -71,6 +71,28 @@ class MxcTextField extends FormField<String> {
             width: width,
           ),
         );
+
+  @override
+  FormFieldState<String> createState() => _MxcTextFieldFormState();
+}
+
+class _MxcTextFieldFormState extends FormFieldState<String> {
+  @override
+  MxcTextField get widget => super.widget as MxcTextField;
+
+  @override
+  void initState() {
+    super.initState();
+    widget.controller?.addListener(_controllerListener);
+  }
+
+  void _controllerListener() => setValue(widget.controller!.text);
+
+  @override
+  void dispose() {
+    widget.controller?.removeListener(_controllerListener);
+    super.dispose();
+  }
 }
 
 class _MxcNonFormTextField extends StatefulWidget {
