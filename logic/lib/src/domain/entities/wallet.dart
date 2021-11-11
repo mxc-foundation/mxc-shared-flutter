@@ -9,9 +9,13 @@ class BtcMiningSession {
   final DateTime endSession;
   final int _mxcLockDurationDays;
 
+  /// Lock duration from backend session config, extended if session start date is in the future
   int get mxcLockDurationDays =>
       _mxcLockDurationDays +
       max(0, startSession.difference(DateTime.now()).inDays);
+
+  /// Lock duration from backend session config, needed for lock API call
+  int get mxcLockDurationDaysFromBackend => _mxcLockDurationDays;
 
   BtcMiningSession(
     this.sessionId,
