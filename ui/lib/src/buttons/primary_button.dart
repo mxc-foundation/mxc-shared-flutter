@@ -32,7 +32,7 @@ class _MxcPrimaryButtonState extends State<MxcPrimaryButton> {
     var buttonColor = primaryColor;
 
     if (widget.onTap == null) {
-      buttonColor = ColorsTheme.of(context).boxComponents;
+      buttonColor = ColorsTheme.of(context).buttonDisabledBackground;
     } else if (hovering) {
       buttonColor = buttonColor.withOpacity(0.8);
     }
@@ -55,7 +55,7 @@ class _MxcPrimaryButtonState extends State<MxcPrimaryButton> {
             textAlign: TextAlign.center,
             style: widget.onTap != null
                 ? FontTheme.of(context).big.button()
-                : FontTheme.of(context).big.label(),
+                : FontTheme.of(context).big.buttonDisabled(),
           ),
         ),
       ),
