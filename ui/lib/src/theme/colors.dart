@@ -65,6 +65,8 @@ class ColorsTheme {
   final textError20 = const Color(0xFFFF5B5B).withOpacity(0.2);
 
   final buttonIconTextColor = Colors.white;
+  final buttonDisabledBackground = const Color(0xFFEBEFF2);
+  final buttonDisabledLabel = const Color(0xFF98A6AD);
   final transparent = Colors.transparent;
 
   Color get shadow => mxcBlue20;
@@ -180,6 +182,12 @@ class ColorsThemeDark implements ColorsTheme {
 
   @override
   final buttonIconTextColor = Colors.white;
+
+  @override
+  final buttonDisabledBackground = const Color(0xFF323233);
+
+  @override
+  final buttonDisabledLabel = const Color(0xFF4E5659);
 
   @override
   final transparent = Colors.transparent;
