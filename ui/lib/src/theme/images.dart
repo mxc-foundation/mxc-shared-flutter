@@ -451,6 +451,13 @@ class ImagesThemeDark extends ImagesTheme {
         'assets/images/wallet/calendar3-dark.png',
         package: _packageName,
       );
+
+  //gateway
+  @override
+  ImageProvider get uptime => const AssetImage(
+        'assets/images/gateway/uptime-dark.png',
+        package: _packageName,
+      );
 }
 
 extension ImageProviderExt on ImageProvider {

@@ -9,6 +9,20 @@ class AuthenticationStorageRepository {
   set supernodeAddress(String? supernodeAddress) =>
       _supernodeSetupStore.supernodeAddress = supernodeAddress;
 
+  void updateEmail(String email) {
+    _supernodeSetupStore.credentials = Credentials(
+      email,
+      _supernodeSetupStore.credentials?.password ?? '',
+    );
+  }
+
+  void updatePassword(String password) {
+    _supernodeSetupStore.credentials = Credentials(
+      _supernodeSetupStore.credentials?.username ?? '',
+      password,
+    );
+  }
+
   Future<void> saveCredentials(
     String username,
     String password,
