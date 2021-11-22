@@ -20,7 +20,7 @@ class DemoStakeRepository implements StakeRepository {
     required int? lockMonths,
     String? orgId,
   }) async {
-    return "DemoStakeStatus";
+    return 'DemoStakeStatus';
   }
 
   @override
@@ -29,7 +29,7 @@ class DemoStakeRepository implements StakeRepository {
     required String otpCode,
     String? orgId,
   }) async {
-    return "DemoUnstakeStatus";
+    return 'DemoUnstakeStatus';
   }
 
   @override
@@ -42,17 +42,17 @@ class DemoStakeRepository implements StakeRepository {
     return [
       StakeHistoryFrame(
         timestamp: DateTime.now(),
-        amount: "10000".toDecimal(),
-        type: Mappers.stringToStakeHistoryType("STAKING"),
+        amount: '10000'.toDecimal(),
+        type: Mappers.stringToStakeHistoryType('STAKING'),
         stake: Stake(
-          id: "DemoStakeId1",
+          id: 'DemoStakeId1',
           startTime: DateTime.now().add(const Duration(days: -2)),
           endTime: DateTime.now().add(const Duration(days: -2)),
-          amount: "10000".toDecimal(),
+          amount: '10000'.toDecimal(),
           active: true,
           lockTill: DateTime.now(),
           boost: 10000,
-          revenue: "10000".toDouble(),
+          revenue: '10000'.toDouble(),
           option: _mapStakeOption(
             DateTime.now().add(const Duration(days: -2)),
             DateTime.now(),
@@ -61,17 +61,17 @@ class DemoStakeRepository implements StakeRepository {
       ),
       StakeHistoryFrame(
         timestamp: DateTime.now(),
-        amount: "10000".toDecimal(),
-        type: Mappers.stringToStakeHistoryType("UNSTAKING"),
+        amount: '10000'.toDecimal(),
+        type: Mappers.stringToStakeHistoryType('UNSTAKING'),
         stake: Stake(
-          id: "DemoStakeId2",
+          id: 'DemoStakeId2',
           startTime: DateTime.now().add(const Duration(days: -1)),
           endTime: DateTime.now().add(const Duration(days: -1)),
-          amount: "20000".toDecimal(),
+          amount: '20000'.toDecimal(),
           active: true,
           lockTill: DateTime.now(),
           boost: 10000,
-          revenue: "20000".toDouble(),
+          revenue: '20000'.toDouble(),
           option: _mapStakeOption(
             DateTime.now().add(const Duration(days: -1)),
             DateTime.now(),
@@ -85,28 +85,28 @@ class DemoStakeRepository implements StakeRepository {
   Future<List<Stake>> list({String? orgId}) async {
     return [
       Stake(
-        id: "DemoStakeId1",
+        id: 'DemoStakeId1',
         startTime: DateTime.now().add(const Duration(days: -1)),
         endTime: DateTime.now().add(const Duration(days: -1)),
-        amount: "10000".toDecimal(),
+        amount: '10000'.toDecimal(),
         active: true,
         lockTill: DateTime.now(),
         boost: 10000,
-        revenue: "10000".toDouble(),
+        revenue: '10000'.toDouble(),
         option: _mapStakeOption(
           DateTime.now().add(const Duration(days: -1)),
           DateTime.now(),
         ),
       ),
       Stake(
-        id: "DemoStakeId2",
+        id: 'DemoStakeId2',
         startTime: DateTime.now().add(const Duration(days: -1)),
         endTime: DateTime.now().add(const Duration(days: -1)),
-        amount: "20000".toDecimal(),
+        amount: '20000'.toDecimal(),
         active: true,
         lockTill: DateTime.now(),
         boost: 10000,
-        revenue: "20000".toDouble(),
+        revenue: '20000'.toDouble(),
         option: _mapStakeOption(
           DateTime.now().add(const Duration(days: -1)),
           DateTime.now(),
@@ -122,28 +122,28 @@ class DemoStakeRepository implements StakeRepository {
   }) async {
     return [
       Stake(
-        id: "DemoStakeId1",
+        id: 'DemoStakeId1',
         startTime: DateTime.now().add(const Duration(days: -1)),
         endTime: DateTime.now().add(const Duration(days: -1)),
-        amount: "10000".toDecimal(),
+        amount: '10000'.toDecimal(),
         active: true,
         lockTill: DateTime.now(),
         boost: 10000,
-        revenue: "10000".toDouble(),
+        revenue: '10000'.toDouble(),
         option: _mapStakeOption(
           DateTime.now().add(const Duration(days: -1)),
           DateTime.now(),
         ),
       ),
       Stake(
-        id: "DemoStakeId2",
+        id: 'DemoStakeId2',
         startTime: DateTime.now().add(const Duration(days: -1)),
         endTime: DateTime.now().add(const Duration(days: -1)),
-        amount: "20000".toDecimal(),
+        amount: '20000'.toDecimal(),
         active: true,
         lockTill: DateTime.now(),
         boost: 10000,
-        revenue: "20000".toDouble(),
+        revenue: '20000'.toDouble(),
         option: _mapStakeOption(
           DateTime.now().add(const Duration(days: -1)),
           DateTime.now(),
@@ -157,7 +157,7 @@ class DemoStakeRepository implements StakeRepository {
     String? orgId,
     DateTime? till,
   }) async {
-    return "123456".toDecimal();
+    return '123456'.toDecimal();
   }
 
   @override

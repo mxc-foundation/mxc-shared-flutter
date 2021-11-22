@@ -2,11 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mxc_ui/mxc_ui.dart';
 
 class MxcPrimaryButton extends StatefulWidget {
-  final String title;
-  final Color? color;
-  final VoidCallback? onTap;
-  final bool fillWidth;
-
   /// MXC Primary button
   /// [key] marked as required, because it's often needed for testing purposes
   const MxcPrimaryButton({
@@ -16,6 +11,11 @@ class MxcPrimaryButton extends StatefulWidget {
     this.fillWidth = true,
     this.color,
   }) : super(key: key);
+
+  final String title;
+  final Color? color;
+  final VoidCallback? onTap;
+  final bool fillWidth;
 
   @override
   _MxcPrimaryButtonState createState() => _MxcPrimaryButtonState();

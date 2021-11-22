@@ -20,12 +20,12 @@ class DemoSupernodeRepository implements SupernodeRepository {
   const DemoSupernodeRepository();
 
   static const Supernode _supernode = Supernode(
-    region: "Test",
-    url: "https://lora.test.cloud.mxc.org",
-    logo: "https://lora.test.cloud.mxc.org/branding.png",
-    darkLogo: "https://lora.test.cloud.mxc.org/branding.png",
-    status: "online",
-    name: "Test",
+    region: 'Test',
+    url: 'https://lora.test.cloud.mxc.org',
+    logo: 'https://lora.test.cloud.mxc.org/branding.png',
+    darkLogo: 'https://lora.test.cloud.mxc.org/branding.png',
+    status: 'online',
+    name: 'Test',
   );
 
   @override
@@ -78,7 +78,7 @@ class DemoSupernodeRepository implements SupernodeRepository {
 
   @override
   Future<Map<String, List<Supernode>>> listSupernodes() async => {
-        "MXCtest": [_supernode]
+        'MXCtest': [_supernode]
       };
 
   @override

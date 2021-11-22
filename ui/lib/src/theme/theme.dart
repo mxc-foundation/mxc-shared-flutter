@@ -33,9 +33,6 @@ class MxcThemeData {
 }
 
 class MxcTheme extends StatelessWidget {
-  final MxcThemeData data;
-  final Widget child;
-
   const MxcTheme({
     Key? key,
     required this.data,
@@ -53,6 +50,9 @@ class MxcTheme extends StatelessWidget {
       child: child,
     );
   }
+
+  final MxcThemeData data;
+  final Widget child;
 
   static MxcThemeData of(BuildContext context, {bool listen = true}) {
     final theme = Provider.of<MxcThemeData>(context, listen: listen);

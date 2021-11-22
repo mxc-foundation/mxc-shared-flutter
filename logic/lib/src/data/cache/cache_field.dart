@@ -2,13 +2,6 @@ import 'package:mxc_logic/internal.dart';
 import 'package:mxc_logic/mxc_logic.dart';
 
 class CacheField<T> implements Field<T> {
-  final CacheZone _cache;
-
-  final Serializer<T>? _serializer;
-  final Deserializer<T>? _deserializer;
-
-  final String _name;
-
   CacheField.withDefault(
     this._cache,
     this._name,
@@ -18,6 +11,13 @@ class CacheField<T> implements Field<T> {
   })  : _defaultValue = defaultValue,
         _serializer = serializer,
         _deserializer = deserializer;
+
+  final CacheZone _cache;
+
+  final Serializer<T>? _serializer;
+  final Deserializer<T>? _deserializer;
+
+  final String _name;
 
   static CacheField<T?> nullable<T>(
     CacheZone cache,

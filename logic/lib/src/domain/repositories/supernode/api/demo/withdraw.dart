@@ -25,34 +25,34 @@ class DemoWithdrawRepository implements WithdrawRepository {
   }) async {
     return [
       Withdraw(
-        amount: "1000".toDecimal(),
-        failReason: "DemoFailReason1",
+        amount: '1000'.toDecimal(),
+        failReason: 'DemoFailReason1',
         timestamp: DateTime.now().add(const Duration(days: -2)),
-        txHash: "X10000000000000",
-        txStatus: "DemoStatus1",
-        withdrawFee: "500".toDecimal(),
+        txHash: 'X10000000000000',
+        txStatus: 'DemoStatus1',
+        withdrawFee: '500'.toDecimal(),
       ),
       Withdraw(
-        amount: "2000".toDecimal(),
-        failReason: "DemoFailReason2",
+        amount: '2000'.toDecimal(),
+        failReason: 'DemoFailReason2',
         timestamp: DateTime.now().add(const Duration(days: -1)),
-        txHash: "X20000000000000",
-        txStatus: "DemoStatus2",
-        withdrawFee: "500".toDecimal(),
+        txHash: 'X20000000000000',
+        txStatus: 'DemoStatus2',
+        withdrawFee: '500'.toDecimal(),
       ),
       Withdraw(
-        amount: "3000".toDecimal(),
-        failReason: "DemoFailReason3",
+        amount: '3000'.toDecimal(),
+        failReason: 'DemoFailReason3',
         timestamp: DateTime.now().add(const Duration(days: -2)),
-        txHash: "X30000000000000",
-        txStatus: "DemoStatus3",
-        withdrawFee: "500".toDecimal(),
+        txHash: 'X30000000000000',
+        txStatus: 'DemoStatus3',
+        withdrawFee: '500'.toDecimal(),
       )
     ];
   }
 
   @override
   Future<Decimal> fee({Token currency = Token.mxc}) async {
-    return "300".toDecimal();
+    return '300'.toDecimal();
   }
 }

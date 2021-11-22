@@ -3,15 +3,12 @@ import 'package:mxc_ui/mxc_ui.dart';
 import 'package:provider/provider.dart';
 
 class MxcScopedThemeData {
-  final Color primaryColor;
-
   MxcScopedThemeData({required this.primaryColor});
+
+  final Color primaryColor;
 }
 
 class MxcScopedTheme extends StatelessWidget {
-  final MxcScopedThemeData data;
-  final Widget child;
-
   // Use MxcScopedTheme when you want to set theme defaults on some scope.
   // E.g. set default color to btcYellow instead of mxcBlue for btc page.
   const MxcScopedTheme({
@@ -19,6 +16,9 @@ class MxcScopedTheme extends StatelessWidget {
     required this.data,
     required this.child,
   }) : super(key: key);
+
+  final MxcScopedThemeData data;
+  final Widget child;
 
   static MxcScopedThemeData of(BuildContext context, {bool listen = true}) {
     try {

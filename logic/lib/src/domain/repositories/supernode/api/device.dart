@@ -4,9 +4,9 @@ import 'package:mxc_logic/src/data/data.dart';
 import 'package:mxc_logic/src/domain/repositories/internal/shared_mappers.dart';
 
 class DeviceRepository {
-  final ChopperClient _client;
-
   DeviceRepository(this._client);
+
+  final ChopperClient _client;
 
   Future<ListWithTotal<Device>> list({
     required int limit,

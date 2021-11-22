@@ -9,16 +9,16 @@ class DemoUserRepository implements UserRepository {
   Future<ProfileResult> profile() async {
     return ProfileResult(
       user: User(
-        username: "DemoUser",
-        email: "demo@mxc.org",
+        username: 'DemoUser',
+        email: 'demo@mxc.org',
         isActive: true,
         isAdmin: true,
       ),
       organizations: [
         UserOrganization(
-          organizationId: "DemoOrgId1",
-          name: "DemoOrgName1",
-          displayName: "DemoDisplayName1",
+          organizationId: 'DemoOrgId1',
+          name: 'DemoOrgName1',
+          displayName: 'DemoDisplayName1',
           isUserAdmin: true,
           isUserDeviceAdmin: true,
           isUserGatewayAdmin: true,
@@ -28,15 +28,15 @@ class DemoUserRepository implements UserRepository {
       ],
       externalAccounts: [
         ExternalAccount(
-          externalUserId: "DemoExternalUserId1",
-          externalUsername: "DemoExternalUserName1",
-          service: Mappers.stringToExternalAccountType("wechat"),
+          externalUserId: 'DemoExternalUserId1',
+          externalUsername: 'DemoExternalUserName1',
+          service: Mappers.stringToExternalAccountType('wechat'),
         )
       ],
       currentOrganization: UserOrganization(
-        organizationId: "DemoOrgId1",
-        name: "DemoOrgName1",
-        displayName: "DemoDisplayName1",
+        organizationId: 'DemoOrgId1',
+        name: 'DemoOrgName1',
+        displayName: 'DemoDisplayName1',
         isUserAdmin: true,
         isUserDeviceAdmin: true,
         isUserGatewayAdmin: true,
@@ -64,7 +64,7 @@ class DemoUserRepository implements UserRepository {
     int? sessionTTL,
     String? username,
   }) async {
-    return Mappers.stringToSupernodeJwt("DemoToken");
+    return Mappers.stringToSupernodeJwt('DemoToken');
   }
 
   @override

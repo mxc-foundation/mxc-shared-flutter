@@ -3,9 +3,9 @@ import 'package:mxc_logic/src/data/data.dart';
 import 'package:mxc_logic/src/domain/repositories/internal/shared_mappers.dart';
 
 class ReportRepository {
-  final SupernodeClient client;
-
   ReportRepository(this.client);
+
+  final SupernodeClient client;
 
   Future<List<FiatCurrency>> supportedFiatCurrencies() async {
     final res = await client.reportService.getFiatCurrencyList();

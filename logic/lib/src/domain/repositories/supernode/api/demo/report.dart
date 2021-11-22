@@ -8,16 +8,16 @@ class DemoReportRepository implements ReportRepository {
   Future<List<FiatCurrency>> supportedFiatCurrencies() async {
     return [
       FiatCurrency(
-        id: "DemoId1",
-        description: "DemoDescription1",
+        id: 'DemoId1',
+        description: 'DemoDescription1',
       ),
       FiatCurrency(
-        id: "DemoId2",
-        description: "DemoDescription2",
+        id: 'DemoId2',
+        description: 'DemoDescription2',
       ),
       FiatCurrency(
-        id: "DemoId3",
-        description: "DemoDescription3",
+        id: 'DemoId3',
+        description: 'DemoDescription3',
       ),
     ];
   }
@@ -32,7 +32,7 @@ class DemoReportRepository implements ReportRepository {
     required int decimals,
     String? organizationId,
   }) async {
-    return "DemoBase64EncodedReport";
+    return 'DemoBase64EncodedReport';
   }
 
   @override

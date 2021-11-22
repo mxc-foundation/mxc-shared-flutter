@@ -14,42 +14,42 @@ class DemoGatewayRepository implements GatewayRepository {
   }) async {
     return [
       Gateway(
-        id: "DemoId1",
+        id: 'DemoId1',
         createdAt: DateTime.now().add(const Duration(days: -2)),
-        description: "DemoDescription1",
+        description: 'DemoDescription1',
         firstSeenAt: DateTime.now().add(const Duration(days: -2)),
         lastSeenAt: DateTime.now(),
         updatedAt: DateTime.now(),
         location: Location(0.0, 0.0),
-        name: "DemoName1",
-        networkServerID: "DemoNetworkServerId1",
-        organizationID: "DemoOrgID1",
+        name: 'DemoName1',
+        networkServerID: 'DemoNetworkServerId1',
+        organizationID: 'DemoOrgID1',
         reseller: false,
       ),
       Gateway(
-        id: "DemoId2",
+        id: 'DemoId2',
         createdAt: DateTime.now().add(const Duration(days: -1)),
-        description: "DemoDescription2",
+        description: 'DemoDescription2',
         firstSeenAt: DateTime.now().add(const Duration(days: -1)),
         lastSeenAt: DateTime.now(),
         updatedAt: DateTime.now(),
         location: Location(0.0, 0.0),
-        name: "DemoName2",
-        networkServerID: "DemoNetworkServerId2",
-        organizationID: "DemoOrgID2",
+        name: 'DemoName2',
+        networkServerID: 'DemoNetworkServerId2',
+        organizationID: 'DemoOrgID2',
         reseller: false,
       ),
       Gateway(
-        id: "DemoId3",
+        id: 'DemoId3',
         createdAt: DateTime.now(),
-        description: "DemoDescription3",
+        description: 'DemoDescription3',
         firstSeenAt: DateTime.now(),
         lastSeenAt: DateTime.now(),
         updatedAt: DateTime.now(),
         location: Location(0.0, 0.0),
-        name: "DemoName3",
-        networkServerID: "DemoNetworkServerId3",
-        organizationID: "DemoOrgID3",
+        name: 'DemoName3',
+        networkServerID: 'DemoNetworkServerId3',
+        organizationID: 'DemoOrgID3',
         reseller: false,
       )
     ].withTotal(3);
@@ -82,7 +82,7 @@ class DemoGatewayRepository implements GatewayRepository {
     required String serialNumber,
     String? orgId,
   }) async {
-    return GatewayRegisterResult(status: "DemoGatewayRegisterStatus");
+    return GatewayRegisterResult(status: 'DemoGatewayRegisterStatus');
   }
 
   @override
@@ -90,7 +90,7 @@ class DemoGatewayRepository implements GatewayRepository {
     required String serialNumber,
     String? orgId,
   }) async {
-    return GatewayRegisterResult(status: "DemoGatewayRegisterResellerStatus");
+    return GatewayRegisterResult(status: 'DemoGatewayRegisterResellerStatus');
   }
 
   @override
@@ -102,28 +102,28 @@ class DemoGatewayRepository implements GatewayRepository {
   }) async {
     return [
       GatewayProfile(
-        id: "DemoId1",
+        id: 'DemoId1',
         createdAt: DateTime.now().add(const Duration(days: -2)),
         updatedAt: DateTime.now().add(const Duration(days: -2)),
-        name: "DemoName1",
-        networkServerID: "DemoNetworkServerId1",
-        networkServerName: "DemoNetworkName1",
+        name: 'DemoName1',
+        networkServerID: 'DemoNetworkServerId1',
+        networkServerName: 'DemoNetworkName1',
       ),
       GatewayProfile(
-        id: "DemoId2",
+        id: 'DemoId2',
         createdAt: DateTime.now().add(const Duration(days: -1)),
         updatedAt: DateTime.now().add(const Duration(days: -1)),
-        name: "DemoName2",
-        networkServerID: "DemoNetworkServerId2",
-        networkServerName: "DemoNetworkName2",
+        name: 'DemoName2',
+        networkServerID: 'DemoNetworkServerId2',
+        networkServerName: 'DemoNetworkName2',
       ),
       GatewayProfile(
-        id: "DemoId3",
+        id: 'DemoId3',
         createdAt: DateTime.now(),
         updatedAt: DateTime.now(),
-        name: "DemoName3",
-        networkServerID: "DemoNetworkServerId3",
-        networkServerName: "DemoNetworkName3",
+        name: 'DemoName3',
+        networkServerID: 'DemoNetworkServerId3',
+        networkServerName: 'DemoNetworkName3',
       ),
     ];
   }
@@ -166,33 +166,33 @@ class DemoGatewayRepository implements GatewayRepository {
   }) async {
     final gatewayHealths = [
       GatewayHealth(
-        id: "DemoId1",
+        id: 'DemoId1',
         ageSeconds: 1,
         health: 99,
-        miningFuel: "100".toDecimal(),
+        miningFuel: '100'.toDecimal(),
         miningFuelHealth: 100,
-        miningFuelMax: "100".toDecimal(),
-        totalMined: "100".toDecimal(),
+        miningFuelMax: '100'.toDecimal(),
+        totalMined: '100'.toDecimal(),
         uptimeHealth: 100,
       ),
       GatewayHealth(
-        id: "DemoId2",
+        id: 'DemoId2',
         ageSeconds: 1,
         health: 99,
-        miningFuel: "100".toDecimal(),
+        miningFuel: '100'.toDecimal(),
         miningFuelHealth: 100,
-        miningFuelMax: "100".toDecimal(),
-        totalMined: "100".toDecimal(),
+        miningFuelMax: '100'.toDecimal(),
+        totalMined: '100'.toDecimal(),
         uptimeHealth: 100,
       ),
       GatewayHealth(
-        id: "DemoId3",
+        id: 'DemoId3',
         ageSeconds: 1,
         health: 99,
-        miningFuel: "100".toDecimal(),
+        miningFuel: '100'.toDecimal(),
         miningFuelHealth: 100,
-        miningFuelMax: "100".toDecimal(),
-        totalMined: "100".toDecimal(),
+        miningFuelMax: '100'.toDecimal(),
+        totalMined: '100'.toDecimal(),
         uptimeHealth: 100,
       ),
     ];
@@ -223,25 +223,25 @@ class DemoGatewayRepository implements GatewayRepository {
     return GatewayMiningIncomeSummary(
       daily: [
         GatewayDailyMiningIncome(
-          amount: "100".toDecimal(),
+          amount: '100'.toDecimal(),
           date: DateTime.now().add(const Duration(days: -2)),
           health: 100,
           onlineSeconds: 100,
         ),
         GatewayDailyMiningIncome(
-          amount: "200".toDecimal(),
+          amount: '200'.toDecimal(),
           date: DateTime.now().add(const Duration(days: -1)),
           health: 200,
           onlineSeconds: 200,
         ),
         GatewayDailyMiningIncome(
-          amount: "300".toDecimal(),
+          amount: '300'.toDecimal(),
           date: DateTime.now(),
           health: 300,
           onlineSeconds: 300,
         ),
       ],
-      totalAmount: "3".toDecimal(),
+      totalAmount: '3'.toDecimal(),
     );
   }
 }

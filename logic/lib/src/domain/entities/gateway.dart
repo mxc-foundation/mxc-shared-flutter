@@ -2,18 +2,6 @@ import 'package:decimal/decimal.dart';
 import 'package:mxc_logic/mxc_logic.dart';
 
 class Gateway {
-  final String id;
-  final DateTime createdAt;
-  final String description;
-  final DateTime? firstSeenAt;
-  final DateTime? lastSeenAt;
-  final DateTime? updatedAt;
-  final Location? location;
-  final String name;
-  final String networkServerID;
-  final String organizationID;
-  final bool reseller;
-
   Gateway({
     required this.id,
     required this.createdAt,
@@ -27,16 +15,21 @@ class Gateway {
     required this.organizationID,
     required this.reseller,
   });
+
+  final String id;
+  final DateTime createdAt;
+  final String description;
+  final DateTime? firstSeenAt;
+  final DateTime? lastSeenAt;
+  final DateTime? updatedAt;
+  final Location? location;
+  final String name;
+  final String networkServerID;
+  final String organizationID;
+  final bool reseller;
 }
 
 class GatewayProfile {
-  final String id;
-  final DateTime createdAt;
-  final DateTime? updatedAt;
-  final String name;
-  final String networkServerID;
-  final String networkServerName;
-
   GatewayProfile({
     required this.id,
     required this.createdAt,
@@ -45,42 +38,40 @@ class GatewayProfile {
     required this.name,
     required this.networkServerName,
   });
+
+  final String id;
+  final DateTime createdAt;
+  final DateTime? updatedAt;
+  final String name;
+  final String networkServerID;
+  final String networkServerName;
 }
 
 class GatewayRegisterResult {
-  final String status;
-
   GatewayRegisterResult({
     required this.status,
   });
+
+  final String status;
 }
 
 enum FramesInterval { day }
 
 class GatewayStatisticFrame {
-  final int txPacketsEmitted;
-  final int txPacketsReceived;
-  final int rxPacketsReceivedOK;
-  final DateTime timestamp;
-
   GatewayStatisticFrame({
     required this.txPacketsEmitted,
     required this.txPacketsReceived,
     required this.rxPacketsReceivedOK,
     required this.timestamp,
   });
+
+  final int txPacketsEmitted;
+  final int txPacketsReceived;
+  final int rxPacketsReceivedOK;
+  final DateTime timestamp;
 }
 
 class GatewayHealth {
-  final String id;
-  final int ageSeconds;
-  final double health;
-  final Decimal miningFuel;
-  final double miningFuelHealth;
-  final Decimal miningFuelMax;
-  final Decimal totalMined;
-  final double uptimeHealth;
-
   GatewayHealth({
     required this.id,
     required this.ageSeconds,
@@ -91,52 +82,61 @@ class GatewayHealth {
     required this.totalMined,
     required this.uptimeHealth,
   });
+
+  final String id;
+  final int ageSeconds;
+  final double health;
+  final Decimal miningFuel;
+  final double miningFuelHealth;
+  final Decimal miningFuelMax;
+  final Decimal totalMined;
+  final double uptimeHealth;
 }
 
 class GatewayAverageHealth {
-  final double miningFuelHealth;
-  final double uptimeHealth;
-  final double health;
-
   GatewayAverageHealth({
     required this.miningFuelHealth,
     required this.uptimeHealth,
     required this.health,
   });
+
+  final double miningFuelHealth;
+  final double uptimeHealth;
+  final double health;
 }
 
 class GatewayHealthSummary {
-  final List<GatewayHealth> gatewayHealths;
-  final GatewayAverageHealth average;
-  final Decimal totalFueled;
-
   GatewayHealthSummary({
     required this.gatewayHealths,
     required this.average,
     required this.totalFueled,
   });
+
+  final List<GatewayHealth> gatewayHealths;
+  final GatewayAverageHealth average;
+  final Decimal totalFueled;
 }
 
 class GatewayDailyMiningIncome {
-  final Decimal amount;
-  final DateTime date;
-  final double health;
-  final int onlineSeconds;
-
   GatewayDailyMiningIncome({
     required this.amount,
     required this.date,
     required this.health,
     required this.onlineSeconds,
   });
+
+  final Decimal amount;
+  final DateTime date;
+  final double health;
+  final int onlineSeconds;
 }
 
 class GatewayMiningIncomeSummary {
-  final Decimal totalAmount;
-  final List<GatewayDailyMiningIncome> daily;
-
   GatewayMiningIncomeSummary({
     required this.totalAmount,
     required this.daily,
   });
+
+  final Decimal totalAmount;
+  final List<GatewayDailyMiningIncome> daily;
 }

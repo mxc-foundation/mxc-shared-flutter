@@ -10,10 +10,10 @@ class DemoTotpRepository implements TotpRepository {
   @override
   Future<TotpConfiguration> getTotpConfig({required int qrCodeSize}) async {
     return TotpConfiguration(
-      qrCode: "X0000000000000000",
-      recoveryCodes: ["123", "456", "789"],
-      secret: "111111",
-      url: "http://www.mxc.org",
+      qrCode: 'X0000000000000000',
+      recoveryCodes: ['123', '456', '789'],
+      secret: '111111',
+      url: 'http://www.mxc.org',
     );
   }
 

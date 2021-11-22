@@ -12,18 +12,18 @@ class DemoDeviceRepository implements DeviceRepository {
   }) async {
     return [
       Device(
-        name: "DemoName1",
-        category: "DemoCateory1",
+        name: 'DemoName1',
+        category: 'DemoCateory1',
         lastSeen: DateTime.now().add(const Duration(days: -2)),
       ),
       Device(
-        name: "DemoName2",
-        category: "DemoCateory2",
+        name: 'DemoName2',
+        category: 'DemoCateory2',
         lastSeen: DateTime.now().add(const Duration(days: -1)),
       ),
       Device(
-        name: "DemoName3",
-        category: "DemoCateory3",
+        name: 'DemoName3',
+        category: 'DemoCateory3',
         lastSeen: DateTime.now(),
       ),
     ].withTotal(3);

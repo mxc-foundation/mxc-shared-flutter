@@ -9,9 +9,9 @@ abstract class TokenRefresher {
 }
 
 class TokenRefresherImpl implements TokenRefresher {
-  final SupernodeSetupStore setupRepository;
-
   TokenRefresherImpl(this.setupRepository);
+
+  final SupernodeSetupStore setupRepository;
 
   @override
   Future<String?> refresh(SupernodeRepository supernodeRepository) async {

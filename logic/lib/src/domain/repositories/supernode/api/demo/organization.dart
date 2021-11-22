@@ -18,16 +18,16 @@ class DemoOrganizationRepository implements OrganizationRepository {
   }) async {
     return [
       Organization(
-        name: "DemoOrgName1",
-        displayName: "DemoOrgDisplayName1",
+        name: 'DemoOrgName1',
+        displayName: 'DemoOrgDisplayName1',
       ),
       Organization(
-        name: "DemoOrgName2",
-        displayName: "DemoOrgDisplayName2",
+        name: 'DemoOrgName2',
+        displayName: 'DemoOrgDisplayName2',
       ),
       Organization(
-        name: "DemoOrgName3",
-        displayName: "DemoOrgDisplayName3",
+        name: 'DemoOrgName3',
+        displayName: 'DemoOrgDisplayName3',
       ),
     ];
   }

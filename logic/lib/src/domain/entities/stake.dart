@@ -3,19 +3,32 @@ import 'package:decimal/decimal.dart';
 enum StakeHistoryType { staking, unstaking, unknown }
 
 class StakeHistoryFrame {
-  final DateTime timestamp;
-  final Decimal amount;
-  final StakeHistoryType type;
-  final Stake stake;
   StakeHistoryFrame({
     required this.timestamp,
     required this.amount,
     required this.type,
     required this.stake,
   });
+
+  final DateTime timestamp;
+  final Decimal amount;
+  final StakeHistoryType type;
+  final Stake stake;
 }
 
 class Stake {
+  Stake({
+    required this.id,
+    required this.startTime,
+    required this.endTime,
+    required this.amount,
+    required this.active,
+    required this.lockTill,
+    required this.boost,
+    required this.revenue,
+    required this.option,
+  });
+
   final String id;
   final DateTime startTime;
   final DateTime? endTime;
@@ -36,24 +49,12 @@ class Stake {
       (endTime ?? DateTime.now()).difference(startTime).inDays.abs();
 
   bool get unstaked => endTime != null;
-
-  Stake({
-    required this.id,
-    required this.startTime,
-    required this.endTime,
-    required this.amount,
-    required this.active,
-    required this.lockTill,
-    required this.boost,
-    required this.revenue,
-    required this.option,
-  });
 }
 
 class StakeOption {
-  final int? months;
-
   const StakeOption(this.months);
+
+  final int? months;
 
   static const flex = StakeOption(null);
   static const m6 = StakeOption(6);
@@ -66,13 +67,13 @@ class StakeOption {
 typedef StakeBoostBundle = Map<StakeOption, StakeBoostRate>;
 
 class StakeBoostRate {
-  final double realRate;
-  final int marketingRate;
-  final double estimatedRate;
-
   StakeBoostRate({
     required this.realRate,
     required this.marketingRate,
     required this.estimatedRate,
   });
+
+  final double realRate;
+  final int marketingRate;
+  final double estimatedRate;
 }

@@ -1,10 +1,10 @@
 import 'dart:collection';
 
 class ListWithTotal<T> extends ListBase<T> {
+  ListWithTotal(this.total, List<T> source) : _source = source;
+
   final List<T> _source;
   final int total;
-
-  ListWithTotal(this.total, List<T> source) : _source = source;
 
   @override
   int get length => _source.length;
@@ -24,10 +24,10 @@ extension ListWithTotalExt<T> on List<T> {
 }
 
 class Location {
+  Location(this.latitude, this.longitude);
+
   final double latitude;
   final double longitude;
-
-  Location(this.latitude, this.longitude);
 }
 
 abstract class Field<T> {

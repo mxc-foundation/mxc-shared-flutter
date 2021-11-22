@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mxc_ui/mxc_ui.dart';
 
 class MxcTextField extends FormField<String> {
-  final TextEditingController? controller;
-
   MxcTextField({
     required Key? key,
     String? label,
@@ -72,6 +70,8 @@ class MxcTextField extends FormField<String> {
           ),
         );
 
+  final TextEditingController? controller;
+
   @override
   FormFieldState<String> createState() => _MxcTextFieldFormState();
 }
@@ -96,22 +96,6 @@ class _MxcTextFieldFormState extends FormFieldState<String> {
 }
 
 class _MxcNonFormTextField extends StatefulWidget {
-  final String? label;
-  final bool readOnly;
-  final String? hint;
-  final TextInputAction? action;
-  final TextInputType? keyboardType;
-  final double width;
-  final FocusNode? focusNode;
-  final MxcTextFieldButton? button;
-  final String? suffixText;
-
-  final TextEditingController? _controller;
-  final bool obscure;
-  final String? _initialValue;
-  final String? errorText;
-  final ValueChanged<String>? onChanged;
-
   const _MxcNonFormTextField({
     required Key? key,
     required this.label,
@@ -149,6 +133,22 @@ class _MxcNonFormTextField extends StatefulWidget {
         errorText = null,
         onChanged = null,
         super(key: key);
+
+  final String? label;
+  final bool readOnly;
+  final String? hint;
+  final TextInputAction? action;
+  final TextInputType? keyboardType;
+  final double width;
+  final FocusNode? focusNode;
+  final MxcTextFieldButton? button;
+  final String? suffixText;
+
+  final TextEditingController? _controller;
+  final bool obscure;
+  final String? _initialValue;
+  final String? errorText;
+  final ValueChanged<String>? onChanged;
 
   @override
   State<_MxcNonFormTextField> createState() => _MxcNonFormTextFieldState();
@@ -285,14 +285,14 @@ class _MxcNonFormTextFieldState extends State<_MxcNonFormTextField> {
 }
 
 class MxcTextFieldButton extends StatelessWidget {
-  final VoidCallback? onTap;
-  final IconData icon;
-
   const MxcTextFieldButton({
     Key? key,
     required this.icon,
     required this.onTap,
   }) : super(key: key);
+
+  final VoidCallback? onTap;
+  final IconData icon;
 
   @override
   Widget build(BuildContext context) {

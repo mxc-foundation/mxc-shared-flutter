@@ -2,12 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mxc_ui/mxc_ui.dart';
 
 class MxcSlider extends StatelessWidget {
-  final double? value;
-  final double? max;
-  final void Function(double)? onChanged;
-  final List<String>? labels;
-  final int? divisions;
-
   const MxcSlider({
     required Key? key,
     required double this.value,
@@ -26,6 +20,12 @@ class MxcSlider extends StatelessWidget {
         divisions = null,
         max = null,
         super(key: key);
+
+  final double? value;
+  final double? max;
+  final void Function(double)? onChanged;
+  final List<String>? labels;
+  final int? divisions;
 
   @override
   Widget build(BuildContext context) {

@@ -3,9 +3,9 @@ import 'package:mxc_logic/src/data/data.dart';
 import 'package:mxc_logic/src/domain/repositories/internal/shared_mappers.dart';
 
 class ExternalAccountsRepository {
-  final SupernodeClient client;
-
   ExternalAccountsRepository(this.client);
+
+  final SupernodeClient client;
 
   Future<SupernodeTokenDetails> bind({
     required String email,

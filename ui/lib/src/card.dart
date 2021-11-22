@@ -2,11 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mxc_ui/mxc_ui.dart';
 
 class MxcCard extends StatelessWidget {
-  final Widget child;
-  final VoidCallback? onTap;
-  final Color? color;
-  final EdgeInsets? padding;
-
   const MxcCard({
     Key? key,
     required this.child,
@@ -22,6 +17,11 @@ class MxcCard extends StatelessWidget {
     this.color,
     this.padding,
   }) : super(key: key);
+
+  final Widget child;
+  final VoidCallback? onTap;
+  final Color? color;
+  final EdgeInsets? padding;
 
   @override
   Widget build(BuildContext context) {

@@ -3,9 +3,6 @@ import 'package:mxc_logic/src/data/api/supernode_list_api.dart';
 import 'package:mxc_logic/src/data/data.dart';
 
 class ApiSupernodeRepository implements SupernodeRepository {
-  final SupernodeClient _client;
-  final SupernodeSetupStore _setupStore;
-
   ApiSupernodeRepository({
     required SupernodeSetupStore setupStore,
     required TokenRefresher tokenRefresher,
@@ -29,6 +26,9 @@ class ApiSupernodeRepository implements SupernodeRepository {
     required SupernodeSetupStore setupStore,
   })  : _client = client,
         _setupStore = setupStore;
+
+  final SupernodeClient _client;
+  final SupernodeSetupStore _setupStore;
 
   @override
   DhxRepository get dhx => DhxRepository(_client);

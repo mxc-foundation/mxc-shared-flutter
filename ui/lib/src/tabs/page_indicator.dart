@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:mxc_ui/mxc_ui.dart';
 
 class PageIndicator extends StatelessWidget {
-  final int length;
-  final int selectedPage;
-  final void Function(int) onSelected;
-
   const PageIndicator({
     required Key? key,
     required this.length,
     required this.selectedPage,
     required this.onSelected,
   }) : super(key: key);
+
+  final int length;
+  final int selectedPage;
+  final void Function(int) onSelected;
 
   @override
   Widget build(BuildContext context) {

@@ -4,9 +4,9 @@ import 'package:mxc_logic/src/domain/entities/user.dart';
 import 'package:mxc_logic/src/domain/repositories/internal/shared_mappers.dart';
 
 class UserRepository {
-  final SupernodeClient client;
-
   UserRepository(this.client);
+
+  final SupernodeClient client;
 
   static UserOrganization _userOrganizationMapper(ExtapiOrganizationLink e) =>
       UserOrganization(

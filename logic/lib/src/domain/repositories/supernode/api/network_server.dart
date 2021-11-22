@@ -3,9 +3,9 @@ import 'package:mxc_logic/src/data/data.dart';
 import 'package:mxc_logic/src/domain/repositories/internal/shared_mappers.dart';
 
 class NetworkServerRepository {
-  final SupernodeClient _client;
-
   NetworkServerRepository(this._client);
+
+  final SupernodeClient _client;
 
   Future<List<NetworkServer>> list({
     String? orgId,

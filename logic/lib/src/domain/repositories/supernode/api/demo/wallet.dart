@@ -10,7 +10,7 @@ class DemoWalletRepository implements WalletRepository {
     String? orgId,
     Token? currency,
   }) async {
-    return "10000".toDecimal();
+    return '10000'.toDecimal();
   }
 
   @override
@@ -18,7 +18,7 @@ class DemoWalletRepository implements WalletRepository {
     String? orgId,
     Token? currency,
   }) async {
-    return "20000".toDecimal();
+    return '20000'.toDecimal();
   }
 
   @override
@@ -27,7 +27,7 @@ class DemoWalletRepository implements WalletRepository {
     required String userId,
     required double mxcPrice,
   }) async {
-    return "0.8".toDecimal();
+    return '0.8'.toDecimal();
   }
 
   @override

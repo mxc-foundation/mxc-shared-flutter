@@ -1,15 +1,15 @@
 import 'package:mxc_logic/mxc_logic.dart';
 
 class LoginUseCase {
-  final SupernodeRepository repository;
-  final AuthenticationStorageRepository authStorageRepository;
-  final AuthenticationCacheRepository? authCacheRepository;
-
   LoginUseCase(
     this.repository,
     this.authStorageRepository, [
     this.authCacheRepository,
   ]);
+
+  final SupernodeRepository repository;
+  final AuthenticationStorageRepository authStorageRepository;
+  final AuthenticationCacheRepository? authCacheRepository;
 
   Future<Map<String, List<Supernode>>> listSupernodes() {
     return repository.listSupernodes();

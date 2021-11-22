@@ -1,9 +1,9 @@
 import 'package:mxc_logic/internal.dart';
 
 class AuthenticationStorageRepository {
-  final SupernodeSetupStore _supernodeSetupStore;
-
   AuthenticationStorageRepository(this._supernodeSetupStore);
+
+  final SupernodeSetupStore _supernodeSetupStore;
 
   String? get supernodeAddress => _supernodeSetupStore.supernodeAddress;
   set supernodeAddress(String? supernodeAddress) =>

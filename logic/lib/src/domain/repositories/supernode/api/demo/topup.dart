@@ -13,19 +13,19 @@ class DemoTopupRepository implements TopupRepository {
   }) async {
     return [
       Topup(
-        amount: "1000".toDecimal(),
+        amount: '1000'.toDecimal(),
         timestamp: DateTime.now().add(const Duration(days: -2)),
-        txHash: "DemoTxHash123456789",
+        txHash: 'DemoTxHash123456789',
       ),
       Topup(
-        amount: "2000".toDecimal(),
+        amount: '2000'.toDecimal(),
         timestamp: DateTime.now().add(const Duration(days: -1)),
-        txHash: "DemoTxHash123456789",
+        txHash: 'DemoTxHash123456789',
       ),
       Topup(
-        amount: "3000".toDecimal(),
+        amount: '3000'.toDecimal(),
         timestamp: DateTime.now(),
-        txHash: "DemoTxHash123456789",
+        txHash: 'DemoTxHash123456789',
       ),
     ];
   }
@@ -35,6 +35,6 @@ class DemoTopupRepository implements TopupRepository {
     String? orgId,
     Token? currency,
   }) async {
-    return "0x00000000000000";
+    return '0x00000000000000';
   }
 }

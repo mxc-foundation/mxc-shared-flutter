@@ -7,6 +7,12 @@ abstract class Transaction {
 }
 
 class Topup implements Transaction {
+  Topup({
+    required this.amount,
+    required this.timestamp,
+    required this.txHash,
+  });
+
   @override
   final Decimal amount;
 
@@ -15,15 +21,18 @@ class Topup implements Transaction {
 
   @override
   final String txHash;
-
-  Topup({
-    required this.amount,
-    required this.timestamp,
-    required this.txHash,
-  });
 }
 
 class Withdraw implements Transaction {
+  Withdraw({
+    required this.amount,
+    required this.timestamp,
+    required this.txHash,
+    required this.txStatus,
+    required this.withdrawFee,
+    required this.failReason,
+  });
+
   @override
   final Decimal amount;
 
@@ -36,13 +45,4 @@ class Withdraw implements Transaction {
   final String txStatus;
   final Decimal withdrawFee;
   final String? failReason;
-
-  Withdraw({
-    required this.amount,
-    required this.timestamp,
-    required this.txHash,
-    required this.txStatus,
-    required this.withdrawFee,
-    required this.failReason,
-  });
 }
