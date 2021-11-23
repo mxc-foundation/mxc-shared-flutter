@@ -113,6 +113,10 @@ class TextStylePack {
         _primary.copyWith(color: colorsTheme.buttonIconTextColor),
       );
 
+  DecoratableTextStyle get buttonDisabled => DecoratableTextStyle(
+        _primary.copyWith(color: colorsTheme.buttonDisabledLabel),
+      );
+
   DecoratableTextStyle get health => DecoratableTextStyle(
         _primary.copyWith(color: colorsTheme.minerHealthRed),
       );
