@@ -85,6 +85,11 @@ class ImagesTheme {
         ),
       };
 
+  ImageProvider get profile => const AssetImage(
+        'assets/images/home/profile.png',
+        package: _packageName,
+      );
+
   //app
   ImageProvider get close => const AssetImage(
         'assets/images/app/close.png',
