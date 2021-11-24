@@ -81,7 +81,7 @@ extension MxcThemeDataExtension on MxcThemeData {
         brightness:
             colors is ColorsThemeDark ? Brightness.dark : Brightness.light,
         bottomAppBarColor: colors.secondaryBackground,
-        scaffoldBackgroundColor: colors.secondaryBackground,
+        scaffoldBackgroundColor: colors.primaryBackground,
         textTheme: TextTheme(
           bodyText1: fonts.middle(),
           bodyText2: fonts.middle(),
