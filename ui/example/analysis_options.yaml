@@ -19,7 +19,6 @@ linter:
     sort_constructors_first: true
     prefer_single_quotes: true
     public_member_api_docs: false
-    always_specify_types: false
     sort_pub_dependencies: false # we sort pub deps by feature not alphabetically
     avoid_dynamic_calls: true
     invariant_booleans: true
