@@ -2,12 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mxc_ui/mxc_ui.dart';
 
 abstract class MxcCircleButton extends StatelessWidget {
-  final bool filled;
-  final VoidCallback? onTap;
-  final String? title;
-  final Color? color;
-  final TextStyle? titleStyle;
-
   const factory MxcCircleButton({
     required Key? key,
     required Widget child,
@@ -43,6 +37,12 @@ abstract class MxcCircleButton extends StatelessWidget {
     Color? color,
     TextStyle? titleStyle,
   }) = _MxcCircleIconButton;
+
+  final bool filled;
+  final VoidCallback? onTap;
+  final String? title;
+  final Color? color;
+  final TextStyle? titleStyle;
 
   Color _contentColor(BuildContext context) {
     Color color;
@@ -110,8 +110,6 @@ abstract class MxcCircleButton extends StatelessWidget {
 }
 
 class _MxcCircleChildButton extends MxcCircleButton {
-  final Widget child;
-
   const _MxcCircleChildButton({
     required Key? key,
     required this.child,
@@ -126,13 +124,13 @@ class _MxcCircleChildButton extends MxcCircleButton {
           color: null,
         );
 
+  final Widget child;
+
   @override
   Widget buildChild(BuildContext context) => child;
 }
 
 class _MxcCircleImageButton extends MxcCircleButton {
-  final ImageProvider image;
-
   const _MxcCircleImageButton({
     required Key? key,
     required this.image,
@@ -148,6 +146,8 @@ class _MxcCircleImageButton extends MxcCircleButton {
           color: color,
         );
 
+  final ImageProvider image;
+
   @override
   Widget buildChild(BuildContext context) => Image(
         image: image,
@@ -156,8 +156,6 @@ class _MxcCircleImageButton extends MxcCircleButton {
 }
 
 class _MxcCircleIconButton extends MxcCircleButton {
-  final IconData icon;
-
   const _MxcCircleIconButton({
     required Key? key,
     required this.icon,
@@ -174,6 +172,8 @@ class _MxcCircleIconButton extends MxcCircleButton {
           color: color,
           titleStyle: titleStyle,
         );
+
+  final IconData icon;
 
   @override
   Widget buildChild(BuildContext context) => Icon(

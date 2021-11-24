@@ -2,10 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mxc_ui/mxc_ui.dart';
 
 class MxcSecondaryButton extends StatefulWidget {
-  final String title;
-  final Color? color;
-  final VoidCallback? onTap;
-
   /// MXC Secondary button
   /// [key] marked as required, because it's often needed for testing purposes
   const MxcSecondaryButton({
@@ -14,6 +10,9 @@ class MxcSecondaryButton extends StatefulWidget {
     required this.onTap,
     this.color,
   }) : super(key: key);
+  final String title;
+  final Color? color;
+  final VoidCallback? onTap;
 
   @override
   _MxcSecondaryButtonState createState() => _MxcSecondaryButtonState();

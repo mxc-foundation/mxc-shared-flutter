@@ -66,12 +66,12 @@ abstract class ControlledCacheStore extends BaseCacheStore {
 }
 
 class CacheController {
+  CacheController(this._manager, this.prefixKey);
+
   final List<ControlledCacheStore> _innerRepositories = [];
 
   final CacheManager _manager;
   final String prefixKey;
-
-  CacheController(this._manager, this.prefixKey);
 
   void register(ControlledCacheStore repository) {
     _innerRepositories.add(repository);

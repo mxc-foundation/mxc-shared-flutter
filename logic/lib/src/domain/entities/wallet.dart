@@ -3,6 +3,14 @@ import 'dart:math';
 import 'package:decimal/decimal.dart';
 
 class BtcMiningSession {
+  BtcMiningSession(
+    this.sessionId,
+    this.mxcLockAmount,
+    this.startSession,
+    this.endSession,
+    this._mxcLockDurationDays,
+  );
+
   final String sessionId;
   final int mxcLockAmount;
   final DateTime startSession;
@@ -16,35 +24,27 @@ class BtcMiningSession {
 
   /// Lock duration from backend session config, needed for lock API call
   int get mxcLockDurationDaysFromBackend => _mxcLockDurationDays;
-
-  BtcMiningSession(
-    this.sessionId,
-    this.mxcLockAmount,
-    this.startSession,
-    this.endSession,
-    this._mxcLockDurationDays,
-  );
 }
 
 class BtcLock {
-  final String gatewayMac;
-  final String sessionId;
-  final int amountLocked;
-  final Decimal btcRevenue;
-
   BtcLock({
     required this.gatewayMac,
     required this.sessionId,
     required this.amountLocked,
     required this.btcRevenue,
   });
+
+  final String gatewayMac;
+  final String sessionId;
+  final int amountLocked;
+  final Decimal btcRevenue;
 }
 
 class NoBtcMiningSessionException implements Exception {
+  NoBtcMiningSessionException(this.url, this.message);
+
   final Uri? url;
   final String message;
-
-  NoBtcMiningSessionException(this.url, this.message);
 
   @override
   String toString() => '$message for $url';

@@ -12,12 +12,12 @@ String get dirPath {
   final folderPathSegments =
       fullPathSegments.take(fullPathSegments.length - 1).toList();
   // adds support to run flutter test from logic dir, not only from logic/test
-  if (folderPathSegments.last != "test") {
-    folderPathSegments.add("test");
+  if (folderPathSegments.last != 'test') {
+    folderPathSegments.add('test');
   }
   return "/${folderPathSegments.join("/")}";
 }
 
 String get envFile {
-  return "$dirPath/.env";
+  return '$dirPath/.env';
 }

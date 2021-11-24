@@ -4,9 +4,9 @@ import 'package:mxc_logic/src/data/data.dart';
 import 'package:mxc_logic/src/domain/repositories/internal/shared_mappers.dart';
 
 class RegistrationRepository {
-  final ChopperClient _client;
-
   RegistrationRepository(this._client);
+
+  final ChopperClient _client;
 
   /// [languageCode] can be taken from [Locale.languageCode]
   Future<void> withEmail({

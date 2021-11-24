@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mxc_ui/mxc_ui.dart';
 
 abstract class MxcCircleWidget extends StatelessWidget {
-  final bool filled;
-  final Color? color;
-
   const factory MxcCircleWidget({
     Key? key,
     required Widget child,
@@ -31,6 +28,9 @@ abstract class MxcCircleWidget extends StatelessWidget {
     bool filled,
     Color? color,
   }) = _MxcCircleIconWidget;
+
+  final bool filled;
+  final Color? color;
 
   Color _contentColor(BuildContext context) {
     Color color;
@@ -71,8 +71,6 @@ abstract class MxcCircleWidget extends StatelessWidget {
 }
 
 class _MxcCircleChildWidget extends MxcCircleWidget {
-  final Widget child;
-
   const _MxcCircleChildWidget({
     Key? key,
     required this.child,
@@ -83,14 +81,13 @@ class _MxcCircleChildWidget extends MxcCircleWidget {
           color: null,
         );
 
+  final Widget child;
+
   @override
   Widget buildChild(BuildContext context) => child;
 }
 
 class _MxcCircleImageWidget extends MxcCircleWidget {
-  final ImageProvider image;
-  final bool useColor;
-
   const _MxcCircleImageWidget({
     Key? key,
     required this.image,
@@ -103,6 +100,9 @@ class _MxcCircleImageWidget extends MxcCircleWidget {
           color: color,
         );
 
+  final ImageProvider image;
+  final bool useColor;
+
   @override
   Widget buildChild(BuildContext context) => Image(
         image: image,
@@ -111,8 +111,6 @@ class _MxcCircleImageWidget extends MxcCircleWidget {
 }
 
 class _MxcCircleIconWidget extends MxcCircleWidget {
-  final IconData icon;
-
   const _MxcCircleIconWidget({
     Key? key,
     required this.icon,
@@ -123,6 +121,8 @@ class _MxcCircleIconWidget extends MxcCircleWidget {
           filled: filled,
           color: color,
         );
+
+  final IconData icon;
 
   @override
   Widget buildChild(BuildContext context) => Icon(

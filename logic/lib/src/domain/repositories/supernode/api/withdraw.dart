@@ -4,9 +4,9 @@ import 'package:mxc_logic/src/data/data.dart';
 import 'package:mxc_logic/src/domain/repositories/internal/shared_mappers.dart';
 
 class WithdrawRepository {
-  final SupernodeClient _client;
-
   WithdrawRepository(this._client);
+
+  final SupernodeClient _client;
 
   Future<bool> withdraw({
     String? orgId,

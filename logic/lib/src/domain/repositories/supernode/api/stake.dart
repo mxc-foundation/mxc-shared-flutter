@@ -4,9 +4,9 @@ import 'package:mxc_logic/src/data/data.dart';
 import 'package:mxc_logic/src/domain/repositories/internal/shared_mappers.dart';
 
 class StakeRepository {
-  final SupernodeClient _client;
-
   StakeRepository(this._client);
+
+  final SupernodeClient _client;
 
   static StakeOption _mapStakeOption(DateTime? startTime, DateTime? lockTill) {
     return StakeOption(

@@ -17,7 +17,7 @@ class DemoRegistrationRepository implements RegistrationRepository {
     required String email,
     required String orgName,
   }) async {
-    return Mappers.stringToSupernodeJwt("DemoToken");
+    return Mappers.stringToSupernodeJwt('DemoToken');
   }
 
   @override
@@ -25,11 +25,11 @@ class DemoRegistrationRepository implements RegistrationRepository {
     required String token,
   }) async {
     return RegistrationResult(
-      id: "DemoRegistrationId1",
+      id: 'DemoRegistrationId1',
       isAdmin: true,
       isActive: true,
-      token: Mappers.stringToSupernodeJwt("DemoToken"),
-      username: "DemoUser",
+      token: Mappers.stringToSupernodeJwt('DemoToken'),
+      username: 'DemoUser',
     );
   }
 

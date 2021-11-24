@@ -5,8 +5,8 @@ import 'package:path/path.dart';
 import 'package:sembast/sembast.dart';
 
 import 'sembast_factory.dart'
-    if (dart.library.io) "sembast_factory_io.dart"
-    if (dart.library.js) "sembast_factory_web.dart";
+    if (dart.library.io) 'sembast_factory_io.dart'
+    if (dart.library.js) 'sembast_factory_web.dart';
 
 const String _defaultCacheStore = 'cache';
 
@@ -33,14 +33,14 @@ class _CacheManagerSerializersBucket {
 }
 
 class CacheManagerSembast implements CacheManager {
-  final Database db;
-  final _CacheManagerSerializersBucket _serializersBucket;
-
   CacheManagerSembast(
     this.db, [
     _CacheManagerSerializersBucket? serializersBucket,
   ]) : _serializersBucket =
             serializersBucket ?? _CacheManagerSerializersBucket();
+
+  final Database db;
+  final _CacheManagerSerializersBucket _serializersBucket;
 
   static Future<CacheManagerSembast> load(String dbDirectory) async {
     final path = join(dbDirectory, sembastDbName);
@@ -70,18 +70,18 @@ class CacheManagerSembast implements CacheManager {
 }
 
 class CacheZoneSembast implements CacheZone {
-  final StoreRef<String, dynamic> _store;
-  final Database _db;
-  final _CacheManagerSerializersBucket _serializersBucket;
-
-  final Map<String, dynamic> _inMemory;
-
   CacheZoneSembast(
     this._db,
     this._store,
     this._inMemory,
     this._serializersBucket,
   );
+
+  final StoreRef<String, dynamic> _store;
+  final Database _db;
+  final _CacheManagerSerializersBucket _serializersBucket;
+
+  final Map<String, dynamic> _inMemory;
 
   static Future<CacheZoneSembast> load(
     Database db,

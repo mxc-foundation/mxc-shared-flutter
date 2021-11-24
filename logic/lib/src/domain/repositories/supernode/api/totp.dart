@@ -3,9 +3,9 @@ import 'package:mxc_logic/mxc_logic.dart';
 import 'package:mxc_logic/src/data/data.dart';
 
 class TotpRepository {
-  final ChopperClient client;
-
   TotpRepository(this.client);
+
+  final ChopperClient client;
 
   Future<bool> getTotpStatus() async {
     final res = await client.internalService.getTOTPStatus();

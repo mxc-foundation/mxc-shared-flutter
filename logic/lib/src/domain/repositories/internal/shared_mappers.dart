@@ -46,7 +46,7 @@ extension FramesIntervalMapper on FramesInterval {
   String toData() {
     switch (this) {
       case FramesInterval.day:
-        return "DAY";
+        return 'DAY';
     }
   }
 }
@@ -95,9 +95,9 @@ abstract class Mappers {
 
   static ExternalAccountType stringToExternalAccountType(String type) {
     switch (type) {
-      case "wechat":
+      case 'wechat':
         return ExternalAccountType.wechat;
-      case "shopify":
+      case 'shopify':
         return ExternalAccountType.shopify;
       default:
         return ExternalAccountType.unknown;
@@ -106,9 +106,9 @@ abstract class Mappers {
 
   static StakeHistoryType stringToStakeHistoryType(String? type) {
     switch (type) {
-      case "STAKING":
+      case 'STAKING':
         return StakeHistoryType.staking;
-      case "UNSTAKING":
+      case 'UNSTAKING':
         return StakeHistoryType.unstaking;
       default:
         return StakeHistoryType.unknown;

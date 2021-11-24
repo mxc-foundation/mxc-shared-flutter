@@ -5,9 +5,9 @@ import 'package:mxc_logic/src/data/data.dart';
 import 'package:mxc_logic/src/domain/repositories/internal/shared_mappers.dart';
 
 class WalletRepository {
-  final SupernodeClient _client;
-
   WalletRepository(this._client);
+
+  final SupernodeClient _client;
 
   Future<Decimal> balance({
     String? orgId,

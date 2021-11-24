@@ -19,11 +19,6 @@ void _addAuthHeader(
 }
 
 class SupernodeAuthenticator extends Authenticator {
-  late final SupernodeClient client;
-
-  final Future<String?> Function(SupernodeClient) refreshToken;
-  final String Function() getSupernodeAddress;
-
   SupernodeAuthenticator({
     required this.refreshToken,
     required this.getSupernodeAddress,
@@ -35,6 +30,11 @@ class SupernodeAuthenticator extends Authenticator {
       getDefaultOrganizationId: null,
     );
   }
+
+  late final SupernodeClient client;
+
+  final Future<String?> Function(SupernodeClient) refreshToken;
+  final String Function() getSupernodeAddress;
 
   bool tokenExpired(Response response) =>
       response.statusCode == 401 &&
@@ -59,11 +59,11 @@ class SupernodeAuthenticator extends Authenticator {
 
 @immutable
 class TokenInterceptor implements RequestInterceptor {
-  final String? Function() getToken;
-
   const TokenInterceptor({
     required this.getToken,
   });
+
+  final String? Function() getToken;
 
   @override
   Future<Request> onRequest(Request request) async {

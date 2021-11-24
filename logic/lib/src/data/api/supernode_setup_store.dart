@@ -4,10 +4,10 @@ import 'package:mxc_logic/internal.dart';
 import 'package:mxc_logic/mxc_logic.dart';
 
 class Credentials {
+  Credentials(this.username, this.password);
+
   final String username;
   final String password;
-
-  Credentials(this.username, this.password);
 }
 
 abstract class SupernodeSetupStore implements GlobalCacheStore {

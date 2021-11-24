@@ -10,7 +10,7 @@ class DemoExternalAccountsRepository implements ExternalAccountsRepository {
     required String email,
     required String password,
   }) async {
-    return Mappers.stringToSupernodeJwt("DemoToken");
+    return Mappers.stringToSupernodeJwt('DemoToken');
   }
 
   @override

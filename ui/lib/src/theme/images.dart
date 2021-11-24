@@ -200,12 +200,12 @@ class ImagesTheme {
 
   // login
   ImageProvider get supernodePlaceholder => const AssetImage(
-        "assets/images/login/supernode_placeholder.png",
+        'assets/images/login/supernode_placeholder.png',
         package: _packageName,
       );
 
   ImageProvider get placeholder => const AssetImage(
-        "assets/images/login/placeholder.png",
+        'assets/images/login/placeholder.png',
         package: _packageName,
       );
 

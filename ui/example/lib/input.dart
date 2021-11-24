@@ -113,11 +113,12 @@ class _InputPageState extends State<InputPage> {
 }
 
 class InputPageCard extends StatefulWidget {
-  final bool showBackground;
   const InputPageCard({
     Key? key,
     this.showBackground = true,
   }) : super(key: key);
+
+  final bool showBackground;
 
   @override
   State<InputPageCard> createState() => _InputPageCardState();

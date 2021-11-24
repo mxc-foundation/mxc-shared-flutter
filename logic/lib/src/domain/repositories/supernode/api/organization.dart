@@ -3,9 +3,9 @@ import 'package:mxc_logic/mxc_logic.dart';
 import 'package:mxc_logic/src/data/data.dart';
 
 class OrganizationRepository {
-  final ChopperClient _client;
-
   OrganizationRepository(this._client);
+
+  final ChopperClient _client;
 
   Future<void> update({
     required String id,

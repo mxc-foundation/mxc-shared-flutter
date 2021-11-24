@@ -38,14 +38,14 @@ class ColorsPage extends StatelessWidget {
 }
 
 class ColorsPagePallet extends StatelessWidget {
-  final Color titleColor;
-  final Color backgroundColor;
-
   const ColorsPagePallet({
     Key? key,
     required this.backgroundColor,
     required this.titleColor,
   }) : super(key: key);
+
+  final Color titleColor;
+  final Color backgroundColor;
 
   @override
   Widget build(BuildContext context) {
@@ -178,14 +178,14 @@ class ColorsPagePallet extends StatelessWidget {
 }
 
 class ColorsPageTitle extends StatelessWidget {
-  final Color backgroundColor;
-  final String text;
-
   const ColorsPageTitle(
     this.text, {
     Key? key,
     required this.backgroundColor,
   }) : super(key: key);
+
+  final Color backgroundColor;
+  final String text;
 
   @override
   Widget build(BuildContext context) {
@@ -209,16 +209,16 @@ class ColorsPageTitle extends StatelessWidget {
 }
 
 class ColorsPageSample extends StatelessWidget {
-  final String name;
-  final Color color;
-  final List<Color> shades;
-
   const ColorsPageSample({
     Key? key,
     required this.color,
     required this.name,
     this.shades = const [],
   }) : super(key: key);
+
+  final String name;
+  final Color color;
+  final List<Color> shades;
 
   Widget colorSquare(Color color) => Container(
         height: 96,

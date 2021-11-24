@@ -9,10 +9,6 @@ import 'error_converter.dart';
 
 @internal
 class SupernodeClient extends ChopperClient {
-  final String Function() _getBaseUrl;
-  final String? Function() _getDefaultOrganizationId;
-  final String? Function() _getToken;
-
   SupernodeClient({
     required String Function() getSupernodeAddress,
     required String? Function()? getToken,
@@ -37,6 +33,10 @@ class SupernodeClient extends ChopperClient {
           ],
           errorConverter: ChopperErrorConverter(),
         );
+
+  final String Function() _getBaseUrl;
+  final String? Function() _getDefaultOrganizationId;
+  final String? Function() _getToken;
 
   @override
   String get baseUrl => _getBaseUrl();

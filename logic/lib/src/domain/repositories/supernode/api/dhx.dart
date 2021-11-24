@@ -4,9 +4,9 @@ import 'package:mxc_logic/src/data/data.dart';
 import 'package:mxc_logic/src/domain/repositories/internal/shared_mappers.dart';
 
 class DhxRepository {
-  final SupernodeClient _client;
-
   DhxRepository(this._client);
+
+  final SupernodeClient _client;
 
   static late final Map<int, LockOption> _monthsToOption = {
     for (final o in LockOption.values) o.months: o,

@@ -2,12 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mxc_ui/mxc_ui.dart';
 
 class MxcAppBar extends StatelessWidget {
-  final Widget title;
-  final EdgeInsetsGeometry padding;
-  final Widget? action;
-  final Widget? leading;
-  final bool centerTitle;
-
   MxcAppBar({
     Key? key,
     required String text,
@@ -101,6 +95,12 @@ class MxcAppBar extends StatelessWidget {
         ),
         super(key: key);
 
+  final Widget title;
+  final EdgeInsetsGeometry padding;
+  final Widget? action;
+  final Widget? leading;
+  final bool centerTitle;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -125,9 +125,6 @@ class MxcAppBar extends StatelessWidget {
 }
 
 class MxcAppBarButton extends StatelessWidget {
-  final VoidCallback onTap;
-  final Widget child;
-
   const MxcAppBarButton({
     Key? key,
     required this.child,
@@ -163,6 +160,9 @@ class MxcAppBarButton extends StatelessWidget {
         ),
         super(key: key);
 
+  final VoidCallback onTap;
+  final Widget child;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -178,14 +178,14 @@ class MxcAppBarButton extends StatelessWidget {
 }
 
 class MxcAppBarTextTitle extends StatelessWidget {
-  final bool centerTitle;
-  final String text;
-
   const MxcAppBarTextTitle(
     this.text, {
     Key? key,
     this.centerTitle = true,
   }) : super(key: key);
+
+  final bool centerTitle;
+  final String text;
 
   @override
   Widget build(BuildContext context) {

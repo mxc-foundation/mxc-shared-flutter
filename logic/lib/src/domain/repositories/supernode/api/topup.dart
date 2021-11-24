@@ -3,9 +3,9 @@ import 'package:mxc_logic/src/data/data.dart';
 import 'package:mxc_logic/src/domain/repositories/internal/shared_mappers.dart';
 
 class TopupRepository {
-  final SupernodeClient _client;
-
   TopupRepository(this._client);
+
+  final SupernodeClient _client;
 
   Future<List<Topup>> history({
     Token? currency,

@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:mxc_ui/mxc_ui.dart';
 
 class MxcSwitch extends StatelessWidget {
-  final void Function(bool)? onChanged;
-  final bool value;
-  final String? title;
-
   const MxcSwitch({
     required Key? key,
     required this.onChanged,
     required this.value,
     this.title,
   }) : super(key: key);
+
+  final void Function(bool)? onChanged;
+  final bool value;
+  final String? title;
 
   Widget _switch(BuildContext context) => Switch(
         onChanged: onChanged,

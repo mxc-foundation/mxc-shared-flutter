@@ -11,7 +11,7 @@ class DemoLoginRepository implements LoginRepository {
     required String password,
   }) async {
     return LoginResult(
-      token: Mappers.stringToSupernodeJwt("DemoToken"),
+      token: Mappers.stringToSupernodeJwt('DemoToken'),
       is2faRequired: false,
     );
   }
@@ -20,7 +20,7 @@ class DemoLoginRepository implements LoginRepository {
   Future<WeChatLoginResult> loginWeChat(String code) async {
     return WeChatLoginResult(
       isBindingRequired: false,
-      token: Mappers.stringToSupernodeJwt("DemoToken"),
+      token: Mappers.stringToSupernodeJwt('DemoToken'),
     );
   }
 
@@ -30,7 +30,7 @@ class DemoLoginRepository implements LoginRepository {
   ) async {
     return WeChatLoginResult(
       isBindingRequired: false,
-      token: Mappers.stringToSupernodeJwt("DemoToken"),
+      token: Mappers.stringToSupernodeJwt('DemoToken'),
     );
   }
 
