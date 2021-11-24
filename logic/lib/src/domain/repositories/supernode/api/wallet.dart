@@ -112,12 +112,11 @@ class WalletRepository {
     try {
       final res = await _client.bTCMining.bTCMiningSession();
       return BtcMiningSession(
-        sessionId: res.body!.sessionId!,
-        mxcLockAmount: res.body!.mxcLockAmount!.toInt(),
-        startSession: res.body!.startDate!,
-        endSession: res.body!.endDate!,
-        mxcLockDurationDays: res.body!.mxcLockDurationDays!.toInt(),
-      );
+          res.body!.sessionId!,
+          res.body!.mxcLockAmount!.toInt(),
+          res.body!.startDate!,
+          res.body!.endDate!,
+          res.body!.mxcLockDurationDays!.toInt());
     } on ApiException catch (e) {
       final Object? error = e.source;
       if (error != null &&

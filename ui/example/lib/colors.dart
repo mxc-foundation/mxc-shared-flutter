@@ -161,6 +161,16 @@ class ColorsPagePallet extends StatelessWidget {
             name: 'buttonIconTextColor',
             color: ColorsTheme.of(context).buttonIconTextColor,
           ),
+          const SizedBox(height: 32),
+          ColorsPageSample(
+            name: 'buttonDisabledBackground',
+            color: ColorsTheme.of(context).buttonDisabledBackground,
+          ),
+          const SizedBox(height: 32),
+          ColorsPageSample(
+            name: 'buttonDisabledLabel',
+            color: ColorsTheme.of(context).buttonDisabledLabel,
+          ),
         ],
       ),
     );
