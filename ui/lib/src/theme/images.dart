@@ -345,6 +345,11 @@ class ImagesTheme {
         package: _packageName,
       );
 
+  ImageProvider get iconOpenLock => const AssetImage(
+        'assets/images/wallet/icon-open-lock.png',
+        package: _packageName,
+      );
+
   //settings
   ImageProvider get warningRobot => const AssetImage(
         'assets/images/settings/robot_warning.png',
