@@ -6,6 +6,7 @@ class MxcCard extends StatelessWidget {
   final VoidCallback? onTap;
   final Color? color;
   final EdgeInsets? padding;
+  final bool isShadow;
 
   const MxcCard({
     Key? key,
@@ -13,15 +14,17 @@ class MxcCard extends StatelessWidget {
     this.onTap,
   })  : padding = null,
         color = null,
+        isShadow = true,
         super(key: key);
 
-  const MxcCard.custom({
-    Key? key,
-    required this.child,
-    this.onTap,
-    this.color,
-    this.padding,
-  }) : super(key: key);
+  const MxcCard.custom(
+      {Key? key,
+      required this.child,
+      this.onTap,
+      this.color,
+      this.padding,
+      this.isShadow = true})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,17 +34,18 @@ class MxcCard extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         color: color ?? ColorsTheme.of(context).boxComponents,
-        boxShadow: [
-          MxcBoxShadow(
-            color: ColorsTheme.of(context).shadow2,
-          ),
-        ],
+        boxShadow: isShadow
+            ? [
+                MxcBoxShadow(
+                  color: ColorsTheme.of(context).shadow2,
+                ),
+              ]
+            : null,
       ),
       child: child,
     );
     if (onTap != null) {
       widget = InkWell(
-        borderRadius: BorderRadius.circular(10),
         onTap: onTap,
         child: widget,
       );

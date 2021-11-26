@@ -287,11 +287,13 @@ class _MxcNonFormTextFieldState extends State<_MxcNonFormTextField> {
 class MxcTextFieldButton extends StatelessWidget {
   final VoidCallback? onTap;
   final IconData icon;
+  final Color? color;
 
   const MxcTextFieldButton({
     Key? key,
     required this.icon,
     required this.onTap,
+    this.color,
   }) : super(key: key);
 
   @override
@@ -303,7 +305,7 @@ class MxcTextFieldButton extends StatelessWidget {
         child: Icon(
           icon,
           size: 16,
-          color: MxcScopedTheme.of(context).primaryColor,
+          color: color ?? MxcScopedTheme.of(context).primaryColor,
         ),
       ),
     );

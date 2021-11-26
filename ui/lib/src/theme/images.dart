@@ -345,6 +345,16 @@ class ImagesTheme {
         package: _packageName,
       );
 
+  ImageProvider get unlock => const AssetImage(
+        'assets/images/wallet/unlock.png',
+        package: _packageName,
+      );
+
+  ImageProvider get lock => const AssetImage(
+        'assets/images/wallet/lock.png',
+        package: _packageName,
+      );
+
   //settings
   ImageProvider get warningRobot => const AssetImage(
         'assets/images/settings/robot_warning.png',
