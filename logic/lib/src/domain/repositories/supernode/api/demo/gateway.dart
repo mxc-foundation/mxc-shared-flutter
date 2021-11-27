@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:decimal/decimal.dart';
 import 'package:mxc_logic/mxc_logic.dart';
 import 'package:mxc_logic/src/domain/repositories/internal/shared_mappers.dart';
@@ -12,47 +14,26 @@ class DemoGatewayRepository implements GatewayRepository {
     int? offset,
     String? organizationId,
   }) async {
+    const total = 40;
+    offset ??= 0;
+    limit ??= total;
+    await Future<void>.delayed(const Duration(seconds: 3));
     return [
-      Gateway(
-        id: 'DemoId1',
-        createdAt: DateTime.now().add(const Duration(days: -2)),
-        description: 'DemoDescription1',
-        firstSeenAt: DateTime.now().add(const Duration(days: -2)),
-        lastSeenAt: DateTime.now(),
-        updatedAt: DateTime.now(),
-        location: Location(0.0, 0.0),
-        name: 'DemoName1',
-        networkServerID: 'DemoNetworkServerId1',
-        organizationID: 'DemoOrgID1',
-        reseller: false,
-      ),
-      Gateway(
-        id: 'DemoId2',
-        createdAt: DateTime.now().add(const Duration(days: -1)),
-        description: 'DemoDescription2',
-        firstSeenAt: DateTime.now().add(const Duration(days: -1)),
-        lastSeenAt: DateTime.now(),
-        updatedAt: DateTime.now(),
-        location: Location(0.0, 0.0),
-        name: 'DemoName2',
-        networkServerID: 'DemoNetworkServerId2',
-        organizationID: 'DemoOrgID2',
-        reseller: false,
-      ),
-      Gateway(
-        id: 'DemoId3',
-        createdAt: DateTime.now(),
-        description: 'DemoDescription3',
-        firstSeenAt: DateTime.now(),
-        lastSeenAt: DateTime.now(),
-        updatedAt: DateTime.now(),
-        location: Location(0.0, 0.0),
-        name: 'DemoName3',
-        networkServerID: 'DemoNetworkServerId3',
-        organizationID: 'DemoOrgID3',
-        reseller: false,
-      )
-    ].withTotal(3);
+      for (var i = offset; i < min(offset + limit, total); i++)
+        Gateway(
+          id: 'DemoId$i',
+          createdAt: DateTime.now().add(Duration(days: -i)),
+          description: 'DemoDescription$i',
+          firstSeenAt: DateTime.now().add(Duration(days: -i)),
+          lastSeenAt: DateTime.now(),
+          updatedAt: DateTime.now(),
+          location: Location(0.0, 0.0),
+          name: 'DemoName$i',
+          networkServerID: 'DemoNetworkServerId$i',
+          organizationID: 'DemoOrgID$i',
+          reseller: false,
+        ),
+    ].withTotal(total);
   }
 
   @override
@@ -189,6 +170,16 @@ class DemoGatewayRepository implements GatewayRepository {
         id: 'DemoId3',
         ageSeconds: 1,
         health: 99,
+        miningFuel: '100'.toDecimal(),
+        miningFuelHealth: 100,
+        miningFuelMax: '100'.toDecimal(),
+        totalMined: '100'.toDecimal(),
+        uptimeHealth: 100,
+      ),
+      GatewayHealth(
+        id: 'DemoId15',
+        ageSeconds: 1,
+        health: Random().nextDouble(),
         miningFuel: '100'.toDecimal(),
         miningFuelHealth: 100,
         miningFuelMax: '100'.toDecimal(),
