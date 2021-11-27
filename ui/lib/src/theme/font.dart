@@ -4,9 +4,9 @@ import 'package:provider/provider.dart';
 import 'colors.dart';
 
 class FontTheme {
-  final ColorsTheme _colorsTheme;
-
   FontTheme(this._colorsTheme);
+
+  final ColorsTheme _colorsTheme;
 
   static FontTheme of(BuildContext context, {bool listen = true}) {
     return Provider.of<FontTheme>(context, listen: listen);
@@ -17,8 +17,9 @@ class FontTheme {
         _colorsTheme,
         TextStyle(
           color: _colorsTheme.textPrimaryAndIcons,
-          fontFamily: "Roboto",
+          fontFamily: 'Roboto',
           fontSize: 12,
+          fontWeight: FontWeight.w400,
           height: 1.33333,
           decoration: TextDecoration.none,
         ),
@@ -29,8 +30,9 @@ class FontTheme {
         _colorsTheme,
         TextStyle(
           color: _colorsTheme.textPrimaryAndIcons,
-          fontFamily: "Roboto",
+          fontFamily: 'Roboto',
           fontSize: 14,
+          fontWeight: FontWeight.w400,
           height: 1.33333,
           decoration: TextDecoration.none,
         ),
@@ -41,8 +43,9 @@ class FontTheme {
         _colorsTheme,
         TextStyle(
           color: _colorsTheme.textPrimaryAndIcons,
-          fontFamily: "Roboto",
+          fontFamily: 'Roboto',
           fontSize: 16,
+          fontWeight: FontWeight.w400,
           height: 1.33333,
           decoration: TextDecoration.none,
         ),
@@ -53,8 +56,22 @@ class FontTheme {
         _colorsTheme,
         TextStyle(
           color: _colorsTheme.textPrimaryAndIcons,
-          fontFamily: "Roboto",
+          fontFamily: 'Roboto',
+          fontWeight: FontWeight.w400,
           fontSize: 24,
+          height: 1.33333,
+          decoration: TextDecoration.none,
+        ),
+      );
+
+  /// FontSize: 30
+  TextStylePack get extraBig => TextStylePack(
+        _colorsTheme,
+        TextStyle(
+          color: _colorsTheme.textPrimaryAndIcons,
+          fontFamily: 'Roboto',
+          fontWeight: FontWeight.w400,
+          fontSize: 30,
           height: 1.33333,
           decoration: TextDecoration.none,
         ),
@@ -62,10 +79,10 @@ class FontTheme {
 }
 
 class TextStylePack {
+  TextStylePack(this.colorsTheme, this._primary);
+
   final ColorsTheme colorsTheme;
   final TextStyle _primary;
-
-  TextStylePack(this.colorsTheme, this._primary);
 
   TextStyle call() => _primary;
 
@@ -89,8 +106,15 @@ class TextStylePack {
   DecoratableTextStyle get dhx =>
       DecoratableTextStyle(_primary.copyWith(color: colorsTheme.dhxBlue));
 
+  DecoratableTextStyle get btc =>
+      DecoratableTextStyle(_primary.copyWith(color: colorsTheme.btcYellow));
+
   DecoratableTextStyle get button => DecoratableTextStyle(
         _primary.copyWith(color: colorsTheme.buttonIconTextColor),
+      );
+
+  DecoratableTextStyle get buttonDisabled => DecoratableTextStyle(
+        _primary.copyWith(color: colorsTheme.buttonDisabledLabel),
       );
 
   DecoratableTextStyle get health => DecoratableTextStyle(
@@ -102,9 +126,9 @@ class TextStylePack {
 }
 
 class DecoratableTextStyle {
-  final TextStyle _inner;
-
   DecoratableTextStyle(this._inner);
+
+  final TextStyle _inner;
 
   TextStyle call() => _inner;
 
@@ -113,6 +137,9 @@ class DecoratableTextStyle {
           decoration: TextDecoration.underline,
         ),
       );
+
+  DecoratableTextStyle get semibold =>
+      DecoratableTextStyle(_inner.copyWith(fontWeight: FontWeight.w500));
 
   DecoratableTextStyle get bold =>
       DecoratableTextStyle(_inner.copyWith(fontWeight: FontWeight.w600));

@@ -1,22 +1,29 @@
-import 'package:chopper/chopper.dart';
 import 'package:decimal/decimal.dart';
 import 'package:mxc_logic/mxc_logic.dart';
 import 'package:mxc_logic/src/data/data.dart';
 import 'package:mxc_logic/src/domain/repositories/internal/shared_mappers.dart';
 
 class StakeRepository {
-  final ChopperClient _client;
-
   StakeRepository(this._client);
 
+  final SupernodeClient _client;
+
+  static StakeOption _mapStakeOption(DateTime? startTime, DateTime? lockTill) {
+    return StakeOption(
+      lockTill == null
+          ? null
+          : (lockTill.difference(startTime!).inDays / 30).floor(),
+    );
+  }
+
   Future<String> stake({
-    required String orgId,
     required Decimal amount,
     required double? boostRate,
     required int? lockMonths,
+    String? orgId,
   }) async {
     final res = await _client.stakingService.stake(
-      orgId: orgId,
+      orgId: orgId ?? _client.defaultOrganizationId,
       body: ExtapiStakeRequest(
         amount: amount.toString(),
         boost: boostRate?.toString(),
@@ -27,15 +34,15 @@ class StakeRepository {
   }
 
   Future<String> unstake({
-    required String orgId,
     required String stakeId,
     required String otpCode,
+    String? orgId,
   }) async {
     final res = await _client.stakingService.unstake(
-      orgId: orgId,
+      orgId: orgId ?? _client.defaultOrganizationId,
       grpcMetadataXOTP: otpCode,
       body: ExtapiUnstakeRequest(
-        orgId: orgId,
+        orgId: orgId ?? _client.defaultOrganizationId,
         stakeId: stakeId,
       ),
     );
@@ -43,23 +50,23 @@ class StakeRepository {
   }
 
   Future<List<StakeHistoryFrame>> history({
-    required String orgId,
+    String? orgId,
     Token? currency,
     DateTime? from,
     DateTime? till,
   }) async {
     final res = await _client.stakingService.getStakingHistory(
-      orgId: orgId,
+      orgId: orgId ?? _client.defaultOrganizationId,
       currency: currency?.toData(),
-      from: from?.toData(),
-      till: till?.toData(),
+      from: (from ?? Values.dateMin).toData(),
+      till: (till ?? Values.dateMax).toData(),
     );
     return res.body!.stakingHist!
         .map(
           (e) => StakeHistoryFrame(
             timestamp: e.timestamp!,
             amount: e.amount.toDecimal(),
-            type: e.type!,
+            type: Mappers.stringToStakeHistoryType(e.type),
             stake: Stake(
               id: e.stake!.id!,
               startTime: e.stake!.startTime!,
@@ -69,23 +76,32 @@ class StakeRepository {
               lockTill: e.stake!.lockTill,
               boost: e.stake!.boost.toDouble(),
               revenue: e.stake!.revenue.toDouble(),
-              months: e.stake!.lockTill == null
-                  ? null
-                  : (e.stake!.lockTill!.difference(e.stake!.startTime!).inDays /
-                          30)
-                      .floor(),
+              option: _mapStakeOption(e.stake!.startTime, e.stake!.lockTill),
             ),
           ),
         )
         .toList();
   }
 
+  Future<List<Stake>> list({String? orgId}) async {
+    final history = await this.history(
+      orgId: orgId ?? _client.defaultOrganizationId,
+    );
+    return history
+        .map((e) => e.stake)
+        .toList()
+        .asMap()
+        .map((key, value) => MapEntry(value.id, value))
+        .values
+        .toList();
+  }
+
   Future<List<Stake>> listActive({
-    required String orgId,
+    String? orgId,
     Token? currency,
   }) async {
     final res = await _client.stakingService.getActiveStakes(
-      orgId: orgId,
+      orgId: orgId ?? _client.defaultOrganizationId,
       currency: currency?.toData(),
     );
     return res.body!.actStake!
@@ -99,34 +115,53 @@ class StakeRepository {
             lockTill: e.lockTill,
             revenue: e.revenue.toDouble(),
             startTime: e.startTime!,
-            months: e.lockTill == null
-                ? null
-                : (e.lockTill!.difference(e.startTime!).inDays / 30).floor(),
+            option: _mapStakeOption(e.startTime, e.lockTill),
           ),
         )
         .toList();
   }
 
   Future<Decimal> revenue({
-    required String orgId,
+    String? orgId,
     DateTime? till,
   }) async {
     final res = await _client.stakingService.getStakingRevenue(
-      orgId: orgId,
+      orgId: orgId ?? _client.defaultOrganizationId,
       till: till?.toData(),
     );
     return res.body!.amount.toDecimal();
   }
 
-  Future<StakingPercentage> stakingPercentage({Token? currency}) async {
+  Future<StakeBoostBundle> stakingPercentage({Token? currency}) async {
     final res = await _client.stakingService.getStakingPercentage(
       currency: currency?.toData(),
     );
-    return StakingPercentage(
-      interest: res.body!.stakingInterest!,
-      periodToBoost: res.body!.lockBoosts!
-          .asMap()
-          .map((_, e) => MapEntry(e.lockPeriods!, e.boost.toDouble())),
+    final monthToOption = StakeOption.values.asMap().map(
+          (_, e) => MapEntry(e.months?.toString(), e),
+        );
+    final realRates = res.body!.lockBoosts!.asMap().map(
+          (_, e) => MapEntry(
+            monthToOption[e.lockPeriods!]!,
+            e.boost.toDouble(),
+          ),
+        );
+    realRates[StakeOption.flex] = 0;
+
+    final stakingInterest = res.body!.stakingInterest! * 100;
+
+    final rates = realRates.map(
+      (key, boost) => MapEntry(
+        key,
+        StakeBoostRate(
+          realRate: boost,
+          marketingRate:
+              (((boost + 1) / (realRates[StakeOption.m12]! + 1)) * 100 - 100)
+                  .round(),
+          estimatedRate:
+              (stakingInterest * (1 + boost) * 1000).floorToDouble() / 1000,
+        ),
+      ),
     );
+    return rates;
   }
 }

@@ -1,12 +1,24 @@
-import 'package:chopper/chopper.dart';
+import 'package:collection/collection.dart';
 import 'package:mxc_logic/src/data/data.dart';
 import 'package:mxc_logic/src/domain/entities/user.dart';
 import 'package:mxc_logic/src/domain/repositories/internal/shared_mappers.dart';
 
 class UserRepository {
-  final ChopperClient client;
-
   UserRepository(this.client);
+
+  final SupernodeClient client;
+
+  static UserOrganization _userOrganizationMapper(ExtapiOrganizationLink e) =>
+      UserOrganization(
+        organizationId: e.organizationID!,
+        name: e.organizationName!,
+        displayName: e.organizationDisplayName.orDefault(),
+        isUserAdmin: e.isAdmin.orDefault(),
+        isUserDeviceAdmin: e.isDeviceAdmin.orDefault(),
+        isUserGatewayAdmin: e.isGatewayAdmin.orDefault(),
+        createdAt: e.createdAt!,
+        updatedAt: e.updatedAt,
+      );
 
   Future<ProfileResult> profile() async {
     final res = await client.internalService.profile();
@@ -17,20 +29,8 @@ class UserRepository {
         isActive: res.body!.user!.isActive.orDefault(),
         isAdmin: res.body!.user!.isActive.orDefault(),
       ),
-      organizations: res.body!.organizations!
-          .map(
-            (e) => UserOrganization(
-              organizationId: e.organizationID!,
-              organizationName: e.organizationName!,
-              organizationDisplayName: e.organizationDisplayName.orDefault(),
-              isAdmin: e.isAdmin.orDefault(),
-              isDeviceAdmin: e.isDeviceAdmin.orDefault(),
-              isGatewayAdmin: e.isGatewayAdmin.orDefault(),
-              createdAt: e.createdAt!,
-              updatedAt: e.updatedAt,
-            ),
-          )
-          .toList(),
+      organizations:
+          res.body!.organizations!.map(_userOrganizationMapper).toList(),
       externalAccounts: res.body!.externalUserAccounts!
           .map(
             (e) => ExternalAccount(
@@ -40,8 +40,19 @@ class UserRepository {
             ),
           )
           .toList(),
+      currentOrganization: res.body!.organizations!
+          .map(_userOrganizationMapper)
+          .firstWhereOrNull(
+            (e) => e.organizationId == client.defaultOrganizationId,
+          ),
     );
   }
+
+  String? id() => client.token == null
+      ? null
+      : Mappers.stringToSupernodeJwt(client.token!).userId;
+
+  String? orgId() => client.defaultOrganizationId;
 
   Future<SupernodeTokenDetails> update({
     required String id,

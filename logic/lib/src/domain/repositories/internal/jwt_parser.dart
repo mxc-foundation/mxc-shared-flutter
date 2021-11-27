@@ -10,10 +10,10 @@ Map<String, dynamic> parseJwt(String jwt) {
     case 1:
       break;
     case 2:
-      encoded += "==";
+      encoded += '==';
       break;
     case 3:
-      encoded += "=";
+      encoded += '=';
       break;
   }
   final json = utf8.decode(base64.decode(encoded));

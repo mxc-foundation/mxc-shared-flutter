@@ -2,18 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:mxc_ui/mxc_ui.dart';
 
 class MxcPrimaryButton extends StatefulWidget {
-  final String title;
-  final Color? color;
-  final VoidCallback? onTap;
-
   /// MXC Primary button
   /// [key] marked as required, because it's often needed for testing purposes
   const MxcPrimaryButton({
     required Key? key,
     required this.title,
     required this.onTap,
+    this.fillWidth = true,
     this.color,
   }) : super(key: key);
+
+  final String title;
+  final Color? color;
+  final VoidCallback? onTap;
+  final bool fillWidth;
 
   @override
   _MxcPrimaryButtonState createState() => _MxcPrimaryButtonState();
@@ -30,7 +32,7 @@ class _MxcPrimaryButtonState extends State<MxcPrimaryButton> {
     var buttonColor = primaryColor;
 
     if (widget.onTap == null) {
-      buttonColor = ColorsTheme.of(context).primaryBackground;
+      buttonColor = ColorsTheme.of(context).buttonDisabledBackground;
     } else if (hovering) {
       buttonColor = buttonColor.withOpacity(0.8);
     }
@@ -46,13 +48,14 @@ class _MxcPrimaryButtonState extends State<MxcPrimaryButton> {
           }
         },
         child: Container(
-          height: 48,
-          alignment: Alignment.center,
+          padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 32),
+          width: widget.fillWidth ? double.infinity : null,
           child: Text(
             widget.title,
+            textAlign: TextAlign.center,
             style: widget.onTap != null
                 ? FontTheme.of(context).big.button()
-                : FontTheme.of(context).big.label(),
+                : FontTheme.of(context).big.buttonDisabled(),
           ),
         ),
       ),

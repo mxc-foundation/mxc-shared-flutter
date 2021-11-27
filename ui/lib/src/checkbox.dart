@@ -2,11 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mxc_ui/mxc_ui.dart';
 
 class MxcCheckbox extends StatelessWidget {
-  final void Function(bool?)? onChanged;
-  final bool? value;
-  final bool tristate;
-  final Widget? title;
-
   const MxcCheckbox({
     required Key? key,
     required this.onChanged,
@@ -14,6 +9,11 @@ class MxcCheckbox extends StatelessWidget {
     this.tristate = false,
     this.title,
   }) : super(key: key);
+
+  final void Function(bool?)? onChanged;
+  final bool? value;
+  final bool tristate;
+  final Widget? title;
 
   Widget _checkbox(Color primaryColor) => Checkbox(
         onChanged: onChanged,

@@ -44,9 +44,9 @@ class AuthPresenter extends StateNotifier<AuthState> {
 
   static ActionsProvider get actions => store.notifier;
 
-  final ProviderRefBase _ref;
+  final Ref _ref;
 
-  AuthUseCase get _useCase => _ref.read(authUseCaseProvider);
+  LoginUseCase get _useCase => _ref.read(authUseCaseProvider);
   NavigatorState get _navigator => _ref.read(navigatorProvider);
 
   Future<void> initState() async {
@@ -69,7 +69,7 @@ class AuthPresenter extends StateNotifier<AuthState> {
   }
 
   void logOut() {
-    _useCase.logOut();
+    //_useCase.logOut();
     _navigator.pop();
   }
 }

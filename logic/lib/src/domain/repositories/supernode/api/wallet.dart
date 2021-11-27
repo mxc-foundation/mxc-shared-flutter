@@ -1,45 +1,43 @@
-import 'package:chopper/chopper.dart';
 import 'package:decimal/decimal.dart';
 import 'package:mxc_logic/mxc_logic.dart';
+import 'package:mxc_logic/src/data/api/client/error_converter.dart';
 import 'package:mxc_logic/src/data/data.dart';
 import 'package:mxc_logic/src/domain/repositories/internal/shared_mappers.dart';
 
 class WalletRepository {
-  final ChopperClient _client;
-
   WalletRepository(this._client);
 
+  final SupernodeClient _client;
+
   Future<Decimal> balance({
-    required String orgId,
-    required String userId,
+    String? orgId,
     Token? currency,
   }) async {
     final res = await _client.walletService.getWalletBalance(
-      userId: userId,
-      orgId: orgId,
+      orgId: orgId ?? _client.defaultOrganizationId,
       currency: currency?.toData() ?? '',
     );
     return res.body!.balance.toDecimal();
   }
 
   Future<Decimal> miningIncome({
-    required String orgId,
+    String? orgId,
     Token? currency,
   }) async {
     final res = await _client.walletService.getWalletMiningIncome(
-      orgId: orgId,
+      orgId: orgId ?? _client.defaultOrganizationId,
       currency: currency?.toData() ?? '',
     );
     return res.body!.miningIncome.toDecimal();
   }
 
   Future<Decimal> convertUsd({
-    required String orgId,
+    String? orgId,
     required String userId,
     required double mxcPrice,
   }) async {
     final res = await _client.walletService.getMXCprice(
-      orgId: orgId,
+      orgId: orgId ?? _client.defaultOrganizationId,
       mxcPrice: mxcPrice.toString(),
       userId: userId,
     );
@@ -47,14 +45,13 @@ class WalletRepository {
   }
 
   Future<void> topUpMiningFuel({
-    required String orgId,
+    String? orgId,
     required Map<String, Decimal> macToAmount,
-    Token? currency,
   }) async {
     await _client.walletService.topUpGatewayMiningFuel(
       body: ExtapiTopUpGatewayMiningFuelRequest(
-        currency: currency?.toData() ?? '',
-        orgId: orgId,
+        currency: Token.mxc.toData(),
+        orgId: orgId ?? _client.defaultOrganizationId,
         topUps: macToAmount.entries
             .map(
               (e) => ExtapiGatewayMiningFuelChange(
@@ -68,14 +65,13 @@ class WalletRepository {
   }
 
   Future<void> withdrawMiningFuel({
-    required String orgId,
+    String? orgId,
     required Map<String, Decimal> macToAmount,
-    Token? currency,
   }) async {
     await _client.walletService.withdrawGatewayMiningFuel(
       body: ExtapiWithdrawGatewayMiningFuelRequest(
-        currency: currency?.toData() ?? '',
-        orgId: orgId,
+        currency: Token.mxc.toData(),
+        orgId: orgId ?? _client.defaultOrganizationId,
         withdrawals: macToAmount.entries
             .map(
               (e) => ExtapiGatewayMiningFuelChange(
@@ -88,8 +84,63 @@ class WalletRepository {
     );
   }
 
-  Future<double> downlinkPrice(String orgId) async {
-    final res = await _client.walletService.getDlPrice(orgId: orgId);
+  Future<double> downlinkPrice({String? orgId}) async {
+    final res = await _client.walletService
+        .getDlPrice(orgId: orgId ?? _client.defaultOrganizationId);
     return res.body!.downLinkPrice!;
+  }
+
+  Future<void> btcAddLocks({
+    required String durationDays,
+    required List<String> listMac,
+    required String sessionId,
+    required String totalAmount,
+  }) async {
+    await _client.bTCMining.bTCAddLocks(
+      body: ExtapiBTCAddLocksRequest(
+        durationDays: durationDays,
+        gatewayMac: listMac,
+        orgId: _client.defaultOrganizationId,
+        sessionId: sessionId,
+        totalAmount: totalAmount,
+      ),
+    );
+  }
+
+  Future<BtcMiningSession> bTCMiningSession() async {
+    const int errorCodeNoSession = 5;
+    try {
+      final res = await _client.bTCMining.bTCMiningSession();
+      return BtcMiningSession(
+          res.body!.sessionId!,
+          res.body!.mxcLockAmount!.toInt(),
+          res.body!.startDate!,
+          res.body!.endDate!,
+          res.body!.mxcLockDurationDays!.toInt());
+    } on ApiException catch (e) {
+      final Object? error = e.source;
+      if (error != null &&
+          error is Map<String, dynamic> &&
+          error['code'] == errorCodeNoSession) {
+        throw NoBtcMiningSessionException(e.url, e.message);
+      }
+      rethrow;
+    }
+  }
+
+  Future<List<BtcLock>> bTCListLocks() async {
+    final res = await _client.bTCMining
+        .bTCListLocks(orgId: _client.defaultOrganizationId);
+
+    return res.body!.lock!
+        .map(
+          (e) => BtcLock(
+            gatewayMac: e.gatewayMac!,
+            sessionId: e.sessionId!,
+            amountLocked: e.amount!.toInt(),
+            btcRevenue: Decimal.tryParse(e.btcRevenue!) ?? Decimal.zero,
+          ),
+        )
+        .toList();
   }
 }

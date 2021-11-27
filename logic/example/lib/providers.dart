@@ -13,12 +13,13 @@ typedef PresenterProvider<Presenter extends StateNotifier<State>, State>
 
 late final Provider<CacheManager> cacheManagerProvider;
 late final Provider<SupernodeRepository> supernodeRepositoryProvider;
-late final Provider<SupernodeSetupRepository> supernodeSetupRepositoryProvider;
+late final Provider<AuthenticationStorageRepository>
+    authenticationStorageRepositoryProvider;
 late final Provider<NavigatorState> navigatorProvider;
 
-Provider<AuthUseCase> authUseCaseProvider = Provider((ref) => AuthUseCase(
+Provider<LoginUseCase> authUseCaseProvider = Provider((ref) => LoginUseCase(
       ref.watch(supernodeRepositoryProvider),
-      ref.watch(supernodeSetupRepositoryProvider),
+      ref.watch(authenticationStorageRepositoryProvider),
     ));
 
 Provider<DeviceUseCase> deviceUseCaseProvider = Provider((ref) => DeviceUseCase(
@@ -27,19 +28,19 @@ Provider<DeviceUseCase> deviceUseCaseProvider = Provider((ref) => DeviceUseCase(
 
 Future<void> loadProviders(GlobalKey<NavigatorState> navigatorKey) async {
   final cacheManager = await CacheManager.load();
-  final supernodeSetupRepository =
-      await SupernodeSetupRepository.load(cacheManager);
-  final tokenRefresher = TokenRefresher(supernodeSetupRepository);
+  final supernodeSetupStore = SupernodeSetupStore();
+  await supernodeSetupStore.load(cacheManager);
+  final tokenRefresher = TokenRefresher(supernodeSetupStore);
   final supernodeRepository = ApiSupernodeRepository(
-    setupRepository: supernodeSetupRepository,
+    setupStore: supernodeSetupStore,
     tokenRefresher: tokenRefresher,
   );
 
   cacheManagerProvider = Provider(
     (ref) => cacheManager,
   );
-  supernodeSetupRepositoryProvider = Provider(
-    (ref) => supernodeSetupRepository,
+  authenticationStorageRepositoryProvider = Provider(
+    (ref) => AuthenticationStorageRepository(supernodeSetupStore),
   );
   supernodeRepositoryProvider = Provider(
     (ref) => supernodeRepository,

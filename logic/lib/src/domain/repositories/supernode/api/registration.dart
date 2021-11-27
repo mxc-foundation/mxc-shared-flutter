@@ -4,16 +4,16 @@ import 'package:mxc_logic/src/data/data.dart';
 import 'package:mxc_logic/src/domain/repositories/internal/shared_mappers.dart';
 
 class RegistrationRepository {
-  final ChopperClient client;
+  RegistrationRepository(this._client);
 
-  RegistrationRepository(this.client);
+  final ChopperClient _client;
 
   /// [languageCode] can be taken from [Locale.languageCode]
   Future<void> withEmail({
     required String email,
     required String languageCode,
   }) async {
-    await client.internalService.registerUser(
+    await _client.internalService.registerUser(
       body: ExtapiRegisterUserRequest(
         email: email,
         language: languageCode,
@@ -25,7 +25,7 @@ class RegistrationRepository {
     required String email,
     required String orgName,
   }) async {
-    final res = await client.externalUserService.registerExternalUser(
+    final res = await _client.externalUserService.registerExternalUser(
       body: ExtapiRegisterExternalUserRequest(
         email: email,
         organizationName: orgName,
@@ -37,7 +37,7 @@ class RegistrationRepository {
   Future<RegistrationResult> confirm({
     required String token,
   }) async {
-    final res = await client.internalService.confirmRegistration(
+    final res = await _client.internalService.confirmRegistration(
       body: ExtapiConfirmRegistrationRequest(
         token: token,
       ),
@@ -58,7 +58,7 @@ class RegistrationRepository {
     required String password,
     String? authToken,
   }) async {
-    await client.internalService.finishRegistration(
+    await _client.internalService.finishRegistration(
       body: ExtapiFinishRegistrationRequest(
         organizationDisplayName: organizationDisplayName,
         password: password,

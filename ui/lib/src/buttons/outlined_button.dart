@@ -2,10 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mxc_ui/mxc_ui.dart';
 
 class MxcOutlinedButton extends StatefulWidget {
-  final String title;
-  final Color? color;
-  final VoidCallback? onTap;
-
   /// MXC Outlined button
   /// [key] marked as required, because it's often needed for testing purposes
   const MxcOutlinedButton({
@@ -14,6 +10,10 @@ class MxcOutlinedButton extends StatefulWidget {
     required this.onTap,
     this.color,
   }) : super(key: key);
+
+  final String title;
+  final Color? color;
+  final VoidCallback? onTap;
 
   @override
   _MxcOutlinedButtonState createState() => _MxcOutlinedButtonState();
