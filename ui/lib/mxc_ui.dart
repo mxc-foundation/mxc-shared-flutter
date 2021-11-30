@@ -14,3 +14,5 @@ export 'src/switch.dart';
 export 'src/tabs/tabs.dart';
 export 'src/text_field.dart';
 export 'src/theme/theme.dart';
+
+const mxcUiPackageName = 'mxc_ui';
