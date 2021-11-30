@@ -54,8 +54,8 @@ class _MxcPrimaryButtonState extends State<MxcPrimaryButton> {
             widget.title,
             textAlign: TextAlign.center,
             style: widget.onTap != null
-                ? FontTheme.of(context).big.button()
-                : FontTheme.of(context).big.buttonDisabled(),
+                ? FontTheme.of(context).body2.button()
+                : FontTheme.of(context).body2.buttonDisabled(),
           ),
         ),
       ),
