@@ -160,6 +160,23 @@ class MxcAppBarButton extends StatelessWidget {
         ),
         super(key: key);
 
+  MxcAppBarButton.image(
+    ImageProvider<Object> image, {
+    Key? key,
+    double? width,
+    double? height,
+    Color? color,
+    required this.onTap,
+  })  : child = Builder(
+          builder: (context) => Image(
+            height: height,
+            width: width,
+            image: image,
+            color: color ?? ColorsTheme.of(context).textPrimaryAndIcons,
+          ),
+        ),
+        super(key: key);
+
   final VoidCallback onTap;
   final Widget child;
 

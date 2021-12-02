@@ -85,6 +85,16 @@ class ImagesTheme {
         ),
       };
 
+  ImageProvider get calculator => const AssetImage(
+        'assets/images/home/calculator.png',
+        package: _packageName,
+      );
+
+  ImageProvider get setting => const AssetImage(
+        'assets/images/home/setting.png',
+        package: _packageName,
+      );
+
   //app
   ImageProvider get close => const AssetImage(
         'assets/images/app/close.png',
