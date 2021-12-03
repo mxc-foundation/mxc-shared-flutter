@@ -82,6 +82,16 @@ class ImagesTheme {
         ),
       };
 
+  ImageProvider get calculator => const AssetImage(
+        'assets/images/home/calculator.png',
+        package: mxcUiPackageName,
+      );
+
+  ImageProvider get setting => const AssetImage(
+        'assets/images/home/setting.png',
+        package: mxcUiPackageName,
+      );
+
   //app
   ImageProvider get close => const AssetImage(
         'assets/images/app/close.png',
@@ -339,6 +349,16 @@ class ImagesTheme {
 
   ImageProvider get iconYellowMiner => const AssetImage(
         'assets/images/wallet/btc_yellow_miner.png',
+        package: mxcUiPackageName,
+      );
+
+  ImageProvider get unlock => const AssetImage(
+        'assets/images/wallet/unlock.png',
+        package: mxcUiPackageName,
+      );
+
+  ImageProvider get lock => const AssetImage(
+        'assets/images/wallet/lock.png',
         package: mxcUiPackageName,
       );
 
