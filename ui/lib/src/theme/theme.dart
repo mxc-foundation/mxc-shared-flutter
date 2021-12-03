@@ -83,11 +83,11 @@ extension MxcThemeDataExtension on MxcThemeData {
         bottomAppBarColor: colors.secondaryBackground,
         scaffoldBackgroundColor: colors.primaryBackground,
         textTheme: TextTheme(
-          bodyText1: fonts.middle(),
-          bodyText2: fonts.middle(),
+          bodyText1: fonts.body1(),
+          bodyText2: fonts.body2(),
         ),
         inputDecorationTheme: InputDecorationTheme(
-          hintStyle: fonts.small.secondary(),
+          hintStyle: fonts.caption1.secondary(),
         ),
         bottomNavigationBarTheme: BottomNavigationBarThemeData(
           backgroundColor: colors.secondaryBackground,

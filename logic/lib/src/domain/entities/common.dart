@@ -17,6 +17,9 @@ class ListWithTotal<T> extends ListBase<T> {
 
   @override
   void operator []=(int index, T value) => _source[index] = value;
+
+  @override
+  void add(T element) => _source.add(element);
 }
 
 extension ListWithTotalExt<T> on List<T> {
