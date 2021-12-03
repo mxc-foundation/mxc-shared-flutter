@@ -24,7 +24,7 @@ class _AppBarPageState extends State<AppBarPage> {
               children: [
                 Text(
                   'App bars',
-                  style: FontTheme.of(context).veryBig().copyWith(fontSize: 48),
+                  style: FontTheme.of(context).h3(),
                 ),
                 const SizedBox(height: 20),
                 Column(
@@ -32,13 +32,13 @@ class _AppBarPageState extends State<AppBarPage> {
                   children: [
                     Text(
                       'Standard / based on background color',
-                      style: FontTheme.of(context).big(),
+                      style: FontTheme.of(context).body1(),
                     ),
                     const AppBarView(),
                     const SizedBox(height: 50),
                     Text(
                       'Dark theme',
-                      style: FontTheme.of(context).big(),
+                      style: FontTheme.of(context).body1(),
                     ),
                     MxcTheme.fromOption(
                       option: MxcThemeOption.night,
