@@ -44,7 +44,7 @@ class MxcSwitch extends StatelessWidget {
         Expanded(
           child: Text(
             title!,
-            style: FontTheme.of(context).big(),
+            style: FontTheme.of(context).body1(),
           ),
         ),
         _switch(context),

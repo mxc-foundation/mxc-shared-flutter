@@ -62,8 +62,8 @@ class _MxcOutlinedButtonState extends State<MxcOutlinedButton> {
           child: Text(
             widget.title,
             style: widget.onTap != null
-                ? FontTheme.of(context).big.button()
-                : FontTheme.of(context).big.label(),
+                ? FontTheme.of(context).body2.button()
+                : FontTheme.of(context).body2.label(),
           ),
         ),
       ),

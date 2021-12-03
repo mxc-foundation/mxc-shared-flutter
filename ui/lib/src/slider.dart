@@ -68,7 +68,7 @@ class MxcSlider extends StatelessWidget {
               Expanded(
                 child: Text(
                   labels!.first,
-                  style: FontTheme.of(context).small.label(),
+                  style: FontTheme.of(context).caption1.label(),
                   textAlign: TextAlign.left,
                 ),
               ),
@@ -76,14 +76,14 @@ class MxcSlider extends StatelessWidget {
                 Expanded(
                   child: Text(
                     label,
-                    style: FontTheme.of(context).small.label(),
+                    style: FontTheme.of(context).caption1.label(),
                     textAlign: TextAlign.center,
                   ),
                 ),
               Expanded(
                 child: Text(
                   labels!.last,
-                  style: FontTheme.of(context).small.label(),
+                  style: FontTheme.of(context).caption1.label(),
                   textAlign: TextAlign.right,
                 ),
               ),
