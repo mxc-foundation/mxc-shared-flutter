@@ -46,9 +46,9 @@ class Lock {
 
   bool get unlockable => lockTill.isBefore(DateTime.now());
 
-  int get durationInDays => !unlockable
-      ? lockTill.toLocal().difference(DateTime.now()).inDays.abs()
-      : 0;
+  int get durationInDays => unlockable
+      ? 0
+      : lockTill.toLocal().difference(DateTime.now()).inDays.abs();
 }
 
 class LockOption {
