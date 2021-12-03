@@ -99,7 +99,7 @@ abstract class MxcCircleButton extends StatelessWidget {
           Text(
             title!,
             textAlign: TextAlign.center,
-            style: titleStyle ?? FontTheme.of(context).middle(),
+            style: titleStyle ?? FontTheme.of(context).caption1(),
           ),
         ],
       );

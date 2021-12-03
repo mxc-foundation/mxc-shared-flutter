@@ -31,8 +31,8 @@ class _MxcSegmentationTabState extends State<MxcSegmentationTab> {
               widget.labels[i],
               key: ValueKey('tab_item_$i'),
               style: selectedTab == i
-                  ? FontTheme.of(context).middle.button()
-                  : FontTheme.of(context).middle.label(),
+                  ? FontTheme.of(context).subtitle1.button()
+                  : FontTheme.of(context).subtitle1.label(),
             ),
         },
         onValueChanged: (v) {

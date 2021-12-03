@@ -237,7 +237,7 @@ class ColorsPageSample extends StatelessWidget {
       children: [
         Text(
           '#${color.value.toRadixString(16)} $name',
-          style: FontTheme.of(context).small.label(),
+          style: FontTheme.of(context).caption1.label(),
         ),
         const SizedBox(height: 8),
         SizedBox(

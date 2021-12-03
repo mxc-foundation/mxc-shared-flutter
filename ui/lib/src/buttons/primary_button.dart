@@ -48,14 +48,15 @@ class _MxcPrimaryButtonState extends State<MxcPrimaryButton> {
           }
         },
         child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 32),
           width: widget.fillWidth ? double.infinity : null,
+          height: 48,
+          alignment: Alignment.center,
           child: Text(
             widget.title,
             textAlign: TextAlign.center,
             style: widget.onTap != null
-                ? FontTheme.of(context).big.button()
-                : FontTheme.of(context).big.buttonDisabled(),
+                ? FontTheme.of(context).body2.button()
+                : FontTheme.of(context).body2.buttonDisabled(),
           ),
         ),
       ),

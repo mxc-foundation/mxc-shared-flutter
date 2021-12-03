@@ -138,7 +138,7 @@ class MxcAppBarButton extends StatelessWidget {
   })  : child = Builder(
           builder: (context) => Text(
             text,
-            style: FontTheme.of(context).big.primary(),
+            style: FontTheme.of(context).body1.primary(),
           ),
         ),
         super(key: key);
@@ -157,6 +157,23 @@ class MxcAppBarButton extends StatelessWidget {
                   icon,
                   color: ColorsTheme.of(context).textPrimaryAndIcons,
                 ),
+        ),
+        super(key: key);
+
+  MxcAppBarButton.image(
+    ImageProvider<Object> image, {
+    Key? key,
+    double? width,
+    double? height,
+    Color? color,
+    required this.onTap,
+  })  : child = Builder(
+          builder: (context) => Image(
+            height: height,
+            width: width,
+            image: image,
+            color: color ?? ColorsTheme.of(context).textPrimaryAndIcons,
+          ),
         ),
         super(key: key);
 
@@ -192,7 +209,7 @@ class MxcAppBarTextTitle extends StatelessWidget {
     return Text(
       text,
       textAlign: centerTitle ? TextAlign.center : TextAlign.left,
-      style: FontTheme.of(context).big(),
+      style: FontTheme.of(context).body1(),
       softWrap: true,
       overflow: TextOverflow.ellipsis,
       maxLines: 1,

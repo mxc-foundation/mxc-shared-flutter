@@ -51,8 +51,8 @@ class _MxcSecondaryButtonState extends State<MxcSecondaryButton> {
           child: Text(
             widget.title,
             style: widget.onTap != null
-                ? FontTheme.of(context).big().copyWith(color: textColor)
-                : FontTheme.of(context).big.label(),
+                ? FontTheme.of(context).body2().copyWith(color: textColor)
+                : FontTheme.of(context).body2.label(),
           ),
         ),
       ),

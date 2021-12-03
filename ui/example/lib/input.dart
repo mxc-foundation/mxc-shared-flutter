@@ -38,7 +38,7 @@ class _InputPageState extends State<InputPage> {
                       padding: const EdgeInsets.only(left: 46),
                       child: Text(
                         'Inputs',
-                        style: theme.fonts.veryBig(),
+                        style: theme.fonts.h3(),
                       ),
                     ),
                     const InputPageCard(showBackground: false),
@@ -79,8 +79,7 @@ class _InputPageState extends State<InputPage> {
                   padding: const EdgeInsets.only(left: 46),
                   child: Text(
                     'Inputs',
-                    style:
-                        FontTheme.of(context).veryBig().copyWith(fontSize: 48),
+                    style: FontTheme.of(context).h3(),
                   ),
                 ),
                 const SizedBox(height: 20),
@@ -151,7 +150,7 @@ class _InputPageCardState extends State<InputPageCard> {
         children: [
           Text(
             'Default',
-            style: FontTheme.of(context).big(),
+            style: FontTheme.of(context).body1(),
           ),
           const SizedBox(height: 10),
           MxcTextField(
@@ -173,7 +172,7 @@ class _InputPageCardState extends State<InputPageCard> {
           const SizedBox(height: 30),
           Text(
             'Selected',
-            style: FontTheme.of(context).big(),
+            style: FontTheme.of(context).body1(),
           ),
           const SizedBox(height: 10),
           MxcTextField(
@@ -196,12 +195,12 @@ class _InputPageCardState extends State<InputPageCard> {
           ),
           Text(
             'If you place cursor, it will be here forever. This happens because of always focus hack',
-            style: FontTheme.of(context).small.label(),
+            style: FontTheme.of(context).caption1.label(),
           ),
           const SizedBox(height: 30),
           Text(
             'Entered',
-            style: FontTheme.of(context).big(),
+            style: FontTheme.of(context).body1(),
           ),
           const SizedBox(height: 10),
           MxcTextField(

@@ -204,10 +204,10 @@ class _MxcNonFormTextFieldState extends State<_MxcNonFormTextField> {
               child: AnimatedDefaultTextStyle(
                 duration: const Duration(milliseconds: 200),
                 style: focused
-                    ? FontTheme.of(context).small().copyWith(
+                    ? FontTheme.of(context).caption1().copyWith(
                           color: MxcScopedTheme.of(context).primaryColor,
                         )
-                    : FontTheme.of(context).middle(),
+                    : FontTheme.of(context).caption1(),
                 child: Text(
                   widget.label!,
                   maxLines: 1,
@@ -237,7 +237,7 @@ class _MxcNonFormTextFieldState extends State<_MxcNonFormTextField> {
                     textInputAction: widget.action,
                     controller: controller,
                     cursorColor: ColorsTheme.of(context).textPrimaryAndIcons,
-                    style: FontTheme.of(context).big(),
+                    style: FontTheme.of(context).body1(),
                     obscureText: widget.obscure,
                     onChanged: widget.onChanged,
                     decoration: InputDecoration(
@@ -245,7 +245,7 @@ class _MxcNonFormTextFieldState extends State<_MxcNonFormTextField> {
                       isDense: true,
                       floatingLabelBehavior: FloatingLabelBehavior.always,
                       hintText: widget.hint,
-                      hintStyle: FontTheme.of(context).middle.label(),
+                      hintStyle: FontTheme.of(context).subtitle1.label(),
                       enabledBorder: InputBorder.none,
                       focusedBorder: InputBorder.none,
                       errorBorder: InputBorder.none,
@@ -273,7 +273,7 @@ class _MxcNonFormTextFieldState extends State<_MxcNonFormTextField> {
               width: double.infinity,
               child: Text(
                 widget.errorText!,
-                style: FontTheme.of(context).small.error(),
+                style: FontTheme.of(context).caption1.error(),
               ),
             ),
           ],
@@ -289,10 +289,12 @@ class MxcTextFieldButton extends StatelessWidget {
     Key? key,
     required this.icon,
     required this.onTap,
+    this.color,
   }) : super(key: key);
 
   final VoidCallback? onTap;
   final IconData icon;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -303,7 +305,7 @@ class MxcTextFieldButton extends StatelessWidget {
         child: Icon(
           icon,
           size: 16,
-          color: MxcScopedTheme.of(context).primaryColor,
+          color: color ?? MxcScopedTheme.of(context).primaryColor,
         ),
       ),
     );
