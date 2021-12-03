@@ -84,12 +84,12 @@ class ImagesTheme {
 
   ImageProvider get calculator => const AssetImage(
         'assets/images/home/calculator.png',
-        package: _packageName,
+        package: mxcUiPackageName,
       );
 
   ImageProvider get setting => const AssetImage(
         'assets/images/home/setting.png',
-        package: _packageName,
+        package: mxcUiPackageName,
       );
 
   //app
@@ -354,12 +354,12 @@ class ImagesTheme {
 
   ImageProvider get unlock => const AssetImage(
         'assets/images/wallet/unlock.png',
-        package: _packageName,
+        package: mxcUiPackageName,
       );
 
   ImageProvider get lock => const AssetImage(
         'assets/images/wallet/lock.png',
-        package: _packageName,
+        package: mxcUiPackageName,
       );
 
   //settings
