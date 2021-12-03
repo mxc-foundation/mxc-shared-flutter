@@ -41,25 +41,4 @@ class LoginUseCase {
   }
 
   bool loggedIn() => repository.loggedIn;
-
-  Future<bool> authenticateWeChatUser(
-      {required bool debug, required String weChatCode}) async {
-    final WeChatLoginResult authWeChatUserRes = (debug)
-        ? await repository.auth.loginWeChatDebug(weChatCode)
-        : await repository.auth.loginWeChat(weChatCode);
-
-    await authStorageRepository.saveCredentials(
-      '',
-      '',
-      authWeChatUserRes.token.source,
-    );
-
-    if (!authWeChatUserRes.isBindingRequired) {
-      final profile = await repository.user.profile();
-
-      authStorageRepository.organizationId =
-          profile.organizations.first.organizationId;
-    }
-    return authWeChatUserRes.isBindingRequired;
-  }
 }
