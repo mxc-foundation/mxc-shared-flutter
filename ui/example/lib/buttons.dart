@@ -34,9 +34,7 @@ class _ButtonsPageState extends State<ButtonsPage> {
                         padding: const EdgeInsets.only(left: 60),
                         child: Text(
                           'Buttons and more',
-                          style: FontTheme.of(context)
-                              .veryBig()
-                              .copyWith(fontSize: 48),
+                          style: FontTheme.of(context).h3(),
                         ),
                       ),
                       const SizedBox(height: 55),

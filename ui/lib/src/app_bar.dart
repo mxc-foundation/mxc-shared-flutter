@@ -138,7 +138,7 @@ class MxcAppBarButton extends StatelessWidget {
   })  : child = Builder(
           builder: (context) => Text(
             text,
-            style: FontTheme.of(context).big.primary(),
+            style: FontTheme.of(context).body1.primary(),
           ),
         ),
         super(key: key);
@@ -192,7 +192,7 @@ class MxcAppBarTextTitle extends StatelessWidget {
     return Text(
       text,
       textAlign: centerTitle ? TextAlign.center : TextAlign.left,
-      style: FontTheme.of(context).big.primary.semibold(),
+      style: FontTheme.of(context).body1(),
       softWrap: true,
       overflow: TextOverflow.ellipsis,
       maxLines: 1,
