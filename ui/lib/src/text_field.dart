@@ -289,10 +289,12 @@ class MxcTextFieldButton extends StatelessWidget {
     Key? key,
     required this.icon,
     required this.onTap,
+    this.color,
   }) : super(key: key);
 
   final VoidCallback? onTap;
   final IconData icon;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -303,7 +305,7 @@ class MxcTextFieldButton extends StatelessWidget {
         child: Icon(
           icon,
           size: 16,
-          color: MxcScopedTheme.of(context).primaryColor,
+          color: color ?? MxcScopedTheme.of(context).primaryColor,
         ),
       ),
     );
