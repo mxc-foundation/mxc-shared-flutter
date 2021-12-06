@@ -364,7 +364,7 @@ class ImagesTheme {
 
   ImageProvider get iconOpenLock => const AssetImage(
         'assets/images/wallet/icon-open-lock.png',
-        package: _packageName,
+        package: mxcUiPackageName,
       );
 
   //settings
