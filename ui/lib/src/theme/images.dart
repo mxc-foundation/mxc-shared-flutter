@@ -362,6 +362,11 @@ class ImagesTheme {
         package: mxcUiPackageName,
       );
 
+  ImageProvider get iconOpenLock => const AssetImage(
+        'assets/images/wallet/icon-open-lock.png',
+        package: mxcUiPackageName,
+      );
+
   //settings
   ImageProvider get warningRobot => const AssetImage(
         'assets/images/settings/robot_warning.png',
