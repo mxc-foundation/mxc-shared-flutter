@@ -6,6 +6,9 @@ class DemoUserRepository implements UserRepository {
   const DemoUserRepository();
 
   @override
+  SupernodeClient get client => throw UnimplementedError();
+
+  @override
   Future<ProfileResult> profile() async {
     return ProfileResult(
       user: User(
@@ -47,15 +50,13 @@ class DemoUserRepository implements UserRepository {
   }
 
   @override
-  String? id() => client.token == null
-      ? null
-      : Mappers.stringToSupernodeJwt(client.token!).userId;
+  String? id() => null;
 
   @override
   String? orgId() => client.defaultOrganizationId;
 
   @override
-  Future<SupernodeTokenDetails> update({
+  Future<String> update({
     required String id,
     required String email,
     bool? isActive,
@@ -64,16 +65,14 @@ class DemoUserRepository implements UserRepository {
     int? sessionTTL,
     String? username,
   }) async {
-    return Mappers.stringToSupernodeJwt('DemoToken');
+    throw UnimplementedError();
   }
 
   @override
   Future<void> changePassword({
     required String userId,
     required String password,
-  }) =>
-      throw UnimplementedError();
-
-  @override
-  SupernodeClient get client => throw UnimplementedError();
+  }) {
+    throw UnimplementedError();
+  }
 }
