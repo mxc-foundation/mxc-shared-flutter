@@ -48,13 +48,12 @@ class UserRepository {
     );
   }
 
-  String? id() => client.token == null
-      ? null
-      : Mappers.stringToSupernodeJwt(client.token!).userId;
+  // TODO(rtviwe): find userId
+  String? id() => client.token;
 
   String? orgId() => client.defaultOrganizationId;
 
-  Future<SupernodeTokenDetails> update({
+  Future<String> update({
     required String id,
     required String email,
     bool? isActive,
@@ -76,7 +75,8 @@ class UserRepository {
         ),
       ),
     );
-    return Mappers.stringToSupernodeJwt(res.body!.jwt!);
+
+    return res.body!.jwt!;
   }
 
   Future<void> changePassword({
