@@ -4,9 +4,10 @@ import 'package:mxc_logic/src/data/data.dart';
 import 'package:mxc_logic/src/domain/repositories/internal/shared_mappers.dart';
 
 class LoginRepository {
-  LoginRepository(this.client);
+  LoginRepository({required this.client, required this.userRepository});
 
   final ChopperClient client;
+  final UserRepository userRepository;
 
   Future<LoginResult> login({
     required String username,
@@ -19,8 +20,11 @@ class LoginRepository {
       ),
     );
 
+    final profile = await userRepository.profile();
+
     return LoginResult(
-      token: Mappers.stringToSupernodeJwt(res.body!.jwt!),
+      token: res.body!.jwt!,
+      username: profile.user.username,
       is2faRequired: res.body!.is2faRequired.orDefault(),
     );
   }
@@ -29,9 +33,13 @@ class LoginRepository {
     final res = await client.externalUserService.authenticateWeChatUser(
       body: ExtapiAuthenticateWeChatUserRequest(code: code),
     );
+
+    final profile = await userRepository.profile();
+
     return WeChatLoginResult(
+      token: res.body!.jwt!,
+      username: profile.user.username,
       isBindingRequired: res.body!.bindingIsRequired!,
-      token: Mappers.stringToSupernodeJwt(res.body!.jwt!),
     );
   }
 
@@ -41,9 +49,13 @@ class LoginRepository {
     final res = await client.externalUserService.debugAuthenticateWeChatUser(
       body: ExtapiAuthenticateWeChatUserRequest(code: code),
     );
+
+    final profile = await userRepository.profile();
+
     return WeChatLoginResult(
+      token: res.body!.jwt!,
+      username: profile.user.username,
       isBindingRequired: res.body!.bindingIsRequired!,
-      token: Mappers.stringToSupernodeJwt(res.body!.jwt!),
     );
   }
 

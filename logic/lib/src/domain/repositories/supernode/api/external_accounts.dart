@@ -7,7 +7,7 @@ class ExternalAccountsRepository {
 
   final SupernodeClient client;
 
-  Future<SupernodeTokenDetails> bind({
+  Future<String> bind({
     required String email,
     required String password,
   }) async {
@@ -17,7 +17,7 @@ class ExternalAccountsRepository {
         password: password,
       ),
     );
-    return Mappers.stringToSupernodeJwt(res.body!.jwt!);
+    return res.body!.jwt!;
   }
 
   Future<void> unbind({
