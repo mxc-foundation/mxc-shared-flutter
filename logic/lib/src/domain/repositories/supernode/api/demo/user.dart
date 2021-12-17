@@ -12,6 +12,7 @@ class DemoUserRepository implements UserRepository {
   Future<ProfileResult> profile() async {
     return ProfileResult(
       user: User(
+        id: '123',
         username: 'DemoUser',
         email: 'demo@mxc.org',
         isActive: true,
@@ -48,9 +49,6 @@ class DemoUserRepository implements UserRepository {
       ),
     );
   }
-
-  @override
-  String? id() => null;
 
   @override
   String? orgId() => client.defaultOrganizationId;

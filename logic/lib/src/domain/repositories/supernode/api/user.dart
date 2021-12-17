@@ -24,6 +24,7 @@ class UserRepository {
     final res = await client.internalService.profile();
     return ProfileResult(
       user: User(
+        id: res.body!.user!.id!,
         username: res.body!.user!.username!,
         email: res.body!.user!.email!,
         isActive: res.body!.user!.isActive.orDefault(),
@@ -47,9 +48,6 @@ class UserRepository {
           ),
     );
   }
-
-  // TODO(rtviwe): find userId
-  String? id() => client.token;
 
   String? orgId() => client.defaultOrganizationId;
 
