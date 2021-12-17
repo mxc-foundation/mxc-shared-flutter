@@ -56,12 +56,14 @@ class ProfileResult {
 
 class User {
   User({
+    required this.id,
     required this.email,
     required this.isActive,
     required this.isAdmin,
     required this.username,
   });
 
+  final String id;
   final String email;
   final bool isActive;
   final bool isAdmin;
