@@ -20,11 +20,8 @@ class LoginRepository {
       ),
     );
 
-    final profile = await userRepository.profile();
-
     return LoginResult(
       token: res.body!.jwt!,
-      username: profile.user.username,
       is2faRequired: res.body!.is2faRequired.orDefault(),
     );
   }

@@ -19,12 +19,10 @@ class RegistrationResult {
 class LoginResult {
   LoginResult({
     required this.token,
-    required this.username,
     required this.is2faRequired,
   });
 
   final String token;
-  final String username;
   final bool is2faRequired;
 }
 
