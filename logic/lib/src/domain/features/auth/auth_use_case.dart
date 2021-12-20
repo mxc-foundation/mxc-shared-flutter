@@ -26,7 +26,11 @@ class LoginUseCase {
       password: password,
     );
 
-    await authStorageRepository.saveCredentials(username, password, res.token);
+    await authStorageRepository.saveCredentials(
+      username,
+      password,
+      res.token.source,
+    );
 
     await authCacheRepository?.loadCache(username);
 

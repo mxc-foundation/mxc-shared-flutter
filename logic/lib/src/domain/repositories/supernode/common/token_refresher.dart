@@ -21,8 +21,8 @@ class TokenRefresherImpl implements TokenRefresher {
         username: crendetials.username,
         password: crendetials.password,
       );
-      setupRepository.token = res.token;
-      return res.token;
+      setupRepository.token = res.token.source;
+      return res.token.source;
     } else {
       return null;
     }
