@@ -21,7 +21,7 @@ class RegistrationRepository {
     );
   }
 
-  Future<String> withExternalUser({
+  Future<SupernodeTokenDetails> withExternalUser({
     required String email,
     required String orgName,
   }) async {
@@ -31,7 +31,7 @@ class RegistrationRepository {
         organizationName: orgName,
       ),
     );
-    return res.body!.jwt!;
+    return Mappers.stringToSupernodeJwt(res.body!.jwt!);
   }
 
   Future<RegistrationResult> confirm({
@@ -42,12 +42,11 @@ class RegistrationRepository {
         token: token,
       ),
     );
-
     return RegistrationResult(
       id: res.body!.id!,
       isAdmin: res.body!.isAdmin.orDefault(),
       isActive: res.body!.isActive.orDefault(),
-      token: res.body!.jwt!,
+      token: Mappers.stringToSupernodeJwt(res.body!.jwt!),
       username: res.body!.username!,
     );
   }
@@ -57,7 +56,7 @@ class RegistrationRepository {
     required String organizationDisplayName,
     required String userId,
     required String password,
-    String? token,
+    String? authToken,
   }) async {
     await _client.internalService.finishRegistration(
       body: ExtapiFinishRegistrationRequest(
@@ -66,7 +65,7 @@ class RegistrationRepository {
         userId: userId,
         organizationName: organizationName,
       ),
-      grpcMetadataAuthorization: token,
+      grpcMetadataAuthorization: authToken,
     );
   }
 }

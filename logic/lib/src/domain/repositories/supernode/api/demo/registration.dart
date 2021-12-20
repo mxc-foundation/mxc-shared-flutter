@@ -1,4 +1,5 @@
 import 'package:mxc_logic/mxc_logic.dart';
+import 'package:mxc_logic/src/domain/repositories/internal/shared_mappers.dart';
 
 class DemoRegistrationRepository implements RegistrationRepository {
   const DemoRegistrationRepository();
@@ -12,18 +13,24 @@ class DemoRegistrationRepository implements RegistrationRepository {
       throw UnimplementedError();
 
   @override
-  Future<String> withExternalUser({
+  Future<SupernodeTokenDetails> withExternalUser({
     required String email,
     required String orgName,
   }) async {
-    throw UnimplementedError();
+    return Mappers.stringToSupernodeJwt('DemoToken');
   }
 
   @override
   Future<RegistrationResult> confirm({
     required String token,
   }) async {
-    throw UnimplementedError();
+    return RegistrationResult(
+      id: 'DemoRegistrationId1',
+      isAdmin: true,
+      isActive: true,
+      token: Mappers.stringToSupernodeJwt('DemoToken'),
+      username: 'DemoUser',
+    );
   }
 
   @override
@@ -32,8 +39,7 @@ class DemoRegistrationRepository implements RegistrationRepository {
     required String organizationDisplayName,
     required String userId,
     required String password,
-    String? token,
-  }) {
-    throw UnimplementedError();
-  }
+    String? authToken,
+  }) =>
+      throw UnimplementedError();
 }

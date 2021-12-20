@@ -24,7 +24,6 @@ class UserRepository {
     final res = await client.internalService.profile();
     return ProfileResult(
       user: User(
-        id: res.body!.user!.id!,
         username: res.body!.user!.username!,
         email: res.body!.user!.email!,
         isActive: res.body!.user!.isActive.orDefault(),
@@ -49,9 +48,13 @@ class UserRepository {
     );
   }
 
+  String? id() => client.token == null
+      ? null
+      : Mappers.stringToSupernodeJwt(client.token!).userId;
+
   String? orgId() => client.defaultOrganizationId;
 
-  Future<String> update({
+  Future<SupernodeTokenDetails> update({
     required String id,
     required String email,
     bool? isActive,
@@ -73,8 +76,7 @@ class UserRepository {
         ),
       ),
     );
-
-    return res.body!.jwt!;
+    return Mappers.stringToSupernodeJwt(res.body!.jwt!);
   }
 
   Future<void> changePassword({

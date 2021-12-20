@@ -58,10 +58,7 @@ class ApiSupernodeRepository implements SupernodeRepository {
   NetworkServerRepository get networkServer => NetworkServerRepository(_client);
 
   @override
-  LoginRepository get auth => LoginRepository(
-        client: _client,
-        userRepository: user,
-      );
+  LoginRepository get auth => LoginRepository(_client);
 
   @override
   ExternalAccountsRepository get externalAccounts =>
