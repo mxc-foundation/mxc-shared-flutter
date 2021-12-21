@@ -4,10 +4,17 @@ import 'package:mxc_logic/src/data/data.dart';
 import 'package:mxc_logic/src/domain/repositories/internal/shared_mappers.dart';
 
 class LoginRepository {
-  LoginRepository({required this.client, required this.userRepository});
+  LoginRepository({
+    required this.client,
+    required this.userRepository,
+    required this.authStorageRepository,
+    required this.authCacheRepository,
+  });
 
   final ChopperClient client;
   final UserRepository userRepository;
+  final AuthenticationStorageRepository authStorageRepository;
+  final AuthenticationCacheRepository authCacheRepository;
 
   Future<LoginResult> login({
     required String username,
@@ -31,6 +38,10 @@ class LoginRepository {
       body: ExtapiAuthenticateWeChatUserRequest(code: code),
     );
 
+    await authStorageRepository.saveToken(res.body!.jwt!);
+
+    // await authCacheRepository.loadCache(username);
+
     final profile = await userRepository.profile();
 
     return WeChatLoginResult(
@@ -46,6 +57,10 @@ class LoginRepository {
     final res = await client.externalUserService.debugAuthenticateWeChatUser(
       body: ExtapiAuthenticateWeChatUserRequest(code: code),
     );
+
+    await authStorageRepository.saveToken(res.body!.jwt!);
+
+    // await authCacheRepository.loadCache(username);
 
     final profile = await userRepository.profile();
 
