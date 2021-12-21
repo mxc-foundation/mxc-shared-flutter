@@ -6,6 +6,8 @@ class ApiSupernodeRepository implements SupernodeRepository {
   ApiSupernodeRepository({
     required SupernodeSetupStore setupStore,
     required TokenRefresher tokenRefresher,
+    required AuthenticationStorageRepository authStorageRepository,
+    required AuthenticationCacheRepository authCacheRepository,
   })  : _setupStore = setupStore,
         _client = SupernodeClient(
           getSupernodeAddress: () =>
@@ -17,18 +19,28 @@ class ApiSupernodeRepository implements SupernodeRepository {
             ApiSupernodeRepository.withClient(
               client: client,
               setupStore: setupStore,
+              authStorageRepository: authStorageRepository,
+              authCacheRepository: authCacheRepository,
             ),
           ),
-        );
+        ),
+        _authStorageRepository = authStorageRepository,
+        _authCacheRepository = authCacheRepository;
 
   ApiSupernodeRepository.withClient({
     required SupernodeClient client,
     required SupernodeSetupStore setupStore,
+    required AuthenticationStorageRepository authStorageRepository,
+    required AuthenticationCacheRepository authCacheRepository,
   })  : _client = client,
-        _setupStore = setupStore;
+        _setupStore = setupStore,
+        _authStorageRepository = authStorageRepository,
+        _authCacheRepository = authCacheRepository;
 
   final SupernodeClient _client;
   final SupernodeSetupStore _setupStore;
+  final AuthenticationStorageRepository _authStorageRepository;
+  final AuthenticationCacheRepository _authCacheRepository;
 
   @override
   DhxRepository get dhx => DhxRepository(_client);
@@ -61,6 +73,8 @@ class ApiSupernodeRepository implements SupernodeRepository {
   LoginRepository get auth => LoginRepository(
         client: _client,
         userRepository: user,
+        authCacheRepository: _authCacheRepository,
+        authStorageRepository: _authStorageRepository,
       );
 
   @override

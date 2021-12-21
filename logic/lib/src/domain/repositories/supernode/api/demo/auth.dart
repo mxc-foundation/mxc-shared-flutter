@@ -11,6 +11,14 @@ class DemoLoginRepository implements LoginRepository {
   UserRepository get userRepository => throw UnimplementedError();
 
   @override
+  AuthenticationCacheRepository get authCacheRepository =>
+      throw UnimplementedError();
+
+  @override
+  AuthenticationStorageRepository get authStorageRepository =>
+      throw UnimplementedError();
+
+  @override
   Future<LoginResult> login({
     required String username,
     required String password,
