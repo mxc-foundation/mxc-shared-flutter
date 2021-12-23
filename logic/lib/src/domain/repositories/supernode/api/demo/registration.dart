@@ -8,8 +8,9 @@ class DemoRegistrationRepository implements RegistrationRepository {
   Future<void> withEmail({
     required String email,
     required String languageCode,
-  }) =>
-      throw UnimplementedError();
+  }) {
+    throw UnimplementedError();
+  }
 
   @override
   Future<String> withExternalUser({

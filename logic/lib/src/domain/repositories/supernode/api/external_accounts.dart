@@ -17,6 +17,7 @@ class ExternalAccountsRepository {
         password: password,
       ),
     );
+
     return res.body!.jwt!;
   }
 

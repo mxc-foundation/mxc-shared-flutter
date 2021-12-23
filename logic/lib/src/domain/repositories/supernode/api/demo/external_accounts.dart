@@ -1,5 +1,6 @@
 import 'package:mxc_logic/mxc_logic.dart';
 import 'package:mxc_logic/src/data/data.dart';
+import 'package:mxc_logic/src/domain/repositories/internal/shared_mappers.dart';
 
 class DemoExternalAccountsRepository implements ExternalAccountsRepository {
   const DemoExternalAccountsRepository();

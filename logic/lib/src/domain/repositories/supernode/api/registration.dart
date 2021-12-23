@@ -31,12 +31,11 @@ class RegistrationRepository {
         organizationName: orgName,
       ),
     );
+
     return res.body!.jwt!;
   }
 
-  Future<RegistrationResult> confirm({
-    required String token,
-  }) async {
+  Future<RegistrationResult> confirm({required String token}) async {
     final res = await _client.internalService.confirmRegistration(
       body: ExtapiConfirmRegistrationRequest(
         token: token,

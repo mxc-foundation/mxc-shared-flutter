@@ -73,7 +73,6 @@ class UserRepository {
         ),
       ),
     );
-
     return res.body!.jwt!;
   }
 

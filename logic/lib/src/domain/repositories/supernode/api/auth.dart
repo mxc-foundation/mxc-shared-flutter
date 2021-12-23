@@ -23,8 +23,11 @@ class LoginRepository {
       ),
     );
 
+    final profile = await userRepository.profile();
+
     return LoginResult(
       token: res.body!.jwt!,
+      username: profile.user.username,
       is2faRequired: res.body!.is2faRequired.orDefault(),
     );
   }
@@ -34,8 +37,11 @@ class LoginRepository {
       body: ExtapiAuthenticateWeChatUserRequest(code: code),
     );
 
+    final profile = await userRepository.profile();
+
     return WeChatLoginResult(
       token: res.body!.jwt!,
+      username: profile.user.username,
       isBindingRequired: res.body!.bindingIsRequired!,
     );
   }
@@ -45,8 +51,11 @@ class LoginRepository {
       body: ExtapiAuthenticateWeChatUserRequest(code: code),
     );
 
+    final profile = await userRepository.profile();
+
     return WeChatLoginResult(
       token: res.body!.jwt!,
+      username: profile.user.username,
       isBindingRequired: res.body!.bindingIsRequired!,
     );
   }
