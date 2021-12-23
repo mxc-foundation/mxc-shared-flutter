@@ -7,14 +7,10 @@ class LoginRepository {
   LoginRepository({
     required this.client,
     required this.userRepository,
-    required this.authStorageRepository,
-    required this.authCacheRepository,
   });
 
   final ChopperClient client;
   final UserRepository userRepository;
-  final AuthenticationStorageRepository authStorageRepository;
-  final AuthenticationCacheRepository authCacheRepository;
 
   Future<LoginResult> login({
     required String username,
@@ -38,35 +34,19 @@ class LoginRepository {
       body: ExtapiAuthenticateWeChatUserRequest(code: code),
     );
 
-    await authStorageRepository.saveToken(res.body!.jwt!);
-
-    // await authCacheRepository.loadCache(username);
-
-    final profile = await userRepository.profile();
-
     return WeChatLoginResult(
       token: res.body!.jwt!,
-      username: profile.user.username,
       isBindingRequired: res.body!.bindingIsRequired!,
     );
   }
 
-  Future<WeChatLoginResult> loginWeChatDebug(
-    String code,
-  ) async {
+  Future<WeChatLoginResult> loginWeChatDebug(String code) async {
     final res = await client.externalUserService.debugAuthenticateWeChatUser(
       body: ExtapiAuthenticateWeChatUserRequest(code: code),
     );
 
-    await authStorageRepository.saveToken(res.body!.jwt!);
-
-    // await authCacheRepository.loadCache(username);
-
-    final profile = await userRepository.profile();
-
     return WeChatLoginResult(
       token: res.body!.jwt!,
-      username: profile.user.username,
       isBindingRequired: res.body!.bindingIsRequired!,
     );
   }
