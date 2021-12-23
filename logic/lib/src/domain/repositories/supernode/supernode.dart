@@ -53,8 +53,6 @@ class SupernodeRepositoryDemoDecorator implements SupernodeRepository {
   }) : _apiRepository = ApiSupernodeRepository(
           setupStore: setupStore,
           tokenRefresher: tokenRefresher,
-          authStorageRepository: authStorageRepository,
-          authCacheRepository: authCacheRepository,
         );
 
   final ApiSupernodeRepository _apiRepository;
