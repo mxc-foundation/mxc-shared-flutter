@@ -23,12 +23,14 @@ class AuthenticationStorageRepository {
     );
   }
 
-  Future<void> saveCredentials(
-    String username,
-    String password,
-    String token,
-  ) async {
+  Future<void> saveCredentials({
+    required String username,
+    required String password,
+  }) async {
     _supernodeSetupStore.credentials = Credentials(username, password);
+  }
+
+  Future<void> saveToken(String token) async {
     _supernodeSetupStore.token = token;
   }
 
