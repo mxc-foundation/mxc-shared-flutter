@@ -5,6 +5,10 @@ import 'dart:developer';
 import 'package:chopper/chopper.dart';
 
 class ChopperErrorConverter extends ErrorConverter {
+  ChopperErrorConverter(this.storedTokenResolver);
+
+  final String? Function()? storedTokenResolver;
+
   @override
   FutureOr<Response> convertError<BodyType, InnerType>(Response response) {
     late final Object? error;
@@ -19,7 +23,8 @@ class ChopperErrorConverter extends ErrorConverter {
         (error['message'] ?? error['error'] ?? 'Unknown error') as String,
         error,
       );
-      if (exception.message.contains('couldn' 't find JWT token')) {
+      if (exception.message.contains('couldn' 't find JWT token') &&
+          storedTokenResolver?.call() == null) {
         log(
           'Missing JWT Token. This situation is expected if logging out has been performed',
           error: exception,

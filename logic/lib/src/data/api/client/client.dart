@@ -31,7 +31,7 @@ class SupernodeClient extends ChopperClient {
             HttpLoggingInterceptor(),
             if (getToken != null) TokenInterceptor(getToken: getToken),
           ],
-          errorConverter: ChopperErrorConverter(),
+          errorConverter: ChopperErrorConverter(getToken),
         );
 
   final String Function() _getBaseUrl;
