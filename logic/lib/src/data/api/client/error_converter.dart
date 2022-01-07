@@ -1,9 +1,14 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:chopper/chopper.dart';
 
 class ChopperErrorConverter extends ErrorConverter {
+  ChopperErrorConverter(this.storedTokenResolver);
+
+  final String? Function()? storedTokenResolver;
+
   @override
   FutureOr<Response> convertError<BodyType, InnerType>(Response response) {
     late final Object? error;
@@ -13,11 +18,24 @@ class ChopperErrorConverter extends ErrorConverter {
       error = null;
     }
     if (error is Map<String, dynamic>) {
-      throw ApiException(
+      final exception = ApiException(
         response.base.request?.url,
         (error['message'] ?? error['error'] ?? 'Unknown error') as String,
         error,
       );
+      if (exception.message.contains('couldn' 't find JWT token') &&
+          storedTokenResolver?.call() == null) {
+        log(
+          'Missing JWT Token. This situation is expected if logging out has been performed',
+          error: exception,
+        );
+      } else {
+        throw ApiException(
+          response.base.request?.url,
+          (error['message'] ?? error['error'] ?? 'Unknown error') as String,
+          error,
+        );
+      }
     }
     if (response.statusCode == 404) {
       throw ApiException(

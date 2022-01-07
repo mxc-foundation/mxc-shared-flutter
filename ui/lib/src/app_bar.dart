@@ -46,6 +46,7 @@ class MxcAppBar extends StatelessWidget {
         leading = Builder(
           builder: (context) => MxcAppBarButton.icon(
             Icons.arrow_back_ios,
+            key: const ValueKey('nav_back'),
             onTap: () => Navigator.of(context).pop(),
           ),
         ),
