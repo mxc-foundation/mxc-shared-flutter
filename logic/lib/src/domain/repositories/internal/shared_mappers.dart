@@ -1,7 +1,6 @@
 import 'package:decimal/decimal.dart';
 import 'package:mxc_logic/mxc_logic.dart';
 import 'package:mxc_logic/src/data/data.dart';
-import 'package:mxc_logic/src/domain/repositories/internal/jwt_parser.dart';
 
 void utils;
 
@@ -86,13 +85,6 @@ extension ExternalAccountTypeMapper on ExternalAccountType {
 }
 
 abstract class Mappers {
-  static SupernodeTokenDetails stringToSupernodeJwt(String jwt) {
-    final parsedJwt = parseJwt(jwt);
-    final userId = parsedJwt['userId'].toString();
-    final username = parsedJwt['username'] as String;
-    return SupernodeTokenDetails(userId, username, jwt);
-  }
-
   static ExternalAccountType stringToExternalAccountType(String type) {
     switch (type) {
       case 'wechat':

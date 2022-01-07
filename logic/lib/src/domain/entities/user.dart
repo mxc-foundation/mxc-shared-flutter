@@ -12,7 +12,7 @@ class RegistrationResult {
   final String id;
   final bool isAdmin;
   final bool isActive;
-  final SupernodeTokenDetails token;
+  final String token;
   final String username;
 }
 
@@ -22,8 +22,8 @@ class LoginResult {
     required this.is2faRequired,
   });
 
+  final String token;
   final bool is2faRequired;
-  final SupernodeTokenDetails token;
 }
 
 class WeChatLoginResult {
@@ -32,20 +32,8 @@ class WeChatLoginResult {
     required this.isBindingRequired,
   });
 
-  final SupernodeTokenDetails token;
+  final String token;
   final bool isBindingRequired;
-}
-
-class SupernodeTokenDetails {
-  SupernodeTokenDetails(
-    this.userId,
-    this.username,
-    this.source,
-  );
-
-  final String userId;
-  final String username;
-  final String source;
 }
 
 class ProfileResult {
@@ -64,12 +52,14 @@ class ProfileResult {
 
 class User {
   User({
+    required this.id,
     required this.email,
     required this.isActive,
     required this.isAdmin,
     required this.username,
   });
 
+  final String id;
   final String email;
   final bool isActive;
   final bool isAdmin;

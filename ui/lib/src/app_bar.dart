@@ -210,7 +210,7 @@ class MxcAppBarTextTitle extends StatelessWidget {
     return Text(
       text,
       textAlign: centerTitle ? TextAlign.center : TextAlign.left,
-      style: FontTheme.of(context).body1(),
+      style: FontTheme.of(context).body2(),
       softWrap: true,
       overflow: TextOverflow.ellipsis,
       maxLines: 1,
