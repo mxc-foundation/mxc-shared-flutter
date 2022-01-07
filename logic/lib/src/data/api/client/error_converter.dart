@@ -23,7 +23,8 @@ class ChopperErrorConverter extends ErrorConverter {
         (error['message'] ?? error['error'] ?? 'Unknown error') as String,
         error,
       );
-      if (exception.message.contains('couldn' 't find JWT token') &&
+      if (exception.message
+              .contains('authentication failed: couldn\'t find JWT') &&
           storedTokenResolver?.call() == null) {
         log(
           'Missing JWT Token. This situation is expected if logging out has been performed',
