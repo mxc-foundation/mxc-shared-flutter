@@ -30,12 +30,9 @@ class ChopperErrorConverter extends ErrorConverter {
           'Missing JWT Token. This situation is expected if logging out has been performed',
           error: exception,
         );
+        return response;
       } else {
-        throw ApiException(
-          response.base.request?.url,
-          (error['message'] ?? error['error'] ?? 'Unknown error') as String,
-          error,
-        );
+        throw exception;
       }
     }
     if (response.statusCode == 404) {
