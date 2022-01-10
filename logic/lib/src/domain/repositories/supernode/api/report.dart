@@ -21,6 +21,7 @@ class ReportRepository {
 
   /// Gets mining income report and returns base64-encoded report
   Future<String> miningIncomeReport({
+    required Token token,
     required ReportFormat format,
     required FiatCurrency fiatCurrency,
     required DateTime start,
@@ -33,7 +34,7 @@ class ReportRepository {
     switch (format) {
       case ReportFormat.csv:
         final res = await client.reportService.miningReportCSV(
-          currency: [Token.mxc.toData()],
+          currency: [token.toData()],
           decimals: decimals,
           fiatCurrency: fiatCurrency.id,
           organizationId: organizationId,
