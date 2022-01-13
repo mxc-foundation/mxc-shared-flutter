@@ -45,7 +45,7 @@ class ReportRepository {
         return content;
       case ReportFormat.pdf:
         final res = await client.reportService.miningReportPDF(
-          currency: [Token.mxc.toData()],
+          currency: [token.toData()],
           decimals: decimals,
           fiatCurrency: fiatCurrency.id,
           organizationId: organizationId,
