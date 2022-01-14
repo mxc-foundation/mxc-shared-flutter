@@ -26,14 +26,9 @@ class ChopperErrorConverter extends ErrorConverter {
       if (exception.message
               .contains('authentication failed: couldn\'t find JWT') &&
           storedTokenResolver?.call() == null) {
-        log(
-          'Missing JWT Token. This situation is expected if logging out has been performed',
-          error: exception,
-        );
-        return response;
-      } else {
-        throw exception;
+        log('Missing JWT Token. This situation is expected if logging out has been performed');
       }
+      throw exception;
     }
     if (response.statusCode == 404) {
       throw ApiException(
