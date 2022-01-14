@@ -25,6 +25,7 @@ class DemoReportRepository implements ReportRepository {
   /// Gets mining income report and returns base64-encoded report
   @override
   Future<String> miningIncomeReport({
+    required Token token,
     required ReportFormat format,
     required FiatCurrency fiatCurrency,
     required DateTime start,
