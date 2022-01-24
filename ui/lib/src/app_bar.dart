@@ -107,18 +107,20 @@ class MxcAppBar extends StatelessWidget {
     return Padding(
       padding: padding,
       child: Row(
-        children: <Widget>[
-          SizedBox(
-            width: 48,
-            child: leading,
-          ),
+        children: [
+          if (leading != null || action != null)
+            SizedBox(
+              width: 48,
+              child: leading,
+            ),
           Expanded(
             child: title,
           ),
-          SizedBox(
-            width: 48,
-            child: action,
-          ),
+          if (leading != null || action != null)
+            SizedBox(
+              width: 48,
+              child: action,
+            ),
         ],
       ),
     );
