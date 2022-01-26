@@ -231,6 +231,16 @@ class ImagesTheme {
         package: mxcUiPackageName,
       );
 
+  ImageProvider get datadashBranding => const AssetImage(
+        'assets/images/home/datadash_branding.png',
+        package: mxcUiPackageName,
+      );
+
+  ImageProvider get security => const AssetImage(
+        'assets/images/home/security.png',
+        package: mxcUiPackageName,
+      );
+
   ImageProvider get dhx => const AssetImage(
         'assets/images/login/dhx.png',
         package: mxcUiPackageName,
