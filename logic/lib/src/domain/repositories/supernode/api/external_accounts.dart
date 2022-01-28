@@ -31,30 +31,4 @@ class ExternalAccountsRepository {
       ),
     );
   }
-
-  Future<void> verifyEmail({
-    required String email,
-    required String language,
-    String? orgId,
-  }) async {
-    await client.externalUserService.verifyEmail(
-      body: ExtapiVerifyEmailRequest(
-        email: email,
-        language: language,
-        organizationId: orgId ?? client.defaultOrganizationId,
-      ),
-    );
-  }
-
-  Future<void> confirmEmail({
-    required String token,
-    String? orgId,
-  }) async {
-    await client.externalUserService.confirmBindingEmail(
-      body: ExtapiConfirmBindingEmailRequest(
-        token: token,
-        organizationId: orgId ?? client.defaultOrganizationId,
-      ),
-    );
-  }
 }

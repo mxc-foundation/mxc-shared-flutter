@@ -17,8 +17,6 @@ class GatewayRepository {
     organizationId ??= _client.defaultOrganizationId;
     final res = await _client.gatewayService.list(
       search: search,
-      limit: limit,
-      offset: offset,
       organizationID: organizationId,
     );
     return res.body!.result!
@@ -93,17 +91,18 @@ class GatewayRepository {
     return GatewayRegisterResult(status: res.body!.status!);
   }
 
+  //TODO remove method
   Future<GatewayRegisterResult> registerReseller({
     required String serialNumber,
     String? orgId,
   }) async {
-    final res = await _client.gatewayService.registerReseller(
+    /*final res = await _client.gatewayService.registerReseller(
       body: ExtapiRegisterResellerRequest(
         organizationId: orgId ?? _client.defaultOrganizationId,
         manufacturerNr: serialNumber,
       ),
-    );
-    return GatewayRegisterResult(status: res.body!.status!);
+    );*/
+    return GatewayRegisterResult(status: "res.body!.status!");
   }
 
   Future<List<GatewayProfile>> profiles({
