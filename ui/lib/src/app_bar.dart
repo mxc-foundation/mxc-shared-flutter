@@ -14,6 +14,8 @@ class MxcAppBar extends StatelessWidget {
     this.action,
     this.leading,
     this.centerTitle = true,
+    this.ignoreStartIcon = false,
+    this.ignoreEndIcon = false,
   })  : title = MxcAppBarTextTitle(text, centerTitle: centerTitle),
         super(key: key);
 
@@ -29,6 +31,8 @@ class MxcAppBar extends StatelessWidget {
     this.action,
     this.leading,
     this.centerTitle = true,
+    this.ignoreStartIcon = false,
+    this.ignoreEndIcon = false,
   }) : super(key: key);
 
   MxcAppBar.back({
@@ -42,6 +46,8 @@ class MxcAppBar extends StatelessWidget {
     ),
     this.action,
     this.centerTitle = true,
+    this.ignoreStartIcon = false,
+    this.ignoreEndIcon = false,
   })  : title = MxcAppBarTextTitle(text, centerTitle: centerTitle),
         leading = Builder(
           builder: (context) => MxcAppBarButton.icon(
@@ -63,6 +69,8 @@ class MxcAppBar extends StatelessWidget {
     ),
     this.leading,
     this.centerTitle = true,
+    this.ignoreStartIcon = false,
+    this.ignoreEndIcon = false,
   })  : title = MxcAppBarTextTitle(text, centerTitle: centerTitle),
         action = Builder(
           builder: (context) => MxcAppBarButton.icon(
@@ -76,6 +84,8 @@ class MxcAppBar extends StatelessWidget {
     Key? key,
     required String text,
     this.centerTitle = true,
+    this.ignoreStartIcon = false,
+    this.ignoreEndIcon = false,
     required VoidCallback onClose,
   })  : title = MxcAppBarTextTitle(text, centerTitle: centerTitle),
         leading = Builder(
@@ -101,6 +111,8 @@ class MxcAppBar extends StatelessWidget {
   final Widget? action;
   final Widget? leading;
   final bool centerTitle;
+  final bool ignoreStartIcon;
+  final bool ignoreEndIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -108,7 +120,7 @@ class MxcAppBar extends StatelessWidget {
       padding: padding,
       child: Row(
         children: [
-          if (leading != null || action != null)
+          if (!ignoreStartIcon && (leading != null || action != null))
             SizedBox(
               width: 48,
               child: leading,
@@ -116,7 +128,7 @@ class MxcAppBar extends StatelessWidget {
           Expanded(
             child: title,
           ),
-          if (leading != null || action != null)
+          if (!ignoreEndIcon && (leading != null || action != null))
             SizedBox(
               width: 48,
               child: action,
