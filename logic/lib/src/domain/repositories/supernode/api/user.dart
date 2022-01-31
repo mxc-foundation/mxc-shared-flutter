@@ -97,4 +97,13 @@ class UserRepository {
     await client.userService.addEmail(
         body: ExtapiAddEmailRequest(email: newEmail, language: language));
   }
+
+  Future<void> verifyEmail({
+    required String email,
+    required String verificationCode,
+  }) async {
+    await client.userService.verifyEmail(
+        body: ExtapiVerifyEmailRequest(
+            email: email, verificationCode: verificationCode));
+  }
 }
