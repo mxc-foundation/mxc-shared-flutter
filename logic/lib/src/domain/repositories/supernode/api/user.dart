@@ -89,4 +89,12 @@ class UserRepository {
       ),
     );
   }
+
+  Future<void> addEmail({
+    required String newEmail,
+    required String language,
+  }) async {
+    await client.userService.addEmail(
+        body: ExtapiAddEmailRequest(email: newEmail, language: language));
+  }
 }

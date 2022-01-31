@@ -48,6 +48,7 @@ class ColorsTheme {
   final minerHealthRed = const Color(0xFFFF5B5B);
   final minerHealthRed80 = const Color(0xFFFF5B5B).withOpacity(0.80);
   final minerHealthRed20 = const Color(0xFFFF5B5B).withOpacity(0.20);
+  final minerHealthRed5 = const Color(0xFFFF5B5B).withOpacity(0.05);
 
   final btcYellow = const Color(0xFFF7931A);
   final btcYellow80 = const Color(0xFFF7931A).withOpacity(0.80);
@@ -143,6 +144,9 @@ class ColorsThemeDark implements ColorsTheme {
 
   @override
   final minerHealthRed20 = const Color(0xFFFF7878).withOpacity(0.2);
+
+  @override
+  final minerHealthRed5 = const Color(0xFFFF7878).withOpacity(0.05);
 
   @override
   final btcYellow = const Color(0xFFB1742A);

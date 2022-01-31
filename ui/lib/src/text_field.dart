@@ -290,21 +290,24 @@ class MxcTextFieldButton extends StatelessWidget {
     required this.icon,
     required this.onTap,
     this.color,
+    this.size,
   }) : super(key: key);
 
   final VoidCallback? onTap;
   final IconData icon;
   final Color? color;
+  final double? size;
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: Padding(
-        padding: const EdgeInsets.only(left: 5, right: 5, bottom: 6),
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 6, left: 5, right: 5),
+      child: InkWell(
+        customBorder: const CircleBorder(),
+        onTap: onTap,
         child: Icon(
           icon,
-          size: 16,
+          size: size ?? 16,
           color: color ?? MxcScopedTheme.of(context).primaryColor,
         ),
       ),
