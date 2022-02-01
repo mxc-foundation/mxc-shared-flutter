@@ -70,6 +70,32 @@ class MxcTextField extends FormField<String> {
           ),
         );
 
+  MxcTextField.disabled({
+    Key? key,
+    String? label,
+    required String text,
+    String? hint,
+    MxcTextFieldButton? button,
+    double width = double.infinity,
+    FocusNode? focusNode,
+    String? suffixText,
+    bool obscure = false,
+  })  : controller = null,
+        super(
+          key: key,
+          builder: (s) => _MxcNonFormTextField.viewOnly(
+            disabled: true,
+            label: label,
+            text: text,
+            button: button,
+            focusNode: focusNode,
+            hint: hint,
+            obscure: obscure,
+            suffixText: suffixText,
+            width: width,
+          ),
+        );
+
   final TextEditingController? controller;
 
   @override
@@ -109,6 +135,7 @@ class _MxcNonFormTextField extends StatefulWidget {
     this.keyboardType,
     this.suffixText,
     this.obscure = false,
+    this.disabled = false,
     this.errorText,
     this.onChanged,
   })  : _controller = controller,
@@ -127,6 +154,7 @@ class _MxcNonFormTextField extends StatefulWidget {
     this.keyboardType,
     this.suffixText,
     this.obscure = false,
+    this.disabled = false,
   })  : _initialValue = text,
         readOnly = true,
         _controller = null,
@@ -143,6 +171,7 @@ class _MxcNonFormTextField extends StatefulWidget {
   final FocusNode? focusNode;
   final MxcTextFieldButton? button;
   final String? suffixText;
+  final bool disabled;
 
   final TextEditingController? _controller;
   final bool obscure;
@@ -169,8 +198,12 @@ class _MxcNonFormTextFieldState extends State<_MxcNonFormTextField> {
   void initState() {
     super.initState();
     focusNode = widget.focusNode ?? FocusNode();
-    focused = focusNode.hasFocus;
-    focusNode.addListener(_focusNodeListener);
+    if (widget.disabled) {
+      focused = false;
+    } else {
+      focused = focusNode.hasFocus;
+      focusNode.addListener(_focusNodeListener);
+    }
   }
 
   void _focusNodeListener() {
@@ -203,11 +236,15 @@ class _MxcNonFormTextFieldState extends State<_MxcNonFormTextField> {
               alignment: Alignment.centerLeft,
               child: AnimatedDefaultTextStyle(
                 duration: const Duration(milliseconds: 200),
-                style: focused
+                style: widget.disabled
                     ? FontTheme.of(context).caption1().copyWith(
-                          color: MxcScopedTheme.of(context).primaryColor,
+                          color: ColorsTheme.of(context).buttonDisabledLabel,
                         )
-                    : FontTheme.of(context).caption1(),
+                    : focused
+                        ? FontTheme.of(context).caption1().copyWith(
+                              color: MxcScopedTheme.of(context).primaryColor,
+                            )
+                        : FontTheme.of(context).caption1(),
                 child: Text(
                   widget.label!,
                   maxLines: 1,
@@ -220,9 +257,11 @@ class _MxcNonFormTextFieldState extends State<_MxcNonFormTextField> {
               border: Border(
                 bottom: BorderSide(
                   width: focused ? 2 : 1,
-                  color: focused
-                      ? MxcScopedTheme.of(context).primaryColor
-                      : ColorsTheme.of(context).textPrimaryAndIcons,
+                  color: widget.disabled
+                      ? ColorsTheme.of(context).buttonDisabledLabel
+                      : focused
+                          ? MxcScopedTheme.of(context).primaryColor
+                          : ColorsTheme.of(context).textPrimaryAndIcons,
                 ),
               ),
             ),
@@ -237,7 +276,10 @@ class _MxcNonFormTextFieldState extends State<_MxcNonFormTextField> {
                     textInputAction: widget.action,
                     controller: controller,
                     cursorColor: ColorsTheme.of(context).textPrimaryAndIcons,
-                    style: FontTheme.of(context).body1(),
+                    style: (widget.disabled)
+                        ? FontTheme.of(context).body1().copyWith(
+                            color: ColorsTheme.of(context).buttonDisabledLabel)
+                        : FontTheme.of(context).body1(),
                     obscureText: widget.obscure,
                     onChanged: widget.onChanged,
                     decoration: InputDecoration(
@@ -258,9 +300,11 @@ class _MxcNonFormTextFieldState extends State<_MxcNonFormTextField> {
                 if (widget.button != null)
                   MxcScopedTheme(
                     data: MxcScopedThemeData(
-                      primaryColor: focused
-                          ? MxcScopedTheme.of(context).primaryColor
-                          : ColorsTheme.of(context).textPrimaryAndIcons,
+                      primaryColor: widget.disabled
+                          ? ColorsTheme.of(context).buttonDisabledLabel
+                          : focused
+                              ? MxcScopedTheme.of(context).primaryColor
+                              : ColorsTheme.of(context).textPrimaryAndIcons,
                     ),
                     child: widget.button!,
                   ),
