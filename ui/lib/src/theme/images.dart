@@ -226,6 +226,11 @@ class ImagesTheme {
         package: mxcUiPackageName,
       );
 
+  ImageProvider get datadashLogo => const AssetImage(
+        'assets/images/app/datadash-logo.png',
+        package: mxcUiPackageName,
+      );
+
   ImageProvider get datadash => const AssetImage(
         'assets/images/login/datadash.png',
         package: mxcUiPackageName,
