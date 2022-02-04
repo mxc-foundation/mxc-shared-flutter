@@ -392,6 +392,25 @@ class ImagesTheme {
         'assets/images/settings/wechat_qr_code.png',
         package: mxcUiPackageName,
       );
+
+  // maintenance
+
+  ImageProvider get maintenanceRobot => const AssetImage(
+        'assets/images/maintenance/robot.png',
+        package: mxcUiPackageName,
+      );
+
+  // connectivity
+
+  ImageProvider get connectivity => const AssetImage(
+        'assets/images/connectivity/connectivity.png',
+        package: mxcUiPackageName,
+      );
+
+  ImageProvider get connectivityRobot => const AssetImage(
+        'assets/images/connectivity/robot.png',
+        package: mxcUiPackageName,
+      );
 }
 
 class ImagesThemeDark extends ImagesTheme {
