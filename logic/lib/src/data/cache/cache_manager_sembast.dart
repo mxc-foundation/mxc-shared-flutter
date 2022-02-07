@@ -61,7 +61,7 @@ class CacheManagerSembast implements CacheManager {
 
   @override
   Future<CacheZoneSembast> loadZone(String name) async {
-    return CacheZoneSembast.load(
+    return await CacheZoneSembast.load(
       db,
       '$_defaultCacheStore-$name-${name.hashCode}',
       _serializersBucket,
