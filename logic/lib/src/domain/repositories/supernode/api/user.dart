@@ -78,15 +78,16 @@ class UserRepository {
   }
 
   Future<void> changePassword({
-    required String userId,
-    required String password,
+    required String currentPassword,
+    required String newPassword,
+    required String otp,
   }) async {
-    await client.userService.updatePassword(
-      userId: userId,
-      body: ExtapiUpdateUserPasswordRequest(
-        userId: userId,
-        password: password,
+    await client.userService.changePassword(
+      body: ExtapiChangePasswordRequest(
+        currentPassword: currentPassword,
+        newPassword: newPassword,
       ),
+      grpcMetadataXOTP: otp,
     );
   }
 

@@ -2906,6 +2906,21 @@ abstract class UserService extends ChopperService {
       @Header('Grpc-Metadata-Authorization')
           String? grpcMetadataAuthorization});
 
+  ///ChangePassword changes a password.
+  ///@param body
+  ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
+
+  @Post(path: '/api/users/change-password')
+  Future<chopper.Response> changePassword(
+      {@Body()
+      @required
+          ExtapiChangePasswordRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
+
   ///Add a new email address
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
@@ -2995,25 +3010,6 @@ abstract class UserService extends ChopperService {
       @Body()
       @required
           ExtapiUpdateUserRequest? body,
-      @Header('Grpc-Metadata-X-OTP')
-          String? grpcMetadataXOTP,
-      @Header('Grpc-Metadata-Authorization')
-          String? grpcMetadataAuthorization});
-
-  ///UpdatePassword updates a password.
-  ///@param userId User ID.
-  ///@param body
-  ///@param Grpc-Metadata-X-OTP OTP Code
-  ///@param Grpc-Metadata-Authorization Auth Token
-
-  @Put(path: '/api/users/{userId}/password')
-  Future<chopper.Response> updatePassword(
-      {@Path('userId')
-      @required
-          String? userId,
-      @Body()
-      @required
-          ExtapiUpdateUserPasswordRequest? body,
       @Header('Grpc-Metadata-X-OTP')
           String? grpcMetadataXOTP,
       @Header('Grpc-Metadata-Authorization')
@@ -3406,6 +3402,7 @@ final Map<Type, Object Function(Map<String, dynamic>)>
       ExtapiBindExternalUserResponse.fromJsonFactory,
   ExtapiBoost: ExtapiBoost.fromJsonFactory,
   ExtapiBrandingResponse: ExtapiBrandingResponse.fromJsonFactory,
+  ExtapiChangePasswordRequest: ExtapiChangePasswordRequest.fromJsonFactory,
   ExtapiCheckACLRequest: ExtapiCheckACLRequest.fromJsonFactory,
   ExtapiCheckACLResponse: ExtapiCheckACLResponse.fromJsonFactory,
   ExtapiConfirmPasswordResetReq: ExtapiConfirmPasswordResetReq.fromJsonFactory,
@@ -3744,8 +3741,6 @@ final Map<Type, Object Function(Map<String, dynamic>)>
       ExtapiUpdateOrganizationUserRequest.fromJsonFactory,
   ExtapiUpdateServiceProfileRequest:
       ExtapiUpdateServiceProfileRequest.fromJsonFactory,
-  ExtapiUpdateUserPasswordRequest:
-      ExtapiUpdateUserPasswordRequest.fromJsonFactory,
   ExtapiUpdateUserRequest: ExtapiUpdateUserRequest.fromJsonFactory,
   ExtapiUpdateUserResponse: ExtapiUpdateUserResponse.fromJsonFactory,
   ExtapiUplinkFrameLog: ExtapiUplinkFrameLog.fromJsonFactory,
@@ -4743,6 +4738,46 @@ extension $ExtapiBrandingResponseExtension on ExtapiBrandingResponse {
         logo: logo ?? this.logo,
         logoPath: logoPath ?? this.logoPath,
         registration: registration ?? this.registration);
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class ExtapiChangePasswordRequest {
+  ExtapiChangePasswordRequest({
+    this.currentPassword,
+    this.newPassword,
+  });
+
+  factory ExtapiChangePasswordRequest.fromJson(Map<String, dynamic> json) =>
+      _$ExtapiChangePasswordRequestFromJson(json);
+
+  @JsonKey(name: 'currentPassword')
+  final String? currentPassword;
+  @JsonKey(name: 'newPassword')
+  final String? newPassword;
+  static const fromJsonFactory = _$ExtapiChangePasswordRequestFromJson;
+  static const toJsonFactory = _$ExtapiChangePasswordRequestToJson;
+  Map<String, dynamic> toJson() => _$ExtapiChangePasswordRequestToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is ExtapiChangePasswordRequest &&
+            (identical(other.currentPassword, currentPassword) ||
+                const DeepCollectionEquality()
+                    .equals(other.currentPassword, currentPassword)) &&
+            (identical(other.newPassword, newPassword) ||
+                const DeepCollectionEquality()
+                    .equals(other.newPassword, newPassword)));
+  }
+}
+
+extension $ExtapiChangePasswordRequestExtension on ExtapiChangePasswordRequest {
+  ExtapiChangePasswordRequest copyWith(
+      {String? currentPassword, String? newPassword}) {
+    return ExtapiChangePasswordRequest(
+        currentPassword: currentPassword ?? this.currentPassword,
+        newPassword: newPassword ?? this.newPassword);
   }
 }
 
@@ -15216,45 +15251,6 @@ extension $ExtapiUpdateServiceProfileRequestExtension
       {ExtapiServiceProfile? serviceProfile}) {
     return ExtapiUpdateServiceProfileRequest(
         serviceProfile: serviceProfile ?? this.serviceProfile);
-  }
-}
-
-@JsonSerializable(explicitToJson: true)
-class ExtapiUpdateUserPasswordRequest {
-  ExtapiUpdateUserPasswordRequest({
-    this.password,
-    this.userId,
-  });
-
-  factory ExtapiUpdateUserPasswordRequest.fromJson(Map<String, dynamic> json) =>
-      _$ExtapiUpdateUserPasswordRequestFromJson(json);
-
-  @JsonKey(name: 'password')
-  final String? password;
-  @JsonKey(name: 'userId')
-  final String? userId;
-  static const fromJsonFactory = _$ExtapiUpdateUserPasswordRequestFromJson;
-  static const toJsonFactory = _$ExtapiUpdateUserPasswordRequestToJson;
-  Map<String, dynamic> toJson() =>
-      _$ExtapiUpdateUserPasswordRequestToJson(this);
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is ExtapiUpdateUserPasswordRequest &&
-            (identical(other.password, password) ||
-                const DeepCollectionEquality()
-                    .equals(other.password, password)) &&
-            (identical(other.userId, userId) ||
-                const DeepCollectionEquality().equals(other.userId, userId)));
-  }
-}
-
-extension $ExtapiUpdateUserPasswordRequestExtension
-    on ExtapiUpdateUserPasswordRequest {
-  ExtapiUpdateUserPasswordRequest copyWith({String? password, String? userId}) {
-    return ExtapiUpdateUserPasswordRequest(
-        password: password ?? this.password, userId: userId ?? this.userId);
   }
 }
 

@@ -15,22 +15,48 @@ class LoginUseCase {
     return repository.listSupernodes();
   }
 
-  Future<void> login(
+  Future<bool> login(
     String supernodeAddress,
     String username,
     String password,
   ) async {
     authStorageRepository.supernodeAddress = supernodeAddress;
-    final res = await repository.auth.login(
+    final LoginResult res = await repository.auth.login(
       username: username,
       password: password,
     );
 
-    await authStorageRepository.saveCredentials(
+    authStorageRepository.saveToken(res.token);
+    if (!res.is2faRequired) {
+      authStorageRepository.saveCredentials(
+        username: username,
+        password: password,
+      );
+
+      await authCacheRepository?.loadCache(username);
+
+      final profile = await repository.user.profile();
+
+      authStorageRepository.organizationId =
+          profile.organizations.first.organizationId;
+    }
+
+    return res.is2faRequired;
+  }
+
+  Future<void> login2fa(
+    String supernodeAddress,
+    String username,
+    String password,
+    String otp,
+  ) async {
+    authStorageRepository.supernodeAddress = supernodeAddress;
+    await repository.auth.login2fa(otp: otp);
+
+    authStorageRepository.saveCredentials(
       username: username,
       password: password,
     );
-    await authStorageRepository.saveToken(res.token);
 
     await authCacheRepository?.loadCache(username);
 

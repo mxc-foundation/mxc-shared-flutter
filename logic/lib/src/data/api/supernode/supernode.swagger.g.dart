@@ -343,6 +343,20 @@ Map<String, dynamic> _$ExtapiBrandingResponseToJson(
       'registration': instance.registration,
     };
 
+ExtapiChangePasswordRequest _$ExtapiChangePasswordRequestFromJson(
+        Map<String, dynamic> json) =>
+    ExtapiChangePasswordRequest(
+      currentPassword: json['currentPassword'] as String?,
+      newPassword: json['newPassword'] as String?,
+    );
+
+Map<String, dynamic> _$ExtapiChangePasswordRequestToJson(
+        ExtapiChangePasswordRequest instance) =>
+    <String, dynamic>{
+      'currentPassword': instance.currentPassword,
+      'newPassword': instance.newPassword,
+    };
+
 ExtapiCheckACLRequest _$ExtapiCheckACLRequestFromJson(
         Map<String, dynamic> json) =>
     ExtapiCheckACLRequest(
@@ -4279,20 +4293,6 @@ Map<String, dynamic> _$ExtapiUpdateServiceProfileRequestToJson(
         ExtapiUpdateServiceProfileRequest instance) =>
     <String, dynamic>{
       'serviceProfile': instance.serviceProfile?.toJson(),
-    };
-
-ExtapiUpdateUserPasswordRequest _$ExtapiUpdateUserPasswordRequestFromJson(
-        Map<String, dynamic> json) =>
-    ExtapiUpdateUserPasswordRequest(
-      password: json['password'] as String?,
-      userId: json['userId'] as String?,
-    );
-
-Map<String, dynamic> _$ExtapiUpdateUserPasswordRequestToJson(
-        ExtapiUpdateUserPasswordRequest instance) =>
-    <String, dynamic>{
-      'password': instance.password,
-      'userId': instance.userId,
     };
 
 ExtapiUpdateUserRequest _$ExtapiUpdateUserRequestFromJson(
