@@ -28,17 +28,7 @@ class LoginUseCase {
 
     authStorageRepository.saveToken(res.token);
     if (!res.is2faRequired) {
-      authStorageRepository.saveCredentials(
-        username: username,
-        password: password,
-      );
-
-      await authCacheRepository?.loadCache(username);
-
-      final profile = await repository.user.profile();
-
-      authStorageRepository.organizationId =
-          profile.organizations.first.organizationId;
+      await _postLoginInit(username, password);
     }
 
     return res.is2faRequired;
@@ -53,6 +43,12 @@ class LoginUseCase {
     authStorageRepository.supernodeAddress = supernodeAddress;
     await repository.auth.login2fa(otp: otp);
 
+    await _postLoginInit(username, password);
+  }
+
+  bool loggedIn() => repository.loggedIn;
+
+  Future<void> _postLoginInit(String username, String password) async {
     authStorageRepository.saveCredentials(
       username: username,
       password: password,
@@ -65,6 +61,4 @@ class LoginUseCase {
     authStorageRepository.organizationId =
         profile.organizations.first.organizationId;
   }
-
-  bool loggedIn() => repository.loggedIn;
 }
