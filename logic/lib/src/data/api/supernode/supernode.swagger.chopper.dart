@@ -1719,7 +1719,7 @@ class _$InternalService extends InternalService {
   }
 
   @override
-  Future<Response<ExtapiLoginResponse>> login2FA(
+  Future<Response<dynamic>> login2FA(
       {ExtapiLogin2FARequest? body,
       String? grpcMetadataXOTP,
       String? grpcMetadataAuthorization}) {
@@ -1733,7 +1733,7 @@ class _$InternalService extends InternalService {
     final $body = body;
     final $request =
         Request('POST', $url, client.baseUrl, body: $body, headers: $headers);
-    return client.send<ExtapiLoginResponse, ExtapiLoginResponse>($request);
+    return client.send<dynamic, dynamic>($request);
   }
 
   @override
@@ -3229,7 +3229,7 @@ class _$UserService extends UserService {
   }
 
   @override
-  Future<Response<dynamic>> changePassword(
+  Future<Response<ExtapiChangePasswordResponse>> changePassword(
       {ExtapiChangePasswordRequest? body,
       String? grpcMetadataXOTP,
       String? grpcMetadataAuthorization}) {
@@ -3243,7 +3243,8 @@ class _$UserService extends UserService {
     final $body = body;
     final $request =
         Request('POST', $url, client.baseUrl, body: $body, headers: $headers);
-    return client.send<dynamic, dynamic>($request);
+    return client.send<ExtapiChangePasswordResponse,
+        ExtapiChangePasswordResponse>($request);
   }
 
   @override

@@ -357,6 +357,18 @@ Map<String, dynamic> _$ExtapiChangePasswordRequestToJson(
       'newPassword': instance.newPassword,
     };
 
+ExtapiChangePasswordResponse _$ExtapiChangePasswordResponseFromJson(
+        Map<String, dynamic> json) =>
+    ExtapiChangePasswordResponse(
+      authToken: json['authToken'] as String?,
+    );
+
+Map<String, dynamic> _$ExtapiChangePasswordResponseToJson(
+        ExtapiChangePasswordResponse instance) =>
+    <String, dynamic>{
+      'authToken': instance.authToken,
+    };
+
 ExtapiCheckACLRequest _$ExtapiCheckACLRequestFromJson(
         Map<String, dynamic> json) =>
     ExtapiCheckACLRequest(
@@ -414,6 +426,7 @@ Map<String, dynamic> _$ExtapiConfirmRegistrationRequestToJson(
 ExtapiConfirmRegistrationResponse _$ExtapiConfirmRegistrationResponseFromJson(
         Map<String, dynamic> json) =>
     ExtapiConfirmRegistrationResponse(
+      authToken: json['authToken'] as String?,
       id: json['id'] as String?,
       isActive: json['isActive'] as bool?,
       isAdmin: json['isAdmin'] as bool?,
@@ -425,6 +438,7 @@ ExtapiConfirmRegistrationResponse _$ExtapiConfirmRegistrationResponseFromJson(
 Map<String, dynamic> _$ExtapiConfirmRegistrationResponseToJson(
         ExtapiConfirmRegistrationResponse instance) =>
     <String, dynamic>{
+      'authToken': instance.authToken,
       'id': instance.id,
       'isActive': instance.isActive,
       'isAdmin': instance.isAdmin,
@@ -2904,6 +2918,7 @@ Map<String, dynamic> _$ExtapiLoginRequestToJson(ExtapiLoginRequest instance) =>
 
 ExtapiLoginResponse _$ExtapiLoginResponseFromJson(Map<String, dynamic> json) =>
     ExtapiLoginResponse(
+      authToken: json['authToken'] as String?,
       is2faRequired: json['is2faRequired'] as bool?,
       jwt: json['jwt'] as String?,
     );
@@ -2911,6 +2926,7 @@ ExtapiLoginResponse _$ExtapiLoginResponseFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$ExtapiLoginResponseToJson(
         ExtapiLoginResponse instance) =>
     <String, dynamic>{
+      'authToken': instance.authToken,
       'is2faRequired': instance.is2faRequired,
       'jwt': instance.jwt,
     };

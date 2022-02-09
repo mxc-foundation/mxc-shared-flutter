@@ -1537,7 +1537,7 @@ abstract class InternalService extends ChopperService {
   ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/internal/login-2fa')
-  Future<chopper.Response<ExtapiLoginResponse>> login2FA(
+  Future<chopper.Response> login2FA(
       {@Body()
       @required
           ExtapiLogin2FARequest? body,
@@ -2912,7 +2912,7 @@ abstract class UserService extends ChopperService {
   ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/users/change-password')
-  Future<chopper.Response> changePassword(
+  Future<chopper.Response<ExtapiChangePasswordResponse>> changePassword(
       {@Body()
       @required
           ExtapiChangePasswordRequest? body,
@@ -3403,6 +3403,7 @@ final Map<Type, Object Function(Map<String, dynamic>)>
   ExtapiBoost: ExtapiBoost.fromJsonFactory,
   ExtapiBrandingResponse: ExtapiBrandingResponse.fromJsonFactory,
   ExtapiChangePasswordRequest: ExtapiChangePasswordRequest.fromJsonFactory,
+  ExtapiChangePasswordResponse: ExtapiChangePasswordResponse.fromJsonFactory,
   ExtapiCheckACLRequest: ExtapiCheckACLRequest.fromJsonFactory,
   ExtapiCheckACLResponse: ExtapiCheckACLResponse.fromJsonFactory,
   ExtapiConfirmPasswordResetReq: ExtapiConfirmPasswordResetReq.fromJsonFactory,
@@ -4782,6 +4783,38 @@ extension $ExtapiChangePasswordRequestExtension on ExtapiChangePasswordRequest {
 }
 
 @JsonSerializable(explicitToJson: true)
+class ExtapiChangePasswordResponse {
+  ExtapiChangePasswordResponse({
+    this.authToken,
+  });
+
+  factory ExtapiChangePasswordResponse.fromJson(Map<String, dynamic> json) =>
+      _$ExtapiChangePasswordResponseFromJson(json);
+
+  @JsonKey(name: 'authToken')
+  final String? authToken;
+  static const fromJsonFactory = _$ExtapiChangePasswordResponseFromJson;
+  static const toJsonFactory = _$ExtapiChangePasswordResponseToJson;
+  Map<String, dynamic> toJson() => _$ExtapiChangePasswordResponseToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is ExtapiChangePasswordResponse &&
+            (identical(other.authToken, authToken) ||
+                const DeepCollectionEquality()
+                    .equals(other.authToken, authToken)));
+  }
+}
+
+extension $ExtapiChangePasswordResponseExtension
+    on ExtapiChangePasswordResponse {
+  ExtapiChangePasswordResponse copyWith({String? authToken}) {
+    return ExtapiChangePasswordResponse(authToken: authToken ?? this.authToken);
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
 class ExtapiCheckACLRequest {
   ExtapiCheckACLRequest({
     this.acc,
@@ -4926,6 +4959,7 @@ extension $ExtapiConfirmRegistrationRequestExtension
 @JsonSerializable(explicitToJson: true)
 class ExtapiConfirmRegistrationResponse {
   ExtapiConfirmRegistrationResponse({
+    this.authToken,
     this.id,
     this.isActive,
     this.isAdmin,
@@ -4938,6 +4972,8 @@ class ExtapiConfirmRegistrationResponse {
           Map<String, dynamic> json) =>
       _$ExtapiConfirmRegistrationResponseFromJson(json);
 
+  @JsonKey(name: 'authToken')
+  final String? authToken;
   @JsonKey(name: 'id')
   final String? id;
   @JsonKey(name: 'isActive')
@@ -4959,6 +4995,9 @@ class ExtapiConfirmRegistrationResponse {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is ExtapiConfirmRegistrationResponse &&
+            (identical(other.authToken, authToken) ||
+                const DeepCollectionEquality()
+                    .equals(other.authToken, authToken)) &&
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.isActive, isActive) ||
@@ -4981,13 +5020,15 @@ class ExtapiConfirmRegistrationResponse {
 extension $ExtapiConfirmRegistrationResponseExtension
     on ExtapiConfirmRegistrationResponse {
   ExtapiConfirmRegistrationResponse copyWith(
-      {String? id,
+      {String? authToken,
+      String? id,
       bool? isActive,
       bool? isAdmin,
       String? jwt,
       int? sessionTTL,
       String? username}) {
     return ExtapiConfirmRegistrationResponse(
+        authToken: authToken ?? this.authToken,
         id: id ?? this.id,
         isActive: isActive ?? this.isActive,
         isAdmin: isAdmin ?? this.isAdmin,
@@ -11478,6 +11519,7 @@ extension $ExtapiLoginRequestExtension on ExtapiLoginRequest {
 @JsonSerializable(explicitToJson: true)
 class ExtapiLoginResponse {
   ExtapiLoginResponse({
+    this.authToken,
     this.is2faRequired,
     this.jwt,
   });
@@ -11485,6 +11527,8 @@ class ExtapiLoginResponse {
   factory ExtapiLoginResponse.fromJson(Map<String, dynamic> json) =>
       _$ExtapiLoginResponseFromJson(json);
 
+  @JsonKey(name: 'authToken')
+  final String? authToken;
   @JsonKey(name: 'is2faRequired')
   final bool? is2faRequired;
   @JsonKey(name: 'jwt')
@@ -11497,6 +11541,9 @@ class ExtapiLoginResponse {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is ExtapiLoginResponse &&
+            (identical(other.authToken, authToken) ||
+                const DeepCollectionEquality()
+                    .equals(other.authToken, authToken)) &&
             (identical(other.is2faRequired, is2faRequired) ||
                 const DeepCollectionEquality()
                     .equals(other.is2faRequired, is2faRequired)) &&
@@ -11506,8 +11553,10 @@ class ExtapiLoginResponse {
 }
 
 extension $ExtapiLoginResponseExtension on ExtapiLoginResponse {
-  ExtapiLoginResponse copyWith({bool? is2faRequired, String? jwt}) {
+  ExtapiLoginResponse copyWith(
+      {String? authToken, bool? is2faRequired, String? jwt}) {
     return ExtapiLoginResponse(
+        authToken: authToken ?? this.authToken,
         is2faRequired: is2faRequired ?? this.is2faRequired,
         jwt: jwt ?? this.jwt);
   }
