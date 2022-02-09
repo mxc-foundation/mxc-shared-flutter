@@ -107,9 +107,11 @@ class UserRepository {
   Future<void> verifyEmail({
     required String email,
     required String verificationCode,
+    required String otp,
   }) async {
     await client.userService.verifyEmail(
         body: ExtapiVerifyEmailRequest(
-            email: email, verificationCode: verificationCode));
+            email: email, verificationCode: verificationCode),
+        grpcMetadataXOTP: otp);
   }
 }

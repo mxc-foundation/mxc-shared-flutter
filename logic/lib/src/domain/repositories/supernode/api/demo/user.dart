@@ -84,6 +84,7 @@ class DemoUserRepository implements UserRepository {
   Future<void> verifyEmail({
     required String email,
     required String verificationCode,
+    required String otp,
   }) async {
     throw UnimplementedError();
   }
