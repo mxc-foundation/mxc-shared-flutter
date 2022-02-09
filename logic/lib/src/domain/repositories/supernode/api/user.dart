@@ -77,17 +77,22 @@ class UserRepository {
     return res.body!.jwt!;
   }
 
-  Future<void> changePassword({
+  Future<LoginResult> changePassword({
     required String currentPassword,
     required String newPassword,
     required String otp,
   }) async {
-    await client.userService.changePassword(
+    final res = await client.userService.changePassword(
       body: ExtapiChangePasswordRequest(
         currentPassword: currentPassword,
         newPassword: newPassword,
       ),
       grpcMetadataXOTP: otp,
+    );
+
+    return LoginResult(
+      token: res.body!.authToken!,
+      is2faRequired: false,
     );
   }
 

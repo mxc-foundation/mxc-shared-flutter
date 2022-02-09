@@ -67,7 +67,7 @@ class DemoUserRepository implements UserRepository {
   }
 
   @override
-  Future<void> changePassword({
+  Future<LoginResult> changePassword({
     required String currentPassword,
     required String newPassword,
     required String otp,
