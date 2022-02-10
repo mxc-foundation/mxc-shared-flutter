@@ -393,6 +393,11 @@ class ImagesTheme {
         package: mxcUiPackageName,
       );
 
+  ImageProvider get datadashIcon => const AssetImage(
+        'assets/images/settings/datadash_icon.png',
+        package: mxcUiPackageName,
+      );
+
   // maintenance
 
   ImageProvider get maintenanceRobot => const AssetImage(
