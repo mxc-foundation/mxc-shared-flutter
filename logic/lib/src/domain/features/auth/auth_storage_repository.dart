@@ -9,25 +9,10 @@ class AuthenticationStorageRepository {
   set supernodeAddress(String? supernodeAddress) =>
       _supernodeSetupStore.supernodeAddress = supernodeAddress;
 
-  void updateEmail(String email) {
-    _supernodeSetupStore.credentials = Credentials(
-      email,
-      _supernodeSetupStore.credentials?.password ?? '',
-    );
-  }
-
-  void updatePassword(String password) {
-    _supernodeSetupStore.credentials = Credentials(
-      _supernodeSetupStore.credentials?.username ?? '',
-      password,
-    );
-  }
-
-  void saveCredentials({
+  void saveUsername({
     required String username,
-    required String password,
   }) {
-    _supernodeSetupStore.credentials = Credentials(username, password);
+    _supernodeSetupStore.username = username;
   }
 
   void saveToken(String token) {
@@ -39,5 +24,5 @@ class AuthenticationStorageRepository {
   set organizationId(String organizationId) =>
       _supernodeSetupStore.organizationId = organizationId;
 
-  bool get loggedIn => _supernodeSetupStore.credentials != null;
+  bool get loggedIn => _supernodeSetupStore.username != null;
 }
