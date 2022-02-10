@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'dart:io';
 
 const String isrgx1 = '''
@@ -40,13 +39,10 @@ HttpClient createHttpClientWithCert(String cert) {
   try {
     final bytes = utf8.encode(cert);
     context.setTrustedCertificatesBytes(bytes);
-    log('createHttpClient() - cert added!');
   } on TlsException catch (e) {
     if (e.osError?.message != null &&
         (e.osError?.message.contains('CERT_ALREADY_IN_HASH_TABLE') ?? false)) {
-      log('createHttpClient() - cert already trusted! Skipping.');
     } else {
-      log('createHttpClient().setTrustedCertificateBytes EXCEPTION: $e');
       rethrow;
     }
   }

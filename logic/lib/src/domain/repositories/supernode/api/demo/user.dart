@@ -73,4 +73,17 @@ class DemoUserRepository implements UserRepository {
   }) {
     throw UnimplementedError();
   }
+
+  @override
+  Future<void> addEmail({required String newEmail, required String language}) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> verifyEmail({
+    required String email,
+    required String verificationCode,
+  }) async {
+    throw UnimplementedError();
+  }
 }
