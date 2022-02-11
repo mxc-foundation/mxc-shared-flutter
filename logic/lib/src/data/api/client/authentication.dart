@@ -26,7 +26,6 @@ class SupernodeAuthenticator extends Authenticator {
     client = SupernodeClient(
       getSupernodeAddress: getSupernodeAddress,
       getToken: null,
-      refreshToken: null,
       getDefaultOrganizationId: null,
     );
   }
@@ -43,7 +42,8 @@ class SupernodeAuthenticator extends Authenticator {
       !response.bodyString.contains('invalid email');
 
   @override
-  FutureOr<Request?> authenticate(Request request, Response response) {
+  FutureOr<Request?> authenticate(Request request, Response response,
+      [Request? originalRequest]) {
     if (!tokenExpired(response)) return null;
     return _authenticate(request, response);
   }

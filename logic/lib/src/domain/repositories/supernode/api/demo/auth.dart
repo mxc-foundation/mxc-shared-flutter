@@ -19,6 +19,13 @@ class DemoLoginRepository implements LoginRepository {
   }
 
   @override
+  Future<void> login2fa({
+    required String otp,
+  }) async {
+    throw UnimplementedError();
+  }
+
+  @override
   Future<WeChatLoginResult> loginWeChat(String code) async {
     throw UnimplementedError();
   }
