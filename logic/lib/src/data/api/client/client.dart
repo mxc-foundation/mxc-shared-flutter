@@ -15,8 +15,14 @@ class SupernodeClient extends ChopperClient {
     required String? Function()? getToken,
     required String? Function()? getDefaultOrganizationId,
   })  : _getBaseUrl = getSupernodeAddress,
-        _getDefaultOrganizationId = getDefaultOrganizationId ?? (() {}),
-        _getToken = getToken ?? (() {}),
+        _getDefaultOrganizationId = getDefaultOrganizationId ??
+            (() {
+              return null;
+            }),
+        _getToken = getToken ??
+            (() {
+              return null;
+            }),
         super(
           converter: JsonSerializableConverter(),
           services: [...supernodeServices],
