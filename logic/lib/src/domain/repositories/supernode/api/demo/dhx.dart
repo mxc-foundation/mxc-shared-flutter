@@ -177,6 +177,7 @@ class DemoDhxRepository implements DhxRepository {
       DateTime.now(),
       '1000000'.toDecimal(),
       '2000000'.toDecimal(),
+      '3000000'.toDecimal(),
     );
   }
 }
