@@ -26,6 +26,5 @@ dev_dependencies:
   json_serializable: ^6.1.4
   swagger_dart_code_generator: 
     git: https://github.com/festelo/swagger-dart-code-generator.git
-  #swagger_dart_code_generator: ^2.3.10
   build_runner: ^2.0.6
 
