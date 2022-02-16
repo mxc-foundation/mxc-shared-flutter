@@ -77,16 +77,22 @@ class UserRepository {
     return res.body!.jwt!;
   }
 
-  Future<void> changePassword({
-    required String userId,
-    required String password,
+  Future<LoginResult> changePassword({
+    required String currentPassword,
+    required String newPassword,
+    required String otp,
   }) async {
-    await client.userService.updatePassword(
-      userId: userId,
-      body: ExtapiUpdateUserPasswordRequest(
-        userId: userId,
-        password: password,
+    final res = await client.userService.changePassword(
+      body: ExtapiChangePasswordRequest(
+        currentPassword: currentPassword,
+        newPassword: newPassword,
       ),
+      grpcMetadataXOTP: otp,
+    );
+
+    return LoginResult(
+      token: res.body!.authToken!,
+      is2faRequired: false,
     );
   }
 
@@ -101,9 +107,11 @@ class UserRepository {
   Future<void> verifyEmail({
     required String email,
     required String verificationCode,
+    required String otp,
   }) async {
     await client.userService.verifyEmail(
         body: ExtapiVerifyEmailRequest(
-            email: email, verificationCode: verificationCode));
+            email: email, verificationCode: verificationCode),
+        grpcMetadataXOTP: otp);
   }
 }

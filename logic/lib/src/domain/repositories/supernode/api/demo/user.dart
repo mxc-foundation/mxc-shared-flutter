@@ -67,9 +67,10 @@ class DemoUserRepository implements UserRepository {
   }
 
   @override
-  Future<void> changePassword({
-    required String userId,
-    required String password,
+  Future<LoginResult> changePassword({
+    required String currentPassword,
+    required String newPassword,
+    required String otp,
   }) {
     throw UnimplementedError();
   }
@@ -83,6 +84,7 @@ class DemoUserRepository implements UserRepository {
   Future<void> verifyEmail({
     required String email,
     required String verificationCode,
+    required String otp,
   }) async {
     throw UnimplementedError();
   }

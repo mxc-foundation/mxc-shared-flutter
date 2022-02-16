@@ -26,7 +26,6 @@ class SupernodeAuthenticator extends Authenticator {
     client = SupernodeClient(
       getSupernodeAddress: getSupernodeAddress,
       getToken: null,
-      refreshToken: null,
       getDefaultOrganizationId: null,
     );
   }

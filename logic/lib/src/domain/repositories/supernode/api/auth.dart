@@ -1,7 +1,6 @@
 import 'package:chopper/chopper.dart';
 import 'package:mxc_logic/mxc_logic.dart';
 import 'package:mxc_logic/src/data/data.dart';
-import 'package:mxc_logic/src/domain/repositories/internal/shared_mappers.dart';
 
 class LoginRepository {
   LoginRepository({
@@ -24,8 +23,17 @@ class LoginRepository {
     );
 
     return LoginResult(
-      token: res.body!.jwt!,
-      is2faRequired: res.body!.is2faRequired.orDefault(),
+      token: res.body!.authToken!,
+      is2faRequired: res.body!.is2faRequired ?? false,
+    );
+  }
+
+  Future<void> login2fa({
+    required String otp,
+  }) async {
+    await client.internalService.login2FA(
+      body: ExtapiLogin2FARequest(),
+      grpcMetadataXOTP: otp,
     );
   }
 

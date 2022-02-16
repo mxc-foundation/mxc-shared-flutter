@@ -6,7 +6,7 @@ part of 'supernode.swagger.dart';
 // ChopperGenerator
 // **************************************************************************
 
-// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations
+// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations, unnecessary_brace_in_string_interps
 class _$ApplicationService extends ApplicationService {
   _$ApplicationService([ChopperClient? client]) {
     if (client == null) return;
@@ -115,7 +115,7 @@ class _$ApplicationService extends ApplicationService {
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations
+// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations, unnecessary_brace_in_string_interps
 class _$BTCMiningService extends BTCMiningService {
   _$BTCMiningService([ChopperClient? client]) {
     if (client == null) return;
@@ -179,7 +179,7 @@ class _$BTCMiningService extends BTCMiningService {
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations
+// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations, unnecessary_brace_in_string_interps
 class _$ExternalUserService extends ExternalUserService {
   _$ExternalUserService([ChopperClient? client]) {
     if (client == null) return;
@@ -324,7 +324,7 @@ class _$ExternalUserService extends ExternalUserService {
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations
+// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations, unnecessary_brace_in_string_interps
 class _$DeviceProfileService extends DeviceProfileService {
   _$DeviceProfileService([ChopperClient? client]) {
     if (client == null) return;
@@ -433,7 +433,7 @@ class _$DeviceProfileService extends DeviceProfileService {
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations
+// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations, unnecessary_brace_in_string_interps
 class _$DeviceProvisioningService extends DeviceProvisioningService {
   _$DeviceProvisioningService([ChopperClient? client]) {
     if (client == null) return;
@@ -462,7 +462,7 @@ class _$DeviceProvisioningService extends DeviceProvisioningService {
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations
+// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations, unnecessary_brace_in_string_interps
 class _$DeviceService extends DeviceService {
   _$DeviceService([ChopperClient? client]) {
     if (client == null) return;
@@ -749,7 +749,7 @@ class _$DeviceService extends DeviceService {
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations
+// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations, unnecessary_brace_in_string_interps
 class _$DeviceQueueService extends DeviceQueueService {
   _$DeviceQueueService([ChopperClient? client]) {
     if (client == null) return;
@@ -813,7 +813,7 @@ class _$DeviceQueueService extends DeviceQueueService {
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations
+// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations, unnecessary_brace_in_string_interps
 class _$DFIService extends DFIService {
   _$DFIService([ChopperClient? client]) {
     if (client == null) return;
@@ -886,7 +886,7 @@ class _$DFIService extends DFIService {
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations
+// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations, unnecessary_brace_in_string_interps
 class _$DHXServcieService extends DHXServcieService {
   _$DHXServcieService([ChopperClient? client]) {
     if (client == null) return;
@@ -1130,7 +1130,7 @@ class _$DHXServcieService extends DHXServcieService {
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations
+// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations, unnecessary_brace_in_string_interps
 class _$GatewayProfileService extends GatewayProfileService {
   _$GatewayProfileService([ChopperClient? client]) {
     if (client == null) return;
@@ -1237,7 +1237,7 @@ class _$GatewayProfileService extends GatewayProfileService {
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations
+// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations, unnecessary_brace_in_string_interps
 class _$GatewayService extends GatewayService {
   _$GatewayService([ChopperClient? client]) {
     if (client == null) return;
@@ -1656,7 +1656,7 @@ class _$GatewayService extends GatewayService {
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations
+// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations, unnecessary_brace_in_string_interps
 class _$InternalService extends InternalService {
   _$InternalService([ChopperClient? client]) {
     if (client == null) return;
@@ -1719,7 +1719,7 @@ class _$InternalService extends InternalService {
   }
 
   @override
-  Future<Response<ExtapiLoginResponse>> login2FA(
+  Future<Response<dynamic>> login2FA(
       {ExtapiLogin2FARequest? body,
       String? grpcMetadataXOTP,
       String? grpcMetadataAuthorization}) {
@@ -1733,7 +1733,7 @@ class _$InternalService extends InternalService {
     final $body = body;
     final $request =
         Request('POST', $url, client.baseUrl, body: $body, headers: $headers);
-    return client.send<ExtapiLoginResponse, ExtapiLoginResponse>($request);
+    return client.send<dynamic, dynamic>($request);
   }
 
   @override
@@ -1974,7 +1974,7 @@ class _$InternalService extends InternalService {
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations
+// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations, unnecessary_brace_in_string_interps
 class _$MosquittoAuthService extends MosquittoAuthService {
   _$MosquittoAuthService([ChopperClient? client]) {
     if (client == null) return;
@@ -2111,7 +2111,7 @@ class _$MosquittoAuthService extends MosquittoAuthService {
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations
+// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations, unnecessary_brace_in_string_interps
 class _$NetworkServerService extends NetworkServerService {
   _$NetworkServerService([ChopperClient? client]) {
     if (client == null) return;
@@ -2218,7 +2218,7 @@ class _$NetworkServerService extends NetworkServerService {
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations
+// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations, unnecessary_brace_in_string_interps
 class _$OrganizationService extends OrganizationService {
   _$OrganizationService([ChopperClient? client]) {
     if (client == null) return;
@@ -2420,7 +2420,7 @@ class _$OrganizationService extends OrganizationService {
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations
+// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations, unnecessary_brace_in_string_interps
 class _$ReportService extends ReportService {
   _$ReportService([ChopperClient? client]) {
     if (client == null) return;
@@ -2508,7 +2508,7 @@ class _$ReportService extends ReportService {
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations
+// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations, unnecessary_brace_in_string_interps
 class _$ServerInfoService extends ServerInfoService {
   _$ServerInfoService([ChopperClient? client]) {
     if (client == null) return;
@@ -2565,7 +2565,7 @@ class _$ServerInfoService extends ServerInfoService {
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations
+// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations, unnecessary_brace_in_string_interps
 class _$ServiceProfileService extends ServiceProfileService {
   _$ServiceProfileService([ChopperClient? client]) {
     if (client == null) return;
@@ -2672,7 +2672,7 @@ class _$ServiceProfileService extends ServiceProfileService {
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations
+// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations, unnecessary_brace_in_string_interps
 class _$ShopifyIntegrationService extends ShopifyIntegrationService {
   _$ShopifyIntegrationService([ChopperClient? client]) {
     if (client == null) return;
@@ -2702,7 +2702,7 @@ class _$ShopifyIntegrationService extends ShopifyIntegrationService {
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations
+// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations, unnecessary_brace_in_string_interps
 class _$StakingService extends StakingService {
   _$StakingService([ChopperClient? client]) {
     if (client == null) return;
@@ -2902,7 +2902,7 @@ class _$StakingService extends StakingService {
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations
+// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations, unnecessary_brace_in_string_interps
 class _$SupportService extends SupportService {
   _$SupportService([ChopperClient? client]) {
     if (client == null) return;
@@ -3129,7 +3129,7 @@ class _$SupportService extends SupportService {
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations
+// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations, unnecessary_brace_in_string_interps
 class _$TopUpService extends TopUpService {
   _$TopUpService([ChopperClient? client]) {
     if (client == null) return;
@@ -3179,7 +3179,7 @@ class _$TopUpService extends TopUpService {
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations
+// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations, unnecessary_brace_in_string_interps
 class _$UserService extends UserService {
   _$UserService([ChopperClient? client]) {
     if (client == null) return;
@@ -3226,6 +3226,25 @@ class _$UserService extends UserService {
         Request('POST', $url, client.baseUrl, body: $body, headers: $headers);
     return client
         .send<ExtapiCreateUserResponse, ExtapiCreateUserResponse>($request);
+  }
+
+  @override
+  Future<Response<ExtapiChangePasswordResponse>> changePassword(
+      {ExtapiChangePasswordRequest? body,
+      String? grpcMetadataXOTP,
+      String? grpcMetadataAuthorization}) {
+    final $url = '/api/users/change-password';
+    final $headers = {
+      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
+      if (grpcMetadataAuthorization != null)
+        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
+    };
+
+    final $body = body;
+    final $request =
+        Request('POST', $url, client.baseUrl, body: $body, headers: $headers);
+    return client.send<ExtapiChangePasswordResponse,
+        ExtapiChangePasswordResponse>($request);
   }
 
   @override
@@ -3332,28 +3351,9 @@ class _$UserService extends UserService {
     return client
         .send<ExtapiUpdateUserResponse, ExtapiUpdateUserResponse>($request);
   }
-
-  @override
-  Future<Response<dynamic>> updatePassword(
-      {String? userId,
-      ExtapiUpdateUserPasswordRequest? body,
-      String? grpcMetadataXOTP,
-      String? grpcMetadataAuthorization}) {
-    final $url = '/api/users/${userId}/password';
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $body = body;
-    final $request =
-        Request('PUT', $url, client.baseUrl, body: $body, headers: $headers);
-    return client.send<dynamic, dynamic>($request);
-  }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations
+// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations, unnecessary_brace_in_string_interps
 class _$WalletService extends WalletService {
   _$WalletService([ChopperClient? client]) {
     if (client == null) return;
@@ -3592,7 +3592,7 @@ class _$WalletService extends WalletService {
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations
+// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations, unnecessary_brace_in_string_interps
 class _$WithdrawService extends WithdrawService {
   _$WithdrawService([ChopperClient? client]) {
     if (client == null) return;
