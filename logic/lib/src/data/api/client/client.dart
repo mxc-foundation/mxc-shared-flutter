@@ -1,6 +1,7 @@
 import 'package:chopper/chopper.dart';
 import 'package:http/io_client.dart';
 import 'package:meta/meta.dart';
+import 'package:mxc_logic/internal.dart';
 import 'package:mxc_logic/src/data/api/client/authentication.dart';
 
 import '../supernode/supernode.swagger.dart';
