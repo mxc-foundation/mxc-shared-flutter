@@ -39,10 +39,16 @@ class GatewayRepository {
         .withTotal(res.body!.totalCount.toInt());
   }
 
-  Future<List<Location>> locations() async {
+  Future<List<LocationWithHex>> locations() async {
     final res = await _client.gatewayService.listLocations();
     return res.body!.result!
-        .map((e) => Location(e.location!.latitude!, e.location!.longitude!))
+        .map(
+          (e) => LocationWithHex(
+            e.location!.latitude!,
+            e.location!.longitude!,
+            int.parse(e.location!.h3CellId!),
+          ),
+        )
         .toList();
   }
 

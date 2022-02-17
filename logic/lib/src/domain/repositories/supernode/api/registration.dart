@@ -47,7 +47,7 @@ class RegistrationRepository {
       id: res.body!.id!,
       isAdmin: res.body!.isAdmin.orDefault(),
       isActive: res.body!.isActive.orDefault(),
-      token: res.body!.authToken!,
+      token: res.body!.authToken ?? res.body!.jwt!,
       username: res.body!.username!,
     );
   }
