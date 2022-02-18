@@ -108,9 +108,10 @@ class CreateCouncilResult {
 }
 
 class YesterdayMining {
-  YesterdayMining(this.date, this.dhx, this.mpower);
+  YesterdayMining(this.date, this.dhx, this.mpower, this.globalMiningPower);
 
   final DateTime date;
   final Decimal dhx;
   final Decimal mpower;
+  final Decimal globalMiningPower;
 }

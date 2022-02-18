@@ -169,6 +169,7 @@ class DhxRepository {
       res.body!.date!,
       res.body!.dhxAllocated.toDecimal(),
       res.body!.miningPower.toDecimal(),
+      res.body!.globalMiningPower.toDecimal()
     );
   }
 }

@@ -36,10 +36,12 @@ class RegistrationRepository {
 
   Future<RegistrationResult> confirm({
     required String token,
+    required String email,
   }) async {
     final res = await _client.internalService.confirmRegistration(
       body: ExtapiConfirmRegistrationRequest(
         token: token,
+        email: email,
       ),
     );
 
@@ -66,7 +68,7 @@ class RegistrationRepository {
         userId: userId,
         organizationName: organizationName,
       ),
-      grpcMetadataAuthorization: token,
+      grpcMetadataAuthorization: 'Bearer ' + token!,
     );
   }
 }
