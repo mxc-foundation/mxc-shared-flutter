@@ -35,12 +35,10 @@ class StakeRepository {
 
   Future<String> unstake({
     required String stakeId,
-    required String otpCode,
     String? orgId,
   }) async {
     final res = await _client.stakingService.unstake(
       orgId: orgId ?? _client.defaultOrganizationId,
-      grpcMetadataXOTP: otpCode,
       body: ExtapiUnstakeRequest(
         orgId: orgId ?? _client.defaultOrganizationId,
         stakeId: stakeId,
