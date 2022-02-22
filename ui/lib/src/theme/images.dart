@@ -426,6 +426,11 @@ class ImagesTheme {
         'assets/images/connectivity/robot.png',
         package: mxcUiPackageName,
       );
+
+  AssetImage get mapTitleRectangleBox => const AssetImage(
+        'assets/images/map/map_title_rectangle_box.png',
+        package: mxcUiPackageName,
+      );
 }
 
 class ImagesThemeDark extends ImagesTheme {
