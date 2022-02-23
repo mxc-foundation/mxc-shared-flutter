@@ -39,4 +39,16 @@ class TotpRepository {
       grpcMetadataXOTP: otp,
     );
   }
+
+  Future<List<String>?> getRecoveryCodes({
+    required String otp,
+    required bool regenerate,
+  }) async {
+    final response = await client.internalService.getRecoveryCodes(
+      body: ExtapiGetRecoveryCodesRequest(regenerate: false),
+      grpcMetadataXOTP: otp,
+    );
+
+    return response.body?.recoveryCode;
+  }
 }
