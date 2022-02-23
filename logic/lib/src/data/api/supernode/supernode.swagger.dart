@@ -492,17 +492,17 @@ abstract class ApplicationService extends ChopperService {
 }
 
 @ChopperApi()
-abstract class BTCMining extends ChopperService {
-  static BTCMining createService([ChopperClient? client]) {
+abstract class BTCMiningService extends ChopperService {
+  static BTCMiningService createService([ChopperClient? client]) {
     if (client != null) {
-      return _$BTCMining(client);
+      return _$BTCMiningService(client);
     }
 
     final newClient = ChopperClient(
-      services: [_$BTCMining()],
+      services: [_$BTCMiningService()],
       converter: chopper.JsonConverter(), /*baseUrl: YOUR_BASE_URL*/
     );
-    return _$BTCMining(newClient);
+    return _$BTCMiningService(newClient);
   }
 
   ///List the locks that are still open
@@ -1401,17 +1401,17 @@ abstract class DFIService extends ChopperService {
 }
 
 @ChopperApi()
-abstract class DHXServcie extends ChopperService {
-  static DHXServcie createService([ChopperClient? client]) {
+abstract class DHXServcieService extends ChopperService {
+  static DHXServcieService createService([ChopperClient? client]) {
     if (client != null) {
-      return _$DHXServcie(client);
+      return _$DHXServcieService(client);
     }
 
     final newClient = ChopperClient(
-      services: [_$DHXServcie()],
+      services: [_$DHXServcieService()],
       converter: chopper.JsonConverter(), /*baseUrl: YOUR_BASE_URL*/
     );
-    return _$DHXServcie(newClient);
+    return _$DHXServcieService(newClient);
   }
 
   ///Bond DHX to mine DHX
@@ -3291,17 +3291,17 @@ abstract class SettingsService extends ChopperService {
 }
 
 @ChopperApi()
-abstract class ShopifyIntegration extends ChopperService {
-  static ShopifyIntegration createService([ChopperClient? client]) {
+abstract class ShopifyIntegrationService extends ChopperService {
+  static ShopifyIntegrationService createService([ChopperClient? client]) {
     if (client != null) {
-      return _$ShopifyIntegration(client);
+      return _$ShopifyIntegrationService(client);
     }
 
     final newClient = ChopperClient(
-      services: [_$ShopifyIntegration()],
+      services: [_$ShopifyIntegrationService()],
       converter: chopper.JsonConverter(), /*baseUrl: YOUR_BASE_URL*/
     );
-    return _$ShopifyIntegration(newClient);
+    return _$ShopifyIntegrationService(newClient);
   }
 
   ///GetOrdersByUser returns a list of shopify orders filtered by given email, this API is only open for global admin user
@@ -4001,9 +4001,9 @@ abstract class WithdrawService extends ChopperService {
           String? grpcMetadataAuthorization});
 }
 
-extension SwaggerExtension on ChopperClient {
+extension SupernodeSwaggerExtension on ChopperClient {
   ApplicationService get applicationService => getService<ApplicationService>();
-  BTCMining get bTCMining => getService<BTCMining>();
+  BTCMiningService get bTCMining => getService<BTCMiningService>();
   ExternalUserService get externalUserService =>
       getService<ExternalUserService>();
   DeviceProfileService get deviceProfileService =>
@@ -4015,7 +4015,7 @@ extension SwaggerExtension on ChopperClient {
       getService<FUOTADeploymentService>();
   DeviceQueueService get deviceQueueService => getService<DeviceQueueService>();
   DFIService get dFIService => getService<DFIService>();
-  DHXServcie get dHXServcie => getService<DHXServcie>();
+  DHXServcieService get dHXServcie => getService<DHXServcieService>();
   GatewayProfileService get gatewayProfileService =>
       getService<GatewayProfileService>();
   GatewayService get gatewayService => getService<GatewayService>();
@@ -4033,7 +4033,8 @@ extension SwaggerExtension on ChopperClient {
   ServiceProfileService get serviceProfileService =>
       getService<ServiceProfileService>();
   SettingsService get settingsService => getService<SettingsService>();
-  ShopifyIntegration get shopifyIntegration => getService<ShopifyIntegration>();
+  ShopifyIntegrationService get shopifyIntegration =>
+      getService<ShopifyIntegrationService>();
   StakingService get stakingService => getService<StakingService>();
   TopUpService get topUpService => getService<TopUpService>();
   UserService get userService => getService<UserService>();
@@ -4043,7 +4044,7 @@ extension SwaggerExtension on ChopperClient {
 
 List<ChopperService> get supernodeServices => [
       ApplicationService.createService(),
-      BTCMining.createService(),
+      BTCMiningService.createService(),
       ExternalUserService.createService(),
       DeviceProfileService.createService(),
       DeviceProvisioningService.createService(),
@@ -4051,7 +4052,7 @@ List<ChopperService> get supernodeServices => [
       FUOTADeploymentService.createService(),
       DeviceQueueService.createService(),
       DFIService.createService(),
-      DHXServcie.createService(),
+      DHXServcieService.createService(),
       GatewayProfileService.createService(),
       GatewayService.createService(),
       InternalService.createService(),
@@ -4063,7 +4064,7 @@ List<ChopperService> get supernodeServices => [
       ServerInfoService.createService(),
       ServiceProfileService.createService(),
       SettingsService.createService(),
-      ShopifyIntegration.createService(),
+      ShopifyIntegrationService.createService(),
       StakingService.createService(),
       TopUpService.createService(),
       UserService.createService(),
@@ -5603,6 +5604,7 @@ extension $ExtapiConfirmPasswordResetReqExtension
 @JsonSerializable(explicitToJson: true)
 class ExtapiConfirmRegistrationRequest {
   ExtapiConfirmRegistrationRequest({
+    this.email,
     this.token,
   });
 
@@ -5610,6 +5612,8 @@ class ExtapiConfirmRegistrationRequest {
           Map<String, dynamic> json) =>
       _$ExtapiConfirmRegistrationRequestFromJson(json);
 
+  @JsonKey(name: 'email')
+  final String? email;
   @JsonKey(name: 'token')
   final String? token;
   static const fromJsonFactory = _$ExtapiConfirmRegistrationRequestFromJson;
@@ -5621,6 +5625,8 @@ class ExtapiConfirmRegistrationRequest {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is ExtapiConfirmRegistrationRequest &&
+            (identical(other.email, email) ||
+                const DeepCollectionEquality().equals(other.email, email)) &&
             (identical(other.token, token) ||
                 const DeepCollectionEquality().equals(other.token, token)));
   }
@@ -5628,8 +5634,9 @@ class ExtapiConfirmRegistrationRequest {
 
 extension $ExtapiConfirmRegistrationRequestExtension
     on ExtapiConfirmRegistrationRequest {
-  ExtapiConfirmRegistrationRequest copyWith({String? token}) {
-    return ExtapiConfirmRegistrationRequest(token: token ?? this.token);
+  ExtapiConfirmRegistrationRequest copyWith({String? email, String? token}) {
+    return ExtapiConfirmRegistrationRequest(
+        email: email ?? this.email, token: token ?? this.token);
   }
 }
 
@@ -20433,60 +20440,6 @@ List<enums.GwFineTimestampType> gwFineTimestampTypeListFromJson(
       .map((e) => gwFineTimestampTypeFromJson(e.toString()))
       .toList();
 }
-
-typedef JsonFactory<T> = T Function(Map<String, dynamic> json);
-
-class CustomJsonDecoder {
-  CustomJsonDecoder(this.factories);
-
-  final Map<Type, JsonFactory> factories;
-
-  dynamic decode<T>(dynamic entity) {
-    if (entity is Iterable) {
-      return _decodeList<T>(entity);
-    }
-
-    if (entity is T) {
-      return entity;
-    }
-
-    if (entity is Map<String, dynamic>) {
-      return _decodeMap<T>(entity);
-    }
-
-    return entity;
-  }
-
-  T _decodeMap<T>(Map<String, dynamic> values) {
-    final jsonFactory = factories[T];
-    if (jsonFactory == null || jsonFactory is! JsonFactory<T>) {
-      return throw "Could not find factory for type $T. Is '$T: $T.fromJsonFactory' included in the CustomJsonDecoder instance creation in bootstrapper.dart?";
-    }
-
-    return jsonFactory(values);
-  }
-
-  List<T> _decodeList<T>(Iterable values) =>
-      values.where((v) => v != null).map<T>((v) => decode<T>(v) as T).toList();
-}
-
-class JsonSerializableConverter extends chopper.JsonConverter {
-  @override
-  chopper.Response<ResultType> convertResponse<ResultType, Item>(
-      chopper.Response response) {
-    if (response.bodyString.isEmpty) {
-      // In rare cases, when let's say 204 (no content) is returned -
-      // we cannot decode the missing json with the result type specified
-      return chopper.Response(response.base, null, error: response.error);
-    }
-
-    final jsonRes = super.convertResponse(response);
-    return jsonRes.copyWith<ResultType>(
-        body: jsonDecoder.decode<Item>(jsonRes.body) as ResultType);
-  }
-}
-
-final jsonDecoder = CustomJsonDecoder(SupernodeJsonDecoderMappings);
 
 // ignore: unused_element
 String? _dateToJson(DateTime? date) {
