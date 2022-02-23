@@ -166,9 +166,9 @@ class DhxRepository {
     final res = await _client.dHXServcie.dHXGetLastMining();
     if (res.body == null || res.body?.date == null) return null;
     return YesterdayMining(
-      res.body!.date!,
-      res.body!.dhxAllocated.toDecimal(),
-      res.body!.miningPower.toDecimal(),
-    );
+        res.body!.date!,
+        res.body!.dhxAllocated.toDecimal(),
+        res.body!.miningPower.toDecimal(),
+        res.body!.globalMiningPower.toDecimal());
   }
 }
