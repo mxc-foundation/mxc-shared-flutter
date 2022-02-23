@@ -4,7 +4,6 @@ import 'package:meta/meta.dart';
 import 'package:mxc_logic/internal.dart';
 import 'package:mxc_logic/src/data/api/client/authentication.dart';
 
-import '../supernode/supernode.swagger.dart';
 import 'cert.dart';
 import 'error_converter.dart';
 
