@@ -110,7 +110,7 @@ class MxcAppBar extends StatelessWidget {
         children: [
           if (leading != null || action != null)
             SizedBox(
-              width: 60,
+              width: 32,
               child: leading,
             ),
           Expanded(
@@ -118,7 +118,7 @@ class MxcAppBar extends StatelessWidget {
           ),
           if (leading != null || action != null)
             SizedBox(
-              width: 60,
+              width: 32,
               child: action,
             ),
         ],

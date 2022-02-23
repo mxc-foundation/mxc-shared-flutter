@@ -92,11 +92,6 @@ class ImagesTheme {
         package: mxcUiPackageName,
       );
 
-  ImageProvider get faq => const AssetImage(
-        'assets/images/home/faq.png',
-        package: mxcUiPackageName,
-      );
-
   //app
   ImageProvider get close => const AssetImage(
         'assets/images/app/close.png',
