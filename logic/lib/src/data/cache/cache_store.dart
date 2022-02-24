@@ -84,6 +84,7 @@ class CacheController {
   }
 
   void unload() {
+    // not working
     _innerRepositories.map((e) => e.unload());
     _loadedStatusChanged.add(false);
   }
