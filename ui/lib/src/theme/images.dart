@@ -412,8 +412,20 @@ class ImagesTheme {
         package: mxcUiPackageName,
       );
 
+  // meta xp
+
   AssetImage get mapTitleRectangleBox => const AssetImage(
         'assets/images/map/map_title_rectangle_box.png',
+        package: mxcUiPackageName,
+      );
+
+  ImageProvider get metaXpLeaderboardSoon => const AssetImage(
+        'assets/images/map/meta-leaderboard-soon.png',
+        package: mxcUiPackageName,
+      );
+
+  ImageProvider get metaXpMapIcon => const AssetImage(
+        'assets/images/map/meta-xp-map-icon.png',
         package: mxcUiPackageName,
       );
 }
