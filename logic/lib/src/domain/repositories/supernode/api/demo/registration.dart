@@ -22,6 +22,7 @@ class DemoRegistrationRepository implements RegistrationRepository {
   @override
   Future<RegistrationResult> confirm({
     required String token,
+    required String email,
   }) async {
     throw UnimplementedError();
   }
