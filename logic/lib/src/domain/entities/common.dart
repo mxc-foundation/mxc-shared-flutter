@@ -33,6 +33,14 @@ class Location {
   final double longitude;
 }
 
+class LocationWithHex {
+  LocationWithHex(this.latitude, this.longitude, this.hexId);
+
+  final double latitude;
+  final double longitude;
+  final int hexId;
+}
+
 abstract class Field<T> {
   T get value;
   set value(T value);

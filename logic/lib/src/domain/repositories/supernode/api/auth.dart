@@ -23,7 +23,7 @@ class LoginRepository {
     );
 
     return LoginResult(
-      token: res.body!.authToken!,
+      token: res.body!.authToken ?? res.body!.jwt!,
       is2faRequired: res.body!.is2faRequired ?? false,
     );
   }

@@ -37,11 +37,11 @@ class DemoGatewayRepository implements GatewayRepository {
   }
 
   @override
-  Future<List<Location>> locations() async {
+  Future<List<LocationWithHex>> locations() async {
     return [
-      Location(0.0, 0.0),
-      Location(0.0, 0.1),
-      Location(0.0, 0.2),
+      LocationWithHex(0.0, 0.0, 1),
+      LocationWithHex(0.0, 0.1, 1),
+      LocationWithHex(0.0, 0.2, 1),
     ];
   }
 

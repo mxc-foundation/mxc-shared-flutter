@@ -58,6 +58,7 @@ class ColorsTheme {
 
   final success = const Color(0xFF10C469);
   final success20 = const Color(0xFF10C469).withOpacity(0.2);
+  final success40 = const Color(0xFF10C469).withOpacity(0.4);
 
   final textPrimaryAndIcons = Colors.black.withOpacity(0.87);
   final textSecondary = const Color(0xFF98A6AD);
@@ -168,6 +169,9 @@ class ColorsThemeDark implements ColorsTheme {
 
   @override
   final success20 = const Color(0xFF30A78B).withOpacity(0.2);
+
+  @override
+  final success40 = const Color(0xFF30A78B).withOpacity(0.4);
 
   @override
   final textPrimaryAndIcons = Colors.white;
