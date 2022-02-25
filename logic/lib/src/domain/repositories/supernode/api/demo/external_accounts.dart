@@ -22,21 +22,4 @@ class DemoExternalAccountsRepository implements ExternalAccountsRepository {
   }) {
     throw UnimplementedError();
   }
-
-  @override
-  Future<void> verifyEmail({
-    required String email,
-    required String language,
-    String? orgId,
-  }) {
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<void> confirmEmail({
-    required String token,
-    String? orgId,
-  }) {
-    throw UnimplementedError();
-  }
 }
