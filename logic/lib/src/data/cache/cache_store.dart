@@ -1,7 +1,6 @@
 import 'package:meta/meta.dart';
 import 'package:mxc_logic/internal.dart';
 import 'package:mxc_logic/mxc_logic.dart';
-import 'package:rxdart/rxdart.dart';
 
 abstract class BaseCacheStore {
   CacheZone get _zone;
@@ -74,11 +73,6 @@ class CacheController {
   final CacheManager _manager;
   final String prefixKey;
 
-  final BehaviorSubject<bool> _loadedStatusChanged =
-      BehaviorSubject.seeded(false);
-
-  ValueStream<bool> get loadedStatusChanged => _loadedStatusChanged;
-
   void register(ControlledCacheStore repository) {
     _innerRepositories.add(repository);
   }
@@ -86,7 +80,6 @@ class CacheController {
   void unload() {
     // not working
     _innerRepositories.map((e) => e.unload());
-    _loadedStatusChanged.add(false);
   }
 
   Future<void> load(String key) async {
@@ -97,6 +90,5 @@ class CacheController {
         },
       ),
     );
-    _loadedStatusChanged.add(true);
   }
 }
