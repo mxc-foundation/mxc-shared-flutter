@@ -29,7 +29,6 @@ class DemoTotpRepository implements TotpRepository {
   @override
   Future<List<String>?> getRecoveryCodes({
     required String otp,
-    required bool regenerate,
   }) {
     throw UnimplementedError('no 2fa recovery codes for demo mode');
   }
