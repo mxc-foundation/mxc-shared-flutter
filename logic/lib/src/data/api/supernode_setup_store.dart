@@ -32,7 +32,6 @@ class SupernodeSetupStoreImpl extends GlobalCacheStore
   String get zone => 'supernode-setup';
 
   late final Field<String?> _username = field('username');
-  late final Field<String?> _password = field('password');
   late final Field<String?> _supernodeAddress = field('supernode-address');
   late final Field<String?> _token = field('token');
   late final Field<String?> _organizationId = field('organizationId');
@@ -63,7 +62,6 @@ class SupernodeSetupStoreImpl extends GlobalCacheStore
   @override
   Future<void> clean() => cleanFields([
         _username,
-        _password,
         _supernodeAddress,
         _token,
       ]);

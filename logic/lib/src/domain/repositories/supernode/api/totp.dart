@@ -42,9 +42,10 @@ class TotpRepository {
 
   Future<List<String>?> getRecoveryCodes({
     required String otp,
+    required bool regenerate,
   }) async {
     final response = await client.internalService.getRecoveryCodes(
-      body: ExtapiGetRecoveryCodesRequest(regenerate: true),
+      body: ExtapiGetRecoveryCodesRequest(regenerate: regenerate),
       grpcMetadataXOTP: otp,
     );
 
