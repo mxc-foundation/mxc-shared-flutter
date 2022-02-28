@@ -16,12 +16,14 @@ class LoginUseCase {
   }
 
   Future<bool> login(
+    String captcha,
     String supernodeAddress,
     String username,
     String password,
   ) async {
     authStorageRepository.supernodeAddress = supernodeAddress;
     final LoginResult res = await repository.auth.login(
+      captcha: captcha,
       username: username,
       password: password,
     );

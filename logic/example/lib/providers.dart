@@ -30,11 +30,12 @@ Future<void> loadProviders(GlobalKey<NavigatorState> navigatorKey) async {
   final cacheManager = await CacheManager.load();
   final supernodeSetupStore = SupernodeSetupStore();
   await supernodeSetupStore.load(cacheManager);
-  final tokenRefresher = TokenRefresher(supernodeSetupStore);
-  final supernodeRepository = ApiSupernodeRepository(
-    setupStore: supernodeSetupStore,
-    tokenRefresher: tokenRefresher,
-  );
+  /// Based on the 2AF feature, the automatic re-login will be removed.
+  // final tokenRefresher = TokenRefresher(supernodeSetupStore);
+  // final supernodeRepository = ApiSupernodeRepository(
+  //   setupStore: supernodeSetupStore,
+  //   tokenRefresher: tokenRefresher,
+  // );
 
   cacheManagerProvider = Provider(
     (ref) => cacheManager,
@@ -42,9 +43,9 @@ Future<void> loadProviders(GlobalKey<NavigatorState> navigatorKey) async {
   authenticationStorageRepositoryProvider = Provider(
     (ref) => AuthenticationStorageRepository(supernodeSetupStore),
   );
-  supernodeRepositoryProvider = Provider(
-    (ref) => supernodeRepository,
-  );
+  // supernodeRepositoryProvider = Provider(
+  //   (ref) => supernodeRepository,
+  // );
   navigatorProvider = Provider(
     (ref) => navigatorKey.currentState!,
   );

@@ -63,8 +63,9 @@ class AuthPresenter extends StateNotifier<AuthState> {
 
   void resetSupernode() => state = state.resetSupernode();
 
-  Future<void> login(String username, String password) async {
-    await _useCase.login(state.pickedSupernode!.url, username, password);
+  Future<void> login(String captcha, String username, String password) async {
+    await _useCase.login(
+        captcha, state.pickedSupernode!.url, username, password);
     _navigator.pop();
   }
 

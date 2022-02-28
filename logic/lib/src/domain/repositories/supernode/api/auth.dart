@@ -12,11 +12,13 @@ class LoginRepository {
   final UserRepository userRepository;
 
   Future<LoginResult> login({
+    required String captcha,
     required String username,
     required String password,
   }) async {
     final res = await client.internalService.login(
       body: ExtapiLoginRequest(
+        captcha: captcha,
         username: username,
         password: password,
       ),
@@ -61,11 +63,12 @@ class LoginRepository {
 
   /// [languageCode] can be taken from [Locale.languageCode]
   Future<void> resetPassword({
+    required String captcha,
     required String username,
     required String languageCode,
   }) async {
     await client.internalService.requestPasswordReset(
-      body: ExtapiPasswordResetReq(username: username, language: languageCode),
+      body: ExtapiPasswordResetReq(captcha: captcha, username: username, language: languageCode),
     );
   }
 

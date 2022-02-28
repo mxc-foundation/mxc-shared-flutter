@@ -45,6 +45,7 @@ class AuthPage extends HookConsumerWidget {
         ),
         TextButton(
           onPressed: () => ref.read(AuthPresenter.actions).login(
+                'captcha',
                 loginController.text,
                 passwordController.text,
               ),

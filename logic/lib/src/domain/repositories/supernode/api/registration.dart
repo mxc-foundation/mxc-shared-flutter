@@ -10,11 +10,13 @@ class RegistrationRepository {
 
   /// [languageCode] can be taken from [Locale.languageCode]
   Future<void> withEmail({
+    required String captcha,
     required String email,
     required String languageCode,
   }) async {
     await _client.internalService.registerUser(
       body: ExtapiRegisterUserRequest(
+        captcha: captcha,
         email: email,
         language: languageCode,
       ),
