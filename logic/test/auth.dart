@@ -68,6 +68,7 @@ Future<void> main() async {
     });
     test('Can login', () async {
       await loginUseCase.login(
+        'captcha',
         supernodeAddress,
         login,
         password,

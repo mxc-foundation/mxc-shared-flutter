@@ -18,6 +18,7 @@ class TokenRefresherImpl implements TokenRefresher {
     final crendetials = setupRepository.credentials;
     if (crendetials != null) {
       final res = await supernodeRepository.auth.login(
+        captcha: '',
         username: crendetials.username,
         password: crendetials.password,
       );

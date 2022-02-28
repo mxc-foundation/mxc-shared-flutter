@@ -14049,6 +14049,7 @@ class ExtapiLogin2FARequest {
 @JsonSerializable(explicitToJson: true)
 class ExtapiLoginRequest {
   ExtapiLoginRequest({
+    this.captcha,
     this.password,
     this.username,
   });
@@ -14056,6 +14057,8 @@ class ExtapiLoginRequest {
   factory ExtapiLoginRequest.fromJson(Map<String, dynamic> json) =>
       _$ExtapiLoginRequestFromJson(json);
 
+  @JsonKey(name: 'captcha')
+  final String? captcha;
   @JsonKey(name: 'password')
   final String? password;
   @JsonKey(name: 'username')
@@ -14068,6 +14071,9 @@ class ExtapiLoginRequest {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is ExtapiLoginRequest &&
+            (identical(other.captcha, captcha) ||
+                const DeepCollectionEquality()
+                    .equals(other.captcha, captcha)) &&
             (identical(other.password, password) ||
                 const DeepCollectionEquality()
                     .equals(other.password, password)) &&
@@ -14078,8 +14084,10 @@ class ExtapiLoginRequest {
 }
 
 extension $ExtapiLoginRequestExtension on ExtapiLoginRequest {
-  ExtapiLoginRequest copyWith({String? password, String? username}) {
+  ExtapiLoginRequest copyWith(
+      {String? captcha, String? password, String? username}) {
     return ExtapiLoginRequest(
+        captcha: captcha ?? this.captcha,
         password: password ?? this.password,
         username: username ?? this.username);
   }
@@ -15510,6 +15518,7 @@ extension $ExtapiOrganizationUserListItemExtension
 @JsonSerializable(explicitToJson: true)
 class ExtapiPasswordResetReq {
   ExtapiPasswordResetReq({
+    this.captcha,
     this.language,
     this.username,
   });
@@ -15517,6 +15526,8 @@ class ExtapiPasswordResetReq {
   factory ExtapiPasswordResetReq.fromJson(Map<String, dynamic> json) =>
       _$ExtapiPasswordResetReqFromJson(json);
 
+  @JsonKey(name: 'captcha')
+  final String? captcha;
   @JsonKey(name: 'language')
   final String? language;
   @JsonKey(name: 'username')
@@ -15529,6 +15540,9 @@ class ExtapiPasswordResetReq {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is ExtapiPasswordResetReq &&
+            (identical(other.captcha, captcha) ||
+                const DeepCollectionEquality()
+                    .equals(other.captcha, captcha)) &&
             (identical(other.language, language) ||
                 const DeepCollectionEquality()
                     .equals(other.language, language)) &&
@@ -15539,8 +15553,10 @@ class ExtapiPasswordResetReq {
 }
 
 extension $ExtapiPasswordResetReqExtension on ExtapiPasswordResetReq {
-  ExtapiPasswordResetReq copyWith({String? language, String? username}) {
+  ExtapiPasswordResetReq copyWith(
+      {String? captcha, String? language, String? username}) {
     return ExtapiPasswordResetReq(
+        captcha: captcha ?? this.captcha,
         language: language ?? this.language,
         username: username ?? this.username);
   }
@@ -15905,6 +15921,7 @@ extension $ExtapiRegisterResponseExtension on ExtapiRegisterResponse {
 @JsonSerializable(explicitToJson: true)
 class ExtapiRegisterUserRequest {
   ExtapiRegisterUserRequest({
+    this.captcha,
     this.email,
     this.language,
   });
@@ -15912,6 +15929,8 @@ class ExtapiRegisterUserRequest {
   factory ExtapiRegisterUserRequest.fromJson(Map<String, dynamic> json) =>
       _$ExtapiRegisterUserRequestFromJson(json);
 
+  @JsonKey(name: 'captcha')
+  final String? captcha;
   @JsonKey(name: 'email')
   final String? email;
   @JsonKey(name: 'language')
@@ -15924,6 +15943,9 @@ class ExtapiRegisterUserRequest {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is ExtapiRegisterUserRequest &&
+            (identical(other.captcha, captcha) ||
+                const DeepCollectionEquality()
+                    .equals(other.captcha, captcha)) &&
             (identical(other.email, email) ||
                 const DeepCollectionEquality().equals(other.email, email)) &&
             (identical(other.language, language) ||
@@ -15933,9 +15955,12 @@ class ExtapiRegisterUserRequest {
 }
 
 extension $ExtapiRegisterUserRequestExtension on ExtapiRegisterUserRequest {
-  ExtapiRegisterUserRequest copyWith({String? email, String? language}) {
+  ExtapiRegisterUserRequest copyWith(
+      {String? captcha, String? email, String? language}) {
     return ExtapiRegisterUserRequest(
-        email: email ?? this.email, language: language ?? this.language);
+        captcha: captcha ?? this.captcha,
+        email: email ?? this.email,
+        language: language ?? this.language);
   }
 }
 

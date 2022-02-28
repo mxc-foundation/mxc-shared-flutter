@@ -11310,6 +11310,10 @@
         },
         "extapiLoginRequest": {
             "properties": {
+                "captcha": {
+                    "description": "Captcha token",
+                    "type": "string"
+                },
                 "password": {
                     "description": "Password of the user.",
                     "type": "string"
@@ -11916,6 +11920,10 @@
         },
         "extapiPasswordResetReq": {
             "properties": {
+                "captcha": {
+                    "description": "captcha token",
+                    "type": "string"
+                },
                 "language": {
                     "description": "language for the email",
                     "type": "string"
@@ -12060,6 +12068,10 @@
         },
         "extapiRegisterUserRequest": {
             "properties": {
+                "captcha": {
+                    "description": "Captcha token",
+                    "type": "string"
+                },
                 "email": {
                     "type": "string"
                 },
