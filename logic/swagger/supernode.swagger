@@ -142,359 +142,6 @@
                 ]
             }
         },
-        "/api/applications/{applicationID}/integrations": {
-            "get": {
-                "operationId": "ListIntegrations",
-                "parameters": [
-                    {
-                        "description": "The id of the application.",
-                        "format": "int64",
-                        "in": "path",
-                        "name": "applicationID",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "A successful response.",
-                        "schema": {
-                            "$ref": "#/definitions/extapiListIntegrationResponse"
-                        }
-                    },
-                    "default": {
-                        "description": "An unexpected error response.",
-                        "schema": {
-                            "$ref": "#/definitions/runtimeError"
-                        }
-                    }
-                },
-                "summary": "ListIntegrations lists all configured integrations.",
-                "tags": [
-                    "ApplicationService"
-                ]
-            }
-        },
-        "/api/applications/{applicationID}/integrations/http": {
-            "delete": {
-                "operationId": "DeleteHTTPIntegration",
-                "parameters": [
-                    {
-                        "description": "The id of the application.",
-                        "format": "int64",
-                        "in": "path",
-                        "name": "applicationID",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "A successful response.",
-                        "schema": {
-                            "properties": {}
-                        }
-                    },
-                    "default": {
-                        "description": "An unexpected error response.",
-                        "schema": {
-                            "$ref": "#/definitions/runtimeError"
-                        }
-                    }
-                },
-                "summary": "DeleteIntegration deletes the HTTP application-integration.",
-                "tags": [
-                    "ApplicationService"
-                ]
-            },
-            "get": {
-                "operationId": "GetHTTPIntegration",
-                "parameters": [
-                    {
-                        "description": "Application ID.",
-                        "format": "int64",
-                        "in": "path",
-                        "name": "applicationID",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "A successful response.",
-                        "schema": {
-                            "$ref": "#/definitions/extapiGetHTTPIntegrationResponse"
-                        }
-                    },
-                    "default": {
-                        "description": "An unexpected error response.",
-                        "schema": {
-                            "$ref": "#/definitions/runtimeError"
-                        }
-                    }
-                },
-                "summary": "GetHTTPIntegration returns the HTTP application-integration.",
-                "tags": [
-                    "ApplicationService"
-                ]
-            }
-        },
-        "/api/applications/{applicationID}/integrations/influxdb": {
-            "delete": {
-                "operationId": "DeleteInfluxDBIntegration",
-                "parameters": [
-                    {
-                        "description": "Application ID.",
-                        "format": "int64",
-                        "in": "path",
-                        "name": "applicationID",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "A successful response.",
-                        "schema": {
-                            "properties": {}
-                        }
-                    },
-                    "default": {
-                        "description": "An unexpected error response.",
-                        "schema": {
-                            "$ref": "#/definitions/runtimeError"
-                        }
-                    }
-                },
-                "summary": "DeleteInfluxDBIntegration deletes the InfluxDB application-integration.",
-                "tags": [
-                    "ApplicationService"
-                ]
-            },
-            "get": {
-                "operationId": "GetInfluxDBIntegration",
-                "parameters": [
-                    {
-                        "description": "Application ID.",
-                        "format": "int64",
-                        "in": "path",
-                        "name": "applicationID",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "A successful response.",
-                        "schema": {
-                            "$ref": "#/definitions/extapiGetInfluxDBIntegrationResponse"
-                        }
-                    },
-                    "default": {
-                        "description": "An unexpected error response.",
-                        "schema": {
-                            "$ref": "#/definitions/runtimeError"
-                        }
-                    }
-                },
-                "summary": "GetInfluxDBIntegration returns the InfluxDB application-integration.",
-                "tags": [
-                    "ApplicationService"
-                ]
-            }
-        },
-        "/api/applications/{applicationID}/integrations/loracloud": {
-            "delete": {
-                "operationId": "DeleteLoRaCloudIntegration",
-                "parameters": [
-                    {
-                        "description": "Application ID.",
-                        "format": "int64",
-                        "in": "path",
-                        "name": "applicationID",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "A successful response.",
-                        "schema": {
-                            "properties": {}
-                        }
-                    },
-                    "default": {
-                        "description": "An unexpected error response.",
-                        "schema": {
-                            "$ref": "#/definitions/runtimeError"
-                        }
-                    }
-                },
-                "summary": "DeleteLoRaCloudIntegration deletes the LoRaCloud application-integration.",
-                "tags": [
-                    "ApplicationService"
-                ]
-            },
-            "get": {
-                "operationId": "GetLoRaCloudIntegration",
-                "parameters": [
-                    {
-                        "description": "Application ID.",
-                        "format": "int64",
-                        "in": "path",
-                        "name": "applicationID",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "A successful response.",
-                        "schema": {
-                            "$ref": "#/definitions/extapiGetLoRaCloudIntegrationResponse"
-                        }
-                    },
-                    "default": {
-                        "description": "An unexpected error response.",
-                        "schema": {
-                            "$ref": "#/definitions/runtimeError"
-                        }
-                    }
-                },
-                "summary": "GetLoRaCloudIntegration returns the LoRaCloud application-integration.",
-                "tags": [
-                    "ApplicationService"
-                ]
-            }
-        },
-        "/api/applications/{applicationID}/integrations/mydevices": {
-            "delete": {
-                "operationId": "DeleteMyDevicesIntegration",
-                "parameters": [
-                    {
-                        "description": "Application ID.",
-                        "format": "int64",
-                        "in": "path",
-                        "name": "applicationID",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "A successful response.",
-                        "schema": {
-                            "properties": {}
-                        }
-                    },
-                    "default": {
-                        "description": "An unexpected error response.",
-                        "schema": {
-                            "$ref": "#/definitions/runtimeError"
-                        }
-                    }
-                },
-                "summary": "DeleteMyDevicesIntegration deletes the MyDevices application-integration.",
-                "tags": [
-                    "ApplicationService"
-                ]
-            },
-            "get": {
-                "operationId": "GetMyDevicesIntegration",
-                "parameters": [
-                    {
-                        "description": "Application ID.",
-                        "format": "int64",
-                        "in": "path",
-                        "name": "applicationID",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "A successful response.",
-                        "schema": {
-                            "$ref": "#/definitions/extapiGetMyDevicesIntegrationResponse"
-                        }
-                    },
-                    "default": {
-                        "description": "An unexpected error response.",
-                        "schema": {
-                            "$ref": "#/definitions/runtimeError"
-                        }
-                    }
-                },
-                "summary": "GetMyDevicesIntegration returns the MyDevices application-integration.",
-                "tags": [
-                    "ApplicationService"
-                ]
-            }
-        },
-        "/api/applications/{applicationID}/integrations/thingsboard": {
-            "delete": {
-                "operationId": "DeleteThingsBoardIntegration",
-                "parameters": [
-                    {
-                        "description": "Application ID.",
-                        "format": "int64",
-                        "in": "path",
-                        "name": "applicationID",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "A successful response.",
-                        "schema": {
-                            "properties": {}
-                        }
-                    },
-                    "default": {
-                        "description": "An unexpected error response.",
-                        "schema": {
-                            "$ref": "#/definitions/runtimeError"
-                        }
-                    }
-                },
-                "summary": "DeleteThingsBoardIntegration deletes the ThingsBoard application-integration.",
-                "tags": [
-                    "ApplicationService"
-                ]
-            },
-            "get": {
-                "operationId": "GetThingsBoardIntegration",
-                "parameters": [
-                    {
-                        "description": "Application ID.",
-                        "format": "int64",
-                        "in": "path",
-                        "name": "applicationID",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "A successful response.",
-                        "schema": {
-                            "$ref": "#/definitions/extapiGetThingsBoardIntegrationResponse"
-                        }
-                    },
-                    "default": {
-                        "description": "An unexpected error response.",
-                        "schema": {
-                            "$ref": "#/definitions/runtimeError"
-                        }
-                    }
-                },
-                "summary": "GetThingsBoardIntegration returns the ThingsBoard application-integration.",
-                "tags": [
-                    "ApplicationService"
-                ]
-            }
-        },
         "/api/applications/{id}": {
             "delete": {
                 "operationId": "Delete",
@@ -554,406 +201,6 @@
                     }
                 },
                 "summary": "Get returns the requested application.",
-                "tags": [
-                    "ApplicationService"
-                ]
-            }
-        },
-        "/api/applications/{integration.applicationID}/integrations/http": {
-            "post": {
-                "operationId": "CreateHTTPIntegration",
-                "parameters": [
-                    {
-                        "description": "The id of the application.",
-                        "format": "int64",
-                        "in": "path",
-                        "name": "integration.applicationID",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/extapiCreateHTTPIntegrationRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "A successful response.",
-                        "schema": {
-                            "properties": {}
-                        }
-                    },
-                    "default": {
-                        "description": "An unexpected error response.",
-                        "schema": {
-                            "$ref": "#/definitions/runtimeError"
-                        }
-                    }
-                },
-                "summary": "CreateHTTPIntegration creates a HTTP application-integration.",
-                "tags": [
-                    "ApplicationService"
-                ]
-            },
-            "put": {
-                "operationId": "UpdateHTTPIntegration",
-                "parameters": [
-                    {
-                        "description": "The id of the application.",
-                        "format": "int64",
-                        "in": "path",
-                        "name": "integration.applicationID",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/extapiUpdateHTTPIntegrationRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "A successful response.",
-                        "schema": {
-                            "properties": {}
-                        }
-                    },
-                    "default": {
-                        "description": "An unexpected error response.",
-                        "schema": {
-                            "$ref": "#/definitions/runtimeError"
-                        }
-                    }
-                },
-                "summary": "UpdateHTTPIntegration updates the HTTP application-integration.",
-                "tags": [
-                    "ApplicationService"
-                ]
-            }
-        },
-        "/api/applications/{integration.applicationID}/integrations/influxdb": {
-            "post": {
-                "operationId": "CreateInfluxDBIntegration",
-                "parameters": [
-                    {
-                        "description": "Application ID.",
-                        "format": "int64",
-                        "in": "path",
-                        "name": "integration.applicationID",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/extapiCreateInfluxDBIntegrationRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "A successful response.",
-                        "schema": {
-                            "properties": {}
-                        }
-                    },
-                    "default": {
-                        "description": "An unexpected error response.",
-                        "schema": {
-                            "$ref": "#/definitions/runtimeError"
-                        }
-                    }
-                },
-                "summary": "CreateInfluxDBIntegration create an InfluxDB application-integration.",
-                "tags": [
-                    "ApplicationService"
-                ]
-            },
-            "put": {
-                "operationId": "UpdateInfluxDBIntegration",
-                "parameters": [
-                    {
-                        "description": "Application ID.",
-                        "format": "int64",
-                        "in": "path",
-                        "name": "integration.applicationID",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/extapiUpdateInfluxDBIntegrationRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "A successful response.",
-                        "schema": {
-                            "properties": {}
-                        }
-                    },
-                    "default": {
-                        "description": "An unexpected error response.",
-                        "schema": {
-                            "$ref": "#/definitions/runtimeError"
-                        }
-                    }
-                },
-                "summary": "UpdateInfluxDBIntegration updates the InfluxDB application-integration.",
-                "tags": [
-                    "ApplicationService"
-                ]
-            }
-        },
-        "/api/applications/{integration.applicationID}/integrations/loracloud": {
-            "post": {
-                "operationId": "CreateLoRaCloudIntegration",
-                "parameters": [
-                    {
-                        "description": "Application ID.",
-                        "format": "int64",
-                        "in": "path",
-                        "name": "integration.applicationID",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/extapiCreateLoRaCloudIntegrationRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "A successful response.",
-                        "schema": {
-                            "properties": {}
-                        }
-                    },
-                    "default": {
-                        "description": "An unexpected error response.",
-                        "schema": {
-                            "$ref": "#/definitions/runtimeError"
-                        }
-                    }
-                },
-                "summary": "CreateLoRaCloudIntegration creates A LoRaCloud application-integration.",
-                "tags": [
-                    "ApplicationService"
-                ]
-            },
-            "put": {
-                "operationId": "UpdateLoRaCloudIntegration",
-                "parameters": [
-                    {
-                        "description": "Application ID.",
-                        "format": "int64",
-                        "in": "path",
-                        "name": "integration.applicationID",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/extapiUpdateLoRaCloudIntegrationRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "A successful response.",
-                        "schema": {
-                            "properties": {}
-                        }
-                    },
-                    "default": {
-                        "description": "An unexpected error response.",
-                        "schema": {
-                            "$ref": "#/definitions/runtimeError"
-                        }
-                    }
-                },
-                "summary": "UpdateLoRaCloudIntegration updates the LoRaCloud application-integration.",
-                "tags": [
-                    "ApplicationService"
-                ]
-            }
-        },
-        "/api/applications/{integration.applicationID}/integrations/mydevices": {
-            "post": {
-                "operationId": "CreateMyDevicesIntegration",
-                "parameters": [
-                    {
-                        "description": "Application ID.",
-                        "format": "int64",
-                        "in": "path",
-                        "name": "integration.applicationID",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/extapiCreateMyDevicesIntegrationRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "A successful response.",
-                        "schema": {
-                            "properties": {}
-                        }
-                    },
-                    "default": {
-                        "description": "An unexpected error response.",
-                        "schema": {
-                            "$ref": "#/definitions/runtimeError"
-                        }
-                    }
-                },
-                "summary": "CreateMyDevicesIntegration creates a MyDevices application-integration.",
-                "tags": [
-                    "ApplicationService"
-                ]
-            },
-            "put": {
-                "operationId": "UpdateMyDevicesIntegration",
-                "parameters": [
-                    {
-                        "description": "Application ID.",
-                        "format": "int64",
-                        "in": "path",
-                        "name": "integration.applicationID",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/extapiUpdateMyDevicesIntegrationRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "A successful response.",
-                        "schema": {
-                            "properties": {}
-                        }
-                    },
-                    "default": {
-                        "description": "An unexpected error response.",
-                        "schema": {
-                            "$ref": "#/definitions/runtimeError"
-                        }
-                    }
-                },
-                "summary": "UpdateMyDevicesIntegration updates the MyDevices application-integration.",
-                "tags": [
-                    "ApplicationService"
-                ]
-            }
-        },
-        "/api/applications/{integration.applicationID}/integrations/thingsboard": {
-            "post": {
-                "operationId": "CreateThingsBoardIntegration",
-                "parameters": [
-                    {
-                        "description": "Application ID.",
-                        "format": "int64",
-                        "in": "path",
-                        "name": "integration.applicationID",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/extapiCreateThingsBoardIntegrationRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "A successful response.",
-                        "schema": {
-                            "properties": {}
-                        }
-                    },
-                    "default": {
-                        "description": "An unexpected error response.",
-                        "schema": {
-                            "$ref": "#/definitions/runtimeError"
-                        }
-                    }
-                },
-                "summary": "CreateThingsBoardIntegration creates a ThingsBoard application-integration.",
-                "tags": [
-                    "ApplicationService"
-                ]
-            },
-            "put": {
-                "operationId": "UpdateThingsBoardIntegration",
-                "parameters": [
-                    {
-                        "description": "Application ID.",
-                        "format": "int64",
-                        "in": "path",
-                        "name": "integration.applicationID",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/extapiUpdateThingsBoardIntegrationRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "A successful response.",
-                        "schema": {
-                            "properties": {}
-                        }
-                    },
-                    "default": {
-                        "description": "An unexpected error response.",
-                        "schema": {
-                            "$ref": "#/definitions/runtimeError"
-                        }
-                    }
-                },
-                "summary": "UpdateThingsBoardIntegration updates the ThingsBoard application-integration.",
                 "tags": [
                     "ApplicationService"
                 ]
@@ -1050,14 +297,14 @@
         },
         "/api/confirm-external-email": {
             "post": {
-                "operationId": "ConfirmBindingEmail",
+                "operationId": "ConfirmShopifyEmail",
                 "parameters": [
                     {
                         "in": "body",
                         "name": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/extapiConfirmBindingEmailRequest"
+                            "$ref": "#/definitions/extapiConfirmShopifyEmailRequest"
                         }
                     }
                 ],
@@ -1065,7 +312,7 @@
                     "200": {
                         "description": "A successful response.",
                         "schema": {
-                            "$ref": "#/definitions/extapiConfirmBindingEmailResponse"
+                            "$ref": "#/definitions/extapiConfirmShopifyEmailResponse"
                         }
                     },
                     "default": {
@@ -1075,7 +322,7 @@
                         }
                     }
                 },
-                "summary": "ConfirmBindingEmail checks given token and bind",
+                "summary": "ConfirmShopifyEmail checks given token and bind",
                 "tags": [
                     "ExternalUserService"
                 ]
@@ -1304,187 +551,6 @@
                 ]
             }
         },
-        "/api/device/{orgId}/device-history/{devId}": {
-            "get": {
-                "operationId": "GetDeviceHistory",
-                "parameters": [
-                    {
-                        "format": "int64",
-                        "in": "path",
-                        "name": "orgId",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "format": "int64",
-                        "in": "path",
-                        "name": "devId",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "format": "int64",
-                        "in": "query",
-                        "name": "offset",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "format": "int64",
-                        "in": "query",
-                        "name": "limit",
-                        "required": false,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "A successful response.",
-                        "schema": {
-                            "$ref": "#/definitions/extapiGetDeviceHistoryResponse"
-                        }
-                    },
-                    "default": {
-                        "description": "An unexpected error response.",
-                        "schema": {
-                            "$ref": "#/definitions/runtimeError"
-                        }
-                    }
-                },
-                "tags": [
-                    "DeviceService"
-                ]
-            }
-        },
-        "/api/device/{orgId}/device-list": {
-            "get": {
-                "operationId": "GetDeviceList",
-                "parameters": [
-                    {
-                        "format": "int64",
-                        "in": "path",
-                        "name": "orgId",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "format": "int64",
-                        "in": "query",
-                        "name": "offset",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "format": "int64",
-                        "in": "query",
-                        "name": "limit",
-                        "required": false,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "A successful response.",
-                        "schema": {
-                            "$ref": "#/definitions/extapiGetDeviceListResponse"
-                        }
-                    },
-                    "default": {
-                        "description": "An unexpected error response.",
-                        "schema": {
-                            "$ref": "#/definitions/runtimeError"
-                        }
-                    }
-                },
-                "tags": [
-                    "DeviceService"
-                ]
-            }
-        },
-        "/api/device/{orgId}/device-mode/{devId}": {
-            "post": {
-                "operationId": "SetDeviceMode",
-                "parameters": [
-                    {
-                        "format": "int64",
-                        "in": "path",
-                        "name": "orgId",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "format": "int64",
-                        "in": "path",
-                        "name": "devId",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/extapiSetDeviceModeRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "A successful response.",
-                        "schema": {
-                            "$ref": "#/definitions/extapiSetDeviceModeResponse"
-                        }
-                    },
-                    "default": {
-                        "description": "An unexpected error response.",
-                        "schema": {
-                            "$ref": "#/definitions/runtimeError"
-                        }
-                    }
-                },
-                "tags": [
-                    "DeviceService"
-                ]
-            }
-        },
-        "/api/device/{orgId}/device-profile/{devId}": {
-            "get": {
-                "operationId": "GetDeviceProfile",
-                "parameters": [
-                    {
-                        "format": "int64",
-                        "in": "path",
-                        "name": "orgId",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "format": "int64",
-                        "in": "path",
-                        "name": "devId",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "A successful response.",
-                        "schema": {
-                            "$ref": "#/definitions/extapiGetDSDeviceProfileResponse"
-                        }
-                    },
-                    "default": {
-                        "description": "An unexpected error response.",
-                        "schema": {
-                            "$ref": "#/definitions/runtimeError"
-                        }
-                    }
-                },
-                "tags": [
-                    "DeviceService"
-                ]
-            }
-        },
         "/api/devices": {
             "get": {
                 "operationId": "List",
@@ -1517,13 +583,6 @@
                         "description": "Search on name or DevEUI.",
                         "in": "query",
                         "name": "search",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "description": "Multicast-group ID to filter on (string formatted UUID).",
-                        "in": "query",
-                        "name": "multicastGroupID",
                         "required": false,
                         "type": "string"
                     },
@@ -1789,46 +848,6 @@
                 "summary": "StreamFrameLogs streams the uplink and downlink frame-logs for the given DevEUI.\n  * These are the raw LoRaWAN frames and this endpoint is intended for debugging only.\n  * This endpoint does not work from a web-browser.",
                 "tags": [
                     "DeviceService"
-                ]
-            }
-        },
-        "/api/devices/{devEUI}/fuota-deployments": {
-            "post": {
-                "operationId": "CreateForDevice",
-                "parameters": [
-                    {
-                        "description": "Device EUI (HEX encoded).",
-                        "in": "path",
-                        "name": "devEUI",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/extapiCreateFUOTADeploymentForDeviceRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "A successful response.",
-                        "schema": {
-                            "$ref": "#/definitions/extapiCreateFUOTADeploymentForDeviceResponse"
-                        }
-                    },
-                    "default": {
-                        "description": "An unexpected error response.",
-                        "schema": {
-                            "$ref": "#/definitions/runtimeError"
-                        }
-                    }
-                },
-                "summary": "CreateForDevice creates a deployment for the given DevEUI.",
-                "tags": [
-                    "FUOTADeploymentService"
                 ]
             }
         },
@@ -2425,6 +1444,39 @@
                 ]
             }
         },
+        "/api/dhx-mining/dhx-total-mined": {
+            "get": {
+                "operationId": "DHXTotalMining",
+                "parameters": [
+                    {
+                        "description": "organization id for which the total should be returned.",
+                        "format": "int64",
+                        "in": "query",
+                        "name": "orgId",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/extapiDHXTotalMiningResponse"
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/runtimeError"
+                        }
+                    }
+                },
+                "summary": "DHXTotalMining returns total amount of DHX mined by the org",
+                "tags": [
+                    "DHXServcie"
+                ]
+            }
+        },
         "/api/dhx-mining/estimate": {
             "get": {
                 "operationId": "DHXEstimateMining",
@@ -2599,6 +1651,39 @@
                     }
                 },
                 "summary": "List all dhx stakes for the organization",
+                "tags": [
+                    "DHXServcie"
+                ]
+            }
+        },
+        "/api/dhx-mining/mxc-locked-total": {
+            "get": {
+                "operationId": "MXCLockdropsTotal",
+                "parameters": [
+                    {
+                        "description": "organization id for which the total amount of locked MXC should be returned.",
+                        "format": "int64",
+                        "in": "query",
+                        "name": "orgId",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/extapiMXCLockdropsTotalResponse"
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/runtimeError"
+                        }
+                    }
+                },
+                "summary": "MXCLockdropsTotal returns total amount of MXC locked for DHX mining",
                 "tags": [
                     "DHXServcie"
                 ]
@@ -2799,181 +1884,6 @@
                 "summary": "UnbindExternalUser unbinds external user and supernode user account",
                 "tags": [
                     "ExternalUserService"
-                ]
-            }
-        },
-        "/api/fuota-deployments": {
-            "get": {
-                "operationId": "List",
-                "parameters": [
-                    {
-                        "description": "Max number of deployments to return in the result-set.",
-                        "format": "int64",
-                        "in": "query",
-                        "name": "limit",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "description": "Offset in the result-set (for pagination).",
-                        "format": "int64",
-                        "in": "query",
-                        "name": "offset",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "description": "Application ID to filter on (optional).",
-                        "format": "int64",
-                        "in": "query",
-                        "name": "applicationID",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "description": "Device EUI (HEX encoded) (optional).",
-                        "in": "query",
-                        "name": "devEUI",
-                        "required": false,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "A successful response.",
-                        "schema": {
-                            "$ref": "#/definitions/extapiListFUOTADeploymentResponse"
-                        }
-                    },
-                    "default": {
-                        "description": "An unexpected error response.",
-                        "schema": {
-                            "$ref": "#/definitions/runtimeError"
-                        }
-                    }
-                },
-                "summary": "List lists the fuota deployments.",
-                "tags": [
-                    "FUOTADeploymentService"
-                ]
-            }
-        },
-        "/api/fuota-deployments/{fuotaDeploymentID}/devices": {
-            "get": {
-                "operationId": "ListDeploymentDevices",
-                "parameters": [
-                    {
-                        "description": "ID of the deployment (string formatted UUID).\nThis value will be automatically assigned on create.",
-                        "in": "path",
-                        "name": "fuotaDeploymentID",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "description": "Max number of items to return.",
-                        "format": "int64",
-                        "in": "query",
-                        "name": "limit",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "description": "Offset in the result-set (for pagination).",
-                        "format": "int64",
-                        "in": "query",
-                        "name": "offset",
-                        "required": false,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "A successful response.",
-                        "schema": {
-                            "$ref": "#/definitions/extapiListFUOTADeploymentDevicesResponse"
-                        }
-                    },
-                    "default": {
-                        "description": "An unexpected error response.",
-                        "schema": {
-                            "$ref": "#/definitions/runtimeError"
-                        }
-                    }
-                },
-                "summary": "ListDeploymentDevices lists the devices (and status) for the given fuota deployment ID.",
-                "tags": [
-                    "FUOTADeploymentService"
-                ]
-            }
-        },
-        "/api/fuota-deployments/{fuotaDeploymentID}/devices/{devEUI}": {
-            "get": {
-                "operationId": "GetDeploymentDevice",
-                "parameters": [
-                    {
-                        "description": "ID of the deployment (string formatted UUID).\nThis value will be automatically assigned on create.",
-                        "in": "path",
-                        "name": "fuotaDeploymentID",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "description": "Device EUI (HEX encoded).",
-                        "in": "path",
-                        "name": "devEUI",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "A successful response.",
-                        "schema": {
-                            "$ref": "#/definitions/extapiGetFUOTADeploymentDeviceResponse"
-                        }
-                    },
-                    "default": {
-                        "description": "An unexpected error response.",
-                        "schema": {
-                            "$ref": "#/definitions/runtimeError"
-                        }
-                    }
-                },
-                "summary": "GetDeploymentDevice returns the deployment device.",
-                "tags": [
-                    "FUOTADeploymentService"
-                ]
-            }
-        },
-        "/api/fuota-deployments/{id}": {
-            "get": {
-                "operationId": "Get",
-                "parameters": [
-                    {
-                        "description": "ID of the deployment (string formatted UUID).\nThis value will be automatically assigned on create.",
-                        "in": "path",
-                        "name": "id",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "A successful response.",
-                        "schema": {
-                            "$ref": "#/definitions/extapiGetFUOTADeploymentResponse"
-                        }
-                    },
-                    "default": {
-                        "description": "An unexpected error response.",
-                        "schema": {
-                            "$ref": "#/definitions/runtimeError"
-                        }
-                    }
-                },
-                "summary": "Get returns the fuota deployment for the given id.",
-                "tags": [
-                    "FUOTADeploymentService"
                 ]
             }
         },
@@ -3191,221 +2101,10 @@
                 ]
             }
         },
-        "/api/gateway/{orgId}/gateway-history/{gwId}": {
-            "get": {
-                "operationId": "GetGatewayHistory",
-                "parameters": [
-                    {
-                        "format": "int64",
-                        "in": "path",
-                        "name": "orgId",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "format": "int64",
-                        "in": "path",
-                        "name": "gwId",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "format": "int64",
-                        "in": "query",
-                        "name": "offset",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "format": "int64",
-                        "in": "query",
-                        "name": "limit",
-                        "required": false,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "A successful response.",
-                        "schema": {
-                            "$ref": "#/definitions/extapiGetGatewayHistoryResponse"
-                        }
-                    },
-                    "default": {
-                        "description": "An unexpected error response.",
-                        "schema": {
-                            "$ref": "#/definitions/runtimeError"
-                        }
-                    }
-                },
-                "tags": [
-                    "GatewayService"
-                ]
-            }
-        },
-        "/api/gateway/{orgId}/gateway-list": {
-            "get": {
-                "operationId": "GetGatewayList",
-                "parameters": [
-                    {
-                        "format": "int64",
-                        "in": "path",
-                        "name": "orgId",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "format": "int64",
-                        "in": "query",
-                        "name": "offset",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "format": "int64",
-                        "in": "query",
-                        "name": "limit",
-                        "required": false,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "A successful response.",
-                        "schema": {
-                            "$ref": "#/definitions/extapiGetGatewayListResponse"
-                        }
-                    },
-                    "default": {
-                        "description": "An unexpected error response.",
-                        "schema": {
-                            "$ref": "#/definitions/runtimeError"
-                        }
-                    }
-                },
-                "tags": [
-                    "GatewayService"
-                ]
-            }
-        },
-        "/api/gateway/{orgId}/gateway-mode/{gwId}": {
-            "post": {
-                "operationId": "SetGatewayMode",
-                "parameters": [
-                    {
-                        "format": "int64",
-                        "in": "path",
-                        "name": "orgId",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "format": "int64",
-                        "in": "path",
-                        "name": "gwId",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/extapiSetGatewayModeRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "A successful response.",
-                        "schema": {
-                            "$ref": "#/definitions/extapiSetGatewayModeResponse"
-                        }
-                    },
-                    "default": {
-                        "description": "An unexpected error response.",
-                        "schema": {
-                            "$ref": "#/definitions/runtimeError"
-                        }
-                    }
-                },
-                "tags": [
-                    "GatewayService"
-                ]
-            }
-        },
-        "/api/gateway/{orgId}/gateway-profile/{gwId}": {
-            "get": {
-                "operationId": "GetGatewayProfile",
-                "parameters": [
-                    {
-                        "format": "int64",
-                        "in": "path",
-                        "name": "orgId",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "format": "int64",
-                        "in": "path",
-                        "name": "gwId",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "format": "int64",
-                        "in": "query",
-                        "name": "offset",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "format": "int64",
-                        "in": "query",
-                        "name": "limit",
-                        "required": false,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "A successful response.",
-                        "schema": {
-                            "$ref": "#/definitions/extapiGetGSGatewayProfileResponse"
-                        }
-                    },
-                    "default": {
-                        "description": "An unexpected error response.",
-                        "schema": {
-                            "$ref": "#/definitions/runtimeError"
-                        }
-                    }
-                },
-                "tags": [
-                    "GatewayService"
-                ]
-            }
-        },
         "/api/gateways": {
             "get": {
                 "operationId": "List",
                 "parameters": [
-                    {
-                        "description": "Max number of nodes to return in the result-set.",
-                        "format": "int32",
-                        "in": "query",
-                        "name": "limit",
-                        "required": false,
-                        "type": "integer"
-                    },
-                    {
-                        "description": "Offset of the result-set (for pagination).",
-                        "format": "int32",
-                        "in": "query",
-                        "name": "offset",
-                        "required": false,
-                        "type": "integer"
-                    },
                     {
                         "description": "ID of the organization for which to filter on, when left blank the\nresponse will return all gateways to which the user has access to.",
                         "format": "int64",
@@ -3491,6 +2190,29 @@
                     }
                 },
                 "summary": "ListLocations lists the gateways locations.",
+                "tags": [
+                    "GatewayService"
+                ]
+            }
+        },
+        "/api/gateways/cells/list": {
+            "get": {
+                "operationId": "ListCells",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/extapiListCellsResponse"
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/runtimeError"
+                        }
+                    }
+                },
+                "summary": "ListCells lists all the cells with gateways and the numbers of gateways",
                 "tags": [
                     "GatewayService"
                 ]
@@ -3744,38 +2466,6 @@
                         "description": "A successful response.",
                         "schema": {
                             "$ref": "#/definitions/extapiRegisterResponse"
-                        }
-                    },
-                    "default": {
-                        "description": "An unexpected error response.",
-                        "schema": {
-                            "$ref": "#/definitions/runtimeError"
-                        }
-                    }
-                },
-                "tags": [
-                    "GatewayService"
-                ]
-            }
-        },
-        "/api/gateways/register-reseller": {
-            "post": {
-                "operationId": "RegisterReseller",
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/extapiRegisterResellerRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "A successful response.",
-                        "schema": {
-                            "$ref": "#/definitions/extapiRegisterResellerResponse"
                         }
                     },
                     "default": {
@@ -4178,7 +2868,7 @@
                         }
                     }
                 },
-                "summary": "Log the user in, returns JWT",
+                "summary": "Log the user in, returns API Token",
                 "tags": [
                     "InternalService"
                 ]
@@ -4201,7 +2891,7 @@
                     "200": {
                         "description": "A successful response.",
                         "schema": {
-                            "$ref": "#/definitions/extapiLoginResponse"
+                            "properties": {}
                         }
                     },
                     "default": {
@@ -4211,7 +2901,30 @@
                         }
                     }
                 },
-                "summary": "Validate OTP, returns JWT",
+                "summary": "Validate OTP, returns API Token",
+                "tags": [
+                    "InternalService"
+                ]
+            }
+        },
+        "/api/internal/logout": {
+            "get": {
+                "operationId": "Logout",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/extapiLogoutResponse"
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/runtimeError"
+                        }
+                    }
+                },
+                "summary": "Log the user out, invalidates user's API token",
                 "tags": [
                     "InternalService"
                 ]
@@ -4566,38 +3279,6 @@
                 ]
             }
         },
-        "/api/internal/verify-g-recaptcha": {
-            "post": {
-                "operationId": "GetVerifyingGoogleRecaptcha",
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/extapiGoogleRecaptchaRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "A successful response.",
-                        "schema": {
-                            "$ref": "#/definitions/extapiGoogleRecaptchaResponse"
-                        }
-                    },
-                    "default": {
-                        "description": "An unexpected error response.",
-                        "schema": {
-                            "$ref": "#/definitions/runtimeError"
-                        }
-                    }
-                },
-                "tags": [
-                    "InternalService"
-                ]
-            }
-        },
         "/api/mosquitto-auth/acl-check": {
             "post": {
                 "operationId": "CheckACL",
@@ -4812,390 +3493,6 @@
                 ]
             }
         },
-        "/api/multicast-groups": {
-            "get": {
-                "operationId": "List",
-                "parameters": [
-                    {
-                        "description": "Max number of items to return.",
-                        "format": "int64",
-                        "in": "query",
-                        "name": "limit",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "description": "Offset in the result-set (for pagination).",
-                        "format": "int64",
-                        "in": "query",
-                        "name": "offset",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "description": "Organization id to filter on.",
-                        "format": "int64",
-                        "in": "query",
-                        "name": "organizationID",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "description": "Device EUI (HEX encoded string) to filter on.",
-                        "in": "query",
-                        "name": "devEUI",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "description": "Service-profile ID to filter on.",
-                        "in": "query",
-                        "name": "serviceProfileID",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "description": "Search can be used to search on the multicast-group name.",
-                        "in": "query",
-                        "name": "search",
-                        "required": false,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "A successful response.",
-                        "schema": {
-                            "$ref": "#/definitions/extapiListMulticastGroupResponse"
-                        }
-                    },
-                    "default": {
-                        "description": "An unexpected error response.",
-                        "schema": {
-                            "$ref": "#/definitions/runtimeError"
-                        }
-                    }
-                },
-                "summary": "List lists the available multicast-groups.",
-                "tags": [
-                    "MulticastGroupService"
-                ]
-            },
-            "post": {
-                "operationId": "Create",
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/extapiCreateMulticastGroupRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "A successful response.",
-                        "schema": {
-                            "$ref": "#/definitions/extapiCreateMulticastGroupResponse"
-                        }
-                    },
-                    "default": {
-                        "description": "An unexpected error response.",
-                        "schema": {
-                            "$ref": "#/definitions/runtimeError"
-                        }
-                    }
-                },
-                "summary": "Create creates the given multicast-group.",
-                "tags": [
-                    "MulticastGroupService"
-                ]
-            }
-        },
-        "/api/multicast-groups/{id}": {
-            "delete": {
-                "operationId": "Delete",
-                "parameters": [
-                    {
-                        "description": "ID (string formatted UUID).",
-                        "in": "path",
-                        "name": "id",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "A successful response.",
-                        "schema": {
-                            "properties": {}
-                        }
-                    },
-                    "default": {
-                        "description": "An unexpected error response.",
-                        "schema": {
-                            "$ref": "#/definitions/runtimeError"
-                        }
-                    }
-                },
-                "summary": "Delete deletes a multicast-group given an ID.",
-                "tags": [
-                    "MulticastGroupService"
-                ]
-            },
-            "get": {
-                "operationId": "Get",
-                "parameters": [
-                    {
-                        "description": "ID (string formatted UUID).",
-                        "in": "path",
-                        "name": "id",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "A successful response.",
-                        "schema": {
-                            "$ref": "#/definitions/extapiGetMulticastGroupResponse"
-                        }
-                    },
-                    "default": {
-                        "description": "An unexpected error response.",
-                        "schema": {
-                            "$ref": "#/definitions/runtimeError"
-                        }
-                    }
-                },
-                "summary": "Get returns a multicast-group given an ID.",
-                "tags": [
-                    "MulticastGroupService"
-                ]
-            }
-        },
-        "/api/multicast-groups/{multicastGroup.id}": {
-            "put": {
-                "operationId": "Update",
-                "parameters": [
-                    {
-                        "description": "ID (string formatted UUID).\nThis will be generated automatically on create.",
-                        "in": "path",
-                        "name": "multicastGroup.id",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/extapiUpdateMulticastGroupRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "A successful response.",
-                        "schema": {
-                            "properties": {}
-                        }
-                    },
-                    "default": {
-                        "description": "An unexpected error response.",
-                        "schema": {
-                            "$ref": "#/definitions/runtimeError"
-                        }
-                    }
-                },
-                "summary": "Update updates the given multicast-group.",
-                "tags": [
-                    "MulticastGroupService"
-                ]
-            }
-        },
-        "/api/multicast-groups/{multicastGroupID}/devices": {
-            "post": {
-                "operationId": "AddDevice",
-                "parameters": [
-                    {
-                        "description": "Multicast-group ID (string formatted UUID).",
-                        "in": "path",
-                        "name": "multicastGroupID",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/extapiAddDeviceToMulticastGroupRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "A successful response.",
-                        "schema": {
-                            "properties": {}
-                        }
-                    },
-                    "default": {
-                        "description": "An unexpected error response.",
-                        "schema": {
-                            "$ref": "#/definitions/runtimeError"
-                        }
-                    }
-                },
-                "summary": "AddDevice adds the given device to the multicast-group.",
-                "tags": [
-                    "MulticastGroupService"
-                ]
-            }
-        },
-        "/api/multicast-groups/{multicastGroupID}/devices/{devEUI}": {
-            "delete": {
-                "operationId": "RemoveDevice",
-                "parameters": [
-                    {
-                        "description": "Multicast-group ID (string formatted UUID).",
-                        "in": "path",
-                        "name": "multicastGroupID",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "description": "Device EUI (HEX encoded string).",
-                        "in": "path",
-                        "name": "devEUI",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "A successful response.",
-                        "schema": {
-                            "properties": {}
-                        }
-                    },
-                    "default": {
-                        "description": "An unexpected error response.",
-                        "schema": {
-                            "$ref": "#/definitions/runtimeError"
-                        }
-                    }
-                },
-                "summary": "RemoveDevice removes the given device from the multicast-group.",
-                "tags": [
-                    "MulticastGroupService"
-                ]
-            }
-        },
-        "/api/multicast-groups/{multicastGroupID}/queue": {
-            "delete": {
-                "operationId": "FlushQueue",
-                "parameters": [
-                    {
-                        "description": "Multicast-group ID (string formatted UUID).",
-                        "in": "path",
-                        "name": "multicastGroupID",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "A successful response.",
-                        "schema": {
-                            "properties": {}
-                        }
-                    },
-                    "default": {
-                        "description": "An unexpected error response.",
-                        "schema": {
-                            "$ref": "#/definitions/runtimeError"
-                        }
-                    }
-                },
-                "summary": "FlushQueue flushes the multicast-group queue.",
-                "tags": [
-                    "MulticastGroupService"
-                ]
-            },
-            "get": {
-                "operationId": "ListQueue",
-                "parameters": [
-                    {
-                        "description": "Multicast-group ID (string formatted UUID).",
-                        "in": "path",
-                        "name": "multicastGroupID",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "A successful response.",
-                        "schema": {
-                            "$ref": "#/definitions/extapiListMulticastGroupQueueItemsResponse"
-                        }
-                    },
-                    "default": {
-                        "description": "An unexpected error response.",
-                        "schema": {
-                            "$ref": "#/definitions/runtimeError"
-                        }
-                    }
-                },
-                "summary": "ListQueue lists the items in the multicast-group queue.",
-                "tags": [
-                    "MulticastGroupService"
-                ]
-            }
-        },
-        "/api/multicast-groups/{multicastQueueItem.multicastGroupID}/queue": {
-            "post": {
-                "operationId": "Enqueue",
-                "parameters": [
-                    {
-                        "description": "Multicast-group ID (string formatted UUID).",
-                        "in": "path",
-                        "name": "multicastQueueItem.multicastGroupID",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/extapiEnqueueMulticastQueueItemRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "A successful response.",
-                        "schema": {
-                            "$ref": "#/definitions/extapiEnqueueMulticastQueueItemResponse"
-                        }
-                    },
-                    "default": {
-                        "description": "An unexpected error response.",
-                        "schema": {
-                            "$ref": "#/definitions/runtimeError"
-                        }
-                    }
-                },
-                "summary": "Enqueue adds the given item to the multicast-queue.",
-                "tags": [
-                    "MulticastGroupService"
-                ]
-            }
-        },
         "/api/network-servers": {
             "get": {
                 "operationId": "List",
@@ -5385,22 +3682,6 @@
             "get": {
                 "operationId": "ListNewGateways",
                 "parameters": [
-                    {
-                        "description": "Max number of nodes to return in the result-set.",
-                        "format": "int32",
-                        "in": "query",
-                        "name": "limit",
-                        "required": false,
-                        "type": "integer"
-                    },
-                    {
-                        "description": "Offset of the result-set (for pagination).",
-                        "format": "int32",
-                        "in": "query",
-                        "name": "offset",
-                        "required": false,
-                        "type": "integer"
-                    },
                     {
                         "description": "ID of the organization for which to filter on, when left blank the\nresponse will return all gateways to which the user has access to.",
                         "format": "int64",
@@ -6270,58 +4551,6 @@
                 ]
             }
         },
-        "/api/settings": {
-            "get": {
-                "operationId": "GetSettings",
-                "responses": {
-                    "200": {
-                        "description": "A successful response.",
-                        "schema": {
-                            "$ref": "#/definitions/extapiGetSettingsResponse"
-                        }
-                    },
-                    "default": {
-                        "description": "An unexpected error response.",
-                        "schema": {
-                            "$ref": "#/definitions/runtimeError"
-                        }
-                    }
-                },
-                "tags": [
-                    "SettingsService"
-                ]
-            },
-            "put": {
-                "operationId": "ModifySettings",
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/extapiModifySettingsRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "A successful response.",
-                        "schema": {
-                            "$ref": "#/definitions/extapiModifySettingsResponse"
-                        }
-                    },
-                    "default": {
-                        "description": "An unexpected error response.",
-                        "schema": {
-                            "$ref": "#/definitions/runtimeError"
-                        }
-                    }
-                },
-                "tags": [
-                    "SettingsService"
-                ]
-            }
-        },
         "/api/shopify-integration/orders": {
             "get": {
                 "operationId": "GetOrdersByUser",
@@ -6607,6 +4836,82 @@
                 ]
             }
         },
+        "/api/staking/{orgId}/staked-total": {
+            "get": {
+                "operationId": "GetStakingTotals",
+                "parameters": [
+                    {
+                        "format": "int64",
+                        "in": "path",
+                        "name": "orgId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "currency",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/extapiStakingTotalsResponse"
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/runtimeError"
+                        }
+                    }
+                },
+                "summary": "Returns the total amount staked by the organization",
+                "tags": [
+                    "StakingService"
+                ]
+            }
+        },
+        "/api/staking/{orgId}/stakes": {
+            "get": {
+                "operationId": "GetStakes",
+                "parameters": [
+                    {
+                        "format": "int64",
+                        "in": "path",
+                        "name": "orgId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "currency",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/extapiGetStakesResponse"
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/runtimeError"
+                        }
+                    }
+                },
+                "summary": "Get list of all stakes for the organization",
+                "tags": [
+                    "StakingService"
+                ]
+            }
+        },
         "/api/staking/{orgId}/unstake": {
             "post": {
                 "operationId": "Unstake",
@@ -6644,6 +4949,406 @@
                 "summary": "Unstake existing stake",
                 "tags": [
                     "StakingService"
+                ]
+            }
+        },
+        "/api/support/actions/list-by-email": {
+            "get": {
+                "operationId": "ListUserActionsByEmail",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "email",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/extapiListUserActionsByEmailResponse"
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/runtimeError"
+                        }
+                    }
+                },
+                "summary": "ListUserActionsByEmail returns actions taken correspondingly to the given email,\nthis can only be called by support user or global admin user",
+                "tags": [
+                    "SupportService"
+                ]
+            }
+        },
+        "/api/support/actions/list-by-id": {
+            "get": {
+                "operationId": "ListUserActions",
+                "parameters": [
+                    {
+                        "format": "int64",
+                        "in": "query",
+                        "name": "userID",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "format": "date-time",
+                        "in": "query",
+                        "name": "from",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "format": "date-time",
+                        "in": "query",
+                        "name": "to",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/extapiListUserActionsResponse"
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/runtimeError"
+                        }
+                    }
+                },
+                "summary": "ListUserActions returns list of user actions where user can be either the object or the operator",
+                "tags": [
+                    "SupportService"
+                ]
+            }
+        },
+        "/api/support/list-permission-requests": {
+            "get": {
+                "operationId": "GetRequestsForSupportPermission",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/extapiGetRequestsForSupportPermissionResponse"
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/runtimeError"
+                        }
+                    }
+                },
+                "summary": "GetRequestsForSupportPermission returns a list of support permission requests, only for super admin",
+                "tags": [
+                    "SupportService"
+                ]
+            }
+        },
+        "/api/support/regulate-illegal-gateway": {
+            "put": {
+                "operationId": "RegulateIllegalGateway",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/extapiRegulateIllegalGatewayRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/extapiRegulateIllegalGatewayResponse"
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/runtimeError"
+                        }
+                    }
+                },
+                "summary": "RegulateIllegalGateway is used when user reports lost gateway or when gateway is used without fulfill payment, after\nverification of the case, support team can remove gateway from illegal user and temporarily lock it down in ps",
+                "tags": [
+                    "SupportService"
+                ]
+            }
+        },
+        "/api/support/send-permission-request": {
+            "post": {
+                "operationId": "RequestSupportPermission",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/extapiRequestSupportPermissionRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/extapiRequestSupportPermissionResponse"
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/runtimeError"
+                        }
+                    }
+                },
+                "summary": "RequestSupportPermission will send request to server for granting user support permission, request will remain pending\nuntil super admin accepts the request",
+                "tags": [
+                    "SupportService"
+                ]
+            }
+        },
+        "/api/support/set-permission": {
+            "put": {
+                "operationId": "ModifyUserSupportPermission",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/extapiModifyUserSupportPermissionRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/extapiModifyUserSupportPermissionResponse"
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/runtimeError"
+                        }
+                    }
+                },
+                "summary": "ModifyUserSupportPermission grants/revoke user support permission",
+                "tags": [
+                    "SupportService"
+                ]
+            }
+        },
+        "/api/support/{userID}/activate": {
+            "put": {
+                "operationId": "ActivateUser",
+                "parameters": [
+                    {
+                        "format": "int64",
+                        "in": "path",
+                        "name": "userID",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/extapiActivateUserRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/extapiActivateUserResponse"
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/runtimeError"
+                        }
+                    }
+                },
+                "summary": "ActivateUser will set inactive user to active state, operation done only by tech support user type",
+                "tags": [
+                    "SupportService"
+                ]
+            }
+        },
+        "/api/support/{userID}/deactivate": {
+            "put": {
+                "operationId": "DeactivateUser",
+                "parameters": [
+                    {
+                        "format": "int64",
+                        "in": "path",
+                        "name": "userID",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/extapiDeactivateUserRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/extapiDeactivateUserResponse"
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/runtimeError"
+                        }
+                    }
+                },
+                "summary": "DeactivateUser will set active user to inactive state, operation done only by tech support user type",
+                "tags": [
+                    "SupportService"
+                ]
+            }
+        },
+        "/api/support/{userID}/recover-account": {
+            "put": {
+                "operationId": "RecoverUserAccount",
+                "parameters": [
+                    {
+                        "description": "user ID for account that needs to be recovered",
+                        "format": "int64",
+                        "in": "path",
+                        "name": "userID",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/extapiRecoverUserAccountRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/extapiRecoverUserAccountResponse"
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/runtimeError"
+                        }
+                    }
+                },
+                "summary": "RecoverUserAccount is used to recover user's account to last normal state and re-grant access, note that after\nrecover user's account, user must be warned to reset password and re-enable 2FA as soon as possible",
+                "tags": [
+                    "SupportService"
+                ]
+            }
+        },
+        "/api/support/{userID}/reset-2fa": {
+            "put": {
+                "operationId": "Reset2FA",
+                "parameters": [
+                    {
+                        "format": "int64",
+                        "in": "path",
+                        "name": "userID",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/extapiReset2FAReqeust"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/extapiReset2FAResponse"
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/runtimeError"
+                        }
+                    }
+                },
+                "summary": "Reset2FA can only be used when user lost their access to authenticator app and recovery code, after identification\nverification, support team can reset 2fa for user so one can re-enable again",
+                "tags": [
+                    "SupportService"
+                ]
+            }
+        },
+        "/api/support/{userID}/reset-pr-limit": {
+            "put": {
+                "operationId": "ResetPasswordResetLimit",
+                "parameters": [
+                    {
+                        "format": "int64",
+                        "in": "path",
+                        "name": "userID",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/extapiResetPasswordResetLimitRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/extapiResetPasswordResetLimitResponse"
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/runtimeError"
+                        }
+                    }
+                },
+                "summary": "ResetPasswordResetLimit can only be used when user already used up their reset password limited times, after identification\nverification, support team can reset this limit for user so one can reset password again",
+                "tags": [
+                    "SupportService"
                 ]
             }
         },
@@ -6788,6 +5493,105 @@
                 ]
             }
         },
+        "/api/users/change-password": {
+            "post": {
+                "operationId": "ChangePassword",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/extapiChangePasswordRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/extapiChangePasswordResponse"
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/runtimeError"
+                        }
+                    }
+                },
+                "summary": "ChangePassword changes a password.",
+                "tags": [
+                    "UserService"
+                ]
+            }
+        },
+        "/api/users/email-add": {
+            "post": {
+                "operationId": "AddEmail",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/extapiAddEmailRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "properties": {}
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/runtimeError"
+                        }
+                    }
+                },
+                "summary": "Add a new email address",
+                "tags": [
+                    "UserService"
+                ]
+            }
+        },
+        "/api/users/email-verify": {
+            "post": {
+                "operationId": "VerifyEmail",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/extapiVerifyEmailRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "properties": {}
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/runtimeError"
+                        }
+                    }
+                },
+                "summary": "Verify email address",
+                "tags": [
+                    "UserService"
+                ]
+            }
+        },
         "/api/users/email/{userEmail}": {
             "get": {
                 "operationId": "GetUserEmail",
@@ -6804,36 +5608,6 @@
                         "description": "A successful response.",
                         "schema": {
                             "$ref": "#/definitions/extapiGetUserEmailResponse"
-                        }
-                    },
-                    "default": {
-                        "description": "An unexpected error response.",
-                        "schema": {
-                            "$ref": "#/definitions/runtimeError"
-                        }
-                    }
-                },
-                "tags": [
-                    "UserService"
-                ]
-            }
-        },
-        "/api/users/otp/{userEmail}": {
-            "get": {
-                "operationId": "GetOTPCode",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "userEmail",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "A successful response.",
-                        "schema": {
-                            "$ref": "#/definitions/extapiGetOTPCodeResponse"
                         }
                     },
                     "default": {
@@ -6953,57 +5727,16 @@
                 ]
             }
         },
-        "/api/users/{userId}/password": {
-            "put": {
-                "operationId": "UpdatePassword",
-                "parameters": [
-                    {
-                        "description": "User ID.",
-                        "format": "int64",
-                        "in": "path",
-                        "name": "userId",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/extapiUpdateUserPasswordRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "A successful response.",
-                        "schema": {
-                            "properties": {}
-                        }
-                    },
-                    "default": {
-                        "description": "An unexpected error response.",
-                        "schema": {
-                            "$ref": "#/definitions/runtimeError"
-                        }
-                    }
-                },
-                "summary": "UpdatePassword updates a password.",
-                "tags": [
-                    "UserService"
-                ]
-            }
-        },
         "/api/verify-external-email": {
             "post": {
-                "operationId": "VerifyEmail",
+                "operationId": "VerifyShopifyEmail",
                 "parameters": [
                     {
                         "in": "body",
                         "name": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/extapiVerifyEmailRequest"
+                            "$ref": "#/definitions/extapiVerifyShopifyEmailRequest"
                         }
                     }
                 ],
@@ -7011,7 +5744,7 @@
                     "200": {
                         "description": "A successful response.",
                         "schema": {
-                            "$ref": "#/definitions/extapiVerifyEmailResponse"
+                            "$ref": "#/definitions/extapiVerifyShopifyEmailResponse"
                         }
                     },
                     "default": {
@@ -7021,7 +5754,7 @@
                         }
                     }
                 },
-                "summary": "VerifyEmail sends email with confirmation message to given address",
+                "summary": "VerifyShopifyEmail sends email with confirmation message to given address",
                 "tags": [
                     "ExternalUserService"
                 ]
@@ -7455,102 +6188,6 @@
                 ]
             }
         },
-        "/api/wallet/{orgId}/tx-history": {
-            "get": {
-                "operationId": "GetVmxcTxHistory",
-                "parameters": [
-                    {
-                        "format": "int64",
-                        "in": "path",
-                        "name": "orgId",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "format": "int64",
-                        "in": "query",
-                        "name": "offset",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "format": "int64",
-                        "in": "query",
-                        "name": "limit",
-                        "required": false,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "A successful response.",
-                        "schema": {
-                            "$ref": "#/definitions/extapiGetVmxcTxHistoryResponse"
-                        }
-                    },
-                    "default": {
-                        "description": "An unexpected error response.",
-                        "schema": {
-                            "$ref": "#/definitions/runtimeError"
-                        }
-                    }
-                },
-                "tags": [
-                    "WalletService"
-                ]
-            }
-        },
-        "/api/wallet/{orgId}/usage-history": {
-            "get": {
-                "operationId": "GetNetworkUsageHist",
-                "parameters": [
-                    {
-                        "format": "int64",
-                        "in": "path",
-                        "name": "orgId",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "currency",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "format": "date-time",
-                        "in": "query",
-                        "name": "from",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "format": "date-time",
-                        "in": "query",
-                        "name": "till",
-                        "required": false,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "A successful response.",
-                        "schema": {
-                            "$ref": "#/definitions/extapiGetNetworkUsageHistResponse"
-                        }
-                    },
-                    "default": {
-                        "description": "An unexpected error response.",
-                        "schema": {
-                            "$ref": "#/definitions/runtimeError"
-                        }
-                    }
-                },
-                "tags": [
-                    "WalletService"
-                ]
-            }
-        },
         "/api/withdraw/get-withdraw-fee": {
             "get": {
                 "operationId": "GetWithdrawFee",
@@ -7762,14 +6399,34 @@
             },
             "type": "object"
         },
-        "extapiAddDeviceToMulticastGroupRequest": {
+        "extapiActivateUserRequest": {
             "properties": {
-                "devEUI": {
-                    "description": "Device EUI (HEX encoded string).\nNote that the device must be under the same service-profile as the\nmulticast-group.",
+                "reason": {
                     "type": "string"
                 },
-                "multicastGroupID": {
-                    "description": "Multicast-group ID (string formatted UUID).",
+                "userID": {
+                    "format": "int64",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "extapiActivateUserResponse": {
+            "properties": {
+                "message": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "extapiAddEmailRequest": {
+            "properties": {
+                "email": {
+                    "description": "email address to add",
+                    "type": "string"
+                },
+                "language": {
+                    "description": "language of the email",
                     "type": "string"
                 }
             },
@@ -8057,6 +6714,44 @@
             },
             "type": "object"
         },
+        "extapiCell": {
+            "description": "Cell contains info about the cell",
+            "properties": {
+                "gateways": {
+                    "description": "Number of gateways in the cell",
+                    "format": "uint64",
+                    "type": "string"
+                },
+                "h3CellId": {
+                    "description": "H3 cell ID",
+                    "format": "uint64",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "extapiChangePasswordRequest": {
+            "properties": {
+                "currentPassword": {
+                    "description": "Current password",
+                    "type": "string"
+                },
+                "newPassword": {
+                    "description": "New pasword.",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "extapiChangePasswordResponse": {
+            "properties": {
+                "authToken": {
+                    "description": "Changing password revokes all existing authentication tokens, to avoid\nlogging the user out we create a new auth token that replaces the old\none",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
         "extapiCheckACLRequest": {
             "properties": {
                 "acc": {
@@ -8073,22 +6768,6 @@
             "type": "object"
         },
         "extapiCheckACLResponse": {
-            "type": "object"
-        },
-        "extapiConfirmBindingEmailRequest": {
-            "properties": {
-                "organizationId": {
-                    "format": "int64",
-                    "type": "string"
-                },
-                "token": {
-                    "description": "token sent to user in VerifyEmail",
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "extapiConfirmBindingEmailResponse": {
             "type": "object"
         },
         "extapiConfirmPasswordResetReq": {
@@ -8121,6 +6800,9 @@
         },
         "extapiConfirmRegistrationResponse": {
             "properties": {
+                "authToken": {
+                    "type": "string"
+                },
                 "id": {
                     "format": "int64",
                     "type": "string"
@@ -8132,6 +6814,7 @@
                     "type": "boolean"
                 },
                 "jwt": {
+                    "description": "same as auth_token, legacy name",
                     "type": "string"
                 },
                 "sessionTTL": {
@@ -8142,6 +6825,22 @@
                     "type": "string"
                 }
             },
+            "type": "object"
+        },
+        "extapiConfirmShopifyEmailRequest": {
+            "properties": {
+                "organizationId": {
+                    "format": "int64",
+                    "type": "string"
+                },
+                "token": {
+                    "description": "token sent to user in VerifyEmail",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "extapiConfirmShopifyEmailResponse": {
             "type": "object"
         },
         "extapiCouncil": {
@@ -8232,28 +6931,6 @@
             },
             "type": "object"
         },
-        "extapiCreateFUOTADeploymentForDeviceRequest": {
-            "properties": {
-                "devEUI": {
-                    "description": "Device EUI (HEX encoded).",
-                    "type": "string"
-                },
-                "fuotaDeployment": {
-                    "$ref": "#/definitions/extapiFUOTADeployment",
-                    "description": "FUOTA deployment."
-                }
-            },
-            "type": "object"
-        },
-        "extapiCreateFUOTADeploymentForDeviceResponse": {
-            "properties": {
-                "id": {
-                    "description": "ID of the created deployment (string formatted UUID).",
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
         "extapiCreateGatewayProfileRequest": {
             "properties": {
                 "gatewayProfile": {
@@ -8277,60 +6954,6 @@
                 "gateway": {
                     "$ref": "#/definitions/extapiGateway",
                     "description": "Gateway object to create."
-                }
-            },
-            "type": "object"
-        },
-        "extapiCreateHTTPIntegrationRequest": {
-            "properties": {
-                "integration": {
-                    "$ref": "#/definitions/extapiHTTPIntegration",
-                    "description": "Integration object to create."
-                }
-            },
-            "type": "object"
-        },
-        "extapiCreateInfluxDBIntegrationRequest": {
-            "properties": {
-                "integration": {
-                    "$ref": "#/definitions/extapiInfluxDBIntegration",
-                    "description": "Integration object to create."
-                }
-            },
-            "type": "object"
-        },
-        "extapiCreateLoRaCloudIntegrationRequest": {
-            "properties": {
-                "integration": {
-                    "$ref": "#/definitions/extapiLoRaCloudIntegration",
-                    "description": "Integration object to create."
-                }
-            },
-            "type": "object"
-        },
-        "extapiCreateMulticastGroupRequest": {
-            "properties": {
-                "multicastGroup": {
-                    "$ref": "#/definitions/extapiMulticastGroup",
-                    "description": "Multicast-group object to create."
-                }
-            },
-            "type": "object"
-        },
-        "extapiCreateMulticastGroupResponse": {
-            "properties": {
-                "id": {
-                    "description": "ID of created group (string formatted UUID).",
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "extapiCreateMyDevicesIntegrationRequest": {
-            "properties": {
-                "integration": {
-                    "$ref": "#/definitions/extapiMyDevicesIntegration",
-                    "description": "Integration object to create."
                 }
             },
             "type": "object"
@@ -8413,15 +7036,6 @@
                 "id": {
                     "description": "Service-profile ID (UUID string).",
                     "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "extapiCreateThingsBoardIntegrationRequest": {
-            "properties": {
-                "integration": {
-                    "$ref": "#/definitions/extapiThingsBoardIntegration",
-                    "description": "Integration object to create."
                 }
             },
             "type": "object"
@@ -8822,6 +7436,15 @@
             },
             "type": "object"
         },
+        "extapiDHXTotalMiningResponse": {
+            "properties": {
+                "amount": {
+                    "description": "amount of DHX that the organization has mined in a lifetime",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
         "extapiDHXUnbondRequest": {
             "properties": {
                 "amount": {
@@ -8854,33 +7477,21 @@
             },
             "type": "object"
         },
-        "extapiDSDeviceProfile": {
+        "extapiDeactivateUserRequest": {
             "properties": {
-                "applicationId": {
+                "reason": {
+                    "type": "string"
+                },
+                "userID": {
                     "format": "int64",
                     "type": "string"
-                },
-                "createdAt": {
-                    "type": "string"
-                },
-                "devEui": {
-                    "type": "string"
-                },
-                "fkWallet": {
-                    "format": "int64",
-                    "type": "string"
-                },
-                "id": {
-                    "format": "int64",
-                    "type": "string"
-                },
-                "lastSeenAt": {
-                    "type": "string"
-                },
-                "mode": {
-                    "$ref": "#/definitions/extapiDeviceMode"
-                },
-                "name": {
+                }
+            },
+            "type": "object"
+        },
+        "extapiDeactivateUserResponse": {
+            "properties": {
+                "message": {
                     "type": "string"
                 }
             },
@@ -8993,10 +7604,6 @@
                     "description": "Device EUI (HEX encoded).",
                     "type": "string"
                 },
-                "genAppKey": {
-                    "description": "Gen application key (HEX encoded).\nThis is an optional key that only must be set for LORaWAN 1.0.x devices\nthat implement the remote multicast setup specification.",
-                    "type": "string"
-                },
                 "nwkKey": {
                     "description": "Network root key (HEX encoded).\nNote: For LoRaWAN 1.0.x, use this field for the LoRaWAN 1.0.x 'AppKey`!",
                     "type": "string"
@@ -9062,16 +7669,6 @@
             },
             "type": "object"
         },
-        "extapiDeviceMode": {
-            "default": "DV_INACTIVE",
-            "enum": [
-                "DV_INACTIVE",
-                "DV_FREE_GATEWAYS_LIMITED",
-                "DV_WHOLE_NETWORK",
-                "DV_DELETED"
-            ],
-            "type": "string"
-        },
         "extapiDeviceProfile": {
             "properties": {
                 "classBTimeout": {
@@ -9093,12 +7690,12 @@
                     "type": "array"
                 },
                 "geolocBufferTTL": {
-                    "description": "Geolocation buffer TTL (in seconds).\nWhen > 0, uplink RX meta-data will be stored in a buffer so that\nthe meta-data of multiple uplinks can be used for geolocation.",
+                    "description": "Geolocation buffer TTL (in seconds).\nWhen \u003e 0, uplink RX meta-data will be stored in a buffer so that\nthe meta-data of multiple uplinks can be used for geolocation.",
                     "format": "int64",
                     "type": "integer"
                 },
                 "geolocMinBufferSize": {
-                    "description": "Geolocation minimum buffer size.\nWhen > 0, geolocation will only be performed when the buffer has\nat least the given size.",
+                    "description": "Geolocation minimum buffer size.\nWhen \u003e 0, geolocation will only be performed when the buffer has\nat least the given size.",
                     "format": "int64",
                     "type": "integer"
                 },
@@ -9269,7 +7866,7 @@
                     "type": "integer"
                 },
                 "fPort": {
-                    "description": "FPort used (must be > 0)",
+                    "description": "FPort used (must be \u003e 0)",
                     "format": "int64",
                     "type": "integer"
                 },
@@ -9312,25 +7909,6 @@
             },
             "type": "object"
         },
-        "extapiEnqueueMulticastQueueItemRequest": {
-            "properties": {
-                "multicastQueueItem": {
-                    "$ref": "#/definitions/extapiMulticastQueueItem",
-                    "description": "Multicast queue-item object to enqueue."
-                }
-            },
-            "type": "object"
-        },
-        "extapiEnqueueMulticastQueueItemResponse": {
-            "properties": {
-                "fCnt": {
-                    "description": "Frame-counter for the enqueued payload.",
-                    "format": "int64",
-                    "type": "integer"
-                }
-            },
-            "type": "object"
-        },
         "extapiExternalUserAccount": {
             "properties": {
                 "externalUserId": {
@@ -9340,134 +7918,6 @@
                     "type": "string"
                 },
                 "service": {
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "extapiFUOTADeployment": {
-            "properties": {
-                "dr": {
-                    "description": "Data-rate.",
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "frequency": {
-                    "description": "Frequency (Hz).",
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "groupType": {
-                    "$ref": "#/definitions/extapiMulticastGroupType",
-                    "description": "Multicast type.\nCurrently only Class-C is supported!"
-                },
-                "id": {
-                    "description": "ID of the deployment (string formatted UUID).\nThis value will be automatically assigned on create.",
-                    "type": "string"
-                },
-                "multicastTimeout": {
-                    "description": "Multicast time-out.\nPlease refer to the Remote Multicast Setup specification as this field\nhas a different meaning for Class-B and Class-C groups.",
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "name": {
-                    "description": "Name of the deployment.",
-                    "type": "string"
-                },
-                "nextStepAfter": {
-                    "description": "Next step after.\nThis value will be automatically set on create.",
-                    "format": "date-time",
-                    "type": "string"
-                },
-                "payload": {
-                    "description": "Payload.",
-                    "format": "byte",
-                    "type": "string"
-                },
-                "redundancy": {
-                    "description": "Redundancy (number of packages).",
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "state": {
-                    "description": "Deployment state.\nThis value will be automatically set on create.",
-                    "type": "string"
-                },
-                "unicastTimeout": {
-                    "description": "Unicast time-out.\nSet this to the value in which you at least expect an uplink frame from the\ndevice. The FUOTA deployment engine will wait at least for the given time\nbefore proceeding with the next steps.",
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "extapiFUOTADeploymentDeviceListItem": {
-            "properties": {
-                "createdAt": {
-                    "description": "Created at timestamp.",
-                    "format": "date-time",
-                    "type": "string"
-                },
-                "devEUI": {
-                    "description": "Device EUI (HEX encoded).",
-                    "type": "string"
-                },
-                "deviceName": {
-                    "description": "Device name.",
-                    "type": "string"
-                },
-                "errorMessage": {
-                    "description": "Error message (in case of error state).",
-                    "type": "string"
-                },
-                "state": {
-                    "$ref": "#/definitions/extapiFUOTADeploymentDeviceState",
-                    "description": "Device state."
-                },
-                "updatedAt": {
-                    "description": "Updated at timestamp.",
-                    "format": "date-time",
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "extapiFUOTADeploymentDeviceState": {
-            "default": "PENDING",
-            "description": " - PENDING: Pending.\n - SUCCESS: Success.\n - ERROR: Error.",
-            "enum": [
-                "PENDING",
-                "SUCCESS",
-                "ERROR"
-            ],
-            "type": "string"
-        },
-        "extapiFUOTADeploymentListItem": {
-            "properties": {
-                "createdAt": {
-                    "description": "Created at timestamp.",
-                    "format": "date-time",
-                    "type": "string"
-                },
-                "id": {
-                    "description": "ID of the deployment (string formatted UUID).",
-                    "type": "string"
-                },
-                "name": {
-                    "description": "Name of the deployment.",
-                    "type": "string"
-                },
-                "nextStepAfter": {
-                    "description": "Next step after.",
-                    "format": "date-time",
-                    "type": "string"
-                },
-                "state": {
-                    "description": "Deployment state.",
-                    "type": "string"
-                },
-                "updatedAt": {
-                    "description": "Last update timestamp.",
-                    "format": "date-time",
                     "type": "string"
                 }
             },
@@ -9496,45 +7946,6 @@
                     "type": "string"
                 },
                 "userId": {
-                    "format": "int64",
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "extapiGSGatewayProfile": {
-            "properties": {
-                "createAt": {
-                    "type": "string"
-                },
-                "description": {
-                    "type": "string"
-                },
-                "fkGwNs": {
-                    "format": "int64",
-                    "type": "string"
-                },
-                "fkWallet": {
-                    "format": "int64",
-                    "type": "string"
-                },
-                "id": {
-                    "format": "int64",
-                    "type": "string"
-                },
-                "lastSeenAt": {
-                    "type": "string"
-                },
-                "mac": {
-                    "type": "string"
-                },
-                "mode": {
-                    "$ref": "#/definitions/extapiGatewayMode"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "orgId": {
                     "format": "int64",
                     "type": "string"
                 }
@@ -9672,6 +8083,11 @@
                     "format": "double",
                     "type": "number"
                 },
+                "h3CellId": {
+                    "description": "H3 resolution 7 cell ID",
+                    "format": "uint64",
+                    "type": "string"
+                },
                 "latitude": {
                     "description": "Latitude of the gateway -90.0 to 90.0.",
                     "format": "double",
@@ -9753,16 +8169,6 @@
                 }
             },
             "type": "object"
-        },
-        "extapiGatewayMode": {
-            "default": "GW_INACTIVE",
-            "enum": [
-                "GW_INACTIVE",
-                "GW_FREE_GATEWAYS_LIMITED",
-                "GW_WHOLE_NETWORK",
-                "GW_DELETED"
-            ],
-            "type": "string"
         },
         "extapiGatewayProfile": {
             "properties": {
@@ -9919,14 +8325,6 @@
             },
             "type": "object"
         },
-        "extapiGetDSDeviceProfileResponse": {
-            "properties": {
-                "devProfile": {
-                    "$ref": "#/definitions/extapiDSDeviceProfile"
-                }
-            },
-            "type": "object"
-        },
         "extapiGetDefaultGatewayConfigResponse": {
             "properties": {
                 "defaultConfig": {
@@ -9944,34 +8342,11 @@
             },
             "type": "object"
         },
-        "extapiGetDeviceHistoryResponse": {
-            "properties": {
-                "devHistory": {
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
         "extapiGetDeviceKeysResponse": {
             "properties": {
                 "deviceKeys": {
                     "$ref": "#/definitions/extapiDeviceKeys",
                     "description": "Device-key object."
-                }
-            },
-            "type": "object"
-        },
-        "extapiGetDeviceListResponse": {
-            "properties": {
-                "count": {
-                    "format": "int64",
-                    "type": "string"
-                },
-                "devProfile": {
-                    "items": {
-                        "$ref": "#/definitions/extapiDSDeviceProfile"
-                    },
-                    "type": "array"
                 }
             },
             "type": "object"
@@ -10032,68 +8407,11 @@
             },
             "type": "object"
         },
-        "extapiGetFUOTADeploymentDeviceResponse": {
-            "properties": {
-                "deploymentDevice": {
-                    "$ref": "#/definitions/extapiFUOTADeploymentDeviceListItem"
-                }
-            },
-            "type": "object"
-        },
-        "extapiGetFUOTADeploymentResponse": {
-            "properties": {
-                "createdAt": {
-                    "description": "Created at timestamp.",
-                    "format": "date-time",
-                    "type": "string"
-                },
-                "fuotaDeployment": {
-                    "$ref": "#/definitions/extapiFUOTADeployment"
-                },
-                "updatedAt": {
-                    "description": "Last update timestamp.",
-                    "format": "date-time",
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
         "extapiGetFiatCurrencyListResponse": {
             "properties": {
                 "fiatCurrencyList": {
                     "items": {
                         "$ref": "#/definitions/extapiFiatCurrency"
-                    },
-                    "type": "array"
-                }
-            },
-            "type": "object"
-        },
-        "extapiGetGSGatewayProfileResponse": {
-            "properties": {
-                "gwProfile": {
-                    "$ref": "#/definitions/extapiGSGatewayProfile"
-                }
-            },
-            "type": "object"
-        },
-        "extapiGetGatewayHistoryResponse": {
-            "properties": {
-                "gwHistory": {
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "extapiGetGatewayListResponse": {
-            "properties": {
-                "count": {
-                    "format": "int64",
-                    "type": "string"
-                },
-                "gwProfile": {
-                    "items": {
-                        "$ref": "#/definitions/extapiGSGatewayProfile"
                     },
                     "type": "array"
                 }
@@ -10207,24 +8525,6 @@
             },
             "type": "object"
         },
-        "extapiGetHTTPIntegrationResponse": {
-            "properties": {
-                "integration": {
-                    "$ref": "#/definitions/extapiHTTPIntegration",
-                    "description": "Integration object."
-                }
-            },
-            "type": "object"
-        },
-        "extapiGetInfluxDBIntegrationResponse": {
-            "properties": {
-                "integration": {
-                    "$ref": "#/definitions/extapiInfluxDBIntegration",
-                    "description": "Integration object."
-                }
-            },
-            "type": "object"
-        },
         "extapiGetJWTRequest": {
             "properties": {
                 "organizationId": {
@@ -10274,15 +8574,6 @@
             },
             "type": "object"
         },
-        "extapiGetLoRaCloudIntegrationResponse": {
-            "properties": {
-                "integration": {
-                    "$ref": "#/definitions/extapiLoRaCloudIntegration",
-                    "description": "Integration object."
-                }
-            },
-            "type": "object"
-        },
         "extapiGetMXCpriceResponse": {
             "properties": {
                 "mxcPrice": {
@@ -10305,38 +8596,10 @@
             },
             "type": "object"
         },
-        "extapiGetMulticastGroupResponse": {
-            "properties": {
-                "createdAt": {
-                    "description": "Created at timestamp.",
-                    "format": "date-time",
-                    "type": "string"
-                },
-                "multicastGroup": {
-                    "$ref": "#/definitions/extapiMulticastGroup",
-                    "description": "Multicast-group object."
-                },
-                "updatedAt": {
-                    "description": "Last update timestamp.",
-                    "format": "date-time",
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
         "extapiGetMxprotocolServerVersionResponse": {
             "properties": {
                 "version": {
                     "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "extapiGetMyDevicesIntegrationResponse": {
-            "properties": {
-                "integration": {
-                    "$ref": "#/definitions/extapiMyDevicesIntegration",
-                    "description": "Integration object."
                 }
             },
             "type": "object"
@@ -10363,29 +8626,6 @@
                 },
                 "version": {
                     "description": "The LPWAN Server version.",
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "extapiGetNetworkUsageHistResponse": {
-            "properties": {
-                "count": {
-                    "format": "int64",
-                    "type": "string"
-                },
-                "networkUsage": {
-                    "items": {
-                        "$ref": "#/definitions/extapiNetworkUsage"
-                    },
-                    "type": "array"
-                }
-            },
-            "type": "object"
-        },
-        "extapiGetOTPCodeResponse": {
-            "properties": {
-                "otpCode": {
                     "type": "string"
                 }
             },
@@ -10471,6 +8711,21 @@
             },
             "type": "object"
         },
+        "extapiGetRequestsForSupportPermissionResponse": {
+            "properties": {
+                "count": {
+                    "format": "int64",
+                    "type": "string"
+                },
+                "list": {
+                    "items": {
+                        "$ref": "#/definitions/extapiSupportPermissionRequest"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
         "extapiGetServerRegionResponse": {
             "properties": {
                 "serverRegion": {
@@ -10498,28 +8753,13 @@
             },
             "type": "object"
         },
-        "extapiGetSettingsResponse": {
+        "extapiGetStakesResponse": {
             "properties": {
-                "compensation": {
-                    "format": "double",
-                    "type": "number"
-                },
-                "downlinkPrice": {
-                    "format": "double",
-                    "type": "number"
-                },
-                "lowBalanceWarning": {
-                    "description": "when supernode income is lower than expected revenue, warn system owner to increase income",
-                    "type": "string"
-                },
-                "stakingInterest": {
-                    "description": "this is the monthly interest we pay on stakes",
-                    "format": "double",
-                    "type": "number"
-                },
-                "supernodeIncomeRatio": {
-                    "format": "double",
-                    "type": "number"
+                "stake": {
+                    "items": {
+                        "$ref": "#/definitions/extapiStake"
+                    },
+                    "type": "array"
                 }
             },
             "type": "object"
@@ -10554,15 +8794,6 @@
                 "url": {
                     "description": "otpauth:// url containing details of TOTP configuration",
                     "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "extapiGetThingsBoardIntegrationResponse": {
-            "properties": {
-                "integration": {
-                    "$ref": "#/definitions/extapiThingsBoardIntegration",
-                    "description": "Integration object."
                 }
             },
             "type": "object"
@@ -10640,21 +8871,6 @@
                 "user": {
                     "$ref": "#/definitions/extapiUser",
                     "description": "User object."
-                }
-            },
-            "type": "object"
-        },
-        "extapiGetVmxcTxHistoryResponse": {
-            "properties": {
-                "count": {
-                    "format": "int64",
-                    "type": "string"
-                },
-                "txHistory": {
-                    "items": {
-                        "$ref": "#/definitions/extapiVmxcTxHistory"
-                    },
-                    "type": "array"
                 }
             },
             "type": "object"
@@ -10784,145 +9000,6 @@
             },
             "type": "object"
         },
-        "extapiGoogleRecaptchaRequest": {
-            "properties": {
-                "remoteip": {
-                    "type": "string"
-                },
-                "response": {
-                    "type": "string"
-                },
-                "secret": {
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "extapiGoogleRecaptchaResponse": {
-            "properties": {
-                "challengeTs": {
-                    "type": "string"
-                },
-                "errorCodes": {
-                    "type": "string"
-                },
-                "hostname": {
-                    "type": "string"
-                },
-                "success": {
-                    "type": "boolean"
-                }
-            },
-            "type": "object"
-        },
-        "extapiHTTPIntegration": {
-            "properties": {
-                "ackNotificationURL": {
-                    "description": "The URL to call for ACK notifications (for confirmed downlink data).",
-                    "type": "string"
-                },
-                "applicationID": {
-                    "description": "The id of the application.",
-                    "format": "int64",
-                    "type": "string"
-                },
-                "errorNotificationURL": {
-                    "description": "The URL to call for error notifications.",
-                    "type": "string"
-                },
-                "headers": {
-                    "description": "The headers to use when making HTTP callbacks.",
-                    "items": {
-                        "$ref": "#/definitions/extapiHTTPIntegrationHeader"
-                    },
-                    "type": "array"
-                },
-                "integrationNotificationURL": {
-                    "description": "The URL to call for integration notifications.",
-                    "type": "string"
-                },
-                "joinNotificationURL": {
-                    "description": "The URL to call for join notifications.",
-                    "type": "string"
-                },
-                "locationNotificationURL": {
-                    "description": "The URL to call for location notifications.",
-                    "type": "string"
-                },
-                "statusNotificationURL": {
-                    "description": "The URL to call for device-status notifications.",
-                    "type": "string"
-                },
-                "txAckNotificationURL": {
-                    "description": "The URL to call for tx ack notifications (downlink acknowledged by gateway for transmission).",
-                    "type": "string"
-                },
-                "uplinkDataURL": {
-                    "description": "The URL to call for uplink data.",
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "extapiHTTPIntegrationHeader": {
-            "properties": {
-                "key": {
-                    "description": "Key",
-                    "type": "string"
-                },
-                "value": {
-                    "description": "Value",
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "extapiInfluxDBIntegration": {
-            "properties": {
-                "applicationID": {
-                    "description": "Application ID.",
-                    "format": "int64",
-                    "type": "string"
-                },
-                "db": {
-                    "description": "InfluxDB database name.",
-                    "type": "string"
-                },
-                "endpoint": {
-                    "description": "InfluxDB API write endpoint (e.g. http://localhost:8086/write).",
-                    "type": "string"
-                },
-                "password": {
-                    "description": "InfluxDB password.",
-                    "type": "string"
-                },
-                "precision": {
-                    "$ref": "#/definitions/extapiInfluxDBPrecision",
-                    "description": "InfluxDB timestamp precision."
-                },
-                "retentionPolicyName": {
-                    "description": "InfluxDB retention policy name.",
-                    "type": "string"
-                },
-                "username": {
-                    "description": "InfluxDB username.",
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "extapiInfluxDBPrecision": {
-            "default": "NS",
-            "enum": [
-                "NS",
-                "U",
-                "MS",
-                "S",
-                "M",
-                "H"
-            ],
-            "type": "string"
-        },
         "extapiInsertNewDefaultGatewayConfigRequest": {
             "properties": {
                 "defaultConfig": {
@@ -10941,26 +9018,6 @@
             "properties": {
                 "status": {
                     "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "extapiIntegrationKind": {
-            "default": "HTTP",
-            "enum": [
-                "HTTP",
-                "INFLUXDB",
-                "THINGSBOARD",
-                "MYDEVICES",
-                "LORACLOUD"
-            ],
-            "type": "string"
-        },
-        "extapiIntegrationListItem": {
-            "properties": {
-                "kind": {
-                    "$ref": "#/definitions/extapiIntegrationKind",
-                    "description": "Integration kind."
                 }
             },
             "type": "object"
@@ -10984,6 +9041,18 @@
                     "description": "Total number of applications available within the result-set.",
                     "format": "int64",
                     "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "extapiListCellsResponse": {
+            "properties": {
+                "cell": {
+                    "description": "list of cells with number of gateways in each",
+                    "items": {
+                        "$ref": "#/definitions/extapiCell"
+                    },
+                    "type": "array"
                 }
             },
             "type": "object"
@@ -11032,39 +9101,6 @@
             },
             "type": "object"
         },
-        "extapiListFUOTADeploymentDevicesResponse": {
-            "properties": {
-                "result": {
-                    "items": {
-                        "$ref": "#/definitions/extapiFUOTADeploymentDeviceListItem"
-                    },
-                    "type": "array"
-                },
-                "totalCount": {
-                    "description": "Total number of devices for the FUOTA deployment.",
-                    "format": "int64",
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "extapiListFUOTADeploymentResponse": {
-            "properties": {
-                "result": {
-                    "description": "Deployments within this result-set.",
-                    "items": {
-                        "$ref": "#/definitions/extapiFUOTADeploymentListItem"
-                    },
-                    "type": "array"
-                },
-                "totalCount": {
-                    "description": "Total number of deployments available within the result-set.",
-                    "format": "int64",
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
         "extapiListGatewayLocationsResponse": {
             "properties": {
                 "result": {
@@ -11103,51 +9139,6 @@
                     "type": "array"
                 },
                 "totalCount": {
-                    "description": "Total number of nodes available within the result-set.",
-                    "format": "int64",
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "extapiListIntegrationResponse": {
-            "properties": {
-                "result": {
-                    "description": "Integrations within result-set.",
-                    "items": {
-                        "$ref": "#/definitions/extapiIntegrationListItem"
-                    },
-                    "type": "array"
-                },
-                "totalCount": {
-                    "description": "Total number of integrations available within the result-set.",
-                    "format": "int64",
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "extapiListMulticastGroupQueueItemsResponse": {
-            "properties": {
-                "multicastQueueItems": {
-                    "items": {
-                        "$ref": "#/definitions/extapiMulticastQueueItem"
-                    },
-                    "type": "array"
-                }
-            },
-            "type": "object"
-        },
-        "extapiListMulticastGroupResponse": {
-            "properties": {
-                "result": {
-                    "items": {
-                        "$ref": "#/definitions/extapiMulticastGroupListItem"
-                    },
-                    "type": "array"
-                },
-                "totalCount": {
-                    "description": "Total number of multicast-groups.",
                     "format": "int64",
                     "type": "string"
                 }
@@ -11219,6 +9210,28 @@
             },
             "type": "object"
         },
+        "extapiListUserActionsByEmailResponse": {
+            "properties": {
+                "userActions": {
+                    "items": {
+                        "$ref": "#/definitions/extapiUserAction"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "extapiListUserActionsResponse": {
+            "properties": {
+                "userActions": {
+                    "items": {
+                        "$ref": "#/definitions/extapiUserAction"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
         "extapiListUserResponse": {
             "properties": {
                 "result": {
@@ -11236,80 +9249,15 @@
             },
             "type": "object"
         },
-        "extapiLoRaCloudIntegration": {
-            "properties": {
-                "applicationID": {
-                    "description": "Application ID.",
-                    "format": "int64",
-                    "type": "string"
-                },
-                "das": {
-                    "description": "Device Application Services enabled.",
-                    "type": "boolean"
-                },
-                "dasModemPort": {
-                    "description": "Device Application Services modem port (FPort).\nChirpStack Application Server will only forward the FRMPayload to DAS\nwhen the uplink FPort is equal to this value.",
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "dasToken": {
-                    "description": "Device Application Services token.\nThis token can be obtained from the LoRa Cloud console.",
-                    "type": "string"
-                },
-                "geolocation": {
-                    "description": "Geolocation enabled.",
-                    "type": "boolean"
-                },
-                "geolocationBufferTTL": {
-                    "description": "Geolocation buffer TTL (in seconds).\nWhen > 0, uplink RX meta-data will be stored in a buffer so that\nthe meta-data of multiple uplinks can be used for geolocation.",
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "geolocationGNSS": {
-                    "description": "GNSS based geolocation is enabled (LR1110).",
-                    "type": "boolean"
-                },
-                "geolocationGNSSPayloadField": {
-                    "description": "GNSS payload field.\nThis holds the name of the field in the decoded payload object which\ncontains the GNSS payload bytes.",
-                    "type": "string"
-                },
-                "geolocationGNSSUseRxTime": {
-                    "description": "GNSS use RX time.\nIn case this is set to true, the resolver will use the RX time of the\nnetwork instead of the timestamp included in the LR1110 payload.",
-                    "type": "boolean"
-                },
-                "geolocationMinBufferSize": {
-                    "description": "Geolocation minimum buffer size.\nWhen > 0, geolocation will only be performed when the buffer has\nat least the given size.",
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "geolocationRSSI": {
-                    "description": "RSSI based geolocation is enabled.",
-                    "type": "boolean"
-                },
-                "geolocationTDOA": {
-                    "description": "TDOA based geolocation is enabled.",
-                    "type": "boolean"
-                },
-                "geolocationToken": {
-                    "description": "Geolocation token.\nThis token can be obtained from the LoRa Cloud console.",
-                    "type": "string"
-                },
-                "geolocationWifi": {
-                    "description": "Wifi based geolocation is enabled.",
-                    "type": "boolean"
-                },
-                "geolocationWifiPayloadField": {
-                    "description": "Wifi payload field.\nThis holds the name of the field in the decoded payload object which\ncontains an array of objects with the following fields:\n* macAddress - e.g. 01:23:45:67:89:ab\n* signalStrength - e.g. -51 (optional)",
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
         "extapiLogin2FARequest": {
             "type": "object"
         },
         "extapiLoginRequest": {
             "properties": {
+                "captcha": {
+                    "description": "Captcha token",
+                    "type": "string"
+                },
                 "password": {
                     "description": "Password of the user.",
                     "type": "string"
@@ -11323,12 +9271,28 @@
         },
         "extapiLoginResponse": {
             "properties": {
+                "authToken": {
+                    "description": "The API token to be used to access lora-app-server interfaces.",
+                    "type": "string"
+                },
                 "is2faRequired": {
                     "description": "Two-factor authentication is required to finish the process",
                     "type": "boolean"
                 },
                 "jwt": {
-                    "description": "The JWT token to be used to access lora-app-server interfaces.",
+                    "description": "The same API token just with a different name for legacy compatibility",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "extapiLogoutResponse": {
+            "type": "object"
+        },
+        "extapiMXCLockdropsTotalResponse": {
+            "properties": {
+                "amount": {
+                    "description": "total amount of MXC locked for DHX mining",
                     "type": "string"
                 }
             },
@@ -11408,29 +9372,19 @@
             },
             "type": "object"
         },
-        "extapiModifySettingsRequest": {
+        "extapiModifyUserSupportPermissionRequest": {
             "properties": {
-                "downlinkFee": {
-                    "format": "int64",
-                    "type": "string"
+                "grantPermission": {
+                    "type": "boolean"
                 },
-                "lowBalanceWarning": {
-                    "format": "int64",
-                    "type": "string"
-                },
-                "transactionPercentageShare": {
+                "userID": {
                     "format": "int64",
                     "type": "string"
                 }
             },
             "type": "object"
         },
-        "extapiModifySettingsResponse": {
-            "properties": {
-                "status": {
-                    "type": "boolean"
-                }
-            },
+        "extapiModifyUserSupportPermissionResponse": {
             "type": "object"
         },
         "extapiModifyWithdrawFeeRequest": {
@@ -11438,7 +9392,7 @@
                 "currency": {
                     "type": "string"
                 },
-                "password": {
+                "feeCurrency": {
                     "type": "string"
                 },
                 "withdrawFee": {
@@ -11448,132 +9402,6 @@
             "type": "object"
         },
         "extapiModifyWithdrawFeeResponse": {
-            "properties": {
-                "status": {
-                    "type": "boolean"
-                }
-            },
-            "type": "object"
-        },
-        "extapiMulticastGroup": {
-            "properties": {
-                "dr": {
-                    "description": "Data-rate.",
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "fCnt": {
-                    "description": "Frame-counter.",
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "frequency": {
-                    "description": "Frequency (Hz).",
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "groupType": {
-                    "$ref": "#/definitions/extapiMulticastGroupType",
-                    "description": "Multicast type."
-                },
-                "id": {
-                    "description": "ID (string formatted UUID).\nThis will be generated automatically on create.",
-                    "type": "string"
-                },
-                "mcAddr": {
-                    "description": "Multicast address (HEX encoded DevAddr).",
-                    "type": "string"
-                },
-                "mcAppSKey": {
-                    "description": "Multicast application session key (HEX encoded AES128 key).",
-                    "type": "string"
-                },
-                "mcNwkSKey": {
-                    "description": "Multicast network session key (HEX encoded AES128 key).",
-                    "type": "string"
-                },
-                "name": {
-                    "description": "Multicast-group name.",
-                    "type": "string"
-                },
-                "pingSlotPeriod": {
-                    "description": "Ping-slot period.\nMandatory for Class-B multicast groups.",
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "serviceProfileID": {
-                    "description": "Service-profile ID.\nAfter creation, this can not be updated.",
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "extapiMulticastGroupListItem": {
-            "properties": {
-                "id": {
-                    "description": "ID (string formatted UUID).",
-                    "type": "string"
-                },
-                "name": {
-                    "description": "Multicast-group name.",
-                    "type": "string"
-                },
-                "serviceProfileID": {
-                    "description": "Service-profile ID (string formatted UUID).",
-                    "type": "string"
-                },
-                "serviceProfileName": {
-                    "description": "Service-profile name.",
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "extapiMulticastGroupType": {
-            "default": "CLASS_C",
-            "description": " - CLASS_C: Class-C.\n - CLASS_B: Class-B.",
-            "enum": [
-                "CLASS_C",
-                "CLASS_B"
-            ],
-            "type": "string"
-        },
-        "extapiMulticastQueueItem": {
-            "properties": {
-                "data": {
-                    "description": "Base64 encoded data.",
-                    "format": "byte",
-                    "type": "string"
-                },
-                "fCnt": {
-                    "description": "Downlink frame-counter.\nThis will be automatically set on enqueue.",
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "fPort": {
-                    "description": "FPort used (must be > 0).",
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "multicastGroupID": {
-                    "description": "Multicast-group ID (string formatted UUID).",
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "extapiMyDevicesIntegration": {
-            "properties": {
-                "applicationID": {
-                    "description": "Application ID.",
-                    "format": "int64",
-                    "type": "string"
-                },
-                "endpoint": {
-                    "description": "MyDevices API endpoint.",
-                    "type": "string"
-                }
-            },
             "type": "object"
         },
         "extapiNetworkServer": {
@@ -11665,50 +9493,6 @@
             },
             "type": "object"
         },
-        "extapiNetworkUsage": {
-            "properties": {
-                "amount": {
-                    "type": "string"
-                },
-                "dlCntDev": {
-                    "format": "int64",
-                    "type": "string"
-                },
-                "dlCntDevFree": {
-                    "format": "int64",
-                    "type": "string"
-                },
-                "dlCntGw": {
-                    "format": "int64",
-                    "type": "string"
-                },
-                "dlCntGwFree": {
-                    "format": "int64",
-                    "type": "string"
-                },
-                "timestamp": {
-                    "format": "date-time",
-                    "type": "string"
-                },
-                "ulCntDev": {
-                    "format": "int64",
-                    "type": "string"
-                },
-                "ulCntDevFree": {
-                    "format": "int64",
-                    "type": "string"
-                },
-                "ulCntGw": {
-                    "format": "int64",
-                    "type": "string"
-                },
-                "ulCntGwFree": {
-                    "format": "int64",
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
         "extapiOrder": {
             "properties": {
                 "amountProduct": {
@@ -11787,7 +9571,7 @@
                     "type": "boolean"
                 },
                 "isDeviceAdmin": {
-                    "description": "User is able to modify device related resources (applications,\ndevice-profiles, devices, multicast-groups).",
+                    "description": "User is able to modify device related resources (applications,\ndevice-profiles, devices).",
                     "type": "boolean"
                 },
                 "isGatewayAdmin": {
@@ -11854,7 +9638,7 @@
                     "type": "boolean"
                 },
                 "isDeviceAdmin": {
-                    "description": "User is able to modify device related resources (applications,\ndevice-profiles, devices, multicast-groups).",
+                    "description": "User is able to modify device related resources (applications,\ndevice-profiles, devices).",
                     "type": "boolean"
                 },
                 "isGatewayAdmin": {
@@ -11890,7 +9674,7 @@
                     "type": "boolean"
                 },
                 "isDeviceAdmin": {
-                    "description": "User is able to modify device related resources (applications,\ndevice-profiles, devices, multicast-groups).",
+                    "description": "User is able to modify device related resources (applications,\ndevice-profiles, devices).",
                     "type": "boolean"
                 },
                 "isGatewayAdmin": {
@@ -11916,6 +9700,10 @@
         },
         "extapiPasswordResetReq": {
             "properties": {
+                "captcha": {
+                    "description": "captcha token",
+                    "type": "string"
+                },
                 "language": {
                     "description": "language for the email",
                     "type": "string"
@@ -11999,6 +9787,35 @@
             ],
             "type": "string"
         },
+        "extapiRecoverUserAccountRequest": {
+            "properties": {
+                "illegalEmail": {
+                    "description": "illegal email address used by illegal user",
+                    "type": "string"
+                },
+                "originalEmail": {
+                    "description": "original email address for user account before changed",
+                    "type": "string"
+                },
+                "reason": {
+                    "type": "string"
+                },
+                "userID": {
+                    "description": "user ID for account that needs to be recovered",
+                    "format": "int64",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "extapiRecoverUserAccountResponse": {
+            "properties": {
+                "message": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
         "extapiRegisterExternalUserRequest": {
             "properties": {
                 "email": {
@@ -12030,26 +9847,6 @@
             },
             "type": "object"
         },
-        "extapiRegisterResellerRequest": {
-            "properties": {
-                "manufacturerNr": {
-                    "type": "string"
-                },
-                "organizationId": {
-                    "format": "int64",
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "extapiRegisterResellerResponse": {
-            "properties": {
-                "status": {
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
         "extapiRegisterResponse": {
             "properties": {
                 "status": {
@@ -12060,10 +9857,65 @@
         },
         "extapiRegisterUserRequest": {
             "properties": {
+                "captcha": {
+                    "description": "Captcha token",
+                    "type": "string"
+                },
                 "email": {
                     "type": "string"
                 },
                 "language": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "extapiRegulateIllegalGatewayRequest": {
+            "properties": {
+                "reason": {
+                    "type": "string"
+                },
+                "snList": {
+                    "description": "list of serial number, requires format: M2XXXX,M2XXXX,M2XXXX,M2XXXX.. separate each serial number by ','",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "extapiRegulateIllegalGatewayResponse": {
+            "properties": {
+                "message": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "extapiRequestSupportPermissionRequest": {
+            "type": "object"
+        },
+        "extapiRequestSupportPermissionResponse": {
+            "properties": {
+                "status": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "extapiReset2FAReqeust": {
+            "properties": {
+                "reason": {
+                    "type": "string"
+                },
+                "userID": {
+                    "format": "int64",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "extapiReset2FAResponse": {
+            "properties": {
+                "message": {
                     "type": "string"
                 }
             },
@@ -12080,6 +9932,26 @@
         "extapiResetDefaultGatewatConfigByIDResponse": {
             "properties": {
                 "status": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "extapiResetPasswordResetLimitRequest": {
+            "properties": {
+                "reason": {
+                    "type": "string"
+                },
+                "userID": {
+                    "format": "int64",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "extapiResetPasswordResetLimitResponse": {
+            "properties": {
+                "message": {
                     "type": "string"
                 }
             },
@@ -12254,54 +10126,6 @@
             },
             "type": "object"
         },
-        "extapiSetDeviceModeRequest": {
-            "properties": {
-                "devId": {
-                    "format": "int64",
-                    "type": "string"
-                },
-                "devMode": {
-                    "$ref": "#/definitions/extapiDeviceMode"
-                },
-                "orgId": {
-                    "format": "int64",
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "extapiSetDeviceModeResponse": {
-            "properties": {
-                "status": {
-                    "type": "boolean"
-                }
-            },
-            "type": "object"
-        },
-        "extapiSetGatewayModeRequest": {
-            "properties": {
-                "gwId": {
-                    "format": "int64",
-                    "type": "string"
-                },
-                "gwMode": {
-                    "$ref": "#/definitions/extapiGatewayMode"
-                },
-                "orgId": {
-                    "format": "int64",
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "extapiSetGatewayModeResponse": {
-            "properties": {
-                "status": {
-                    "type": "boolean"
-                }
-            },
-            "type": "object"
-        },
         "extapiStake": {
             "properties": {
                 "active": {
@@ -12457,6 +10281,14 @@
             },
             "type": "object"
         },
+        "extapiStakingTotalsResponse": {
+            "properties": {
+                "amount": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
         "extapiStreamDeviceEventLogsResponse": {
             "properties": {
                 "payloadJSON": {
@@ -12515,6 +10347,22 @@
             },
             "type": "object"
         },
+        "extapiSupportPermissionRequest": {
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "timestamp": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "userID": {
+                    "format": "int64",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
         "extapiTOTPStatusRequest": {
             "type": "object"
         },
@@ -12523,20 +10371,6 @@
                 "enabled": {
                     "description": "set to true if TOTP is enabled",
                     "type": "boolean"
-                }
-            },
-            "type": "object"
-        },
-        "extapiThingsBoardIntegration": {
-            "properties": {
-                "applicationID": {
-                    "description": "Application ID.",
-                    "format": "int64",
-                    "type": "string"
-                },
-                "server": {
-                    "description": "ThingsBoard server endpoint, e.g. https://example.com",
-                    "type": "string"
                 }
             },
             "type": "object"
@@ -12746,51 +10580,6 @@
             },
             "type": "object"
         },
-        "extapiUpdateHTTPIntegrationRequest": {
-            "properties": {
-                "integration": {
-                    "$ref": "#/definitions/extapiHTTPIntegration",
-                    "description": "Integration object to update."
-                }
-            },
-            "type": "object"
-        },
-        "extapiUpdateInfluxDBIntegrationRequest": {
-            "properties": {
-                "integration": {
-                    "$ref": "#/definitions/extapiInfluxDBIntegration",
-                    "description": "Integration object."
-                }
-            },
-            "type": "object"
-        },
-        "extapiUpdateLoRaCloudIntegrationRequest": {
-            "properties": {
-                "integration": {
-                    "$ref": "#/definitions/extapiLoRaCloudIntegration",
-                    "description": "Integration object."
-                }
-            },
-            "type": "object"
-        },
-        "extapiUpdateMulticastGroupRequest": {
-            "properties": {
-                "multicastGroup": {
-                    "$ref": "#/definitions/extapiMulticastGroup",
-                    "description": "Multicast-group object to update."
-                }
-            },
-            "type": "object"
-        },
-        "extapiUpdateMyDevicesIntegrationRequest": {
-            "properties": {
-                "integration": {
-                    "$ref": "#/definitions/extapiMyDevicesIntegration",
-                    "description": "Integration object."
-                }
-            },
-            "type": "object"
-        },
         "extapiUpdateNetworkServerRequest": {
             "properties": {
                 "networkServer": {
@@ -12823,29 +10612,6 @@
                 "serviceProfile": {
                     "$ref": "#/definitions/extapiServiceProfile",
                     "description": "Service-profile object to update."
-                }
-            },
-            "type": "object"
-        },
-        "extapiUpdateThingsBoardIntegrationRequest": {
-            "properties": {
-                "integration": {
-                    "$ref": "#/definitions/extapiThingsBoardIntegration",
-                    "description": "Integration object."
-                }
-            },
-            "type": "object"
-        },
-        "extapiUpdateUserPasswordRequest": {
-            "properties": {
-                "password": {
-                    "description": "New pasword.",
-                    "type": "string"
-                },
-                "userId": {
-                    "description": "User ID.",
-                    "format": "int64",
-                    "type": "string"
                 }
             },
             "type": "object"
@@ -12923,6 +10689,29 @@
             },
             "type": "object"
         },
+        "extapiUserAction": {
+            "properties": {
+                "action": {
+                    "type": "string"
+                },
+                "details": {
+                    "type": "string"
+                },
+                "operatorID": {
+                    "format": "int64",
+                    "type": "string"
+                },
+                "timestamp": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "userID": {
+                    "format": "int64",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
         "extapiUserListItem": {
             "properties": {
                 "createdAt": {
@@ -12967,7 +10756,7 @@
                     "type": "boolean"
                 },
                 "isDeviceAdmin": {
-                    "description": "User is able to modify device related resources (applications,\ndevice-profiles, devices, multicast-groups).",
+                    "description": "User is able to modify device related resources (applications,\ndevice-profiles, devices).",
                     "type": "boolean"
                 },
                 "isGatewayAdmin": {
@@ -12985,6 +10774,19 @@
         "extapiVerifyEmailRequest": {
             "properties": {
                 "email": {
+                    "description": "email address to verify",
+                    "type": "string"
+                },
+                "verificationCode": {
+                    "description": "verification code that was sent to the email",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "extapiVerifyShopifyEmailRequest": {
+            "properties": {
+                "email": {
                     "description": "user will receive confirmation message on given email address",
                     "type": "string"
                 },
@@ -12998,30 +10800,9 @@
             },
             "type": "object"
         },
-        "extapiVerifyEmailResponse": {
+        "extapiVerifyShopifyEmailResponse": {
             "properties": {
                 "status": {
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "extapiVmxcTxHistory": {
-            "properties": {
-                "amount": {
-                    "format": "double",
-                    "type": "number"
-                },
-                "createdAt": {
-                    "type": "string"
-                },
-                "from": {
-                    "type": "string"
-                },
-                "to": {
-                    "type": "string"
-                },
-                "txType": {
                     "type": "string"
                 }
             },

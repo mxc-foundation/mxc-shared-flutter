@@ -82,191 +82,6 @@ class _$ApplicationService extends ApplicationService {
   }
 
   @override
-  Future<Response<ExtapiListIntegrationResponse>> listIntegrations(
-      {String? applicationID,
-      String? grpcMetadataXOTP,
-      String? grpcMetadataAuthorization}) {
-    final $url = '/api/applications/${applicationID}/integrations';
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $request = Request('GET', $url, client.baseUrl, headers: $headers);
-    return client.send<ExtapiListIntegrationResponse,
-        ExtapiListIntegrationResponse>($request);
-  }
-
-  @override
-  Future<Response<dynamic>> deleteHTTPIntegration(
-      {String? applicationID,
-      String? grpcMetadataXOTP,
-      String? grpcMetadataAuthorization}) {
-    final $url = '/api/applications/${applicationID}/integrations/http';
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $request = Request('DELETE', $url, client.baseUrl, headers: $headers);
-    return client.send<dynamic, dynamic>($request);
-  }
-
-  @override
-  Future<Response<ExtapiGetHTTPIntegrationResponse>> getHTTPIntegration(
-      {String? applicationID,
-      String? grpcMetadataXOTP,
-      String? grpcMetadataAuthorization}) {
-    final $url = '/api/applications/${applicationID}/integrations/http';
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $request = Request('GET', $url, client.baseUrl, headers: $headers);
-    return client.send<ExtapiGetHTTPIntegrationResponse,
-        ExtapiGetHTTPIntegrationResponse>($request);
-  }
-
-  @override
-  Future<Response<dynamic>> deleteInfluxDBIntegration(
-      {String? applicationID,
-      String? grpcMetadataXOTP,
-      String? grpcMetadataAuthorization}) {
-    final $url = '/api/applications/${applicationID}/integrations/influxdb';
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $request = Request('DELETE', $url, client.baseUrl, headers: $headers);
-    return client.send<dynamic, dynamic>($request);
-  }
-
-  @override
-  Future<Response<ExtapiGetInfluxDBIntegrationResponse>> getInfluxDBIntegration(
-      {String? applicationID,
-      String? grpcMetadataXOTP,
-      String? grpcMetadataAuthorization}) {
-    final $url = '/api/applications/${applicationID}/integrations/influxdb';
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $request = Request('GET', $url, client.baseUrl, headers: $headers);
-    return client.send<ExtapiGetInfluxDBIntegrationResponse,
-        ExtapiGetInfluxDBIntegrationResponse>($request);
-  }
-
-  @override
-  Future<Response<dynamic>> deleteLoRaCloudIntegration(
-      {String? applicationID,
-      String? grpcMetadataXOTP,
-      String? grpcMetadataAuthorization}) {
-    final $url = '/api/applications/${applicationID}/integrations/loracloud';
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $request = Request('DELETE', $url, client.baseUrl, headers: $headers);
-    return client.send<dynamic, dynamic>($request);
-  }
-
-  @override
-  Future<Response<ExtapiGetLoRaCloudIntegrationResponse>>
-      getLoRaCloudIntegration(
-          {String? applicationID,
-          String? grpcMetadataXOTP,
-          String? grpcMetadataAuthorization}) {
-    final $url = '/api/applications/${applicationID}/integrations/loracloud';
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $request = Request('GET', $url, client.baseUrl, headers: $headers);
-    return client.send<ExtapiGetLoRaCloudIntegrationResponse,
-        ExtapiGetLoRaCloudIntegrationResponse>($request);
-  }
-
-  @override
-  Future<Response<dynamic>> deleteMyDevicesIntegration(
-      {String? applicationID,
-      String? grpcMetadataXOTP,
-      String? grpcMetadataAuthorization}) {
-    final $url = '/api/applications/${applicationID}/integrations/mydevices';
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $request = Request('DELETE', $url, client.baseUrl, headers: $headers);
-    return client.send<dynamic, dynamic>($request);
-  }
-
-  @override
-  Future<Response<ExtapiGetMyDevicesIntegrationResponse>>
-      getMyDevicesIntegration(
-          {String? applicationID,
-          String? grpcMetadataXOTP,
-          String? grpcMetadataAuthorization}) {
-    final $url = '/api/applications/${applicationID}/integrations/mydevices';
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $request = Request('GET', $url, client.baseUrl, headers: $headers);
-    return client.send<ExtapiGetMyDevicesIntegrationResponse,
-        ExtapiGetMyDevicesIntegrationResponse>($request);
-  }
-
-  @override
-  Future<Response<dynamic>> deleteThingsBoardIntegration(
-      {String? applicationID,
-      String? grpcMetadataXOTP,
-      String? grpcMetadataAuthorization}) {
-    final $url = '/api/applications/${applicationID}/integrations/thingsboard';
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $request = Request('DELETE', $url, client.baseUrl, headers: $headers);
-    return client.send<dynamic, dynamic>($request);
-  }
-
-  @override
-  Future<Response<ExtapiGetThingsBoardIntegrationResponse>>
-      getThingsBoardIntegration(
-          {String? applicationID,
-          String? grpcMetadataXOTP,
-          String? grpcMetadataAuthorization}) {
-    final $url = '/api/applications/${applicationID}/integrations/thingsboard';
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $request = Request('GET', $url, client.baseUrl, headers: $headers);
-    return client.send<ExtapiGetThingsBoardIntegrationResponse,
-        ExtapiGetThingsBoardIntegrationResponse>($request);
-  }
-
-  @override
   Future<Response<dynamic>> delete(
       {String? id,
       String? grpcMetadataXOTP,
@@ -297,196 +112,6 @@ class _$ApplicationService extends ApplicationService {
     final $request = Request('GET', $url, client.baseUrl, headers: $headers);
     return client.send<ExtapiGetApplicationResponse,
         ExtapiGetApplicationResponse>($request);
-  }
-
-  @override
-  Future<Response<dynamic>> createHTTPIntegration(
-      {String? applicationID,
-      ExtapiCreateHTTPIntegrationRequest? body,
-      String? grpcMetadataXOTP,
-      String? grpcMetadataAuthorization}) {
-    final $url = '/api/applications/${applicationID}/integrations/http';
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $body = body;
-    final $request =
-        Request('POST', $url, client.baseUrl, body: $body, headers: $headers);
-    return client.send<dynamic, dynamic>($request);
-  }
-
-  @override
-  Future<Response<dynamic>> updateHTTPIntegration(
-      {String? applicationID,
-      ExtapiUpdateHTTPIntegrationRequest? body,
-      String? grpcMetadataXOTP,
-      String? grpcMetadataAuthorization}) {
-    final $url = '/api/applications/${applicationID}/integrations/http';
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $body = body;
-    final $request =
-        Request('PUT', $url, client.baseUrl, body: $body, headers: $headers);
-    return client.send<dynamic, dynamic>($request);
-  }
-
-  @override
-  Future<Response<dynamic>> createInfluxDBIntegration(
-      {String? applicationID,
-      ExtapiCreateInfluxDBIntegrationRequest? body,
-      String? grpcMetadataXOTP,
-      String? grpcMetadataAuthorization}) {
-    final $url = '/api/applications/${applicationID}/integrations/influxdb';
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $body = body;
-    final $request =
-        Request('POST', $url, client.baseUrl, body: $body, headers: $headers);
-    return client.send<dynamic, dynamic>($request);
-  }
-
-  @override
-  Future<Response<dynamic>> updateInfluxDBIntegration(
-      {String? applicationID,
-      ExtapiUpdateInfluxDBIntegrationRequest? body,
-      String? grpcMetadataXOTP,
-      String? grpcMetadataAuthorization}) {
-    final $url = '/api/applications/${applicationID}/integrations/influxdb';
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $body = body;
-    final $request =
-        Request('PUT', $url, client.baseUrl, body: $body, headers: $headers);
-    return client.send<dynamic, dynamic>($request);
-  }
-
-  @override
-  Future<Response<dynamic>> createLoRaCloudIntegration(
-      {String? applicationID,
-      ExtapiCreateLoRaCloudIntegrationRequest? body,
-      String? grpcMetadataXOTP,
-      String? grpcMetadataAuthorization}) {
-    final $url = '/api/applications/${applicationID}/integrations/loracloud';
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $body = body;
-    final $request =
-        Request('POST', $url, client.baseUrl, body: $body, headers: $headers);
-    return client.send<dynamic, dynamic>($request);
-  }
-
-  @override
-  Future<Response<dynamic>> updateLoRaCloudIntegration(
-      {String? applicationID,
-      ExtapiUpdateLoRaCloudIntegrationRequest? body,
-      String? grpcMetadataXOTP,
-      String? grpcMetadataAuthorization}) {
-    final $url = '/api/applications/${applicationID}/integrations/loracloud';
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $body = body;
-    final $request =
-        Request('PUT', $url, client.baseUrl, body: $body, headers: $headers);
-    return client.send<dynamic, dynamic>($request);
-  }
-
-  @override
-  Future<Response<dynamic>> createMyDevicesIntegration(
-      {String? applicationID,
-      ExtapiCreateMyDevicesIntegrationRequest? body,
-      String? grpcMetadataXOTP,
-      String? grpcMetadataAuthorization}) {
-    final $url = '/api/applications/${applicationID}/integrations/mydevices';
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $body = body;
-    final $request =
-        Request('POST', $url, client.baseUrl, body: $body, headers: $headers);
-    return client.send<dynamic, dynamic>($request);
-  }
-
-  @override
-  Future<Response<dynamic>> updateMyDevicesIntegration(
-      {String? applicationID,
-      ExtapiUpdateMyDevicesIntegrationRequest? body,
-      String? grpcMetadataXOTP,
-      String? grpcMetadataAuthorization}) {
-    final $url = '/api/applications/${applicationID}/integrations/mydevices';
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $body = body;
-    final $request =
-        Request('PUT', $url, client.baseUrl, body: $body, headers: $headers);
-    return client.send<dynamic, dynamic>($request);
-  }
-
-  @override
-  Future<Response<dynamic>> createThingsBoardIntegration(
-      {String? applicationID,
-      ExtapiCreateThingsBoardIntegrationRequest? body,
-      String? grpcMetadataXOTP,
-      String? grpcMetadataAuthorization}) {
-    final $url = '/api/applications/${applicationID}/integrations/thingsboard';
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $body = body;
-    final $request =
-        Request('POST', $url, client.baseUrl, body: $body, headers: $headers);
-    return client.send<dynamic, dynamic>($request);
-  }
-
-  @override
-  Future<Response<dynamic>> updateThingsBoardIntegration(
-      {String? applicationID,
-      ExtapiUpdateThingsBoardIntegrationRequest? body,
-      String? grpcMetadataXOTP,
-      String? grpcMetadataAuthorization}) {
-    final $url = '/api/applications/${applicationID}/integrations/thingsboard';
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $body = body;
-    final $request =
-        Request('PUT', $url, client.baseUrl, body: $body, headers: $headers);
-    return client.send<dynamic, dynamic>($request);
   }
 }
 
@@ -565,8 +190,8 @@ class _$ExternalUserService extends ExternalUserService {
   final definitionType = ExternalUserService;
 
   @override
-  Future<Response<ExtapiConfirmBindingEmailResponse>> confirmBindingEmail(
-      {ExtapiConfirmBindingEmailRequest? body,
+  Future<Response<ExtapiConfirmShopifyEmailResponse>> confirmShopifyEmail(
+      {ExtapiConfirmShopifyEmailRequest? body,
       String? grpcMetadataXOTP,
       String? grpcMetadataAuthorization}) {
     final $url = '/api/confirm-external-email';
@@ -579,8 +204,8 @@ class _$ExternalUserService extends ExternalUserService {
     final $body = body;
     final $request =
         Request('POST', $url, client.baseUrl, body: $body, headers: $headers);
-    return client.send<ExtapiConfirmBindingEmailResponse,
-        ExtapiConfirmBindingEmailResponse>($request);
+    return client.send<ExtapiConfirmShopifyEmailResponse,
+        ExtapiConfirmShopifyEmailResponse>($request);
   }
 
   @override
@@ -680,8 +305,8 @@ class _$ExternalUserService extends ExternalUserService {
   }
 
   @override
-  Future<Response<ExtapiVerifyEmailResponse>> verifyEmail(
-      {ExtapiVerifyEmailRequest? body,
+  Future<Response<ExtapiVerifyShopifyEmailResponse>> verifyShopifyEmail(
+      {ExtapiVerifyShopifyEmailRequest? body,
       String? grpcMetadataXOTP,
       String? grpcMetadataAuthorization}) {
     final $url = '/api/verify-external-email';
@@ -694,8 +319,8 @@ class _$ExternalUserService extends ExternalUserService {
     final $body = body;
     final $request =
         Request('POST', $url, client.baseUrl, body: $body, headers: $headers);
-    return client
-        .send<ExtapiVerifyEmailResponse, ExtapiVerifyEmailResponse>($request);
+    return client.send<ExtapiVerifyShopifyEmailResponse,
+        ExtapiVerifyShopifyEmailResponse>($request);
   }
 }
 
@@ -848,94 +473,11 @@ class _$DeviceService extends DeviceService {
   final definitionType = DeviceService;
 
   @override
-  Future<Response<ExtapiGetDeviceHistoryResponse>> getDeviceHistory(
-      {String? orgId,
-      String? devId,
-      String? offset,
-      String? limit,
-      String? grpcMetadataXOTP,
-      String? grpcMetadataAuthorization}) {
-    final $url = '/api/device/${orgId}/device-history/${devId}';
-    final $params = <String, dynamic>{'offset': offset, 'limit': limit};
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $request = Request('GET', $url, client.baseUrl,
-        parameters: $params, headers: $headers);
-    return client.send<ExtapiGetDeviceHistoryResponse,
-        ExtapiGetDeviceHistoryResponse>($request);
-  }
-
-  @override
-  Future<Response<ExtapiGetDeviceListResponse>> getDeviceList(
-      {String? orgId,
-      String? offset,
-      String? limit,
-      String? grpcMetadataXOTP,
-      String? grpcMetadataAuthorization}) {
-    final $url = '/api/device/${orgId}/device-list';
-    final $params = <String, dynamic>{'offset': offset, 'limit': limit};
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $request = Request('GET', $url, client.baseUrl,
-        parameters: $params, headers: $headers);
-    return client.send<ExtapiGetDeviceListResponse,
-        ExtapiGetDeviceListResponse>($request);
-  }
-
-  @override
-  Future<Response<ExtapiSetDeviceModeResponse>> setDeviceMode(
-      {String? orgId,
-      String? devId,
-      ExtapiSetDeviceModeRequest? body,
-      String? grpcMetadataXOTP,
-      String? grpcMetadataAuthorization}) {
-    final $url = '/api/device/${orgId}/device-mode/${devId}';
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $body = body;
-    final $request =
-        Request('POST', $url, client.baseUrl, body: $body, headers: $headers);
-    return client.send<ExtapiSetDeviceModeResponse,
-        ExtapiSetDeviceModeResponse>($request);
-  }
-
-  @override
-  Future<Response<ExtapiGetDSDeviceProfileResponse>> getDeviceProfile(
-      {String? orgId,
-      String? devId,
-      String? grpcMetadataXOTP,
-      String? grpcMetadataAuthorization}) {
-    final $url = '/api/device/${orgId}/device-profile/${devId}';
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $request = Request('GET', $url, client.baseUrl, headers: $headers);
-    return client.send<ExtapiGetDSDeviceProfileResponse,
-        ExtapiGetDSDeviceProfileResponse>($request);
-  }
-
-  @override
   Future<Response<ExtapiListDeviceResponse>> list(
       {String? limit,
       String? offset,
       String? applicationID,
       String? search,
-      String? multicastGroupID,
       String? serviceProfileID,
       String? grpcMetadataXOTP,
       String? grpcMetadataAuthorization}) {
@@ -945,7 +487,6 @@ class _$DeviceService extends DeviceService {
       'offset': offset,
       'applicationID': applicationID,
       'search': search,
-      'multicastGroupID': multicastGroupID,
       'serviceProfileID': serviceProfileID
     };
     final $headers = {
@@ -1209,123 +750,6 @@ class _$DeviceService extends DeviceService {
 }
 
 // ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations, unnecessary_brace_in_string_interps
-class _$FUOTADeploymentService extends FUOTADeploymentService {
-  _$FUOTADeploymentService([ChopperClient? client]) {
-    if (client == null) return;
-    this.client = client;
-  }
-
-  @override
-  final definitionType = FUOTADeploymentService;
-
-  @override
-  Future<Response<ExtapiCreateFUOTADeploymentForDeviceResponse>>
-      createForDevice(
-          {String? devEUI,
-          ExtapiCreateFUOTADeploymentForDeviceRequest? body,
-          String? grpcMetadataXOTP,
-          String? grpcMetadataAuthorization}) {
-    final $url = '/api/devices/${devEUI}/fuota-deployments';
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $body = body;
-    final $request =
-        Request('POST', $url, client.baseUrl, body: $body, headers: $headers);
-    return client.send<ExtapiCreateFUOTADeploymentForDeviceResponse,
-        ExtapiCreateFUOTADeploymentForDeviceResponse>($request);
-  }
-
-  @override
-  Future<Response<ExtapiListFUOTADeploymentResponse>> list(
-      {String? limit,
-      String? offset,
-      String? applicationID,
-      String? devEUI,
-      String? grpcMetadataXOTP,
-      String? grpcMetadataAuthorization}) {
-    final $url = '/api/fuota-deployments';
-    final $params = <String, dynamic>{
-      'limit': limit,
-      'offset': offset,
-      'applicationID': applicationID,
-      'devEUI': devEUI
-    };
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $request = Request('GET', $url, client.baseUrl,
-        parameters: $params, headers: $headers);
-    return client.send<ExtapiListFUOTADeploymentResponse,
-        ExtapiListFUOTADeploymentResponse>($request);
-  }
-
-  @override
-  Future<Response<ExtapiListFUOTADeploymentDevicesResponse>>
-      listDeploymentDevices(
-          {String? fuotaDeploymentID,
-          String? limit,
-          String? offset,
-          String? grpcMetadataXOTP,
-          String? grpcMetadataAuthorization}) {
-    final $url = '/api/fuota-deployments/${fuotaDeploymentID}/devices';
-    final $params = <String, dynamic>{'limit': limit, 'offset': offset};
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $request = Request('GET', $url, client.baseUrl,
-        parameters: $params, headers: $headers);
-    return client.send<ExtapiListFUOTADeploymentDevicesResponse,
-        ExtapiListFUOTADeploymentDevicesResponse>($request);
-  }
-
-  @override
-  Future<Response<ExtapiGetFUOTADeploymentDeviceResponse>> getDeploymentDevice(
-      {String? fuotaDeploymentID,
-      String? devEUI,
-      String? grpcMetadataXOTP,
-      String? grpcMetadataAuthorization}) {
-    final $url =
-        '/api/fuota-deployments/${fuotaDeploymentID}/devices/${devEUI}';
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $request = Request('GET', $url, client.baseUrl, headers: $headers);
-    return client.send<ExtapiGetFUOTADeploymentDeviceResponse,
-        ExtapiGetFUOTADeploymentDeviceResponse>($request);
-  }
-
-  @override
-  Future<Response<ExtapiGetFUOTADeploymentResponse>> get(
-      {String? id,
-      String? grpcMetadataXOTP,
-      String? grpcMetadataAuthorization}) {
-    final $url = '/api/fuota-deployments/${id}';
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $request = Request('GET', $url, client.baseUrl, headers: $headers);
-    return client.send<ExtapiGetFUOTADeploymentResponse,
-        ExtapiGetFUOTADeploymentResponse>($request);
-  }
-}
-
-// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations, unnecessary_brace_in_string_interps
 class _$DeviceQueueService extends DeviceQueueService {
   _$DeviceQueueService([ChopperClient? client]) {
     if (client == null) return;
@@ -1548,6 +972,25 @@ class _$DHXServcieService extends DHXServcieService {
   }
 
   @override
+  Future<Response<ExtapiDHXTotalMiningResponse>> dHXTotalMining(
+      {String? orgId,
+      String? grpcMetadataXOTP,
+      String? grpcMetadataAuthorization}) {
+    final $url = '/api/dhx-mining/dhx-total-mined';
+    final $params = <String, dynamic>{'orgId': orgId};
+    final $headers = {
+      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
+      if (grpcMetadataAuthorization != null)
+        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
+    };
+
+    final $request = Request('GET', $url, client.baseUrl,
+        parameters: $params, headers: $headers);
+    return client.send<ExtapiDHXTotalMiningResponse,
+        ExtapiDHXTotalMiningResponse>($request);
+  }
+
+  @override
   Future<Response<ExtapiDHXEstimateMiningResponse>> dHXEstimateMining(
       {String? orgId,
       String? grpcMetadataXOTP,
@@ -1646,6 +1089,25 @@ class _$DHXServcieService extends DHXServcieService {
         parameters: $params, headers: $headers);
     return client.send<ExtapiDHXListStakesResponse,
         ExtapiDHXListStakesResponse>($request);
+  }
+
+  @override
+  Future<Response<ExtapiMXCLockdropsTotalResponse>> mXCLockdropsTotal(
+      {String? orgId,
+      String? grpcMetadataXOTP,
+      String? grpcMetadataAuthorization}) {
+    final $url = '/api/dhx-mining/mxc-locked-total';
+    final $params = <String, dynamic>{'orgId': orgId};
+    final $headers = {
+      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
+      if (grpcMetadataAuthorization != null)
+        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
+    };
+
+    final $request = Request('GET', $url, client.baseUrl,
+        parameters: $params, headers: $headers);
+    return client.send<ExtapiMXCLockdropsTotalResponse,
+        ExtapiMXCLockdropsTotalResponse>($request);
   }
 
   @override
@@ -1806,103 +1268,13 @@ class _$GatewayService extends GatewayService {
   }
 
   @override
-  Future<Response<ExtapiGetGatewayHistoryResponse>> getGatewayHistory(
-      {String? orgId,
-      String? gwId,
-      String? offset,
-      String? limit,
-      String? grpcMetadataXOTP,
-      String? grpcMetadataAuthorization}) {
-    final $url = '/api/gateway/${orgId}/gateway-history/${gwId}';
-    final $params = <String, dynamic>{'offset': offset, 'limit': limit};
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $request = Request('GET', $url, client.baseUrl,
-        parameters: $params, headers: $headers);
-    return client.send<ExtapiGetGatewayHistoryResponse,
-        ExtapiGetGatewayHistoryResponse>($request);
-  }
-
-  @override
-  Future<Response<ExtapiGetGatewayListResponse>> getGatewayList(
-      {String? orgId,
-      String? offset,
-      String? limit,
-      String? grpcMetadataXOTP,
-      String? grpcMetadataAuthorization}) {
-    final $url = '/api/gateway/${orgId}/gateway-list';
-    final $params = <String, dynamic>{'offset': offset, 'limit': limit};
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $request = Request('GET', $url, client.baseUrl,
-        parameters: $params, headers: $headers);
-    return client.send<ExtapiGetGatewayListResponse,
-        ExtapiGetGatewayListResponse>($request);
-  }
-
-  @override
-  Future<Response<ExtapiSetGatewayModeResponse>> setGatewayMode(
-      {String? orgId,
-      String? gwId,
-      ExtapiSetGatewayModeRequest? body,
-      String? grpcMetadataXOTP,
-      String? grpcMetadataAuthorization}) {
-    final $url = '/api/gateway/${orgId}/gateway-mode/${gwId}';
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $body = body;
-    final $request =
-        Request('POST', $url, client.baseUrl, body: $body, headers: $headers);
-    return client.send<ExtapiSetGatewayModeResponse,
-        ExtapiSetGatewayModeResponse>($request);
-  }
-
-  @override
-  Future<Response<ExtapiGetGSGatewayProfileResponse>> getGatewayProfile(
-      {String? orgId,
-      String? gwId,
-      String? offset,
-      String? limit,
-      String? grpcMetadataXOTP,
-      String? grpcMetadataAuthorization}) {
-    final $url = '/api/gateway/${orgId}/gateway-profile/${gwId}';
-    final $params = <String, dynamic>{'offset': offset, 'limit': limit};
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $request = Request('GET', $url, client.baseUrl,
-        parameters: $params, headers: $headers);
-    return client.send<ExtapiGetGSGatewayProfileResponse,
-        ExtapiGetGSGatewayProfileResponse>($request);
-  }
-
-  @override
   Future<Response<ExtapiListGatewayResponse>> list(
-      {int? limit,
-      int? offset,
-      String? organizationID,
+      {String? organizationID,
       String? search,
       String? grpcMetadataXOTP,
       String? grpcMetadataAuthorization}) {
     final $url = '/api/gateways';
     final $params = <String, dynamic>{
-      'limit': limit,
-      'offset': offset,
       'organizationID': organizationID,
       'search': search
     };
@@ -1949,6 +1321,21 @@ class _$GatewayService extends GatewayService {
     final $request = Request('GET', $url, client.baseUrl, headers: $headers);
     return client.send<ExtapiListGatewayLocationsResponse,
         ExtapiListGatewayLocationsResponse>($request);
+  }
+
+  @override
+  Future<Response<ExtapiListCellsResponse>> listCells(
+      {String? grpcMetadataXOTP, String? grpcMetadataAuthorization}) {
+    final $url = '/api/gateways/cells/list';
+    final $headers = {
+      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
+      if (grpcMetadataAuthorization != null)
+        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
+    };
+
+    final $request = Request('GET', $url, client.baseUrl, headers: $headers);
+    return client
+        .send<ExtapiListCellsResponse, ExtapiListCellsResponse>($request);
   }
 
   @override
@@ -2109,25 +1496,6 @@ class _$GatewayService extends GatewayService {
   }
 
   @override
-  Future<Response<ExtapiRegisterResellerResponse>> registerReseller(
-      {ExtapiRegisterResellerRequest? body,
-      String? grpcMetadataXOTP,
-      String? grpcMetadataAuthorization}) {
-    final $url = '/api/gateways/register-reseller';
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $body = body;
-    final $request =
-        Request('POST', $url, client.baseUrl, body: $body, headers: $headers);
-    return client.send<ExtapiRegisterResellerResponse,
-        ExtapiRegisterResellerResponse>($request);
-  }
-
-  @override
   Future<Response<ExtapiSetAutoUpdateFirmwareResponse>> setAutoUpdateFirmware(
       {String? gatewayId,
       ExtapiSetAutoUpdateFirmwareRequest? body,
@@ -2281,16 +1649,12 @@ class _$GatewayService extends GatewayService {
 
   @override
   Future<Response<ExtapiListGatewayResponse>> listNewGateways(
-      {int? limit,
-      int? offset,
-      String? organizationID,
+      {String? organizationID,
       String? search,
       String? grpcMetadataXOTP,
       String? grpcMetadataAuthorization}) {
     final $url = '/api/new-gateways';
     final $params = <String, dynamic>{
-      'limit': limit,
-      'offset': offset,
       'organizationID': organizationID,
       'search': search
     };
@@ -2370,7 +1734,7 @@ class _$InternalService extends InternalService {
   }
 
   @override
-  Future<Response<ExtapiLoginResponse>> login2FA(
+  Future<Response<dynamic>> login2FA(
       {ExtapiLogin2FARequest? body,
       String? grpcMetadataXOTP,
       String? grpcMetadataAuthorization}) {
@@ -2384,7 +1748,21 @@ class _$InternalService extends InternalService {
     final $body = body;
     final $request =
         Request('POST', $url, client.baseUrl, body: $body, headers: $headers);
-    return client.send<ExtapiLoginResponse, ExtapiLoginResponse>($request);
+    return client.send<dynamic, dynamic>($request);
+  }
+
+  @override
+  Future<Response<ExtapiLogoutResponse>> logout(
+      {String? grpcMetadataXOTP, String? grpcMetadataAuthorization}) {
+    final $url = '/api/internal/logout';
+    final $headers = {
+      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
+      if (grpcMetadataAuthorization != null)
+        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
+    };
+
+    final $request = Request('GET', $url, client.baseUrl, headers: $headers);
+    return client.send<ExtapiLogoutResponse, ExtapiLogoutResponse>($request);
   }
 
   @override
@@ -2590,25 +1968,6 @@ class _$InternalService extends InternalService {
     return client
         .send<ExtapiTOTPStatusResponse, ExtapiTOTPStatusResponse>($request);
   }
-
-  @override
-  Future<Response<ExtapiGoogleRecaptchaResponse>> getVerifyingGoogleRecaptcha(
-      {ExtapiGoogleRecaptchaRequest? body,
-      String? grpcMetadataXOTP,
-      String? grpcMetadataAuthorization}) {
-    final $url = '/api/internal/verify-g-recaptcha';
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $body = body;
-    final $request =
-        Request('POST', $url, client.baseUrl, body: $body, headers: $headers);
-    return client.send<ExtapiGoogleRecaptchaResponse,
-        ExtapiGoogleRecaptchaResponse>($request);
-  }
 }
 
 // ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations, unnecessary_brace_in_string_interps
@@ -2745,208 +2104,6 @@ class _$MosquittoAuthService extends MosquittoAuthService {
         parameters: $params, headers: $headers);
     return client.send<ExtapiSubsribeDeviceEventsResponse,
         ExtapiSubsribeDeviceEventsResponse>($request);
-  }
-}
-
-// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations, unnecessary_brace_in_string_interps
-class _$MulticastGroupService extends MulticastGroupService {
-  _$MulticastGroupService([ChopperClient? client]) {
-    if (client == null) return;
-    this.client = client;
-  }
-
-  @override
-  final definitionType = MulticastGroupService;
-
-  @override
-  Future<Response<ExtapiListMulticastGroupResponse>> list(
-      {String? limit,
-      String? offset,
-      String? organizationID,
-      String? devEUI,
-      String? serviceProfileID,
-      String? search,
-      String? grpcMetadataXOTP,
-      String? grpcMetadataAuthorization}) {
-    final $url = '/api/multicast-groups';
-    final $params = <String, dynamic>{
-      'limit': limit,
-      'offset': offset,
-      'organizationID': organizationID,
-      'devEUI': devEUI,
-      'serviceProfileID': serviceProfileID,
-      'search': search
-    };
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $request = Request('GET', $url, client.baseUrl,
-        parameters: $params, headers: $headers);
-    return client.send<ExtapiListMulticastGroupResponse,
-        ExtapiListMulticastGroupResponse>($request);
-  }
-
-  @override
-  Future<Response<ExtapiCreateMulticastGroupResponse>> create(
-      {ExtapiCreateMulticastGroupRequest? body,
-      String? grpcMetadataXOTP,
-      String? grpcMetadataAuthorization}) {
-    final $url = '/api/multicast-groups';
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $body = body;
-    final $request =
-        Request('POST', $url, client.baseUrl, body: $body, headers: $headers);
-    return client.send<ExtapiCreateMulticastGroupResponse,
-        ExtapiCreateMulticastGroupResponse>($request);
-  }
-
-  @override
-  Future<Response<dynamic>> delete(
-      {String? id,
-      String? grpcMetadataXOTP,
-      String? grpcMetadataAuthorization}) {
-    final $url = '/api/multicast-groups/${id}';
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $request = Request('DELETE', $url, client.baseUrl, headers: $headers);
-    return client.send<dynamic, dynamic>($request);
-  }
-
-  @override
-  Future<Response<ExtapiGetMulticastGroupResponse>> get(
-      {String? id,
-      String? grpcMetadataXOTP,
-      String? grpcMetadataAuthorization}) {
-    final $url = '/api/multicast-groups/${id}';
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $request = Request('GET', $url, client.baseUrl, headers: $headers);
-    return client.send<ExtapiGetMulticastGroupResponse,
-        ExtapiGetMulticastGroupResponse>($request);
-  }
-
-  @override
-  Future<Response<dynamic>> update(
-      {String? id,
-      ExtapiUpdateMulticastGroupRequest? body,
-      String? grpcMetadataXOTP,
-      String? grpcMetadataAuthorization}) {
-    final $url = '/api/multicast-groups/${id}';
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $body = body;
-    final $request =
-        Request('PUT', $url, client.baseUrl, body: $body, headers: $headers);
-    return client.send<dynamic, dynamic>($request);
-  }
-
-  @override
-  Future<Response<dynamic>> addDevice(
-      {String? multicastGroupID,
-      ExtapiAddDeviceToMulticastGroupRequest? body,
-      String? grpcMetadataXOTP,
-      String? grpcMetadataAuthorization}) {
-    final $url = '/api/multicast-groups/${multicastGroupID}/devices';
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $body = body;
-    final $request =
-        Request('POST', $url, client.baseUrl, body: $body, headers: $headers);
-    return client.send<dynamic, dynamic>($request);
-  }
-
-  @override
-  Future<Response<dynamic>> removeDevice(
-      {String? multicastGroupID,
-      String? devEUI,
-      String? grpcMetadataXOTP,
-      String? grpcMetadataAuthorization}) {
-    final $url = '/api/multicast-groups/${multicastGroupID}/devices/${devEUI}';
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $request = Request('DELETE', $url, client.baseUrl, headers: $headers);
-    return client.send<dynamic, dynamic>($request);
-  }
-
-  @override
-  Future<Response<dynamic>> flushQueue(
-      {String? multicastGroupID,
-      String? grpcMetadataXOTP,
-      String? grpcMetadataAuthorization}) {
-    final $url = '/api/multicast-groups/${multicastGroupID}/queue';
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $request = Request('DELETE', $url, client.baseUrl, headers: $headers);
-    return client.send<dynamic, dynamic>($request);
-  }
-
-  @override
-  Future<Response<ExtapiListMulticastGroupQueueItemsResponse>> listQueue(
-      {String? multicastGroupID,
-      String? grpcMetadataXOTP,
-      String? grpcMetadataAuthorization}) {
-    final $url = '/api/multicast-groups/${multicastGroupID}/queue';
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $request = Request('GET', $url, client.baseUrl, headers: $headers);
-    return client.send<ExtapiListMulticastGroupQueueItemsResponse,
-        ExtapiListMulticastGroupQueueItemsResponse>($request);
-  }
-
-  @override
-  Future<Response<ExtapiEnqueueMulticastQueueItemResponse>> enqueue(
-      {String? multicastGroupID,
-      ExtapiEnqueueMulticastQueueItemRequest? body,
-      String? grpcMetadataXOTP,
-      String? grpcMetadataAuthorization}) {
-    final $url = '/api/multicast-groups/${multicastGroupID}/queue';
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $body = body;
-    final $request =
-        Request('POST', $url, client.baseUrl, body: $body, headers: $headers);
-    return client.send<ExtapiEnqueueMulticastQueueItemResponse,
-        ExtapiEnqueueMulticastQueueItemResponse>($request);
   }
 }
 
@@ -3512,51 +2669,6 @@ class _$ServiceProfileService extends ServiceProfileService {
 }
 
 // ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations, unnecessary_brace_in_string_interps
-class _$SettingsService extends SettingsService {
-  _$SettingsService([ChopperClient? client]) {
-    if (client == null) return;
-    this.client = client;
-  }
-
-  @override
-  final definitionType = SettingsService;
-
-  @override
-  Future<Response<ExtapiGetSettingsResponse>> getSettings(
-      {String? grpcMetadataXOTP, String? grpcMetadataAuthorization}) {
-    final $url = '/api/settings';
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $request = Request('GET', $url, client.baseUrl, headers: $headers);
-    return client
-        .send<ExtapiGetSettingsResponse, ExtapiGetSettingsResponse>($request);
-  }
-
-  @override
-  Future<Response<ExtapiModifySettingsResponse>> modifySettings(
-      {ExtapiModifySettingsRequest? body,
-      String? grpcMetadataXOTP,
-      String? grpcMetadataAuthorization}) {
-    final $url = '/api/settings';
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $body = body;
-    final $request =
-        Request('PUT', $url, client.baseUrl, body: $body, headers: $headers);
-    return client.send<ExtapiModifySettingsResponse,
-        ExtapiModifySettingsResponse>($request);
-  }
-}
-
-// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations, unnecessary_brace_in_string_interps
 class _$ShopifyIntegrationService extends ShopifyIntegrationService {
   _$ShopifyIntegrationService([ChopperClient? client]) {
     if (client == null) return;
@@ -3727,6 +2839,46 @@ class _$StakingService extends StakingService {
   }
 
   @override
+  Future<Response<ExtapiStakingTotalsResponse>> getStakingTotals(
+      {String? orgId,
+      String? currency,
+      String? grpcMetadataXOTP,
+      String? grpcMetadataAuthorization}) {
+    final $url = '/api/staking/${orgId}/staked-total';
+    final $params = <String, dynamic>{'currency': currency};
+    final $headers = {
+      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
+      if (grpcMetadataAuthorization != null)
+        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
+    };
+
+    final $request = Request('GET', $url, client.baseUrl,
+        parameters: $params, headers: $headers);
+    return client.send<ExtapiStakingTotalsResponse,
+        ExtapiStakingTotalsResponse>($request);
+  }
+
+  @override
+  Future<Response<ExtapiGetStakesResponse>> getStakes(
+      {String? orgId,
+      String? currency,
+      String? grpcMetadataXOTP,
+      String? grpcMetadataAuthorization}) {
+    final $url = '/api/staking/${orgId}/stakes';
+    final $params = <String, dynamic>{'currency': currency};
+    final $headers = {
+      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
+      if (grpcMetadataAuthorization != null)
+        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
+    };
+
+    final $request = Request('GET', $url, client.baseUrl,
+        parameters: $params, headers: $headers);
+    return client
+        .send<ExtapiGetStakesResponse, ExtapiGetStakesResponse>($request);
+  }
+
+  @override
   Future<Response<ExtapiUnstakeResponse>> unstake(
       {String? orgId,
       ExtapiUnstakeRequest? body,
@@ -3743,6 +2895,233 @@ class _$StakingService extends StakingService {
     final $request =
         Request('POST', $url, client.baseUrl, body: $body, headers: $headers);
     return client.send<ExtapiUnstakeResponse, ExtapiUnstakeResponse>($request);
+  }
+}
+
+// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations, unnecessary_brace_in_string_interps
+class _$SupportService extends SupportService {
+  _$SupportService([ChopperClient? client]) {
+    if (client == null) return;
+    this.client = client;
+  }
+
+  @override
+  final definitionType = SupportService;
+
+  @override
+  Future<Response<ExtapiListUserActionsByEmailResponse>> listUserActionsByEmail(
+      {String? email,
+      String? grpcMetadataXOTP,
+      String? grpcMetadataAuthorization}) {
+    final $url = '/api/support/actions/list-by-email';
+    final $params = <String, dynamic>{'email': email};
+    final $headers = {
+      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
+      if (grpcMetadataAuthorization != null)
+        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
+    };
+
+    final $request = Request('GET', $url, client.baseUrl,
+        parameters: $params, headers: $headers);
+    return client.send<ExtapiListUserActionsByEmailResponse,
+        ExtapiListUserActionsByEmailResponse>($request);
+  }
+
+  @override
+  Future<Response<ExtapiListUserActionsResponse>> listUserActions(
+      {String? userID,
+      String? from,
+      String? to,
+      String? grpcMetadataXOTP,
+      String? grpcMetadataAuthorization}) {
+    final $url = '/api/support/actions/list-by-id';
+    final $params = <String, dynamic>{'userID': userID, 'from': from, 'to': to};
+    final $headers = {
+      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
+      if (grpcMetadataAuthorization != null)
+        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
+    };
+
+    final $request = Request('GET', $url, client.baseUrl,
+        parameters: $params, headers: $headers);
+    return client.send<ExtapiListUserActionsResponse,
+        ExtapiListUserActionsResponse>($request);
+  }
+
+  @override
+  Future<Response<ExtapiGetRequestsForSupportPermissionResponse>>
+      getRequestsForSupportPermission(
+          {String? grpcMetadataXOTP, String? grpcMetadataAuthorization}) {
+    final $url = '/api/support/list-permission-requests';
+    final $headers = {
+      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
+      if (grpcMetadataAuthorization != null)
+        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
+    };
+
+    final $request = Request('GET', $url, client.baseUrl, headers: $headers);
+    return client.send<ExtapiGetRequestsForSupportPermissionResponse,
+        ExtapiGetRequestsForSupportPermissionResponse>($request);
+  }
+
+  @override
+  Future<Response<ExtapiRegulateIllegalGatewayResponse>> regulateIllegalGateway(
+      {ExtapiRegulateIllegalGatewayRequest? body,
+      String? grpcMetadataXOTP,
+      String? grpcMetadataAuthorization}) {
+    final $url = '/api/support/regulate-illegal-gateway';
+    final $headers = {
+      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
+      if (grpcMetadataAuthorization != null)
+        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
+    };
+
+    final $body = body;
+    final $request =
+        Request('PUT', $url, client.baseUrl, body: $body, headers: $headers);
+    return client.send<ExtapiRegulateIllegalGatewayResponse,
+        ExtapiRegulateIllegalGatewayResponse>($request);
+  }
+
+  @override
+  Future<Response<ExtapiRequestSupportPermissionResponse>>
+      requestSupportPermission(
+          {ExtapiRequestSupportPermissionRequest? body,
+          String? grpcMetadataXOTP,
+          String? grpcMetadataAuthorization}) {
+    final $url = '/api/support/send-permission-request';
+    final $headers = {
+      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
+      if (grpcMetadataAuthorization != null)
+        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
+    };
+
+    final $body = body;
+    final $request =
+        Request('POST', $url, client.baseUrl, body: $body, headers: $headers);
+    return client.send<ExtapiRequestSupportPermissionResponse,
+        ExtapiRequestSupportPermissionResponse>($request);
+  }
+
+  @override
+  Future<Response<ExtapiModifyUserSupportPermissionResponse>>
+      modifyUserSupportPermission(
+          {ExtapiModifyUserSupportPermissionRequest? body,
+          String? grpcMetadataXOTP,
+          String? grpcMetadataAuthorization}) {
+    final $url = '/api/support/set-permission';
+    final $headers = {
+      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
+      if (grpcMetadataAuthorization != null)
+        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
+    };
+
+    final $body = body;
+    final $request =
+        Request('PUT', $url, client.baseUrl, body: $body, headers: $headers);
+    return client.send<ExtapiModifyUserSupportPermissionResponse,
+        ExtapiModifyUserSupportPermissionResponse>($request);
+  }
+
+  @override
+  Future<Response<ExtapiActivateUserResponse>> activateUser(
+      {String? userID,
+      ExtapiActivateUserRequest? body,
+      String? grpcMetadataXOTP,
+      String? grpcMetadataAuthorization}) {
+    final $url = '/api/support/${userID}/activate';
+    final $headers = {
+      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
+      if (grpcMetadataAuthorization != null)
+        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
+    };
+
+    final $body = body;
+    final $request =
+        Request('PUT', $url, client.baseUrl, body: $body, headers: $headers);
+    return client
+        .send<ExtapiActivateUserResponse, ExtapiActivateUserResponse>($request);
+  }
+
+  @override
+  Future<Response<ExtapiDeactivateUserResponse>> deactivateUser(
+      {String? userID,
+      ExtapiDeactivateUserRequest? body,
+      String? grpcMetadataXOTP,
+      String? grpcMetadataAuthorization}) {
+    final $url = '/api/support/${userID}/deactivate';
+    final $headers = {
+      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
+      if (grpcMetadataAuthorization != null)
+        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
+    };
+
+    final $body = body;
+    final $request =
+        Request('PUT', $url, client.baseUrl, body: $body, headers: $headers);
+    return client.send<ExtapiDeactivateUserResponse,
+        ExtapiDeactivateUserResponse>($request);
+  }
+
+  @override
+  Future<Response<ExtapiRecoverUserAccountResponse>> recoverUserAccount(
+      {String? userID,
+      ExtapiRecoverUserAccountRequest? body,
+      String? grpcMetadataXOTP,
+      String? grpcMetadataAuthorization}) {
+    final $url = '/api/support/${userID}/recover-account';
+    final $headers = {
+      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
+      if (grpcMetadataAuthorization != null)
+        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
+    };
+
+    final $body = body;
+    final $request =
+        Request('PUT', $url, client.baseUrl, body: $body, headers: $headers);
+    return client.send<ExtapiRecoverUserAccountResponse,
+        ExtapiRecoverUserAccountResponse>($request);
+  }
+
+  @override
+  Future<Response<ExtapiReset2FAResponse>> reset2FA(
+      {String? userID,
+      ExtapiReset2FAReqeust? body,
+      String? grpcMetadataXOTP,
+      String? grpcMetadataAuthorization}) {
+    final $url = '/api/support/${userID}/reset-2fa';
+    final $headers = {
+      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
+      if (grpcMetadataAuthorization != null)
+        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
+    };
+
+    final $body = body;
+    final $request =
+        Request('PUT', $url, client.baseUrl, body: $body, headers: $headers);
+    return client
+        .send<ExtapiReset2FAResponse, ExtapiReset2FAResponse>($request);
+  }
+
+  @override
+  Future<Response<ExtapiResetPasswordResetLimitResponse>>
+      resetPasswordResetLimit(
+          {String? userID,
+          ExtapiResetPasswordResetLimitRequest? body,
+          String? grpcMetadataXOTP,
+          String? grpcMetadataAuthorization}) {
+    final $url = '/api/support/${userID}/reset-pr-limit';
+    final $headers = {
+      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
+      if (grpcMetadataAuthorization != null)
+        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
+    };
+
+    final $body = body;
+    final $request =
+        Request('PUT', $url, client.baseUrl, body: $body, headers: $headers);
+    return client.send<ExtapiResetPasswordResetLimitResponse,
+        ExtapiResetPasswordResetLimitResponse>($request);
   }
 }
 
@@ -3846,6 +3225,61 @@ class _$UserService extends UserService {
   }
 
   @override
+  Future<Response<ExtapiChangePasswordResponse>> changePassword(
+      {ExtapiChangePasswordRequest? body,
+      String? grpcMetadataXOTP,
+      String? grpcMetadataAuthorization}) {
+    final $url = '/api/users/change-password';
+    final $headers = {
+      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
+      if (grpcMetadataAuthorization != null)
+        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
+    };
+
+    final $body = body;
+    final $request =
+        Request('POST', $url, client.baseUrl, body: $body, headers: $headers);
+    return client.send<ExtapiChangePasswordResponse,
+        ExtapiChangePasswordResponse>($request);
+  }
+
+  @override
+  Future<Response<dynamic>> addEmail(
+      {ExtapiAddEmailRequest? body,
+      String? grpcMetadataXOTP,
+      String? grpcMetadataAuthorization}) {
+    final $url = '/api/users/email-add';
+    final $headers = {
+      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
+      if (grpcMetadataAuthorization != null)
+        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
+    };
+
+    final $body = body;
+    final $request =
+        Request('POST', $url, client.baseUrl, body: $body, headers: $headers);
+    return client.send<dynamic, dynamic>($request);
+  }
+
+  @override
+  Future<Response<dynamic>> verifyEmail(
+      {ExtapiVerifyEmailRequest? body,
+      String? grpcMetadataXOTP,
+      String? grpcMetadataAuthorization}) {
+    final $url = '/api/users/email-verify';
+    final $headers = {
+      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
+      if (grpcMetadataAuthorization != null)
+        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
+    };
+
+    final $body = body;
+    final $request =
+        Request('POST', $url, client.baseUrl, body: $body, headers: $headers);
+    return client.send<dynamic, dynamic>($request);
+  }
+
+  @override
   Future<Response<ExtapiGetUserEmailResponse>> getUserEmail(
       {String? userEmail,
       String? grpcMetadataXOTP,
@@ -3860,23 +3294,6 @@ class _$UserService extends UserService {
     final $request = Request('GET', $url, client.baseUrl, headers: $headers);
     return client
         .send<ExtapiGetUserEmailResponse, ExtapiGetUserEmailResponse>($request);
-  }
-
-  @override
-  Future<Response<ExtapiGetOTPCodeResponse>> getOTPCode(
-      {String? userEmail,
-      String? grpcMetadataXOTP,
-      String? grpcMetadataAuthorization}) {
-    final $url = '/api/users/otp/${userEmail}';
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $request = Request('GET', $url, client.baseUrl, headers: $headers);
-    return client
-        .send<ExtapiGetOTPCodeResponse, ExtapiGetOTPCodeResponse>($request);
   }
 
   @override
@@ -3929,25 +3346,6 @@ class _$UserService extends UserService {
         Request('PUT', $url, client.baseUrl, body: $body, headers: $headers);
     return client
         .send<ExtapiUpdateUserResponse, ExtapiUpdateUserResponse>($request);
-  }
-
-  @override
-  Future<Response<dynamic>> updatePassword(
-      {String? userId,
-      ExtapiUpdateUserPasswordRequest? body,
-      String? grpcMetadataXOTP,
-      String? grpcMetadataAuthorization}) {
-    final $url = '/api/users/${userId}/password';
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $body = body;
-    final $request =
-        Request('PUT', $url, client.baseUrl, body: $body, headers: $headers);
-    return client.send<dynamic, dynamic>($request);
   }
 }
 
@@ -4187,53 +3585,6 @@ class _$WalletService extends WalletService {
     final $request = Request('GET', $url, client.baseUrl, headers: $headers);
     return client.send<ExtapiGetDownLinkPriceResponse,
         ExtapiGetDownLinkPriceResponse>($request);
-  }
-
-  @override
-  Future<Response<ExtapiGetVmxcTxHistoryResponse>> getVmxcTxHistory(
-      {String? orgId,
-      String? offset,
-      String? limit,
-      String? grpcMetadataXOTP,
-      String? grpcMetadataAuthorization}) {
-    final $url = '/api/wallet/${orgId}/tx-history';
-    final $params = <String, dynamic>{'offset': offset, 'limit': limit};
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $request = Request('GET', $url, client.baseUrl,
-        parameters: $params, headers: $headers);
-    return client.send<ExtapiGetVmxcTxHistoryResponse,
-        ExtapiGetVmxcTxHistoryResponse>($request);
-  }
-
-  @override
-  Future<Response<ExtapiGetNetworkUsageHistResponse>> getNetworkUsageHist(
-      {String? orgId,
-      String? currency,
-      String? from,
-      String? till,
-      String? grpcMetadataXOTP,
-      String? grpcMetadataAuthorization}) {
-    final $url = '/api/wallet/${orgId}/usage-history';
-    final $params = <String, dynamic>{
-      'currency': currency,
-      'from': from,
-      'till': till
-    };
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $request = Request('GET', $url, client.baseUrl,
-        parameters: $params, headers: $headers);
-    return client.send<ExtapiGetNetworkUsageHistResponse,
-        ExtapiGetNetworkUsageHistResponse>($request);
   }
 }
 
