@@ -343,6 +343,17 @@ Map<String, dynamic> _$ExtapiBrandingResponseToJson(
       'registration': instance.registration,
     };
 
+ExtapiCell _$ExtapiCellFromJson(Map<String, dynamic> json) => ExtapiCell(
+      gateways: json['gateways'] as String?,
+      h3CellId: json['h3CellId'] as String?,
+    );
+
+Map<String, dynamic> _$ExtapiCellToJson(ExtapiCell instance) =>
+    <String, dynamic>{
+      'gateways': instance.gateways,
+      'h3CellId': instance.h3CellId,
+    };
+
 ExtapiChangePasswordRequest _$ExtapiChangePasswordRequestFromJson(
         Map<String, dynamic> json) =>
     ExtapiChangePasswordRequest(
@@ -2572,40 +2583,6 @@ Map<String, dynamic> _$ExtapiGlobalSearchResultToJson(
       'score': instance.score,
     };
 
-ExtapiGoogleRecaptchaRequest _$ExtapiGoogleRecaptchaRequestFromJson(
-        Map<String, dynamic> json) =>
-    ExtapiGoogleRecaptchaRequest(
-      remoteip: json['remoteip'] as String?,
-      response: json['response'] as String?,
-      secret: json['secret'] as String?,
-    );
-
-Map<String, dynamic> _$ExtapiGoogleRecaptchaRequestToJson(
-        ExtapiGoogleRecaptchaRequest instance) =>
-    <String, dynamic>{
-      'remoteip': instance.remoteip,
-      'response': instance.response,
-      'secret': instance.secret,
-    };
-
-ExtapiGoogleRecaptchaResponse _$ExtapiGoogleRecaptchaResponseFromJson(
-        Map<String, dynamic> json) =>
-    ExtapiGoogleRecaptchaResponse(
-      challengeTs: json['challengeTs'] as String?,
-      errorCodes: json['errorCodes'] as String?,
-      hostname: json['hostname'] as String?,
-      success: json['success'] as bool?,
-    );
-
-Map<String, dynamic> _$ExtapiGoogleRecaptchaResponseToJson(
-        ExtapiGoogleRecaptchaResponse instance) =>
-    <String, dynamic>{
-      'challengeTs': instance.challengeTs,
-      'errorCodes': instance.errorCodes,
-      'hostname': instance.hostname,
-      'success': instance.success,
-    };
-
 ExtapiInsertNewDefaultGatewayConfigRequest
     _$ExtapiInsertNewDefaultGatewayConfigRequestFromJson(
             Map<String, dynamic> json) =>
@@ -2668,6 +2645,21 @@ Map<String, dynamic> _$ExtapiListApplicationResponseToJson(
     <String, dynamic>{
       'result': instance.result?.map((e) => e.toJson()).toList(),
       'totalCount': instance.totalCount,
+    };
+
+ExtapiListCellsResponse _$ExtapiListCellsResponseFromJson(
+        Map<String, dynamic> json) =>
+    ExtapiListCellsResponse(
+      cell: (json['cell'] as List<dynamic>?)
+              ?.map((e) => ExtapiCell.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$ExtapiListCellsResponseToJson(
+        ExtapiListCellsResponse instance) =>
+    <String, dynamic>{
+      'cell': instance.cell?.map((e) => e.toJson()).toList(),
     };
 
 ExtapiListDeviceProfileResponse _$ExtapiListDeviceProfileResponseFromJson(
@@ -2906,12 +2898,14 @@ Map<String, dynamic> _$ExtapiLogin2FARequestToJson(
 
 ExtapiLoginRequest _$ExtapiLoginRequestFromJson(Map<String, dynamic> json) =>
     ExtapiLoginRequest(
+      captcha: json['captcha'] as String?,
       password: json['password'] as String?,
       username: json['username'] as String?,
     );
 
 Map<String, dynamic> _$ExtapiLoginRequestToJson(ExtapiLoginRequest instance) =>
     <String, dynamic>{
+      'captcha': instance.captcha,
       'password': instance.password,
       'username': instance.username,
     };
@@ -3285,6 +3279,7 @@ Map<String, dynamic> _$ExtapiOrganizationUserListItemToJson(
 ExtapiPasswordResetReq _$ExtapiPasswordResetReqFromJson(
         Map<String, dynamic> json) =>
     ExtapiPasswordResetReq(
+      captcha: json['captcha'] as String?,
       language: json['language'] as String?,
       username: json['username'] as String?,
     );
@@ -3292,6 +3287,7 @@ ExtapiPasswordResetReq _$ExtapiPasswordResetReqFromJson(
 Map<String, dynamic> _$ExtapiPasswordResetReqToJson(
         ExtapiPasswordResetReq instance) =>
     <String, dynamic>{
+      'captcha': instance.captcha,
       'language': instance.language,
       'username': instance.username,
     };
@@ -3437,6 +3433,7 @@ Map<String, dynamic> _$ExtapiRegisterResponseToJson(
 ExtapiRegisterUserRequest _$ExtapiRegisterUserRequestFromJson(
         Map<String, dynamic> json) =>
     ExtapiRegisterUserRequest(
+      captcha: json['captcha'] as String?,
       email: json['email'] as String?,
       language: json['language'] as String?,
     );
@@ -3444,6 +3441,7 @@ ExtapiRegisterUserRequest _$ExtapiRegisterUserRequestFromJson(
 Map<String, dynamic> _$ExtapiRegisterUserRequestToJson(
         ExtapiRegisterUserRequest instance) =>
     <String, dynamic>{
+      'captcha': instance.captcha,
       'email': instance.email,
       'language': instance.language,
     };
