@@ -111,11 +111,11 @@ class SupernodeRepositoryDemoDecorator implements SupernodeRepository {
   Future<Supernode> getSupernode() => _currentRepository.getSupernode();
 
   @override
-  void logOut() {
+  Future<void> logOut() async {
     if (demoMode) {
       demoMode = false;
     } else {
-      _apiRepository.logOut();
+      await _apiRepository.logOut();
     }
   }
 

@@ -114,4 +114,8 @@ class UserRepository {
             email: email, verificationCode: verificationCode),
         grpcMetadataXOTP: otp);
   }
+
+  Future<void> logout() async {
+    await client.internalService.logout();
+  }
 }
