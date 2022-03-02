@@ -48,6 +48,132 @@ const $CommonModulationMap = {
   CommonModulation.swaggerGeneratedUnknown: ''
 };
 
+enum ExtapiDeviceMode {
+  @JsonValue('swaggerGeneratedUnknown')
+  swaggerGeneratedUnknown,
+  @JsonValue('DV_INACTIVE')
+  dvInactive,
+  @JsonValue('DV_FREE_GATEWAYS_LIMITED')
+  dvFreeGatewaysLimited,
+  @JsonValue('DV_WHOLE_NETWORK')
+  dvWholeNetwork,
+  @JsonValue('DV_DELETED')
+  dvDeleted
+}
+
+const $ExtapiDeviceModeMap = {
+  ExtapiDeviceMode.dvInactive: 'DV_INACTIVE',
+  ExtapiDeviceMode.dvFreeGatewaysLimited: 'DV_FREE_GATEWAYS_LIMITED',
+  ExtapiDeviceMode.dvWholeNetwork: 'DV_WHOLE_NETWORK',
+  ExtapiDeviceMode.dvDeleted: 'DV_DELETED',
+  ExtapiDeviceMode.swaggerGeneratedUnknown: ''
+};
+
+enum ExtapiFUOTADeploymentDeviceState {
+  @JsonValue('swaggerGeneratedUnknown')
+  swaggerGeneratedUnknown,
+  @JsonValue('PENDING')
+  pending,
+  @JsonValue('SUCCESS')
+  success,
+  @JsonValue('ERROR')
+  error
+}
+
+const $ExtapiFUOTADeploymentDeviceStateMap = {
+  ExtapiFUOTADeploymentDeviceState.pending: 'PENDING',
+  ExtapiFUOTADeploymentDeviceState.success: 'SUCCESS',
+  ExtapiFUOTADeploymentDeviceState.error: 'ERROR',
+  ExtapiFUOTADeploymentDeviceState.swaggerGeneratedUnknown: ''
+};
+
+enum ExtapiGatewayMode {
+  @JsonValue('swaggerGeneratedUnknown')
+  swaggerGeneratedUnknown,
+  @JsonValue('GW_INACTIVE')
+  gwInactive,
+  @JsonValue('GW_FREE_GATEWAYS_LIMITED')
+  gwFreeGatewaysLimited,
+  @JsonValue('GW_WHOLE_NETWORK')
+  gwWholeNetwork,
+  @JsonValue('GW_DELETED')
+  gwDeleted
+}
+
+const $ExtapiGatewayModeMap = {
+  ExtapiGatewayMode.gwInactive: 'GW_INACTIVE',
+  ExtapiGatewayMode.gwFreeGatewaysLimited: 'GW_FREE_GATEWAYS_LIMITED',
+  ExtapiGatewayMode.gwWholeNetwork: 'GW_WHOLE_NETWORK',
+  ExtapiGatewayMode.gwDeleted: 'GW_DELETED',
+  ExtapiGatewayMode.swaggerGeneratedUnknown: ''
+};
+
+enum ExtapiInfluxDBPrecision {
+  @JsonValue('swaggerGeneratedUnknown')
+  swaggerGeneratedUnknown,
+  @JsonValue('NS')
+  ns,
+  @JsonValue('U')
+  u,
+  @JsonValue('MS')
+  ms,
+  @JsonValue('S')
+  s,
+  @JsonValue('M')
+  m,
+  @JsonValue('H')
+  h
+}
+
+const $ExtapiInfluxDBPrecisionMap = {
+  ExtapiInfluxDBPrecision.ns: 'NS',
+  ExtapiInfluxDBPrecision.u: 'U',
+  ExtapiInfluxDBPrecision.ms: 'MS',
+  ExtapiInfluxDBPrecision.s: 'S',
+  ExtapiInfluxDBPrecision.m: 'M',
+  ExtapiInfluxDBPrecision.h: 'H',
+  ExtapiInfluxDBPrecision.swaggerGeneratedUnknown: ''
+};
+
+enum ExtapiIntegrationKind {
+  @JsonValue('swaggerGeneratedUnknown')
+  swaggerGeneratedUnknown,
+  @JsonValue('HTTP')
+  http,
+  @JsonValue('INFLUXDB')
+  influxdb,
+  @JsonValue('THINGSBOARD')
+  thingsboard,
+  @JsonValue('MYDEVICES')
+  mydevices,
+  @JsonValue('LORACLOUD')
+  loracloud
+}
+
+const $ExtapiIntegrationKindMap = {
+  ExtapiIntegrationKind.http: 'HTTP',
+  ExtapiIntegrationKind.influxdb: 'INFLUXDB',
+  ExtapiIntegrationKind.thingsboard: 'THINGSBOARD',
+  ExtapiIntegrationKind.mydevices: 'MYDEVICES',
+  ExtapiIntegrationKind.loracloud: 'LORACLOUD',
+  ExtapiIntegrationKind.swaggerGeneratedUnknown: ''
+};
+
+enum ExtapiMulticastGroupType {
+  @JsonValue('swaggerGeneratedUnknown')
+  swaggerGeneratedUnknown,
+  @JsonValue('CLASS_C')
+  classC,
+  @JsonValue('CLASS_B')
+  classB
+}
+
+const $ExtapiMulticastGroupTypeMap = {
+  ExtapiMulticastGroupType.classC: 'CLASS_C',
+  ExtapiMulticastGroupType.classB: 'CLASS_B',
+  ExtapiMulticastGroupType.swaggerGeneratedUnknown: ''
+};
+
 enum ExtapiRatePolicy {
   @JsonValue('swaggerGeneratedUnknown')
   swaggerGeneratedUnknown,
