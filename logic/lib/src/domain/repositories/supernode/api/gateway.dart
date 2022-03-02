@@ -91,20 +91,6 @@ class GatewayRepository {
     return GatewayRegisterResult(status: res.body!.status!);
   }
 
-  //TODO remove method
-  Future<GatewayRegisterResult> registerReseller({
-    required String serialNumber,
-    String? orgId,
-  }) async {
-    /*final res = await _client.gatewayService.registerReseller(
-      body: ExtapiRegisterResellerRequest(
-        organizationId: orgId ?? _client.defaultOrganizationId,
-        manufacturerNr: serialNumber,
-      ),
-    );*/
-    return GatewayRegisterResult(status: "res.body!.status!");
-  }
-
   Future<List<GatewayProfile>> profiles({
     required String networkServerId,
     String? search,
