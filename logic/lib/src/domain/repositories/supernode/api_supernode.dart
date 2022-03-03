@@ -87,7 +87,8 @@ class ApiSupernodeRepository implements SupernodeRepository {
   }
 
   @override
-  void logOut() {
+  Future<void> logOut() async {
+    await user.logout();
     _setupStore.username = null;
     _setupStore.token = null;
   }

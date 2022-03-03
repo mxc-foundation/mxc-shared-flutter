@@ -88,4 +88,7 @@ class DemoUserRepository implements UserRepository {
   }) async {
     throw UnimplementedError();
   }
+
+  @override
+  Future<void> logout() async {}
 }
