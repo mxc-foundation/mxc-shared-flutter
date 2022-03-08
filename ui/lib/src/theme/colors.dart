@@ -65,7 +65,7 @@ class ColorsTheme {
   final textError20 = const Color(0xFFFF5B5B).withOpacity(0.2);
 
   final buttonIconTextColor = Colors.white;
-  final buttonDisabledBackground = const Color(0xFFEBEFF2);
+  final buttonDisabledBackground = const Color(0xFFE3E3E5);
   final buttonDisabledLabel = const Color(0xFF98A6AD);
   final transparent = Colors.transparent;
 

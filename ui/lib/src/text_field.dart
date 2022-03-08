@@ -284,17 +284,38 @@ class _MxcNonFormTextFieldState extends State<_MxcNonFormTextField> {
   }
 }
 
-class MxcTextFieldButton extends StatelessWidget {
-  const MxcTextFieldButton({
+abstract class MxcTextFieldButton extends StatelessWidget {
+  const factory MxcTextFieldButton({
     Key? key,
-    required this.icon,
+    required Widget child,
+    required VoidCallback? onTap,
+    Color? color,
+  }) = _MxcTextFieldButton;
+
+  const MxcTextFieldButton._({
+    Key? key,
     required this.onTap,
     this.color,
   }) : super(key: key);
 
+  const factory MxcTextFieldButton.icon({
+    Key? key,
+    required IconData icon,
+    required VoidCallback? onTap,
+    Color? color,
+  }) = _MxcTextFieldIconButton;
+
+  const factory MxcTextFieldButton.image({
+    Key? key,
+    required ImageProvider image,
+    required VoidCallback? onTap,
+    Color? color,
+  }) = _MxcTextFieldImageButton;
+
   final VoidCallback? onTap;
-  final IconData icon;
   final Color? color;
+
+  Widget buildChild(BuildContext context);
 
   @override
   Widget build(BuildContext context) {
@@ -302,12 +323,54 @@ class MxcTextFieldButton extends StatelessWidget {
       onTap: onTap,
       child: Padding(
         padding: const EdgeInsets.only(left: 5, right: 5, bottom: 6),
-        child: Icon(
-          icon,
-          size: 16,
-          color: color ?? MxcScopedTheme.of(context).primaryColor,
-        ),
+        child: buildChild(context),
       ),
     );
   }
+}
+
+class _MxcTextFieldButton extends MxcTextFieldButton {
+  const _MxcTextFieldButton({
+    Key? key,
+    required this.child,
+    required VoidCallback? onTap,
+    Color? color,
+  }) : super._(onTap: onTap, color: color);
+
+  final Widget child;
+
+  @override
+  Widget buildChild(BuildContext context) => child;
+}
+
+class _MxcTextFieldIconButton extends MxcTextFieldButton {
+  const _MxcTextFieldIconButton({
+    Key? key,
+    required this.icon,
+    required VoidCallback? onTap,
+    Color? color,
+  }) : super._(key: key, onTap: onTap, color: color);
+
+  final IconData icon;
+
+  @override
+  Widget buildChild(BuildContext context) => Icon(icon, size: 16);
+}
+
+class _MxcTextFieldImageButton extends MxcTextFieldButton {
+  const _MxcTextFieldImageButton({
+    Key? key,
+    required this.image,
+    required VoidCallback? onTap,
+    Color? color,
+  }) : super._(key: key, onTap: onTap, color: color);
+
+  final ImageProvider image;
+
+  @override
+  Widget buildChild(BuildContext context) => Image(
+        image: image,
+        width: 16,
+        height: 16,
+      );
 }

@@ -411,6 +411,12 @@ class ImagesTheme {
         'assets/images/connectivity/robot.png',
         package: mxcUiPackageName,
       );
+
+  //withdraw
+  ImageProvider get address => const AssetImage(
+        'assets/images/withdraw/address.png',
+        package: mxcUiPackageName,
+      );
 }
 
 class ImagesThemeDark extends ImagesTheme {
