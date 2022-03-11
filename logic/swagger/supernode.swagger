@@ -7561,6 +7561,12 @@
                         "name": "currency",
                         "required": false,
                         "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "amount",
+                        "required": false,
+                        "type": "string"
                     }
                 ],
                 "responses": {

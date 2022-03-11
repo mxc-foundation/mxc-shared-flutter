@@ -4250,10 +4250,11 @@ class _$WithdrawService extends WithdrawService {
   @override
   Future<Response<ExtapiGetWithdrawFeeResponse>> getWithdrawFee(
       {String? currency,
+      String? amount,
       String? grpcMetadataXOTP,
       String? grpcMetadataAuthorization}) {
     final $url = '/api/withdraw/get-withdraw-fee';
-    final $params = <String, dynamic>{'currency': currency};
+    final $params = <String, dynamic>{'currency': currency, 'amount': amount};
     final $headers = {
       if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
       if (grpcMetadataAuthorization != null)

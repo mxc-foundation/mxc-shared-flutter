@@ -53,9 +53,10 @@ class WithdrawRepository {
         .toList();
   }
 
-  Future<Decimal> fee({Token currency = Token.mxc}) async {
+  Future<Decimal> fee({Token currency = Token.mxc, String? amount}) async {
     final res = await _client.withdrawService.getWithdrawFee(
       currency: currency.toData(),
+      amount: amount
     );
     return res.body!.withdrawFee.toDecimal();
   }
