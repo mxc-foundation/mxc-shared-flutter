@@ -303,6 +303,7 @@ abstract class MxcTextFieldButton extends StatelessWidget {
     required IconData icon,
     required VoidCallback? onTap,
     Color? color,
+    double? size,
   }) = _MxcTextFieldIconButton;
 
   const factory MxcTextFieldButton.image({
@@ -349,12 +350,14 @@ class _MxcTextFieldIconButton extends MxcTextFieldButton {
     required this.icon,
     required VoidCallback? onTap,
     Color? color,
+    this.size,
   }) : super._(key: key, onTap: onTap, color: color);
 
   final IconData icon;
+  final double? size;
 
   @override
-  Widget buildChild(BuildContext context) => Icon(icon, size: 16);
+  Widget buildChild(BuildContext context) => Icon(icon, size: size ?? 16);
 }
 
 class _MxcTextFieldImageButton extends MxcTextFieldButton {
