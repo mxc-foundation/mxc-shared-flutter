@@ -163,7 +163,7 @@ class _InputPageCardState extends State<InputPageCard> {
             key: null,
             label: 'Label text',
             hint: 'Hint text',
-            button: MxcTextFieldButton(
+            button: MxcTextFieldButton.icon(
               icon: FontAwesomeIcons.addressBook,
               onTap: () {},
             ),
@@ -187,7 +187,7 @@ class _InputPageCardState extends State<InputPageCard> {
             label: 'Label text',
             hint: 'Hint text',
             focusNode: AlwaysFocusedNode(),
-            button: MxcTextFieldButton(
+            button: MxcTextFieldButton.icon(
               icon: FontAwesomeIcons.addressBook,
               onTap: () {},
             ),
@@ -213,7 +213,7 @@ class _InputPageCardState extends State<InputPageCard> {
             key: null,
             label: 'Label text',
             hint: 'Hint text',
-            button: MxcTextFieldButton(
+            button: MxcTextFieldButton.icon(
               icon: FontAwesomeIcons.addressBook,
               onTap: () {},
             ),

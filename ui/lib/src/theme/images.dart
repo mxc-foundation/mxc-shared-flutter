@@ -443,6 +443,12 @@ class ImagesTheme {
         'assets/images/map/meta-xp-map-icon.png',
         package: mxcUiPackageName,
       );
+
+  //withdraw
+  ImageProvider get address => const AssetImage(
+        'assets/images/withdraw/address.png',
+        package: mxcUiPackageName,
+      );
 }
 
 class ImagesThemeDark extends ImagesTheme {

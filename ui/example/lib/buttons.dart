@@ -360,7 +360,7 @@ class _ButtonsRowState extends State<ButtonsRow> {
                         label: 'Label',
                         controller: controller,
                         hint: 'Hint',
-                        button: MxcTextFieldButton(
+                        button: MxcTextFieldButton.icon(
                           icon: Icons.ac_unit,
                           onTap: () {},
                         ),

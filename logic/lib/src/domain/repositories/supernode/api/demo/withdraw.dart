@@ -52,7 +52,7 @@ class DemoWithdrawRepository implements WithdrawRepository {
   }
 
   @override
-  Future<Decimal> fee({Token currency = Token.mxc}) async {
+  Future<Decimal> fee({Token currency = Token.mxc, String? amount}) async {
     return '300'.toDecimal();
   }
 }
