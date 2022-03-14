@@ -382,7 +382,7 @@ class _MxcTextFieldButton extends MxcTextFieldButton {
     required this.child,
     required VoidCallback? onTap,
     Color? color,
-  }) : super._(onTap: onTap, color: color);
+  }) : super._(key: key, onTap: onTap, color: color);
 
   final Widget child;
 
@@ -395,14 +395,18 @@ class _MxcTextFieldIconButton extends MxcTextFieldButton {
     Key? key,
     required this.icon,
     required VoidCallback? onTap,
-    Color? color,
     double? size,
-  }) : super._(key: key, onTap: onTap, color: color, size: size);
+    Color? color,
+  }) : super._(key: key, onTap: onTap, size: size, color: color);
 
   final IconData icon;
 
   @override
-  Widget buildChild(BuildContext context) => Icon(icon, size: size ?? 16);
+  Widget buildChild(BuildContext context) => Icon(
+        icon,
+        size: size ?? 16,
+        color: color ?? MxcScopedTheme.of(context).primaryColor,
+      );
 }
 
 class _MxcTextFieldImageButton extends MxcTextFieldButton {
@@ -420,5 +424,6 @@ class _MxcTextFieldImageButton extends MxcTextFieldButton {
         image: image,
         width: 16,
         height: 16,
+        color: color ?? MxcScopedTheme.of(context).primaryColor,
       );
 }
