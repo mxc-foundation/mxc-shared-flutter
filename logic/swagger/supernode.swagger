@@ -6736,6 +6736,21 @@
             },
             "type": "object"
         },
+        "extapiCheckACLRequest": {
+            "properties": {
+                "gateways": {
+                    "description": "Number of gateways in the cell",
+                    "format": "uint64",
+                    "type": "string"
+                },
+                "h3CellId": {
+                    "description": "H3 cell ID",
+                    "format": "uint64",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
         "extapiChangePasswordRequest": {
             "properties": {
                 "currentPassword": {
@@ -9052,6 +9067,62 @@
             "type": "object"
         },
         "extapiListCellsResponse": {
+            "properties": {
+                "cell": {
+                    "description": "list of cells with number of gateways in each",
+                    "items": {
+                        "$ref": "#/definitions/extapiCell"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "extapiListDeviceProfileResponse": {
+            "properties": {
+                "result": {
+                    "items": {
+                        "$ref": "#/definitions/extapiDeviceProfileListItem"
+                    },
+                    "type": "array"
+                },
+                "totalCount": {
+                    "description": "Total number of device-profiles.",
+                    "format": "int64",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "extapiListDeviceQueueItemsResponse": {
+            "properties": {
+                "deviceQueueItems": {
+                    "items": {
+                        "$ref": "#/definitions/extapiDeviceQueueItem"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "extapiListDeviceResponse": {
+            "properties": {
+                "result": {
+                    "description": "Devices within this result-set.",
+                    "items": {
+                        "$ref": "#/definitions/extapiDeviceListItem"
+                    },
+                    "type": "array"
+                },
+                "totalCount": {
+                    "description": "Total number of devices available within the result-set.",
+                    "format": "int64",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "extapiListFUOTADeploymentDevicesResponse": {
             "properties": {
                 "cell": {
                     "description": "list of cells with number of gateways in each",
