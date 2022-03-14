@@ -357,7 +357,11 @@ class _MxcTextFieldIconButton extends MxcTextFieldButton {
   final double? size;
 
   @override
-  Widget buildChild(BuildContext context) => Icon(icon, size: size ?? 16);
+  Widget buildChild(BuildContext context) => Icon(
+        icon,
+        size: size ?? 16,
+        color: color ?? MxcScopedTheme.of(context).primaryColor,
+      );
 }
 
 class _MxcTextFieldImageButton extends MxcTextFieldButton {
@@ -375,5 +379,6 @@ class _MxcTextFieldImageButton extends MxcTextFieldButton {
         image: image,
         width: 16,
         height: 16,
+        color: color ?? MxcScopedTheme.of(context).primaryColor,
       );
 }
