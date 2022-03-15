@@ -1185,6 +1185,17 @@ abstract class GatewayService extends ChopperService {
       @Header('Grpc-Metadata-Authorization')
           String? grpcMetadataAuthorization});
 
+  ///ListCells lists all the cells with gateways and the numbers of gateways
+  ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
+
+  @Get(path: '/api/gateways/cells/list')
+  Future<chopper.Response<ExtapiListCellsResponse>> listCells(
+      {@Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
+
   ///
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
@@ -1720,22 +1731,6 @@ abstract class InternalService extends ChopperService {
           String? grpcMetadataXOTP,
       @Header('Grpc-Metadata-Authorization')
           String? grpcMetadataAuthorization});
-
-  ///
-  ///@param body
-  ///@param Grpc-Metadata-X-OTP OTP Code
-  ///@param Grpc-Metadata-Authorization Auth Token
-
-  @Post(path: '/api/internal/verify-g-recaptcha')
-  Future<chopper.Response<ExtapiGoogleRecaptchaResponse>>
-      getVerifyingGoogleRecaptcha(
-          {@Body()
-          @required
-              ExtapiGoogleRecaptchaRequest? body,
-          @Header('Grpc-Metadata-X-OTP')
-              String? grpcMetadataXOTP,
-          @Header('Grpc-Metadata-Authorization')
-              String? grpcMetadataAuthorization});
 }
 
 @ChopperApi()
@@ -3402,6 +3397,7 @@ final Map<Type, Object Function(Map<String, dynamic>)>
       ExtapiBindExternalUserResponse.fromJsonFactory,
   ExtapiBoost: ExtapiBoost.fromJsonFactory,
   ExtapiBrandingResponse: ExtapiBrandingResponse.fromJsonFactory,
+  ExtapiCell: ExtapiCell.fromJsonFactory,
   ExtapiChangePasswordRequest: ExtapiChangePasswordRequest.fromJsonFactory,
   ExtapiChangePasswordResponse: ExtapiChangePasswordResponse.fromJsonFactory,
   ExtapiCheckACLRequest: ExtapiCheckACLRequest.fromJsonFactory,
@@ -3576,8 +3572,6 @@ final Map<Type, Object Function(Map<String, dynamic>)>
   ExtapiGetWithdrawResponse: ExtapiGetWithdrawResponse.fromJsonFactory,
   ExtapiGlobalSearchResponse: ExtapiGlobalSearchResponse.fromJsonFactory,
   ExtapiGlobalSearchResult: ExtapiGlobalSearchResult.fromJsonFactory,
-  ExtapiGoogleRecaptchaRequest: ExtapiGoogleRecaptchaRequest.fromJsonFactory,
-  ExtapiGoogleRecaptchaResponse: ExtapiGoogleRecaptchaResponse.fromJsonFactory,
   ExtapiInsertNewDefaultGatewayConfigRequest:
       ExtapiInsertNewDefaultGatewayConfigRequest.fromJsonFactory,
   ExtapiInsertNewDefaultGatewayConfigResponse:
@@ -3587,6 +3581,7 @@ final Map<Type, Object Function(Map<String, dynamic>)>
   ExtapiJWTAuthenticationResponse:
       ExtapiJWTAuthenticationResponse.fromJsonFactory,
   ExtapiListApplicationResponse: ExtapiListApplicationResponse.fromJsonFactory,
+  ExtapiListCellsResponse: ExtapiListCellsResponse.fromJsonFactory,
   ExtapiListDeviceProfileResponse:
       ExtapiListDeviceProfileResponse.fromJsonFactory,
   ExtapiListDeviceQueueItemsResponse:
@@ -4219,18 +4214,21 @@ extension $ExtapiAuthenticateWeChatUserRequestExtension
 @JsonSerializable(explicitToJson: true)
 class ExtapiAuthenticateWeChatUserResponse {
   ExtapiAuthenticateWeChatUserResponse({
+    this.authToken,
     this.bindingIsRequired,
-    this.jwt,
+    this.is2faRequired,
   });
 
   factory ExtapiAuthenticateWeChatUserResponse.fromJson(
           Map<String, dynamic> json) =>
       _$ExtapiAuthenticateWeChatUserResponseFromJson(json);
 
+  @JsonKey(name: 'authToken')
+  final String? authToken;
   @JsonKey(name: 'bindingIsRequired')
   final bool? bindingIsRequired;
-  @JsonKey(name: 'jwt')
-  final String? jwt;
+  @JsonKey(name: 'is2faRequired')
+  final bool? is2faRequired;
   static const fromJsonFactory = _$ExtapiAuthenticateWeChatUserResponseFromJson;
   static const toJsonFactory = _$ExtapiAuthenticateWeChatUserResponseToJson;
   Map<String, dynamic> toJson() =>
@@ -4240,21 +4238,26 @@ class ExtapiAuthenticateWeChatUserResponse {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is ExtapiAuthenticateWeChatUserResponse &&
+            (identical(other.authToken, authToken) ||
+                const DeepCollectionEquality()
+                    .equals(other.authToken, authToken)) &&
             (identical(other.bindingIsRequired, bindingIsRequired) ||
                 const DeepCollectionEquality()
                     .equals(other.bindingIsRequired, bindingIsRequired)) &&
-            (identical(other.jwt, jwt) ||
-                const DeepCollectionEquality().equals(other.jwt, jwt)));
+            (identical(other.is2faRequired, is2faRequired) ||
+                const DeepCollectionEquality()
+                    .equals(other.is2faRequired, is2faRequired)));
   }
 }
 
 extension $ExtapiAuthenticateWeChatUserResponseExtension
     on ExtapiAuthenticateWeChatUserResponse {
   ExtapiAuthenticateWeChatUserResponse copyWith(
-      {bool? bindingIsRequired, String? jwt}) {
+      {String? authToken, bool? bindingIsRequired, bool? is2faRequired}) {
     return ExtapiAuthenticateWeChatUserResponse(
+        authToken: authToken ?? this.authToken,
         bindingIsRequired: bindingIsRequired ?? this.bindingIsRequired,
-        jwt: jwt ?? this.jwt);
+        is2faRequired: is2faRequired ?? this.is2faRequired);
   }
 }
 
@@ -4585,71 +4588,26 @@ extension $ExtapiBatchResetDefaultGatewatConfigResponseExtension
 
 @JsonSerializable(explicitToJson: true)
 class ExtapiBindExternalUserRequest {
-  ExtapiBindExternalUserRequest({
-    this.email,
-    this.password,
-  });
+  ExtapiBindExternalUserRequest();
 
   factory ExtapiBindExternalUserRequest.fromJson(Map<String, dynamic> json) =>
       _$ExtapiBindExternalUserRequestFromJson(json);
 
-  @JsonKey(name: 'email')
-  final String? email;
-  @JsonKey(name: 'password')
-  final String? password;
   static const fromJsonFactory = _$ExtapiBindExternalUserRequestFromJson;
   static const toJsonFactory = _$ExtapiBindExternalUserRequestToJson;
   Map<String, dynamic> toJson() => _$ExtapiBindExternalUserRequestToJson(this);
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is ExtapiBindExternalUserRequest &&
-            (identical(other.email, email) ||
-                const DeepCollectionEquality().equals(other.email, email)) &&
-            (identical(other.password, password) ||
-                const DeepCollectionEquality()
-                    .equals(other.password, password)));
-  }
-}
-
-extension $ExtapiBindExternalUserRequestExtension
-    on ExtapiBindExternalUserRequest {
-  ExtapiBindExternalUserRequest copyWith({String? email, String? password}) {
-    return ExtapiBindExternalUserRequest(
-        email: email ?? this.email, password: password ?? this.password);
-  }
 }
 
 @JsonSerializable(explicitToJson: true)
 class ExtapiBindExternalUserResponse {
-  ExtapiBindExternalUserResponse({
-    this.jwt,
-  });
+  ExtapiBindExternalUserResponse();
 
   factory ExtapiBindExternalUserResponse.fromJson(Map<String, dynamic> json) =>
       _$ExtapiBindExternalUserResponseFromJson(json);
 
-  @JsonKey(name: 'jwt')
-  final String? jwt;
   static const fromJsonFactory = _$ExtapiBindExternalUserResponseFromJson;
   static const toJsonFactory = _$ExtapiBindExternalUserResponseToJson;
   Map<String, dynamic> toJson() => _$ExtapiBindExternalUserResponseToJson(this);
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is ExtapiBindExternalUserResponse &&
-            (identical(other.jwt, jwt) ||
-                const DeepCollectionEquality().equals(other.jwt, jwt)));
-  }
-}
-
-extension $ExtapiBindExternalUserResponseExtension
-    on ExtapiBindExternalUserResponse {
-  ExtapiBindExternalUserResponse copyWith({String? jwt}) {
-    return ExtapiBindExternalUserResponse(jwt: jwt ?? this.jwt);
-  }
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -4739,6 +4697,45 @@ extension $ExtapiBrandingResponseExtension on ExtapiBrandingResponse {
         logo: logo ?? this.logo,
         logoPath: logoPath ?? this.logoPath,
         registration: registration ?? this.registration);
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class ExtapiCell {
+  ExtapiCell({
+    this.gateways,
+    this.h3CellId,
+  });
+
+  factory ExtapiCell.fromJson(Map<String, dynamic> json) =>
+      _$ExtapiCellFromJson(json);
+
+  @JsonKey(name: 'gateways')
+  final String? gateways;
+  @JsonKey(name: 'h3CellId')
+  final String? h3CellId;
+  static const fromJsonFactory = _$ExtapiCellFromJson;
+  static const toJsonFactory = _$ExtapiCellToJson;
+  Map<String, dynamic> toJson() => _$ExtapiCellToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is ExtapiCell &&
+            (identical(other.gateways, gateways) ||
+                const DeepCollectionEquality()
+                    .equals(other.gateways, gateways)) &&
+            (identical(other.h3CellId, h3CellId) ||
+                const DeepCollectionEquality()
+                    .equals(other.h3CellId, h3CellId)));
+  }
+}
+
+extension $ExtapiCellExtension on ExtapiCell {
+  ExtapiCell copyWith({String? gateways, String? h3CellId}) {
+    return ExtapiCell(
+        gateways: gateways ?? this.gateways,
+        h3CellId: h3CellId ?? this.h3CellId);
   }
 }
 
@@ -10706,110 +10703,6 @@ extension $ExtapiGlobalSearchResultExtension on ExtapiGlobalSearchResult {
 }
 
 @JsonSerializable(explicitToJson: true)
-class ExtapiGoogleRecaptchaRequest {
-  ExtapiGoogleRecaptchaRequest({
-    this.remoteip,
-    this.response,
-    this.secret,
-  });
-
-  factory ExtapiGoogleRecaptchaRequest.fromJson(Map<String, dynamic> json) =>
-      _$ExtapiGoogleRecaptchaRequestFromJson(json);
-
-  @JsonKey(name: 'remoteip')
-  final String? remoteip;
-  @JsonKey(name: 'response')
-  final String? response;
-  @JsonKey(name: 'secret')
-  final String? secret;
-  static const fromJsonFactory = _$ExtapiGoogleRecaptchaRequestFromJson;
-  static const toJsonFactory = _$ExtapiGoogleRecaptchaRequestToJson;
-  Map<String, dynamic> toJson() => _$ExtapiGoogleRecaptchaRequestToJson(this);
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is ExtapiGoogleRecaptchaRequest &&
-            (identical(other.remoteip, remoteip) ||
-                const DeepCollectionEquality()
-                    .equals(other.remoteip, remoteip)) &&
-            (identical(other.response, response) ||
-                const DeepCollectionEquality()
-                    .equals(other.response, response)) &&
-            (identical(other.secret, secret) ||
-                const DeepCollectionEquality().equals(other.secret, secret)));
-  }
-}
-
-extension $ExtapiGoogleRecaptchaRequestExtension
-    on ExtapiGoogleRecaptchaRequest {
-  ExtapiGoogleRecaptchaRequest copyWith(
-      {String? remoteip, String? response, String? secret}) {
-    return ExtapiGoogleRecaptchaRequest(
-        remoteip: remoteip ?? this.remoteip,
-        response: response ?? this.response,
-        secret: secret ?? this.secret);
-  }
-}
-
-@JsonSerializable(explicitToJson: true)
-class ExtapiGoogleRecaptchaResponse {
-  ExtapiGoogleRecaptchaResponse({
-    this.challengeTs,
-    this.errorCodes,
-    this.hostname,
-    this.success,
-  });
-
-  factory ExtapiGoogleRecaptchaResponse.fromJson(Map<String, dynamic> json) =>
-      _$ExtapiGoogleRecaptchaResponseFromJson(json);
-
-  @JsonKey(name: 'challengeTs')
-  final String? challengeTs;
-  @JsonKey(name: 'errorCodes')
-  final String? errorCodes;
-  @JsonKey(name: 'hostname')
-  final String? hostname;
-  @JsonKey(name: 'success')
-  final bool? success;
-  static const fromJsonFactory = _$ExtapiGoogleRecaptchaResponseFromJson;
-  static const toJsonFactory = _$ExtapiGoogleRecaptchaResponseToJson;
-  Map<String, dynamic> toJson() => _$ExtapiGoogleRecaptchaResponseToJson(this);
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is ExtapiGoogleRecaptchaResponse &&
-            (identical(other.challengeTs, challengeTs) ||
-                const DeepCollectionEquality()
-                    .equals(other.challengeTs, challengeTs)) &&
-            (identical(other.errorCodes, errorCodes) ||
-                const DeepCollectionEquality()
-                    .equals(other.errorCodes, errorCodes)) &&
-            (identical(other.hostname, hostname) ||
-                const DeepCollectionEquality()
-                    .equals(other.hostname, hostname)) &&
-            (identical(other.success, success) ||
-                const DeepCollectionEquality().equals(other.success, success)));
-  }
-}
-
-extension $ExtapiGoogleRecaptchaResponseExtension
-    on ExtapiGoogleRecaptchaResponse {
-  ExtapiGoogleRecaptchaResponse copyWith(
-      {String? challengeTs,
-      String? errorCodes,
-      String? hostname,
-      bool? success}) {
-    return ExtapiGoogleRecaptchaResponse(
-        challengeTs: challengeTs ?? this.challengeTs,
-        errorCodes: errorCodes ?? this.errorCodes,
-        hostname: hostname ?? this.hostname,
-        success: success ?? this.success);
-  }
-}
-
-@JsonSerializable(explicitToJson: true)
 class ExtapiInsertNewDefaultGatewayConfigRequest {
   ExtapiInsertNewDefaultGatewayConfigRequest({
     this.defaultConfig,
@@ -10957,6 +10850,36 @@ extension $ExtapiListApplicationResponseExtension
     return ExtapiListApplicationResponse(
         result: result ?? this.result,
         totalCount: totalCount ?? this.totalCount);
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class ExtapiListCellsResponse {
+  ExtapiListCellsResponse({
+    this.cell,
+  });
+
+  factory ExtapiListCellsResponse.fromJson(Map<String, dynamic> json) =>
+      _$ExtapiListCellsResponseFromJson(json);
+
+  @JsonKey(name: 'cell', defaultValue: <ExtapiCell>[])
+  final List<ExtapiCell>? cell;
+  static const fromJsonFactory = _$ExtapiListCellsResponseFromJson;
+  static const toJsonFactory = _$ExtapiListCellsResponseToJson;
+  Map<String, dynamic> toJson() => _$ExtapiListCellsResponseToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is ExtapiListCellsResponse &&
+            (identical(other.cell, cell) ||
+                const DeepCollectionEquality().equals(other.cell, cell)));
+  }
+}
+
+extension $ExtapiListCellsResponseExtension on ExtapiListCellsResponse {
+  ExtapiListCellsResponse copyWith({List<ExtapiCell>? cell}) {
+    return ExtapiListCellsResponse(cell: cell ?? this.cell);
   }
 }
 
@@ -11480,6 +11403,7 @@ class ExtapiLogin2FARequest {
 @JsonSerializable(explicitToJson: true)
 class ExtapiLoginRequest {
   ExtapiLoginRequest({
+    this.captcha,
     this.password,
     this.username,
   });
@@ -11487,6 +11411,8 @@ class ExtapiLoginRequest {
   factory ExtapiLoginRequest.fromJson(Map<String, dynamic> json) =>
       _$ExtapiLoginRequestFromJson(json);
 
+  @JsonKey(name: 'captcha')
+  final String? captcha;
   @JsonKey(name: 'password')
   final String? password;
   @JsonKey(name: 'username')
@@ -11499,6 +11425,9 @@ class ExtapiLoginRequest {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is ExtapiLoginRequest &&
+            (identical(other.captcha, captcha) ||
+                const DeepCollectionEquality()
+                    .equals(other.captcha, captcha)) &&
             (identical(other.password, password) ||
                 const DeepCollectionEquality()
                     .equals(other.password, password)) &&
@@ -11509,8 +11438,10 @@ class ExtapiLoginRequest {
 }
 
 extension $ExtapiLoginRequestExtension on ExtapiLoginRequest {
-  ExtapiLoginRequest copyWith({String? password, String? username}) {
+  ExtapiLoginRequest copyWith(
+      {String? captcha, String? password, String? username}) {
     return ExtapiLoginRequest(
+        captcha: captcha ?? this.captcha,
         password: password ?? this.password,
         username: username ?? this.username);
   }
@@ -12588,6 +12519,7 @@ extension $ExtapiOrganizationUserListItemExtension
 @JsonSerializable(explicitToJson: true)
 class ExtapiPasswordResetReq {
   ExtapiPasswordResetReq({
+    this.captcha,
     this.language,
     this.username,
   });
@@ -12595,6 +12527,8 @@ class ExtapiPasswordResetReq {
   factory ExtapiPasswordResetReq.fromJson(Map<String, dynamic> json) =>
       _$ExtapiPasswordResetReqFromJson(json);
 
+  @JsonKey(name: 'captcha')
+  final String? captcha;
   @JsonKey(name: 'language')
   final String? language;
   @JsonKey(name: 'username')
@@ -12607,6 +12541,9 @@ class ExtapiPasswordResetReq {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is ExtapiPasswordResetReq &&
+            (identical(other.captcha, captcha) ||
+                const DeepCollectionEquality()
+                    .equals(other.captcha, captcha)) &&
             (identical(other.language, language) ||
                 const DeepCollectionEquality()
                     .equals(other.language, language)) &&
@@ -12617,8 +12554,10 @@ class ExtapiPasswordResetReq {
 }
 
 extension $ExtapiPasswordResetReqExtension on ExtapiPasswordResetReq {
-  ExtapiPasswordResetReq copyWith({String? language, String? username}) {
+  ExtapiPasswordResetReq copyWith(
+      {String? captcha, String? language, String? username}) {
     return ExtapiPasswordResetReq(
+        captcha: captcha ?? this.captcha,
         language: language ?? this.language,
         username: username ?? this.username);
   }
@@ -13001,6 +12940,7 @@ extension $ExtapiRegisterResponseExtension on ExtapiRegisterResponse {
 @JsonSerializable(explicitToJson: true)
 class ExtapiRegisterUserRequest {
   ExtapiRegisterUserRequest({
+    this.captcha,
     this.email,
     this.language,
   });
@@ -13008,6 +12948,8 @@ class ExtapiRegisterUserRequest {
   factory ExtapiRegisterUserRequest.fromJson(Map<String, dynamic> json) =>
       _$ExtapiRegisterUserRequestFromJson(json);
 
+  @JsonKey(name: 'captcha')
+  final String? captcha;
   @JsonKey(name: 'email')
   final String? email;
   @JsonKey(name: 'language')
@@ -13020,6 +12962,9 @@ class ExtapiRegisterUserRequest {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is ExtapiRegisterUserRequest &&
+            (identical(other.captcha, captcha) ||
+                const DeepCollectionEquality()
+                    .equals(other.captcha, captcha)) &&
             (identical(other.email, email) ||
                 const DeepCollectionEquality().equals(other.email, email)) &&
             (identical(other.language, language) ||
@@ -13029,9 +12974,12 @@ class ExtapiRegisterUserRequest {
 }
 
 extension $ExtapiRegisterUserRequestExtension on ExtapiRegisterUserRequest {
-  ExtapiRegisterUserRequest copyWith({String? email, String? language}) {
+  ExtapiRegisterUserRequest copyWith(
+      {String? captcha, String? email, String? language}) {
     return ExtapiRegisterUserRequest(
-        email: email ?? this.email, language: language ?? this.language);
+        captcha: captcha ?? this.captcha,
+        email: email ?? this.email,
+        language: language ?? this.language);
   }
 }
 

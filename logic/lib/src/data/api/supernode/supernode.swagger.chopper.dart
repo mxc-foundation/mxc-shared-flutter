@@ -1324,6 +1324,21 @@ class _$GatewayService extends GatewayService {
   }
 
   @override
+  Future<Response<ExtapiListCellsResponse>> listCells(
+      {String? grpcMetadataXOTP, String? grpcMetadataAuthorization}) {
+    final $url = '/api/gateways/cells/list';
+    final $headers = {
+      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
+      if (grpcMetadataAuthorization != null)
+        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
+    };
+
+    final $request = Request('GET', $url, client.baseUrl, headers: $headers);
+    return client
+        .send<ExtapiListCellsResponse, ExtapiListCellsResponse>($request);
+  }
+
+  @override
   Future<Response<ExtapiInsertNewDefaultGatewayConfigResponse>>
       insertNewDefaultGatewayConfig(
           {ExtapiInsertNewDefaultGatewayConfigRequest? body,
@@ -1952,25 +1967,6 @@ class _$InternalService extends InternalService {
     final $request = Request('GET', $url, client.baseUrl, headers: $headers);
     return client
         .send<ExtapiTOTPStatusResponse, ExtapiTOTPStatusResponse>($request);
-  }
-
-  @override
-  Future<Response<ExtapiGoogleRecaptchaResponse>> getVerifyingGoogleRecaptcha(
-      {ExtapiGoogleRecaptchaRequest? body,
-      String? grpcMetadataXOTP,
-      String? grpcMetadataAuthorization}) {
-    final $url = '/api/internal/verify-g-recaptcha';
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $body = body;
-    final $request =
-        Request('POST', $url, client.baseUrl, body: $body, headers: $headers);
-    return client.send<ExtapiGoogleRecaptchaResponse,
-        ExtapiGoogleRecaptchaResponse>($request);
   }
 }
 
