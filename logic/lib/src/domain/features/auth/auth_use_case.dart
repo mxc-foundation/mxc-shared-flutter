@@ -15,11 +15,12 @@ class LoginUseCase {
     return repository.listSupernodes();
   }
 
-  Future<bool> login(
-    String supernodeAddress,
-    String username,
-    String password,
-  ) async {
+  Future<bool> login({
+    required String captcha,
+    required String supernodeAddress,
+    required String username,
+    required String password,
+  }) async {
     authStorageRepository.supernodeAddress = supernodeAddress;
     final LoginResult res = await repository.auth.login(
       username: username,
