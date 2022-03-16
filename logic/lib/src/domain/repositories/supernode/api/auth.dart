@@ -45,7 +45,7 @@ class LoginRepository {
     );
 
     return WeChatLoginResult(
-      token: res.body!.jwt!,
+      token: res.body!.authToken!,
       isBindingRequired: res.body!.bindingIsRequired!,
     );
   }
@@ -56,7 +56,7 @@ class LoginRepository {
     );
 
     return WeChatLoginResult(
-      token: res.body!.jwt!,
+      token: res.body!.authToken!,
       isBindingRequired: res.body!.bindingIsRequired!,
     );
   }

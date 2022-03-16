@@ -4217,18 +4217,21 @@ extension $ExtapiAuthenticateWeChatUserRequestExtension
 @JsonSerializable(explicitToJson: true)
 class ExtapiAuthenticateWeChatUserResponse {
   ExtapiAuthenticateWeChatUserResponse({
+    this.authToken,
     this.bindingIsRequired,
-    this.jwt,
+    this.is2faRequired,
   });
 
   factory ExtapiAuthenticateWeChatUserResponse.fromJson(
           Map<String, dynamic> json) =>
       _$ExtapiAuthenticateWeChatUserResponseFromJson(json);
 
+  @JsonKey(name: 'authToken')
+  final String? authToken;
   @JsonKey(name: 'bindingIsRequired')
   final bool? bindingIsRequired;
-  @JsonKey(name: 'jwt')
-  final String? jwt;
+  @JsonKey(name: 'is2faRequired')
+  final bool? is2faRequired;
   static const fromJsonFactory = _$ExtapiAuthenticateWeChatUserResponseFromJson;
   static const toJsonFactory = _$ExtapiAuthenticateWeChatUserResponseToJson;
   Map<String, dynamic> toJson() =>
@@ -4238,21 +4241,26 @@ class ExtapiAuthenticateWeChatUserResponse {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is ExtapiAuthenticateWeChatUserResponse &&
+            (identical(other.authToken, authToken) ||
+                const DeepCollectionEquality()
+                    .equals(other.authToken, authToken)) &&
             (identical(other.bindingIsRequired, bindingIsRequired) ||
                 const DeepCollectionEquality()
                     .equals(other.bindingIsRequired, bindingIsRequired)) &&
-            (identical(other.jwt, jwt) ||
-                const DeepCollectionEquality().equals(other.jwt, jwt)));
+            (identical(other.is2faRequired, is2faRequired) ||
+                const DeepCollectionEquality()
+                    .equals(other.is2faRequired, is2faRequired)));
   }
 }
 
 extension $ExtapiAuthenticateWeChatUserResponseExtension
     on ExtapiAuthenticateWeChatUserResponse {
   ExtapiAuthenticateWeChatUserResponse copyWith(
-      {bool? bindingIsRequired, String? jwt}) {
+      {String? authToken, bool? bindingIsRequired, bool? is2faRequired}) {
     return ExtapiAuthenticateWeChatUserResponse(
+        authToken: authToken ?? this.authToken,
         bindingIsRequired: bindingIsRequired ?? this.bindingIsRequired,
-        jwt: jwt ?? this.jwt);
+        is2faRequired: is2faRequired ?? this.is2faRequired);
   }
 }
 
@@ -4583,71 +4591,26 @@ extension $ExtapiBatchResetDefaultGatewatConfigResponseExtension
 
 @JsonSerializable(explicitToJson: true)
 class ExtapiBindExternalUserRequest {
-  ExtapiBindExternalUserRequest({
-    this.email,
-    this.password,
-  });
+  ExtapiBindExternalUserRequest();
 
   factory ExtapiBindExternalUserRequest.fromJson(Map<String, dynamic> json) =>
       _$ExtapiBindExternalUserRequestFromJson(json);
 
-  @JsonKey(name: 'email')
-  final String? email;
-  @JsonKey(name: 'password')
-  final String? password;
   static const fromJsonFactory = _$ExtapiBindExternalUserRequestFromJson;
   static const toJsonFactory = _$ExtapiBindExternalUserRequestToJson;
   Map<String, dynamic> toJson() => _$ExtapiBindExternalUserRequestToJson(this);
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is ExtapiBindExternalUserRequest &&
-            (identical(other.email, email) ||
-                const DeepCollectionEquality().equals(other.email, email)) &&
-            (identical(other.password, password) ||
-                const DeepCollectionEquality()
-                    .equals(other.password, password)));
-  }
-}
-
-extension $ExtapiBindExternalUserRequestExtension
-    on ExtapiBindExternalUserRequest {
-  ExtapiBindExternalUserRequest copyWith({String? email, String? password}) {
-    return ExtapiBindExternalUserRequest(
-        email: email ?? this.email, password: password ?? this.password);
-  }
 }
 
 @JsonSerializable(explicitToJson: true)
 class ExtapiBindExternalUserResponse {
-  ExtapiBindExternalUserResponse({
-    this.jwt,
-  });
+  ExtapiBindExternalUserResponse();
 
   factory ExtapiBindExternalUserResponse.fromJson(Map<String, dynamic> json) =>
       _$ExtapiBindExternalUserResponseFromJson(json);
 
-  @JsonKey(name: 'jwt')
-  final String? jwt;
   static const fromJsonFactory = _$ExtapiBindExternalUserResponseFromJson;
   static const toJsonFactory = _$ExtapiBindExternalUserResponseToJson;
   Map<String, dynamic> toJson() => _$ExtapiBindExternalUserResponseToJson(this);
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is ExtapiBindExternalUserResponse &&
-            (identical(other.jwt, jwt) ||
-                const DeepCollectionEquality().equals(other.jwt, jwt)));
-  }
-}
-
-extension $ExtapiBindExternalUserResponseExtension
-    on ExtapiBindExternalUserResponse {
-  ExtapiBindExternalUserResponse copyWith({String? jwt}) {
-    return ExtapiBindExternalUserResponse(jwt: jwt ?? this.jwt);
-  }
 }
 
 @JsonSerializable(explicitToJson: true)

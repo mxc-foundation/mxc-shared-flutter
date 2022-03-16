@@ -388,11 +388,6 @@ class ImagesTheme {
       );
 
   //settings
-  ImageProvider get warningRobot => const AssetImage(
-        'assets/images/settings/robot_warning.png',
-        package: mxcUiPackageName,
-      );
-
   ImageProvider get weChat => const AssetImage(
         'assets/images/settings/wechat.png',
         package: mxcUiPackageName,

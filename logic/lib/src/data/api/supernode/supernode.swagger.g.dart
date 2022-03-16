@@ -155,15 +155,17 @@ Map<String, dynamic> _$ExtapiAuthenticateWeChatUserRequestToJson(
 ExtapiAuthenticateWeChatUserResponse
     _$ExtapiAuthenticateWeChatUserResponseFromJson(Map<String, dynamic> json) =>
         ExtapiAuthenticateWeChatUserResponse(
+          authToken: json['authToken'] as String?,
           bindingIsRequired: json['bindingIsRequired'] as bool?,
-          jwt: json['jwt'] as String?,
+          is2faRequired: json['is2faRequired'] as bool?,
         );
 
 Map<String, dynamic> _$ExtapiAuthenticateWeChatUserResponseToJson(
         ExtapiAuthenticateWeChatUserResponse instance) =>
     <String, dynamic>{
+      'authToken': instance.authToken,
       'bindingIsRequired': instance.bindingIsRequired,
-      'jwt': instance.jwt,
+      'is2faRequired': instance.is2faRequired,
     };
 
 ExtapiBTCAddLocksRequest _$ExtapiBTCAddLocksRequestFromJson(
@@ -290,29 +292,19 @@ Map<String, dynamic> _$ExtapiBatchResetDefaultGatewatConfigResponseToJson(
 
 ExtapiBindExternalUserRequest _$ExtapiBindExternalUserRequestFromJson(
         Map<String, dynamic> json) =>
-    ExtapiBindExternalUserRequest(
-      email: json['email'] as String?,
-      password: json['password'] as String?,
-    );
+    ExtapiBindExternalUserRequest();
 
 Map<String, dynamic> _$ExtapiBindExternalUserRequestToJson(
         ExtapiBindExternalUserRequest instance) =>
-    <String, dynamic>{
-      'email': instance.email,
-      'password': instance.password,
-    };
+    <String, dynamic>{};
 
 ExtapiBindExternalUserResponse _$ExtapiBindExternalUserResponseFromJson(
         Map<String, dynamic> json) =>
-    ExtapiBindExternalUserResponse(
-      jwt: json['jwt'] as String?,
-    );
+    ExtapiBindExternalUserResponse();
 
 Map<String, dynamic> _$ExtapiBindExternalUserResponseToJson(
         ExtapiBindExternalUserResponse instance) =>
-    <String, dynamic>{
-      'jwt': instance.jwt,
-    };
+    <String, dynamic>{};
 
 ExtapiBoost _$ExtapiBoostFromJson(Map<String, dynamic> json) => ExtapiBoost(
       boost: json['boost'] as String?,
