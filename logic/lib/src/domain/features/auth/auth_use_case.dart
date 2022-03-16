@@ -36,8 +36,6 @@ class LoginUseCase {
 
   Future<void> login2fa(
     String supernodeAddress,
-    String username,
-    String password,
     String otp,
   ) async {
     authStorageRepository.supernodeAddress = supernodeAddress;

@@ -30,10 +30,12 @@ class WeChatLoginResult {
   WeChatLoginResult({
     required this.token,
     required this.isBindingRequired,
+    required this.is2faRequired,
   });
 
   final String token;
   final bool isBindingRequired;
+  final bool is2faRequired;
 }
 
 class ProfileResult {

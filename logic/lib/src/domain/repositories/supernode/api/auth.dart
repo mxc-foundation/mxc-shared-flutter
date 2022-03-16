@@ -45,6 +45,7 @@ class LoginRepository {
     return WeChatLoginResult(
       token: res.body!.authToken!,
       isBindingRequired: res.body!.bindingIsRequired!,
+      is2faRequired: res.body!.is2faRequired!,
     );
   }
 
@@ -56,6 +57,7 @@ class LoginRepository {
     return WeChatLoginResult(
       token: res.body!.authToken!,
       isBindingRequired: res.body!.bindingIsRequired!,
+      is2faRequired: res.body!.is2faRequired!,
     );
   }
 
