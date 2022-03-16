@@ -19,6 +19,10 @@ class AuthenticationStorageRepository {
     _supernodeSetupStore.token = token;
   }
 
+  void deleteToken() {
+    _supernodeSetupStore.token = null;
+  }
+
   String get organizationId =>
       _supernodeSetupStore.organizationId = organizationId;
   set organizationId(String organizationId) =>
