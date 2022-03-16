@@ -23,6 +23,7 @@ class LoginUseCase {
   }) async {
     authStorageRepository.supernodeAddress = supernodeAddress;
     final LoginResult res = await repository.auth.login(
+      captcha: captcha,
       username: username,
       password: password,
     );
