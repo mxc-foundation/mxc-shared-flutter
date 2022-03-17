@@ -7,9 +7,10 @@ class ExternalAccountsRepository {
 
   final SupernodeClient client;
 
-  Future<void> bind() async {
-    await client.externalUserService
-        .bindExternalUser(body: ExtapiBindExternalUserRequest());
+  Future<void> bind({required String externalAuthToken}) async {
+    await client.externalUserService.bindExternalUser(
+        body: ExtapiBindExternalUserRequest(
+            externalAuthToken: externalAuthToken));
   }
 
   Future<void> unbind({

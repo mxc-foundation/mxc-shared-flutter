@@ -5586,6 +5586,41 @@
             ]
          }
       },
+      "/api/users/confirm-verify-existing-email":{
+         "post":{
+            "operationId":"ConfirmVerifyExistingEmail",
+            "parameters":[
+               {
+                  "in":"body",
+                  "name":"body",
+                  "required":true,
+                  "schema":{
+                     "$ref":"#/definitions/extapiConfirmVerifyExistingEmailRequest"
+                  }
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+
+                     }
+                  }
+               },
+               "default":{
+                  "description":"An unexpected error response.",
+                  "schema":{
+                     "$ref":"#/definitions/runtimeError"
+                  }
+               }
+            },
+            "summary":"ConfirmVerifyExistingEmail confirms the existing email after a verification email has been sent",
+            "tags":[
+               "UserService"
+            ]
+         }
+      },
       "/api/users/email-add":{
          "post":{
             "operationId":"AddEmail",
@@ -5681,6 +5716,72 @@
                   }
                }
             },
+            "tags":[
+               "UserService"
+            ]
+         }
+      },
+      "/api/users/set-password":{
+         "post":{
+            "operationId":"SetPassword",
+            "parameters":[
+               {
+                  "in":"body",
+                  "name":"body",
+                  "required":true,
+                  "schema":{
+                     "$ref":"#/definitions/extapiSetPasswordRequest"
+                  }
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "$ref":"#/definitions/extapiSetPasswordResponse"
+                  }
+               },
+               "default":{
+                  "description":"An unexpected error response.",
+                  "schema":{
+                     "$ref":"#/definitions/runtimeError"
+                  }
+               }
+            },
+            "summary":"SetPassword saves password to account.\nThis API is only used when account's password was never set before.",
+            "tags":[
+               "UserService"
+            ]
+         }
+      },
+      "/api/users/verify-existing-email":{
+         "post":{
+            "operationId":"VerifyExistingEmail",
+            "parameters":[
+               {
+                  "in":"body",
+                  "name":"body",
+                  "required":true,
+                  "schema":{
+                     "$ref":"#/definitions/extapiVerifyExistingEmailRequest"
+                  }
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "$ref":"#/definitions/extapiVerifyExistingEmailResponse"
+                  }
+               },
+               "default":{
+                  "description":"An unexpected error response.",
+                  "schema":{
+                     "$ref":"#/definitions/runtimeError"
+                  }
+               }
+            },
+            "summary":"VerifyExistingEmail sends a verification email in case email is not verified",
             "tags":[
                "UserService"
             ]
@@ -6733,6 +6834,12 @@
          "type":"object"
       },
       "extapiBindExternalUserRequest":{
+         "properties":{
+            "externalAuthToken":{
+               "description":"This token contains key parameters for authenticated external account",
+               "type":"string"
+            }
+         },
          "type":"object"
       },
       "extapiBindExternalUserResponse":{
@@ -6901,6 +7008,15 @@
          "type":"object"
       },
       "extapiConfirmShopifyEmailResponse":{
+         "type":"object"
+      },
+      "extapiConfirmVerifyExistingEmailRequest":{
+         "properties":{
+            "verificationCode":{
+               "description":"verification code that was sent to the email",
+               "type":"string"
+            }
+         },
          "type":"object"
       },
       "extapiCouncil":{
@@ -10002,7 +10118,7 @@
       },
       "extapiRegisterExternalUserResponse":{
          "properties":{
-            "jwt":{
+            "authToken":{
                "type":"string"
             }
          },
@@ -10297,6 +10413,18 @@
                "type":"string"
             }
          },
+         "type":"object"
+      },
+      "extapiSetPasswordRequest":{
+         "properties":{
+            "password":{
+               "description":"new password",
+               "type":"string"
+            }
+         },
+         "type":"object"
+      },
+      "extapiSetPasswordResponse":{
          "type":"object"
       },
       "extapiStake":{
@@ -10953,6 +11081,22 @@
             "verificationCode":{
                "description":"verification code that was sent to the email",
                "type":"string"
+            }
+         },
+         "type":"object"
+      },
+      "extapiVerifyExistingEmailRequest":{
+         "properties":{
+            "language":{
+               "type":"string"
+            }
+         },
+         "type":"object"
+      },
+      "extapiVerifyExistingEmailResponse":{
+         "properties":{
+            "verified":{
+               "type":"boolean"
             }
          },
          "type":"object"

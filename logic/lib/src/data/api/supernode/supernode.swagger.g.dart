@@ -292,11 +292,15 @@ Map<String, dynamic> _$ExtapiBatchResetDefaultGatewatConfigResponseToJson(
 
 ExtapiBindExternalUserRequest _$ExtapiBindExternalUserRequestFromJson(
         Map<String, dynamic> json) =>
-    ExtapiBindExternalUserRequest();
+    ExtapiBindExternalUserRequest(
+      externalAuthToken: json['externalAuthToken'] as String?,
+    );
 
 Map<String, dynamic> _$ExtapiBindExternalUserRequestToJson(
         ExtapiBindExternalUserRequest instance) =>
-    <String, dynamic>{};
+    <String, dynamic>{
+      'externalAuthToken': instance.externalAuthToken,
+    };
 
 ExtapiBindExternalUserResponse _$ExtapiBindExternalUserResponseFromJson(
         Map<String, dynamic> json) =>
@@ -471,6 +475,19 @@ ExtapiConfirmShopifyEmailResponse _$ExtapiConfirmShopifyEmailResponseFromJson(
 Map<String, dynamic> _$ExtapiConfirmShopifyEmailResponseToJson(
         ExtapiConfirmShopifyEmailResponse instance) =>
     <String, dynamic>{};
+
+ExtapiConfirmVerifyExistingEmailRequest
+    _$ExtapiConfirmVerifyExistingEmailRequestFromJson(
+            Map<String, dynamic> json) =>
+        ExtapiConfirmVerifyExistingEmailRequest(
+          verificationCode: json['verificationCode'] as String?,
+        );
+
+Map<String, dynamic> _$ExtapiConfirmVerifyExistingEmailRequestToJson(
+        ExtapiConfirmVerifyExistingEmailRequest instance) =>
+    <String, dynamic>{
+      'verificationCode': instance.verificationCode,
+    };
 
 ExtapiCouncil _$ExtapiCouncilFromJson(Map<String, dynamic> json) =>
     ExtapiCouncil(
@@ -3387,13 +3404,13 @@ Map<String, dynamic> _$ExtapiRegisterExternalUserRequestToJson(
 ExtapiRegisterExternalUserResponse _$ExtapiRegisterExternalUserResponseFromJson(
         Map<String, dynamic> json) =>
     ExtapiRegisterExternalUserResponse(
-      jwt: json['jwt'] as String?,
+      authToken: json['authToken'] as String?,
     );
 
 Map<String, dynamic> _$ExtapiRegisterExternalUserResponseToJson(
         ExtapiRegisterExternalUserResponse instance) =>
     <String, dynamic>{
-      'jwt': instance.jwt,
+      'authToken': instance.authToken,
     };
 
 ExtapiRegisterRequest _$ExtapiRegisterRequestFromJson(
@@ -3684,6 +3701,26 @@ Map<String, dynamic> _$ExtapiSetAutoUpdateFirmwareResponseToJson(
     <String, dynamic>{
       'message': instance.message,
     };
+
+ExtapiSetPasswordRequest _$ExtapiSetPasswordRequestFromJson(
+        Map<String, dynamic> json) =>
+    ExtapiSetPasswordRequest(
+      password: json['password'] as String?,
+    );
+
+Map<String, dynamic> _$ExtapiSetPasswordRequestToJson(
+        ExtapiSetPasswordRequest instance) =>
+    <String, dynamic>{
+      'password': instance.password,
+    };
+
+ExtapiSetPasswordResponse _$ExtapiSetPasswordResponseFromJson(
+        Map<String, dynamic> json) =>
+    ExtapiSetPasswordResponse();
+
+Map<String, dynamic> _$ExtapiSetPasswordResponseToJson(
+        ExtapiSetPasswordResponse instance) =>
+    <String, dynamic>{};
 
 ExtapiStake _$ExtapiStakeFromJson(Map<String, dynamic> json) => ExtapiStake(
       active: json['active'] as bool?,
@@ -4445,6 +4482,30 @@ Map<String, dynamic> _$ExtapiVerifyEmailRequestToJson(
     <String, dynamic>{
       'email': instance.email,
       'verificationCode': instance.verificationCode,
+    };
+
+ExtapiVerifyExistingEmailRequest _$ExtapiVerifyExistingEmailRequestFromJson(
+        Map<String, dynamic> json) =>
+    ExtapiVerifyExistingEmailRequest(
+      language: json['language'] as String?,
+    );
+
+Map<String, dynamic> _$ExtapiVerifyExistingEmailRequestToJson(
+        ExtapiVerifyExistingEmailRequest instance) =>
+    <String, dynamic>{
+      'language': instance.language,
+    };
+
+ExtapiVerifyExistingEmailResponse _$ExtapiVerifyExistingEmailResponseFromJson(
+        Map<String, dynamic> json) =>
+    ExtapiVerifyExistingEmailResponse(
+      verified: json['verified'] as bool?,
+    );
+
+Map<String, dynamic> _$ExtapiVerifyExistingEmailResponseToJson(
+        ExtapiVerifyExistingEmailResponse instance) =>
+    <String, dynamic>{
+      'verified': instance.verified,
     };
 
 ExtapiVerifyShopifyEmailRequest _$ExtapiVerifyShopifyEmailRequestFromJson(
