@@ -94,5 +94,5 @@ class ApiSupernodeRepository implements SupernodeRepository {
   }
 
   @override
-  bool get loggedIn => _setupStore.username != null;
+  bool get loggedIn => _setupStore.token != null;
 }
