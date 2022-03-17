@@ -3244,6 +3244,24 @@ class _$UserService extends UserService {
   }
 
   @override
+  Future<Response<dynamic>> confirmVerifyExistingEmail(
+      {ExtapiConfirmVerifyExistingEmailRequest? body,
+      String? grpcMetadataXOTP,
+      String? grpcMetadataAuthorization}) {
+    final $url = '/api/users/confirm-verify-existing-email';
+    final $headers = {
+      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
+      if (grpcMetadataAuthorization != null)
+        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
+    };
+
+    final $body = body;
+    final $request =
+        Request('POST', $url, client.baseUrl, body: $body, headers: $headers);
+    return client.send<dynamic, dynamic>($request);
+  }
+
+  @override
   Future<Response<dynamic>> addEmail(
       {ExtapiAddEmailRequest? body,
       String? grpcMetadataXOTP,
@@ -3294,6 +3312,44 @@ class _$UserService extends UserService {
     final $request = Request('GET', $url, client.baseUrl, headers: $headers);
     return client
         .send<ExtapiGetUserEmailResponse, ExtapiGetUserEmailResponse>($request);
+  }
+
+  @override
+  Future<Response<ExtapiSetPasswordResponse>> setPassword(
+      {ExtapiSetPasswordRequest? body,
+      String? grpcMetadataXOTP,
+      String? grpcMetadataAuthorization}) {
+    final $url = '/api/users/set-password';
+    final $headers = {
+      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
+      if (grpcMetadataAuthorization != null)
+        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
+    };
+
+    final $body = body;
+    final $request =
+        Request('POST', $url, client.baseUrl, body: $body, headers: $headers);
+    return client
+        .send<ExtapiSetPasswordResponse, ExtapiSetPasswordResponse>($request);
+  }
+
+  @override
+  Future<Response<ExtapiVerifyExistingEmailResponse>> verifyExistingEmail(
+      {ExtapiVerifyExistingEmailRequest? body,
+      String? grpcMetadataXOTP,
+      String? grpcMetadataAuthorization}) {
+    final $url = '/api/users/verify-existing-email';
+    final $headers = {
+      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
+      if (grpcMetadataAuthorization != null)
+        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
+    };
+
+    final $body = body;
+    final $request =
+        Request('POST', $url, client.baseUrl, body: $body, headers: $headers);
+    return client.send<ExtapiVerifyExistingEmailResponse,
+        ExtapiVerifyExistingEmailResponse>($request);
   }
 
   @override

@@ -2916,6 +2916,21 @@ abstract class UserService extends ChopperService {
       @Header('Grpc-Metadata-Authorization')
           String? grpcMetadataAuthorization});
 
+  ///ConfirmVerifyExistingEmail confirms the existing email after a verification email has been sent
+  ///@param body
+  ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
+
+  @Post(path: '/api/users/confirm-verify-existing-email')
+  Future<chopper.Response> confirmVerifyExistingEmail(
+      {@Body()
+      @required
+          ExtapiConfirmVerifyExistingEmailRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
+
   ///Add a new email address
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
@@ -2960,6 +2975,37 @@ abstract class UserService extends ChopperService {
           String? grpcMetadataXOTP,
       @Header('Grpc-Metadata-Authorization')
           String? grpcMetadataAuthorization});
+
+  ///SetPassword saves password to account. This API is only used when account's password was never set before.
+  ///@param body
+  ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
+
+  @Post(path: '/api/users/set-password')
+  Future<chopper.Response<ExtapiSetPasswordResponse>> setPassword(
+      {@Body()
+      @required
+          ExtapiSetPasswordRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
+
+  ///VerifyExistingEmail sends a verification email in case email is not verified
+  ///@param body
+  ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
+
+  @Post(path: '/api/users/verify-existing-email')
+  Future<chopper.Response<ExtapiVerifyExistingEmailResponse>>
+      verifyExistingEmail(
+          {@Body()
+          @required
+              ExtapiVerifyExistingEmailRequest? body,
+          @Header('Grpc-Metadata-X-OTP')
+              String? grpcMetadataXOTP,
+          @Header('Grpc-Metadata-Authorization')
+              String? grpcMetadataAuthorization});
 
   ///Delete a user.
   ///@param id User ID.
@@ -3411,6 +3457,8 @@ final Map<Type, Object Function(Map<String, dynamic>)>
       ExtapiConfirmShopifyEmailRequest.fromJsonFactory,
   ExtapiConfirmShopifyEmailResponse:
       ExtapiConfirmShopifyEmailResponse.fromJsonFactory,
+  ExtapiConfirmVerifyExistingEmailRequest:
+      ExtapiConfirmVerifyExistingEmailRequest.fromJsonFactory,
   ExtapiCouncil: ExtapiCouncil.fromJsonFactory,
   ExtapiCreateApplicationRequest:
       ExtapiCreateApplicationRequest.fromJsonFactory,
@@ -3676,6 +3724,8 @@ final Map<Type, Object Function(Map<String, dynamic>)>
       ExtapiSetAutoUpdateFirmwareRequest.fromJsonFactory,
   ExtapiSetAutoUpdateFirmwareResponse:
       ExtapiSetAutoUpdateFirmwareResponse.fromJsonFactory,
+  ExtapiSetPasswordRequest: ExtapiSetPasswordRequest.fromJsonFactory,
+  ExtapiSetPasswordResponse: ExtapiSetPasswordResponse.fromJsonFactory,
   ExtapiStake: ExtapiStake.fromJsonFactory,
   ExtapiStakeInfoResponse: ExtapiStakeInfoResponse.fromJsonFactory,
   ExtapiStakeRequest: ExtapiStakeRequest.fromJsonFactory,
@@ -3745,6 +3795,10 @@ final Map<Type, Object Function(Map<String, dynamic>)>
   ExtapiUserListItem: ExtapiUserListItem.fromJsonFactory,
   ExtapiUserOrganization: ExtapiUserOrganization.fromJsonFactory,
   ExtapiVerifyEmailRequest: ExtapiVerifyEmailRequest.fromJsonFactory,
+  ExtapiVerifyExistingEmailRequest:
+      ExtapiVerifyExistingEmailRequest.fromJsonFactory,
+  ExtapiVerifyExistingEmailResponse:
+      ExtapiVerifyExistingEmailResponse.fromJsonFactory,
   ExtapiVerifyShopifyEmailRequest:
       ExtapiVerifyShopifyEmailRequest.fromJsonFactory,
   ExtapiVerifyShopifyEmailResponse:
@@ -4588,14 +4642,35 @@ extension $ExtapiBatchResetDefaultGatewatConfigResponseExtension
 
 @JsonSerializable(explicitToJson: true)
 class ExtapiBindExternalUserRequest {
-  ExtapiBindExternalUserRequest();
+  ExtapiBindExternalUserRequest({
+    this.externalAuthToken,
+  });
 
   factory ExtapiBindExternalUserRequest.fromJson(Map<String, dynamic> json) =>
       _$ExtapiBindExternalUserRequestFromJson(json);
 
+  @JsonKey(name: 'externalAuthToken')
+  final String? externalAuthToken;
   static const fromJsonFactory = _$ExtapiBindExternalUserRequestFromJson;
   static const toJsonFactory = _$ExtapiBindExternalUserRequestToJson;
   Map<String, dynamic> toJson() => _$ExtapiBindExternalUserRequestToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is ExtapiBindExternalUserRequest &&
+            (identical(other.externalAuthToken, externalAuthToken) ||
+                const DeepCollectionEquality()
+                    .equals(other.externalAuthToken, externalAuthToken)));
+  }
+}
+
+extension $ExtapiBindExternalUserRequestExtension
+    on ExtapiBindExternalUserRequest {
+  ExtapiBindExternalUserRequest copyWith({String? externalAuthToken}) {
+    return ExtapiBindExternalUserRequest(
+        externalAuthToken: externalAuthToken ?? this.externalAuthToken);
+  }
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -5089,6 +5164,42 @@ class ExtapiConfirmShopifyEmailResponse {
   static const toJsonFactory = _$ExtapiConfirmShopifyEmailResponseToJson;
   Map<String, dynamic> toJson() =>
       _$ExtapiConfirmShopifyEmailResponseToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class ExtapiConfirmVerifyExistingEmailRequest {
+  ExtapiConfirmVerifyExistingEmailRequest({
+    this.verificationCode,
+  });
+
+  factory ExtapiConfirmVerifyExistingEmailRequest.fromJson(
+          Map<String, dynamic> json) =>
+      _$ExtapiConfirmVerifyExistingEmailRequestFromJson(json);
+
+  @JsonKey(name: 'verificationCode')
+  final String? verificationCode;
+  static const fromJsonFactory =
+      _$ExtapiConfirmVerifyExistingEmailRequestFromJson;
+  static const toJsonFactory = _$ExtapiConfirmVerifyExistingEmailRequestToJson;
+  Map<String, dynamic> toJson() =>
+      _$ExtapiConfirmVerifyExistingEmailRequestToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is ExtapiConfirmVerifyExistingEmailRequest &&
+            (identical(other.verificationCode, verificationCode) ||
+                const DeepCollectionEquality()
+                    .equals(other.verificationCode, verificationCode)));
+  }
+}
+
+extension $ExtapiConfirmVerifyExistingEmailRequestExtension
+    on ExtapiConfirmVerifyExistingEmailRequest {
+  ExtapiConfirmVerifyExistingEmailRequest copyWith({String? verificationCode}) {
+    return ExtapiConfirmVerifyExistingEmailRequest(
+        verificationCode: verificationCode ?? this.verificationCode);
+  }
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -12839,15 +12950,15 @@ extension $ExtapiRegisterExternalUserRequestExtension
 @JsonSerializable(explicitToJson: true)
 class ExtapiRegisterExternalUserResponse {
   ExtapiRegisterExternalUserResponse({
-    this.jwt,
+    this.authToken,
   });
 
   factory ExtapiRegisterExternalUserResponse.fromJson(
           Map<String, dynamic> json) =>
       _$ExtapiRegisterExternalUserResponseFromJson(json);
 
-  @JsonKey(name: 'jwt')
-  final String? jwt;
+  @JsonKey(name: 'authToken')
+  final String? authToken;
   static const fromJsonFactory = _$ExtapiRegisterExternalUserResponseFromJson;
   static const toJsonFactory = _$ExtapiRegisterExternalUserResponseToJson;
   Map<String, dynamic> toJson() =>
@@ -12857,15 +12968,17 @@ class ExtapiRegisterExternalUserResponse {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is ExtapiRegisterExternalUserResponse &&
-            (identical(other.jwt, jwt) ||
-                const DeepCollectionEquality().equals(other.jwt, jwt)));
+            (identical(other.authToken, authToken) ||
+                const DeepCollectionEquality()
+                    .equals(other.authToken, authToken)));
   }
 }
 
 extension $ExtapiRegisterExternalUserResponseExtension
     on ExtapiRegisterExternalUserResponse {
-  ExtapiRegisterExternalUserResponse copyWith({String? jwt}) {
-    return ExtapiRegisterExternalUserResponse(jwt: jwt ?? this.jwt);
+  ExtapiRegisterExternalUserResponse copyWith({String? authToken}) {
+    return ExtapiRegisterExternalUserResponse(
+        authToken: authToken ?? this.authToken);
   }
 }
 
@@ -13710,6 +13823,49 @@ extension $ExtapiSetAutoUpdateFirmwareResponseExtension
     return ExtapiSetAutoUpdateFirmwareResponse(
         message: message ?? this.message);
   }
+}
+
+@JsonSerializable(explicitToJson: true)
+class ExtapiSetPasswordRequest {
+  ExtapiSetPasswordRequest({
+    this.password,
+  });
+
+  factory ExtapiSetPasswordRequest.fromJson(Map<String, dynamic> json) =>
+      _$ExtapiSetPasswordRequestFromJson(json);
+
+  @JsonKey(name: 'password')
+  final String? password;
+  static const fromJsonFactory = _$ExtapiSetPasswordRequestFromJson;
+  static const toJsonFactory = _$ExtapiSetPasswordRequestToJson;
+  Map<String, dynamic> toJson() => _$ExtapiSetPasswordRequestToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is ExtapiSetPasswordRequest &&
+            (identical(other.password, password) ||
+                const DeepCollectionEquality()
+                    .equals(other.password, password)));
+  }
+}
+
+extension $ExtapiSetPasswordRequestExtension on ExtapiSetPasswordRequest {
+  ExtapiSetPasswordRequest copyWith({String? password}) {
+    return ExtapiSetPasswordRequest(password: password ?? this.password);
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class ExtapiSetPasswordResponse {
+  ExtapiSetPasswordResponse();
+
+  factory ExtapiSetPasswordResponse.fromJson(Map<String, dynamic> json) =>
+      _$ExtapiSetPasswordResponseFromJson(json);
+
+  static const fromJsonFactory = _$ExtapiSetPasswordResponseFromJson;
+  static const toJsonFactory = _$ExtapiSetPasswordResponseToJson;
+  Map<String, dynamic> toJson() => _$ExtapiSetPasswordResponseToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -15671,6 +15827,76 @@ extension $ExtapiVerifyEmailRequestExtension on ExtapiVerifyEmailRequest {
     return ExtapiVerifyEmailRequest(
         email: email ?? this.email,
         verificationCode: verificationCode ?? this.verificationCode);
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class ExtapiVerifyExistingEmailRequest {
+  ExtapiVerifyExistingEmailRequest({
+    this.language,
+  });
+
+  factory ExtapiVerifyExistingEmailRequest.fromJson(
+          Map<String, dynamic> json) =>
+      _$ExtapiVerifyExistingEmailRequestFromJson(json);
+
+  @JsonKey(name: 'language')
+  final String? language;
+  static const fromJsonFactory = _$ExtapiVerifyExistingEmailRequestFromJson;
+  static const toJsonFactory = _$ExtapiVerifyExistingEmailRequestToJson;
+  Map<String, dynamic> toJson() =>
+      _$ExtapiVerifyExistingEmailRequestToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is ExtapiVerifyExistingEmailRequest &&
+            (identical(other.language, language) ||
+                const DeepCollectionEquality()
+                    .equals(other.language, language)));
+  }
+}
+
+extension $ExtapiVerifyExistingEmailRequestExtension
+    on ExtapiVerifyExistingEmailRequest {
+  ExtapiVerifyExistingEmailRequest copyWith({String? language}) {
+    return ExtapiVerifyExistingEmailRequest(
+        language: language ?? this.language);
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class ExtapiVerifyExistingEmailResponse {
+  ExtapiVerifyExistingEmailResponse({
+    this.verified,
+  });
+
+  factory ExtapiVerifyExistingEmailResponse.fromJson(
+          Map<String, dynamic> json) =>
+      _$ExtapiVerifyExistingEmailResponseFromJson(json);
+
+  @JsonKey(name: 'verified')
+  final bool? verified;
+  static const fromJsonFactory = _$ExtapiVerifyExistingEmailResponseFromJson;
+  static const toJsonFactory = _$ExtapiVerifyExistingEmailResponseToJson;
+  Map<String, dynamic> toJson() =>
+      _$ExtapiVerifyExistingEmailResponseToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is ExtapiVerifyExistingEmailResponse &&
+            (identical(other.verified, verified) ||
+                const DeepCollectionEquality()
+                    .equals(other.verified, verified)));
+  }
+}
+
+extension $ExtapiVerifyExistingEmailResponseExtension
+    on ExtapiVerifyExistingEmailResponse {
+  ExtapiVerifyExistingEmailResponse copyWith({bool? verified}) {
+    return ExtapiVerifyExistingEmailResponse(
+        verified: verified ?? this.verified);
   }
 }
 

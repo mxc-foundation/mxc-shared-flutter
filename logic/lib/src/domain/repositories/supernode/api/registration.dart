@@ -33,7 +33,7 @@ class RegistrationRepository {
         organizationName: orgName,
       ),
     );
-    return res.body!.jwt!;
+    return res.body!.authToken!;
   }
 
   Future<RegistrationResult> confirm({
