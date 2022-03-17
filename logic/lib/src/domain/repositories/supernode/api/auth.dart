@@ -45,7 +45,7 @@ class LoginRepository {
     );
 
     return WeChatLoginResult(
-      token: res.body!.authToken!,
+      externalToken: res.body!.authToken!,
       isBindingRequired: res.body!.bindingIsRequired!,
       is2faRequired: res.body!.is2faRequired!,
     );
@@ -57,7 +57,7 @@ class LoginRepository {
     );
 
     return WeChatLoginResult(
-      token: res.body!.authToken!,
+      externalToken: res.body!.authToken!,
       isBindingRequired: res.body!.bindingIsRequired!,
       is2faRequired: res.body!.is2faRequired!,
     );
@@ -70,7 +70,11 @@ class LoginRepository {
     required String languageCode,
   }) async {
     await client.internalService.requestPasswordReset(
-      body: ExtapiPasswordResetReq(captcha: captcha, username: username, language: languageCode),
+      body: ExtapiPasswordResetReq(
+        captcha: captcha,
+        username: username,
+        language: languageCode,
+      ),
     );
   }
 
