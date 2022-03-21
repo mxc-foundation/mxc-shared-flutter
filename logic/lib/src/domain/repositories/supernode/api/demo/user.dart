@@ -76,6 +76,11 @@ class DemoUserRepository implements UserRepository {
   }
 
   @override
+  Future<void> setPassword({required String password}) async {
+    throw UnimplementedError();
+  }
+
+  @override
   Future<void> addEmail({required String newEmail, required String language}) {
     throw UnimplementedError();
   }
@@ -95,6 +100,12 @@ class DemoUserRepository implements UserRepository {
   @override
   Future<bool> verifyExistingEmail(
       {required String language, required String otp}) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> confirmVerificationCodeForExistingEmail(
+      {required String verificationCode}) async {
     throw UnimplementedError();
   }
 }
