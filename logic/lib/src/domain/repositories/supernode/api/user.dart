@@ -115,6 +115,15 @@ class UserRepository {
         grpcMetadataXOTP: otp);
   }
 
+  Future<bool> verifyExistingEmail(
+      {required String language, required String otp}) async {
+    final res = await client.userService.verifyExistingEmail(
+      body: ExtapiVerifyExistingEmailRequest(language: language),
+      grpcMetadataXOTP: otp,
+    );
+    return res.body!.verified!;
+  }
+
   Future<void> logout() async {
     await client.internalService.logout();
   }

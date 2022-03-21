@@ -91,4 +91,10 @@ class DemoUserRepository implements UserRepository {
 
   @override
   Future<void> logout() async {}
+
+  @override
+  Future<bool> verifyExistingEmail(
+      {required String language, required String otp}) {
+    throw UnimplementedError();
+  }
 }
