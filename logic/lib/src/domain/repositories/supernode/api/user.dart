@@ -51,32 +51,6 @@ class UserRepository {
 
   String? orgId() => client.defaultOrganizationId;
 
-  Future<String> update({
-    required String id,
-    required String email,
-    bool? isActive,
-    bool? isAdmin,
-    String? note,
-    int? sessionTTL,
-    String? username,
-  }) async {
-    final res = await client.userService.update(
-      id: id,
-      body: ExtapiUpdateUserRequest(
-        user: ExtapiUser(
-          id: id,
-          email: email,
-          sessionTTL: 0,
-          isActive: true,
-          isAdmin: true,
-          note: '',
-        ),
-      ),
-    );
-
-    return res.body!.jwt!;
-  }
-
   Future<LoginResult> changePassword({
     required String currentPassword,
     required String newPassword,
@@ -113,6 +87,15 @@ class UserRepository {
         body: ExtapiVerifyEmailRequest(
             email: email, verificationCode: verificationCode),
         grpcMetadataXOTP: otp);
+  }
+
+  Future<bool> verifyExistingEmail(
+      {required String language, required String otp}) async {
+    final res = await client.userService.verifyExistingEmail(
+      body: ExtapiVerifyExistingEmailRequest(language: language),
+      grpcMetadataXOTP: otp,
+    );
+    return res.body!.verified!;
   }
 
   Future<void> logout() async {
