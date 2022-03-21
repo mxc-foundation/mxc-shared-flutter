@@ -51,32 +51,6 @@ class UserRepository {
 
   String? orgId() => client.defaultOrganizationId;
 
-  Future<String> update({
-    required String id,
-    required String email,
-    bool? isActive,
-    bool? isAdmin,
-    String? note,
-    int? sessionTTL,
-    String? username,
-  }) async {
-    final res = await client.userService.update(
-      id: id,
-      body: ExtapiUpdateUserRequest(
-        user: ExtapiUser(
-          id: id,
-          email: email,
-          sessionTTL: 0,
-          isActive: true,
-          isAdmin: true,
-          note: '',
-        ),
-      ),
-    );
-
-    return res.body!.jwt!;
-  }
-
   Future<LoginResult> changePassword({
     required String currentPassword,
     required String newPassword,
