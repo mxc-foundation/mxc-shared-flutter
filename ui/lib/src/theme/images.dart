@@ -251,6 +251,11 @@ class ImagesTheme {
         package: mxcUiPackageName,
       );
 
+  ImageProvider get biometric => const AssetImage(
+        'assets/images/home/biometric.png',
+        package: mxcUiPackageName,
+      );
+
   ImageProvider get dhx => const AssetImage(
         'assets/images/login/dhx.png',
         package: mxcUiPackageName,
