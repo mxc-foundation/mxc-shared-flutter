@@ -12909,6 +12909,7 @@ extension $ExtapiRecoverUserAccountResponseExtension
 class ExtapiRegisterExternalUserRequest {
   ExtapiRegisterExternalUserRequest({
     this.email,
+    this.externalAuthToken,
     this.organizationName,
   });
 
@@ -12918,6 +12919,8 @@ class ExtapiRegisterExternalUserRequest {
 
   @JsonKey(name: 'email')
   final String? email;
+  @JsonKey(name: 'externalAuthToken')
+  final String? externalAuthToken;
   @JsonKey(name: 'organizationName')
   final String? organizationName;
   static const fromJsonFactory = _$ExtapiRegisterExternalUserRequestFromJson;
@@ -12931,6 +12934,9 @@ class ExtapiRegisterExternalUserRequest {
         (other is ExtapiRegisterExternalUserRequest &&
             (identical(other.email, email) ||
                 const DeepCollectionEquality().equals(other.email, email)) &&
+            (identical(other.externalAuthToken, externalAuthToken) ||
+                const DeepCollectionEquality()
+                    .equals(other.externalAuthToken, externalAuthToken)) &&
             (identical(other.organizationName, organizationName) ||
                 const DeepCollectionEquality()
                     .equals(other.organizationName, organizationName)));
@@ -12940,9 +12946,10 @@ class ExtapiRegisterExternalUserRequest {
 extension $ExtapiRegisterExternalUserRequestExtension
     on ExtapiRegisterExternalUserRequest {
   ExtapiRegisterExternalUserRequest copyWith(
-      {String? email, String? organizationName}) {
+      {String? email, String? externalAuthToken, String? organizationName}) {
     return ExtapiRegisterExternalUserRequest(
         email: email ?? this.email,
+        externalAuthToken: externalAuthToken ?? this.externalAuthToken,
         organizationName: organizationName ?? this.organizationName);
   }
 }

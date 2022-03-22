@@ -3391,6 +3391,7 @@ ExtapiRegisterExternalUserRequest _$ExtapiRegisterExternalUserRequestFromJson(
         Map<String, dynamic> json) =>
     ExtapiRegisterExternalUserRequest(
       email: json['email'] as String?,
+      externalAuthToken: json['externalAuthToken'] as String?,
       organizationName: json['organizationName'] as String?,
     );
 
@@ -3398,6 +3399,7 @@ Map<String, dynamic> _$ExtapiRegisterExternalUserRequestToJson(
         ExtapiRegisterExternalUserRequest instance) =>
     <String, dynamic>{
       'email': instance.email,
+      'externalAuthToken': instance.externalAuthToken,
       'organizationName': instance.organizationName,
     };
 

@@ -16,6 +16,7 @@ class DemoRegistrationRepository implements RegistrationRepository {
   Future<String> withExternalUser({
     required String email,
     required String orgName,
+    required String externalAuthToken,
   }) async {
     throw UnimplementedError();
   }
