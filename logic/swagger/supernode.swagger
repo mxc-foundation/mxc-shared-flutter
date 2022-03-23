@@ -10110,6 +10110,10 @@
             "email":{
                "type":"string"
             },
+            "externalAuthToken":{
+               "description":"This token contains key parameters for authenticated external account",
+               "type":"string"
+            },
             "organizationName":{
                "type":"string"
             }

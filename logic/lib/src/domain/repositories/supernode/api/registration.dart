@@ -26,11 +26,13 @@ class RegistrationRepository {
   Future<String> withExternalUser({
     required String email,
     required String orgName,
+    required String externalAuthToken,
   }) async {
     final res = await _client.externalUserService.registerExternalUser(
       body: ExtapiRegisterExternalUserRequest(
         email: email,
         organizationName: orgName,
+        externalAuthToken: externalAuthToken,
       ),
     );
     return res.body!.authToken!;

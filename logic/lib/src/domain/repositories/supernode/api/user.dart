@@ -70,6 +70,11 @@ class UserRepository {
     );
   }
 
+  Future<void> setPassword({required String password}) async {
+    await client.userService
+        .setPassword(body: ExtapiSetPasswordRequest(password: password));
+  }
+
   Future<void> addEmail({
     required String newEmail,
     required String language,
@@ -96,6 +101,13 @@ class UserRepository {
       grpcMetadataXOTP: otp,
     );
     return res.body!.verified!;
+  }
+
+  Future<void> confirmVerificationCodeForExistingEmail(
+      {required String verificationCode}) async {
+    await client.userService.confirmVerifyExistingEmail(
+        body: ExtapiConfirmVerifyExistingEmailRequest(
+            verificationCode: verificationCode));
   }
 
   Future<void> logout() async {
