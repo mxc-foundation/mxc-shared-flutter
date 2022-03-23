@@ -4270,6 +4270,7 @@ class ExtapiAuthenticateWeChatUserResponse {
   ExtapiAuthenticateWeChatUserResponse({
     this.authToken,
     this.bindingIsRequired,
+    this.externalAuthToken,
     this.is2faRequired,
   });
 
@@ -4281,6 +4282,8 @@ class ExtapiAuthenticateWeChatUserResponse {
   final String? authToken;
   @JsonKey(name: 'bindingIsRequired')
   final bool? bindingIsRequired;
+  @JsonKey(name: 'externalAuthToken')
+  final String? externalAuthToken;
   @JsonKey(name: 'is2faRequired')
   final bool? is2faRequired;
   static const fromJsonFactory = _$ExtapiAuthenticateWeChatUserResponseFromJson;
@@ -4298,6 +4301,9 @@ class ExtapiAuthenticateWeChatUserResponse {
             (identical(other.bindingIsRequired, bindingIsRequired) ||
                 const DeepCollectionEquality()
                     .equals(other.bindingIsRequired, bindingIsRequired)) &&
+            (identical(other.externalAuthToken, externalAuthToken) ||
+                const DeepCollectionEquality()
+                    .equals(other.externalAuthToken, externalAuthToken)) &&
             (identical(other.is2faRequired, is2faRequired) ||
                 const DeepCollectionEquality()
                     .equals(other.is2faRequired, is2faRequired)));
@@ -4307,10 +4313,14 @@ class ExtapiAuthenticateWeChatUserResponse {
 extension $ExtapiAuthenticateWeChatUserResponseExtension
     on ExtapiAuthenticateWeChatUserResponse {
   ExtapiAuthenticateWeChatUserResponse copyWith(
-      {String? authToken, bool? bindingIsRequired, bool? is2faRequired}) {
+      {String? authToken,
+      bool? bindingIsRequired,
+      String? externalAuthToken,
+      bool? is2faRequired}) {
     return ExtapiAuthenticateWeChatUserResponse(
         authToken: authToken ?? this.authToken,
         bindingIsRequired: bindingIsRequired ?? this.bindingIsRequired,
+        externalAuthToken: externalAuthToken ?? this.externalAuthToken,
         is2faRequired: is2faRequired ?? this.is2faRequired);
   }
 }

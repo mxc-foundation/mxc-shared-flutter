@@ -6697,6 +6697,10 @@
                "description":"when wechat account has already bond to supernode account, return false, otherwise return true",
                "type":"boolean"
             },
+            "externalAuthToken":{
+               "description":"The API token generated with wechat credentials for binding process",
+               "type":"string"
+            },
             "is2faRequired":{
                "description":"when wechat account has already bond to supernode account, and this supernode account has enabled 2FA, return true",
                "type":"boolean"

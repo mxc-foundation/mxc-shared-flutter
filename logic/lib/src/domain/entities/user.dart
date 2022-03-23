@@ -28,12 +28,14 @@ class LoginResult {
 
 class WeChatLoginResult {
   WeChatLoginResult({
-    required this.externalToken,
+    this.authToken,
+    this.externalToken,
     required this.isBindingRequired,
     required this.is2faRequired,
   });
 
-  final String externalToken;
+  final String? authToken;
+  final String? externalToken;
   final bool isBindingRequired;
   final bool is2faRequired;
 }
