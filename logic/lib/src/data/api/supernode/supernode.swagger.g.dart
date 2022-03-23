@@ -157,6 +157,7 @@ ExtapiAuthenticateWeChatUserResponse
         ExtapiAuthenticateWeChatUserResponse(
           authToken: json['authToken'] as String?,
           bindingIsRequired: json['bindingIsRequired'] as bool?,
+          externalAuthToken: json['externalAuthToken'] as String?,
           is2faRequired: json['is2faRequired'] as bool?,
         );
 
@@ -165,6 +166,7 @@ Map<String, dynamic> _$ExtapiAuthenticateWeChatUserResponseToJson(
     <String, dynamic>{
       'authToken': instance.authToken,
       'bindingIsRequired': instance.bindingIsRequired,
+      'externalAuthToken': instance.externalAuthToken,
       'is2faRequired': instance.is2faRequired,
     };
 
