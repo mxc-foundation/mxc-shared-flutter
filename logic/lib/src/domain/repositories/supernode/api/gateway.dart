@@ -102,7 +102,7 @@ class GatewayRepository {
         manufacturerNr: serialNumber,
       ),
     );*/
-    return GatewayRegisterResult(status: "res.body!.status!");
+    return GatewayRegisterResult(status: 'res.body!.status!');
   }
 
   Future<List<GatewayProfile>> profiles({
