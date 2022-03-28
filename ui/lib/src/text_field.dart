@@ -230,8 +230,8 @@ class _MxcNonFormTextFieldState extends State<_MxcNonFormTextField> {
             AnimatedContainer(
               duration: const Duration(milliseconds: 200),
               padding: EdgeInsets.only(
-                top: focused ? 1 : 3,
-                bottom: focused ? 8 : 4,
+                top: focused ? 4.5 : 3,
+                bottom: focused ? 10 : 8,
               ),
               alignment: Alignment.centerLeft,
               child: AnimatedDefaultTextStyle(
@@ -244,7 +244,7 @@ class _MxcNonFormTextFieldState extends State<_MxcNonFormTextField> {
                         ? FontTheme.of(context).caption1().copyWith(
                               color: MxcScopedTheme.of(context).primaryColor,
                             )
-                        : FontTheme.of(context).caption1(),
+                        : FontTheme.of(context).body1(),
                 child: Text(
                   widget.label!,
                   maxLines: 1,
@@ -277,13 +277,13 @@ class _MxcNonFormTextFieldState extends State<_MxcNonFormTextField> {
                     controller: controller,
                     cursorColor: ColorsTheme.of(context).textPrimaryAndIcons,
                     style: (widget.disabled)
-                        ? FontTheme.of(context).body1().copyWith(
+                        ? FontTheme.of(context).subtitle1().copyWith(
                             color: ColorsTheme.of(context).buttonDisabledLabel)
-                        : FontTheme.of(context).body1(),
+                        : FontTheme.of(context).subtitle1(),
                     obscureText: widget.obscure,
                     onChanged: widget.onChanged,
                     decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                      contentPadding: const EdgeInsets.fromLTRB(0, 0, 0, 6),
                       isDense: true,
                       floatingLabelBehavior: FloatingLabelBehavior.always,
                       hintText: widget.hint,
@@ -367,7 +367,7 @@ abstract class MxcTextFieldButton extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Padding(
-        padding: const EdgeInsets.only(left: 5, right: 5, bottom: 6),
+        padding: const EdgeInsets.only(left: 5, right: 5),
         child: buildChild(context),
       ),
     );
