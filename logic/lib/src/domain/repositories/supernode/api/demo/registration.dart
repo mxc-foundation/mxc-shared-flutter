@@ -6,6 +6,7 @@ class DemoRegistrationRepository implements RegistrationRepository {
   /// [languageCode] can be taken from [Locale.languageCode]
   @override
   Future<void> withEmail({
+    required String captcha,
     required String email,
     required String languageCode,
   }) =>
@@ -15,6 +16,7 @@ class DemoRegistrationRepository implements RegistrationRepository {
   Future<String> withExternalUser({
     required String email,
     required String orgName,
+    required String externalAuthToken,
   }) async {
     throw UnimplementedError();
   }

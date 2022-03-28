@@ -77,9 +77,18 @@ class CacheController {
     _innerRepositories.add(repository);
   }
 
-  void unload() => _innerRepositories.map((e) => e.unload());
+  void unload() {
+    // not working
+    _innerRepositories.map((e) => e.unload());
+  }
 
-  Future<void> load(String key) => Future.wait(
-        _innerRepositories.map((e) => e._load(_manager, '$prefixKey/$key')),
-      );
+  Future<void> load(String key) async {
+    await Future.wait(
+      _innerRepositories.map(
+        (e) async {
+          await e._load(_manager, '$prefixKey/$key');
+        },
+      ),
+    );
+  }
 }

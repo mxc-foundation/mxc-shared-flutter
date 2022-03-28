@@ -28,5 +28,6 @@ What changes were applied to the fork:
 
 If you want to regenerate these files (in case some new methods appeared, e.g.), follow these steps:
 * Get your **swagger file** from [lora_server_address]/swagger/api.swagger.json
-* Replace `[mxc_shared]/logic/swagger/supernode.swagger` with your file
+* Parse **swagger file** with json beautifier, for example: https://jsonformatter.curiousconcept.com/
+* Replace `[mxc_shared]/logic/swagger/supernode.swagger` with beautified **swagger file**
 * Run `pub run build_runner build` or `flutter pub run build_runner build` 

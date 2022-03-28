@@ -45,10 +45,10 @@ class FontTheme {
       TextStylePack(_colorsTheme, _baseTextStyle.copyWith(fontSize: 34));
 
   TextStylePack get h5 =>
-      TextStylePack(_colorsTheme, _baseTextStyle.copyWith(fontSize: 12));
+      TextStylePack(_colorsTheme, _baseTextStyle.copyWith(fontSize: 24));
 
-  TextStylePack get h6 => TextStylePack(_colorsTheme,
-      _baseTextStyle.copyWith(fontSize: 12, fontWeight: FontWeight.w500));
+  TextStylePack get h6 =>
+      TextStylePack(_colorsTheme, _baseTextStyle.copyWith(fontSize: 20));
 
   TextStylePack get h7 => TextStylePack(_colorsTheme,
       _baseTextStyle.copyWith(fontSize: 12, fontWeight: FontWeight.w500));

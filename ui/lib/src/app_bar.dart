@@ -107,18 +107,26 @@ class MxcAppBar extends StatelessWidget {
     return Padding(
       padding: padding,
       child: Row(
-        children: <Widget>[
-          SizedBox(
-            width: 60,
-            child: leading,
-          ),
+        children: [
+          if (leading != null)
+            SizedBox(
+              width: 32,
+              child: leading,
+            ),
           Expanded(
-            child: title,
+            child: Padding(
+              padding: EdgeInsets.only(
+                left: action != null ? 60 : 0,
+                right: leading != null ? 32 : 0,
+              ),
+              child: title,
+            ),
           ),
-          SizedBox(
-            width: 60,
-            child: action,
-          ),
+          if (action != null)
+            SizedBox(
+              width: 60,
+              child: action,
+            ),
         ],
       ),
     );
@@ -187,8 +195,7 @@ class MxcAppBarButton extends StatelessWidget {
       behavior: HitTestBehavior.opaque,
       onTap: onTap,
       child: Container(
-        alignment: Alignment.center,
-        padding: const EdgeInsets.all(5),
+        alignment: Alignment.centerRight,
         child: child,
       ),
     );

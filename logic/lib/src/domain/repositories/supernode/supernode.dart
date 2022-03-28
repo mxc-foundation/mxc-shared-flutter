@@ -16,7 +16,6 @@ export 'api/totp.dart';
 export 'api/user.dart';
 export 'api/wallet.dart';
 export 'api/withdraw.dart';
-export 'common/token_refresher.dart';
 
 abstract class SupernodeRepository {
   WalletRepository get wallet;
@@ -45,13 +44,8 @@ abstract class SupernodeRepository {
 /// This supernode repository gives you access to [ApiSupernodeRepository] or [DemoSupernodeRepository]
 /// depending on [demoMode] field.
 class SupernodeRepositoryDemoDecorator implements SupernodeRepository {
-  SupernodeRepositoryDemoDecorator({
-    required SupernodeSetupStore setupStore,
-    required TokenRefresher tokenRefresher,
-  }) : _apiRepository = ApiSupernodeRepository(
-          setupStore: setupStore,
-          tokenRefresher: tokenRefresher,
-        );
+  SupernodeRepositoryDemoDecorator({required SupernodeSetupStore setupStore})
+      : _apiRepository = ApiSupernodeRepository(setupStore: setupStore);
 
   final ApiSupernodeRepository _apiRepository;
 
@@ -117,11 +111,11 @@ class SupernodeRepositoryDemoDecorator implements SupernodeRepository {
   Future<Supernode> getSupernode() => _currentRepository.getSupernode();
 
   @override
-  void logOut() {
+  Future<void> logOut() async {
     if (demoMode) {
       demoMode = false;
     } else {
-      _apiRepository.logOut();
+      await _apiRepository.logOut();
     }
   }
 

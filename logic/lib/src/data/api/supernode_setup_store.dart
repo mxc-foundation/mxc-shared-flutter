@@ -1,21 +1,15 @@
 import 'dart:async';
+
 import 'package:meta/meta.dart';
 import 'package:mxc_logic/internal.dart';
 import 'package:mxc_logic/mxc_logic.dart';
 
-class Credentials {
-  Credentials(this.username, this.password);
-
-  final String username;
-  final String password;
-}
-
 abstract class SupernodeSetupStore implements GlobalCacheStore {
   factory SupernodeSetupStore() = SupernodeSetupStoreImpl;
 
-  Credentials? get credentials;
+  String? get username;
   @internal
-  set credentials(Credentials? credentials);
+  set username(String? username);
 
   String? get token;
   @internal
@@ -38,22 +32,14 @@ class SupernodeSetupStoreImpl extends GlobalCacheStore
   String get zone => 'supernode-setup';
 
   late final Field<String?> _username = field('username');
-  late final Field<String?> _password = field('password');
   late final Field<String?> _supernodeAddress = field('supernode-address');
   late final Field<String?> _token = field('token');
   late final Field<String?> _organizationId = field('organizationId');
 
   @override
-  Credentials? get credentials =>
-      _username.value == null || _password.value == null
-          ? null
-          : Credentials(_username.value!, _password.value!);
-
+  String? get username => _username.value;
   @override
-  set credentials(Credentials? credentials) {
-    _username.value = credentials?.username;
-    _password.value = credentials?.password;
-  }
+  set username(String? username) => _username.value = username;
 
   @override
   String? get supernodeAddress => _supernodeAddress.value;
@@ -76,7 +62,6 @@ class SupernodeSetupStoreImpl extends GlobalCacheStore
   @override
   Future<void> clean() => cleanFields([
         _username,
-        _password,
         _supernodeAddress,
         _token,
       ]);
