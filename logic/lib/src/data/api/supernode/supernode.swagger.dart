@@ -3282,6 +3282,7 @@ abstract class WithdrawService extends ChopperService {
 
   ///GetWithdrawFee data for current withdraw fee
   ///@param currency type of crypto currency.
+  ///@param amount
   ///@param Grpc-Metadata-X-OTP OTP Code
   ///@param Grpc-Metadata-Authorization Auth Token
 
@@ -3289,6 +3290,8 @@ abstract class WithdrawService extends ChopperService {
   Future<chopper.Response<ExtapiGetWithdrawFeeResponse>> getWithdrawFee(
       {@Query('currency')
           String? currency,
+      @Query('amount')
+          String? amount,
       @Header('Grpc-Metadata-X-OTP')
           String? grpcMetadataXOTP,
       @Header('Grpc-Metadata-Authorization')
