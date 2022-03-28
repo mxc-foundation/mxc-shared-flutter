@@ -5,7 +5,6 @@ import 'package:mxc_logic/src/data/data.dart';
 class ApiSupernodeRepository implements SupernodeRepository {
   ApiSupernodeRepository({
     required SupernodeSetupStore setupStore,
-    required TokenRefresher tokenRefresher,
   })  : _setupStore = setupStore,
         _client = SupernodeClient(
           getSupernodeAddress: () =>
@@ -13,12 +12,6 @@ class ApiSupernodeRepository implements SupernodeRepository {
               (throw Exception('Supernode address has not been picked')),
           getDefaultOrganizationId: () => setupStore.organizationId,
           getToken: () => setupStore.token,
-          refreshToken: (client) => tokenRefresher.refresh(
-            ApiSupernodeRepository.withClient(
-              client: client,
-              setupStore: setupStore,
-            ),
-          ),
         );
 
   ApiSupernodeRepository.withClient({
@@ -94,11 +87,12 @@ class ApiSupernodeRepository implements SupernodeRepository {
   }
 
   @override
-  void logOut() {
-    _setupStore.credentials = null;
+  Future<void> logOut() async {
+    await user.logout();
+    _setupStore.username = null;
     _setupStore.token = null;
   }
 
   @override
-  bool get loggedIn => _setupStore.credentials != null;
+  bool get loggedIn => _setupStore.token != null;
 }

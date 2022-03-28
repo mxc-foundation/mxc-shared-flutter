@@ -11,14 +11,14 @@ class MxcCard extends StatelessWidget {
         isShadow = true,
         super(key: key);
 
-  const MxcCard.custom(
-      {Key? key,
-      required this.child,
-      this.onTap,
-      this.color,
-      this.padding,
-      this.isShadow = true})
-      : super(key: key);
+  const MxcCard.custom({
+    Key? key,
+    required this.child,
+    this.onTap,
+    this.color,
+    this.padding,
+    this.isShadow = true,
+  }) : super(key: key);
 
   final Widget child;
   final VoidCallback? onTap;

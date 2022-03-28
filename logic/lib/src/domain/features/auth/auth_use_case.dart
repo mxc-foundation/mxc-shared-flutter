@@ -15,30 +15,44 @@ class LoginUseCase {
     return repository.listSupernodes();
   }
 
-  Future<void> login(
+  Future<bool> login({
+    required String captcha,
+    required String supernodeAddress,
+    required String username,
+    required String password,
+  }) async {
+    authStorageRepository.supernodeAddress = supernodeAddress;
+    final LoginResult res = await repository.auth.login(
+      captcha: captcha,
+      username: username,
+      password: password,
+    );
+
+    authStorageRepository.saveToken(res.token);
+    if (!res.is2faRequired) {
+      await _loadProfile();
+    }
+
+    return res.is2faRequired;
+  }
+
+  Future<void> login2fa(
     String supernodeAddress,
-    String username,
-    String password,
+    String otp,
   ) async {
     authStorageRepository.supernodeAddress = supernodeAddress;
-    final res = await repository.auth.login(
-      username: username,
-      password: password,
-    );
+    await repository.auth.login2fa(otp: otp);
 
-    await authStorageRepository.saveCredentials(
-      username: username,
-      password: password,
-    );
-    await authStorageRepository.saveToken(res.token);
-
-    await authCacheRepository?.loadCache(username);
-
-    final profile = await repository.user.profile();
-
-    authStorageRepository.organizationId =
-        profile.organizations.first.organizationId;
+    await _loadProfile();
   }
 
   bool loggedIn() => repository.loggedIn;
+
+  Future<void> _loadProfile() async {
+    final profile = await repository.user.profile();
+    authStorageRepository.saveUsername(username: profile.user.username);
+    await authCacheRepository?.loadCache(profile.user.username);
+    authStorageRepository.organizationId =
+        profile.organizations.first.organizationId;
+  }
 }

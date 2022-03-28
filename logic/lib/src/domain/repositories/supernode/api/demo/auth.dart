@@ -12,8 +12,16 @@ class DemoLoginRepository implements LoginRepository {
 
   @override
   Future<LoginResult> login({
+    required String captcha,
     required String username,
     required String password,
+  }) async {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> login2fa({
+    required String otp,
   }) async {
     throw UnimplementedError();
   }
@@ -33,6 +41,7 @@ class DemoLoginRepository implements LoginRepository {
   /// [languageCode] can be taken from [Locale.languageCode]
   @override
   Future<void> resetPassword({
+    required String captcha,
     required String username,
     required String languageCode,
   }) {

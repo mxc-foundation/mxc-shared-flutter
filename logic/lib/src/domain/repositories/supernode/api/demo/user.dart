@@ -54,23 +54,45 @@ class DemoUserRepository implements UserRepository {
   String? orgId() => client.defaultOrganizationId;
 
   @override
-  Future<String> update({
-    required String id,
+  Future<LoginResult> changePassword({
+    required String currentPassword,
+    required String newPassword,
+    required String otp,
+  }) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> setPassword({required String password}) async {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> addEmail({required String newEmail, required String language}) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> verifyEmail({
     required String email,
-    bool? isActive,
-    bool? isAdmin,
-    String? note,
-    int? sessionTTL,
-    String? username,
+    required String verificationCode,
+    required String otp,
   }) async {
     throw UnimplementedError();
   }
 
   @override
-  Future<void> changePassword({
-    required String userId,
-    required String password,
-  }) {
+  Future<void> logout() async {}
+
+  @override
+  Future<bool> verifyExistingEmail(
+      {required String language, required String otp}) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> confirmVerificationCodeForExistingEmail(
+      {required String verificationCode}) async {
     throw UnimplementedError();
   }
 }

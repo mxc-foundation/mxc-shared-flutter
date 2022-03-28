@@ -1,7 +1,6 @@
 import 'package:chopper/chopper.dart';
 import 'package:mxc_logic/mxc_logic.dart';
 import 'package:mxc_logic/src/data/data.dart';
-import 'package:mxc_logic/src/domain/repositories/internal/shared_mappers.dart';
 
 class LoginRepository {
   LoginRepository({
@@ -13,19 +12,30 @@ class LoginRepository {
   final UserRepository userRepository;
 
   Future<LoginResult> login({
+    required String captcha,
     required String username,
     required String password,
   }) async {
     final res = await client.internalService.login(
       body: ExtapiLoginRequest(
+        captcha: captcha,
         username: username,
         password: password,
       ),
     );
 
     return LoginResult(
-      token: res.body!.jwt!,
-      is2faRequired: res.body!.is2faRequired.orDefault(),
+      token: res.body!.authToken!,
+      is2faRequired: res.body!.is2faRequired ?? false,
+    );
+  }
+
+  Future<void> login2fa({
+    required String otp,
+  }) async {
+    await client.internalService.login2FA(
+      body: ExtapiLogin2FARequest(),
+      grpcMetadataXOTP: otp,
     );
   }
 
@@ -35,8 +45,10 @@ class LoginRepository {
     );
 
     return WeChatLoginResult(
-      token: res.body!.jwt!,
+      authToken: res.body!.authToken,
+      externalToken: res.body!.externalAuthToken,
       isBindingRequired: res.body!.bindingIsRequired!,
+      is2faRequired: res.body!.is2faRequired!,
     );
   }
 
@@ -46,18 +58,25 @@ class LoginRepository {
     );
 
     return WeChatLoginResult(
-      token: res.body!.jwt!,
+      authToken: res.body!.authToken,
+      externalToken: res.body!.externalAuthToken,
       isBindingRequired: res.body!.bindingIsRequired!,
+      is2faRequired: res.body!.is2faRequired!,
     );
   }
 
   /// [languageCode] can be taken from [Locale.languageCode]
   Future<void> resetPassword({
+    required String captcha,
     required String username,
     required String languageCode,
   }) async {
     await client.internalService.requestPasswordReset(
-      body: ExtapiPasswordResetReq(username: username, language: languageCode),
+      body: ExtapiPasswordResetReq(
+        captcha: captcha,
+        username: username,
+        language: languageCode,
+      ),
     );
   }
 
