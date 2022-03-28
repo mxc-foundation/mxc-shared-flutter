@@ -51,32 +51,6 @@ class UserRepository {
 
   String? orgId() => client.defaultOrganizationId;
 
-  Future<String> update({
-    required String id,
-    required String email,
-    bool? isActive,
-    bool? isAdmin,
-    String? note,
-    int? sessionTTL,
-    String? username,
-  }) async {
-    final res = await client.userService.update(
-      id: id,
-      body: ExtapiUpdateUserRequest(
-        user: ExtapiUser(
-          id: id,
-          email: email,
-          sessionTTL: 0,
-          isActive: true,
-          isAdmin: true,
-          note: '',
-        ),
-      ),
-    );
-
-    return res.body!.jwt!;
-  }
-
   Future<LoginResult> changePassword({
     required String currentPassword,
     required String newPassword,
@@ -96,6 +70,11 @@ class UserRepository {
     );
   }
 
+  Future<void> setPassword({required String password}) async {
+    await client.userService
+        .setPassword(body: ExtapiSetPasswordRequest(password: password));
+  }
+
   Future<void> addEmail({
     required String newEmail,
     required String language,
@@ -113,5 +92,25 @@ class UserRepository {
         body: ExtapiVerifyEmailRequest(
             email: email, verificationCode: verificationCode),
         grpcMetadataXOTP: otp);
+  }
+
+  Future<bool> verifyExistingEmail(
+      {required String language, required String otp}) async {
+    final res = await client.userService.verifyExistingEmail(
+      body: ExtapiVerifyExistingEmailRequest(language: language),
+      grpcMetadataXOTP: otp,
+    );
+    return res.body!.verified!;
+  }
+
+  Future<void> confirmVerificationCodeForExistingEmail(
+      {required String verificationCode}) async {
+    await client.userService.confirmVerifyExistingEmail(
+        body: ExtapiConfirmVerifyExistingEmailRequest(
+            verificationCode: verificationCode));
+  }
+
+  Future<void> logout() async {
+    await client.internalService.logout();
   }
 }

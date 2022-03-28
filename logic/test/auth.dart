@@ -50,9 +50,7 @@ Future<void> main() async {
   final cacheManager = MemoryCacheManager();
   final supernodeSetupStore = SupernodeSetupStore();
   await supernodeSetupStore.load(cacheManager);
-  final tokenRefresher = TokenRefresher(supernodeSetupStore);
   final supernodeRepository = ApiSupernodeRepository(
-    tokenRefresher: tokenRefresher,
     setupStore: supernodeSetupStore,
   );
 
@@ -68,9 +66,10 @@ Future<void> main() async {
     });
     test('Can login', () async {
       await loginUseCase.login(
-        supernodeAddress,
-        login,
-        password,
+        captcha: 'captcha',
+        supernodeAddress: supernodeAddress,
+        username: login,
+        password: password,
       );
     });
     test('Can send request after login', () async {

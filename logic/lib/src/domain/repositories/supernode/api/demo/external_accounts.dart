@@ -8,10 +8,7 @@ class DemoExternalAccountsRepository implements ExternalAccountsRepository {
   SupernodeClient get client => throw UnimplementedError();
 
   @override
-  Future<String> bind({
-    required String email,
-    required String password,
-  }) async {
+  Future<String> bind({required String externalAuthToken}) async {
     throw UnimplementedError();
   }
 

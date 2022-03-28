@@ -2227,6 +2227,29 @@
             ]
          }
       },
+      "/api/gateways/cells/list":{
+         "get":{
+            "operationId":"ListCells",
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "$ref":"#/definitions/extapiListCellsResponse"
+                  }
+               },
+               "default":{
+                  "description":"An unexpected error response.",
+                  "schema":{
+                     "$ref":"#/definitions/runtimeError"
+                  }
+               }
+            },
+            "summary":"ListCells lists all the cells with gateways and the numbers of gateways",
+            "tags":[
+               "GatewayService"
+            ]
+         }
+      },
       "/api/gateways/default-config/add":{
          "post":{
             "operationId":"InsertNewDefaultGatewayConfig",
@@ -3284,38 +3307,6 @@
                   "description":"A successful response.",
                   "schema":{
                      "$ref":"#/definitions/extapiTOTPStatusResponse"
-                  }
-               },
-               "default":{
-                  "description":"An unexpected error response.",
-                  "schema":{
-                     "$ref":"#/definitions/runtimeError"
-                  }
-               }
-            },
-            "tags":[
-               "InternalService"
-            ]
-         }
-      },
-      "/api/internal/verify-g-recaptcha":{
-         "post":{
-            "operationId":"GetVerifyingGoogleRecaptcha",
-            "parameters":[
-               {
-                  "in":"body",
-                  "name":"body",
-                  "required":true,
-                  "schema":{
-                     "$ref":"#/definitions/extapiGoogleRecaptchaRequest"
-                  }
-               }
-            ],
-            "responses":{
-               "200":{
-                  "description":"A successful response.",
-                  "schema":{
-                     "$ref":"#/definitions/extapiGoogleRecaptchaResponse"
                   }
                },
                "default":{
@@ -5595,6 +5586,41 @@
             ]
          }
       },
+      "/api/users/confirm-verify-existing-email":{
+         "post":{
+            "operationId":"ConfirmVerifyExistingEmail",
+            "parameters":[
+               {
+                  "in":"body",
+                  "name":"body",
+                  "required":true,
+                  "schema":{
+                     "$ref":"#/definitions/extapiConfirmVerifyExistingEmailRequest"
+                  }
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+
+                     }
+                  }
+               },
+               "default":{
+                  "description":"An unexpected error response.",
+                  "schema":{
+                     "$ref":"#/definitions/runtimeError"
+                  }
+               }
+            },
+            "summary":"ConfirmVerifyExistingEmail confirms the existing email after a verification email has been sent",
+            "tags":[
+               "UserService"
+            ]
+         }
+      },
       "/api/users/email-add":{
          "post":{
             "operationId":"AddEmail",
@@ -5690,6 +5716,72 @@
                   }
                }
             },
+            "tags":[
+               "UserService"
+            ]
+         }
+      },
+      "/api/users/set-password":{
+         "post":{
+            "operationId":"SetPassword",
+            "parameters":[
+               {
+                  "in":"body",
+                  "name":"body",
+                  "required":true,
+                  "schema":{
+                     "$ref":"#/definitions/extapiSetPasswordRequest"
+                  }
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "$ref":"#/definitions/extapiSetPasswordResponse"
+                  }
+               },
+               "default":{
+                  "description":"An unexpected error response.",
+                  "schema":{
+                     "$ref":"#/definitions/runtimeError"
+                  }
+               }
+            },
+            "summary":"SetPassword saves password to account.\nThis API is only used when account's password was never set before.",
+            "tags":[
+               "UserService"
+            ]
+         }
+      },
+      "/api/users/verify-existing-email":{
+         "post":{
+            "operationId":"VerifyExistingEmail",
+            "parameters":[
+               {
+                  "in":"body",
+                  "name":"body",
+                  "required":true,
+                  "schema":{
+                     "$ref":"#/definitions/extapiVerifyExistingEmailRequest"
+                  }
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "$ref":"#/definitions/extapiVerifyExistingEmailResponse"
+                  }
+               },
+               "default":{
+                  "description":"An unexpected error response.",
+                  "schema":{
+                     "$ref":"#/definitions/runtimeError"
+                  }
+               }
+            },
+            "summary":"VerifyExistingEmail sends a verification email in case email is not verified",
             "tags":[
                "UserService"
             ]
@@ -6589,6 +6681,7 @@
       "extapiAuthenticateWeChatUserRequest":{
          "properties":{
             "code":{
+               "description":"code is obtained from wechat app for authenticating wechat account",
                "type":"string"
             }
          },
@@ -6596,11 +6689,21 @@
       },
       "extapiAuthenticateWeChatUserResponse":{
          "properties":{
+            "authToken":{
+               "description":"The API token to be used to access supernode interfaces.",
+               "type":"string"
+            },
             "bindingIsRequired":{
+               "description":"when wechat account has already bond to supernode account, return false, otherwise return true",
                "type":"boolean"
             },
-            "jwt":{
+            "externalAuthToken":{
+               "description":"The API token generated with wechat credentials for binding process",
                "type":"string"
+            },
+            "is2faRequired":{
+               "description":"when wechat account has already bond to supernode account, and this supernode account has enabled 2FA, return true",
+               "type":"boolean"
             }
          },
          "type":"object"
@@ -6736,21 +6839,14 @@
       },
       "extapiBindExternalUserRequest":{
          "properties":{
-            "email":{
-               "type":"string"
-            },
-            "password":{
+            "externalAuthToken":{
+               "description":"This token contains key parameters for authenticated external account",
                "type":"string"
             }
          },
          "type":"object"
       },
       "extapiBindExternalUserResponse":{
-         "properties":{
-            "jwt":{
-               "type":"string"
-            }
-         },
          "type":"object"
       },
       "extapiBoost":{
@@ -6784,6 +6880,22 @@
             },
             "registration":{
                "description":"Registration html.",
+               "type":"string"
+            }
+         },
+         "type":"object"
+      },
+      "extapiCell":{
+         "description":"Cell contains info about the cell",
+         "properties":{
+            "gateways":{
+               "description":"Number of gateways in the cell",
+               "format":"uint64",
+               "type":"string"
+            },
+            "h3CellId":{
+               "description":"H3 cell ID",
+               "format":"uint64",
                "type":"string"
             }
          },
@@ -6900,6 +7012,15 @@
          "type":"object"
       },
       "extapiConfirmShopifyEmailResponse":{
+         "type":"object"
+      },
+      "extapiConfirmVerifyExistingEmailRequest":{
+         "properties":{
+            "verificationCode":{
+               "description":"verification code that was sent to the email",
+               "type":"string"
+            }
+         },
          "type":"object"
       },
       "extapiCouncil":{
@@ -9059,37 +9180,6 @@
          },
          "type":"object"
       },
-      "extapiGoogleRecaptchaRequest":{
-         "properties":{
-            "remoteip":{
-               "type":"string"
-            },
-            "response":{
-               "type":"string"
-            },
-            "secret":{
-               "type":"string"
-            }
-         },
-         "type":"object"
-      },
-      "extapiGoogleRecaptchaResponse":{
-         "properties":{
-            "challengeTs":{
-               "type":"string"
-            },
-            "errorCodes":{
-               "type":"string"
-            },
-            "hostname":{
-               "type":"string"
-            },
-            "success":{
-               "type":"boolean"
-            }
-         },
-         "type":"object"
-      },
       "extapiInsertNewDefaultGatewayConfigRequest":{
          "properties":{
             "defaultConfig":{
@@ -9131,6 +9221,18 @@
                "description":"Total number of applications available within the result-set.",
                "format":"int64",
                "type":"string"
+            }
+         },
+         "type":"object"
+      },
+      "extapiListCellsResponse":{
+         "properties":{
+            "cell":{
+               "description":"list of cells with number of gateways in each",
+               "items":{
+                  "$ref":"#/definitions/extapiCell"
+               },
+               "type":"array"
             }
          },
          "type":"object"
@@ -9332,6 +9434,10 @@
       },
       "extapiLoginRequest":{
          "properties":{
+            "captcha":{
+               "description":"Captcha token",
+               "type":"string"
+            },
             "password":{
                "description":"Password of the user.",
                "type":"string"
@@ -9774,6 +9880,10 @@
       },
       "extapiPasswordResetReq":{
          "properties":{
+            "captcha":{
+               "description":"captcha token",
+               "type":"string"
+            },
             "language":{
                "description":"language for the email",
                "type":"string"
@@ -9891,6 +10001,10 @@
             "email":{
                "type":"string"
             },
+            "externalAuthToken":{
+               "description":"This token contains key parameters for authenticated external account",
+               "type":"string"
+            },
             "organizationName":{
                "type":"string"
             }
@@ -9899,7 +10013,7 @@
       },
       "extapiRegisterExternalUserResponse":{
          "properties":{
-            "jwt":{
+            "authToken":{
                "type":"string"
             }
          },
@@ -9927,6 +10041,10 @@
       },
       "extapiRegisterUserRequest":{
          "properties":{
+            "captcha":{
+               "description":"Captcha token",
+               "type":"string"
+            },
             "email":{
                "type":"string"
             },
@@ -10190,6 +10308,18 @@
                "type":"string"
             }
          },
+         "type":"object"
+      },
+      "extapiSetPasswordRequest":{
+         "properties":{
+            "password":{
+               "description":"new password",
+               "type":"string"
+            }
+         },
+         "type":"object"
+      },
+      "extapiSetPasswordResponse":{
          "type":"object"
       },
       "extapiStake":{
@@ -10846,6 +10976,22 @@
             "verificationCode":{
                "description":"verification code that was sent to the email",
                "type":"string"
+            }
+         },
+         "type":"object"
+      },
+      "extapiVerifyExistingEmailRequest":{
+         "properties":{
+            "language":{
+               "type":"string"
+            }
+         },
+         "type":"object"
+      },
+      "extapiVerifyExistingEmailResponse":{
+         "properties":{
+            "verified":{
+               "type":"boolean"
             }
          },
          "type":"object"

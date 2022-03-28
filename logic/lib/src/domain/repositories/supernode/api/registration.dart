@@ -10,11 +10,13 @@ class RegistrationRepository {
 
   /// [languageCode] can be taken from [Locale.languageCode]
   Future<void> withEmail({
+    required String captcha,
     required String email,
     required String languageCode,
   }) async {
     await _client.internalService.registerUser(
       body: ExtapiRegisterUserRequest(
+        captcha: captcha,
         email: email,
         language: languageCode,
       ),
@@ -24,14 +26,16 @@ class RegistrationRepository {
   Future<String> withExternalUser({
     required String email,
     required String orgName,
+    required String externalAuthToken,
   }) async {
     final res = await _client.externalUserService.registerExternalUser(
       body: ExtapiRegisterExternalUserRequest(
         email: email,
         organizationName: orgName,
+        externalAuthToken: externalAuthToken,
       ),
     );
-    return res.body!.jwt!;
+    return res.body!.authToken!;
   }
 
   Future<RegistrationResult> confirm({
@@ -49,7 +53,7 @@ class RegistrationRepository {
       id: res.body!.id!,
       isAdmin: res.body!.isAdmin.orDefault(),
       isActive: res.body!.isActive.orDefault(),
-      token: res.body!.authToken!,
+      token: res.body!.jwt ?? res.body!.authToken!,
       username: res.body!.username!,
     );
   }

@@ -135,11 +135,11 @@ class _MxcNonFormTextField extends StatefulWidget {
     this.keyboardType,
     this.suffixText,
     this.obscure = false,
-    this.disabled = false,
     this.errorText,
-    this.onChanged,
   })  : _controller = controller,
         _initialValue = null,
+        onChanged = null,
+        disabled = false,
         super(key: key);
 
   const _MxcNonFormTextField.viewOnly({
@@ -230,8 +230,8 @@ class _MxcNonFormTextFieldState extends State<_MxcNonFormTextField> {
             AnimatedContainer(
               duration: const Duration(milliseconds: 200),
               padding: EdgeInsets.only(
-                top: focused ? 1 : 3,
-                bottom: focused ? 8 : 4,
+                top: focused ? 4.5 : 3,
+                bottom: focused ? 10 : 8,
               ),
               alignment: Alignment.centerLeft,
               child: AnimatedDefaultTextStyle(
@@ -244,7 +244,7 @@ class _MxcNonFormTextFieldState extends State<_MxcNonFormTextField> {
                         ? FontTheme.of(context).caption1().copyWith(
                               color: MxcScopedTheme.of(context).primaryColor,
                             )
-                        : FontTheme.of(context).caption1(),
+                        : FontTheme.of(context).body1(),
                 child: Text(
                   widget.label!,
                   maxLines: 1,
@@ -277,13 +277,13 @@ class _MxcNonFormTextFieldState extends State<_MxcNonFormTextField> {
                     controller: controller,
                     cursorColor: ColorsTheme.of(context).textPrimaryAndIcons,
                     style: (widget.disabled)
-                        ? FontTheme.of(context).body1().copyWith(
+                        ? FontTheme.of(context).subtitle1().copyWith(
                             color: ColorsTheme.of(context).buttonDisabledLabel)
-                        : FontTheme.of(context).body1(),
+                        : FontTheme.of(context).subtitle1(),
                     obscureText: widget.obscure,
                     onChanged: widget.onChanged,
                     decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                      contentPadding: const EdgeInsets.fromLTRB(0, 0, 0, 6),
                       isDense: true,
                       floatingLabelBehavior: FloatingLabelBehavior.always,
                       hintText: widget.hint,
@@ -334,24 +334,22 @@ class MxcTextFieldButton extends StatelessWidget {
     required this.icon,
     required this.onTap,
     this.color,
-    this.size,
   }) : super(key: key);
 
   final VoidCallback? onTap;
   final IconData icon;
   final Color? color;
-  final double? size;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 6, left: 5, right: 5),
+      padding: const EdgeInsets.only(left: 5, right: 5),
       child: InkWell(
         customBorder: const CircleBorder(),
         onTap: onTap,
         child: Icon(
           icon,
-          size: size ?? 16,
+          size: 16,
           color: color ?? MxcScopedTheme.of(context).primaryColor,
         ),
       ),

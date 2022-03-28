@@ -251,6 +251,11 @@ class ImagesTheme {
         package: mxcUiPackageName,
       );
 
+  ImageProvider get biometric => const AssetImage(
+        'assets/images/home/biometric.png',
+        package: mxcUiPackageName,
+      );
+
   ImageProvider get dhx => const AssetImage(
         'assets/images/login/dhx.png',
         package: mxcUiPackageName,
@@ -388,11 +393,6 @@ class ImagesTheme {
       );
 
   //settings
-  ImageProvider get warningRobot => const AssetImage(
-        'assets/images/settings/robot_warning.png',
-        package: mxcUiPackageName,
-      );
-
   ImageProvider get weChat => const AssetImage(
         'assets/images/settings/wechat.png',
         package: mxcUiPackageName,
