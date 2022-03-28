@@ -67,14 +67,6 @@ class DemoGatewayRepository implements GatewayRepository {
   }
 
   @override
-  Future<GatewayRegisterResult> registerReseller({
-    required String serialNumber,
-    String? orgId,
-  }) async {
-    return GatewayRegisterResult(status: 'DemoGatewayRegisterResellerStatus');
-  }
-
-  @override
   Future<List<GatewayProfile>> profiles({
     required String networkServerId,
     String? search,
