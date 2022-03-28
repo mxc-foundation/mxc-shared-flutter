@@ -56,9 +56,9 @@ class MxcAppBar extends StatelessWidget {
     Key? key,
     required String text,
     this.padding = const EdgeInsets.only(
-      top: 22,
-      bottom: 14,
-      left: 20,
+      top: 16,
+      bottom: 32,
+      left: 16,
       right: 20,
     ),
     this.leading,
