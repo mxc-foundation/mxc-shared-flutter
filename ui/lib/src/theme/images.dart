@@ -448,6 +448,11 @@ class ImagesTheme {
         'assets/images/withdraw/address.png',
         package: mxcUiPackageName,
       );
+
+  ImageProvider get nftEgg => const AssetImage(
+        'assets/images/gateway/nft-egg.png',
+        package: mxcUiPackageName,
+      );
 }
 
 class ImagesThemeDark extends ImagesTheme {
