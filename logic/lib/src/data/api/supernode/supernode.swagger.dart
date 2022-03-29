@@ -11014,37 +11014,6 @@ class ExtapiListDeviceProfileResponse {
     this.totalCount,
   });
 
-  factory ExtapiListCellsResponse.fromJson(Map<String, dynamic> json) =>
-      _$ExtapiListCellsResponseFromJson(json);
-
-  @JsonKey(name: 'cell', defaultValue: <ExtapiCell>[])
-  final List<ExtapiCell>? cell;
-  static const fromJsonFactory = _$ExtapiListCellsResponseFromJson;
-  static const toJsonFactory = _$ExtapiListCellsResponseToJson;
-  Map<String, dynamic> toJson() => _$ExtapiListCellsResponseToJson(this);
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is ExtapiListCellsResponse &&
-            (identical(other.cell, cell) ||
-                const DeepCollectionEquality().equals(other.cell, cell)));
-  }
-}
-
-extension $ExtapiListCellsResponseExtension on ExtapiListCellsResponse {
-  ExtapiListCellsResponse copyWith({List<ExtapiCell>? cell}) {
-    return ExtapiListCellsResponse(cell: cell ?? this.cell);
-  }
-}
-
-@JsonSerializable(explicitToJson: true)
-class ExtapiListDeviceProfileResponse {
-  ExtapiListDeviceProfileResponse({
-    this.result,
-    this.totalCount,
-  });
-
   factory ExtapiListDeviceProfileResponse.fromJson(Map<String, dynamic> json) =>
       _$ExtapiListDeviceProfileResponseFromJson(json);
 
