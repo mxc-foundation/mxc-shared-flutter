@@ -70,6 +70,32 @@ class MxcTextField extends FormField<String> {
           ),
         );
 
+  MxcTextField.disabled({
+    Key? key,
+    String? label,
+    required String text,
+    String? hint,
+    MxcTextFieldButton? button,
+    double width = double.infinity,
+    FocusNode? focusNode,
+    String? suffixText,
+    bool obscure = false,
+  })  : controller = null,
+        super(
+          key: key,
+          builder: (s) => _MxcNonFormTextField.viewOnly(
+            disabled: true,
+            label: label,
+            text: text,
+            button: button,
+            focusNode: focusNode,
+            hint: hint,
+            obscure: obscure,
+            suffixText: suffixText,
+            width: width,
+          ),
+        );
+
   final TextEditingController? controller;
 
   @override
@@ -110,9 +136,10 @@ class _MxcNonFormTextField extends StatefulWidget {
     this.suffixText,
     this.obscure = false,
     this.errorText,
-    this.onChanged,
   })  : _controller = controller,
         _initialValue = null,
+        onChanged = null,
+        disabled = false,
         super(key: key);
 
   const _MxcNonFormTextField.viewOnly({
@@ -127,6 +154,7 @@ class _MxcNonFormTextField extends StatefulWidget {
     this.keyboardType,
     this.suffixText,
     this.obscure = false,
+    this.disabled = false,
   })  : _initialValue = text,
         readOnly = true,
         _controller = null,
@@ -143,6 +171,7 @@ class _MxcNonFormTextField extends StatefulWidget {
   final FocusNode? focusNode;
   final MxcTextFieldButton? button;
   final String? suffixText;
+  final bool disabled;
 
   final TextEditingController? _controller;
   final bool obscure;
@@ -169,8 +198,12 @@ class _MxcNonFormTextFieldState extends State<_MxcNonFormTextField> {
   void initState() {
     super.initState();
     focusNode = widget.focusNode ?? FocusNode();
-    focused = focusNode.hasFocus;
-    focusNode.addListener(_focusNodeListener);
+    if (widget.disabled) {
+      focused = false;
+    } else {
+      focused = focusNode.hasFocus;
+      focusNode.addListener(_focusNodeListener);
+    }
   }
 
   void _focusNodeListener() {
@@ -197,17 +230,21 @@ class _MxcNonFormTextFieldState extends State<_MxcNonFormTextField> {
             AnimatedContainer(
               duration: const Duration(milliseconds: 200),
               padding: EdgeInsets.only(
-                top: focused ? 1 : 3,
-                bottom: focused ? 8 : 4,
+                top: focused ? 4.5 : 3,
+                bottom: focused ? 10 : 8,
               ),
               alignment: Alignment.centerLeft,
               child: AnimatedDefaultTextStyle(
                 duration: const Duration(milliseconds: 200),
-                style: focused
+                style: widget.disabled
                     ? FontTheme.of(context).caption1().copyWith(
-                          color: MxcScopedTheme.of(context).primaryColor,
+                          color: ColorsTheme.of(context).buttonDisabledLabel,
                         )
-                    : FontTheme.of(context).caption1(),
+                    : focused
+                        ? FontTheme.of(context).caption1().copyWith(
+                              color: MxcScopedTheme.of(context).primaryColor,
+                            )
+                        : FontTheme.of(context).body1(),
                 child: Text(
                   widget.label!,
                   maxLines: 1,
@@ -220,9 +257,11 @@ class _MxcNonFormTextFieldState extends State<_MxcNonFormTextField> {
               border: Border(
                 bottom: BorderSide(
                   width: focused ? 2 : 1,
-                  color: focused
-                      ? MxcScopedTheme.of(context).primaryColor
-                      : ColorsTheme.of(context).textPrimaryAndIcons,
+                  color: widget.disabled
+                      ? ColorsTheme.of(context).buttonDisabledLabel
+                      : focused
+                          ? MxcScopedTheme.of(context).primaryColor
+                          : ColorsTheme.of(context).textPrimaryAndIcons,
                 ),
               ),
             ),
@@ -237,11 +276,14 @@ class _MxcNonFormTextFieldState extends State<_MxcNonFormTextField> {
                     textInputAction: widget.action,
                     controller: controller,
                     cursorColor: ColorsTheme.of(context).textPrimaryAndIcons,
-                    style: FontTheme.of(context).body1(),
+                    style: (widget.disabled)
+                        ? FontTheme.of(context).subtitle1().copyWith(
+                            color: ColorsTheme.of(context).buttonDisabledLabel)
+                        : FontTheme.of(context).subtitle1(),
                     obscureText: widget.obscure,
                     onChanged: widget.onChanged,
                     decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                      contentPadding: const EdgeInsets.fromLTRB(0, 0, 0, 6),
                       isDense: true,
                       floatingLabelBehavior: FloatingLabelBehavior.always,
                       hintText: widget.hint,
@@ -258,9 +300,11 @@ class _MxcNonFormTextFieldState extends State<_MxcNonFormTextField> {
                 if (widget.button != null)
                   MxcScopedTheme(
                     data: MxcScopedThemeData(
-                      primaryColor: focused
-                          ? MxcScopedTheme.of(context).primaryColor
-                          : ColorsTheme.of(context).textPrimaryAndIcons,
+                      primaryColor: widget.disabled
+                          ? ColorsTheme.of(context).buttonDisabledLabel
+                          : focused
+                              ? MxcScopedTheme.of(context).primaryColor
+                              : ColorsTheme.of(context).textPrimaryAndIcons,
                     ),
                     child: widget.button!,
                   ),
@@ -284,17 +328,39 @@ class _MxcNonFormTextFieldState extends State<_MxcNonFormTextField> {
   }
 }
 
-class MxcTextFieldButton extends StatelessWidget {
-  const MxcTextFieldButton({
+abstract class MxcTextFieldButton extends StatelessWidget {
+  const factory MxcTextFieldButton({
     Key? key,
-    required this.icon,
+    required Widget child,
+    required VoidCallback? onTap,
+    Color? color,
+  }) = _MxcTextFieldButton;
+
+  const MxcTextFieldButton._({
+    Key? key,
     required this.onTap,
     this.color,
   }) : super(key: key);
 
+  const factory MxcTextFieldButton.icon({
+    Key? key,
+    required IconData icon,
+    required VoidCallback? onTap,
+    Color? color,
+    double? size,
+  }) = _MxcTextFieldIconButton;
+
+  const factory MxcTextFieldButton.image({
+    Key? key,
+    required ImageProvider image,
+    required VoidCallback? onTap,
+    Color? color,
+  }) = _MxcTextFieldImageButton;
+
   final VoidCallback? onTap;
-  final IconData icon;
   final Color? color;
+
+  Widget buildChild(BuildContext context);
 
   @override
   Widget build(BuildContext context) {
@@ -302,12 +368,61 @@ class MxcTextFieldButton extends StatelessWidget {
       onTap: onTap,
       child: Padding(
         padding: const EdgeInsets.only(left: 5, right: 5, bottom: 6),
-        child: Icon(
-          icon,
-          size: 16,
-          color: color ?? MxcScopedTheme.of(context).primaryColor,
-        ),
+        child: buildChild(context),
       ),
     );
   }
+}
+
+class _MxcTextFieldButton extends MxcTextFieldButton {
+  const _MxcTextFieldButton({
+    Key? key,
+    required this.child,
+    required VoidCallback? onTap,
+    Color? color,
+  }) : super._(key: key, onTap: onTap, color: color);
+
+  final Widget child;
+
+  @override
+  Widget buildChild(BuildContext context) => child;
+}
+
+class _MxcTextFieldIconButton extends MxcTextFieldButton {
+  const _MxcTextFieldIconButton({
+    Key? key,
+    required this.icon,
+    required VoidCallback? onTap,
+    this.size,
+    Color? color,
+  }) : super._(key: key, onTap: onTap, color: color);
+
+  final IconData icon;
+  final double? size;
+
+  @override
+  Widget buildChild(BuildContext context) => Icon(
+        icon,
+        size: size ?? 16,
+        color: color ?? MxcScopedTheme.of(context).primaryColor,
+      );
+}
+
+class _MxcTextFieldImageButton extends MxcTextFieldButton {
+  const _MxcTextFieldImageButton({
+    Key? key,
+    required this.image,
+    required VoidCallback? onTap,
+    Color? color,
+  }) : super._(key: key, onTap: onTap, color: color);
+
+  final ImageProvider image;
+
+  @override
+  Widget buildChild(BuildContext context) => Image(
+        image: image,
+        width: 16,
+        height: 16,
+        color: color ?? MxcScopedTheme.of(context).primaryColor,
+      );
 }

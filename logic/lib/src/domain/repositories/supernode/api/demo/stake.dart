@@ -26,7 +26,6 @@ class DemoStakeRepository implements StakeRepository {
   @override
   Future<String> unstake({
     required String stakeId,
-    required String otpCode,
     String? orgId,
   }) async {
     return 'DemoUnstakeStatus';

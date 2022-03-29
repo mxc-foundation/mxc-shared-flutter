@@ -12,7 +12,6 @@ class SupernodeClient extends ChopperClient {
   SupernodeClient({
     required String Function() getSupernodeAddress,
     required String? Function()? getToken,
-    required Future<String?> Function(SupernodeClient)? refreshToken,
     required String? Function()? getDefaultOrganizationId,
   })  : _getBaseUrl = getSupernodeAddress,
         _getDefaultOrganizationId = getDefaultOrganizationId ??
@@ -27,12 +26,6 @@ class SupernodeClient extends ChopperClient {
           converter: JsonSerializableConverter(),
           services: [...supernodeServices],
           client: IOClient(createHttpClientWithCert(isrgx1)),
-          authenticator: refreshToken == null
-              ? null
-              : SupernodeAuthenticator(
-                  refreshToken: refreshToken,
-                  getSupernodeAddress: getSupernodeAddress,
-                ),
           interceptors: <Object>[
             HttpLoggingInterceptor(),
             if (getToken != null) TokenInterceptor(getToken: getToken),
