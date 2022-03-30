@@ -5,12 +5,7 @@ class MxcAppBar extends StatelessWidget {
   MxcAppBar({
     Key? key,
     required String text,
-    this.padding = const EdgeInsets.only(
-      top: 22,
-      bottom: 14,
-      left: 20,
-      right: 20,
-    ),
+    this.padding,
     this.action,
     this.leading,
     this.centerTitle = true,
@@ -20,12 +15,7 @@ class MxcAppBar extends StatelessWidget {
   const MxcAppBar.custom({
     Key? key,
     required this.title,
-    this.padding = const EdgeInsets.only(
-      top: 22,
-      bottom: 14,
-      left: 20,
-      right: 20,
-    ),
+    this.padding,
     this.action,
     this.leading,
     this.centerTitle = true,
@@ -34,12 +24,7 @@ class MxcAppBar extends StatelessWidget {
   MxcAppBar.back({
     Key? key,
     required String text,
-    this.padding = const EdgeInsets.only(
-      top: 22,
-      bottom: 14,
-      left: 20,
-      right: 20,
-    ),
+    this.padding,
     this.action,
     this.centerTitle = true,
   })  : title = MxcAppBarTextTitle(text, centerTitle: centerTitle),
@@ -55,12 +40,7 @@ class MxcAppBar extends StatelessWidget {
   MxcAppBar.close({
     Key? key,
     required String text,
-    this.padding = const EdgeInsets.only(
-      top: 22,
-      bottom: 14,
-      left: 20,
-      right: 20,
-    ),
+    this.padding,
     this.leading,
     this.centerTitle = true,
   })  : title = MxcAppBarTextTitle(text, centerTitle: centerTitle),
@@ -88,16 +68,11 @@ class MxcAppBar extends StatelessWidget {
           Icons.close,
           onTap: onClose,
         ),
-        padding = const EdgeInsets.only(
-          top: 22,
-          bottom: 14,
-          left: 20,
-          right: 20,
-        ),
+        padding = null,
         super(key: key);
 
   final Widget title;
-  final EdgeInsetsGeometry padding;
+  final EdgeInsetsGeometry? padding;
   final Widget? action;
   final Widget? leading;
   final bool centerTitle;
@@ -105,7 +80,13 @@ class MxcAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: padding,
+      padding: padding ??
+          const EdgeInsets.only(
+            top: 22,
+            bottom: 14,
+            left: 16,
+            right: 16,
+          ),
       child: Row(
         children: [
           if (leading != null)
