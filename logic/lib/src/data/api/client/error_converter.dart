@@ -11,7 +11,7 @@ class ChopperErrorConverter extends ErrorConverter {
 
   @override
   FutureOr<Response> convertError<BodyType, InnerType>(Response response) {
-    late final Object? error;
+    Object? error;
     try {
       error = jsonDecode(response.bodyString);
     } on FormatException {
