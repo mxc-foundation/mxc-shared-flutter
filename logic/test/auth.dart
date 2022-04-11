@@ -50,33 +50,37 @@ Future<void> main() async {
   final cacheManager = MemoryCacheManager();
   final supernodeSetupStore = SupernodeSetupStore();
   await supernodeSetupStore.load(cacheManager);
+
   /// Based on the 2AF feature, the automatic re-login was removed.
   // final tokenRefresher = TokenRefresher(supernodeSetupStore);
   // final supernodeRepository = ApiSupernodeRepository(
   //   tokenRefresher: tokenRefresher,
   //   setupStore: supernodeSetupStore,
   // );
+  final supernodeRepository = ApiSupernodeRepository(
+    setupStore: supernodeSetupStore,
+  );
 
-  // final loginUseCase = LoginUseCase(
-  //   supernodeRepository,
-  //   AuthenticationStorageRepository(supernodeSetupStore),
-  // );
+  final loginUseCase = LoginUseCase(
+    supernodeRepository,
+    AuthenticationStorageRepository(supernodeSetupStore),
+  );
 
-  // group('A group of tests', () {
-  //   test('Can get supernodes', () async {
-  //     final supernodes = await loginUseCase.listSupernodes();
-  //     expect(supernodes, isNotEmpty);
-  //   });
-  //   test('Can login', () async {
-  //     await loginUseCase.login(
-  //       'captcha',
-  //       supernodeAddress,
-  //       login,
-  //       password,
-  //     );
-  //   });
-  //   test('Can send request after login', () async {
-  //     await supernodeRepository.user.profile();
-  //   });
-  // });
+  group('A group of tests', () {
+    test('Can get supernodes', () async {
+      final supernodes = await loginUseCase.listSupernodes();
+      expect(supernodes, isNotEmpty);
+    });
+    test('Can login', () async {
+      await loginUseCase.login(
+        captcha: 'captcha',
+        supernodeAddress: supernodeAddress,
+        username: login,
+        password: password,
+      );
+    });
+    test('Can send request after login', () async {
+      await supernodeRepository.user.profile();
+    });
+  });
 }

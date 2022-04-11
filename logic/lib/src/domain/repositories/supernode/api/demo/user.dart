@@ -54,19 +54,6 @@ class DemoUserRepository implements UserRepository {
   String? orgId() => client.defaultOrganizationId;
 
   @override
-  Future<String> update({
-    required String id,
-    required String email,
-    bool? isActive,
-    bool? isAdmin,
-    String? note,
-    int? sessionTTL,
-    String? username,
-  }) async {
-    throw UnimplementedError();
-  }
-
-  @override
   Future<LoginResult> changePassword({
     required String currentPassword,
     required String newPassword,

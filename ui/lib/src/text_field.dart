@@ -135,11 +135,11 @@ class _MxcNonFormTextField extends StatefulWidget {
     this.keyboardType,
     this.suffixText,
     this.obscure = false,
-    this.disabled = false,
     this.errorText,
-    this.onChanged,
   })  : _controller = controller,
         _initialValue = null,
+        onChanged = null,
+        disabled = false,
         super(key: key);
 
   const _MxcNonFormTextField.viewOnly({
