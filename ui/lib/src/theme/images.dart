@@ -439,8 +439,14 @@ class ImagesTheme {
         package: mxcUiPackageName,
       );
 
+  ImageProvider get metaXp => const AssetImage(
+        'assets/images/gateway/meta-xp.png',
+        package: mxcUiPackageName,
+      );
+
   ImageProvider get metaXpMapIcon => const AssetImage(
         'assets/images/map/meta-xp-map-icon.png',
+        package: mxcUiPackageName,
       );
 
   //withdraw
@@ -451,6 +457,11 @@ class ImagesTheme {
 
   ImageProvider get nftEgg => const AssetImage(
         'assets/images/gateway/nft-egg.png',
+        package: mxcUiPackageName,
+      );
+
+  ImageProvider get nftEggDefault => const AssetImage(
+        'assets/images/gateway/nft-egg-default.png',
         package: mxcUiPackageName,
       );
 }
