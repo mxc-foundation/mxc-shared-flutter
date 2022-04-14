@@ -161,6 +161,7 @@ class GatewayRepository {
             miningFuelMax: e.miningFuelMax.toDecimal(),
             totalMined: e.totalMined.toDecimal(),
             uptimeHealth: e.uptimeHealth.orDefault(),
+            proximityFactor: e.proximityFactor.orDefault(),
           ),
         )
         .toList();

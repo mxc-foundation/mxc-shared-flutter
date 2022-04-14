@@ -1501,6 +1501,47 @@ abstract class InternalService extends ChopperService {
     return _$InternalService(newClient);
   }
 
+  ///AccessTokenCreate allows user to create api token for use with scripts
+  ///@param body
+  ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
+
+  @Post(path: '/api/internal/access-token/create')
+  Future<chopper.Response<ExtapiAccessTokenCreateResponse>> accessTokenCreate(
+      {@Body()
+      @required
+          ExtapiAccessTokenCreateRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
+
+  ///AccessTokenList returns the list of api tokens for the user
+  ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
+
+  @Get(path: '/api/internal/access-token/list')
+  Future<chopper.Response<ExtapiAccessTokenListResponse>> accessTokenList(
+      {@Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
+
+  ///AccessTokenRevoke revokes api tokens specified in request
+  ///@param body
+  ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
+
+  @Post(path: '/api/internal/access-token/revoke')
+  Future<chopper.Response<ExtapiAccessTokenRevokeResponse>> accessTokenRevoke(
+      {@Body()
+      @required
+          ExtapiAccessTokenRevokeRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
+
   ///Get the branding for the UI
   ///@param Grpc-Metadata-X-OTP OTP Code
   ///@param Grpc-Metadata-Authorization Auth Token
@@ -3419,6 +3460,16 @@ List<ChopperService> get supernodeServices => [
 final Map<Type, Object Function(Map<String, dynamic>)>
     SupernodeJsonDecoderMappings = {
   CommonLocation: CommonLocation.fromJsonFactory,
+  ExtapiAccessToken: ExtapiAccessToken.fromJsonFactory,
+  ExtapiAccessTokenCreateRequest:
+      ExtapiAccessTokenCreateRequest.fromJsonFactory,
+  ExtapiAccessTokenCreateResponse:
+      ExtapiAccessTokenCreateResponse.fromJsonFactory,
+  ExtapiAccessTokenListResponse: ExtapiAccessTokenListResponse.fromJsonFactory,
+  ExtapiAccessTokenRevokeRequest:
+      ExtapiAccessTokenRevokeRequest.fromJsonFactory,
+  ExtapiAccessTokenRevokeResponse:
+      ExtapiAccessTokenRevokeResponse.fromJsonFactory,
   ExtapiActivateDeviceRequest: ExtapiActivateDeviceRequest.fromJsonFactory,
   ExtapiActivateUserRequest: ExtapiActivateUserRequest.fromJsonFactory,
   ExtapiActivateUserResponse: ExtapiActivateUserResponse.fromJsonFactory,
@@ -3903,6 +3954,259 @@ extension $CommonLocationExtension on CommonLocation {
         longitude: longitude ?? this.longitude,
         source: source ?? this.source);
   }
+}
+
+@JsonSerializable(explicitToJson: true)
+class ExtapiAccessToken {
+  ExtapiAccessToken({
+    this.created,
+    this.description,
+    this.expires,
+    this.id,
+    this.lastUsed,
+    this.maxInactiveSeconds,
+    this.scope,
+  });
+
+  factory ExtapiAccessToken.fromJson(Map<String, dynamic> json) =>
+      _$ExtapiAccessTokenFromJson(json);
+
+  @JsonKey(name: 'created')
+  final DateTime? created;
+  @JsonKey(name: 'description')
+  final String? description;
+  @JsonKey(name: 'expires')
+  final DateTime? expires;
+  @JsonKey(name: 'id')
+  final String? id;
+  @JsonKey(name: 'lastUsed')
+  final DateTime? lastUsed;
+  @JsonKey(name: 'maxInactiveSeconds')
+  final String? maxInactiveSeconds;
+  @JsonKey(name: 'scope', defaultValue: <String>[])
+  final List<String>? scope;
+  static const fromJsonFactory = _$ExtapiAccessTokenFromJson;
+  static const toJsonFactory = _$ExtapiAccessTokenToJson;
+  Map<String, dynamic> toJson() => _$ExtapiAccessTokenToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is ExtapiAccessToken &&
+            (identical(other.created, created) ||
+                const DeepCollectionEquality()
+                    .equals(other.created, created)) &&
+            (identical(other.description, description) ||
+                const DeepCollectionEquality()
+                    .equals(other.description, description)) &&
+            (identical(other.expires, expires) ||
+                const DeepCollectionEquality()
+                    .equals(other.expires, expires)) &&
+            (identical(other.id, id) ||
+                const DeepCollectionEquality().equals(other.id, id)) &&
+            (identical(other.lastUsed, lastUsed) ||
+                const DeepCollectionEquality()
+                    .equals(other.lastUsed, lastUsed)) &&
+            (identical(other.maxInactiveSeconds, maxInactiveSeconds) ||
+                const DeepCollectionEquality()
+                    .equals(other.maxInactiveSeconds, maxInactiveSeconds)) &&
+            (identical(other.scope, scope) ||
+                const DeepCollectionEquality().equals(other.scope, scope)));
+  }
+}
+
+extension $ExtapiAccessTokenExtension on ExtapiAccessToken {
+  ExtapiAccessToken copyWith(
+      {DateTime? created,
+      String? description,
+      DateTime? expires,
+      String? id,
+      DateTime? lastUsed,
+      String? maxInactiveSeconds,
+      List<String>? scope}) {
+    return ExtapiAccessToken(
+        created: created ?? this.created,
+        description: description ?? this.description,
+        expires: expires ?? this.expires,
+        id: id ?? this.id,
+        lastUsed: lastUsed ?? this.lastUsed,
+        maxInactiveSeconds: maxInactiveSeconds ?? this.maxInactiveSeconds,
+        scope: scope ?? this.scope);
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class ExtapiAccessTokenCreateRequest {
+  ExtapiAccessTokenCreateRequest({
+    this.description,
+    this.expires,
+    this.maxInactiveSeconds,
+    this.organizationId,
+    this.scope,
+  });
+
+  factory ExtapiAccessTokenCreateRequest.fromJson(Map<String, dynamic> json) =>
+      _$ExtapiAccessTokenCreateRequestFromJson(json);
+
+  @JsonKey(name: 'description')
+  final String? description;
+  @JsonKey(name: 'expires')
+  final DateTime? expires;
+  @JsonKey(name: 'maxInactiveSeconds')
+  final String? maxInactiveSeconds;
+  @JsonKey(name: 'organizationId')
+  final String? organizationId;
+  @JsonKey(name: 'scope', defaultValue: <String>[])
+  final List<String>? scope;
+  static const fromJsonFactory = _$ExtapiAccessTokenCreateRequestFromJson;
+  static const toJsonFactory = _$ExtapiAccessTokenCreateRequestToJson;
+  Map<String, dynamic> toJson() => _$ExtapiAccessTokenCreateRequestToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is ExtapiAccessTokenCreateRequest &&
+            (identical(other.description, description) ||
+                const DeepCollectionEquality()
+                    .equals(other.description, description)) &&
+            (identical(other.expires, expires) ||
+                const DeepCollectionEquality()
+                    .equals(other.expires, expires)) &&
+            (identical(other.maxInactiveSeconds, maxInactiveSeconds) ||
+                const DeepCollectionEquality()
+                    .equals(other.maxInactiveSeconds, maxInactiveSeconds)) &&
+            (identical(other.organizationId, organizationId) ||
+                const DeepCollectionEquality()
+                    .equals(other.organizationId, organizationId)) &&
+            (identical(other.scope, scope) ||
+                const DeepCollectionEquality().equals(other.scope, scope)));
+  }
+}
+
+extension $ExtapiAccessTokenCreateRequestExtension
+    on ExtapiAccessTokenCreateRequest {
+  ExtapiAccessTokenCreateRequest copyWith(
+      {String? description,
+      DateTime? expires,
+      String? maxInactiveSeconds,
+      String? organizationId,
+      List<String>? scope}) {
+    return ExtapiAccessTokenCreateRequest(
+        description: description ?? this.description,
+        expires: expires ?? this.expires,
+        maxInactiveSeconds: maxInactiveSeconds ?? this.maxInactiveSeconds,
+        organizationId: organizationId ?? this.organizationId,
+        scope: scope ?? this.scope);
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class ExtapiAccessTokenCreateResponse {
+  ExtapiAccessTokenCreateResponse({
+    this.authToken,
+  });
+
+  factory ExtapiAccessTokenCreateResponse.fromJson(Map<String, dynamic> json) =>
+      _$ExtapiAccessTokenCreateResponseFromJson(json);
+
+  @JsonKey(name: 'authToken')
+  final String? authToken;
+  static const fromJsonFactory = _$ExtapiAccessTokenCreateResponseFromJson;
+  static const toJsonFactory = _$ExtapiAccessTokenCreateResponseToJson;
+  Map<String, dynamic> toJson() =>
+      _$ExtapiAccessTokenCreateResponseToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is ExtapiAccessTokenCreateResponse &&
+            (identical(other.authToken, authToken) ||
+                const DeepCollectionEquality()
+                    .equals(other.authToken, authToken)));
+  }
+}
+
+extension $ExtapiAccessTokenCreateResponseExtension
+    on ExtapiAccessTokenCreateResponse {
+  ExtapiAccessTokenCreateResponse copyWith({String? authToken}) {
+    return ExtapiAccessTokenCreateResponse(
+        authToken: authToken ?? this.authToken);
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class ExtapiAccessTokenListResponse {
+  ExtapiAccessTokenListResponse({
+    this.token,
+  });
+
+  factory ExtapiAccessTokenListResponse.fromJson(Map<String, dynamic> json) =>
+      _$ExtapiAccessTokenListResponseFromJson(json);
+
+  @JsonKey(name: 'token', defaultValue: <ExtapiAccessToken>[])
+  final List<ExtapiAccessToken>? token;
+  static const fromJsonFactory = _$ExtapiAccessTokenListResponseFromJson;
+  static const toJsonFactory = _$ExtapiAccessTokenListResponseToJson;
+  Map<String, dynamic> toJson() => _$ExtapiAccessTokenListResponseToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is ExtapiAccessTokenListResponse &&
+            (identical(other.token, token) ||
+                const DeepCollectionEquality().equals(other.token, token)));
+  }
+}
+
+extension $ExtapiAccessTokenListResponseExtension
+    on ExtapiAccessTokenListResponse {
+  ExtapiAccessTokenListResponse copyWith({List<ExtapiAccessToken>? token}) {
+    return ExtapiAccessTokenListResponse(token: token ?? this.token);
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class ExtapiAccessTokenRevokeRequest {
+  ExtapiAccessTokenRevokeRequest({
+    this.id,
+  });
+
+  factory ExtapiAccessTokenRevokeRequest.fromJson(Map<String, dynamic> json) =>
+      _$ExtapiAccessTokenRevokeRequestFromJson(json);
+
+  @JsonKey(name: 'id', defaultValue: <String>[])
+  final List<String>? id;
+  static const fromJsonFactory = _$ExtapiAccessTokenRevokeRequestFromJson;
+  static const toJsonFactory = _$ExtapiAccessTokenRevokeRequestToJson;
+  Map<String, dynamic> toJson() => _$ExtapiAccessTokenRevokeRequestToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is ExtapiAccessTokenRevokeRequest &&
+            (identical(other.id, id) ||
+                const DeepCollectionEquality().equals(other.id, id)));
+  }
+}
+
+extension $ExtapiAccessTokenRevokeRequestExtension
+    on ExtapiAccessTokenRevokeRequest {
+  ExtapiAccessTokenRevokeRequest copyWith({List<String>? id}) {
+    return ExtapiAccessTokenRevokeRequest(id: id ?? this.id);
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class ExtapiAccessTokenRevokeResponse {
+  ExtapiAccessTokenRevokeResponse();
+
+  factory ExtapiAccessTokenRevokeResponse.fromJson(Map<String, dynamic> json) =>
+      _$ExtapiAccessTokenRevokeResponseFromJson(json);
+
+  static const fromJsonFactory = _$ExtapiAccessTokenRevokeResponseFromJson;
+  static const toJsonFactory = _$ExtapiAccessTokenRevokeResponseToJson;
+  Map<String, dynamic> toJson() =>
+      _$ExtapiAccessTokenRevokeResponseToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -8428,10 +8732,12 @@ class ExtapiGatewayMiningHealth {
     this.ageSeconds,
     this.health,
     this.id,
+    this.metaXp,
     this.miningFuel,
     this.miningFuelHealth,
     this.miningFuelMax,
     this.orgId,
+    this.proximityFactor,
     this.totalMined,
     this.uptimeHealth,
   });
@@ -8445,6 +8751,8 @@ class ExtapiGatewayMiningHealth {
   final double? health;
   @JsonKey(name: 'id')
   final String? id;
+  @JsonKey(name: 'metaXp')
+  final double? metaXp;
   @JsonKey(name: 'miningFuel')
   final String? miningFuel;
   @JsonKey(name: 'miningFuelHealth')
@@ -8453,6 +8761,8 @@ class ExtapiGatewayMiningHealth {
   final String? miningFuelMax;
   @JsonKey(name: 'orgId')
   final String? orgId;
+  @JsonKey(name: 'proximityFactor')
+  final double? proximityFactor;
   @JsonKey(name: 'totalMined')
   final String? totalMined;
   @JsonKey(name: 'uptimeHealth')
@@ -8472,6 +8782,8 @@ class ExtapiGatewayMiningHealth {
                 const DeepCollectionEquality().equals(other.health, health)) &&
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
+            (identical(other.metaXp, metaXp) ||
+                const DeepCollectionEquality().equals(other.metaXp, metaXp)) &&
             (identical(other.miningFuel, miningFuel) ||
                 const DeepCollectionEquality()
                     .equals(other.miningFuel, miningFuel)) &&
@@ -8483,6 +8795,9 @@ class ExtapiGatewayMiningHealth {
                     .equals(other.miningFuelMax, miningFuelMax)) &&
             (identical(other.orgId, orgId) ||
                 const DeepCollectionEquality().equals(other.orgId, orgId)) &&
+            (identical(other.proximityFactor, proximityFactor) ||
+                const DeepCollectionEquality()
+                    .equals(other.proximityFactor, proximityFactor)) &&
             (identical(other.totalMined, totalMined) ||
                 const DeepCollectionEquality()
                     .equals(other.totalMined, totalMined)) &&
@@ -8497,20 +8812,24 @@ extension $ExtapiGatewayMiningHealthExtension on ExtapiGatewayMiningHealth {
       {String? ageSeconds,
       double? health,
       String? id,
+      double? metaXp,
       String? miningFuel,
       double? miningFuelHealth,
       String? miningFuelMax,
       String? orgId,
+      double? proximityFactor,
       String? totalMined,
       double? uptimeHealth}) {
     return ExtapiGatewayMiningHealth(
         ageSeconds: ageSeconds ?? this.ageSeconds,
         health: health ?? this.health,
         id: id ?? this.id,
+        metaXp: metaXp ?? this.metaXp,
         miningFuel: miningFuel ?? this.miningFuel,
         miningFuelHealth: miningFuelHealth ?? this.miningFuelHealth,
         miningFuelMax: miningFuelMax ?? this.miningFuelMax,
         orgId: orgId ?? this.orgId,
+        proximityFactor: proximityFactor ?? this.proximityFactor,
         totalMined: totalMined ?? this.totalMined,
         uptimeHealth: uptimeHealth ?? this.uptimeHealth);
   }
@@ -11733,6 +12052,7 @@ class ExtapiMiningHealthAverage {
   ExtapiMiningHealthAverage({
     this.miningFuelHealth,
     this.overall,
+    this.proximityFactor,
     this.uptimeHealth,
   });
 
@@ -11743,6 +12063,8 @@ class ExtapiMiningHealthAverage {
   final double? miningFuelHealth;
   @JsonKey(name: 'overall')
   final double? overall;
+  @JsonKey(name: 'proximityFactor')
+  final double? proximityFactor;
   @JsonKey(name: 'uptimeHealth')
   final double? uptimeHealth;
   static const fromJsonFactory = _$ExtapiMiningHealthAverageFromJson;
@@ -11759,6 +12081,9 @@ class ExtapiMiningHealthAverage {
             (identical(other.overall, overall) ||
                 const DeepCollectionEquality()
                     .equals(other.overall, overall)) &&
+            (identical(other.proximityFactor, proximityFactor) ||
+                const DeepCollectionEquality()
+                    .equals(other.proximityFactor, proximityFactor)) &&
             (identical(other.uptimeHealth, uptimeHealth) ||
                 const DeepCollectionEquality()
                     .equals(other.uptimeHealth, uptimeHealth)));
@@ -11767,10 +12092,14 @@ class ExtapiMiningHealthAverage {
 
 extension $ExtapiMiningHealthAverageExtension on ExtapiMiningHealthAverage {
   ExtapiMiningHealthAverage copyWith(
-      {double? miningFuelHealth, double? overall, double? uptimeHealth}) {
+      {double? miningFuelHealth,
+      double? overall,
+      double? proximityFactor,
+      double? uptimeHealth}) {
     return ExtapiMiningHealthAverage(
         miningFuelHealth: miningFuelHealth ?? this.miningFuelHealth,
         overall: overall ?? this.overall,
+        proximityFactor: proximityFactor ?? this.proximityFactor,
         uptimeHealth: uptimeHealth ?? this.uptimeHealth);
   }
 }

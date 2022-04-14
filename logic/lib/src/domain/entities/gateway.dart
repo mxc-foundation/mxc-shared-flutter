@@ -81,6 +81,7 @@ class GatewayHealth {
     required this.miningFuelMax,
     required this.totalMined,
     required this.uptimeHealth,
+    required this.proximityFactor,
   });
 
   final String id;
@@ -91,6 +92,7 @@ class GatewayHealth {
   final Decimal miningFuelMax;
   final Decimal totalMined;
   final double uptimeHealth;
+  final double proximityFactor;
 }
 
 class GatewayAverageHealth {

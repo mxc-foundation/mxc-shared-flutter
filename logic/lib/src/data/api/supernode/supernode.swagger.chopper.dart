@@ -1682,6 +1682,59 @@ class _$InternalService extends InternalService {
   final definitionType = InternalService;
 
   @override
+  Future<Response<ExtapiAccessTokenCreateResponse>> accessTokenCreate(
+      {ExtapiAccessTokenCreateRequest? body,
+      String? grpcMetadataXOTP,
+      String? grpcMetadataAuthorization}) {
+    final $url = '/api/internal/access-token/create';
+    final $headers = {
+      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
+      if (grpcMetadataAuthorization != null)
+        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
+    };
+
+    final $body = body;
+    final $request =
+        Request('POST', $url, client.baseUrl, body: $body, headers: $headers);
+    return client.send<ExtapiAccessTokenCreateResponse,
+        ExtapiAccessTokenCreateResponse>($request);
+  }
+
+  @override
+  Future<Response<ExtapiAccessTokenListResponse>> accessTokenList(
+      {String? grpcMetadataXOTP, String? grpcMetadataAuthorization}) {
+    final $url = '/api/internal/access-token/list';
+    final $headers = {
+      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
+      if (grpcMetadataAuthorization != null)
+        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
+    };
+
+    final $request = Request('GET', $url, client.baseUrl, headers: $headers);
+    return client.send<ExtapiAccessTokenListResponse,
+        ExtapiAccessTokenListResponse>($request);
+  }
+
+  @override
+  Future<Response<ExtapiAccessTokenRevokeResponse>> accessTokenRevoke(
+      {ExtapiAccessTokenRevokeRequest? body,
+      String? grpcMetadataXOTP,
+      String? grpcMetadataAuthorization}) {
+    final $url = '/api/internal/access-token/revoke';
+    final $headers = {
+      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
+      if (grpcMetadataAuthorization != null)
+        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
+    };
+
+    final $body = body;
+    final $request =
+        Request('POST', $url, client.baseUrl, body: $body, headers: $headers);
+    return client.send<ExtapiAccessTokenRevokeResponse,
+        ExtapiAccessTokenRevokeResponse>($request);
+  }
+
+  @override
   Future<Response<ExtapiBrandingResponse>> branding(
       {String? grpcMetadataXOTP, String? grpcMetadataAuthorization}) {
     final $url = '/api/internal/branding';

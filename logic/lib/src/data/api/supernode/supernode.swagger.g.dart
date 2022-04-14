@@ -24,6 +24,109 @@ Map<String, dynamic> _$CommonLocationToJson(CommonLocation instance) =>
       'source': commonLocationSourceToJson(instance.source),
     };
 
+ExtapiAccessToken _$ExtapiAccessTokenFromJson(Map<String, dynamic> json) =>
+    ExtapiAccessToken(
+      created: json['created'] == null
+          ? null
+          : DateTime.parse(json['created'] as String),
+      description: json['description'] as String?,
+      expires: json['expires'] == null
+          ? null
+          : DateTime.parse(json['expires'] as String),
+      id: json['id'] as String?,
+      lastUsed: json['lastUsed'] == null
+          ? null
+          : DateTime.parse(json['lastUsed'] as String),
+      maxInactiveSeconds: json['maxInactiveSeconds'] as String?,
+      scope:
+          (json['scope'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+    );
+
+Map<String, dynamic> _$ExtapiAccessTokenToJson(ExtapiAccessToken instance) =>
+    <String, dynamic>{
+      'created': instance.created?.toIso8601String(),
+      'description': instance.description,
+      'expires': instance.expires?.toIso8601String(),
+      'id': instance.id,
+      'lastUsed': instance.lastUsed?.toIso8601String(),
+      'maxInactiveSeconds': instance.maxInactiveSeconds,
+      'scope': instance.scope,
+    };
+
+ExtapiAccessTokenCreateRequest _$ExtapiAccessTokenCreateRequestFromJson(
+        Map<String, dynamic> json) =>
+    ExtapiAccessTokenCreateRequest(
+      description: json['description'] as String?,
+      expires: json['expires'] == null
+          ? null
+          : DateTime.parse(json['expires'] as String),
+      maxInactiveSeconds: json['maxInactiveSeconds'] as String?,
+      organizationId: json['organizationId'] as String?,
+      scope:
+          (json['scope'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+    );
+
+Map<String, dynamic> _$ExtapiAccessTokenCreateRequestToJson(
+        ExtapiAccessTokenCreateRequest instance) =>
+    <String, dynamic>{
+      'description': instance.description,
+      'expires': instance.expires?.toIso8601String(),
+      'maxInactiveSeconds': instance.maxInactiveSeconds,
+      'organizationId': instance.organizationId,
+      'scope': instance.scope,
+    };
+
+ExtapiAccessTokenCreateResponse _$ExtapiAccessTokenCreateResponseFromJson(
+        Map<String, dynamic> json) =>
+    ExtapiAccessTokenCreateResponse(
+      authToken: json['authToken'] as String?,
+    );
+
+Map<String, dynamic> _$ExtapiAccessTokenCreateResponseToJson(
+        ExtapiAccessTokenCreateResponse instance) =>
+    <String, dynamic>{
+      'authToken': instance.authToken,
+    };
+
+ExtapiAccessTokenListResponse _$ExtapiAccessTokenListResponseFromJson(
+        Map<String, dynamic> json) =>
+    ExtapiAccessTokenListResponse(
+      token: (json['token'] as List<dynamic>?)
+              ?.map(
+                  (e) => ExtapiAccessToken.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$ExtapiAccessTokenListResponseToJson(
+        ExtapiAccessTokenListResponse instance) =>
+    <String, dynamic>{
+      'token': instance.token?.map((e) => e.toJson()).toList(),
+    };
+
+ExtapiAccessTokenRevokeRequest _$ExtapiAccessTokenRevokeRequestFromJson(
+        Map<String, dynamic> json) =>
+    ExtapiAccessTokenRevokeRequest(
+      id: (json['id'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$ExtapiAccessTokenRevokeRequestToJson(
+        ExtapiAccessTokenRevokeRequest instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+    };
+
+ExtapiAccessTokenRevokeResponse _$ExtapiAccessTokenRevokeResponseFromJson(
+        Map<String, dynamic> json) =>
+    ExtapiAccessTokenRevokeResponse();
+
+Map<String, dynamic> _$ExtapiAccessTokenRevokeResponseToJson(
+        ExtapiAccessTokenRevokeResponse instance) =>
+    <String, dynamic>{};
+
 ExtapiActivateDeviceRequest _$ExtapiActivateDeviceRequestFromJson(
         Map<String, dynamic> json) =>
     ExtapiActivateDeviceRequest(
@@ -1634,10 +1737,12 @@ ExtapiGatewayMiningHealth _$ExtapiGatewayMiningHealthFromJson(
       ageSeconds: json['ageSeconds'] as String?,
       health: (json['health'] as num?)?.toDouble(),
       id: json['id'] as String?,
+      metaXp: (json['metaXp'] as num?)?.toDouble(),
       miningFuel: json['miningFuel'] as String?,
       miningFuelHealth: (json['miningFuelHealth'] as num?)?.toDouble(),
       miningFuelMax: json['miningFuelMax'] as String?,
       orgId: json['orgId'] as String?,
+      proximityFactor: (json['proximityFactor'] as num?)?.toDouble(),
       totalMined: json['totalMined'] as String?,
       uptimeHealth: (json['uptimeHealth'] as num?)?.toDouble(),
     );
@@ -1648,10 +1753,12 @@ Map<String, dynamic> _$ExtapiGatewayMiningHealthToJson(
       'ageSeconds': instance.ageSeconds,
       'health': instance.health,
       'id': instance.id,
+      'metaXp': instance.metaXp,
       'miningFuel': instance.miningFuel,
       'miningFuelHealth': instance.miningFuelHealth,
       'miningFuelMax': instance.miningFuelMax,
       'orgId': instance.orgId,
+      'proximityFactor': instance.proximityFactor,
       'totalMined': instance.totalMined,
       'uptimeHealth': instance.uptimeHealth,
     };
@@ -2991,6 +3098,7 @@ ExtapiMiningHealthAverage _$ExtapiMiningHealthAverageFromJson(
     ExtapiMiningHealthAverage(
       miningFuelHealth: (json['miningFuelHealth'] as num?)?.toDouble(),
       overall: (json['overall'] as num?)?.toDouble(),
+      proximityFactor: (json['proximityFactor'] as num?)?.toDouble(),
       uptimeHealth: (json['uptimeHealth'] as num?)?.toDouble(),
     );
 
@@ -2999,6 +3107,7 @@ Map<String, dynamic> _$ExtapiMiningHealthAverageToJson(
     <String, dynamic>{
       'miningFuelHealth': instance.miningFuelHealth,
       'overall': instance.overall,
+      'proximityFactor': instance.proximityFactor,
       'uptimeHealth': instance.uptimeHealth,
     };
 

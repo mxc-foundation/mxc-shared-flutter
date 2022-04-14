@@ -147,6 +147,7 @@ class DemoGatewayRepository implements GatewayRepository {
         miningFuelMax: '100'.toDecimal(),
         totalMined: '100'.toDecimal(),
         uptimeHealth: 100,
+        proximityFactor: 0,
       ),
       GatewayHealth(
         id: 'DemoId2',
@@ -157,6 +158,7 @@ class DemoGatewayRepository implements GatewayRepository {
         miningFuelMax: '100'.toDecimal(),
         totalMined: '100'.toDecimal(),
         uptimeHealth: 100,
+        proximityFactor: 0,
       ),
       GatewayHealth(
         id: 'DemoId3',
@@ -167,6 +169,7 @@ class DemoGatewayRepository implements GatewayRepository {
         miningFuelMax: '100'.toDecimal(),
         totalMined: '100'.toDecimal(),
         uptimeHealth: 100,
+        proximityFactor: 0,
       ),
       GatewayHealth(
         id: 'DemoId15',
@@ -177,6 +180,7 @@ class DemoGatewayRepository implements GatewayRepository {
         miningFuelMax: '100'.toDecimal(),
         totalMined: '100'.toDecimal(),
         uptimeHealth: 100,
+        proximityFactor: 0,
       ),
     ];
 
