@@ -194,9 +194,6 @@ class ColorsThemeDark implements ColorsTheme {
   final buttonDisabledLabel = const Color(0xFF4E5659);
 
   @override
-  final buttonDisabledLabel2 = const Color(0xFF4E5659);
-
-  @override
   final transparent = Colors.transparent;
 
   @override
