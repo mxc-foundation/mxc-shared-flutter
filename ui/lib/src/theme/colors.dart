@@ -67,7 +67,7 @@ class ColorsTheme {
 
   final buttonIconTextColor = Colors.white;
   final buttonDisabledBackground = const Color(0xFFE3E3E5);
-  final buttonDisabledLabel = const Color(0xFF98A6AD);
+  final buttonDisabledLabel = const Color(0xFFBBBFC6);
   final transparent = Colors.transparent;
 
   Color get shadow => mxcBlue20;
