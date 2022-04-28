@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:chopper/chopper.dart' as chopper;
 import 'client_mapping.dart';
 
@@ -52,8 +54,21 @@ class JsonSerializableConverter extends chopper.JsonConverter {
     }
 
     final jsonRes = super.convertResponse<dynamic, dynamic>(response);
-    return jsonRes.copyWith<ResultType>(
-      body: jsonDecoder.decode<Item>(jsonRes.body) as ResultType,
-    );
+    try {
+      return jsonRes.copyWith<ResultType>(
+        body: jsonDecoder.decode<Item>(jsonRes.body) as ResultType,
+      );
+    } on TypeError catch (e, s) {
+      log(
+        ('❗❓❔❕❗❗❕❔❓❗' * 6) +
+            '\n' +
+            '🐜🐛🪲🔥🚒🧯🧑‍🚒❤️‍🔥🔜🔜 Oops. Can\'t deserialize. Is this a backend bug or ours? Who knows 🔚🔚❤️‍🔥🧑‍🚒🧯🚒🔥🪲🐛🐜' +
+            '\n' +
+            ('❗❓❔❕❗❗❕❔❓❗' * 6),
+        error: e,
+        stackTrace: s,
+      );
+      return chopper.Response<ResultType>(jsonRes.base, null, error: e);
+    }
   }
 }
