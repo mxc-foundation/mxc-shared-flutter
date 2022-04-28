@@ -1988,6 +1988,32 @@ abstract class NetworkServerService extends ChopperService {
 }
 
 @ChopperApi()
+abstract class NFTService extends ChopperService {
+  static NFTService createService([ChopperClient? client]) {
+    if (client != null) {
+      return _$NFTService(client);
+    }
+
+    final newClient = ChopperClient(
+      services: [_$NFTService()],
+      converter: chopper.JsonConverter(), /*baseUrl: YOUR_BASE_URL*/
+    );
+    return _$NFTService(newClient);
+  }
+
+  ///
+  ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
+
+  @Get(path: '/api/nft/get-image')
+  Future<chopper.Response<ApiNftGetImageGet$Response>> getNFTEggImage(
+      {@Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
+}
+
+@ChopperApi()
 abstract class OrganizationService extends ChopperService {
   static OrganizationService createService([ChopperClient? client]) {
     if (client != null) {
@@ -3413,6 +3439,7 @@ extension SupernodeSwaggerExtension on ChopperClient {
       getService<MosquittoAuthService>();
   NetworkServerService get networkServerService =>
       getService<NetworkServerService>();
+  NFTService get nFTService => getService<NFTService>();
   OrganizationService get organizationService =>
       getService<OrganizationService>();
   ReportService get reportService => getService<ReportService>();
@@ -3444,6 +3471,7 @@ List<ChopperService> get supernodeServices => [
       InternalService.createService(),
       MosquittoAuthService.createService(),
       NetworkServerService.createService(),
+      NFTService.createService(),
       OrganizationService.createService(),
       ReportService.createService(),
       ServerInfoService.createService(),
@@ -3634,6 +3662,7 @@ final Map<Type, Object Function(Map<String, dynamic>)>
   ExtapiGetMiningInfoResponse: ExtapiGetMiningInfoResponse.fromJsonFactory,
   ExtapiGetMxprotocolServerVersionResponse:
       ExtapiGetMxprotocolServerVersionResponse.fromJsonFactory,
+  ExtapiGetNFTEggImageResponse: ExtapiGetNFTEggImageResponse.fromJsonFactory,
   ExtapiGetNetworkServerResponse:
       ExtapiGetNetworkServerResponse.fromJsonFactory,
   ExtapiGetOrdersByUserResponse: ExtapiGetOrdersByUserResponse.fromJsonFactory,
@@ -3883,6 +3912,7 @@ final Map<Type, Object Function(Map<String, dynamic>)>
       ApiDevicesDevEUIFramesGet$Response.fromJsonFactory,
   ApiGatewaysGatewayIDFramesGet$Response:
       ApiGatewaysGatewayIDFramesGet$Response.fromJsonFactory,
+  ApiNftGetImageGet$Response: ApiNftGetImageGet$Response.fromJsonFactory,
   ApiReportMiningIncomeCsvGet$Response:
       ApiReportMiningIncomeCsvGet$Response.fromJsonFactory,
   ApiReportMiningIncomePdfGet$Response:
@@ -8730,12 +8760,15 @@ extension $ExtapiGatewayMiningFuelChangeExtension
 class ExtapiGatewayMiningHealth {
   ExtapiGatewayMiningHealth({
     this.ageSeconds,
+    this.btcRing,
+    this.dhxRing,
     this.health,
     this.id,
     this.metaXp,
     this.miningFuel,
     this.miningFuelHealth,
     this.miningFuelMax,
+    this.mxcRing,
     this.orgId,
     this.proximityFactor,
     this.totalMined,
@@ -8747,6 +8780,10 @@ class ExtapiGatewayMiningHealth {
 
   @JsonKey(name: 'ageSeconds')
   final String? ageSeconds;
+  @JsonKey(name: 'btcRing')
+  final double? btcRing;
+  @JsonKey(name: 'dhxRing')
+  final double? dhxRing;
   @JsonKey(name: 'health')
   final double? health;
   @JsonKey(name: 'id')
@@ -8759,6 +8796,8 @@ class ExtapiGatewayMiningHealth {
   final double? miningFuelHealth;
   @JsonKey(name: 'miningFuelMax')
   final String? miningFuelMax;
+  @JsonKey(name: 'mxcRing')
+  final double? mxcRing;
   @JsonKey(name: 'orgId')
   final String? orgId;
   @JsonKey(name: 'proximityFactor')
@@ -8778,6 +8817,12 @@ class ExtapiGatewayMiningHealth {
             (identical(other.ageSeconds, ageSeconds) ||
                 const DeepCollectionEquality()
                     .equals(other.ageSeconds, ageSeconds)) &&
+            (identical(other.btcRing, btcRing) ||
+                const DeepCollectionEquality()
+                    .equals(other.btcRing, btcRing)) &&
+            (identical(other.dhxRing, dhxRing) ||
+                const DeepCollectionEquality()
+                    .equals(other.dhxRing, dhxRing)) &&
             (identical(other.health, health) ||
                 const DeepCollectionEquality().equals(other.health, health)) &&
             (identical(other.id, id) ||
@@ -8793,6 +8838,9 @@ class ExtapiGatewayMiningHealth {
             (identical(other.miningFuelMax, miningFuelMax) ||
                 const DeepCollectionEquality()
                     .equals(other.miningFuelMax, miningFuelMax)) &&
+            (identical(other.mxcRing, mxcRing) ||
+                const DeepCollectionEquality()
+                    .equals(other.mxcRing, mxcRing)) &&
             (identical(other.orgId, orgId) ||
                 const DeepCollectionEquality().equals(other.orgId, orgId)) &&
             (identical(other.proximityFactor, proximityFactor) ||
@@ -8810,24 +8858,30 @@ class ExtapiGatewayMiningHealth {
 extension $ExtapiGatewayMiningHealthExtension on ExtapiGatewayMiningHealth {
   ExtapiGatewayMiningHealth copyWith(
       {String? ageSeconds,
+      double? btcRing,
+      double? dhxRing,
       double? health,
       String? id,
       double? metaXp,
       String? miningFuel,
       double? miningFuelHealth,
       String? miningFuelMax,
+      double? mxcRing,
       String? orgId,
       double? proximityFactor,
       String? totalMined,
       double? uptimeHealth}) {
     return ExtapiGatewayMiningHealth(
         ageSeconds: ageSeconds ?? this.ageSeconds,
+        btcRing: btcRing ?? this.btcRing,
+        dhxRing: dhxRing ?? this.dhxRing,
         health: health ?? this.health,
         id: id ?? this.id,
         metaXp: metaXp ?? this.metaXp,
         miningFuel: miningFuel ?? this.miningFuel,
         miningFuelHealth: miningFuelHealth ?? this.miningFuelHealth,
         miningFuelMax: miningFuelMax ?? this.miningFuelMax,
+        mxcRing: mxcRing ?? this.mxcRing,
         orgId: orgId ?? this.orgId,
         proximityFactor: proximityFactor ?? this.proximityFactor,
         totalMined: totalMined ?? this.totalMined,
@@ -10011,6 +10065,43 @@ extension $ExtapiGetMxprotocolServerVersionResponseExtension
   ExtapiGetMxprotocolServerVersionResponse copyWith({String? version}) {
     return ExtapiGetMxprotocolServerVersionResponse(
         version: version ?? this.version);
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class ExtapiGetNFTEggImageResponse {
+  ExtapiGetNFTEggImageResponse({
+    this.data,
+    this.finish,
+  });
+
+  factory ExtapiGetNFTEggImageResponse.fromJson(Map<String, dynamic> json) =>
+      _$ExtapiGetNFTEggImageResponseFromJson(json);
+
+  @JsonKey(name: 'data')
+  final String? data;
+  @JsonKey(name: 'finish')
+  final bool? finish;
+  static const fromJsonFactory = _$ExtapiGetNFTEggImageResponseFromJson;
+  static const toJsonFactory = _$ExtapiGetNFTEggImageResponseToJson;
+  Map<String, dynamic> toJson() => _$ExtapiGetNFTEggImageResponseToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is ExtapiGetNFTEggImageResponse &&
+            (identical(other.data, data) ||
+                const DeepCollectionEquality().equals(other.data, data)) &&
+            (identical(other.finish, finish) ||
+                const DeepCollectionEquality().equals(other.finish, finish)));
+  }
+}
+
+extension $ExtapiGetNFTEggImageResponseExtension
+    on ExtapiGetNFTEggImageResponse {
+  ExtapiGetNFTEggImageResponse copyWith({String? data, bool? finish}) {
+    return ExtapiGetNFTEggImageResponse(
+        data: data ?? this.data, finish: finish ?? this.finish);
   }
 }
 
@@ -17423,6 +17514,43 @@ extension $ApiGatewaysGatewayIDFramesGet$ResponseExtension
       {RuntimeStreamError? error,
       ExtapiStreamGatewayFrameLogsResponse? result}) {
     return ApiGatewaysGatewayIDFramesGet$Response(
+        error: error ?? this.error, result: result ?? this.result);
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class ApiNftGetImageGet$Response {
+  ApiNftGetImageGet$Response({
+    this.error,
+    this.result,
+  });
+
+  factory ApiNftGetImageGet$Response.fromJson(Map<String, dynamic> json) =>
+      _$ApiNftGetImageGet$ResponseFromJson(json);
+
+  @JsonKey(name: 'error')
+  final RuntimeStreamError? error;
+  @JsonKey(name: 'result')
+  final ExtapiGetNFTEggImageResponse? result;
+  static const fromJsonFactory = _$ApiNftGetImageGet$ResponseFromJson;
+  static const toJsonFactory = _$ApiNftGetImageGet$ResponseToJson;
+  Map<String, dynamic> toJson() => _$ApiNftGetImageGet$ResponseToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is ApiNftGetImageGet$Response &&
+            (identical(other.error, error) ||
+                const DeepCollectionEquality().equals(other.error, error)) &&
+            (identical(other.result, result) ||
+                const DeepCollectionEquality().equals(other.result, result)));
+  }
+}
+
+extension $ApiNftGetImageGet$ResponseExtension on ApiNftGetImageGet$Response {
+  ApiNftGetImageGet$Response copyWith(
+      {RuntimeStreamError? error, ExtapiGetNFTEggImageResponse? result}) {
+    return ApiNftGetImageGet$Response(
         error: error ?? this.error, result: result ?? this.result);
   }
 }

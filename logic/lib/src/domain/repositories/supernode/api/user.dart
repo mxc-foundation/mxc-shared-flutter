@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:collection/collection.dart';
 import 'package:mxc_logic/src/data/data.dart';
 import 'package:mxc_logic/src/domain/entities/user.dart';
@@ -47,6 +50,27 @@ class UserRepository {
             (e) => e.organizationId == client.defaultOrganizationId,
           ),
     );
+  }
+
+  Future<Uint8List?> nftImage() async {
+    final res = await client.nFTService.getNFTEggImage();
+    String base64Image = '';
+    // backend sends several json responses splitted by \n symbol
+    if (res.body == null) {
+      final resultParts = res.bodyString.split('\n');
+      for (final result in resultParts) {
+        if (result.trim().isEmpty) continue;
+        final part = ApiNftGetImageGet$Response.fromJson(
+          Map<String, dynamic>.from(jsonDecode(result) as Map),
+        );
+        base64Image += (part.result?.data).orDefault();
+      }
+    } else {
+      base64Image = (res.body?.result?.data).orDefault();
+    }
+    final result = base64Decode(base64Image);
+    if (result.isEmpty) return null;
+    return result;
   }
 
   String? orgId() => client.defaultOrganizationId;

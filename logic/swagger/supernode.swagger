@@ -3807,6 +3807,37 @@
             ]
          }
       },
+      "/api/nft/get-image": {
+         "get": {
+            "operationId": "GetNFTEggImage",
+            "responses": {
+               "200": {
+                  "description": "A successful response.(streaming responses)",
+                  "schema": {
+                     "description": "Stream result of extapiGetNFTEggImageResponse",
+                     "properties": {
+                        "error": {
+                           "$ref": "#/definitions/runtimeStreamError"
+                        },
+                        "result": {
+                           "$ref": "#/definitions/extapiGetNFTEggImageResponse"
+                        }
+                     },
+                     "type": "object"
+                  }
+               },
+               "default": {
+                  "description": "An unexpected error response.",
+                  "schema": {
+                     "$ref": "#/definitions/runtimeError"
+                  }
+               }
+            },
+            "tags": [
+               "NFTService"
+            ]
+         }
+      },
       "/api/organizations": {
          "get": {
             "operationId": "List",
@@ -8432,6 +8463,16 @@
                "format": "int64",
                "type": "string"
             },
+            "btcRing": {
+               "description": "btc ring value 0..1",
+               "format": "float",
+               "type": "number"
+            },
+            "dhxRing": {
+               "description": "dhx ring value 0..1",
+               "format": "float",
+               "type": "number"
+            },
             "health": {
                "description": "overall health score",
                "format": "float",
@@ -8458,6 +8499,11 @@
             "miningFuelMax": {
                "description": "mining fuel required for full mining efficiency",
                "type": "string"
+            },
+            "mxcRing": {
+               "description": "mxc ring value 0..1",
+               "format": "float",
+               "type": "number"
             },
             "orgId": {
                "description": "organization that owns the gateway",
@@ -8911,6 +8957,18 @@
          "properties": {
             "version": {
                "type": "string"
+            }
+         },
+         "type": "object"
+      },
+      "extapiGetNFTEggImageResponse": {
+         "properties": {
+            "data": {
+               "format": "byte",
+               "type": "string"
+            },
+            "finish": {
+               "type": "boolean"
             }
          },
          "type": "object"
