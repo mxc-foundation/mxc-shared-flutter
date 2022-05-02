@@ -96,6 +96,28 @@ class MxcTextField extends FormField<String> {
           ),
         );
 
+  MxcTextField.multiline({
+    required Key? key,
+    String? label,
+    required TextEditingController this.controller,
+    String? hint,
+  }) : super(
+          key: key,
+          initialValue: controller.text,
+          builder: (field) {
+            return _MxcNonFormTextField(
+              key: null,
+              label: label,
+              controller: controller,
+              hint: hint,
+              obscure: false,
+              readOnly: false,
+              width: double.infinity,
+              maxLines: 7,
+            );
+          },
+        );
+
   final TextEditingController? controller;
 
   @override
@@ -131,6 +153,7 @@ class _MxcNonFormTextField extends StatefulWidget {
     this.readOnly = false,
     this.button,
     this.width = double.infinity,
+    this.maxLines = 1,
     this.focusNode,
     this.keyboardType,
     this.suffixText,
@@ -150,6 +173,7 @@ class _MxcNonFormTextField extends StatefulWidget {
     this.action,
     this.button,
     this.width = double.infinity,
+    this.maxLines = 1,
     this.focusNode,
     this.keyboardType,
     this.suffixText,
@@ -168,6 +192,7 @@ class _MxcNonFormTextField extends StatefulWidget {
   final TextInputAction? action;
   final TextInputType? keyboardType;
   final double width;
+  final int maxLines;
   final FocusNode? focusNode;
   final MxcTextFieldButton? button;
   final String? suffixText;
@@ -254,18 +279,26 @@ class _MxcNonFormTextFieldState extends State<_MxcNonFormTextField> {
           AnimatedContainer(
             duration: const Duration(milliseconds: 200),
             decoration: BoxDecoration(
-              border: Border(
-                bottom: BorderSide(
-                  width: focused ? 2 : 1,
-                  color: widget.disabled
-                      ? ColorsTheme.of(context).buttonDisabledLabel
-                      : focused
-                          ? MxcScopedTheme.of(context).primaryColor
-                          : ColorsTheme.of(context).textPrimaryAndIcons,
-                ),
-              ),
+              borderRadius: (widget.maxLines == 1)
+                  ? null
+                  : const BorderRadius.all(Radius.circular(10)),
+              border: (widget.maxLines == 1)
+                  ? Border(
+                      bottom: BorderSide(
+                        width: focused ? 2 : 1,
+                        color: widget.disabled
+                            ? ColorsTheme.of(context).buttonDisabledLabel
+                            : focused
+                                ? MxcScopedTheme.of(context).primaryColor
+                                : ColorsTheme.of(context).textPrimaryAndIcons,
+                      ),
+                    )
+                  : Border.all(
+                      color: ColorsTheme.of(context).primaryBackground),
             ),
-            padding: const EdgeInsets.only(bottom: 2),
+            padding: (widget.maxLines == 1)
+                ? const EdgeInsets.only(bottom: 2)
+                : const EdgeInsets.all(16),
             child: Row(
               children: [
                 Expanded(
@@ -273,6 +306,7 @@ class _MxcNonFormTextFieldState extends State<_MxcNonFormTextField> {
                     readOnly: widget.readOnly,
                     keyboardType: widget.keyboardType,
                     focusNode: focusNode,
+                    maxLines: widget.maxLines,
                     textInputAction: widget.action,
                     controller: controller,
                     cursorColor: ColorsTheme.of(context).textPrimaryAndIcons,
