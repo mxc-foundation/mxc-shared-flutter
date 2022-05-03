@@ -302,32 +302,35 @@ class _MxcNonFormTextFieldState extends State<_MxcNonFormTextField> {
             child: Row(
               children: [
                 Expanded(
-                  child: TextField(
-                    readOnly: widget.readOnly,
-                    keyboardType: widget.keyboardType,
-                    focusNode: focusNode,
-                    maxLines: widget.maxLines,
-                    textInputAction: widget.action,
-                    controller: controller,
-                    cursorColor: ColorsTheme.of(context).textPrimaryAndIcons,
-                    style: (widget.disabled)
-                        ? FontTheme.of(context).subtitle1().copyWith(
-                            color: ColorsTheme.of(context).buttonDisabledLabel)
-                        : FontTheme.of(context).subtitle1(),
-                    obscureText: widget.obscure,
-                    onChanged: widget.onChanged,
-                    decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.fromLTRB(0, 0, 0, 6),
-                      isDense: true,
-                      floatingLabelBehavior: FloatingLabelBehavior.always,
-                      hintText: widget.hint,
-                      hintStyle: FontTheme.of(context).subtitle1.label(),
-                      enabledBorder: InputBorder.none,
-                      focusedBorder: InputBorder.none,
-                      errorBorder: InputBorder.none,
-                      focusedErrorBorder: InputBorder.none,
-                      disabledBorder: InputBorder.none,
-                      suffixText: widget.suffixText,
+                  child: Scrollbar(
+                    child: TextField(
+                      readOnly: widget.readOnly,
+                      keyboardType: widget.keyboardType,
+                      focusNode: focusNode,
+                      maxLines: widget.maxLines,
+                      textInputAction: widget.action,
+                      controller: controller,
+                      cursorColor: ColorsTheme.of(context).textPrimaryAndIcons,
+                      style: (widget.disabled)
+                          ? FontTheme.of(context).subtitle1().copyWith(
+                              color:
+                                  ColorsTheme.of(context).buttonDisabledLabel)
+                          : FontTheme.of(context).subtitle1(),
+                      obscureText: widget.obscure,
+                      onChanged: widget.onChanged,
+                      decoration: InputDecoration(
+                        contentPadding: const EdgeInsets.fromLTRB(0, 0, 0, 6),
+                        isDense: true,
+                        floatingLabelBehavior: FloatingLabelBehavior.always,
+                        hintText: widget.hint,
+                        hintStyle: FontTheme.of(context).subtitle1.label(),
+                        enabledBorder: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                        errorBorder: InputBorder.none,
+                        focusedErrorBorder: InputBorder.none,
+                        disabledBorder: InputBorder.none,
+                        suffixText: widget.suffixText,
+                      ),
                     ),
                   ),
                 ),
