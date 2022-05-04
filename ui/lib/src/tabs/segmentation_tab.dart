@@ -30,6 +30,7 @@ class _MxcSegmentationTabState extends State<MxcSegmentationTab> {
             i: Text(
               widget.labels[i],
               key: ValueKey('tab_item_$i'),
+              textAlign: TextAlign.center,
               style: selectedTab == i
                   ? FontTheme.of(context).subtitle1.button()
                   : FontTheme.of(context).subtitle1.label(),
