@@ -173,7 +173,6 @@ class _MxcNonFormTextField extends StatefulWidget {
     this.action,
     this.button,
     this.width = double.infinity,
-    this.maxLines = 1,
     this.focusNode,
     this.keyboardType,
     this.suffixText,
@@ -182,6 +181,7 @@ class _MxcNonFormTextField extends StatefulWidget {
   })  : _initialValue = text,
         readOnly = true,
         _controller = null,
+        maxLines = 1,
         errorText = null,
         onChanged = null,
         super(key: key);
