@@ -44,8 +44,13 @@ abstract class SupernodeRepository {
 /// This supernode repository gives you access to [ApiSupernodeRepository] or [DemoSupernodeRepository]
 /// depending on [demoMode] field.
 class SupernodeRepositoryDemoDecorator implements SupernodeRepository {
-  SupernodeRepositoryDemoDecorator({required SupernodeSetupStore setupStore})
-      : _apiRepository = ApiSupernodeRepository(setupStore: setupStore);
+  SupernodeRepositoryDemoDecorator(
+      {required SupernodeSetupStore setupStore,
+      required Future<void> Function() onTokenExpired})
+      : _apiRepository = ApiSupernodeRepository(
+          setupStore: setupStore,
+          onTokenExpired: onTokenExpired,
+        );
 
   final ApiSupernodeRepository _apiRepository;
 

@@ -52,6 +52,7 @@ Future<void> main() async {
   await supernodeSetupStore.load(cacheManager);
   final supernodeRepository = ApiSupernodeRepository(
     setupStore: supernodeSetupStore,
+    onTokenExpired: () async {},
   );
 
   final loginUseCase = LoginUseCase(

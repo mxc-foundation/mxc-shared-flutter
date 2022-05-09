@@ -3,8 +3,6 @@ import 'dart:async';
 import 'package:chopper/chopper.dart';
 import 'package:meta/meta.dart';
 
-import 'client.dart';
-
 void _addAuthHeader(
   Map<String, String> map,
   String value, {
@@ -20,40 +18,26 @@ void _addAuthHeader(
 
 class SupernodeAuthenticator extends Authenticator {
   SupernodeAuthenticator({
-    required this.refreshToken,
-    required this.getSupernodeAddress,
-  }) {
-    client = SupernodeClient(
-      getSupernodeAddress: getSupernodeAddress,
-      getToken: null,
-      getDefaultOrganizationId: null,
-    );
-  }
+    required this.onTokenExpired,
+  });
 
-  late final SupernodeClient client;
-
-  final Future<String?> Function(SupernodeClient) refreshToken;
-  final String Function() getSupernodeAddress;
+  final Future<void> Function() onTokenExpired;
 
   bool tokenExpired(Response response) =>
       response.statusCode == 401 &&
-      !response.bodyString.contains('OTP') &&
-      !response.bodyString.contains('global admin') &&
-      !response.bodyString.contains('invalid email');
+      (response.bodyString.contains(
+              'authentication failed: invalid authorization header') ||
+          response.bodyString
+              .contains('authentication failed: token does not exist') ||
+          response.bodyString
+              .contains('not authenticated: token does not exist'));
 
   @override
   FutureOr<Request?> authenticate(Request request, Response response,
-      [Request? originalRequest]) {
+      [Request? originalRequest]) async {
     if (!tokenExpired(response)) return null;
-    return _authenticate(request, response);
-  }
-
-  Future<Request?> _authenticate(Request request, Response response) async {
-    final newToken = await refreshToken(client);
-    if (newToken == null) return null;
-    final headers = {...request.headers};
-    _addAuthHeader(headers, newToken, override: true);
-    return request.copyWith(headers: headers);
+    await onTokenExpired();
+    return null;
   }
 }
 

@@ -3,16 +3,17 @@ import 'package:mxc_logic/src/data/api/supernode_list_api.dart';
 import 'package:mxc_logic/src/data/data.dart';
 
 class ApiSupernodeRepository implements SupernodeRepository {
-  ApiSupernodeRepository({
-    required SupernodeSetupStore setupStore,
-  })  : _setupStore = setupStore,
+  ApiSupernodeRepository(
+      {required SupernodeSetupStore setupStore,
+      required Future<void> Function() onTokenExpired})
+      : _setupStore = setupStore,
         _client = SupernodeClient(
-          getSupernodeAddress: () =>
-              setupStore.supernodeAddress ??
-              (throw Exception('Supernode address has not been picked')),
-          getDefaultOrganizationId: () => setupStore.organizationId,
-          getToken: () => setupStore.token,
-        );
+            getSupernodeAddress: () =>
+                setupStore.supernodeAddress ??
+                (throw Exception('Supernode address has not been picked')),
+            getDefaultOrganizationId: () => setupStore.organizationId,
+            getToken: () => setupStore.token,
+            onTokenExpired: onTokenExpired);
 
   ApiSupernodeRepository.withClient({
     required SupernodeClient client,

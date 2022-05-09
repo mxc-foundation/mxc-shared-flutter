@@ -13,6 +13,7 @@ class SupernodeClient extends ChopperClient {
     required String Function() getSupernodeAddress,
     required String? Function()? getToken,
     required String? Function()? getDefaultOrganizationId,
+    required Future<void> Function() onTokenExpired,
   })  : _getBaseUrl = getSupernodeAddress,
         _getDefaultOrganizationId = getDefaultOrganizationId ??
             (() {
@@ -30,6 +31,7 @@ class SupernodeClient extends ChopperClient {
             HttpLoggingInterceptor(),
             if (getToken != null) TokenInterceptor(getToken: getToken),
           ],
+          authenticator: SupernodeAuthenticator(onTokenExpired: onTokenExpired),
           errorConverter: ChopperErrorConverter(getToken),
         );
 
