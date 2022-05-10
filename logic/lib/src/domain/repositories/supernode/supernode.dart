@@ -39,23 +39,24 @@ abstract class SupernodeRepository {
 
   bool get loggedIn;
   void logOut();
+  void invalidateToken();
 }
 
 /// This supernode repository gives you access to [ApiSupernodeRepository] or [DemoSupernodeRepository]
 /// depending on [demoMode] field.
 class SupernodeRepositoryDemoDecorator implements SupernodeRepository {
-  SupernodeRepositoryDemoDecorator(
-      {required SupernodeSetupStore setupStore,
-      required Future<void> Function() onTokenExpired})
-      : _apiRepository = ApiSupernodeRepository(
+  SupernodeRepositoryDemoDecorator({
+    required SupernodeSetupStore setupStore,
+  }) : _apiRepository = ApiSupernodeRepository(
           setupStore: setupStore,
-          onTokenExpired: onTokenExpired,
         );
 
   final ApiSupernodeRepository _apiRepository;
 
   final DemoSupernodeRepository _demoRepository =
       const DemoSupernodeRepository();
+
+  Stream<void> get onTokenExpired => _apiRepository.onTokenExpired;
 
   bool demoMode = false;
 
@@ -126,4 +127,7 @@ class SupernodeRepositoryDemoDecorator implements SupernodeRepository {
 
   @override
   bool get loggedIn => _currentRepository.loggedIn;
+
+  @override
+  void invalidateToken() => _currentRepository.invalidateToken();
 }

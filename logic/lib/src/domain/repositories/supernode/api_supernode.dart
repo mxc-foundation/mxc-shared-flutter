@@ -1,19 +1,20 @@
+import 'dart:async';
+
 import 'package:mxc_logic/mxc_logic.dart';
 import 'package:mxc_logic/src/data/api/supernode_list_api.dart';
 import 'package:mxc_logic/src/data/data.dart';
 
 class ApiSupernodeRepository implements SupernodeRepository {
-  ApiSupernodeRepository(
-      {required SupernodeSetupStore setupStore,
-      required Future<void> Function() onTokenExpired})
-      : _setupStore = setupStore,
+  ApiSupernodeRepository({
+    required SupernodeSetupStore setupStore,
+  })  : _setupStore = setupStore,
         _client = SupernodeClient(
-            getSupernodeAddress: () =>
-                setupStore.supernodeAddress ??
-                (throw Exception('Supernode address has not been picked')),
-            getDefaultOrganizationId: () => setupStore.organizationId,
-            getToken: () => setupStore.token,
-            onTokenExpired: onTokenExpired);
+          getSupernodeAddress: () =>
+              setupStore.supernodeAddress ??
+              (throw Exception('Supernode address has not been picked')),
+          getDefaultOrganizationId: () => setupStore.organizationId,
+          getToken: () => setupStore.token,
+        );
 
   ApiSupernodeRepository.withClient({
     required SupernodeClient client,
@@ -23,6 +24,8 @@ class ApiSupernodeRepository implements SupernodeRepository {
 
   final SupernodeClient _client;
   final SupernodeSetupStore _setupStore;
+
+  Stream<void> get onTokenExpired => _client.onTokenExpired;
 
   @override
   DhxRepository get dhx => DhxRepository(_client);
@@ -90,10 +93,19 @@ class ApiSupernodeRepository implements SupernodeRepository {
   @override
   Future<void> logOut() async {
     await user.logout();
+    invalidateToken();
+  }
+
+  @override
+  void invalidateToken() {
     _setupStore.username = null;
     _setupStore.token = null;
   }
 
   @override
   bool get loggedIn => _setupStore.token != null;
+
+  void dispose() {
+    _client.dispose();
+  }
 }

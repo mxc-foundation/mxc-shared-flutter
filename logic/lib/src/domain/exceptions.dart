@@ -3,3 +3,5 @@ class DomainException implements Exception {
 
   final String message;
 }
+
+class TokenExpiredException implements Exception {}
