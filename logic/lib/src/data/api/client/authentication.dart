@@ -53,7 +53,7 @@ class TokenInterceptor implements RequestInterceptor {
 
   @override
   Future<Request> onRequest(Request request) async {
-    final token = getToken()?.toLowerCase();
+    final token = getToken();
     if (token != null) {
       final headers = {...request.headers};
       _addAuthHeader(headers, token);
