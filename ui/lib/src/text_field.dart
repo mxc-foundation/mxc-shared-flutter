@@ -463,3 +463,137 @@ class _MxcTextFieldImageButton extends MxcTextFieldButton {
         color: color ?? MxcScopedTheme.of(context).primaryColor,
       );
 }
+
+class MxcMiniTextField extends FormField<String> {
+  MxcMiniTextField({
+    required Key? key,
+    required TextEditingController this.controller,
+    FormFieldValidator<String>? validator,
+    bool readOnly = false,
+    double width = 64,
+    FocusNode? focusNode,
+    AutovalidateMode? autovalidateMode,
+  }) : super(
+          key: key,
+          initialValue: controller.text,
+          validator: validator,
+          autovalidateMode: autovalidateMode,
+          builder: (field) {
+            return _MxcMiniNonFormTextField(
+              key: null,
+              controller: controller,
+              focusNode: focusNode,
+              readOnly: readOnly,
+              width: width,
+            );
+          },
+        );
+
+  final TextEditingController? controller;
+}
+
+class _MxcMiniNonFormTextField extends StatefulWidget {
+  const _MxcMiniNonFormTextField({
+    required Key? key,
+    required this.controller,
+    this.readOnly = false,
+    this.width = 64,
+    this.focusNode,
+    this.disabled = false,
+    this.error = false,
+  })  : onChanged = null,
+        super(key: key);
+
+  final bool readOnly;
+  final double width;
+  final FocusNode? focusNode;
+  final bool disabled;
+  final bool error;
+
+  final TextEditingController controller;
+  final ValueChanged<String>? onChanged;
+
+  @override
+  State<_MxcMiniNonFormTextField> createState() =>
+      _MxcMiniNonFormTextFieldState();
+}
+
+class _MxcMiniNonFormTextFieldState extends State<_MxcMiniNonFormTextField> {
+  late final FocusNode focusNode;
+  late bool focused;
+  TextEditingController? _internalController;
+
+  @override
+  void initState() {
+    super.initState();
+    focusNode = widget.focusNode ?? FocusNode();
+    if (widget.disabled) {
+      focused = false;
+    } else {
+      focused = focusNode.hasFocus;
+      focusNode.addListener(_focusNodeListener);
+    }
+  }
+
+  void _focusNodeListener() {
+    if (focusNode.hasFocus != focused) {
+      setState(() => focused = focusNode.hasFocus);
+    }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _internalController?.dispose();
+    if (widget.focusNode == null) focusNode.dispose();
+  }
+
+  Color getColorBorder() {
+    if (widget.disabled) return ColorsTheme.of(context).buttonDisabledLabel;
+    if (widget.error) return ColorsTheme.of(context).textError;
+    if (_internalController != null && _internalController!.text.isEmpty) {
+      return ColorsTheme.of(context).textLabel;
+    }
+    if (focused) return ColorsTheme.of(context).mxcBlue;
+    return ColorsTheme.of(context).textLabel;
+  }
+
+  Color getColorFont() {
+    if (widget.disabled) return ColorsTheme.of(context).buttonDisabledLabel;
+    if (widget.error) return ColorsTheme.of(context).textError;
+    if (focused) return ColorsTheme.of(context).mxcBlue;
+    return ColorsTheme.of(context).mxcBlue;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: widget.width,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 8),
+        decoration: BoxDecoration(
+          borderRadius: const BorderRadius.all(Radius.circular(10)),
+          border: Border.all(color: getColorBorder(), width: (focused) ? 2 : 1),
+        ),
+        child: TextField(
+          readOnly: widget.readOnly,
+          focusNode: focusNode,
+          controller: widget.controller,
+          cursorColor: ColorsTheme.of(context).textPrimaryAndIcons,
+          style:
+              FontTheme.of(context).subtitle1().copyWith(color: getColorFont()),
+          textAlign: TextAlign.center,
+          onChanged: widget.onChanged,
+          decoration: const InputDecoration(
+            isDense: true,
+            enabledBorder: InputBorder.none,
+            focusedBorder: InputBorder.none,
+            errorBorder: InputBorder.none,
+            focusedErrorBorder: InputBorder.none,
+            disabledBorder: InputBorder.none,
+          ),
+        ),
+      ),
+    );
+  }
+}
