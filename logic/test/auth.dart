@@ -59,6 +59,7 @@ Future<void> main() async {
   // );
   final supernodeRepository = ApiSupernodeRepository(
     setupStore: supernodeSetupStore,
+    onTokenExpired: () async {},
   );
 
   final loginUseCase = LoginUseCase(
