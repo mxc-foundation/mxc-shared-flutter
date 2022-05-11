@@ -470,7 +470,8 @@ class MxcMiniTextField extends FormField<String> {
     required TextEditingController this.controller,
     this.onChanged,
     FormFieldValidator<String>? validator,
-    bool readOnly = false,
+    bool disabled = false,
+    bool error = false,
     double width = 64,
     FocusNode? focusNode,
     AutovalidateMode? autovalidateMode,
@@ -485,7 +486,8 @@ class MxcMiniTextField extends FormField<String> {
               controller: controller,
               onChanged: onChanged,
               focusNode: focusNode,
-              readOnly: readOnly,
+              disabled: disabled,
+              error: error,
               width: width,
             );
           },
@@ -499,7 +501,6 @@ class _MxcMiniNonFormTextField extends StatefulWidget {
   const _MxcMiniNonFormTextField({
     required Key? key,
     required this.controller,
-    this.readOnly = false,
     this.width = 64,
     this.focusNode,
     this.disabled = false,
@@ -507,7 +508,6 @@ class _MxcMiniNonFormTextField extends StatefulWidget {
     this.onChanged,
   }) : super(key: key);
 
-  final bool readOnly;
   final double width;
   final FocusNode? focusNode;
   final bool disabled;
@@ -579,10 +579,10 @@ class _MxcMiniNonFormTextFieldState extends State<_MxcMiniNonFormTextField> {
           border: Border.all(color: getColorBorder(), width: (focused) ? 2 : 1),
         ),
         child: TextField(
-          readOnly: widget.readOnly,
           focusNode: focusNode,
           controller: widget.controller,
           cursorColor: ColorsTheme.of(context).textPrimaryAndIcons,
+          readOnly: widget.disabled,
           style:
               FontTheme.of(context).subtitle1().copyWith(color: getColorFont()),
           textAlign: TextAlign.center,
