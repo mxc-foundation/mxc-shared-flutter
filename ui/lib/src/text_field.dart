@@ -468,6 +468,7 @@ class MxcMiniTextField extends FormField<String> {
   MxcMiniTextField({
     required Key? key,
     required TextEditingController this.controller,
+    this.onChanged,
     FormFieldValidator<String>? validator,
     bool readOnly = false,
     double width = 64,
@@ -482,6 +483,7 @@ class MxcMiniTextField extends FormField<String> {
             return _MxcMiniNonFormTextField(
               key: null,
               controller: controller,
+              onChanged: onChanged,
               focusNode: focusNode,
               readOnly: readOnly,
               width: width,
@@ -490,6 +492,7 @@ class MxcMiniTextField extends FormField<String> {
         );
 
   final TextEditingController? controller;
+  final void Function(String)? onChanged;
 }
 
 class _MxcMiniNonFormTextField extends StatefulWidget {
@@ -501,8 +504,8 @@ class _MxcMiniNonFormTextField extends StatefulWidget {
     this.focusNode,
     this.disabled = false,
     this.error = false,
-  })  : onChanged = null,
-        super(key: key);
+    this.onChanged,
+  }) : super(key: key);
 
   final bool readOnly;
   final double width;
