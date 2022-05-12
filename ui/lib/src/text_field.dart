@@ -539,7 +539,7 @@ class _MxcMiniNonFormTextFieldState extends State<_MxcMiniNonFormTextField> {
   }
 
   void _focusNodeListener() {
-    if (focusNode.hasFocus != focused) {
+    if (focusNode.hasFocus != focused && !widget.disabled) {
       setState(() => focused = focusNode.hasFocus);
     }
   }
