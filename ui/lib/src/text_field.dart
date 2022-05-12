@@ -565,18 +565,24 @@ class _MxcMiniNonFormTextFieldState extends State<_MxcMiniNonFormTextField> {
     if (widget.disabled) return ColorsTheme.of(context).buttonDisabledLabel;
     if (widget.error) return ColorsTheme.of(context).textError;
     if (focused) return ColorsTheme.of(context).mxcBlue;
-    return ColorsTheme.of(context).mxcBlue;
+    return ColorsTheme.of(context).textPrimaryAndIcons;
   }
+
+  bool isThickBorder() => (focused || widget.error);
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: widget.width,
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 8),
+        padding: EdgeInsets.symmetric(
+          horizontal: 8,
+          vertical: isThickBorder() ? 0 : 1,
+        ),
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(10)),
-          border: Border.all(color: getColorBorder(), width: (focused) ? 2 : 1),
+          border: Border.all(
+              color: getColorBorder(), width: isThickBorder() ? 2 : 1),
         ),
         child: TextField(
           focusNode: focusNode,
