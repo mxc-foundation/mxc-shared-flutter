@@ -1,5 +1,8 @@
+import 'package:decimal/decimal.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:mxc_ui/mxc_ui.dart';
+import 'package:supernodeapp/common/common.dart';
 
 class MxcSlider extends StatelessWidget {
   const MxcSlider({
@@ -109,5 +112,64 @@ class CustomTrackShape extends RoundedRectSliderTrackShape {
         offset.dy + (parentBox.size.height - trackHeight) / 2;
     final double trackWidth = parentBox.size.width;
     return Rect.fromLTWH(trackLeft, trackTop, trackWidth, trackHeight);
+  }
+}
+
+class MxcSliderWithMiniTextField extends StatelessWidget {
+  const MxcSliderWithMiniTextField({
+    required Key? key,
+    required this.value,
+    required this.min,
+    required this.max,
+    this.errorMsg,
+    required this.onChanged,
+  }) : super(key: key);
+
+  final double value;
+  final double min;
+  final double max;
+  final String? errorMsg;
+  final void Function(double) onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    final controller = TextEditingController();
+    controller.text = Format.amountDouble(value);
+    return Column(
+      children: [
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                    FlutterI18n.translate(context, 'bond_x_mxc').replaceFirst(
+                        '{0}', Format.amount(Decimal.parse(value.toString()))),
+                    style: FontTheme.of(context).subtitle1.label()),
+                if (errorMsg != null) const SizedBox(height: 8),
+                if (errorMsg != null)
+                  Text(errorMsg!,
+                      style: FontTheme.of(context).caption1.error()),
+              ],
+            ),
+            const Spacer(),
+            MxcMiniTextField(
+              key: null,
+              controller: controller,
+              error: errorMsg != null,
+              onChanged: onChanged,
+            ),
+          ],
+        ),
+        const SizedBox(height: 8),
+        MxcSlider(
+          key: null,
+          max: max.toDouble(),
+          value: value.toDouble(),
+          onChanged: onChanged,
+        ),
+      ],
+    );
   }
 }

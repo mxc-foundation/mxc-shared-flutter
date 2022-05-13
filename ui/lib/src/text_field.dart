@@ -463,3 +463,151 @@ class _MxcTextFieldImageButton extends MxcTextFieldButton {
         color: color ?? MxcScopedTheme.of(context).primaryColor,
       );
 }
+
+class MxcMiniTextField extends FormField<String> {
+  MxcMiniTextField({
+    required Key? key,
+    required TextEditingController this.controller,
+    this.onChanged,
+    FormFieldValidator<String>? validator,
+    bool disabled = false,
+    bool error = false,
+    double width = 64,
+    FocusNode? focusNode,
+    AutovalidateMode? autovalidateMode,
+  }) : super(
+          key: key,
+          initialValue: controller.text,
+          validator: validator,
+          autovalidateMode: autovalidateMode,
+          builder: (field) {
+            return _MxcMiniNonFormTextField(
+              key: null,
+              controller: controller,
+              onChanged: onChanged,
+              focusNode: focusNode,
+              disabled: disabled,
+              error: error,
+              width: width,
+            );
+          },
+        );
+
+  final TextEditingController? controller;
+  final void Function(double)? onChanged;
+}
+
+class _MxcMiniNonFormTextField extends StatefulWidget {
+  const _MxcMiniNonFormTextField({
+    required Key? key,
+    required this.controller,
+    this.width = 64,
+    this.focusNode,
+    this.disabled = false,
+    this.error = false,
+    this.onChanged,
+  }) : super(key: key);
+
+  final double width;
+  final FocusNode? focusNode;
+  final bool disabled;
+  final bool error;
+
+  final TextEditingController controller;
+  final ValueChanged<double>? onChanged;
+
+  @override
+  State<_MxcMiniNonFormTextField> createState() =>
+      _MxcMiniNonFormTextFieldState();
+}
+
+class _MxcMiniNonFormTextFieldState extends State<_MxcMiniNonFormTextField> {
+  late final FocusNode focusNode;
+  late bool focused;
+  TextEditingController? _internalController;
+
+  @override
+  void initState() {
+    super.initState();
+    focusNode = widget.focusNode ?? FocusNode();
+    if (widget.disabled) {
+      focused = false;
+    } else {
+      focused = focusNode.hasFocus;
+      focusNode.addListener(_focusNodeListener);
+    }
+  }
+
+  void _focusNodeListener() {
+    if (focusNode.hasFocus != focused && !widget.disabled) {
+      setState(() => focused = focusNode.hasFocus);
+    }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _internalController?.dispose();
+    if (widget.focusNode == null) focusNode.dispose();
+  }
+
+  Color getColorBorder() {
+    if (widget.disabled) return ColorsTheme.of(context).buttonDisabledLabel;
+    if (widget.error) return ColorsTheme.of(context).textError;
+    if (_internalController != null && _internalController!.text.isEmpty) {
+      return ColorsTheme.of(context).textLabel;
+    }
+    if (focused) return ColorsTheme.of(context).mxcBlue;
+    return ColorsTheme.of(context).textLabel;
+  }
+
+  Color getColorFont() {
+    if (widget.disabled) return ColorsTheme.of(context).buttonDisabledLabel;
+    if (widget.error) return ColorsTheme.of(context).textError;
+    if (focused) return ColorsTheme.of(context).mxcBlue;
+    return ColorsTheme.of(context).textPrimaryAndIcons;
+  }
+
+  bool isThickBorder() => (focused || widget.error);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: widget.width,
+      child: Container(
+        padding: EdgeInsets.symmetric(
+          horizontal: 8,
+          vertical: isThickBorder() ? 0 : 1,
+        ),
+        decoration: BoxDecoration(
+          borderRadius: const BorderRadius.all(Radius.circular(10)),
+          border: Border.all(
+              color: getColorBorder(), width: isThickBorder() ? 2 : 1),
+        ),
+        child: TextField(
+          focusNode: focusNode,
+          controller: widget.controller,
+          cursorColor: ColorsTheme.of(context).textPrimaryAndIcons,
+          readOnly: widget.disabled,
+          style:
+              FontTheme.of(context).subtitle1().copyWith(color: getColorFont()),
+          textAlign: TextAlign.center,
+          onChanged: widget.onChanged == null
+              ? null
+              : (String s) => widget.onChanged!(double.parse(s)),
+          decoration: const InputDecoration(
+            isDense: true,
+            enabledBorder: InputBorder.none,
+            focusedBorder: InputBorder.none,
+            errorBorder: InputBorder.none,
+            focusedErrorBorder: InputBorder.none,
+            disabledBorder: InputBorder.none,
+          ),
+          keyboardType: const TextInputType.numberWithOptions(
+            decimal: true,
+          ),
+        ),
+      ),
+    );
+  }
+}
