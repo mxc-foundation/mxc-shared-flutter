@@ -603,6 +603,9 @@ class _MxcMiniNonFormTextFieldState extends State<_MxcMiniNonFormTextField> {
             focusedErrorBorder: InputBorder.none,
             disabledBorder: InputBorder.none,
           ),
+          keyboardType: const TextInputType.numberWithOptions(
+            decimal: true,
+          ),
         ),
       ),
     );
