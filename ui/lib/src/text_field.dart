@@ -494,7 +494,7 @@ class MxcMiniTextField extends FormField<String> {
         );
 
   final TextEditingController? controller;
-  final void Function(String)? onChanged;
+  final void Function(double)? onChanged;
 }
 
 class _MxcMiniNonFormTextField extends StatefulWidget {
@@ -514,7 +514,7 @@ class _MxcMiniNonFormTextField extends StatefulWidget {
   final bool error;
 
   final TextEditingController controller;
-  final ValueChanged<String>? onChanged;
+  final ValueChanged<double>? onChanged;
 
   @override
   State<_MxcMiniNonFormTextField> createState() =>
@@ -592,7 +592,9 @@ class _MxcMiniNonFormTextFieldState extends State<_MxcMiniNonFormTextField> {
           style:
               FontTheme.of(context).subtitle1().copyWith(color: getColorFont()),
           textAlign: TextAlign.center,
-          onChanged: widget.onChanged,
+          onChanged: widget.onChanged == null
+              ? null
+              : (String s) => widget.onChanged!(double.parse(s)),
           decoration: const InputDecoration(
             isDense: true,
             enabledBorder: InputBorder.none,
