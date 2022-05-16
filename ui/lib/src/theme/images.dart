@@ -387,11 +387,6 @@ class ImagesTheme {
         package: mxcUiPackageName,
       );
 
-  ImageProvider get iconOpenLock => const AssetImage(
-        'assets/images/wallet/icon-open-lock.png',
-        package: mxcUiPackageName,
-      );
-
   //settings
   ImageProvider get weChat => const AssetImage(
         'assets/images/settings/wechat.png',
