@@ -33,6 +33,13 @@ class ColorsTheme {
   final mxcBlue20 = const Color(0xFF1C1478).withOpacity(0.20);
   final mxcBlue05 = const Color(0xFF1C1478).withOpacity(0.05);
 
+  final mxcPurple = const Color(0xFF6300FF);
+  final mxcPurple500 = const Color(0xFF8132FE);
+  final mxcPurple400 = const Color(0xFFA065FE);
+  final mxcPurple300 = const Color(0xFFBF97FD);
+  final mxcPurple200 = const Color(0xFFDECAFD);
+  final mxcPurple100 = const Color(0xFFF4EFFC);
+
   final dhxBlue = const Color(0xFF4665EA);
   final dhxBlue80 = const Color(0xFF4665EA).withOpacity(0.80);
   final dhxBlue60 = const Color(0xFF4665EA).withOpacity(0.60);
@@ -105,6 +112,24 @@ class ColorsThemeDark implements ColorsTheme {
 
   @override
   final mxcBlue05 = const Color(0xFF30A78B).withOpacity(0.05);
+
+  @override
+  final mxcPurple = const Color(0xFFB593EC);
+
+  @override
+  final mxcPurple500 = const Color(0xFF967BC3);
+
+  @override
+  final mxcPurple400 = const Color(0xFF78639A);
+
+  @override
+  final mxcPurple300 = const Color(0xFF594C70);
+
+  @override
+  final mxcPurple200 = const Color(0xFF3B3447);
+
+  @override
+  final mxcPurple100 = const Color(0xFF242228);
 
   @override
   final dhxBlue = const Color(0xFF7B90E9);
