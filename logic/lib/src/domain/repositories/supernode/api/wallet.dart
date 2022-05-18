@@ -135,10 +135,13 @@ class WalletRepository {
     return res.body!.lock!
         .map(
           (e) => BtcLock(
-            gatewayMac: e.gatewayMac!,
-            sessionId: e.sessionId!,
-            amountLocked: e.amount!.toInt(),
+            amount: e.amount!.toDecimal(),
             btcRevenue: Decimal.tryParse(e.btcRevenue!) ?? Decimal.zero,
+            created: e.created!,
+            gatewayMac: e.gatewayMac!,
+            id: e.id!,
+            lockTill: e.lockTill!,
+            sessionId: e.sessionId!,
           ),
         )
         .toList();
