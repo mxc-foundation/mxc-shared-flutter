@@ -114,10 +114,15 @@ class UserRepository {
   }
 
   Future<bool> needConfirmationToOtpChange() async {
-    final res = await client.userService.email2FAPassed(
-      body: ExtapiEmail2FAPassedRequest(language: 'en'),
-    );
-    return res.body?.verified == false;
+    try {
+      final res = await client.userService.email2FAPassed(
+        body: ExtapiEmail2FAPassedRequest(language: 'en'),
+      );
+      return res.body?.verified == false;
+    } on ApiException catch (e) {
+      if (e.message == 'authentication failed: email 2FA required') return true;
+      rethrow;
+    }
   }
 
   Future<void> requestOtpChangeConfirmation(String language) async {
