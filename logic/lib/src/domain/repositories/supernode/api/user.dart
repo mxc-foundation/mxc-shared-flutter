@@ -117,7 +117,7 @@ class UserRepository {
     final res = await client.userService.email2FAPassed(
       body: ExtapiEmail2FAPassedRequest(language: 'en'),
     );
-    return res.body?.verified == true;
+    return res.body?.verified == false;
   }
 
   Future<void> requestOtpChangeConfirmation(String language) async {
