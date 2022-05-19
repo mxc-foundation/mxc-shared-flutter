@@ -1682,59 +1682,6 @@ class _$InternalService extends InternalService {
   final definitionType = InternalService;
 
   @override
-  Future<Response<ExtapiAccessTokenCreateResponse>> accessTokenCreate(
-      {ExtapiAccessTokenCreateRequest? body,
-      String? grpcMetadataXOTP,
-      String? grpcMetadataAuthorization}) {
-    final $url = '/api/internal/access-token/create';
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $body = body;
-    final $request =
-        Request('POST', $url, client.baseUrl, body: $body, headers: $headers);
-    return client.send<ExtapiAccessTokenCreateResponse,
-        ExtapiAccessTokenCreateResponse>($request);
-  }
-
-  @override
-  Future<Response<ExtapiAccessTokenListResponse>> accessTokenList(
-      {String? grpcMetadataXOTP, String? grpcMetadataAuthorization}) {
-    final $url = '/api/internal/access-token/list';
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $request = Request('GET', $url, client.baseUrl, headers: $headers);
-    return client.send<ExtapiAccessTokenListResponse,
-        ExtapiAccessTokenListResponse>($request);
-  }
-
-  @override
-  Future<Response<ExtapiAccessTokenRevokeResponse>> accessTokenRevoke(
-      {ExtapiAccessTokenRevokeRequest? body,
-      String? grpcMetadataXOTP,
-      String? grpcMetadataAuthorization}) {
-    final $url = '/api/internal/access-token/revoke';
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $body = body;
-    final $request =
-        Request('POST', $url, client.baseUrl, body: $body, headers: $headers);
-    return client.send<ExtapiAccessTokenRevokeResponse,
-        ExtapiAccessTokenRevokeResponse>($request);
-  }
-
-  @override
   Future<Response<ExtapiBrandingResponse>> branding(
       {String? grpcMetadataXOTP, String? grpcMetadataAuthorization}) {
     final $url = '/api/internal/branding';
@@ -3312,63 +3259,6 @@ class _$UserService extends UserService {
     final $request =
         Request('POST', $url, client.baseUrl, body: $body, headers: $headers);
     return client.send<dynamic, dynamic>($request);
-  }
-
-  @override
-  Future<Response<ExtapiEmail2FAPassedResponse>> email2FAPassed(
-      {ExtapiEmail2FAPassedRequest? body,
-      String? grpcMetadataXOTP,
-      String? grpcMetadataAuthorization}) {
-    final $url = '/api/users/email-2fa-passed';
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $body = body;
-    final $request =
-        Request('POST', $url, client.baseUrl, body: $body, headers: $headers);
-    return client.send<ExtapiEmail2FAPassedResponse,
-        ExtapiEmail2FAPassedResponse>($request);
-  }
-
-  @override
-  Future<Response<ExtapiEmail2FARequestResponse>> email2FARequest(
-      {ExtapiEmail2FARequestRequest? body,
-      String? grpcMetadataXOTP,
-      String? grpcMetadataAuthorization}) {
-    final $url = '/api/users/email-2fa-request';
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $body = body;
-    final $request =
-        Request('POST', $url, client.baseUrl, body: $body, headers: $headers);
-    return client.send<ExtapiEmail2FARequestResponse,
-        ExtapiEmail2FARequestResponse>($request);
-  }
-
-  @override
-  Future<Response<ExtapiEmail2FAVerifyResponse>> email2FAVerify(
-      {ExtapiEmail2FAVerifyRequest? body,
-      String? grpcMetadataXOTP,
-      String? grpcMetadataAuthorization}) {
-    final $url = '/api/users/email-2fa-verify';
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $body = body;
-    final $request =
-        Request('POST', $url, client.baseUrl, body: $body, headers: $headers);
-    return client.send<ExtapiEmail2FAVerifyResponse,
-        ExtapiEmail2FAVerifyResponse>($request);
   }
 
   @override

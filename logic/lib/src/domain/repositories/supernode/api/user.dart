@@ -1,6 +1,4 @@
 import 'package:collection/collection.dart';
-import 'package:mxc_logic/mxc_logic.dart';
-import 'package:mxc_logic/src/data/api/client/error_converter.dart';
 import 'package:mxc_logic/src/data/data.dart';
 import 'package:mxc_logic/src/domain/entities/user.dart';
 import 'package:mxc_logic/src/domain/repositories/internal/shared_mappers.dart';
@@ -109,33 +107,7 @@ class UserRepository {
       {required String verificationCode}) async {
     await client.userService.confirmVerifyExistingEmail(
         body: ExtapiConfirmVerifyExistingEmailRequest(
-      verificationCode: verificationCode,
-    ));
-  }
-
-  Future<bool> needConfirmationToOtpChange() async {
-    final res = await client.userService.email2FAPassed(
-      body: ExtapiEmail2FAPassedRequest(language: 'en'),
-    );
-    return res.body?.verified == true;
-  }
-
-  Future<void> requestOtpChangeConfirmation(String language) async {
-    await client.userService.email2FARequest(
-      body: ExtapiEmail2FARequestRequest(language: 'en'),
-    );
-  }
-
-  Future<bool> verifyOtpChange(String code) async {
-    try {
-      final res = await client.userService.email2FAVerify(
-        body: ExtapiEmail2FAVerifyRequest(code: code, language: 'en'),
-      );
-      return res.body?.verified == true;
-    } on ApiException catch (e) {
-      if (e.message == 'invalid code') return false;
-      rethrow;
-    }
+            verificationCode: verificationCode));
   }
 
   Future<void> logout() async {
