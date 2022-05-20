@@ -136,6 +136,7 @@ class UserRepository {
       final res = await client.userService.email2FAVerify(
         body: ExtapiEmail2FAVerifyRequest(code: code, language: 'en'),
       );
+      if (res.body?.verified == null) return true;
       return res.body?.verified == true;
     } on ApiException catch (e) {
       if (e.message == 'invalid code') return false;
