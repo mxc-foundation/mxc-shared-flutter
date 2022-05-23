@@ -130,7 +130,7 @@ abstract class BTCMiningService extends ChopperService {
     return _$BTCMiningService(newClient);
   }
 
-  ///List the locks that are still open
+  ///List the locks that are still open (that includes the one that were released already, but are still cooling off)
   ///@param orgId org for which the locks must be returned.
   ///@param Grpc-Metadata-X-OTP OTP Code
   ///@param Grpc-Metadata-Authorization Auth Token
@@ -4437,32 +4437,35 @@ extension $ExtapiBTCListLocksResponseExtension on ExtapiBTCListLocksResponse {
 @JsonSerializable(explicitToJson: true)
 class ExtapiBTCLock {
   ExtapiBTCLock({
-    this.amount,
-    this.btcRevenue,
-    this.created,
-    this.gatewayMac,
     this.id,
+    this.created,
+    this.amount,
+    this.gatewayMac,
+    this.unlockFrom,
     this.lockTill,
-    this.sessionId,
+    this.unlocked,
+    this.coolingOffEnds,
   });
 
   factory ExtapiBTCLock.fromJson(Map<String, dynamic> json) =>
       _$ExtapiBTCLockFromJson(json);
 
-  @JsonKey(name: 'amount')
-  final String? amount;
-  @JsonKey(name: 'btcRevenue')
-  final String? btcRevenue;
-  @JsonKey(name: 'created')
-  final DateTime? created;
-  @JsonKey(name: 'gatewayMac')
-  final String? gatewayMac;
   @JsonKey(name: 'id')
   final String? id;
+  @JsonKey(name: 'created')
+  final DateTime? created;
+  @JsonKey(name: 'amount')
+  final String? amount;
+  @JsonKey(name: 'gatewayMac')
+  final String? gatewayMac;
+  @JsonKey(name: 'unlockFrom')
+  final DateTime? unlockFrom;
   @JsonKey(name: 'lockTill')
   final DateTime? lockTill;
-  @JsonKey(name: 'sessionId')
-  final String? sessionId;
+  @JsonKey(name: 'unlocked')
+  final DateTime? unlocked;
+  @JsonKey(name: 'coolingOffEnds')
+  final DateTime? coolingOffEnds;
   static const fromJsonFactory = _$ExtapiBTCLockFromJson;
   static const toJsonFactory = _$ExtapiBTCLockToJson;
   Map<String, dynamic> toJson() => _$ExtapiBTCLockToJson(this);
@@ -4471,45 +4474,50 @@ class ExtapiBTCLock {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is ExtapiBTCLock &&
-            (identical(other.amount, amount) ||
-                const DeepCollectionEquality().equals(other.amount, amount)) &&
-            (identical(other.btcRevenue, btcRevenue) ||
-                const DeepCollectionEquality()
-                    .equals(other.btcRevenue, btcRevenue)) &&
+            (identical(other.id, id) ||
+                const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.created, created) ||
                 const DeepCollectionEquality()
                     .equals(other.created, created)) &&
+            (identical(other.amount, amount) ||
+                const DeepCollectionEquality().equals(other.amount, amount)) &&
             (identical(other.gatewayMac, gatewayMac) ||
                 const DeepCollectionEquality()
                     .equals(other.gatewayMac, gatewayMac)) &&
-            (identical(other.id, id) ||
-                const DeepCollectionEquality().equals(other.id, id)) &&
+            (identical(other.unlockFrom, unlockFrom) ||
+                const DeepCollectionEquality()
+                    .equals(other.unlockFrom, unlockFrom)) &&
             (identical(other.lockTill, lockTill) ||
                 const DeepCollectionEquality()
                     .equals(other.lockTill, lockTill)) &&
-            (identical(other.sessionId, sessionId) ||
+            (identical(other.unlocked, unlocked) ||
                 const DeepCollectionEquality()
-                    .equals(other.sessionId, sessionId)));
+                    .equals(other.unlocked, unlocked)) &&
+            (identical(other.coolingOffEnds, coolingOffEnds) ||
+                const DeepCollectionEquality()
+                    .equals(other.coolingOffEnds, coolingOffEnds)));
   }
 }
 
 extension $ExtapiBTCLockExtension on ExtapiBTCLock {
   ExtapiBTCLock copyWith(
-      {String? amount,
-      String? btcRevenue,
+      {String? id,
       DateTime? created,
+      String? amount,
       String? gatewayMac,
-      String? id,
+      DateTime? unlockFrom,
       DateTime? lockTill,
-      String? sessionId}) {
+      DateTime? unlocked,
+      DateTime? coolingOffEnds}) {
     return ExtapiBTCLock(
-        amount: amount ?? this.amount,
-        btcRevenue: btcRevenue ?? this.btcRevenue,
-        created: created ?? this.created,
-        gatewayMac: gatewayMac ?? this.gatewayMac,
         id: id ?? this.id,
+        created: created ?? this.created,
+        amount: amount ?? this.amount,
+        gatewayMac: gatewayMac ?? this.gatewayMac,
+        unlockFrom: unlockFrom ?? this.unlockFrom,
         lockTill: lockTill ?? this.lockTill,
-        sessionId: sessionId ?? this.sessionId);
+        unlocked: unlocked ?? this.unlocked,
+        coolingOffEnds: coolingOffEnds ?? this.coolingOffEnds);
   }
 }
 

@@ -212,17 +212,8 @@
       },
       "/api/btc-mining/list-locks":{
          "get":{
+            "summary":"List the locks that are still open (that includes the one that were\nreleased already, but are still cooling off)",
             "operationId":"BTCListLocks",
-            "parameters":[
-               {
-                  "description":"org for which the locks must be returned.",
-                  "format":"int64",
-                  "in":"query",
-                  "name":"orgId",
-                  "required":false,
-                  "type":"string"
-               }
-            ],
             "responses":{
                "200":{
                   "description":"A successful response.",
@@ -237,7 +228,16 @@
                   }
                }
             },
-            "summary":"List the locks that are still open",
+            "parameters":[
+               {
+                  "name":"orgId",
+                  "description":"org for which the locks must be returned.",
+                  "in":"query",
+                  "required":false,
+                  "type":"string",
+                  "format":"int64"
+               }
+            ],
             "tags":[
                "BTCMining"
             ]
@@ -6761,41 +6761,47 @@
          "type":"object"
       },
       "extapiBTCLock":{
+         "type":"object",
          "properties":{
-            "amount":{
-               "description":"amount of MXC locked",
-               "type":"string"
-            },
-            "btcRevenue":{
-               "description":"BTC revenue earned by this lock",
-               "type":"string"
+            "id":{
+               "type":"string",
+               "format":"int64",
+               "title":"lock id in database"
             },
             "created":{
-               "description":"timestamp when lock was created",
+               "type":"string",
                "format":"date-time",
-               "type":"string"
+               "title":"timestamp when lock was created"
+            },
+            "amount":{
+               "type":"string",
+               "title":"amount of MXC locked"
             },
             "gatewayMac":{
-               "description":"MAC of the gateway associated with the lock",
-               "type":"string"
+               "type":"string",
+               "title":"MAC of the gateway associated with the lock"
             },
-            "id":{
-               "description":"lock id in database",
-               "format":"int64",
-               "type":"string"
+            "unlockFrom":{
+               "type":"string",
+               "format":"date-time",
+               "title":"timestamp from when the unlock can be requested (lock_till shows the end\nof the period during which the unlock can be requested)"
             },
             "lockTill":{
-               "description":"timestamp after which the lock will be released",
+               "type":"string",
                "format":"date-time",
-               "type":"string"
+               "title":"timestamp at which current lock period ends"
             },
-            "sessionId":{
-               "description":"btc mining session id",
-               "format":"int64",
-               "type":"string"
+            "unlocked":{
+               "type":"string",
+               "format":"date-time",
+               "title":"timestamp when the unlock has been requested"
+            },
+            "coolingOffEnds":{
+               "type":"string",
+               "format":"date-time",
+               "title":"timestamp when cooling off ends (only for unlocked bonds)"
             }
-         },
-         "type":"object"
+         }
       },
       "extapiBTCMiningSessionResponse":{
          "properties":{

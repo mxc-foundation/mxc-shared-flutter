@@ -28,22 +28,24 @@ class BtcMiningSession {
 
 class BtcLock {
   BtcLock({
-    required this.amount,
-    required this.btcRevenue,
-    required this.created,
-    required this.gatewayMac,
     required this.id,
-    required this.lockTill,
-    required this.sessionId,
+    required this.created,
+    required this.amount,
+    required this.gatewayMac,
+    this.unlockFrom,
+    this.lockTill,
+    this.unlocked,
+    this.coolingOffEnds,
   });
 
-  final Decimal amount;
-  final Decimal btcRevenue;
-  final DateTime created;
-  final String gatewayMac;
   final String id;
-  final DateTime lockTill;
-  final String sessionId;
+  final DateTime created;
+  final Decimal amount;
+  final String gatewayMac;
+  final DateTime? unlockFrom;
+  final DateTime? lockTill;
+  final DateTime? unlocked;
+  final DateTime? coolingOffEnds;
 }
 
 class NoBtcMiningSessionException implements Exception {

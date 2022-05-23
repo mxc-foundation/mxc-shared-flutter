@@ -218,28 +218,36 @@ Map<String, dynamic> _$ExtapiBTCListLocksResponseToJson(
 
 ExtapiBTCLock _$ExtapiBTCLockFromJson(Map<String, dynamic> json) =>
     ExtapiBTCLock(
-      amount: json['amount'] as String?,
-      btcRevenue: json['btcRevenue'] as String?,
+      id: json['id'] as String?,
       created: json['created'] == null
           ? null
           : DateTime.parse(json['created'] as String),
+      amount: json['amount'] as String?,
       gatewayMac: json['gatewayMac'] as String?,
-      id: json['id'] as String?,
+      unlockFrom: json['unlockFrom'] == null
+          ? null
+          : DateTime.parse(json['unlockFrom'] as String),
       lockTill: json['lockTill'] == null
           ? null
           : DateTime.parse(json['lockTill'] as String),
-      sessionId: json['sessionId'] as String?,
+      unlocked: json['unlocked'] == null
+          ? null
+          : DateTime.parse(json['unlocked'] as String),
+      coolingOffEnds: json['coolingOffEnds'] == null
+          ? null
+          : DateTime.parse(json['coolingOffEnds'] as String),
     );
 
 Map<String, dynamic> _$ExtapiBTCLockToJson(ExtapiBTCLock instance) =>
     <String, dynamic>{
-      'amount': instance.amount,
-      'btcRevenue': instance.btcRevenue,
-      'created': instance.created?.toIso8601String(),
-      'gatewayMac': instance.gatewayMac,
       'id': instance.id,
+      'created': instance.created?.toIso8601String(),
+      'amount': instance.amount,
+      'gatewayMac': instance.gatewayMac,
+      'unlockFrom': instance.unlockFrom?.toIso8601String(),
       'lockTill': instance.lockTill?.toIso8601String(),
-      'sessionId': instance.sessionId,
+      'unlocked': instance.unlocked?.toIso8601String(),
+      'coolingOffEnds': instance.coolingOffEnds?.toIso8601String(),
     };
 
 ExtapiBTCMiningSessionResponse _$ExtapiBTCMiningSessionResponseFromJson(
