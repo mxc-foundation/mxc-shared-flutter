@@ -24,6 +24,9 @@ class ApiSupernodeRepository implements SupernodeRepository {
   final SupernodeSetupStore _setupStore;
 
   @override
+  BtcRepository get btc => BtcRepository(_client);
+
+  @override
   DhxRepository get dhx => DhxRepository(_client);
 
   @override
