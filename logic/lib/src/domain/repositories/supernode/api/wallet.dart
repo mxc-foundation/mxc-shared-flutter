@@ -96,15 +96,16 @@ class WalletRepository {
     required String sessionId,
     required String totalAmount,
   }) async {
-    await _client.bTCMining.bTCAddLocks(
-      body: ExtapiBTCAddLocksRequest(
-        durationDays: durationDays,
-        gatewayMac: listMac,
-        orgId: _client.defaultOrganizationId,
-        sessionId: sessionId,
-        totalAmount: totalAmount,
-      ),
-    );
+    throw Exception('No bTCAddLocks method');
+    // await _client.bTCMining.bTCAddLocks(
+    //   body: ExtapiBTCAddLocksRequest(
+    //     durationDays: durationDays,
+    //     gatewayMac: listMac,
+    //     orgId: _client.defaultOrganizationId,
+    //     sessionId: sessionId,
+    //     totalAmount: totalAmount,
+    //   ),
+    // );
   }
 
   Future<BtcMiningSession> bTCMiningSession() async {

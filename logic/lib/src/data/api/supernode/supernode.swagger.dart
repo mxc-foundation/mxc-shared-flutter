@@ -130,6 +130,23 @@ abstract class BTCMiningService extends ChopperService {
     return _$BTCMiningService(newClient);
   }
 
+  ///Returns daily history of BTC mining for organization or for a particular gateway
+  ///@param orgId id of the organization for which the history is requested.
+  ///@param gatewayMac MAC of the gateway. If not specified then history for all the organization's gateways is returned.
+  ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
+
+  @Get(path: '/api/btc-mining/history')
+  Future<chopper.Response<ExtapiBTCMiningHistoryResponse>> bTCMiningHistory(
+      {@Query('orgId')
+          String? orgId,
+      @Query('gatewayMac')
+          String? gatewayMac,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
+
   ///List the locks that are still open (that includes the one that were released already, but are still cooling off)
   ///@param orgId org for which the locks must be returned.
   ///@param Grpc-Metadata-X-OTP OTP Code
@@ -144,28 +161,57 @@ abstract class BTCMiningService extends ChopperService {
       @Header('Grpc-Metadata-Authorization')
           String? grpcMetadataAuthorization});
 
-  ///Create locks for current or upcoming mining session
+  ///Create a new bond for the gateway
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
   ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/btc-mining/lock')
-  Future<chopper.Response<ExtapiBTCAddLocksResponse>> bTCAddLocks(
+  Future<chopper.Response<ExtapiBTCLockResponse>> bTCLock(
       {@Body()
       @required
-          ExtapiBTCAddLocksRequest? body,
+          ExtapiBTCLockRequest? body,
       @Header('Grpc-Metadata-X-OTP')
           String? grpcMetadataXOTP,
       @Header('Grpc-Metadata-Authorization')
           String? grpcMetadataAuthorization});
 
-  ///Request information about the current or upcoming mining session
+  ///DEPRECATED: only used not to break the app, always returns not found
   ///@param Grpc-Metadata-X-OTP OTP Code
   ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/btc-mining/session')
   Future<chopper.Response<ExtapiBTCMiningSessionResponse>> bTCMiningSession(
       {@Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
+
+  ///Returns total amount mined by organization's gateways
+  ///@param orgId id of the organization for which the amount is requested.
+  ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
+
+  @Get(path: '/api/btc-mining/totals')
+  Future<chopper.Response<ExtapiBTCMinedResponse>> bTCMined(
+      {@Query('orgId')
+          String? orgId,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
+
+  ///Release bond for the gateway
+  ///@param body
+  ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
+
+  @Post(path: '/api/btc-mining/unlock')
+  Future<chopper.Response<ExtapiBTCUnlockResponse>> bTCUnlock(
+      {@Body()
+      @required
+          ExtapiBTCUnlockRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
           String? grpcMetadataXOTP,
       @Header('Grpc-Metadata-Authorization')
           String? grpcMetadataAuthorization});
@@ -750,69 +796,6 @@ abstract class DeviceQueueService extends ChopperService {
       @Body()
       @required
           ExtapiEnqueueDeviceQueueItemRequest? body,
-      @Header('Grpc-Metadata-X-OTP')
-          String? grpcMetadataXOTP,
-      @Header('Grpc-Metadata-Authorization')
-          String? grpcMetadataAuthorization});
-}
-
-@ChopperApi()
-abstract class DFIService extends ChopperService {
-  static DFIService createService([ChopperClient? client]) {
-    if (client != null) {
-      return _$DFIService(client);
-    }
-
-    final newClient = ChopperClient(
-      services: [_$DFIService()],
-      converter: chopper.JsonConverter(), /*baseUrl: YOUR_BASE_URL*/
-    );
-    return _$DFIService(newClient);
-  }
-
-  ///AuthenticateUser authenticates user with given jwt, return necessary user info for DFI service
-  ///@param Grpc-Metadata-X-OTP OTP Code
-  ///@param Grpc-Metadata-Authorization Auth Token
-
-  @Get(path: '/api/dfi/profile')
-  Future<chopper.Response<ExtapiDFIAuthenticateUserResponse>> authenticateUser(
-      {@Header('Grpc-Metadata-X-OTP')
-          String? grpcMetadataXOTP,
-      @Header('Grpc-Metadata-Authorization')
-          String? grpcMetadataAuthorization});
-
-  ///TopUp allows user to top up DFI margin wallet from DD wallet/supernode wallet
-  ///@param organizationID returned after call of authenticate user request, represent user's DD wallet.
-  ///@param amount the amount that user wants to top up margin wallet from DD wallet.
-  ///@param Grpc-Metadata-X-OTP OTP Code
-  ///@param Grpc-Metadata-Authorization Auth Token
-
-  @Get(path: '/api/dfi/top-up')
-  Future<chopper.Response<ExtapiTopUpResponse>> topUp(
-      {@Query('organizationID')
-          String? organizationID,
-      @Query('amount')
-          String? amount,
-      @Header('Grpc-Metadata-X-OTP')
-          String? grpcMetadataXOTP,
-      @Header('Grpc-Metadata-Authorization')
-          String? grpcMetadataAuthorization});
-
-  ///Withdraw allows user to withdraw from DFI margin wallet to DD wallet/supernode wallet
-  ///@param organizationID
-  ///@param amount
-  ///@param DFIPoolBalance
-  ///@param Grpc-Metadata-X-OTP OTP Code
-  ///@param Grpc-Metadata-Authorization Auth Token
-
-  @Get(path: '/api/dfi/withdraw')
-  Future<chopper.Response<ExtapiWithdrawResponse>> withdraw(
-      {@Query('organizationID')
-          String? organizationID,
-      @Query('amount')
-          String? amount,
-      @Query('DFIPoolBalance')
-          String? dFIPoolBalance,
       @Header('Grpc-Metadata-X-OTP')
           String? grpcMetadataXOTP,
       @Header('Grpc-Metadata-Authorization')
@@ -1501,6 +1484,47 @@ abstract class InternalService extends ChopperService {
     return _$InternalService(newClient);
   }
 
+  ///AccessTokenCreate allows user to create api token for use with scripts
+  ///@param body
+  ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
+
+  @Post(path: '/api/internal/access-token/create')
+  Future<chopper.Response<ExtapiAccessTokenCreateResponse>> accessTokenCreate(
+      {@Body()
+      @required
+          ExtapiAccessTokenCreateRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
+
+  ///AccessTokenList returns the list of api tokens for the user
+  ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
+
+  @Get(path: '/api/internal/access-token/list')
+  Future<chopper.Response<ExtapiAccessTokenListResponse>> accessTokenList(
+      {@Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
+
+  ///AccessTokenRevoke revokes api tokens specified in request
+  ///@param body
+  ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
+
+  @Post(path: '/api/internal/access-token/revoke')
+  Future<chopper.Response<ExtapiAccessTokenRevokeResponse>> accessTokenRevoke(
+      {@Body()
+      @required
+          ExtapiAccessTokenRevokeRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
+
   ///Get the branding for the UI
   ///@param Grpc-Metadata-X-OTP OTP Code
   ///@param Grpc-Metadata-Authorization Auth Token
@@ -1768,16 +1792,16 @@ abstract class MosquittoAuthService extends ChopperService {
   ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/mosquitto-auth/get-user')
-  Future<chopper.Response<ExtapiJWTAuthenticationResponse>> jWTAuthentication(
+  Future<chopper.Response<ExtapiAuthenticateUserResponse>> authenticateUser(
       {@Body()
       @required
-          ExtapiJWTAuthenticationRequest? body,
+          ExtapiAuthenticateUserRequest? body,
       @Header('Grpc-Metadata-X-OTP')
           String? grpcMetadataXOTP,
       @Header('Grpc-Metadata-Authorization')
           String? grpcMetadataAuthorization});
 
-  ///Get JWT for mosquitto auth with given org id Only accessible for authenticated supernode user
+  ///Deprecated: Get JWT for mosquitto auth with given org id Only accessible for authenticated supernode user
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
   ///@param Grpc-Metadata-Authorization Auth Token
@@ -1792,7 +1816,7 @@ abstract class MosquittoAuthService extends ChopperService {
       @Header('Grpc-Metadata-Authorization')
           String? grpcMetadataAuthorization});
 
-  ///SendCommandToDevice takes device eui as request paramter, returns topics that can be used to send command to a specific device
+  ///Deprecated: SendCommandToDevice takes device eui as request paramter, returns topics that can be used to send command to a specific device
   ///@param devEui
   ///@param organizationId
   ///@param Grpc-Metadata-X-OTP OTP Code
@@ -1810,7 +1834,7 @@ abstract class MosquittoAuthService extends ChopperService {
           @Header('Grpc-Metadata-Authorization')
               String? grpcMetadataAuthorization});
 
-  ///SubsribeApplication takes application id as request parameter, returns topics that can be used to subscribe to all devices' events under same application
+  ///Deprecated: SubsribeApplication takes application id as request parameter, returns topics that can be used to subscribe to all devices' events under same application
   ///@param applicationId
   ///@param organizationId
   ///@param Grpc-Metadata-X-OTP OTP Code
@@ -1828,7 +1852,7 @@ abstract class MosquittoAuthService extends ChopperService {
           @Header('Grpc-Metadata-Authorization')
               String? grpcMetadataAuthorization});
 
-  ///SubsribeDeviceEvents takes device eui as request parameter, returns topis that can be used to subscribe to all device events or one specific event
+  ///Deprecated: SubsribeDeviceEvents takes device eui as request parameter, returns topis that can be used to subscribe to all device events or one specific event
   ///@param devEui
   ///@param organizationId
   ///@param Grpc-Metadata-X-OTP OTP Code
@@ -1845,6 +1869,73 @@ abstract class MosquittoAuthService extends ChopperService {
               String? grpcMetadataXOTP,
           @Header('Grpc-Metadata-Authorization')
               String? grpcMetadataAuthorization});
+}
+
+@ChopperApi()
+abstract class MQTTIntegrationService extends ChopperService {
+  static MQTTIntegrationService createService([ChopperClient? client]) {
+    if (client != null) {
+      return _$MQTTIntegrationService(client);
+    }
+
+    final newClient = ChopperClient(
+      services: [_$MQTTIntegrationService()],
+      converter: chopper.JsonConverter(), /*baseUrl: YOUR_BASE_URL*/
+    );
+    return _$MQTTIntegrationService(newClient);
+  }
+
+  ///ApplicationSettings returns parameters for setting up mqtt integration on application level
+  ///@param applicationID
+  ///@param organizationID
+  ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
+
+  @Get(path: '/api/mqtt-integration/application-settings')
+  Future<chopper.Response<ExtapiApplicationSettingsResponse>>
+      applicationSettings(
+          {@Query('applicationID')
+              String? applicationID,
+          @Query('organizationID')
+              String? organizationID,
+          @Header('Grpc-Metadata-X-OTP')
+              String? grpcMetadataXOTP,
+          @Header('Grpc-Metadata-Authorization')
+              String? grpcMetadataAuthorization});
+
+  ///DeviceSettings returns parameters for setting up mqtt integration on device level
+  ///@param devEUI
+  ///@param organizationID
+  ///@param applicationID
+  ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
+
+  @Get(path: '/api/mqtt-integration/device-settings')
+  Future<chopper.Response<ExtapiDeviceSettingsResponse>> deviceSettings(
+      {@Query('devEUI')
+          String? devEUI,
+      @Query('organizationID')
+          String? organizationID,
+      @Query('applicationID')
+          String? applicationID,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
+
+  ///
+  ///@param organizationID
+  ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
+
+  @Get(path: '/api/mqtt-integration/generate-new-token')
+  Future<chopper.Response<ExtapiGenerateNewTokenResponse>> generateNewToken(
+      {@Query('organizationID')
+          String? organizationID,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
 }
 
 @ChopperApi()
@@ -3362,7 +3453,6 @@ extension SupernodeSwaggerExtension on ChopperClient {
       getService<DeviceProvisioningService>();
   DeviceService get deviceService => getService<DeviceService>();
   DeviceQueueService get deviceQueueService => getService<DeviceQueueService>();
-  DFIService get dFIService => getService<DFIService>();
   DHXServcieService get dHXServcie => getService<DHXServcieService>();
   GatewayProfileService get gatewayProfileService =>
       getService<GatewayProfileService>();
@@ -3370,6 +3460,8 @@ extension SupernodeSwaggerExtension on ChopperClient {
   InternalService get internalService => getService<InternalService>();
   MosquittoAuthService get mosquittoAuthService =>
       getService<MosquittoAuthService>();
+  MQTTIntegrationService get mQTTIntegrationService =>
+      getService<MQTTIntegrationService>();
   NetworkServerService get networkServerService =>
       getService<NetworkServerService>();
   OrganizationService get organizationService =>
@@ -3396,12 +3488,12 @@ List<ChopperService> get supernodeServices => [
       DeviceProvisioningService.createService(),
       DeviceService.createService(),
       DeviceQueueService.createService(),
-      DFIService.createService(),
       DHXServcieService.createService(),
       GatewayProfileService.createService(),
       GatewayService.createService(),
       InternalService.createService(),
       MosquittoAuthService.createService(),
+      MQTTIntegrationService.createService(),
       NetworkServerService.createService(),
       OrganizationService.createService(),
       ReportService.createService(),
@@ -3419,6 +3511,16 @@ List<ChopperService> get supernodeServices => [
 final Map<Type, Object Function(Map<String, dynamic>)>
     SupernodeJsonDecoderMappings = {
   CommonLocation: CommonLocation.fromJsonFactory,
+  ExtapiAccessToken: ExtapiAccessToken.fromJsonFactory,
+  ExtapiAccessTokenCreateRequest:
+      ExtapiAccessTokenCreateRequest.fromJsonFactory,
+  ExtapiAccessTokenCreateResponse:
+      ExtapiAccessTokenCreateResponse.fromJsonFactory,
+  ExtapiAccessTokenListResponse: ExtapiAccessTokenListResponse.fromJsonFactory,
+  ExtapiAccessTokenRevokeRequest:
+      ExtapiAccessTokenRevokeRequest.fromJsonFactory,
+  ExtapiAccessTokenRevokeResponse:
+      ExtapiAccessTokenRevokeResponse.fromJsonFactory,
   ExtapiActivateDeviceRequest: ExtapiActivateDeviceRequest.fromJsonFactory,
   ExtapiActivateUserRequest: ExtapiActivateUserRequest.fromJsonFactory,
   ExtapiActivateUserResponse: ExtapiActivateUserResponse.fromJsonFactory,
@@ -3427,16 +3529,28 @@ final Map<Type, Object Function(Map<String, dynamic>)>
       ExtapiAddOrganizationUserRequest.fromJsonFactory,
   ExtapiApplication: ExtapiApplication.fromJsonFactory,
   ExtapiApplicationListItem: ExtapiApplicationListItem.fromJsonFactory,
+  ExtapiApplicationSettingsResponse:
+      ExtapiApplicationSettingsResponse.fromJsonFactory,
+  ExtapiAuthenticateUserRequest: ExtapiAuthenticateUserRequest.fromJsonFactory,
+  ExtapiAuthenticateUserResponse:
+      ExtapiAuthenticateUserResponse.fromJsonFactory,
   ExtapiAuthenticateWeChatUserRequest:
       ExtapiAuthenticateWeChatUserRequest.fromJsonFactory,
   ExtapiAuthenticateWeChatUserResponse:
       ExtapiAuthenticateWeChatUserResponse.fromJsonFactory,
-  ExtapiBTCAddLocksRequest: ExtapiBTCAddLocksRequest.fromJsonFactory,
-  ExtapiBTCAddLocksResponse: ExtapiBTCAddLocksResponse.fromJsonFactory,
+  ExtapiBTCDailyMining: ExtapiBTCDailyMining.fromJsonFactory,
+  ExtapiBTCGWMined: ExtapiBTCGWMined.fromJsonFactory,
   ExtapiBTCListLocksResponse: ExtapiBTCListLocksResponse.fromJsonFactory,
   ExtapiBTCLock: ExtapiBTCLock.fromJsonFactory,
+  ExtapiBTCLockRequest: ExtapiBTCLockRequest.fromJsonFactory,
+  ExtapiBTCLockResponse: ExtapiBTCLockResponse.fromJsonFactory,
+  ExtapiBTCMinedResponse: ExtapiBTCMinedResponse.fromJsonFactory,
+  ExtapiBTCMiningHistoryResponse:
+      ExtapiBTCMiningHistoryResponse.fromJsonFactory,
   ExtapiBTCMiningSessionResponse:
       ExtapiBTCMiningSessionResponse.fromJsonFactory,
+  ExtapiBTCUnlockRequest: ExtapiBTCUnlockRequest.fromJsonFactory,
+  ExtapiBTCUnlockResponse: ExtapiBTCUnlockResponse.fromJsonFactory,
   ExtapiBatchResetDefaultGatewatConfigRequest:
       ExtapiBatchResetDefaultGatewatConfigRequest.fromJsonFactory,
   ExtapiBatchResetDefaultGatewatConfigResponse:
@@ -3494,8 +3608,6 @@ final Map<Type, Object Function(Map<String, dynamic>)>
       ExtapiCreateServiceProfileResponse.fromJsonFactory,
   ExtapiCreateUserRequest: ExtapiCreateUserRequest.fromJsonFactory,
   ExtapiCreateUserResponse: ExtapiCreateUserResponse.fromJsonFactory,
-  ExtapiDFIAuthenticateUserResponse:
-      ExtapiDFIAuthenticateUserResponse.fromJsonFactory,
   ExtapiDHXBondInfoRequest: ExtapiDHXBondInfoRequest.fromJsonFactory,
   ExtapiDHXBondInfoResponse: ExtapiDHXBondInfoResponse.fromJsonFactory,
   ExtapiDHXBondRequest: ExtapiDHXBondRequest.fromJsonFactory,
@@ -3529,6 +3641,7 @@ final Map<Type, Object Function(Map<String, dynamic>)>
   ExtapiDeviceProfile: ExtapiDeviceProfile.fromJsonFactory,
   ExtapiDeviceProfileListItem: ExtapiDeviceProfileListItem.fromJsonFactory,
   ExtapiDeviceQueueItem: ExtapiDeviceQueueItem.fromJsonFactory,
+  ExtapiDeviceSettingsResponse: ExtapiDeviceSettingsResponse.fromJsonFactory,
   ExtapiDownlinkFrameLog: ExtapiDownlinkFrameLog.fromJsonFactory,
   ExtapiEnqueueDeviceQueueItemRequest:
       ExtapiEnqueueDeviceQueueItemRequest.fromJsonFactory,
@@ -3550,6 +3663,8 @@ final Map<Type, Object Function(Map<String, dynamic>)>
       ExtapiGatewayProfileExtraChannel.fromJsonFactory,
   ExtapiGatewayProfileListItem: ExtapiGatewayProfileListItem.fromJsonFactory,
   ExtapiGatewayStats: ExtapiGatewayStats.fromJsonFactory,
+  ExtapiGenerateNewTokenResponse:
+      ExtapiGenerateNewTokenResponse.fromJsonFactory,
   ExtapiGetActiveStakesResponse: ExtapiGetActiveStakesResponse.fromJsonFactory,
   ExtapiGetApplicationResponse: ExtapiGetApplicationResponse.fromJsonFactory,
   ExtapiGetAppserverVersionResponse:
@@ -3627,10 +3742,6 @@ final Map<Type, Object Function(Map<String, dynamic>)>
       ExtapiInsertNewDefaultGatewayConfigRequest.fromJsonFactory,
   ExtapiInsertNewDefaultGatewayConfigResponse:
       ExtapiInsertNewDefaultGatewayConfigResponse.fromJsonFactory,
-  ExtapiJWTAuthenticationRequest:
-      ExtapiJWTAuthenticationRequest.fromJsonFactory,
-  ExtapiJWTAuthenticationResponse:
-      ExtapiJWTAuthenticationResponse.fromJsonFactory,
   ExtapiListApplicationResponse: ExtapiListApplicationResponse.fromJsonFactory,
   ExtapiListCellsResponse: ExtapiListCellsResponse.fromJsonFactory,
   ExtapiListDeviceProfileResponse:
@@ -3759,7 +3870,6 @@ final Map<Type, Object Function(Map<String, dynamic>)>
   ExtapiTopUpGatewayMiningFuelResponse:
       ExtapiTopUpGatewayMiningFuelResponse.fromJsonFactory,
   ExtapiTopUpHistory: ExtapiTopUpHistory.fromJsonFactory,
-  ExtapiTopUpResponse: ExtapiTopUpResponse.fromJsonFactory,
   ExtapiTransaction: ExtapiTransaction.fromJsonFactory,
   ExtapiUnbindExternalUserRequest:
       ExtapiUnbindExternalUserRequest.fromJsonFactory,
@@ -3811,7 +3921,8 @@ final Map<Type, Object Function(Map<String, dynamic>)>
   ExtapiWithdrawGatewayMiningFuelResponse:
       ExtapiWithdrawGatewayMiningFuelResponse.fromJsonFactory,
   ExtapiWithdrawHistory: ExtapiWithdrawHistory.fromJsonFactory,
-  ExtapiWithdrawResponse: ExtapiWithdrawResponse.fromJsonFactory,
+  Extapisettings: Extapisettings.fromJsonFactory,
+  Extapitopic: Extapitopic.fromJsonFactory,
   GwDelayTimingInfo: GwDelayTimingInfo.fromJsonFactory,
   GwDownlinkTXInfo: GwDownlinkTXInfo.fromJsonFactory,
   GwEncryptedFineTimestamp: GwEncryptedFineTimestamp.fromJsonFactory,
@@ -3903,6 +4014,259 @@ extension $CommonLocationExtension on CommonLocation {
         longitude: longitude ?? this.longitude,
         source: source ?? this.source);
   }
+}
+
+@JsonSerializable(explicitToJson: true)
+class ExtapiAccessToken {
+  ExtapiAccessToken({
+    this.created,
+    this.description,
+    this.expires,
+    this.id,
+    this.lastUsed,
+    this.maxInactiveSeconds,
+    this.scope,
+  });
+
+  factory ExtapiAccessToken.fromJson(Map<String, dynamic> json) =>
+      _$ExtapiAccessTokenFromJson(json);
+
+  @JsonKey(name: 'created')
+  final DateTime? created;
+  @JsonKey(name: 'description')
+  final String? description;
+  @JsonKey(name: 'expires')
+  final DateTime? expires;
+  @JsonKey(name: 'id')
+  final String? id;
+  @JsonKey(name: 'lastUsed')
+  final DateTime? lastUsed;
+  @JsonKey(name: 'maxInactiveSeconds')
+  final String? maxInactiveSeconds;
+  @JsonKey(name: 'scope', defaultValue: <String>[])
+  final List<String>? scope;
+  static const fromJsonFactory = _$ExtapiAccessTokenFromJson;
+  static const toJsonFactory = _$ExtapiAccessTokenToJson;
+  Map<String, dynamic> toJson() => _$ExtapiAccessTokenToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is ExtapiAccessToken &&
+            (identical(other.created, created) ||
+                const DeepCollectionEquality()
+                    .equals(other.created, created)) &&
+            (identical(other.description, description) ||
+                const DeepCollectionEquality()
+                    .equals(other.description, description)) &&
+            (identical(other.expires, expires) ||
+                const DeepCollectionEquality()
+                    .equals(other.expires, expires)) &&
+            (identical(other.id, id) ||
+                const DeepCollectionEquality().equals(other.id, id)) &&
+            (identical(other.lastUsed, lastUsed) ||
+                const DeepCollectionEquality()
+                    .equals(other.lastUsed, lastUsed)) &&
+            (identical(other.maxInactiveSeconds, maxInactiveSeconds) ||
+                const DeepCollectionEquality()
+                    .equals(other.maxInactiveSeconds, maxInactiveSeconds)) &&
+            (identical(other.scope, scope) ||
+                const DeepCollectionEquality().equals(other.scope, scope)));
+  }
+}
+
+extension $ExtapiAccessTokenExtension on ExtapiAccessToken {
+  ExtapiAccessToken copyWith(
+      {DateTime? created,
+      String? description,
+      DateTime? expires,
+      String? id,
+      DateTime? lastUsed,
+      String? maxInactiveSeconds,
+      List<String>? scope}) {
+    return ExtapiAccessToken(
+        created: created ?? this.created,
+        description: description ?? this.description,
+        expires: expires ?? this.expires,
+        id: id ?? this.id,
+        lastUsed: lastUsed ?? this.lastUsed,
+        maxInactiveSeconds: maxInactiveSeconds ?? this.maxInactiveSeconds,
+        scope: scope ?? this.scope);
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class ExtapiAccessTokenCreateRequest {
+  ExtapiAccessTokenCreateRequest({
+    this.description,
+    this.expires,
+    this.maxInactiveSeconds,
+    this.organizationId,
+    this.scope,
+  });
+
+  factory ExtapiAccessTokenCreateRequest.fromJson(Map<String, dynamic> json) =>
+      _$ExtapiAccessTokenCreateRequestFromJson(json);
+
+  @JsonKey(name: 'description')
+  final String? description;
+  @JsonKey(name: 'expires')
+  final DateTime? expires;
+  @JsonKey(name: 'maxInactiveSeconds')
+  final String? maxInactiveSeconds;
+  @JsonKey(name: 'organizationId')
+  final String? organizationId;
+  @JsonKey(name: 'scope', defaultValue: <String>[])
+  final List<String>? scope;
+  static const fromJsonFactory = _$ExtapiAccessTokenCreateRequestFromJson;
+  static const toJsonFactory = _$ExtapiAccessTokenCreateRequestToJson;
+  Map<String, dynamic> toJson() => _$ExtapiAccessTokenCreateRequestToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is ExtapiAccessTokenCreateRequest &&
+            (identical(other.description, description) ||
+                const DeepCollectionEquality()
+                    .equals(other.description, description)) &&
+            (identical(other.expires, expires) ||
+                const DeepCollectionEquality()
+                    .equals(other.expires, expires)) &&
+            (identical(other.maxInactiveSeconds, maxInactiveSeconds) ||
+                const DeepCollectionEquality()
+                    .equals(other.maxInactiveSeconds, maxInactiveSeconds)) &&
+            (identical(other.organizationId, organizationId) ||
+                const DeepCollectionEquality()
+                    .equals(other.organizationId, organizationId)) &&
+            (identical(other.scope, scope) ||
+                const DeepCollectionEquality().equals(other.scope, scope)));
+  }
+}
+
+extension $ExtapiAccessTokenCreateRequestExtension
+    on ExtapiAccessTokenCreateRequest {
+  ExtapiAccessTokenCreateRequest copyWith(
+      {String? description,
+      DateTime? expires,
+      String? maxInactiveSeconds,
+      String? organizationId,
+      List<String>? scope}) {
+    return ExtapiAccessTokenCreateRequest(
+        description: description ?? this.description,
+        expires: expires ?? this.expires,
+        maxInactiveSeconds: maxInactiveSeconds ?? this.maxInactiveSeconds,
+        organizationId: organizationId ?? this.organizationId,
+        scope: scope ?? this.scope);
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class ExtapiAccessTokenCreateResponse {
+  ExtapiAccessTokenCreateResponse({
+    this.authToken,
+  });
+
+  factory ExtapiAccessTokenCreateResponse.fromJson(Map<String, dynamic> json) =>
+      _$ExtapiAccessTokenCreateResponseFromJson(json);
+
+  @JsonKey(name: 'authToken')
+  final String? authToken;
+  static const fromJsonFactory = _$ExtapiAccessTokenCreateResponseFromJson;
+  static const toJsonFactory = _$ExtapiAccessTokenCreateResponseToJson;
+  Map<String, dynamic> toJson() =>
+      _$ExtapiAccessTokenCreateResponseToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is ExtapiAccessTokenCreateResponse &&
+            (identical(other.authToken, authToken) ||
+                const DeepCollectionEquality()
+                    .equals(other.authToken, authToken)));
+  }
+}
+
+extension $ExtapiAccessTokenCreateResponseExtension
+    on ExtapiAccessTokenCreateResponse {
+  ExtapiAccessTokenCreateResponse copyWith({String? authToken}) {
+    return ExtapiAccessTokenCreateResponse(
+        authToken: authToken ?? this.authToken);
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class ExtapiAccessTokenListResponse {
+  ExtapiAccessTokenListResponse({
+    this.token,
+  });
+
+  factory ExtapiAccessTokenListResponse.fromJson(Map<String, dynamic> json) =>
+      _$ExtapiAccessTokenListResponseFromJson(json);
+
+  @JsonKey(name: 'token', defaultValue: <ExtapiAccessToken>[])
+  final List<ExtapiAccessToken>? token;
+  static const fromJsonFactory = _$ExtapiAccessTokenListResponseFromJson;
+  static const toJsonFactory = _$ExtapiAccessTokenListResponseToJson;
+  Map<String, dynamic> toJson() => _$ExtapiAccessTokenListResponseToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is ExtapiAccessTokenListResponse &&
+            (identical(other.token, token) ||
+                const DeepCollectionEquality().equals(other.token, token)));
+  }
+}
+
+extension $ExtapiAccessTokenListResponseExtension
+    on ExtapiAccessTokenListResponse {
+  ExtapiAccessTokenListResponse copyWith({List<ExtapiAccessToken>? token}) {
+    return ExtapiAccessTokenListResponse(token: token ?? this.token);
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class ExtapiAccessTokenRevokeRequest {
+  ExtapiAccessTokenRevokeRequest({
+    this.id,
+  });
+
+  factory ExtapiAccessTokenRevokeRequest.fromJson(Map<String, dynamic> json) =>
+      _$ExtapiAccessTokenRevokeRequestFromJson(json);
+
+  @JsonKey(name: 'id', defaultValue: <String>[])
+  final List<String>? id;
+  static const fromJsonFactory = _$ExtapiAccessTokenRevokeRequestFromJson;
+  static const toJsonFactory = _$ExtapiAccessTokenRevokeRequestToJson;
+  Map<String, dynamic> toJson() => _$ExtapiAccessTokenRevokeRequestToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is ExtapiAccessTokenRevokeRequest &&
+            (identical(other.id, id) ||
+                const DeepCollectionEquality().equals(other.id, id)));
+  }
+}
+
+extension $ExtapiAccessTokenRevokeRequestExtension
+    on ExtapiAccessTokenRevokeRequest {
+  ExtapiAccessTokenRevokeRequest copyWith({List<String>? id}) {
+    return ExtapiAccessTokenRevokeRequest(id: id ?? this.id);
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class ExtapiAccessTokenRevokeResponse {
+  ExtapiAccessTokenRevokeResponse();
+
+  factory ExtapiAccessTokenRevokeResponse.fromJson(Map<String, dynamic> json) =>
+      _$ExtapiAccessTokenRevokeResponseFromJson(json);
+
+  static const fromJsonFactory = _$ExtapiAccessTokenRevokeResponseFromJson;
+  static const toJsonFactory = _$ExtapiAccessTokenRevokeResponseToJson;
+  Map<String, dynamic> toJson() =>
+      _$ExtapiAccessTokenRevokeResponseToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -4236,6 +4600,63 @@ extension $ExtapiApplicationListItemExtension on ExtapiApplicationListItem {
 }
 
 @JsonSerializable(explicitToJson: true)
+class ExtapiApplicationSettingsResponse {
+  ExtapiApplicationSettingsResponse({
+    this.uplink,
+  });
+
+  factory ExtapiApplicationSettingsResponse.fromJson(
+          Map<String, dynamic> json) =>
+      _$ExtapiApplicationSettingsResponseFromJson(json);
+
+  @JsonKey(name: 'uplink')
+  final Extapisettings? uplink;
+  static const fromJsonFactory = _$ExtapiApplicationSettingsResponseFromJson;
+  static const toJsonFactory = _$ExtapiApplicationSettingsResponseToJson;
+  Map<String, dynamic> toJson() =>
+      _$ExtapiApplicationSettingsResponseToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is ExtapiApplicationSettingsResponse &&
+            (identical(other.uplink, uplink) ||
+                const DeepCollectionEquality().equals(other.uplink, uplink)));
+  }
+}
+
+extension $ExtapiApplicationSettingsResponseExtension
+    on ExtapiApplicationSettingsResponse {
+  ExtapiApplicationSettingsResponse copyWith({Extapisettings? uplink}) {
+    return ExtapiApplicationSettingsResponse(uplink: uplink ?? this.uplink);
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class ExtapiAuthenticateUserRequest {
+  ExtapiAuthenticateUserRequest();
+
+  factory ExtapiAuthenticateUserRequest.fromJson(Map<String, dynamic> json) =>
+      _$ExtapiAuthenticateUserRequestFromJson(json);
+
+  static const fromJsonFactory = _$ExtapiAuthenticateUserRequestFromJson;
+  static const toJsonFactory = _$ExtapiAuthenticateUserRequestToJson;
+  Map<String, dynamic> toJson() => _$ExtapiAuthenticateUserRequestToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class ExtapiAuthenticateUserResponse {
+  ExtapiAuthenticateUserResponse();
+
+  factory ExtapiAuthenticateUserResponse.fromJson(Map<String, dynamic> json) =>
+      _$ExtapiAuthenticateUserResponseFromJson(json);
+
+  static const fromJsonFactory = _$ExtapiAuthenticateUserResponseFromJson;
+  static const toJsonFactory = _$ExtapiAuthenticateUserResponseToJson;
+  Map<String, dynamic> toJson() => _$ExtapiAuthenticateUserResponseToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
 class ExtapiAuthenticateWeChatUserRequest {
   ExtapiAuthenticateWeChatUserRequest({
     this.code,
@@ -4329,79 +4750,87 @@ extension $ExtapiAuthenticateWeChatUserResponseExtension
 }
 
 @JsonSerializable(explicitToJson: true)
-class ExtapiBTCAddLocksRequest {
-  ExtapiBTCAddLocksRequest({
-    this.durationDays,
-    this.gatewayMac,
-    this.orgId,
-    this.sessionId,
-    this.totalAmount,
+class ExtapiBTCDailyMining {
+  ExtapiBTCDailyMining({
+    this.amount,
+    this.miningDate,
+    this.miningPower,
   });
 
-  factory ExtapiBTCAddLocksRequest.fromJson(Map<String, dynamic> json) =>
-      _$ExtapiBTCAddLocksRequestFromJson(json);
+  factory ExtapiBTCDailyMining.fromJson(Map<String, dynamic> json) =>
+      _$ExtapiBTCDailyMiningFromJson(json);
 
-  @JsonKey(name: 'durationDays')
-  final String? durationDays;
-  @JsonKey(name: 'gatewayMac', defaultValue: <String>[])
-  final List<String>? gatewayMac;
-  @JsonKey(name: 'orgId')
-  final String? orgId;
-  @JsonKey(name: 'sessionId')
-  final String? sessionId;
-  @JsonKey(name: 'totalAmount')
-  final String? totalAmount;
-  static const fromJsonFactory = _$ExtapiBTCAddLocksRequestFromJson;
-  static const toJsonFactory = _$ExtapiBTCAddLocksRequestToJson;
-  Map<String, dynamic> toJson() => _$ExtapiBTCAddLocksRequestToJson(this);
+  @JsonKey(name: 'amount')
+  final String? amount;
+  @JsonKey(name: 'miningDate')
+  final DateTime? miningDate;
+  @JsonKey(name: 'miningPower')
+  final String? miningPower;
+  static const fromJsonFactory = _$ExtapiBTCDailyMiningFromJson;
+  static const toJsonFactory = _$ExtapiBTCDailyMiningToJson;
+  Map<String, dynamic> toJson() => _$ExtapiBTCDailyMiningToJson(this);
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is ExtapiBTCAddLocksRequest &&
-            (identical(other.durationDays, durationDays) ||
+        (other is ExtapiBTCDailyMining &&
+            (identical(other.amount, amount) ||
+                const DeepCollectionEquality().equals(other.amount, amount)) &&
+            (identical(other.miningDate, miningDate) ||
                 const DeepCollectionEquality()
-                    .equals(other.durationDays, durationDays)) &&
-            (identical(other.gatewayMac, gatewayMac) ||
+                    .equals(other.miningDate, miningDate)) &&
+            (identical(other.miningPower, miningPower) ||
                 const DeepCollectionEquality()
-                    .equals(other.gatewayMac, gatewayMac)) &&
-            (identical(other.orgId, orgId) ||
-                const DeepCollectionEquality().equals(other.orgId, orgId)) &&
-            (identical(other.sessionId, sessionId) ||
-                const DeepCollectionEquality()
-                    .equals(other.sessionId, sessionId)) &&
-            (identical(other.totalAmount, totalAmount) ||
-                const DeepCollectionEquality()
-                    .equals(other.totalAmount, totalAmount)));
+                    .equals(other.miningPower, miningPower)));
   }
 }
 
-extension $ExtapiBTCAddLocksRequestExtension on ExtapiBTCAddLocksRequest {
-  ExtapiBTCAddLocksRequest copyWith(
-      {String? durationDays,
-      List<String>? gatewayMac,
-      String? orgId,
-      String? sessionId,
-      String? totalAmount}) {
-    return ExtapiBTCAddLocksRequest(
-        durationDays: durationDays ?? this.durationDays,
-        gatewayMac: gatewayMac ?? this.gatewayMac,
-        orgId: orgId ?? this.orgId,
-        sessionId: sessionId ?? this.sessionId,
-        totalAmount: totalAmount ?? this.totalAmount);
+extension $ExtapiBTCDailyMiningExtension on ExtapiBTCDailyMining {
+  ExtapiBTCDailyMining copyWith(
+      {String? amount, DateTime? miningDate, String? miningPower}) {
+    return ExtapiBTCDailyMining(
+        amount: amount ?? this.amount,
+        miningDate: miningDate ?? this.miningDate,
+        miningPower: miningPower ?? this.miningPower);
   }
 }
 
 @JsonSerializable(explicitToJson: true)
-class ExtapiBTCAddLocksResponse {
-  ExtapiBTCAddLocksResponse();
+class ExtapiBTCGWMined {
+  ExtapiBTCGWMined({
+    this.amount,
+    this.gatewayMac,
+  });
 
-  factory ExtapiBTCAddLocksResponse.fromJson(Map<String, dynamic> json) =>
-      _$ExtapiBTCAddLocksResponseFromJson(json);
+  factory ExtapiBTCGWMined.fromJson(Map<String, dynamic> json) =>
+      _$ExtapiBTCGWMinedFromJson(json);
 
-  static const fromJsonFactory = _$ExtapiBTCAddLocksResponseFromJson;
-  static const toJsonFactory = _$ExtapiBTCAddLocksResponseToJson;
-  Map<String, dynamic> toJson() => _$ExtapiBTCAddLocksResponseToJson(this);
+  @JsonKey(name: 'amount')
+  final String? amount;
+  @JsonKey(name: 'gatewayMac')
+  final String? gatewayMac;
+  static const fromJsonFactory = _$ExtapiBTCGWMinedFromJson;
+  static const toJsonFactory = _$ExtapiBTCGWMinedToJson;
+  Map<String, dynamic> toJson() => _$ExtapiBTCGWMinedToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is ExtapiBTCGWMined &&
+            (identical(other.amount, amount) ||
+                const DeepCollectionEquality().equals(other.amount, amount)) &&
+            (identical(other.gatewayMac, gatewayMac) ||
+                const DeepCollectionEquality()
+                    .equals(other.gatewayMac, gatewayMac)));
+  }
+}
+
+extension $ExtapiBTCGWMinedExtension on ExtapiBTCGWMined {
+  ExtapiBTCGWMined copyWith({String? amount, String? gatewayMac}) {
+    return ExtapiBTCGWMined(
+        amount: amount ?? this.amount,
+        gatewayMac: gatewayMac ?? this.gatewayMac);
+  }
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -4437,35 +4866,35 @@ extension $ExtapiBTCListLocksResponseExtension on ExtapiBTCListLocksResponse {
 @JsonSerializable(explicitToJson: true)
 class ExtapiBTCLock {
   ExtapiBTCLock({
-    this.id,
-    this.created,
     this.amount,
-    this.gatewayMac,
-    this.unlockFrom,
-    this.lockTill,
-    this.unlocked,
     this.coolingOffEnds,
+    this.created,
+    this.gatewayMac,
+    this.id,
+    this.lockTill,
+    this.unlockFrom,
+    this.unlocked,
   });
 
   factory ExtapiBTCLock.fromJson(Map<String, dynamic> json) =>
       _$ExtapiBTCLockFromJson(json);
 
-  @JsonKey(name: 'id')
-  final String? id;
-  @JsonKey(name: 'created')
-  final DateTime? created;
   @JsonKey(name: 'amount')
   final String? amount;
-  @JsonKey(name: 'gatewayMac')
-  final String? gatewayMac;
-  @JsonKey(name: 'unlockFrom')
-  final DateTime? unlockFrom;
-  @JsonKey(name: 'lockTill')
-  final DateTime? lockTill;
-  @JsonKey(name: 'unlocked')
-  final DateTime? unlocked;
   @JsonKey(name: 'coolingOffEnds')
   final DateTime? coolingOffEnds;
+  @JsonKey(name: 'created')
+  final DateTime? created;
+  @JsonKey(name: 'gatewayMac')
+  final String? gatewayMac;
+  @JsonKey(name: 'id')
+  final String? id;
+  @JsonKey(name: 'lockTill')
+  final DateTime? lockTill;
+  @JsonKey(name: 'unlockFrom')
+  final DateTime? unlockFrom;
+  @JsonKey(name: 'unlocked')
+  final DateTime? unlocked;
   static const fromJsonFactory = _$ExtapiBTCLockFromJson;
   static const toJsonFactory = _$ExtapiBTCLockToJson;
   Map<String, dynamic> toJson() => _$ExtapiBTCLockToJson(this);
@@ -4474,50 +4903,199 @@ class ExtapiBTCLock {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is ExtapiBTCLock &&
-            (identical(other.id, id) ||
-                const DeepCollectionEquality().equals(other.id, id)) &&
+            (identical(other.amount, amount) ||
+                const DeepCollectionEquality().equals(other.amount, amount)) &&
+            (identical(other.coolingOffEnds, coolingOffEnds) ||
+                const DeepCollectionEquality()
+                    .equals(other.coolingOffEnds, coolingOffEnds)) &&
             (identical(other.created, created) ||
                 const DeepCollectionEquality()
                     .equals(other.created, created)) &&
-            (identical(other.amount, amount) ||
-                const DeepCollectionEquality().equals(other.amount, amount)) &&
             (identical(other.gatewayMac, gatewayMac) ||
                 const DeepCollectionEquality()
                     .equals(other.gatewayMac, gatewayMac)) &&
-            (identical(other.unlockFrom, unlockFrom) ||
-                const DeepCollectionEquality()
-                    .equals(other.unlockFrom, unlockFrom)) &&
+            (identical(other.id, id) ||
+                const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.lockTill, lockTill) ||
                 const DeepCollectionEquality()
                     .equals(other.lockTill, lockTill)) &&
+            (identical(other.unlockFrom, unlockFrom) ||
+                const DeepCollectionEquality()
+                    .equals(other.unlockFrom, unlockFrom)) &&
             (identical(other.unlocked, unlocked) ||
                 const DeepCollectionEquality()
-                    .equals(other.unlocked, unlocked)) &&
-            (identical(other.coolingOffEnds, coolingOffEnds) ||
-                const DeepCollectionEquality()
-                    .equals(other.coolingOffEnds, coolingOffEnds)));
+                    .equals(other.unlocked, unlocked)));
   }
 }
 
 extension $ExtapiBTCLockExtension on ExtapiBTCLock {
   ExtapiBTCLock copyWith(
-      {String? id,
+      {String? amount,
+      DateTime? coolingOffEnds,
       DateTime? created,
-      String? amount,
       String? gatewayMac,
-      DateTime? unlockFrom,
+      String? id,
       DateTime? lockTill,
-      DateTime? unlocked,
-      DateTime? coolingOffEnds}) {
+      DateTime? unlockFrom,
+      DateTime? unlocked}) {
     return ExtapiBTCLock(
-        id: id ?? this.id,
+        amount: amount ?? this.amount,
+        coolingOffEnds: coolingOffEnds ?? this.coolingOffEnds,
         created: created ?? this.created,
+        gatewayMac: gatewayMac ?? this.gatewayMac,
+        id: id ?? this.id,
+        lockTill: lockTill ?? this.lockTill,
+        unlockFrom: unlockFrom ?? this.unlockFrom,
+        unlocked: unlocked ?? this.unlocked);
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class ExtapiBTCLockRequest {
+  ExtapiBTCLockRequest({
+    this.amount,
+    this.gatewayMac,
+    this.orgId,
+  });
+
+  factory ExtapiBTCLockRequest.fromJson(Map<String, dynamic> json) =>
+      _$ExtapiBTCLockRequestFromJson(json);
+
+  @JsonKey(name: 'amount')
+  final String? amount;
+  @JsonKey(name: 'gatewayMac')
+  final String? gatewayMac;
+  @JsonKey(name: 'orgId')
+  final String? orgId;
+  static const fromJsonFactory = _$ExtapiBTCLockRequestFromJson;
+  static const toJsonFactory = _$ExtapiBTCLockRequestToJson;
+  Map<String, dynamic> toJson() => _$ExtapiBTCLockRequestToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is ExtapiBTCLockRequest &&
+            (identical(other.amount, amount) ||
+                const DeepCollectionEquality().equals(other.amount, amount)) &&
+            (identical(other.gatewayMac, gatewayMac) ||
+                const DeepCollectionEquality()
+                    .equals(other.gatewayMac, gatewayMac)) &&
+            (identical(other.orgId, orgId) ||
+                const DeepCollectionEquality().equals(other.orgId, orgId)));
+  }
+}
+
+extension $ExtapiBTCLockRequestExtension on ExtapiBTCLockRequest {
+  ExtapiBTCLockRequest copyWith(
+      {String? amount, String? gatewayMac, String? orgId}) {
+    return ExtapiBTCLockRequest(
         amount: amount ?? this.amount,
         gatewayMac: gatewayMac ?? this.gatewayMac,
-        unlockFrom: unlockFrom ?? this.unlockFrom,
-        lockTill: lockTill ?? this.lockTill,
-        unlocked: unlocked ?? this.unlocked,
-        coolingOffEnds: coolingOffEnds ?? this.coolingOffEnds);
+        orgId: orgId ?? this.orgId);
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class ExtapiBTCLockResponse {
+  ExtapiBTCLockResponse({
+    this.lockId,
+  });
+
+  factory ExtapiBTCLockResponse.fromJson(Map<String, dynamic> json) =>
+      _$ExtapiBTCLockResponseFromJson(json);
+
+  @JsonKey(name: 'lockId')
+  final String? lockId;
+  static const fromJsonFactory = _$ExtapiBTCLockResponseFromJson;
+  static const toJsonFactory = _$ExtapiBTCLockResponseToJson;
+  Map<String, dynamic> toJson() => _$ExtapiBTCLockResponseToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is ExtapiBTCLockResponse &&
+            (identical(other.lockId, lockId) ||
+                const DeepCollectionEquality().equals(other.lockId, lockId)));
+  }
+}
+
+extension $ExtapiBTCLockResponseExtension on ExtapiBTCLockResponse {
+  ExtapiBTCLockResponse copyWith({String? lockId}) {
+    return ExtapiBTCLockResponse(lockId: lockId ?? this.lockId);
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class ExtapiBTCMinedResponse {
+  ExtapiBTCMinedResponse({
+    this.gatewayMining,
+    this.totalAmount,
+  });
+
+  factory ExtapiBTCMinedResponse.fromJson(Map<String, dynamic> json) =>
+      _$ExtapiBTCMinedResponseFromJson(json);
+
+  @JsonKey(name: 'gatewayMining', defaultValue: <ExtapiBTCGWMined>[])
+  final List<ExtapiBTCGWMined>? gatewayMining;
+  @JsonKey(name: 'totalAmount')
+  final String? totalAmount;
+  static const fromJsonFactory = _$ExtapiBTCMinedResponseFromJson;
+  static const toJsonFactory = _$ExtapiBTCMinedResponseToJson;
+  Map<String, dynamic> toJson() => _$ExtapiBTCMinedResponseToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is ExtapiBTCMinedResponse &&
+            (identical(other.gatewayMining, gatewayMining) ||
+                const DeepCollectionEquality()
+                    .equals(other.gatewayMining, gatewayMining)) &&
+            (identical(other.totalAmount, totalAmount) ||
+                const DeepCollectionEquality()
+                    .equals(other.totalAmount, totalAmount)));
+  }
+}
+
+extension $ExtapiBTCMinedResponseExtension on ExtapiBTCMinedResponse {
+  ExtapiBTCMinedResponse copyWith(
+      {List<ExtapiBTCGWMined>? gatewayMining, String? totalAmount}) {
+    return ExtapiBTCMinedResponse(
+        gatewayMining: gatewayMining ?? this.gatewayMining,
+        totalAmount: totalAmount ?? this.totalAmount);
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class ExtapiBTCMiningHistoryResponse {
+  ExtapiBTCMiningHistoryResponse({
+    this.dailyMining,
+  });
+
+  factory ExtapiBTCMiningHistoryResponse.fromJson(Map<String, dynamic> json) =>
+      _$ExtapiBTCMiningHistoryResponseFromJson(json);
+
+  @JsonKey(name: 'dailyMining', defaultValue: <ExtapiBTCDailyMining>[])
+  final List<ExtapiBTCDailyMining>? dailyMining;
+  static const fromJsonFactory = _$ExtapiBTCMiningHistoryResponseFromJson;
+  static const toJsonFactory = _$ExtapiBTCMiningHistoryResponseToJson;
+  Map<String, dynamic> toJson() => _$ExtapiBTCMiningHistoryResponseToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is ExtapiBTCMiningHistoryResponse &&
+            (identical(other.dailyMining, dailyMining) ||
+                const DeepCollectionEquality()
+                    .equals(other.dailyMining, dailyMining)));
+  }
+}
+
+extension $ExtapiBTCMiningHistoryResponseExtension
+    on ExtapiBTCMiningHistoryResponse {
+  ExtapiBTCMiningHistoryResponse copyWith(
+      {List<ExtapiBTCDailyMining>? dailyMining}) {
+    return ExtapiBTCMiningHistoryResponse(
+        dailyMining: dailyMining ?? this.dailyMining);
   }
 }
 
@@ -4584,6 +5162,74 @@ extension $ExtapiBTCMiningSessionResponseExtension
         mxcLockDurationDays: mxcLockDurationDays ?? this.mxcLockDurationDays,
         sessionId: sessionId ?? this.sessionId,
         startDate: startDate ?? this.startDate);
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class ExtapiBTCUnlockRequest {
+  ExtapiBTCUnlockRequest({
+    this.lockId,
+    this.orgId,
+  });
+
+  factory ExtapiBTCUnlockRequest.fromJson(Map<String, dynamic> json) =>
+      _$ExtapiBTCUnlockRequestFromJson(json);
+
+  @JsonKey(name: 'lockId')
+  final String? lockId;
+  @JsonKey(name: 'orgId')
+  final String? orgId;
+  static const fromJsonFactory = _$ExtapiBTCUnlockRequestFromJson;
+  static const toJsonFactory = _$ExtapiBTCUnlockRequestToJson;
+  Map<String, dynamic> toJson() => _$ExtapiBTCUnlockRequestToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is ExtapiBTCUnlockRequest &&
+            (identical(other.lockId, lockId) ||
+                const DeepCollectionEquality().equals(other.lockId, lockId)) &&
+            (identical(other.orgId, orgId) ||
+                const DeepCollectionEquality().equals(other.orgId, orgId)));
+  }
+}
+
+extension $ExtapiBTCUnlockRequestExtension on ExtapiBTCUnlockRequest {
+  ExtapiBTCUnlockRequest copyWith({String? lockId, String? orgId}) {
+    return ExtapiBTCUnlockRequest(
+        lockId: lockId ?? this.lockId, orgId: orgId ?? this.orgId);
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class ExtapiBTCUnlockResponse {
+  ExtapiBTCUnlockResponse({
+    this.coolingOffTill,
+  });
+
+  factory ExtapiBTCUnlockResponse.fromJson(Map<String, dynamic> json) =>
+      _$ExtapiBTCUnlockResponseFromJson(json);
+
+  @JsonKey(name: 'coolingOffTill')
+  final DateTime? coolingOffTill;
+  static const fromJsonFactory = _$ExtapiBTCUnlockResponseFromJson;
+  static const toJsonFactory = _$ExtapiBTCUnlockResponseToJson;
+  Map<String, dynamic> toJson() => _$ExtapiBTCUnlockResponseToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is ExtapiBTCUnlockResponse &&
+            (identical(other.coolingOffTill, coolingOffTill) ||
+                const DeepCollectionEquality()
+                    .equals(other.coolingOffTill, coolingOffTill)));
+  }
+}
+
+extension $ExtapiBTCUnlockResponseExtension on ExtapiBTCUnlockResponse {
+  ExtapiBTCUnlockResponse copyWith({DateTime? coolingOffTill}) {
+    return ExtapiBTCUnlockResponse(
+        coolingOffTill: coolingOffTill ?? this.coolingOffTill);
   }
 }
 
@@ -5947,56 +6593,6 @@ class ExtapiCreateUserResponse {
 extension $ExtapiCreateUserResponseExtension on ExtapiCreateUserResponse {
   ExtapiCreateUserResponse copyWith({String? id}) {
     return ExtapiCreateUserResponse(id: id ?? this.id);
-  }
-}
-
-@JsonSerializable(explicitToJson: true)
-class ExtapiDFIAuthenticateUserResponse {
-  ExtapiDFIAuthenticateUserResponse({
-    this.mxcBalance,
-    this.organizationID,
-    this.userEmail,
-  });
-
-  factory ExtapiDFIAuthenticateUserResponse.fromJson(
-          Map<String, dynamic> json) =>
-      _$ExtapiDFIAuthenticateUserResponseFromJson(json);
-
-  @JsonKey(name: 'mxcBalance')
-  final String? mxcBalance;
-  @JsonKey(name: 'organizationID')
-  final String? organizationID;
-  @JsonKey(name: 'userEmail')
-  final String? userEmail;
-  static const fromJsonFactory = _$ExtapiDFIAuthenticateUserResponseFromJson;
-  static const toJsonFactory = _$ExtapiDFIAuthenticateUserResponseToJson;
-  Map<String, dynamic> toJson() =>
-      _$ExtapiDFIAuthenticateUserResponseToJson(this);
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is ExtapiDFIAuthenticateUserResponse &&
-            (identical(other.mxcBalance, mxcBalance) ||
-                const DeepCollectionEquality()
-                    .equals(other.mxcBalance, mxcBalance)) &&
-            (identical(other.organizationID, organizationID) ||
-                const DeepCollectionEquality()
-                    .equals(other.organizationID, organizationID)) &&
-            (identical(other.userEmail, userEmail) ||
-                const DeepCollectionEquality()
-                    .equals(other.userEmail, userEmail)));
-  }
-}
-
-extension $ExtapiDFIAuthenticateUserResponseExtension
-    on ExtapiDFIAuthenticateUserResponse {
-  ExtapiDFIAuthenticateUserResponse copyWith(
-      {String? mxcBalance, String? organizationID, String? userEmail}) {
-    return ExtapiDFIAuthenticateUserResponse(
-        mxcBalance: mxcBalance ?? this.mxcBalance,
-        organizationID: organizationID ?? this.organizationID,
-        userEmail: userEmail ?? this.userEmail);
   }
 }
 
@@ -7802,6 +8398,45 @@ extension $ExtapiDeviceQueueItemExtension on ExtapiDeviceQueueItem {
 }
 
 @JsonSerializable(explicitToJson: true)
+class ExtapiDeviceSettingsResponse {
+  ExtapiDeviceSettingsResponse({
+    this.downLink,
+    this.uplink,
+  });
+
+  factory ExtapiDeviceSettingsResponse.fromJson(Map<String, dynamic> json) =>
+      _$ExtapiDeviceSettingsResponseFromJson(json);
+
+  @JsonKey(name: 'downLink')
+  final Extapisettings? downLink;
+  @JsonKey(name: 'uplink')
+  final Extapisettings? uplink;
+  static const fromJsonFactory = _$ExtapiDeviceSettingsResponseFromJson;
+  static const toJsonFactory = _$ExtapiDeviceSettingsResponseToJson;
+  Map<String, dynamic> toJson() => _$ExtapiDeviceSettingsResponseToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is ExtapiDeviceSettingsResponse &&
+            (identical(other.downLink, downLink) ||
+                const DeepCollectionEquality()
+                    .equals(other.downLink, downLink)) &&
+            (identical(other.uplink, uplink) ||
+                const DeepCollectionEquality().equals(other.uplink, uplink)));
+  }
+}
+
+extension $ExtapiDeviceSettingsResponseExtension
+    on ExtapiDeviceSettingsResponse {
+  ExtapiDeviceSettingsResponse copyWith(
+      {Extapisettings? downLink, Extapisettings? uplink}) {
+    return ExtapiDeviceSettingsResponse(
+        downLink: downLink ?? this.downLink, uplink: uplink ?? this.uplink);
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
 class ExtapiDownlinkFrameLog {
   ExtapiDownlinkFrameLog({
     this.phyPayloadJSON,
@@ -8793,6 +9428,37 @@ extension $ExtapiGatewayStatsExtension on ExtapiGatewayStats {
         timestamp: timestamp ?? this.timestamp,
         txPacketsEmitted: txPacketsEmitted ?? this.txPacketsEmitted,
         txPacketsReceived: txPacketsReceived ?? this.txPacketsReceived);
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class ExtapiGenerateNewTokenResponse {
+  ExtapiGenerateNewTokenResponse({
+    this.token,
+  });
+
+  factory ExtapiGenerateNewTokenResponse.fromJson(Map<String, dynamic> json) =>
+      _$ExtapiGenerateNewTokenResponseFromJson(json);
+
+  @JsonKey(name: 'token')
+  final String? token;
+  static const fromJsonFactory = _$ExtapiGenerateNewTokenResponseFromJson;
+  static const toJsonFactory = _$ExtapiGenerateNewTokenResponseToJson;
+  Map<String, dynamic> toJson() => _$ExtapiGenerateNewTokenResponseToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is ExtapiGenerateNewTokenResponse &&
+            (identical(other.token, token) ||
+                const DeepCollectionEquality().equals(other.token, token)));
+  }
+}
+
+extension $ExtapiGenerateNewTokenResponseExtension
+    on ExtapiGenerateNewTokenResponse {
+  ExtapiGenerateNewTokenResponse copyWith({String? token}) {
+    return ExtapiGenerateNewTokenResponse(token: token ?? this.token);
   }
 }
 
@@ -10918,31 +11584,6 @@ extension $ExtapiInsertNewDefaultGatewayConfigResponseExtension
     return ExtapiInsertNewDefaultGatewayConfigResponse(
         status: status ?? this.status);
   }
-}
-
-@JsonSerializable(explicitToJson: true)
-class ExtapiJWTAuthenticationRequest {
-  ExtapiJWTAuthenticationRequest();
-
-  factory ExtapiJWTAuthenticationRequest.fromJson(Map<String, dynamic> json) =>
-      _$ExtapiJWTAuthenticationRequestFromJson(json);
-
-  static const fromJsonFactory = _$ExtapiJWTAuthenticationRequestFromJson;
-  static const toJsonFactory = _$ExtapiJWTAuthenticationRequestToJson;
-  Map<String, dynamic> toJson() => _$ExtapiJWTAuthenticationRequestToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class ExtapiJWTAuthenticationResponse {
-  ExtapiJWTAuthenticationResponse();
-
-  factory ExtapiJWTAuthenticationResponse.fromJson(Map<String, dynamic> json) =>
-      _$ExtapiJWTAuthenticationResponseFromJson(json);
-
-  static const fromJsonFactory = _$ExtapiJWTAuthenticationResponseFromJson;
-  static const toJsonFactory = _$ExtapiJWTAuthenticationResponseToJson;
-  Map<String, dynamic> toJson() =>
-      _$ExtapiJWTAuthenticationResponseToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -14729,18 +15370,6 @@ extension $ExtapiTopUpHistoryExtension on ExtapiTopUpHistory {
 }
 
 @JsonSerializable(explicitToJson: true)
-class ExtapiTopUpResponse {
-  ExtapiTopUpResponse();
-
-  factory ExtapiTopUpResponse.fromJson(Map<String, dynamic> json) =>
-      _$ExtapiTopUpResponseFromJson(json);
-
-  static const fromJsonFactory = _$ExtapiTopUpResponseFromJson;
-  static const toJsonFactory = _$ExtapiTopUpResponseToJson;
-  Map<String, dynamic> toJson() => _$ExtapiTopUpResponseToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
 class ExtapiTransaction {
   ExtapiTransaction({
     this.amount,
@@ -16148,32 +16777,120 @@ extension $ExtapiWithdrawHistoryExtension on ExtapiWithdrawHistory {
 }
 
 @JsonSerializable(explicitToJson: true)
-class ExtapiWithdrawResponse {
-  ExtapiWithdrawResponse({
-    this.msg,
+class Extapisettings {
+  Extapisettings({
+    this.description,
+    this.example,
+    this.hostname,
+    this.mqttVersion,
+    this.port,
+    this.topics,
+    this.username,
   });
 
-  factory ExtapiWithdrawResponse.fromJson(Map<String, dynamic> json) =>
-      _$ExtapiWithdrawResponseFromJson(json);
+  factory Extapisettings.fromJson(Map<String, dynamic> json) =>
+      _$ExtapisettingsFromJson(json);
 
-  @JsonKey(name: 'msg')
-  final String? msg;
-  static const fromJsonFactory = _$ExtapiWithdrawResponseFromJson;
-  static const toJsonFactory = _$ExtapiWithdrawResponseToJson;
-  Map<String, dynamic> toJson() => _$ExtapiWithdrawResponseToJson(this);
+  @JsonKey(name: 'description')
+  final String? description;
+  @JsonKey(name: 'example')
+  final String? example;
+  @JsonKey(name: 'hostname')
+  final String? hostname;
+  @JsonKey(name: 'mqttVersion')
+  final String? mqttVersion;
+  @JsonKey(name: 'port')
+  final String? port;
+  @JsonKey(name: 'topics', defaultValue: <Extapitopic>[])
+  final List<Extapitopic>? topics;
+  @JsonKey(name: 'username')
+  final String? username;
+  static const fromJsonFactory = _$ExtapisettingsFromJson;
+  static const toJsonFactory = _$ExtapisettingsToJson;
+  Map<String, dynamic> toJson() => _$ExtapisettingsToJson(this);
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is ExtapiWithdrawResponse &&
-            (identical(other.msg, msg) ||
-                const DeepCollectionEquality().equals(other.msg, msg)));
+        (other is Extapisettings &&
+            (identical(other.description, description) ||
+                const DeepCollectionEquality()
+                    .equals(other.description, description)) &&
+            (identical(other.example, example) ||
+                const DeepCollectionEquality()
+                    .equals(other.example, example)) &&
+            (identical(other.hostname, hostname) ||
+                const DeepCollectionEquality()
+                    .equals(other.hostname, hostname)) &&
+            (identical(other.mqttVersion, mqttVersion) ||
+                const DeepCollectionEquality()
+                    .equals(other.mqttVersion, mqttVersion)) &&
+            (identical(other.port, port) ||
+                const DeepCollectionEquality().equals(other.port, port)) &&
+            (identical(other.topics, topics) ||
+                const DeepCollectionEquality().equals(other.topics, topics)) &&
+            (identical(other.username, username) ||
+                const DeepCollectionEquality()
+                    .equals(other.username, username)));
   }
 }
 
-extension $ExtapiWithdrawResponseExtension on ExtapiWithdrawResponse {
-  ExtapiWithdrawResponse copyWith({String? msg}) {
-    return ExtapiWithdrawResponse(msg: msg ?? this.msg);
+extension $ExtapisettingsExtension on Extapisettings {
+  Extapisettings copyWith(
+      {String? description,
+      String? example,
+      String? hostname,
+      String? mqttVersion,
+      String? port,
+      List<Extapitopic>? topics,
+      String? username}) {
+    return Extapisettings(
+        description: description ?? this.description,
+        example: example ?? this.example,
+        hostname: hostname ?? this.hostname,
+        mqttVersion: mqttVersion ?? this.mqttVersion,
+        port: port ?? this.port,
+        topics: topics ?? this.topics,
+        username: username ?? this.username);
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class Extapitopic {
+  Extapitopic({
+    this.description,
+    this.topicString,
+  });
+
+  factory Extapitopic.fromJson(Map<String, dynamic> json) =>
+      _$ExtapitopicFromJson(json);
+
+  @JsonKey(name: 'description')
+  final String? description;
+  @JsonKey(name: 'topicString')
+  final String? topicString;
+  static const fromJsonFactory = _$ExtapitopicFromJson;
+  static const toJsonFactory = _$ExtapitopicToJson;
+  Map<String, dynamic> toJson() => _$ExtapitopicToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is Extapitopic &&
+            (identical(other.description, description) ||
+                const DeepCollectionEquality()
+                    .equals(other.description, description)) &&
+            (identical(other.topicString, topicString) ||
+                const DeepCollectionEquality()
+                    .equals(other.topicString, topicString)));
+  }
+}
+
+extension $ExtapitopicExtension on Extapitopic {
+  Extapitopic copyWith({String? description, String? topicString}) {
+    return Extapitopic(
+        description: description ?? this.description,
+        topicString: topicString ?? this.topicString);
   }
 }
 

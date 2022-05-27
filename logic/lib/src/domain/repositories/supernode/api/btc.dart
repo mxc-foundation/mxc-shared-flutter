@@ -20,16 +20,36 @@ class BtcRepository {
                 id: e.id!,
                 created: e.created!,
                 amount: e.amount!.toDecimal(),
-                gatewayMac: e.gatewayMac!)
+                gatewayMac: e.gatewayMac!,
+                unlockFrom: e.unlockFrom!,
+                lockTill: e.lockTill!,
+              )
             : BtcUnbonded(
                 id: e.id!,
                 created: e.created!,
                 amount: e.amount!.toDecimal(),
                 gatewayMac: e.gatewayMac!,
+                unlocked: e.unlocked!,
+                coolingOffEnds: e.coolingOffEnds!,
               ))
         .toList();
 
     resList.sort((a, b) => b.id.compareTo(a.id));
     return resList;
+  }
+
+  Future<BtcMined> btcMined() async {
+    final res =
+        await _client.bTCMining.bTCMined(orgId: _client.defaultOrganizationId);
+
+    return BtcMined(
+      totalAmount: res.body!.totalAmount!.toDecimal(),
+      gatewayMining: res.body!.gatewayMining!
+          .map((e) => GatewayMining(
+                gatewayMac: e.gatewayMac!,
+                amount: e.amount!.toDecimal(),
+              ))
+          .toList(),
+    );
   }
 }

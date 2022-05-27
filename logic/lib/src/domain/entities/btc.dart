@@ -6,12 +6,14 @@ abstract class BtcBondInfo {
     required this.created,
     required this.amount,
     required this.gatewayMac,
+    this.btcMined,
   });
 
   final String id;
   final DateTime created;
   final Decimal amount;
   final String gatewayMac;
+  final Decimal? btcMined;
 }
 
 class BtcBonded implements BtcBondInfo {
@@ -20,8 +22,9 @@ class BtcBonded implements BtcBondInfo {
     required this.created,
     required this.amount,
     required this.gatewayMac,
-    this.unlockFrom,
-    this.lockTill,
+    required this.unlockFrom,
+    required this.lockTill,
+    this.btcMined,
   });
 
   @override
@@ -36,8 +39,11 @@ class BtcBonded implements BtcBondInfo {
   @override
   final String gatewayMac;
 
-  final DateTime? unlockFrom;
-  final DateTime? lockTill;
+  @override
+  final Decimal? btcMined;
+
+  final DateTime unlockFrom;
+  final DateTime lockTill;
 }
 
 class BtcUnbonded implements BtcBondInfo {
@@ -46,8 +52,9 @@ class BtcUnbonded implements BtcBondInfo {
     required this.created,
     required this.amount,
     required this.gatewayMac,
-    this.unlocked,
-    this.coolingOffEnds,
+    required this.unlocked,
+    required this.coolingOffEnds,
+    this.btcMined,
   });
 
   @override
@@ -62,6 +69,29 @@ class BtcUnbonded implements BtcBondInfo {
   @override
   final String gatewayMac;
 
-  final DateTime? unlocked;
-  final DateTime? coolingOffEnds;
+  @override
+  final Decimal? btcMined;
+
+  final DateTime unlocked;
+  final DateTime coolingOffEnds;
+}
+
+class GatewayMining {
+  GatewayMining({
+    required this.gatewayMac,
+    required this.amount,
+  });
+
+  final String gatewayMac;
+  final Decimal amount;
+}
+
+class BtcMined {
+  BtcMined({
+    required this.totalAmount,
+    required this.gatewayMining,
+  });
+
+  final Decimal totalAmount;
+  final List<GatewayMining> gatewayMining;
 }
