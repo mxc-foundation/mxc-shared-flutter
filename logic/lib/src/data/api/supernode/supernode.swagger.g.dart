@@ -1651,6 +1651,82 @@ Map<String, dynamic> _$ExtapiDownlinkFrameLogToJson(
       'txInfo': instance.txInfo?.toJson(),
     };
 
+ExtapiEmail2FAPassedRequest _$ExtapiEmail2FAPassedRequestFromJson(
+        Map<String, dynamic> json) =>
+    ExtapiEmail2FAPassedRequest(
+      language: json['language'] as String?,
+    );
+
+Map<String, dynamic> _$ExtapiEmail2FAPassedRequestToJson(
+        ExtapiEmail2FAPassedRequest instance) =>
+    <String, dynamic>{
+      'language': instance.language,
+    };
+
+ExtapiEmail2FAPassedResponse _$ExtapiEmail2FAPassedResponseFromJson(
+        Map<String, dynamic> json) =>
+    ExtapiEmail2FAPassedResponse(
+      verified: json['verified'] as bool?,
+    );
+
+Map<String, dynamic> _$ExtapiEmail2FAPassedResponseToJson(
+        ExtapiEmail2FAPassedResponse instance) =>
+    <String, dynamic>{
+      'verified': instance.verified,
+    };
+
+ExtapiEmail2FARequestRequest _$ExtapiEmail2FARequestRequestFromJson(
+        Map<String, dynamic> json) =>
+    ExtapiEmail2FARequestRequest(
+      language: json['language'] as String?,
+    );
+
+Map<String, dynamic> _$ExtapiEmail2FARequestRequestToJson(
+        ExtapiEmail2FARequestRequest instance) =>
+    <String, dynamic>{
+      'language': instance.language,
+    };
+
+ExtapiEmail2FARequestResponse _$ExtapiEmail2FARequestResponseFromJson(
+        Map<String, dynamic> json) =>
+    ExtapiEmail2FARequestResponse(
+      sent: json['sent'] as bool?,
+    );
+
+Map<String, dynamic> _$ExtapiEmail2FARequestResponseToJson(
+        ExtapiEmail2FARequestResponse instance) =>
+    <String, dynamic>{
+      'sent': instance.sent,
+    };
+
+ExtapiEmail2FAVerifyRequest _$ExtapiEmail2FAVerifyRequestFromJson(
+        Map<String, dynamic> json) =>
+    ExtapiEmail2FAVerifyRequest(
+      code: json['code'] as String?,
+      language: json['language'] as String?,
+    );
+
+Map<String, dynamic> _$ExtapiEmail2FAVerifyRequestToJson(
+        ExtapiEmail2FAVerifyRequest instance) =>
+    <String, dynamic>{
+      'code': instance.code,
+      'language': instance.language,
+    };
+
+ExtapiEmail2FAVerifyResponse _$ExtapiEmail2FAVerifyResponseFromJson(
+        Map<String, dynamic> json) =>
+    ExtapiEmail2FAVerifyResponse(
+      remainedAttempts: json['remainedAttempts'] as int?,
+      verified: json['verified'] as bool?,
+    );
+
+Map<String, dynamic> _$ExtapiEmail2FAVerifyResponseToJson(
+        ExtapiEmail2FAVerifyResponse instance) =>
+    <String, dynamic>{
+      'remainedAttempts': instance.remainedAttempts,
+      'verified': instance.verified,
+    };
+
 ExtapiEnqueueDeviceQueueItemRequest
     _$ExtapiEnqueueDeviceQueueItemRequestFromJson(Map<String, dynamic> json) =>
         ExtapiEnqueueDeviceQueueItemRequest(

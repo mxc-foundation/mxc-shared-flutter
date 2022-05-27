@@ -3022,6 +3022,51 @@ abstract class UserService extends ChopperService {
       @Header('Grpc-Metadata-Authorization')
           String? grpcMetadataAuthorization});
 
+  ///Email2FAPassed used for verifying current email, to be able to do protected actions for a short period of time
+  ///@param body
+  ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
+
+  @Post(path: '/api/users/email-2fa-passed')
+  Future<chopper.Response<ExtapiEmail2FAPassedResponse>> email2FAPassed(
+      {@Body()
+      @required
+          ExtapiEmail2FAPassedRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
+
+  ///Email2FARequest used for verifying current email, to be able to do protected actions for a short period of time
+  ///@param body
+  ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
+
+  @Post(path: '/api/users/email-2fa-request')
+  Future<chopper.Response<ExtapiEmail2FARequestResponse>> email2FARequest(
+      {@Body()
+      @required
+          ExtapiEmail2FARequestRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
+
+  ///Email2FAVerify used for verifying current email, to be able to do protected actions for a short period of time
+  ///@param body
+  ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
+
+  @Post(path: '/api/users/email-2fa-verify')
+  Future<chopper.Response<ExtapiEmail2FAVerifyResponse>> email2FAVerify(
+      {@Body()
+      @required
+          ExtapiEmail2FAVerifyRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
+
   ///Add a new email address
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
@@ -3643,6 +3688,12 @@ final Map<Type, Object Function(Map<String, dynamic>)>
   ExtapiDeviceQueueItem: ExtapiDeviceQueueItem.fromJsonFactory,
   ExtapiDeviceSettingsResponse: ExtapiDeviceSettingsResponse.fromJsonFactory,
   ExtapiDownlinkFrameLog: ExtapiDownlinkFrameLog.fromJsonFactory,
+  ExtapiEmail2FAPassedRequest: ExtapiEmail2FAPassedRequest.fromJsonFactory,
+  ExtapiEmail2FAPassedResponse: ExtapiEmail2FAPassedResponse.fromJsonFactory,
+  ExtapiEmail2FARequestRequest: ExtapiEmail2FARequestRequest.fromJsonFactory,
+  ExtapiEmail2FARequestResponse: ExtapiEmail2FARequestResponse.fromJsonFactory,
+  ExtapiEmail2FAVerifyRequest: ExtapiEmail2FAVerifyRequest.fromJsonFactory,
+  ExtapiEmail2FAVerifyResponse: ExtapiEmail2FAVerifyResponse.fromJsonFactory,
   ExtapiEnqueueDeviceQueueItemRequest:
       ExtapiEnqueueDeviceQueueItemRequest.fromJsonFactory,
   ExtapiEnqueueDeviceQueueItemResponse:
@@ -8472,6 +8523,210 @@ extension $ExtapiDownlinkFrameLogExtension on ExtapiDownlinkFrameLog {
     return ExtapiDownlinkFrameLog(
         phyPayloadJSON: phyPayloadJSON ?? this.phyPayloadJSON,
         txInfo: txInfo ?? this.txInfo);
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class ExtapiEmail2FAPassedRequest {
+  ExtapiEmail2FAPassedRequest({
+    this.language,
+  });
+
+  factory ExtapiEmail2FAPassedRequest.fromJson(Map<String, dynamic> json) =>
+      _$ExtapiEmail2FAPassedRequestFromJson(json);
+
+  @JsonKey(name: 'language')
+  final String? language;
+  static const fromJsonFactory = _$ExtapiEmail2FAPassedRequestFromJson;
+  static const toJsonFactory = _$ExtapiEmail2FAPassedRequestToJson;
+  Map<String, dynamic> toJson() => _$ExtapiEmail2FAPassedRequestToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is ExtapiEmail2FAPassedRequest &&
+            (identical(other.language, language) ||
+                const DeepCollectionEquality()
+                    .equals(other.language, language)));
+  }
+}
+
+extension $ExtapiEmail2FAPassedRequestExtension on ExtapiEmail2FAPassedRequest {
+  ExtapiEmail2FAPassedRequest copyWith({String? language}) {
+    return ExtapiEmail2FAPassedRequest(language: language ?? this.language);
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class ExtapiEmail2FAPassedResponse {
+  ExtapiEmail2FAPassedResponse({
+    this.verified,
+  });
+
+  factory ExtapiEmail2FAPassedResponse.fromJson(Map<String, dynamic> json) =>
+      _$ExtapiEmail2FAPassedResponseFromJson(json);
+
+  @JsonKey(name: 'verified')
+  final bool? verified;
+  static const fromJsonFactory = _$ExtapiEmail2FAPassedResponseFromJson;
+  static const toJsonFactory = _$ExtapiEmail2FAPassedResponseToJson;
+  Map<String, dynamic> toJson() => _$ExtapiEmail2FAPassedResponseToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is ExtapiEmail2FAPassedResponse &&
+            (identical(other.verified, verified) ||
+                const DeepCollectionEquality()
+                    .equals(other.verified, verified)));
+  }
+}
+
+extension $ExtapiEmail2FAPassedResponseExtension
+    on ExtapiEmail2FAPassedResponse {
+  ExtapiEmail2FAPassedResponse copyWith({bool? verified}) {
+    return ExtapiEmail2FAPassedResponse(verified: verified ?? this.verified);
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class ExtapiEmail2FARequestRequest {
+  ExtapiEmail2FARequestRequest({
+    this.language,
+  });
+
+  factory ExtapiEmail2FARequestRequest.fromJson(Map<String, dynamic> json) =>
+      _$ExtapiEmail2FARequestRequestFromJson(json);
+
+  @JsonKey(name: 'language')
+  final String? language;
+  static const fromJsonFactory = _$ExtapiEmail2FARequestRequestFromJson;
+  static const toJsonFactory = _$ExtapiEmail2FARequestRequestToJson;
+  Map<String, dynamic> toJson() => _$ExtapiEmail2FARequestRequestToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is ExtapiEmail2FARequestRequest &&
+            (identical(other.language, language) ||
+                const DeepCollectionEquality()
+                    .equals(other.language, language)));
+  }
+}
+
+extension $ExtapiEmail2FARequestRequestExtension
+    on ExtapiEmail2FARequestRequest {
+  ExtapiEmail2FARequestRequest copyWith({String? language}) {
+    return ExtapiEmail2FARequestRequest(language: language ?? this.language);
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class ExtapiEmail2FARequestResponse {
+  ExtapiEmail2FARequestResponse({
+    this.sent,
+  });
+
+  factory ExtapiEmail2FARequestResponse.fromJson(Map<String, dynamic> json) =>
+      _$ExtapiEmail2FARequestResponseFromJson(json);
+
+  @JsonKey(name: 'sent')
+  final bool? sent;
+  static const fromJsonFactory = _$ExtapiEmail2FARequestResponseFromJson;
+  static const toJsonFactory = _$ExtapiEmail2FARequestResponseToJson;
+  Map<String, dynamic> toJson() => _$ExtapiEmail2FARequestResponseToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is ExtapiEmail2FARequestResponse &&
+            (identical(other.sent, sent) ||
+                const DeepCollectionEquality().equals(other.sent, sent)));
+  }
+}
+
+extension $ExtapiEmail2FARequestResponseExtension
+    on ExtapiEmail2FARequestResponse {
+  ExtapiEmail2FARequestResponse copyWith({bool? sent}) {
+    return ExtapiEmail2FARequestResponse(sent: sent ?? this.sent);
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class ExtapiEmail2FAVerifyRequest {
+  ExtapiEmail2FAVerifyRequest({
+    this.code,
+    this.language,
+  });
+
+  factory ExtapiEmail2FAVerifyRequest.fromJson(Map<String, dynamic> json) =>
+      _$ExtapiEmail2FAVerifyRequestFromJson(json);
+
+  @JsonKey(name: 'code')
+  final String? code;
+  @JsonKey(name: 'language')
+  final String? language;
+  static const fromJsonFactory = _$ExtapiEmail2FAVerifyRequestFromJson;
+  static const toJsonFactory = _$ExtapiEmail2FAVerifyRequestToJson;
+  Map<String, dynamic> toJson() => _$ExtapiEmail2FAVerifyRequestToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is ExtapiEmail2FAVerifyRequest &&
+            (identical(other.code, code) ||
+                const DeepCollectionEquality().equals(other.code, code)) &&
+            (identical(other.language, language) ||
+                const DeepCollectionEquality()
+                    .equals(other.language, language)));
+  }
+}
+
+extension $ExtapiEmail2FAVerifyRequestExtension on ExtapiEmail2FAVerifyRequest {
+  ExtapiEmail2FAVerifyRequest copyWith({String? code, String? language}) {
+    return ExtapiEmail2FAVerifyRequest(
+        code: code ?? this.code, language: language ?? this.language);
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class ExtapiEmail2FAVerifyResponse {
+  ExtapiEmail2FAVerifyResponse({
+    this.remainedAttempts,
+    this.verified,
+  });
+
+  factory ExtapiEmail2FAVerifyResponse.fromJson(Map<String, dynamic> json) =>
+      _$ExtapiEmail2FAVerifyResponseFromJson(json);
+
+  @JsonKey(name: 'remainedAttempts')
+  final int? remainedAttempts;
+  @JsonKey(name: 'verified')
+  final bool? verified;
+  static const fromJsonFactory = _$ExtapiEmail2FAVerifyResponseFromJson;
+  static const toJsonFactory = _$ExtapiEmail2FAVerifyResponseToJson;
+  Map<String, dynamic> toJson() => _$ExtapiEmail2FAVerifyResponseToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is ExtapiEmail2FAVerifyResponse &&
+            (identical(other.remainedAttempts, remainedAttempts) ||
+                const DeepCollectionEquality()
+                    .equals(other.remainedAttempts, remainedAttempts)) &&
+            (identical(other.verified, verified) ||
+                const DeepCollectionEquality()
+                    .equals(other.verified, verified)));
+  }
+}
+
+extension $ExtapiEmail2FAVerifyResponseExtension
+    on ExtapiEmail2FAVerifyResponse {
+  ExtapiEmail2FAVerifyResponse copyWith(
+      {int? remainedAttempts, bool? verified}) {
+    return ExtapiEmail2FAVerifyResponse(
+        remainedAttempts: remainedAttempts ?? this.remainedAttempts,
+        verified: verified ?? this.verified);
   }
 }
 

@@ -3377,6 +3377,63 @@ class _$UserService extends UserService {
   }
 
   @override
+  Future<Response<ExtapiEmail2FAPassedResponse>> email2FAPassed(
+      {ExtapiEmail2FAPassedRequest? body,
+      String? grpcMetadataXOTP,
+      String? grpcMetadataAuthorization}) {
+    final $url = '/api/users/email-2fa-passed';
+    final $headers = {
+      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
+      if (grpcMetadataAuthorization != null)
+        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
+    };
+
+    final $body = body;
+    final $request =
+        Request('POST', $url, client.baseUrl, body: $body, headers: $headers);
+    return client.send<ExtapiEmail2FAPassedResponse,
+        ExtapiEmail2FAPassedResponse>($request);
+  }
+
+  @override
+  Future<Response<ExtapiEmail2FARequestResponse>> email2FARequest(
+      {ExtapiEmail2FARequestRequest? body,
+      String? grpcMetadataXOTP,
+      String? grpcMetadataAuthorization}) {
+    final $url = '/api/users/email-2fa-request';
+    final $headers = {
+      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
+      if (grpcMetadataAuthorization != null)
+        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
+    };
+
+    final $body = body;
+    final $request =
+        Request('POST', $url, client.baseUrl, body: $body, headers: $headers);
+    return client.send<ExtapiEmail2FARequestResponse,
+        ExtapiEmail2FARequestResponse>($request);
+  }
+
+  @override
+  Future<Response<ExtapiEmail2FAVerifyResponse>> email2FAVerify(
+      {ExtapiEmail2FAVerifyRequest? body,
+      String? grpcMetadataXOTP,
+      String? grpcMetadataAuthorization}) {
+    final $url = '/api/users/email-2fa-verify';
+    final $headers = {
+      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
+      if (grpcMetadataAuthorization != null)
+        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
+    };
+
+    final $body = body;
+    final $request =
+        Request('POST', $url, client.baseUrl, body: $body, headers: $headers);
+    return client.send<ExtapiEmail2FAVerifyResponse,
+        ExtapiEmail2FAVerifyResponse>($request);
+  }
+
+  @override
   Future<Response<dynamic>> addEmail(
       {ExtapiAddEmailRequest? body,
       String? grpcMetadataXOTP,
