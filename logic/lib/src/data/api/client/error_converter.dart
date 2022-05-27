@@ -1,13 +1,22 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:chopper/chopper.dart';
 
-class ChopperErrorConverter extends ErrorConverter {
-  ChopperErrorConverter(this.storedTokenResolver);
+import 'api_exception.dart';
 
-  final String? Function()? storedTokenResolver;
+class ChopperErrorConverter extends ErrorConverter {
+  final StreamController<void> _onTokenExpired = StreamController.broadcast();
+  Stream<void> get onTokenExpired => _onTokenExpired.stream;
+
+  bool tokenExpired(Response response) =>
+      response.statusCode == 401 &&
+      (response.bodyString.contains(
+              'authentication failed: invalid authorization header') ||
+          response.bodyString
+              .contains('authentication failed: token does not exist') ||
+          response.bodyString
+              .contains('not authenticated: token does not exist'));
 
   @override
   FutureOr<Response> convertError<BodyType, InnerType>(Response response) {
@@ -17,17 +26,24 @@ class ChopperErrorConverter extends ErrorConverter {
     } on FormatException {
       error = null;
     }
+
+    if (tokenExpired(response)) {
+      _onTokenExpired.add(null);
+      if (error is Map<String, dynamic>) {
+        final tokenExpiredException = TokenExpiredException(
+          response.base.request?.url,
+          (error['message'] ?? error['error'] ?? 'Unknown error') as String,
+          error,
+        );
+        throw tokenExpiredException;
+      }
+    }
     if (error is Map<String, dynamic>) {
       final exception = ApiException(
         response.base.request?.url,
         (error['message'] ?? error['error'] ?? 'Unknown error') as String,
         error,
       );
-      if (exception.message
-              .contains('authentication failed: couldn\'t find JWT') &&
-          storedTokenResolver?.call() == null) {
-        log('Missing JWT Token. This situation is expected if logging out has been performed');
-      }
       throw exception;
     }
     if (response.statusCode == 404) {
@@ -43,15 +59,4 @@ class ChopperErrorConverter extends ErrorConverter {
       error,
     );
   }
-}
-
-class ApiException implements Exception {
-  ApiException(this.url, this.message, this.source);
-
-  final Uri? url;
-  final String message;
-  final Object? source;
-
-  @override
-  String toString() => '$message for $url';
 }
