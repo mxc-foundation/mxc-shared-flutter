@@ -95,4 +95,7 @@ class DemoSupernodeRepository implements SupernodeRepository {
 
   @override
   bool get loggedIn => true;
+
+  @override
+  void invalidateToken() {}
 }
