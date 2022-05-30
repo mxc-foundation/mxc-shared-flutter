@@ -95,4 +95,21 @@ class DemoUserRepository implements UserRepository {
       {required String verificationCode}) async {
     throw UnimplementedError();
   }
+
+  @override
+  Future<bool> needConfirmationToOtpChange() {
+    return Future.value(false);
+  }
+
+  @override
+  Future<void> requestOtpChangeConfirmation(String language) {
+    // TODO: implement requestOtpChangeConfirmation
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<bool> verifyOtpChange(String code) {
+    // TODO: implement verifyOtpChange
+    throw UnimplementedError();
+  }
 }

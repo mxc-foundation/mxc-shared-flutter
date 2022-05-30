@@ -24,6 +24,109 @@ Map<String, dynamic> _$CommonLocationToJson(CommonLocation instance) =>
       'source': commonLocationSourceToJson(instance.source),
     };
 
+ExtapiAccessToken _$ExtapiAccessTokenFromJson(Map<String, dynamic> json) =>
+    ExtapiAccessToken(
+      created: json['created'] == null
+          ? null
+          : DateTime.parse(json['created'] as String),
+      description: json['description'] as String?,
+      expires: json['expires'] == null
+          ? null
+          : DateTime.parse(json['expires'] as String),
+      id: json['id'] as String?,
+      lastUsed: json['lastUsed'] == null
+          ? null
+          : DateTime.parse(json['lastUsed'] as String),
+      maxInactiveSeconds: json['maxInactiveSeconds'] as String?,
+      scope:
+          (json['scope'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+    );
+
+Map<String, dynamic> _$ExtapiAccessTokenToJson(ExtapiAccessToken instance) =>
+    <String, dynamic>{
+      'created': instance.created?.toIso8601String(),
+      'description': instance.description,
+      'expires': instance.expires?.toIso8601String(),
+      'id': instance.id,
+      'lastUsed': instance.lastUsed?.toIso8601String(),
+      'maxInactiveSeconds': instance.maxInactiveSeconds,
+      'scope': instance.scope,
+    };
+
+ExtapiAccessTokenCreateRequest _$ExtapiAccessTokenCreateRequestFromJson(
+        Map<String, dynamic> json) =>
+    ExtapiAccessTokenCreateRequest(
+      description: json['description'] as String?,
+      expires: json['expires'] == null
+          ? null
+          : DateTime.parse(json['expires'] as String),
+      maxInactiveSeconds: json['maxInactiveSeconds'] as String?,
+      organizationId: json['organizationId'] as String?,
+      scope:
+          (json['scope'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+    );
+
+Map<String, dynamic> _$ExtapiAccessTokenCreateRequestToJson(
+        ExtapiAccessTokenCreateRequest instance) =>
+    <String, dynamic>{
+      'description': instance.description,
+      'expires': instance.expires?.toIso8601String(),
+      'maxInactiveSeconds': instance.maxInactiveSeconds,
+      'organizationId': instance.organizationId,
+      'scope': instance.scope,
+    };
+
+ExtapiAccessTokenCreateResponse _$ExtapiAccessTokenCreateResponseFromJson(
+        Map<String, dynamic> json) =>
+    ExtapiAccessTokenCreateResponse(
+      authToken: json['authToken'] as String?,
+    );
+
+Map<String, dynamic> _$ExtapiAccessTokenCreateResponseToJson(
+        ExtapiAccessTokenCreateResponse instance) =>
+    <String, dynamic>{
+      'authToken': instance.authToken,
+    };
+
+ExtapiAccessTokenListResponse _$ExtapiAccessTokenListResponseFromJson(
+        Map<String, dynamic> json) =>
+    ExtapiAccessTokenListResponse(
+      token: (json['token'] as List<dynamic>?)
+              ?.map(
+                  (e) => ExtapiAccessToken.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$ExtapiAccessTokenListResponseToJson(
+        ExtapiAccessTokenListResponse instance) =>
+    <String, dynamic>{
+      'token': instance.token?.map((e) => e.toJson()).toList(),
+    };
+
+ExtapiAccessTokenRevokeRequest _$ExtapiAccessTokenRevokeRequestFromJson(
+        Map<String, dynamic> json) =>
+    ExtapiAccessTokenRevokeRequest(
+      id: (json['id'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$ExtapiAccessTokenRevokeRequestToJson(
+        ExtapiAccessTokenRevokeRequest instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+    };
+
+ExtapiAccessTokenRevokeResponse _$ExtapiAccessTokenRevokeResponseFromJson(
+        Map<String, dynamic> json) =>
+    ExtapiAccessTokenRevokeResponse();
+
+Map<String, dynamic> _$ExtapiAccessTokenRevokeResponseToJson(
+        ExtapiAccessTokenRevokeResponse instance) =>
+    <String, dynamic>{};
+
 ExtapiActivateDeviceRequest _$ExtapiActivateDeviceRequestFromJson(
         Map<String, dynamic> json) =>
     ExtapiActivateDeviceRequest(
@@ -1102,6 +1205,94 @@ Map<String, dynamic> _$ExtapiDHXStakeToJson(ExtapiDHXStake instance) =>
       'organizationId': instance.organizationId,
     };
 
+ExtapiGateway _$ExtapiGatewayFromJson(Map<String, dynamic> json) =>
+    ExtapiGateway(
+      boards: (json['boards'] as List<dynamic>?)
+              ?.map(
+                  (e) => ExtapiGatewayBoard.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      description: json['description'] as String?,
+      discoveryEnabled: json['discoveryEnabled'] as bool?,
+      gatewayProfileID: json['gatewayProfileID'] as String?,
+      id: json['id'] as String?,
+      location: json['location'] == null
+          ? null
+          : CommonLocation.fromJson(json['location'] as Map<String, dynamic>),
+      metadata: json['metadata'],
+      name: json['name'] as String?,
+      networkServerID: json['networkServerID'] as String?,
+      organizationID: json['organizationID'] as String?,
+      tags: json['tags'],
+    );
+
+Map<String, dynamic> _$ExtapiGatewayToJson(ExtapiGateway instance) =>
+    <String, dynamic>{
+      'boards': instance.boards?.map((e) => e.toJson()).toList(),
+      'description': instance.description,
+      'discoveryEnabled': instance.discoveryEnabled,
+      'gatewayProfileID': instance.gatewayProfileID,
+      'id': instance.id,
+      'location': instance.location?.toJson(),
+      'metadata': instance.metadata,
+      'name': instance.name,
+      'networkServerID': instance.networkServerID,
+      'organizationID': instance.organizationID,
+      'tags': instance.tags,
+    };
+
+ExtapiGatewayBoard _$ExtapiGatewayBoardFromJson(Map<String, dynamic> json) =>
+    ExtapiGatewayBoard(
+      fineTimestampKey: json['fineTimestampKey'] as String?,
+      fpgaID: json['fpgaID'] as String?,
+    );
+
+Map<String, dynamic> _$ExtapiGatewayBoardToJson(ExtapiGatewayBoard instance) =>
+    <String, dynamic>{
+      'fineTimestampKey': instance.fineTimestampKey,
+      'fpgaID': instance.fpgaID,
+    };
+
+ExtapiGatewayListItem _$ExtapiGatewayListItemFromJson(
+        Map<String, dynamic> json) =>
+    ExtapiGatewayListItem(
+      createdAt: json['createdAt'] == null
+          ? null
+          : DateTime.parse(json['createdAt'] as String),
+      description: json['description'] as String?,
+      firstSeenAt: json['firstSeenAt'] == null
+          ? null
+          : DateTime.parse(json['firstSeenAt'] as String),
+      id: json['id'] as String?,
+      lastSeenAt: json['lastSeenAt'] == null
+          ? null
+          : DateTime.parse(json['lastSeenAt'] as String),
+      location: json['location'] == null
+          ? null
+          : CommonLocation.fromJson(json['location'] as Map<String, dynamic>),
+      name: json['name'] as String?,
+      networkServerID: json['networkServerID'] as String?,
+      organizationID: json['organizationID'] as String?,
+      updatedAt: json['updatedAt'] == null
+          ? null
+          : DateTime.parse(json['updatedAt'] as String),
+    );
+
+Map<String, dynamic> _$ExtapiGatewayListItemToJson(
+        ExtapiGatewayListItem instance) =>
+    <String, dynamic>{
+      'createdAt': instance.createdAt?.toIso8601String(),
+      'description': instance.description,
+      'firstSeenAt': instance.firstSeenAt?.toIso8601String(),
+      'id': instance.id,
+      'lastSeenAt': instance.lastSeenAt?.toIso8601String(),
+      'location': instance.location?.toJson(),
+      'name': instance.name,
+      'networkServerID': instance.networkServerID,
+      'organizationID': instance.organizationID,
+      'updatedAt': instance.updatedAt?.toIso8601String(),
+    };
+
 ExtapiDHXTotalMiningResponse _$ExtapiDHXTotalMiningResponseFromJson(
         Map<String, dynamic> json) =>
     ExtapiDHXTotalMiningResponse(
@@ -1420,6 +1611,82 @@ Map<String, dynamic> _$ExtapiDownlinkFrameLogToJson(
       'txInfo': instance.txInfo?.toJson(),
     };
 
+ExtapiEmail2FAPassedRequest _$ExtapiEmail2FAPassedRequestFromJson(
+        Map<String, dynamic> json) =>
+    ExtapiEmail2FAPassedRequest(
+      language: json['language'] as String?,
+    );
+
+Map<String, dynamic> _$ExtapiEmail2FAPassedRequestToJson(
+        ExtapiEmail2FAPassedRequest instance) =>
+    <String, dynamic>{
+      'language': instance.language,
+    };
+
+ExtapiEmail2FAPassedResponse _$ExtapiEmail2FAPassedResponseFromJson(
+        Map<String, dynamic> json) =>
+    ExtapiEmail2FAPassedResponse(
+      verified: json['verified'] as bool?,
+    );
+
+Map<String, dynamic> _$ExtapiEmail2FAPassedResponseToJson(
+        ExtapiEmail2FAPassedResponse instance) =>
+    <String, dynamic>{
+      'verified': instance.verified,
+    };
+
+ExtapiEmail2FARequestRequest _$ExtapiEmail2FARequestRequestFromJson(
+        Map<String, dynamic> json) =>
+    ExtapiEmail2FARequestRequest(
+      language: json['language'] as String?,
+    );
+
+Map<String, dynamic> _$ExtapiEmail2FARequestRequestToJson(
+        ExtapiEmail2FARequestRequest instance) =>
+    <String, dynamic>{
+      'language': instance.language,
+    };
+
+ExtapiEmail2FARequestResponse _$ExtapiEmail2FARequestResponseFromJson(
+        Map<String, dynamic> json) =>
+    ExtapiEmail2FARequestResponse(
+      sent: json['sent'] as bool?,
+    );
+
+Map<String, dynamic> _$ExtapiEmail2FARequestResponseToJson(
+        ExtapiEmail2FARequestResponse instance) =>
+    <String, dynamic>{
+      'sent': instance.sent,
+    };
+
+ExtapiEmail2FAVerifyRequest _$ExtapiEmail2FAVerifyRequestFromJson(
+        Map<String, dynamic> json) =>
+    ExtapiEmail2FAVerifyRequest(
+      code: json['code'] as String?,
+      language: json['language'] as String?,
+    );
+
+Map<String, dynamic> _$ExtapiEmail2FAVerifyRequestToJson(
+        ExtapiEmail2FAVerifyRequest instance) =>
+    <String, dynamic>{
+      'code': instance.code,
+      'language': instance.language,
+    };
+
+ExtapiEmail2FAVerifyResponse _$ExtapiEmail2FAVerifyResponseFromJson(
+        Map<String, dynamic> json) =>
+    ExtapiEmail2FAVerifyResponse(
+      remainedAttempts: json['remainedAttempts'] as int?,
+      verified: json['verified'] as bool?,
+    );
+
+Map<String, dynamic> _$ExtapiEmail2FAVerifyResponseToJson(
+        ExtapiEmail2FAVerifyResponse instance) =>
+    <String, dynamic>{
+      'remainedAttempts': instance.remainedAttempts,
+      'verified': instance.verified,
+    };
+
 ExtapiEnqueueDeviceQueueItemRequest
     _$ExtapiEnqueueDeviceQueueItemRequestFromJson(Map<String, dynamic> json) =>
         ExtapiEnqueueDeviceQueueItemRequest(
@@ -1491,94 +1758,6 @@ Map<String, dynamic> _$ExtapiFinishRegistrationRequestToJson(
       'organizationName': instance.organizationName,
       'password': instance.password,
       'userId': instance.userId,
-    };
-
-ExtapiGateway _$ExtapiGatewayFromJson(Map<String, dynamic> json) =>
-    ExtapiGateway(
-      boards: (json['boards'] as List<dynamic>?)
-              ?.map(
-                  (e) => ExtapiGatewayBoard.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          [],
-      description: json['description'] as String?,
-      discoveryEnabled: json['discoveryEnabled'] as bool?,
-      gatewayProfileID: json['gatewayProfileID'] as String?,
-      id: json['id'] as String?,
-      location: json['location'] == null
-          ? null
-          : CommonLocation.fromJson(json['location'] as Map<String, dynamic>),
-      metadata: json['metadata'],
-      name: json['name'] as String?,
-      networkServerID: json['networkServerID'] as String?,
-      organizationID: json['organizationID'] as String?,
-      tags: json['tags'],
-    );
-
-Map<String, dynamic> _$ExtapiGatewayToJson(ExtapiGateway instance) =>
-    <String, dynamic>{
-      'boards': instance.boards?.map((e) => e.toJson()).toList(),
-      'description': instance.description,
-      'discoveryEnabled': instance.discoveryEnabled,
-      'gatewayProfileID': instance.gatewayProfileID,
-      'id': instance.id,
-      'location': instance.location?.toJson(),
-      'metadata': instance.metadata,
-      'name': instance.name,
-      'networkServerID': instance.networkServerID,
-      'organizationID': instance.organizationID,
-      'tags': instance.tags,
-    };
-
-ExtapiGatewayBoard _$ExtapiGatewayBoardFromJson(Map<String, dynamic> json) =>
-    ExtapiGatewayBoard(
-      fineTimestampKey: json['fineTimestampKey'] as String?,
-      fpgaID: json['fpgaID'] as String?,
-    );
-
-Map<String, dynamic> _$ExtapiGatewayBoardToJson(ExtapiGatewayBoard instance) =>
-    <String, dynamic>{
-      'fineTimestampKey': instance.fineTimestampKey,
-      'fpgaID': instance.fpgaID,
-    };
-
-ExtapiGatewayListItem _$ExtapiGatewayListItemFromJson(
-        Map<String, dynamic> json) =>
-    ExtapiGatewayListItem(
-      createdAt: json['createdAt'] == null
-          ? null
-          : DateTime.parse(json['createdAt'] as String),
-      description: json['description'] as String?,
-      firstSeenAt: json['firstSeenAt'] == null
-          ? null
-          : DateTime.parse(json['firstSeenAt'] as String),
-      id: json['id'] as String?,
-      lastSeenAt: json['lastSeenAt'] == null
-          ? null
-          : DateTime.parse(json['lastSeenAt'] as String),
-      location: json['location'] == null
-          ? null
-          : CommonLocation.fromJson(json['location'] as Map<String, dynamic>),
-      name: json['name'] as String?,
-      networkServerID: json['networkServerID'] as String?,
-      organizationID: json['organizationID'] as String?,
-      updatedAt: json['updatedAt'] == null
-          ? null
-          : DateTime.parse(json['updatedAt'] as String),
-    );
-
-Map<String, dynamic> _$ExtapiGatewayListItemToJson(
-        ExtapiGatewayListItem instance) =>
-    <String, dynamic>{
-      'createdAt': instance.createdAt?.toIso8601String(),
-      'description': instance.description,
-      'firstSeenAt': instance.firstSeenAt?.toIso8601String(),
-      'id': instance.id,
-      'lastSeenAt': instance.lastSeenAt?.toIso8601String(),
-      'location': instance.location?.toJson(),
-      'name': instance.name,
-      'networkServerID': instance.networkServerID,
-      'organizationID': instance.organizationID,
-      'updatedAt': instance.updatedAt?.toIso8601String(),
     };
 
 ExtapiGatewayLocation _$ExtapiGatewayLocationFromJson(
