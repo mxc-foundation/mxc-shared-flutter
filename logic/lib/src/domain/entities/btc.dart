@@ -15,9 +15,7 @@ abstract class BtcBondInfo {
   final String gatewayMac;
   final Decimal? btcMined;
 
-  static const btcBondDuration = Duration(days: 58);
-
-  bool get passed58Days;
+  bool get canBeUnlocked;
 }
 
 class BtcBonded implements BtcBondInfo {
@@ -51,9 +49,7 @@ class BtcBonded implements BtcBondInfo {
   final DateTime lockTill;
 
   @override
-  bool get passed58Days {
-    return DateTime.now().isAfter(created.add(BtcBondInfo.btcBondDuration));
-  }
+  bool get canBeUnlocked => DateTime.now().isAfter(unlockFrom);
 }
 
 class BtcUnbonded implements BtcBondInfo {
@@ -86,9 +82,7 @@ class BtcUnbonded implements BtcBondInfo {
   final DateTime coolingOffEnds;
 
   @override
-  bool get passed58Days {
-    return false;
-  }
+  bool get canBeUnlocked => false;
 }
 
 class GatewayMining {
