@@ -9,7 +9,12 @@ class MxcAppBar extends StatelessWidget {
     this.action,
     this.leading,
     this.centerTitle = true,
-  })  : title = MxcAppBarTextTitle(text, centerTitle: centerTitle),
+    String? subtitle,
+  })  : title = MxcAppBarTextTitle(
+          text,
+          centerTitle: centerTitle,
+          subtitle: subtitle,
+        ),
         super(key: key);
 
   const MxcAppBar.custom({
@@ -27,7 +32,12 @@ class MxcAppBar extends StatelessWidget {
     this.padding,
     this.action,
     this.centerTitle = true,
-  })  : title = MxcAppBarTextTitle(text, centerTitle: centerTitle),
+    String? subtitle,
+  })  : title = MxcAppBarTextTitle(
+          text,
+          centerTitle: centerTitle,
+          subtitle: subtitle,
+        ),
         leading = Builder(
           builder: (context) => MxcAppBarButton.icon(
             Icons.arrow_back_ios,
@@ -43,7 +53,12 @@ class MxcAppBar extends StatelessWidget {
     this.padding,
     this.leading,
     this.centerTitle = true,
-  })  : title = MxcAppBarTextTitle(text, centerTitle: centerTitle),
+    String? subtitle,
+  })  : title = MxcAppBarTextTitle(
+          text,
+          centerTitle: centerTitle,
+          subtitle: subtitle,
+        ),
         action = Builder(
           builder: (context) => MxcAppBarButton.icon(
             Icons.close,
@@ -57,7 +72,12 @@ class MxcAppBar extends StatelessWidget {
     required String text,
     this.centerTitle = true,
     required VoidCallback onClose,
-  })  : title = MxcAppBarTextTitle(text, centerTitle: centerTitle),
+    String? subtitle,
+  })  : title = MxcAppBarTextTitle(
+          text,
+          centerTitle: centerTitle,
+          subtitle: subtitle,
+        ),
         leading = Builder(
           builder: (context) => MxcAppBarButton.icon(
             Icons.arrow_back_ios,
@@ -88,6 +108,7 @@ class MxcAppBar extends StatelessWidget {
             right: 16,
           ),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (leading != null)
             SizedBox(
@@ -188,14 +209,16 @@ class MxcAppBarTextTitle extends StatelessWidget {
     this.text, {
     Key? key,
     this.centerTitle = true,
+    this.subtitle,
   }) : super(key: key);
 
   final bool centerTitle;
   final String text;
+  final String? subtitle;
 
   @override
   Widget build(BuildContext context) {
-    return Text(
+    final titleWidget = Text(
       text,
       textAlign: centerTitle ? TextAlign.center : TextAlign.left,
       style: FontTheme.of(context).body2(),
@@ -203,5 +226,25 @@ class MxcAppBarTextTitle extends StatelessWidget {
       overflow: TextOverflow.ellipsis,
       maxLines: 1,
     );
+    if (subtitle != null) {
+      return Column(
+        children: [
+          titleWidget,
+          const SizedBox(height: 2),
+          Padding(
+            padding: EdgeInsets.only(
+              left: centerTitle ? 15 : 0,
+              right: 15,
+            ),
+            child: Text(
+              subtitle!,
+              textAlign: centerTitle ? TextAlign.center : TextAlign.left,
+              style: FontTheme.of(context).caption1.secondary(),
+            ),
+          ),
+        ],
+      );
+    }
+    return titleWidget;
   }
 }
