@@ -1,7 +1,7 @@
 import 'package:decimal/decimal.dart';
 
 abstract class BtcBondInfo {
-  BtcBondInfo({
+  const BtcBondInfo({
     required this.id,
     required this.created,
     required this.amount,
@@ -14,6 +14,10 @@ abstract class BtcBondInfo {
   final Decimal amount;
   final String gatewayMac;
   final Decimal? btcMined;
+
+  static const btcBondDuration = Duration(days: 58);
+
+  bool get passed58Days;
 }
 
 class BtcBonded implements BtcBondInfo {
@@ -43,7 +47,13 @@ class BtcBonded implements BtcBondInfo {
   final Decimal? btcMined;
 
   final DateTime unlockFrom;
+
   final DateTime lockTill;
+
+  @override
+  bool get passed58Days {
+    return DateTime.now().isAfter(created.add(BtcBondInfo.btcBondDuration));
+  }
 }
 
 class BtcUnbonded implements BtcBondInfo {
@@ -74,6 +84,11 @@ class BtcUnbonded implements BtcBondInfo {
 
   final DateTime unlocked;
   final DateTime coolingOffEnds;
+
+  @override
+  bool get passed58Days {
+    return false;
+  }
 }
 
 class GatewayMining {
