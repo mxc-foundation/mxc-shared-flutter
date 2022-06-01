@@ -9,6 +9,7 @@ class MxcSlider extends StatelessWidget {
     this.labels,
     this.divisions,
     this.max,
+    this.enabled = true,
   })  : assert(labels == null || labels.length >= 3),
         super(key: key);
 
@@ -19,6 +20,7 @@ class MxcSlider extends StatelessWidget {
         labels = null,
         divisions = null,
         max = null,
+        enabled = false,
         super(key: key);
 
   final double? value;
@@ -26,6 +28,7 @@ class MxcSlider extends StatelessWidget {
   final void Function(double)? onChanged;
   final List<String>? labels;
   final int? divisions;
+  final bool enabled;
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +55,7 @@ class MxcSlider extends StatelessWidget {
                   )
                 : Slider(
                     value: value!,
-                    onChanged: onChanged,
+                    onChanged: enabled ? onChanged : null,
                     max: max ?? 1,
                     activeColor: MxcScopedTheme.of(context).primaryColor,
                     divisions: divisions,
@@ -121,6 +124,7 @@ class MxcSliderWithMiniTextField extends StatefulWidget {
     this.min = 0,
     this.max = 1,
     this.errorMsg,
+    this.enabled = true,
   }) : super(key: key);
 
   final double value;
@@ -129,6 +133,7 @@ class MxcSliderWithMiniTextField extends StatefulWidget {
   final String? errorMsg;
   final void Function(double) onChanged;
   final String text;
+  final bool enabled;
 
   @override
   State<MxcSliderWithMiniTextField> createState() =>
@@ -194,6 +199,7 @@ class _MxcSliderWithMiniTextFieldState
               controller: controller,
               error: widget.errorMsg != null,
               onChanged: widget.onChanged,
+              disabled: !widget.enabled,
             ),
           ],
         ),
@@ -203,6 +209,7 @@ class _MxcSliderWithMiniTextFieldState
           max: widget.max.toDouble(),
           value: widget.value.toDouble(),
           onChanged: widget.onChanged,
+          enabled: widget.enabled,
         ),
       ],
     );

@@ -55,4 +55,8 @@ class DemoBtcRepository implements BtcRepository {
             (previousValue, element) => previousValue + element.amount),
         gatewayMining: gatewayMinings);
   }
+
+  @override
+  Future<void> lock(
+      {required Decimal amount, required String gatewayMac}) async {}
 }

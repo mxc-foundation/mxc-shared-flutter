@@ -1,3 +1,4 @@
+import 'package:decimal/decimal.dart';
 import 'package:mxc_logic/mxc_logic.dart';
 import 'package:mxc_logic/src/data/data.dart';
 import 'package:mxc_logic/src/domain/repositories/internal/shared_mappers.dart';
@@ -51,5 +52,19 @@ class BtcRepository {
               ))
           .toList(),
     );
+  }
+
+  Future<void> lock({
+    required Decimal amount,
+    required String gatewayMac,
+  }) async {
+    final res = await _client.bTCMining.bTCLock(
+      body: ExtapiBTCLockRequest(
+        amount: amount.toString(),
+        gatewayMac: gatewayMac,
+        orgId: _client.defaultOrganizationId,
+      ),
+    );
+    assert(res.body?.lockId != null);
   }
 }
