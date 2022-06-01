@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:mxc_ui/mxc_ui.dart';
 
@@ -154,7 +156,7 @@ class _MxcSliderWithMiniTextFieldState
         _previousText = controller.text;
         final newValue = double.tryParse(controller.text);
         if (newValue == null) return;
-        widget.onChanged(newValue);
+        _onChanged(newValue);
       }
     });
     _updateText(widget.value);
@@ -163,6 +165,11 @@ class _MxcSliderWithMiniTextFieldState
   void _updateText(double value) {
     controller.text = value.toString();
     _previousText = value.toString();
+  }
+
+  void _onChanged(double value) {
+    if (widget.value == value) return;
+    widget.onChanged(value);
   }
 
   @override
@@ -198,7 +205,7 @@ class _MxcSliderWithMiniTextFieldState
               key: null,
               controller: controller,
               error: widget.errorMsg != null,
-              onChanged: widget.onChanged,
+              onChanged: _onChanged,
               disabled: !widget.enabled,
             ),
           ],
@@ -206,10 +213,13 @@ class _MxcSliderWithMiniTextFieldState
         const SizedBox(height: 8),
         MxcSlider(
           key: null,
-          max: widget.max.toDouble(),
-          value: widget.value.toDouble(),
-          onChanged: widget.onChanged,
-          enabled: widget.enabled,
+          max: max(0, widget.max - widget.min),
+          value: max(0, widget.value - widget.min),
+          onChanged: (v) => _onChanged(v + widget.min),
+          enabled: max(0, widget.max - widget.min) == 0 &&
+                  max(0, widget.value - widget.min) == 0
+              ? false
+              : widget.enabled,
         ),
       ],
     );

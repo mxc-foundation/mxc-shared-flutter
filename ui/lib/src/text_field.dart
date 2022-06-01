@@ -487,7 +487,7 @@ class MxcMiniTextField extends FormField<String> {
               onChanged: onChanged,
               focusNode: focusNode,
               disabled: disabled,
-              error: error,
+              error: field.errorText != null || error,
               width: width,
             );
           },
@@ -594,7 +594,11 @@ class _MxcMiniNonFormTextFieldState extends State<_MxcMiniNonFormTextField> {
           textAlign: TextAlign.center,
           onChanged: widget.onChanged == null
               ? null
-              : (String s) => widget.onChanged!(double.parse(s)),
+              : (String s) {
+                  final v = double.tryParse(s);
+                  if (v == null) return;
+                  widget.onChanged!(v);
+                },
           decoration: const InputDecoration(
             isDense: true,
             enabledBorder: InputBorder.none,
