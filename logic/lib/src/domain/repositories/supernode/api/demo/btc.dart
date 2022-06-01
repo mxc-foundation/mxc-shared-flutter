@@ -57,6 +57,11 @@ class DemoBtcRepository implements BtcRepository {
   }
 
   @override
-  Future<void> lock(
-      {required Decimal amount, required String gatewayMac}) async {}
+  Future<void> lock({
+    required Decimal amount,
+    required String gatewayMac,
+  }) async {}
+
+  @override
+  Future<void> unlock({required String lockId}) async {}
 }

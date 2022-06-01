@@ -15,25 +15,25 @@ class BtcRepository {
     final now = DateTime.now();
     final list = res.body!.lock!;
 
-    final resList = list
-        .map((e) => e.lockTill!.toLocal().isBefore(now)
-            ? BtcBonded(
-                id: e.id!,
-                created: e.created!,
-                amount: e.amount!.toDecimal(),
-                gatewayMac: e.gatewayMac!,
-                unlockFrom: e.unlockFrom!,
-                lockTill: e.lockTill!,
-              )
-            : BtcUnbonded(
-                id: e.id!,
-                created: e.created!,
-                amount: e.amount!.toDecimal(),
-                gatewayMac: e.gatewayMac!,
-                unlocked: e.unlocked!,
-                coolingOffEnds: e.coolingOffEnds!,
-              ))
-        .toList();
+    final resList = list.map((btcLock) {
+      return btcLock.lockTill!.toLocal().isBefore(now)
+          ? BtcUnbonded(
+              id: btcLock.id!,
+              created: btcLock.created!,
+              amount: btcLock.amount!.toDecimal(),
+              gatewayMac: btcLock.gatewayMac!,
+              unlocked: btcLock.unlocked!,
+              coolingOffEnds: btcLock.coolingOffEnds!,
+            )
+          : BtcBonded(
+              id: btcLock.id!,
+              created: btcLock.created!,
+              amount: btcLock.amount!.toDecimal(),
+              gatewayMac: btcLock.gatewayMac!,
+              unlockFrom: btcLock.unlockFrom!,
+              lockTill: btcLock.lockTill!,
+            );
+    }).toList();
 
     resList.sort((a, b) => b.id.compareTo(a.id));
     return resList;
@@ -66,5 +66,16 @@ class BtcRepository {
       ),
     );
     assert(res.body?.lockId != null);
+  }
+
+  Future<void> unlock({
+    required String lockId,
+  }) async {
+    await _client.bTCMining.bTCUnlock(
+      body: ExtapiBTCUnlockRequest(
+        lockId: lockId,
+        orgId: _client.defaultOrganizationId,
+      ),
+    );
   }
 }

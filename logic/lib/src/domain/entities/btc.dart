@@ -15,7 +15,7 @@ abstract class BtcBondInfo {
   final String gatewayMac;
   final Decimal? btcMined;
 
-  bool get canBeUnlocked;
+  bool get canBeUnbonded;
 }
 
 class BtcBonded implements BtcBondInfo {
@@ -49,7 +49,7 @@ class BtcBonded implements BtcBondInfo {
   final DateTime lockTill;
 
   @override
-  bool get canBeUnlocked => DateTime.now().isAfter(unlockFrom.toLocal());
+  bool get canBeUnbonded => DateTime.now().isAfter(unlockFrom.toLocal());
 }
 
 class BtcUnbonded implements BtcBondInfo {
@@ -79,10 +79,11 @@ class BtcUnbonded implements BtcBondInfo {
   final Decimal? btcMined;
 
   final DateTime unlocked;
+
   final DateTime coolingOffEnds;
 
   @override
-  bool get canBeUnlocked => false;
+  bool get canBeUnbonded => false;
 }
 
 class GatewayMining {
