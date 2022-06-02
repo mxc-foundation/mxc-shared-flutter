@@ -438,18 +438,6 @@ class ImagesThemeDark extends ImagesTheme {
   const ImagesThemeDark._() : super._();
 
   @override
-  ImageProvider get logoMxc => const AssetImage(
-        'assets/images/wallet/logo-mxc-dark.png',
-        package: mxcUiPackageName,
-      );
-
-  @override
-  ImageProvider get logoMxcBig => const AssetImage(
-        'assets/images/wallet/logo-mxc-big-dark.png',
-        package: mxcUiPackageName,
-      );
-
-  @override
   ImageProvider get logoDhx => const AssetImage(
         'assets/images/wallet/logo-dhx-dark.png',
         package: mxcUiPackageName,
