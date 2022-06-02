@@ -102,7 +102,7 @@ class TextStylePack {
       DecoratableTextStyle(_primary.copyWith(color: colorsTheme.textError));
 
   DecoratableTextStyle get mxc =>
-      DecoratableTextStyle(_primary.copyWith(color: colorsTheme.mxcBlue));
+      DecoratableTextStyle(_primary.copyWith(color: colorsTheme.purpleMain));
 
   DecoratableTextStyle get dhx =>
       DecoratableTextStyle(_primary.copyWith(color: colorsTheme.dhxBlue));
@@ -111,7 +111,7 @@ class TextStylePack {
       DecoratableTextStyle(_primary.copyWith(color: colorsTheme.btcYellow));
 
   DecoratableTextStyle get button => DecoratableTextStyle(
-        _primary.copyWith(color: colorsTheme.buttonIconTextColor),
+        _primary.copyWith(color: colorsTheme.white),
       );
 
   DecoratableTextStyle get buttonDisabled => DecoratableTextStyle(

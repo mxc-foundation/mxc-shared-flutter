@@ -49,7 +49,7 @@ abstract class MxcCircleButton extends StatelessWidget {
     if (onTap == null) {
       color = ColorsTheme.of(context).textLabel;
     } else if (filled) {
-      color = ColorsTheme.of(context).buttonIconTextColor;
+      color = ColorsTheme.of(context).white;
     } else {
       color = this.color ?? MxcScopedTheme.of(context).primaryColor;
     }
