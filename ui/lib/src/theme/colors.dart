@@ -92,7 +92,7 @@ class ColorsThemeDark implements ColorsTheme {
   final purpleMain = const Color(0xFFA885E0);
 
   @override
-  final purple600 = const Color(0xFF2A0F69);
+  final purple600 = const Color(0xFFA885E0);
 
   @override
   final purple500 = const Color(0xFF967BC3);
