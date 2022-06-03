@@ -271,21 +271,6 @@ class ImagesTheme {
         package: mxcUiPackageName,
       );
 
-  ImageProvider get mxcSite1 => const AssetImage(
-        'assets/images/login/mxc_1.png',
-        package: mxcUiPackageName,
-      );
-
-  ImageProvider get mxcSite2 => const AssetImage(
-        'assets/images/login/mxc_2.png',
-        package: mxcUiPackageName,
-      );
-
-  ImageProvider get mxcSite3 => const AssetImage(
-        'assets/images/login/mxc_3.png',
-        package: mxcUiPackageName,
-      );
-
   ImageProvider get dhxSite => const AssetImage(
         'assets/images/login/dhx_site.png',
         package: mxcUiPackageName,
@@ -460,18 +445,6 @@ class ImagesThemeDark extends ImagesTheme {
   const ImagesThemeDark._() : super._();
 
   @override
-  ImageProvider get logoMxc => const AssetImage(
-        'assets/images/wallet/logo-mxc-dark.png',
-        package: mxcUiPackageName,
-      );
-
-  @override
-  ImageProvider get logoMxcBig => const AssetImage(
-        'assets/images/wallet/logo-mxc-big-dark.png',
-        package: mxcUiPackageName,
-      );
-
-  @override
   ImageProvider get logoDhx => const AssetImage(
         'assets/images/wallet/logo-dhx-dark.png',
         package: mxcUiPackageName,
@@ -509,12 +482,6 @@ class ImagesThemeDark extends ImagesTheme {
         package: mxcUiPackageName,
       );
 
-  @override
-  ImageProvider get mxc => const AssetImage(
-        'assets/images/login/mxc-dark.png',
-        package: mxcUiPackageName,
-      );
-
   // wallet
   @override
   ImageProvider get minerBoostGraph => const AssetImage(
@@ -545,6 +512,12 @@ class ImagesThemeDark extends ImagesTheme {
         'assets/images/wallet/calendar3-dark.png',
         package: mxcUiPackageName,
       );
+
+  //settings
+  ImageProvider get datadashIcon => const AssetImage(
+    'assets/images/settings/datadash_icon_dark.png',
+    package: mxcUiPackageName,
+  );
 
   //gateway
   @override
