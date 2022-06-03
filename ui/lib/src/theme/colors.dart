@@ -69,7 +69,6 @@ class ColorsTheme {
   final white = Colors.white;
   final buttonDisabledBackground = const Color(0xFFE3E3E5);
   final buttonDisabledLabel = const Color(0xFFBBBFC6);
-  final transparent = Colors.transparent;
 
   Color get shadow => purple200;
   Color get shadow2 => Colors.black.withOpacity(0.107);
@@ -196,9 +195,6 @@ class ColorsThemeDark implements ColorsTheme {
 
   @override
   final buttonDisabledLabel = const Color(0xFF4E5659);
-
-  @override
-  final transparent = Colors.transparent;
 
   @override
   Color get shadow => purple200;

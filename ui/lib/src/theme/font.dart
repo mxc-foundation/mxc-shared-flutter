@@ -121,9 +121,6 @@ class TextStylePack {
   DecoratableTextStyle get health => DecoratableTextStyle(
         _primary.copyWith(color: colorsTheme.minerHealthRed),
       );
-
-  DecoratableTextStyle get transparent =>
-      DecoratableTextStyle(_primary.copyWith(color: colorsTheme.transparent));
 }
 
 class DecoratableTextStyle {
