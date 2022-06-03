@@ -460,12 +460,6 @@ class ImagesThemeDark extends ImagesTheme {
         package: mxcUiPackageName,
       );
 
-  @override
-  ImageProvider get mxc => const AssetImage(
-        'assets/images/login/mxc-dark.png',
-        package: mxcUiPackageName,
-      );
-
   // wallet
   @override
   ImageProvider get minerBoostGraph => const AssetImage(
