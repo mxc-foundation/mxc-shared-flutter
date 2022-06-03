@@ -266,21 +266,6 @@ class ImagesTheme {
         package: mxcUiPackageName,
       );
 
-  ImageProvider get mxcSite1 => const AssetImage(
-        'assets/images/login/mxc_1.png',
-        package: mxcUiPackageName,
-      );
-
-  ImageProvider get mxcSite2 => const AssetImage(
-        'assets/images/login/mxc_2.png',
-        package: mxcUiPackageName,
-      );
-
-  ImageProvider get mxcSite3 => const AssetImage(
-        'assets/images/login/mxc_3.png',
-        package: mxcUiPackageName,
-      );
-
   ImageProvider get dhxSite => const AssetImage(
         'assets/images/login/dhx_site.png',
         package: mxcUiPackageName,
