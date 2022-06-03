@@ -12,11 +12,10 @@ class BtcRepository {
     final res = await _client.bTCMining
         .bTCListLocks(orgId: _client.defaultOrganizationId);
 
-    final now = DateTime.now();
     final list = res.body!.lock!;
 
     final resList = list.map((btcLock) {
-      return btcLock.lockTill!.toLocal().isBefore(now)
+      return btcLock.unlocked != null
           ? BtcUnbonded(
               id: btcLock.id!,
               created: btcLock.created!,
