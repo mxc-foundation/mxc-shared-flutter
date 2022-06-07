@@ -65,7 +65,6 @@ class ColorsTheme {
   final textSecondary = const Color(0xFF98A6AD);
   final textLabel = const Color(0xFF98A6AD);
   final textError = const Color(0xFFD22D2D);
-  final textError20 = const Color(0xFFD22D2D).withOpacity(0.2);
 
   final white = Colors.white;
   final buttonDisabledBackground = const Color(0xFFE3E3E5);
@@ -187,9 +186,6 @@ class ColorsThemeDark implements ColorsTheme {
 
   @override
   final textError = const Color(0xFFFC8383);
-
-  @override
-  final textError20 = const Color(0xFFFC8383).withOpacity(0.2);
 
   @override
   final white = Colors.white;
