@@ -49,7 +49,7 @@ class BtcBonded implements BtcBondInfo {
   final DateTime lockTill;
 
   @override
-  bool get canBeUnbonded => DateTime.now().isAfter(unlockFrom);
+  bool get canBeUnbonded => DateTime.now().isAfter(unlockFrom.toLocal());
 }
 
 class BtcUnbonded implements BtcBondInfo {
