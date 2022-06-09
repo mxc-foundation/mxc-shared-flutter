@@ -77,6 +77,12 @@ class ColorsTheme {
   final buttonDisabledBackground = const Color(0xFFE3E3E5);
   final buttonDisabledLabel = const Color(0xFFBBBFC6);
 
+  final sliderDisabledKnob = const Color(0xFFBBBFC6);
+  final sliderDisabledBaseActive = const Color(0xFFBBBFC6);
+  final sliderDisabledBaseDefault = const Color(0xFFE3E3E5);
+
+  final transparent = Colors.transparent;
+
   Color get shadow => purple200;
   Color get shadow2 => Colors.black.withOpacity(0.107);
 }
@@ -223,6 +229,18 @@ class ColorsThemeDark implements ColorsTheme {
 
   @override
   Color get shadow => purple200;
+
+  @override
+  final sliderDisabledKnob = const Color(0xFF484A4D);
+
+  @override
+  final sliderDisabledBaseActive = const Color(0xFF484A4D);
+
+  @override
+  final sliderDisabledBaseDefault = const Color(0xFF323233);
+
+  @override
+  final transparent = Colors.transparent;
 
   @override
   Color get shadow2 => Colors.black.withOpacity(0.107);
