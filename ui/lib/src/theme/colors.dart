@@ -75,6 +75,11 @@ class ColorsTheme {
   final buttonIconTextColor = Colors.white;
   final buttonDisabledBackground = const Color(0xFFE3E3E5);
   final buttonDisabledLabel = const Color(0xFFBBBFC6);
+
+  final sliderDisabledKnob = const Color(0xFFBBBFC6);
+  final sliderDisabledBaseActive = const Color(0xFFBBBFC6);
+  final sliderDisabledBaseDefault = const Color(0xFFE3E3E5);
+
   final transparent = Colors.transparent;
 
   Color get shadow => mxcBlue20;
@@ -217,6 +222,15 @@ class ColorsThemeDark implements ColorsTheme {
 
   @override
   final buttonDisabledLabel = const Color(0xFF4E5659);
+
+  @override
+  final sliderDisabledKnob = const Color(0xFF484A4D);
+
+  @override
+  final sliderDisabledBaseActive = const Color(0xFF484A4D);
+
+  @override
+  final sliderDisabledBaseDefault = const Color(0xFF323233);
 
   @override
   final transparent = Colors.transparent;

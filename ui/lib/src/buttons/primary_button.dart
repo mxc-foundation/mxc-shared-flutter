@@ -10,12 +10,14 @@ class MxcPrimaryButton extends StatefulWidget {
     required this.onTap,
     this.fillWidth = true,
     this.color,
+    this.borderRadius,
   }) : super(key: key);
 
   final String title;
   final Color? color;
   final VoidCallback? onTap;
   final bool fillWidth;
+  final BorderRadius? borderRadius;
 
   @override
   _MxcPrimaryButtonState createState() => _MxcPrimaryButtonState();
@@ -39,7 +41,7 @@ class _MxcPrimaryButtonState extends State<MxcPrimaryButton> {
 
     return Material(
       color: buttonColor,
-      borderRadius: BorderRadius.circular(5),
+      borderRadius: widget.borderRadius ?? BorderRadius.circular(5),
       child: InkWell(
         onTap: widget.onTap,
         onHover: (hovering) {

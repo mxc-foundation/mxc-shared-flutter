@@ -43,7 +43,12 @@ class MxcSlider extends StatelessWidget {
           child: SliderTheme(
             data: SliderThemeData(
               trackShape: CustomTrackShape(),
-              trackHeight: 5,
+              trackHeight: 6,
+              disabledThumbColor: ColorsTheme.of(context).sliderDisabledKnob,
+              disabledActiveTrackColor:
+                  ColorsTheme.of(context).sliderDisabledBaseActive,
+              disabledInactiveTrackColor:
+                  ColorsTheme.of(context).sliderDisabledBaseDefault,
             ),
             child: value == null || onChanged == null
                 ? Center(
@@ -278,7 +283,7 @@ class _AmountTextFieldWithSliderState extends State<AmountTextFieldWithSlider> {
             ),
           ],
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: 3),
         MxcSlider(
           key: null,
           value: _sliderValue,

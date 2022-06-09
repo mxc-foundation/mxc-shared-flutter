@@ -9,6 +9,7 @@ class MxcCard extends StatelessWidget {
   })  : padding = null,
         color = null,
         isShadow = true,
+        borderRadius = null,
         super(key: key);
 
   const MxcCard.custom({
@@ -18,12 +19,14 @@ class MxcCard extends StatelessWidget {
     this.color,
     this.padding,
     this.isShadow = true,
+    this.borderRadius,
   }) : super(key: key);
 
   final Widget child;
   final VoidCallback? onTap;
   final Color? color;
   final EdgeInsets? padding;
+  final BorderRadius? borderRadius;
   final bool isShadow;
 
   @override
@@ -32,7 +35,7 @@ class MxcCard extends StatelessWidget {
       padding: padding ?? const EdgeInsets.all(16),
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: borderRadius ?? BorderRadius.circular(10),
         color: color ?? ColorsTheme.of(context).boxComponents,
         boxShadow: isShadow
             ? [
