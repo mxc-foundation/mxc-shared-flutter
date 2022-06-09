@@ -552,19 +552,21 @@ class _MxcMiniNonFormTextFieldState extends State<_MxcMiniNonFormTextField> {
   }
 
   Color getColorBorder() {
-    if (widget.disabled) return ColorsTheme.of(context).buttonDisabledLabel;
+    if (widget.disabled) {
+      return ColorsTheme.of(context).buttonDisabledBackground;
+    }
     if (widget.error) return ColorsTheme.of(context).textError;
     if (_internalController != null && _internalController!.text.isEmpty) {
       return ColorsTheme.of(context).primaryBackground;
     }
-    if (focused) return ColorsTheme.of(context).textLabel;
-    return ColorsTheme.of(context).primaryBackground;
+    if (focused) return ColorsTheme.of(context).mxcBlue;
+    return ColorsTheme.of(context).textLabel;
   }
 
   Color getColorFont() {
     if (widget.disabled) return ColorsTheme.of(context).buttonDisabledLabel;
     if (widget.error) return ColorsTheme.of(context).textError;
-    if (focused) return ColorsTheme.of(context).textPrimaryAndIcons;
+    if (focused) return ColorsTheme.of(context).mxcBlue;
     return ColorsTheme.of(context).textPrimaryAndIcons;
   }
 
@@ -572,22 +574,20 @@ class _MxcMiniNonFormTextFieldState extends State<_MxcMiniNonFormTextField> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: widget.width,
-      child: Container(
-        padding: EdgeInsets.symmetric(
-          horizontal: 4,
-          vertical: isThickBorder() ? 4 : 5,
-        ),
-        decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(Radius.circular(10)),
-          border: Border.all(
-              color: getColorBorder(), width: isThickBorder() ? 2 : 1),
-        ),
+    return Container(
+      padding: EdgeInsets.all(isThickBorder() ? 5 : 6),
+      height: 38,
+      constraints: BoxConstraints(minWidth: widget.width),
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.all(Radius.circular(10)),
+        border:
+            Border.all(color: getColorBorder(), width: isThickBorder() ? 2 : 1),
+      ),
+      child: IntrinsicWidth(
         child: TextField(
           focusNode: focusNode,
           controller: widget.controller,
-          cursorColor: ColorsTheme.of(context).textPrimaryAndIcons,
+          cursorColor: getColorFont(),
           readOnly: widget.disabled,
           style:
               FontTheme.of(context).subtitle1().copyWith(color: getColorFont()),
