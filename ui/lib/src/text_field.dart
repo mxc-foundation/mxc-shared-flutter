@@ -467,17 +467,16 @@ class _MxcTextFieldImageButton extends MxcTextFieldButton {
 class MxcMiniTextField extends FormField<String> {
   MxcMiniTextField({
     required Key? key,
-    required TextEditingController this.controller,
+    this.controller,
     this.onChanged,
     FormFieldValidator<String>? validator,
     bool disabled = false,
     bool error = false,
-    double width = 64,
     FocusNode? focusNode,
     AutovalidateMode? autovalidateMode,
   }) : super(
           key: key,
-          initialValue: controller.text,
+          initialValue: controller?.text,
           validator: validator,
           autovalidateMode: autovalidateMode,
           builder: (field) {
@@ -488,33 +487,30 @@ class MxcMiniTextField extends FormField<String> {
               focusNode: focusNode,
               disabled: disabled,
               error: field.errorText != null || error,
-              width: width,
             );
           },
         );
 
   final TextEditingController? controller;
-  final void Function(double)? onChanged;
+  final void Function(String)? onChanged;
 }
 
 class _MxcMiniNonFormTextField extends StatefulWidget {
   const _MxcMiniNonFormTextField({
     required Key? key,
     required this.controller,
-    this.width = 64,
     this.focusNode,
     this.disabled = false,
     this.error = false,
     this.onChanged,
   }) : super(key: key);
 
-  final double width;
   final FocusNode? focusNode;
   final bool disabled;
   final bool error;
 
-  final TextEditingController controller;
-  final ValueChanged<double>? onChanged;
+  final TextEditingController? controller;
+  final ValueChanged<String>? onChanged;
 
   @override
   State<_MxcMiniNonFormTextField> createState() =>
@@ -575,9 +571,10 @@ class _MxcMiniNonFormTextFieldState extends State<_MxcMiniNonFormTextField> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(isThickBorder() ? 5 : 6),
-      height: 38,
-      constraints: BoxConstraints(minWidth: widget.width),
+      padding: EdgeInsets.symmetric(
+        horizontal: 4,
+        vertical: isThickBorder() ? 4 : 5,
+      ),
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.all(Radius.circular(10)),
         border:
@@ -592,13 +589,7 @@ class _MxcMiniNonFormTextFieldState extends State<_MxcMiniNonFormTextField> {
           style:
               FontTheme.of(context).subtitle1().copyWith(color: getColorFont()),
           textAlign: TextAlign.center,
-          onChanged: widget.onChanged == null
-              ? null
-              : (String s) {
-                  final v = double.tryParse(s);
-                  if (v == null) return;
-                  widget.onChanged!(v);
-                },
+          onChanged: widget.onChanged,
           decoration: const InputDecoration(
             isDense: true,
             enabledBorder: InputBorder.none,
