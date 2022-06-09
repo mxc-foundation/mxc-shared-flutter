@@ -487,7 +487,7 @@ class MxcMiniTextField extends FormField<String> {
               onChanged: onChanged,
               focusNode: focusNode,
               disabled: disabled,
-              error: error,
+              error: field.errorText != null || error,
               width: width,
             );
           },
@@ -552,10 +552,12 @@ class _MxcMiniNonFormTextFieldState extends State<_MxcMiniNonFormTextField> {
   }
 
   Color getColorBorder() {
-    if (widget.disabled) return ColorsTheme.of(context).buttonDisabledLabel;
+    if (widget.disabled) {
+      return ColorsTheme.of(context).buttonDisabledBackground;
+    }
     if (widget.error) return ColorsTheme.of(context).textError;
     if (_internalController != null && _internalController!.text.isEmpty) {
-      return ColorsTheme.of(context).textLabel;
+      return ColorsTheme.of(context).primaryBackground;
     }
     if (focused) return ColorsTheme.of(context).purpleMain;
     return ColorsTheme.of(context).textLabel;
@@ -572,29 +574,31 @@ class _MxcMiniNonFormTextFieldState extends State<_MxcMiniNonFormTextField> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: widget.width,
-      child: Container(
-        padding: EdgeInsets.symmetric(
-          horizontal: 8,
-          vertical: isThickBorder() ? 0 : 1,
-        ),
-        decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(Radius.circular(10)),
-          border: Border.all(
-              color: getColorBorder(), width: isThickBorder() ? 2 : 1),
-        ),
+    return Container(
+      padding: EdgeInsets.all(isThickBorder() ? 5 : 6),
+      height: 38,
+      constraints: BoxConstraints(minWidth: widget.width),
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.all(Radius.circular(10)),
+        border:
+            Border.all(color: getColorBorder(), width: isThickBorder() ? 2 : 1),
+      ),
+      child: IntrinsicWidth(
         child: TextField(
           focusNode: focusNode,
           controller: widget.controller,
-          cursorColor: ColorsTheme.of(context).textPrimaryAndIcons,
+          cursorColor: getColorFont(),
           readOnly: widget.disabled,
           style:
               FontTheme.of(context).subtitle1().copyWith(color: getColorFont()),
           textAlign: TextAlign.center,
           onChanged: widget.onChanged == null
               ? null
-              : (String s) => widget.onChanged!(double.parse(s)),
+              : (String s) {
+                  final v = double.tryParse(s);
+                  if (v == null) return;
+                  widget.onChanged!(v);
+                },
           decoration: const InputDecoration(
             isDense: true,
             enabledBorder: InputBorder.none,

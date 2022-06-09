@@ -122,11 +122,6 @@ class ImagesTheme {
         'assets/images/app/ic-question-circle.png',
         package: mxcUiPackageName,
       );
-  
-  ImageProvider get exclamationCircle => const AssetImage(
-        'assets/images/app/exclamation-circle.png',
-        package: mxcUiPackageName,
-      );
 
   //deposit
   ImageProvider get qrcode => const AssetImage(
@@ -374,11 +369,6 @@ class ImagesTheme {
 
   ImageProvider get lock => const AssetImage(
         'assets/images/wallet/lock.png',
-        package: mxcUiPackageName,
-      );
-
-  ImageProvider get iconOpenLock => const AssetImage(
-        'assets/images/wallet/icon-open-lock.png',
         package: mxcUiPackageName,
       );
 

@@ -79,9 +79,10 @@ abstract class MxcCircleButton extends StatelessWidget {
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             boxShadow: [
-              MxcBoxShadow(
-                color: ColorsTheme.of(context).shadow2,
-              ),
+              if (onTap != null)
+                MxcBoxShadow(
+                  color: ColorsTheme.of(context).shadow2,
+                ),
             ],
           ),
           width: 52,
