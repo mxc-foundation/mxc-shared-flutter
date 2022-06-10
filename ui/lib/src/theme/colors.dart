@@ -225,7 +225,7 @@ class ColorsThemeDark implements ColorsTheme {
   final buttonDisabledBackground = const Color(0xFF323233);
 
   @override
-  final buttonDisabledLabel = const Color(0xFF4E5659);
+  final buttonDisabledLabel = const Color(0xFF484A4D);
 
   @override
   Color get shadow => purple200;
