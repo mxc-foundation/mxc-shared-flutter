@@ -63,5 +63,7 @@ class DemoBtcRepository implements BtcRepository {
   }) async {}
 
   @override
-  Future<void> unlock({required String lockId}) async {}
+  Future<DateTime?> unlock({required String lockId}) async {
+    return DateTime.now();
+  }
 }
