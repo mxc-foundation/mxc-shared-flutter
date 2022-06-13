@@ -84,6 +84,8 @@ class ColorsTheme {
 
   Color get shadow => mxcBlue20;
   Color get shadow2 => Colors.black.withOpacity(0.107);
+
+  Color get dialogOverlay => const Color(0xFF000000).withOpacity(0.35);
 }
 
 class ColorsThemeDark implements ColorsTheme {
@@ -240,4 +242,7 @@ class ColorsThemeDark implements ColorsTheme {
 
   @override
   Color get shadow2 => Colors.black.withOpacity(0.107);
+
+  @override
+  Color get dialogOverlay => const Color(0xFFFFFFFF).withOpacity(0.4);
 }
