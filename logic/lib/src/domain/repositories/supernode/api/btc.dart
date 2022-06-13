@@ -67,14 +67,15 @@ class BtcRepository {
     assert(res.body?.lockId != null);
   }
 
-  Future<void> unlock({
+  Future<DateTime?> unlock({
     required String lockId,
   }) async {
-    await _client.bTCMining.bTCUnlock(
+    final response = await _client.bTCMining.bTCUnlock(
       body: ExtapiBTCUnlockRequest(
         lockId: lockId,
         orgId: _client.defaultOrganizationId,
       ),
     );
+    return response.body?.coolingOffTill;
   }
 }
