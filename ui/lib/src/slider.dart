@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mxc_ui/mxc_ui.dart';
+import 'dart:math' as math;
 
 class MxcSlider extends StatelessWidget {
   const MxcSlider({
@@ -151,19 +152,40 @@ class CustomThumbShape extends RoundSliderThumbShape {
               (center.dx / sizeWithOverflow.width),
       center.dy,
     );
-    super.paint(
-      context,
+
+    final Canvas canvas = context.canvas;
+    final Tween<double> radiusTween = Tween<double>(
+      begin: disabledThumbRadius ?? enabledThumbRadius,
+      end: enabledThumbRadius,
+    );
+    final ColorTween colorTween = ColorTween(
+      begin: sliderTheme.disabledThumbColor,
+      end: sliderTheme.thumbColor,
+    );
+
+    final Color color = colorTween.evaluate(enableAnimation)!;
+    final double radius = radiusTween.evaluate(enableAnimation);
+
+    final Tween<double> elevationTween = Tween<double>(
+      begin: 0,
+      end: pressedElevation,
+    );
+
+    final double evaluatedElevation = elevationTween
+        .transform((activationAnimation.value + enableAnimation.value) / 2);
+
+    final Path path = Path()
+      ..addArc(
+        Rect.fromCenter(center: center, width: 2 * radius, height: 2 * radius),
+        0,
+        math.pi * 2,
+      );
+    canvas.drawShadow(path, Colors.black, evaluatedElevation, true);
+
+    canvas.drawCircle(
       center,
-      activationAnimation: activationAnimation,
-      enableAnimation: enableAnimation,
-      isDiscrete: isDiscrete,
-      labelPainter: labelPainter,
-      parentBox: parentBox,
-      sliderTheme: sliderTheme,
-      textDirection: textDirection,
-      value: value,
-      textScaleFactor: textScaleFactor,
-      sizeWithOverflow: sizeWithOverflow,
+      radius,
+      Paint()..color = color,
     );
   }
 }
