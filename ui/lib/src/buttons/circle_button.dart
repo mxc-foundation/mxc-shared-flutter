@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mxc_ui/mxc_ui.dart';
 
 abstract class MxcCircleButton extends StatelessWidget {
@@ -38,6 +39,16 @@ abstract class MxcCircleButton extends StatelessWidget {
     TextStyle? titleStyle,
   }) = _MxcCircleIconButton;
 
+  const factory MxcCircleButton.svg({
+    required Key? key,
+    required String svgString,
+    required VoidCallback? onTap,
+    bool filled,
+    String? title,
+    Color? color,
+    TextStyle? titleStyle,
+  }) = _MxcCircleSvgButton;
+
   final bool filled;
   final VoidCallback? onTap;
   final String? title;
@@ -49,7 +60,7 @@ abstract class MxcCircleButton extends StatelessWidget {
     if (onTap == null) {
       color = ColorsTheme.of(context).buttonDisabledLabel;
     } else if (filled) {
-      color = ColorsTheme.of(context).buttonIconTextColor;
+      color = ColorsTheme.of(context).white;
     } else {
       color = this.color ?? MxcScopedTheme.of(context).primaryColor;
     }
@@ -179,6 +190,35 @@ class _MxcCircleIconButton extends MxcCircleButton {
   @override
   Widget buildChild(BuildContext context) => Icon(
         icon,
+        color: _contentColor(context),
+      );
+}
+
+class _MxcCircleSvgButton extends MxcCircleButton {
+  const _MxcCircleSvgButton({
+    required Key? key,
+    required this.svgString,
+    required VoidCallback? onTap,
+    bool filled = false,
+    String? title,
+    Color? color,
+    TextStyle? titleStyle,
+  }) : super._(
+          key: key,
+          filled: filled,
+          onTap: onTap,
+          title: title,
+          color: color,
+          titleStyle: titleStyle,
+        );
+
+  final String svgString;
+
+  @override
+  Widget buildChild(BuildContext context) => SvgPicture.asset(
+        svgString,
+        height: 24,
+        width: 24,
         color: _contentColor(context),
       );
 }
