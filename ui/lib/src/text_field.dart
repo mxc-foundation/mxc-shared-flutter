@@ -571,8 +571,8 @@ class _MxcMiniNonFormTextFieldState extends State<_MxcMiniNonFormTextField> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 36,
       padding: EdgeInsets.symmetric(
-        horizontal: 4,
         vertical: isThickBorder() ? 4 : 5,
       ),
       decoration: BoxDecoration(
@@ -580,27 +580,26 @@ class _MxcMiniNonFormTextFieldState extends State<_MxcMiniNonFormTextField> {
         border:
             Border.all(color: getColorBorder(), width: isThickBorder() ? 2 : 1),
       ),
-      child: IntrinsicWidth(
-        child: TextField(
-          focusNode: focusNode,
-          controller: widget.controller,
-          cursorColor: getColorFont(),
-          readOnly: widget.disabled,
-          style:
-              FontTheme.of(context).subtitle1().copyWith(color: getColorFont()),
-          textAlign: TextAlign.center,
-          onChanged: widget.onChanged,
-          decoration: const InputDecoration(
-            isDense: true,
-            enabledBorder: InputBorder.none,
-            focusedBorder: InputBorder.none,
-            errorBorder: InputBorder.none,
-            focusedErrorBorder: InputBorder.none,
-            disabledBorder: InputBorder.none,
-          ),
-          keyboardType: const TextInputType.numberWithOptions(
-            decimal: true,
-          ),
+      child: TextField(
+        focusNode: focusNode,
+        controller: widget.controller,
+        cursorColor: getColorFont(),
+        readOnly: widget.disabled,
+        style:
+            FontTheme.of(context).subtitle1().copyWith(color: getColorFont()),
+        textAlign: TextAlign.center,
+        onChanged: widget.onChanged,
+        decoration: const InputDecoration(
+          isDense: true,
+          enabledBorder: InputBorder.none,
+          focusedBorder: InputBorder.none,
+          errorBorder: InputBorder.none,
+          focusedErrorBorder: InputBorder.none,
+          disabledBorder: InputBorder.none,
+          contentPadding: EdgeInsets.symmetric(horizontal: 4),
+        ),
+        keyboardType: const TextInputType.numberWithOptions(
+          decimal: true,
         ),
       ),
     );
