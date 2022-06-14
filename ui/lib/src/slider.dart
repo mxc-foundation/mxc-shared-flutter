@@ -1,8 +1,6 @@
-import 'dart:math';
-
-import 'package:decimal/decimal.dart';
 import 'package:flutter/material.dart';
 import 'package:mxc_ui/mxc_ui.dart';
+import 'dart:math' as math;
 
 class MxcSlider extends StatelessWidget {
   const MxcSlider({
@@ -13,6 +11,7 @@ class MxcSlider extends StatelessWidget {
     this.divisions,
     this.max,
     this.enabled = true,
+    this.thumbPadding = 0,
   })  : assert(labels == null || labels.length >= 3),
         super(key: key);
 
@@ -24,6 +23,7 @@ class MxcSlider extends StatelessWidget {
         divisions = null,
         max = null,
         enabled = false,
+        thumbPadding = 0,
         super(key: key);
 
   final double? value;
@@ -32,6 +32,7 @@ class MxcSlider extends StatelessWidget {
   final List<String>? labels;
   final int? divisions;
   final bool enabled;
+  final double thumbPadding;
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +44,8 @@ class MxcSlider extends StatelessWidget {
           child: SliderTheme(
             data: SliderThemeData(
               trackShape: CustomTrackShape(),
+              thumbShape: CustomThumbShape(thumbPadding),
+              overlayShape: CustomOverlayShape(thumbPadding),
               trackHeight: 6,
               disabledThumbColor: ColorsTheme.of(context).sliderDisabledKnob,
               disabledActiveTrackColor:
@@ -119,178 +122,113 @@ class CustomTrackShape extends RoundedRectSliderTrackShape {
     final double trackTop =
         offset.dy + (parentBox.size.height - trackHeight) / 2;
     final double trackWidth = parentBox.size.width;
-    return Rect.fromLTWH(trackLeft, trackTop, trackWidth, trackHeight);
+    return Rect.fromLTWH(trackLeft - 8, trackTop, trackWidth + 8, trackHeight);
   }
 }
 
-class AmountTextFieldWithSlider extends StatefulWidget {
-  AmountTextFieldWithSlider({
-    required Key? key,
-    required this.value,
-    required this.onChanged,
-    required this.text,
-    this.errorMsg,
-    this.enabled = true,
-    Decimal? min,
-    required this.max,
-    this.fractionDigits = 8,
-  })  : min = min ?? Decimal.zero,
-        super(key: key);
+class CustomThumbShape extends RoundSliderThumbShape {
+  CustomThumbShape(this.thumbPadding);
 
-  final Decimal value;
-  final Decimal min;
-  final Decimal max;
-  final String? errorMsg;
-  final void Function(Decimal?) onChanged;
-  final String text;
-  final bool enabled;
-  final int fractionDigits;
+  final double thumbPadding;
 
   @override
-  State<AmountTextFieldWithSlider> createState() =>
-      _AmountTextFieldWithSliderState();
-}
+  void paint(
+    PaintingContext context,
+    Offset center, {
+    required Animation<double> activationAnimation,
+    required Animation<double> enableAnimation,
+    required bool isDiscrete,
+    required TextPainter labelPainter,
+    required RenderBox parentBox,
+    required SliderThemeData sliderTheme,
+    required TextDirection textDirection,
+    required double value,
+    required double textScaleFactor,
+    required Size sizeWithOverflow,
+  }) {
+    center = Offset(
+      thumbPadding +
+          (sizeWithOverflow.width - thumbPadding * 2) *
+              (center.dx / sizeWithOverflow.width),
+      center.dy,
+    );
 
-class _AmountTextFieldWithSliderState extends State<AmountTextFieldWithSlider> {
-  late final controller = TextEditingController();
+    final Canvas canvas = context.canvas;
+    final Tween<double> radiusTween = Tween<double>(
+      begin: disabledThumbRadius ?? enabledThumbRadius,
+      end: enabledThumbRadius,
+    );
+    final ColorTween colorTween = ColorTween(
+      begin: sliderTheme.disabledThumbColor,
+      end: sliderTheme.thumbColor,
+    );
 
-  String _previousText = '';
-  Decimal _previousSliderAmount = Decimal.zero;
-  double _sliderValue = 0;
+    final Color color = colorTween.evaluate(enableAnimation)!;
+    final double radius = radiusTween.evaluate(enableAnimation);
 
-  @override
-  void initState() {
-    super.initState();
-    _refreshValuesIfNeeded();
-    controller.addListener(_onControllerListener);
-  }
+    final Tween<double> elevationTween = Tween<double>(
+      begin: 0,
+      end: pressedElevation,
+    );
 
-  void _onControllerListener() {
-    if (controller.text != _previousText) {
-      _onTextValueChanged(controller.text);
-    }
-  }
+    final double evaluatedElevation = elevationTween
+        .transform((activationAnimation.value + enableAnimation.value) / 2);
 
-  @override
-  void didUpdateWidget(covariant AmountTextFieldWithSlider oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (oldWidget.value != widget.value ||
-        oldWidget.max != widget.max ||
-        oldWidget.min != widget.min) {
-      _refreshValuesIfNeeded(
-        minOrMaxChanged:
-            oldWidget.max != widget.max || oldWidget.min != widget.min,
+    final Path path = Path()
+      ..addArc(
+        Rect.fromCenter(center: center, width: 2 * radius, height: 2 * radius),
+        0,
+        math.pi * 2,
       );
-    }
-  }
+    canvas.drawShadow(path, Colors.black, evaluatedElevation, true);
 
-  void _refreshValuesIfNeeded({bool minOrMaxChanged = false}) {
-    _refreshSliderValueIfNeeded(minOrMaxChanged: minOrMaxChanged);
-    _refreshTextValueIfNeeded();
+    canvas.drawCircle(
+      center,
+      radius,
+      Paint()..color = color,
+    );
   }
+}
 
-  void _refreshSliderValueIfNeeded({bool minOrMaxChanged = false}) {
-    if (minOrMaxChanged || _previousSliderAmount != widget.value) {
-      final amountRange = widget.max - widget.min;
-      if (amountRange <= Decimal.zero) {
-        _sliderValue = 0;
-      } else {
-        final expectedValue =
-            ((widget.value - widget.min) / amountRange).toDouble();
-        _sliderValue = min(
-          1,
-          max(0, expectedValue),
-        );
-      }
-      _previousSliderAmount = widget.value;
-    }
-  }
+class CustomOverlayShape extends RoundSliderOverlayShape {
+  CustomOverlayShape(this.thumbPadding);
 
-  void _refreshTextValueIfNeeded() {
-    if (Decimal.tryParse(_previousText) != widget.value) {
-      // round number to avoid showing full 18 digits-after-the-dot number
-      // produced by slider
-      final text = widget.value.floor(scale: 2).toString();
-      _previousText = text;
-      controller.text = text;
-    }
-  }
-
-  void _onSliderValueChanged(double value) {
-    _sliderValue = value;
-    final amountFull =
-        Decimal.parse(value.toString()) * (widget.max - widget.min) +
-            widget.min;
-    final amount =
-        Decimal.parse(amountFull.toStringAsFixed(widget.fractionDigits));
-    _previousSliderAmount = amount;
-    widget.onChanged(amount);
-  }
-
-  void _onTextValueChanged(String value) {
-    _previousText = value;
-    final amount = Decimal.tryParse(value);
-    widget.onChanged(amount);
-  }
+  final double thumbPadding;
 
   @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            ConstrainedBox(
-              constraints: const BoxConstraints(
-                maxWidth: 220,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(widget.text,
-                      style: FontTheme.of(context).subtitle1.label()),
-                  if (widget.errorMsg != null) const SizedBox(height: 8),
-                  if (widget.errorMsg != null)
-                    Text(widget.errorMsg!,
-                        style: FontTheme.of(context).caption1.error()),
-                ],
-              ),
-            ),
-            const SizedBox(width: 32),
-            Expanded(
-              child: Align(
-                alignment: Alignment.centerRight,
-                child: IntrinsicWidth(
-                  child: Container(
-                    constraints: const BoxConstraints(
-                      minWidth: 64,
-                    ),
-                    child: MxcMiniTextField(
-                      key: null,
-                      controller: controller,
-                      error: widget.errorMsg != null,
-                      disabled: !widget.enabled,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 3),
-        MxcSlider(
-          key: null,
-          value: _sliderValue,
-          onChanged: _onSliderValueChanged,
-          enabled: widget.min >= widget.max ? false : widget.enabled,
-        ),
-      ],
+  void paint(
+    PaintingContext context,
+    Offset center, {
+    required Animation<double> activationAnimation,
+    required Animation<double> enableAnimation,
+    required bool isDiscrete,
+    required TextPainter labelPainter,
+    required RenderBox parentBox,
+    required SliderThemeData sliderTheme,
+    required TextDirection textDirection,
+    required double value,
+    required double textScaleFactor,
+    required Size sizeWithOverflow,
+  }) {
+    center = Offset(
+      thumbPadding +
+          (sizeWithOverflow.width - thumbPadding * 2) *
+              (center.dx / sizeWithOverflow.width),
+      center.dy,
+    );
+    super.paint(
+      context,
+      center,
+      activationAnimation: activationAnimation,
+      enableAnimation: enableAnimation,
+      isDiscrete: isDiscrete,
+      labelPainter: labelPainter,
+      parentBox: parentBox,
+      sliderTheme: sliderTheme,
+      textDirection: textDirection,
+      value: value,
+      textScaleFactor: textScaleFactor,
+      sizeWithOverflow: sizeWithOverflow,
     );
   }
 }
