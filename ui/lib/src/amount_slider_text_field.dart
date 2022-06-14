@@ -167,7 +167,7 @@ class _AmountTextFieldWithSliderState extends State<AmountTextFieldWithSlider> {
         ),
         const SizedBox(height: 3),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8),
+          padding: const EdgeInsets.only(left: 8),
           child: MxcSlider(
             key: null,
             thumbPadding: 8,
