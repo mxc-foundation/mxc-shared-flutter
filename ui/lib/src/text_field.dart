@@ -573,7 +573,7 @@ class _MxcMiniNonFormTextFieldState extends State<_MxcMiniNonFormTextField> {
     return Container(
       height: 36,
       padding: EdgeInsets.symmetric(
-        vertical: isThickBorder() ? 4 : 5,
+        vertical: isThickBorder() ? 5 : 6,
       ),
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.all(Radius.circular(10)),
