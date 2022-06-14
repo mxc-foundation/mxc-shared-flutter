@@ -555,14 +555,14 @@ class _MxcMiniNonFormTextFieldState extends State<_MxcMiniNonFormTextField> {
     if (_internalController != null && _internalController!.text.isEmpty) {
       return ColorsTheme.of(context).primaryBackground;
     }
-    if (focused) return ColorsTheme.of(context).mxcBlue;
+    if (focused) return ColorsTheme.of(context).purpleMain;
     return ColorsTheme.of(context).textLabel;
   }
 
   Color getColorFont() {
     if (widget.disabled) return ColorsTheme.of(context).buttonDisabledLabel;
     if (widget.error) return ColorsTheme.of(context).textError;
-    if (focused) return ColorsTheme.of(context).mxcBlue;
+    if (focused) return ColorsTheme.of(context).purpleMain;
     return ColorsTheme.of(context).textPrimaryAndIcons;
   }
 

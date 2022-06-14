@@ -35,7 +35,7 @@ abstract class MxcCircleWidget extends StatelessWidget {
   Color _contentColor(BuildContext context) {
     Color color;
     if (filled) {
-      color = ColorsTheme.of(context).buttonIconTextColor;
+      color = ColorsTheme.of(context).white;
     } else {
       color = this.color ?? MxcScopedTheme.of(context).primaryColor;
     }
