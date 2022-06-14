@@ -43,7 +43,7 @@ class MxcSlider extends StatelessWidget {
           height: 20,
           child: SliderTheme(
             data: SliderThemeData(
-              trackShape: CustomTrackShape(),
+              trackShape: CustomTrackShape(thumbPadding),
               thumbShape: CustomThumbShape(thumbPadding),
               overlayShape: CustomOverlayShape(thumbPadding),
               trackHeight: 6,
@@ -109,6 +109,9 @@ class MxcSlider extends StatelessWidget {
 }
 
 class CustomTrackShape extends RoundedRectSliderTrackShape {
+  CustomTrackShape(this.thumbPadding);
+
+  final double thumbPadding;
   @override
   Rect getPreferredRect({
     required RenderBox parentBox,
@@ -122,7 +125,8 @@ class CustomTrackShape extends RoundedRectSliderTrackShape {
     final double trackTop =
         offset.dy + (parentBox.size.height - trackHeight) / 2;
     final double trackWidth = parentBox.size.width;
-    return Rect.fromLTWH(trackLeft - 8, trackTop, trackWidth + 8, trackHeight);
+    return Rect.fromLTWH(trackLeft - thumbPadding, trackTop,
+        trackWidth + thumbPadding, trackHeight);
   }
 }
 
@@ -146,11 +150,25 @@ class CustomThumbShape extends RoundSliderThumbShape {
     required double textScaleFactor,
     required Size sizeWithOverflow,
   }) {
+    final double visualPosition;
+    switch (textDirection) {
+      case TextDirection.rtl:
+        visualPosition = 1.0 - value;
+        break;
+      case TextDirection.ltr:
+        visualPosition = value;
+        break;
+    }
+
+    final Rect trackRect = sliderTheme.trackShape!.getPreferredRect(
+      parentBox: parentBox,
+      offset: Offset.zero,
+      sliderTheme: sliderTheme,
+      isDiscrete: isDiscrete,
+    );
     center = Offset(
-      thumbPadding +
-          (sizeWithOverflow.width - thumbPadding * 2) *
-              (center.dx / sizeWithOverflow.width),
-      center.dy,
+      visualPosition * (trackRect.width - thumbPadding * 2),
+      trackRect.center.dy,
     );
 
     final Canvas canvas = context.canvas;
@@ -210,11 +228,25 @@ class CustomOverlayShape extends RoundSliderOverlayShape {
     required double textScaleFactor,
     required Size sizeWithOverflow,
   }) {
+    final double visualPosition;
+    switch (textDirection) {
+      case TextDirection.rtl:
+        visualPosition = 1.0 - value;
+        break;
+      case TextDirection.ltr:
+        visualPosition = value;
+        break;
+    }
+
+    final Rect trackRect = sliderTheme.trackShape!.getPreferredRect(
+      parentBox: parentBox,
+      offset: Offset.zero,
+      sliderTheme: sliderTheme,
+      isDiscrete: isDiscrete,
+    );
     center = Offset(
-      thumbPadding +
-          (sizeWithOverflow.width - thumbPadding * 2) *
-              (center.dx / sizeWithOverflow.width),
-      center.dy,
+      visualPosition * (trackRect.width - thumbPadding * 2),
+      trackRect.center.dy,
     );
     super.paint(
       context,
