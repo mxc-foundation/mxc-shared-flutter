@@ -81,8 +81,6 @@ class ColorsTheme {
   final sliderDisabledBaseActive = const Color(0xFFBBBFC6);
   final sliderDisabledBaseDefault = const Color(0xFFE3E3E5);
 
-  final transparent = Colors.transparent;
-
   Color get shadow => purple200;
   Color get shadow2 => Colors.black.withOpacity(0.107);
 

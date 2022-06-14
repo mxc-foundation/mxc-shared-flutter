@@ -41,7 +41,7 @@ class _MxcSegmentationTabState extends State<MxcSegmentationTab> {
           widget.onChanged(v!);
         },
         groupValue: selectedTab,
-        thumbColor: MxcScopedTheme.of(context).primaryColor.withOpacity(0.9),
+        thumbColor: MxcScopedTheme.of(context).primaryColor,
         backgroundColor:
             MxcScopedTheme.of(context).primaryColor.withOpacity(0.2),
       ),
