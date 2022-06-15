@@ -474,6 +474,7 @@ class MxcMiniTextField extends FormField<String> {
     bool error = false,
     FocusNode? focusNode,
     AutovalidateMode? autovalidateMode,
+    EdgeInsets? scrollPadding,
   }) : super(
           key: key,
           initialValue: controller?.text,
@@ -486,6 +487,7 @@ class MxcMiniTextField extends FormField<String> {
               onChanged: onChanged,
               focusNode: focusNode,
               disabled: disabled,
+              scrollPadding: scrollPadding,
               error: field.errorText != null || error,
             );
           },
@@ -503,11 +505,13 @@ class _MxcMiniNonFormTextField extends StatefulWidget {
     this.disabled = false,
     this.error = false,
     this.onChanged,
+    this.scrollPadding,
   }) : super(key: key);
 
   final FocusNode? focusNode;
   final bool disabled;
   final bool error;
+  final EdgeInsets? scrollPadding;
 
   final TextEditingController? controller;
   final ValueChanged<String>? onChanged;
@@ -601,6 +605,7 @@ class _MxcMiniNonFormTextFieldState extends State<_MxcMiniNonFormTextField> {
         keyboardType: const TextInputType.numberWithOptions(
           decimal: true,
         ),
+        scrollPadding: EdgeInsets.only(bottom: 100),
       ),
     );
   }

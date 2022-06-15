@@ -15,6 +15,7 @@ class AmountTextFieldWithSlider extends StatefulWidget {
     Decimal? min,
     required this.max,
     this.fractionDigits = 8,
+    this.scrollPadding,
   })  : min = min ?? Decimal.zero,
         super(key: key);
 
@@ -26,6 +27,7 @@ class AmountTextFieldWithSlider extends StatefulWidget {
   final String text;
   final bool enabled;
   final int fractionDigits;
+  final EdgeInsets? scrollPadding;
 
   @override
   State<AmountTextFieldWithSlider> createState() =>
@@ -156,6 +158,7 @@ class _AmountTextFieldWithSliderState extends State<AmountTextFieldWithSlider> {
                     child: MxcMiniTextField(
                       key: null,
                       controller: controller,
+                      scrollPadding: widget.scrollPadding,
                       error: widget.errorMsg != null,
                       disabled: !widget.enabled,
                     ),
