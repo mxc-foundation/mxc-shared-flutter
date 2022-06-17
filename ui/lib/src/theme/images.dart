@@ -487,10 +487,11 @@ class ImagesThemeDark extends ImagesTheme {
       );
 
   //settings
+  @override
   ImageProvider get datadashIcon => const AssetImage(
-    'assets/images/settings/datadash_icon_dark.png',
-    package: mxcUiPackageName,
-  );
+        'assets/images/settings/datadash_icon_dark.png',
+        package: mxcUiPackageName,
+      );
 
   //gateway
   @override
