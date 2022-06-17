@@ -239,5 +239,5 @@ class ColorsThemeDark implements ColorsTheme {
   Color get shadow2 => Colors.black.withOpacity(0.107);
 
   @override
-  Color get dialogOverlay => const Color(0xFFFFFFFF).withOpacity(0.4);
+  Color get dialogOverlay => const Color(0xFF000000).withOpacity(0.35);
 }
