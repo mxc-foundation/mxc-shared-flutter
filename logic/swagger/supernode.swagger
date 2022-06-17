@@ -1,10 +1,10 @@
 {
-   "swagger": "2.0",
-   "basePath": "",
-   "info": {
-      "title": "Supernode API",
-      "version": "1.0.0",
-      "description": "Supernode API"
+   "swagger":"2.0",
+   "basePath":"",
+   "info":{
+      "title":"Supernode API",
+      "version":"1.0.0",
+      "description":"Supernode API"
    },
    "schemes": null,
    "consumes": [
@@ -122,11 +122,13 @@
                   }
                }
             ],
-            "responses": {
-               "200": {
-                  "description": "A successful response.",
-                  "schema": {
-                     "properties": {}
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
                   }
                },
                "default": {
@@ -155,11 +157,13 @@
                   "type": "string"
                }
             ],
-            "responses": {
-               "200": {
-                  "description": "A successful response.",
-                  "schema": {
-                     "properties": {}
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
                   }
                },
                "default": {
@@ -206,10 +210,50 @@
             ]
          }
       },
-      "/api/btc-mining/list-locks": {
-         "get": {
-            "operationId": "BTCListLocks",
-            "parameters": [
+      "/api/btc-mining/history":{
+         "get":{
+            "operationId":"BTCMiningHistory",
+            "parameters":[
+               {
+                  "description":"id of the organization for which the history is requested.",
+                  "format":"int64",
+                  "in":"query",
+                  "name":"orgId",
+                  "required":false,
+                  "type":"string"
+               },
+               {
+                  "description":"MAC of the gateway. If not specified then history for all the\norganization's gateways is returned.",
+                  "in":"query",
+                  "name":"gatewayMac",
+                  "required":false,
+                  "type":"string"
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "$ref":"#/definitions/extapiBTCMiningHistoryResponse"
+                  }
+               },
+               "default":{
+                  "description":"An unexpected error response.",
+                  "schema":{
+                     "$ref":"#/definitions/runtimeError"
+                  }
+               }
+            },
+            "summary":"Returns daily history of BTC mining for organization or for a particular gateway",
+            "tags":[
+               "BTCMining"
+            ]
+         }
+      },
+      "/api/btc-mining/list-locks":{
+         "get":{
+            "operationId":"BTCListLocks",
+            "parameters":[
                {
                   "description": "org for which the locks must be returned.",
                   "format": "int64",
@@ -233,30 +277,30 @@
                   }
                }
             },
-            "summary": "List the locks that are still open",
-            "tags": [
+            "summary":"List the locks that are still open (that includes the one that were\nreleased already, but are still cooling off)",
+            "tags":[
                "BTCMining"
             ]
          }
       },
-      "/api/btc-mining/lock": {
-         "post": {
-            "operationId": "BTCAddLocks",
-            "parameters": [
+      "/api/btc-mining/lock":{
+         "post":{
+            "operationId":"BTCLock",
+            "parameters":[
                {
-                  "in": "body",
-                  "name": "body",
-                  "required": true,
-                  "schema": {
-                     "$ref": "#/definitions/extapiBTCAddLocksRequest"
+                  "in":"body",
+                  "name":"body",
+                  "required":true,
+                  "schema":{
+                     "$ref":"#/definitions/extapiBTCLockRequest"
                   }
                }
             ],
-            "responses": {
-               "200": {
-                  "description": "A successful response.",
-                  "schema": {
-                     "$ref": "#/definitions/extapiBTCAddLocksResponse"
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "$ref":"#/definitions/extapiBTCLockResponse"
                   }
                },
                "default": {
@@ -266,8 +310,8 @@
                   }
                }
             },
-            "summary": "Create locks for current or upcoming mining session",
-            "tags": [
+            "summary":"Create a new bond for the gateway",
+            "tags":[
                "BTCMining"
             ]
          }
@@ -289,8 +333,74 @@
                   }
                }
             },
-            "summary": "Request information about the current or upcoming mining session",
-            "tags": [
+            "summary":"DEPRECATED: only used not to break the app, always returns not found",
+            "tags":[
+               "BTCMining"
+            ]
+         }
+      },
+      "/api/btc-mining/totals":{
+         "get":{
+            "operationId":"BTCMined",
+            "parameters":[
+               {
+                  "description":"id of the organization for which the amount is requested.",
+                  "format":"int64",
+                  "in":"query",
+                  "name":"orgId",
+                  "required":false,
+                  "type":"string"
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "$ref":"#/definitions/extapiBTCMinedResponse"
+                  }
+               },
+               "default":{
+                  "description":"An unexpected error response.",
+                  "schema":{
+                     "$ref":"#/definitions/runtimeError"
+                  }
+               }
+            },
+            "summary":"Returns total amount mined by organization's gateways",
+            "tags":[
+               "BTCMining"
+            ]
+         }
+      },
+      "/api/btc-mining/unlock":{
+         "post":{
+            "operationId":"BTCUnlock",
+            "parameters":[
+               {
+                  "in":"body",
+                  "name":"body",
+                  "required":true,
+                  "schema":{
+                     "$ref":"#/definitions/extapiBTCUnlockRequest"
+                  }
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "$ref":"#/definitions/extapiBTCUnlockResponse"
+                  }
+               },
+               "default":{
+                  "description":"An unexpected error response.",
+                  "schema":{
+                     "$ref":"#/definitions/runtimeError"
+                  }
+               }
+            },
+            "summary":"Release bond for the gateway",
+            "tags":[
                "BTCMining"
             ]
          }
@@ -436,11 +546,13 @@
                   }
                }
             ],
-            "responses": {
-               "200": {
-                  "description": "A successful response.",
-                  "schema": {
-                     "properties": {}
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
                   }
                },
                "default": {
@@ -468,11 +580,13 @@
                   "type": "string"
                }
             ],
-            "responses": {
-               "200": {
-                  "description": "A successful response.",
-                  "schema": {
-                     "properties": {}
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
                   }
                },
                "default": {
@@ -625,11 +739,13 @@
                   }
                }
             ],
-            "responses": {
-               "200": {
-                  "description": "A successful response.",
-                  "schema": {
-                     "properties": {}
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
                   }
                },
                "default": {
@@ -657,11 +773,13 @@
                   "type": "string"
                }
             ],
-            "responses": {
-               "200": {
-                  "description": "A successful response.",
-                  "schema": {
-                     "properties": {}
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
                   }
                },
                "default": {
@@ -719,11 +837,13 @@
                   "type": "string"
                }
             ],
-            "responses": {
-               "200": {
-                  "description": "A successful response.",
-                  "schema": {
-                     "properties": {}
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
                   }
                },
                "default": {
@@ -895,11 +1015,13 @@
                   "type": "string"
                }
             ],
-            "responses": {
-               "200": {
-                  "description": "A successful response.",
-                  "schema": {
-                     "properties": {}
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
                   }
                },
                "default": {
@@ -957,11 +1079,13 @@
                   "type": "string"
                }
             ],
-            "responses": {
-               "200": {
-                  "description": "A successful response.",
-                  "schema": {
-                     "properties": {}
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
                   }
                },
                "default": {
@@ -1027,11 +1151,13 @@
                   }
                }
             ],
-            "responses": {
-               "200": {
-                  "description": "A successful response.",
-                  "schema": {
-                     "properties": {}
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
                   }
                },
                "default": {
@@ -1067,11 +1193,13 @@
                   }
                }
             ],
-            "responses": {
-               "200": {
-                  "description": "A successful response.",
-                  "schema": {
-                     "properties": {}
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
                   }
                },
                "default": {
@@ -1107,11 +1235,13 @@
                   }
                }
             ],
-            "responses": {
-               "200": {
-                  "description": "A successful response.",
-                  "schema": {
-                     "properties": {}
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
                   }
                },
                "default": {
@@ -1145,11 +1275,13 @@
                   }
                }
             ],
-            "responses": {
-               "200": {
-                  "description": "A successful response.",
-                  "schema": {
-                     "properties": {}
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
                   }
                },
                "default": {
@@ -1205,117 +1337,10 @@
             ]
          }
       },
-      "/api/dfi/profile": {
-         "get": {
-            "operationId": "AuthenticateUser",
-            "responses": {
-               "200": {
-                  "description": "A successful response.",
-                  "schema": {
-                     "$ref": "#/definitions/extapiDFIAuthenticateUserResponse"
-                  }
-               },
-               "default": {
-                  "description": "An unexpected error response.",
-                  "schema": {
-                     "$ref": "#/definitions/runtimeError"
-                  }
-               }
-            },
-            "summary": "AuthenticateUser authenticates user with given jwt, return necessary user info for DFI service",
-            "tags": [
-               "DFIService"
-            ]
-         }
-      },
-      "/api/dfi/top-up": {
-         "get": {
-            "operationId": "TopUp",
-            "parameters": [
-               {
-                  "description": "returned after call of authenticate user request, represent user's DD wallet.",
-                  "format": "int64",
-                  "in": "query",
-                  "name": "organizationID",
-                  "required": false,
-                  "type": "string"
-               },
-               {
-                  "description": "the amount that user wants to top up margin wallet from DD wallet.",
-                  "in": "query",
-                  "name": "amount",
-                  "required": false,
-                  "type": "string"
-               }
-            ],
-            "responses": {
-               "200": {
-                  "description": "A successful response.",
-                  "schema": {
-                     "$ref": "#/definitions/extapiTopUpResponse"
-                  }
-               },
-               "default": {
-                  "description": "An unexpected error response.",
-                  "schema": {
-                     "$ref": "#/definitions/runtimeError"
-                  }
-               }
-            },
-            "summary": "TopUp allows user to top up DFI margin wallet from DD wallet/supernode wallet",
-            "tags": [
-               "DFIService"
-            ]
-         }
-      },
-      "/api/dfi/withdraw": {
-         "get": {
-            "operationId": "Withdraw",
-            "parameters": [
-               {
-                  "format": "int64",
-                  "in": "query",
-                  "name": "organizationID",
-                  "required": false,
-                  "type": "string"
-               },
-               {
-                  "in": "query",
-                  "name": "amount",
-                  "required": false,
-                  "type": "string"
-               },
-               {
-                  "in": "query",
-                  "name": "DFIPoolBalance",
-                  "required": false,
-                  "type": "string"
-               }
-            ],
-            "responses": {
-               "200": {
-                  "description": "A successful response.",
-                  "schema": {
-                     "$ref": "#/definitions/extapiWithdrawResponse"
-                  }
-               },
-               "default": {
-                  "description": "An unexpected error response.",
-                  "schema": {
-                     "$ref": "#/definitions/runtimeError"
-                  }
-               }
-            },
-            "summary": "Withdraw allows user to withdraw from DFI margin wallet to DD wallet/supernode wallet",
-            "tags": [
-               "DFIService"
-            ]
-         }
-      },
-      "/api/dhx-mining/bond": {
-         "post": {
-            "operationId": "DHXBond",
-            "parameters": [
+      "/api/dhx-mining/bond":{
+         "post":{
+            "operationId":"DHXBond",
+            "parameters":[
                {
                   "in": "body",
                   "name": "body",
@@ -1987,11 +2012,13 @@
                   }
                }
             ],
-            "responses": {
-               "200": {
-                  "description": "A successful response.",
-                  "schema": {
-                     "properties": {}
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
                   }
                },
                "default": {
@@ -2019,11 +2046,13 @@
                   "type": "string"
                }
             ],
-            "responses": {
-               "200": {
-                  "description": "A successful response.",
-                  "schema": {
-                     "properties": {}
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
                   }
                },
                "default": {
@@ -2152,11 +2181,13 @@
                   }
                }
             ],
-            "responses": {
-               "200": {
-                  "description": "A successful response.",
-                  "schema": {
-                     "properties": {}
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
                   }
                },
                "default": {
@@ -2576,11 +2607,13 @@
                   }
                }
             ],
-            "responses": {
-               "200": {
-                  "description": "A successful response.",
-                  "schema": {
-                     "properties": {}
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
                   }
                },
                "default": {
@@ -2736,11 +2769,13 @@
                   "type": "string"
                }
             ],
-            "responses": {
-               "200": {
-                  "description": "A successful response.",
-                  "schema": {
-                     "properties": {}
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
                   }
                },
                "default": {
@@ -2786,47 +2821,103 @@
             ]
          }
       },
-      "/api/internal/access-token/create": {
-         "post": {
-            "operationId": "AccessTokenCreate",
-            "parameters": [
+      "/api/internal/access-token/create":{
+         "post":{
+            "operationId":"AccessTokenCreate",
+            "parameters":[
                {
-                  "in": "body",
-                  "name": "body",
-                  "required": true,
-                  "schema": {
-                     "$ref": "#/definitions/extapiAccessTokenCreateRequest"
+                  "in":"body",
+                  "name":"body",
+                  "required":true,
+                  "schema":{
+                     "$ref":"#/definitions/extapiAccessTokenCreateRequest"
                   }
                }
             ],
-            "responses": {
-               "200": {
-                  "description": "A successful response.",
-                  "schema": {
-                     "$ref": "#/definitions/extapiAccessTokenCreateResponse"
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "$ref":"#/definitions/extapiAccessTokenCreateResponse"
                   }
                },
-               "default": {
-                  "description": "An unexpected error response.",
-                  "schema": {
-                     "$ref": "#/definitions/runtimeError"
+               "default":{
+                  "description":"An unexpected error response.",
+                  "schema":{
+                     "$ref":"#/definitions/runtimeError"
                   }
                }
             },
-            "summary": "AccessTokenCreate allows user to create api token for use with scripts",
-            "tags": [
+            "summary":"AccessTokenCreate allows user to create api token for use with scripts",
+            "tags":[
                "InternalService"
             ]
          }
       },
-      "/api/internal/access-token/list": {
-         "get": {
-            "operationId": "AccessTokenList",
-            "responses": {
-               "200": {
-                  "description": "A successful response.",
-                  "schema": {
-                     "$ref": "#/definitions/extapiAccessTokenListResponse"
+      "/api/internal/access-token/list":{
+         "get":{
+            "operationId":"AccessTokenList",
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "$ref":"#/definitions/extapiAccessTokenListResponse"
+                  }
+               },
+               "default":{
+                  "description":"An unexpected error response.",
+                  "schema":{
+                     "$ref":"#/definitions/runtimeError"
+                  }
+               }
+            },
+            "summary":"AccessTokenList returns the list of api tokens for the user",
+            "tags":[
+               "InternalService"
+            ]
+         }
+      },
+      "/api/internal/access-token/revoke":{
+         "post":{
+            "operationId":"AccessTokenRevoke",
+            "parameters":[
+               {
+                  "in":"body",
+                  "name":"body",
+                  "required":true,
+                  "schema":{
+                     "$ref":"#/definitions/extapiAccessTokenRevokeRequest"
+                  }
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "$ref":"#/definitions/extapiAccessTokenRevokeResponse"
+                  }
+               },
+               "default":{
+                  "description":"An unexpected error response.",
+                  "schema":{
+                     "$ref":"#/definitions/runtimeError"
+                  }
+               }
+            },
+            "summary":"AccessTokenRevoke revokes api tokens specified in request",
+            "tags":[
+               "InternalService"
+            ]
+         }
+      },
+      "/api/internal/branding":{
+         "get":{
+            "operationId":"Branding",
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "$ref":"#/definitions/extapiBrandingResponse"
                   }
                },
                "default": {
@@ -2943,11 +3034,13 @@
                   }
                }
             ],
-            "responses": {
-               "200": {
-                  "description": "A successful response.",
-                  "schema": {
-                     "$ref": "#/definitions/extapiLoginResponse"
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
                   }
                },
                "default": {
@@ -3055,11 +3148,13 @@
                   }
                }
             ],
-            "responses": {
-               "200": {
-                  "description": "A successful response.",
-                  "schema": {
-                     "properties": {}
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
                   }
                },
                "default": {
@@ -3119,11 +3214,13 @@
                   }
                }
             ],
-            "responses": {
-               "200": {
-                  "description": "A successful response.",
-                  "schema": {
-                     "properties": {}
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
                   }
                },
                "default": {
@@ -3401,24 +3498,24 @@
             ]
          }
       },
-      "/api/mosquitto-auth/get-user": {
-         "post": {
-            "operationId": "JWTAuthentication",
-            "parameters": [
+      "/api/mosquitto-auth/get-user":{
+         "post":{
+            "operationId":"AuthenticateUser",
+            "parameters":[
                {
-                  "in": "body",
-                  "name": "body",
-                  "required": true,
-                  "schema": {
-                     "$ref": "#/definitions/extapiJWTAuthenticationRequest"
+                  "in":"body",
+                  "name":"body",
+                  "required":true,
+                  "schema":{
+                     "$ref":"#/definitions/extapiAuthenticateUserRequest"
                   }
                }
             ],
-            "responses": {
-               "200": {
-                  "description": "A successful response.",
-                  "schema": {
-                     "$ref": "#/definitions/extapiJWTAuthenticationResponse"
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "$ref":"#/definitions/extapiAuthenticateUserResponse"
                   }
                },
                "default": {
@@ -3461,8 +3558,8 @@
                   }
                }
             },
-            "summary": "Get JWT for mosquitto auth with given org id\nOnly accessible for authenticated supernode user",
-            "tags": [
+            "summary":"Deprecated: Get JWT for mosquitto auth with given org id\nOnly accessible for authenticated supernode user",
+            "tags":[
                "MosquittoAuthService"
             ]
          }
@@ -3499,8 +3596,8 @@
                   }
                }
             },
-            "summary": "SendCommandToDevice takes device eui as request paramter,\nreturns topics that can be used to send command to a specific device",
-            "tags": [
+            "summary":"Deprecated: SendCommandToDevice takes device eui as request paramter,\nreturns topics that can be used to send command to a specific device",
+            "tags":[
                "MosquittoAuthService"
             ]
          }
@@ -3517,56 +3614,140 @@
                   "type": "string"
                },
                {
-                  "format": "int64",
-                  "in": "query",
-                  "name": "organizationId",
-                  "required": false,
-                  "type": "string"
+                  "format":"int64",
+                  "in":"query",
+                  "name":"organizationId",
+                  "required":false,
+                  "type":"string"
                }
             ],
-            "responses": {
-               "200": {
-                  "description": "A successful response.",
-                  "schema": {
-                     "$ref": "#/definitions/extapiSubsribeApplicationEventsResponse"
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "$ref":"#/definitions/extapiSubsribeApplicationEventsResponse"
                   }
                },
-               "default": {
-                  "description": "An unexpected error response.",
-                  "schema": {
-                     "$ref": "#/definitions/runtimeError"
+               "default":{
+                  "description":"An unexpected error response.",
+                  "schema":{
+                     "$ref":"#/definitions/runtimeError"
                   }
                }
             },
-            "summary": "SubsribeApplication takes application id as request parameter,\nreturns topics that can be used to subscribe to all devices' events under same application",
-            "tags": [
+            "summary":"Deprecated: SubsribeApplication takes application id as request parameter,\nreturns topics that can be used to subscribe to all devices' events under same application",
+            "tags":[
                "MosquittoAuthService"
             ]
          }
       },
-      "/api/mosquitto-auth/subscribe-device-events": {
-         "get": {
-            "operationId": "SubsribeDeviceEvents",
-            "parameters": [
+      "/api/mosquitto-auth/subscribe-device-events":{
+         "get":{
+            "operationId":"SubsribeDeviceEvents",
+            "parameters":[
                {
-                  "in": "query",
-                  "name": "devEui",
-                  "required": false,
-                  "type": "string"
+                  "in":"query",
+                  "name":"devEui",
+                  "required":false,
+                  "type":"string"
                },
                {
-                  "format": "int64",
-                  "in": "query",
-                  "name": "organizationId",
-                  "required": false,
-                  "type": "string"
+                  "format":"int64",
+                  "in":"query",
+                  "name":"organizationId",
+                  "required":false,
+                  "type":"string"
                }
             ],
-            "responses": {
-               "200": {
-                  "description": "A successful response.",
-                  "schema": {
-                     "$ref": "#/definitions/extapiSubsribeDeviceEventsResponse"
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "$ref":"#/definitions/extapiSubsribeDeviceEventsResponse"
+                  }
+               },
+               "default":{
+                  "description":"An unexpected error response.",
+                  "schema":{
+                     "$ref":"#/definitions/runtimeError"
+                  }
+               }
+            },
+            "summary":"Deprecated: SubsribeDeviceEvents takes device eui as request parameter,\nreturns topis that can be used to subscribe to all device events or one specific event",
+            "tags":[
+               "MosquittoAuthService"
+            ]
+         }
+      },
+      "/api/mqtt-integration/application-settings":{
+         "get":{
+            "operationId":"ApplicationSettings",
+            "parameters":[
+               {
+                  "format":"int64",
+                  "in":"query",
+                  "name":"applicationID",
+                  "required":false,
+                  "type":"string"
+               },
+               {
+                  "format":"int64",
+                  "in":"query",
+                  "name":"organizationID",
+                  "required":false,
+                  "type":"string"
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "$ref":"#/definitions/extapiApplicationSettingsResponse"
+                  }
+               },
+               "default":{
+                  "description":"An unexpected error response.",
+                  "schema":{
+                     "$ref":"#/definitions/runtimeError"
+                  }
+               }
+            },
+            "summary":"ApplicationSettings returns parameters for setting up mqtt integration on application level",
+            "tags":[
+               "MQTTIntegrationService"
+            ]
+         }
+      },
+      "/api/mqtt-integration/device-settings":{
+         "get":{
+            "operationId":"DeviceSettings",
+            "parameters":[
+               {
+                  "in":"query",
+                  "name":"devEUI",
+                  "required":false,
+                  "type":"string"
+               },
+               {
+                  "format":"int64",
+                  "in":"query",
+                  "name":"organizationID",
+                  "required":false,
+                  "type":"string"
+               },
+               {
+                  "format":"int64",
+                  "in":"query",
+                  "name":"applicationID",
+                  "required":false,
+                  "type":"string"
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "$ref":"#/definitions/extapiDeviceSettingsResponse"
                   }
                },
                "default": {
@@ -3576,9 +3757,40 @@
                   }
                }
             },
-            "summary": "SubsribeDeviceEvents takes device eui as request parameter,\nreturns topis that can be used to subscribe to all device events or one specific event",
-            "tags": [
-               "MosquittoAuthService"
+            "summary":"DeviceSettings returns parameters for setting up mqtt integration on device level",
+            "tags":[
+               "MQTTIntegrationService"
+            ]
+         }
+      },
+      "/api/mqtt-integration/generate-new-token":{
+         "get":{
+            "operationId":"GenerateNewToken",
+            "parameters":[
+               {
+                  "format":"int64",
+                  "in":"query",
+                  "name":"organizationID",
+                  "required":false,
+                  "type":"string"
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "$ref":"#/definitions/extapiGenerateNewTokenResponse"
+                  }
+               },
+               "default": {
+                  "description": "An unexpected error response.",
+                  "schema": {
+                     "$ref": "#/definitions/runtimeError"
+                  }
+               }
+            },
+            "tags":[
+               "MQTTIntegrationService"
             ]
          }
       },
@@ -3675,11 +3887,13 @@
                   "type": "string"
                }
             ],
-            "responses": {
-               "200": {
-                  "description": "A successful response.",
-                  "schema": {
-                     "properties": {}
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
                   }
                },
                "default": {
@@ -3747,11 +3961,13 @@
                   }
                }
             ],
-            "responses": {
-               "200": {
-                  "description": "A successful response.",
-                  "schema": {
-                     "properties": {}
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
                   }
                },
                "default": {
@@ -3899,11 +4115,13 @@
                   "type": "string"
                }
             ],
-            "responses": {
-               "200": {
-                  "description": "A successful response.",
-                  "schema": {
-                     "properties": {}
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
                   }
                },
                "default": {
@@ -3971,11 +4189,13 @@
                   }
                }
             ],
-            "responses": {
-               "200": {
-                  "description": "A successful response.",
-                  "schema": {
-                     "properties": {}
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
                   }
                },
                "default": {
@@ -4061,11 +4281,13 @@
                   "type": "string"
                }
             ],
-            "responses": {
-               "200": {
-                  "description": "A successful response.",
-                  "schema": {
-                     "properties": {}
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
                   }
                },
                "default": {
@@ -4141,11 +4363,13 @@
                   }
                }
             ],
-            "responses": {
-               "200": {
-                  "description": "A successful response.",
-                  "schema": {
-                     "properties": {}
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
                   }
                },
                "default": {
@@ -4190,11 +4414,13 @@
                   }
                }
             ],
-            "responses": {
-               "200": {
-                  "description": "A successful response.",
-                  "schema": {
-                     "properties": {}
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
                   }
                },
                "default": {
@@ -4550,11 +4776,13 @@
                   "type": "string"
                }
             ],
-            "responses": {
-               "200": {
-                  "description": "A successful response.",
-                  "schema": {
-                     "properties": {}
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
                   }
                },
                "default": {
@@ -4620,11 +4848,13 @@
                   }
                }
             ],
-            "responses": {
-               "200": {
-                  "description": "A successful response.",
-                  "schema": {
-                     "properties": {}
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
                   }
                },
                "default": {
@@ -5628,11 +5858,13 @@
                   }
                }
             ],
-            "responses": {
-               "200": {
-                  "description": "A successful response.",
-                  "schema": {
-                     "properties": {}
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
                   }
                },
                "default": {
@@ -5661,11 +5893,13 @@
                   }
                }
             ],
-            "responses": {
-               "200": {
-                  "description": "A successful response.",
-                  "schema": {
-                     "$ref": "#/definitions/extapiEmail2FAPassedResponse"
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
                   }
                },
                "default": {
@@ -5694,11 +5928,13 @@
                   }
                }
             ],
-            "responses": {
-               "200": {
-                  "description": "A successful response.",
-                  "schema": {
-                     "$ref": "#/definitions/extapiEmail2FARequestResponse"
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
                   }
                },
                "default": {
@@ -5824,11 +6060,13 @@
                   "type": "string"
                }
             ],
-            "responses": {
-               "200": {
-                  "description": "A successful response.",
-                  "schema": {
-                     "$ref": "#/definitions/extapiGetUserEmailResponse"
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
                   }
                },
                "default": {
@@ -6487,10 +6725,10 @@
                   "type": "string"
                },
                {
-                  "in": "query",
-                  "name": "amount",
-                  "required": false,
-                  "type": "string"
+                  "in":"query",
+                  "name":"amount",
+                  "required":false,
+                  "type":"string"
                }
             ],
             "responses": {
@@ -6775,13 +7013,104 @@
          },
          "type": "object"
       },
-      "extapiAccessTokenRevokeResponse": {
-         "type": "object"
+      "extapiAccessToken":{
+         "properties":{
+            "created":{
+               "format":"date-time",
+               "type":"string"
+            },
+            "description":{
+               "type":"string"
+            },
+            "expires":{
+               "format":"date-time",
+               "type":"string"
+            },
+            "id":{
+               "format":"int64",
+               "type":"string"
+            },
+            "lastUsed":{
+               "format":"date-time",
+               "type":"string"
+            },
+            "maxInactiveSeconds":{
+               "format":"uint64",
+               "type":"string"
+            },
+            "scope":{
+               "items":{
+                  "type":"string"
+               },
+               "type":"array"
+            }
+         },
+         "type":"object"
       },
-      "extapiActivateDeviceRequest": {
-         "properties": {
-            "deviceActivation": {
-               "$ref": "#/definitions/extapiDeviceActivation"
+      "extapiAccessTokenCreateRequest":{
+         "properties":{
+            "description":{
+               "type":"string"
+            },
+            "expires":{
+               "format":"date-time",
+               "type":"string"
+            },
+            "maxInactiveSeconds":{
+               "format":"uint64",
+               "type":"string"
+            },
+            "organizationId":{
+               "format":"uint64",
+               "type":"string"
+            },
+            "scope":{
+               "items":{
+                  "type":"string"
+               },
+               "type":"array"
+            }
+         },
+         "type":"object"
+      },
+      "extapiAccessTokenCreateResponse":{
+         "properties":{
+            "authToken":{
+               "type":"string"
+            }
+         },
+         "type":"object"
+      },
+      "extapiAccessTokenListResponse":{
+         "properties":{
+            "token":{
+               "items":{
+                  "$ref":"#/definitions/extapiAccessToken"
+               },
+               "type":"array"
+            }
+         },
+         "type":"object"
+      },
+      "extapiAccessTokenRevokeRequest":{
+         "properties":{
+            "id":{
+               "items":{
+                  "format":"int64",
+                  "type":"string"
+               },
+               "type":"array"
+            }
+         },
+         "type":"object"
+      },
+      "extapiAccessTokenRevokeResponse":{
+         "type":"object"
+      },
+      "extapiActivateDeviceRequest":{
+         "properties":{
+            "deviceActivation":{
+               "$ref":"#/definitions/extapiDeviceActivation"
             }
          },
          "type": "object"
@@ -6898,11 +7227,26 @@
          },
          "type": "object"
       },
-      "extapiAuthenticateWeChatUserRequest": {
-         "properties": {
-            "code": {
-               "description": "code is obtained from wechat app for authenticating wechat account",
-               "type": "string"
+      "extapiApplicationSettingsResponse":{
+         "properties":{
+            "uplink":{
+               "$ref":"#/definitions/extapisettings",
+               "description":"integration settings for subscribing to uplink events"
+            }
+         },
+         "type":"object"
+      },
+      "extapiAuthenticateUserRequest":{
+         "type":"object"
+      },
+      "extapiAuthenticateUserResponse":{
+         "type":"object"
+      },
+      "extapiAuthenticateWeChatUserRequest":{
+         "properties":{
+            "code":{
+               "description":"code is obtained from wechat app for authenticating wechat account",
+               "type":"string"
             }
          },
          "type": "object"
@@ -6928,39 +7272,37 @@
          },
          "type": "object"
       },
-      "extapiBTCAddLocksRequest": {
-         "properties": {
-            "durationDays": {
-               "description": "duration for which amount will be locked (it has to match session parameters)",
-               "format": "int64",
-               "type": "string"
+      "extapiBTCDailyMining":{
+         "properties":{
+            "amount":{
+               "description":"amount of BTC mined",
+               "type":"string"
             },
-            "gatewayMac": {
-               "description": "MACs of the gateways that will participate",
-               "items": {
-                  "type": "string"
-               },
-               "type": "array"
+            "miningDate":{
+               "description":"the date on which the mining happened",
+               "format":"date-time",
+               "type":"string"
             },
-            "orgId": {
-               "description": "org that locks the mxc and owns the gateways",
-               "format": "int64",
-               "type": "string"
-            },
-            "sessionId": {
-               "description": "btc mining session for which the locks will be active",
-               "format": "int64",
-               "type": "string"
-            },
-            "totalAmount": {
-               "description": "total amount to be locked (it has to match session parameters)",
-               "type": "string"
+            "miningPower":{
+               "description":"mining power on that date",
+               "format":"int64",
+               "type":"string"
             }
          },
          "type": "object"
       },
-      "extapiBTCAddLocksResponse": {
-         "type": "object"
+      "extapiBTCGWMined":{
+         "properties":{
+            "amount":{
+               "description":"amount mined by this gateway",
+               "type":"string"
+            },
+            "gatewayMac":{
+               "description":"gateway's MAC",
+               "type":"string"
+            }
+         },
+         "type":"object"
       },
       "extapiBTCListLocksResponse": {
          "properties": {
@@ -6980,9 +7322,10 @@
                "description": "amount of MXC locked",
                "type": "string"
             },
-            "btcRevenue": {
-               "description": "BTC revenue earned by this lock",
-               "type": "string"
+            "coolingOffEnds":{
+               "description":"timestamp when cooling off ends (only for unlocked bonds)",
+               "format":"date-time",
+               "type":"string"
             },
             "created": {
                "description": "timestamp when lock was created",
@@ -6998,25 +7341,86 @@
                "format": "int64",
                "type": "string"
             },
-            "lockTill": {
-               "description": "timestamp after which the lock will be released",
-               "format": "date-time",
-               "type": "string"
+            "lockTill":{
+               "description":"timestamp at which current lock period ends",
+               "format":"date-time",
+               "type":"string"
             },
-            "sessionId": {
-               "description": "btc mining session id",
-               "format": "int64",
-               "type": "string"
+            "unlockFrom":{
+               "description":"timestamp from when the unlock can be requested (lock_till shows the end\nof the period during which the unlock can be requested)",
+               "format":"date-time",
+               "type":"string"
+            },
+            "unlocked":{
+               "description":"timestamp when the unlock has been requested",
+               "format":"date-time",
+               "type":"string"
+            }
+         },
+         "type":"object"
+      },
+      "extapiBTCLockRequest":{
+         "properties":{
+            "amount":{
+               "description":"amount to be bonded",
+               "type":"string"
+            },
+            "gatewayMac":{
+               "description":"MAC of the gateways to which MXC will be bonded",
+               "type":"string"
+            },
+            "orgId":{
+               "description":"org that locks the mxc and owns the gateways",
+               "format":"int64",
+               "type":"string"
+            }
+         },
+         "type":"object"
+      },
+      "extapiBTCLockResponse":{
+         "properties":{
+            "lockId":{
+               "description":"internal ID of the lock",
+               "format":"int64",
+               "type":"string"
             }
          },
          "type": "object"
       },
-      "extapiBTCMiningSessionResponse": {
-         "properties": {
-            "endDate": {
-               "description": "last day of the mining session",
-               "format": "date-time",
-               "type": "string"
+      "extapiBTCMinedResponse":{
+         "properties":{
+            "gatewayMining":{
+               "description":"amounts mined by individual gateways",
+               "items":{
+                  "$ref":"#/definitions/extapiBTCGWMined"
+               },
+               "type":"array"
+            },
+            "totalAmount":{
+               "description":"total amount of BTC mined by the organization",
+               "type":"string"
+            }
+         },
+         "type":"object"
+      },
+      "extapiBTCMiningHistoryResponse":{
+         "properties":{
+            "dailyMining":{
+               "description":"mining history records ordered by date",
+               "items":{
+                  "$ref":"#/definitions/extapiBTCDailyMining"
+               },
+               "type":"array"
+            }
+         },
+         "type":"object"
+      },
+      "extapiBTCMiningSessionResponse":{
+         "properties":{
+            "endDate":{
+               "description":"last day of the mining session",
+               "format":"date-time",
+               "type":"string"
             },
             "mxcLockAmount": {
                "description": "amount of MXC per gateway that the user must lock",
@@ -7041,10 +7445,35 @@
          },
          "type": "object"
       },
-      "extapiBatchResetDefaultGatewatConfigRequest": {
-         "properties": {
-            "organizationList": {
-               "type": "string"
+      "extapiBTCUnlockRequest":{
+         "properties":{
+            "lockId":{
+               "description":"ID of the lock to release",
+               "format":"int64",
+               "type":"string"
+            },
+            "orgId":{
+               "description":"org to which the lock belongs",
+               "format":"int64",
+               "type":"string"
+            }
+         },
+         "type":"object"
+      },
+      "extapiBTCUnlockResponse":{
+         "properties":{
+            "coolingOffTill":{
+               "description":"timestamp of when the cooling off ends",
+               "format":"date-time",
+               "type":"string"
+            }
+         },
+         "type":"object"
+      },
+      "extapiBatchResetDefaultGatewatConfigRequest":{
+         "properties":{
+            "organizationList":{
+               "type":"string"
             }
          },
          "type": "object"
@@ -7470,28 +7899,12 @@
          },
          "type": "object"
       },
-      "extapiDFIAuthenticateUserResponse": {
-         "properties": {
-            "mxcBalance": {
-               "description": "current mxc balance in user's dd wallet/supernode wallet",
-               "type": "string"
-            },
-            "organizationID": {
-               "type": "string"
-            },
-            "userEmail": {
-               "description": "for displaying",
-               "type": "string"
-            }
-         },
-         "type": "object"
-      },
-      "extapiDHXBondInfoRequest": {
-         "properties": {
-            "orgId": {
-               "description": "organization for which the info should be returned",
-               "format": "int64",
-               "type": "string"
+      "extapiDHXBondInfoRequest":{
+         "properties":{
+            "orgId":{
+               "description":"organization for which the info should be returned",
+               "format":"int64",
+               "type":"string"
             }
          },
          "type": "object"
@@ -8044,159 +8457,159 @@
                "format": "float",
                "type": "number"
             },
-            "deviceStatusBatteryLevelUnavailable": {
-               "description": "Device battery status is unavailable.",
-               "type": "boolean"
+            "deviceStatusBatteryLevelUnavailable":{
+               "description":"Device battery status is unavailable.",
+               "type":"boolean"
             },
-            "deviceStatusExternalPowerSource": {
-               "description": "Device is connected to an external power source.",
-               "type": "boolean"
+            "deviceStatusExternalPowerSource":{
+               "description":"Device is connected to an external power source.",
+               "type":"boolean"
             },
-            "deviceStatusMargin": {
-               "description": "The device margin status\n-32..32: The demodulation SNR ration in dB\n256:     The device-status is not available.",
-               "format": "int32",
-               "type": "integer"
+            "deviceStatusMargin":{
+               "description":"The device margin status\n-32..32: The demodulation SNR ration in dB\n256:     The device-status is not available.",
+               "format":"int32",
+               "type":"integer"
             },
-            "lastSeenAt": {
-               "description": "The last time the application-server received any data from the device,\nor an empty string when the device never sent any data.",
-               "format": "date-time",
-               "type": "string"
+            "lastSeenAt":{
+               "description":"The last time the application-server received any data from the device,\nor an empty string when the device never sent any data.",
+               "format":"date-time",
+               "type":"string"
             },
-            "name": {
-               "description": "Name of the device.",
-               "type": "string"
+            "name":{
+               "description":"Name of the device.",
+               "type":"string"
             }
          },
-         "type": "object"
+         "type":"object"
       },
-      "extapiDeviceProfile": {
-         "properties": {
-            "classBTimeout": {
-               "description": "Maximum delay for the End-Device to answer a MAC request or a confirmed DL frame (mandatory if class B mode supported).",
-               "format": "int64",
-               "type": "integer"
+      "extapiDeviceProfile":{
+         "properties":{
+            "classBTimeout":{
+               "description":"Maximum delay for the End-Device to answer a MAC request or a confirmed DL frame (mandatory if class B mode supported).",
+               "format":"int64",
+               "type":"integer"
             },
-            "classCTimeout": {
-               "description": "Maximum delay for the End-Device to answer a MAC request or a confirmed DL frame (mandatory if class C mode supported).",
-               "format": "int64",
-               "type": "integer"
+            "classCTimeout":{
+               "description":"Maximum delay for the End-Device to answer a MAC request or a confirmed DL frame (mandatory if class C mode supported).",
+               "format":"int64",
+               "type":"integer"
             },
-            "factoryPresetFreqs": {
-               "description": "List of factory-preset frequencies (mandatory for ABP).",
-               "items": {
-                  "format": "int64",
-                  "type": "integer"
+            "factoryPresetFreqs":{
+               "description":"List of factory-preset frequencies (mandatory for ABP).",
+               "items":{
+                  "format":"int64",
+                  "type":"integer"
                },
-               "type": "array"
+               "type":"array"
             },
-            "geolocBufferTTL": {
-               "description": "Geolocation buffer TTL (in seconds).\nWhen \u003e 0, uplink RX meta-data will be stored in a buffer so that\nthe meta-data of multiple uplinks can be used for geolocation.",
-               "format": "int64",
-               "type": "integer"
+            "geolocBufferTTL":{
+               "description":"Geolocation buffer TTL (in seconds).\nWhen > 0, uplink RX meta-data will be stored in a buffer so that\nthe meta-data of multiple uplinks can be used for geolocation.",
+               "format":"int64",
+               "type":"integer"
             },
-            "geolocMinBufferSize": {
-               "description": "Geolocation minimum buffer size.\nWhen \u003e 0, geolocation will only be performed when the buffer has\nat least the given size.",
-               "format": "int64",
-               "type": "integer"
+            "geolocMinBufferSize":{
+               "description":"Geolocation minimum buffer size.\nWhen > 0, geolocation will only be performed when the buffer has\nat least the given size.",
+               "format":"int64",
+               "type":"integer"
             },
-            "id": {
-               "description": "Device-profile ID (UUID string).",
-               "type": "string"
+            "id":{
+               "description":"Device-profile ID (UUID string).",
+               "type":"string"
             },
-            "macVersion": {
-               "description": "Version of the LoRaWAN supported by the End-Device.",
-               "type": "string"
+            "macVersion":{
+               "description":"Version of the LoRaWAN supported by the End-Device.",
+               "type":"string"
             },
-            "maxDutyCycle": {
-               "description": "Maximum duty cycle supported by the End-Device.",
-               "format": "int64",
-               "type": "integer"
+            "maxDutyCycle":{
+               "description":"Maximum duty cycle supported by the End-Device.",
+               "format":"int64",
+               "type":"integer"
             },
-            "maxEIRP": {
-               "description": "Maximum EIRP supported by the End-Device.",
-               "format": "int64",
-               "type": "integer"
+            "maxEIRP":{
+               "description":"Maximum EIRP supported by the End-Device.",
+               "format":"int64",
+               "type":"integer"
             },
-            "name": {
-               "description": "Device-profile name.",
-               "type": "string"
+            "name":{
+               "description":"Device-profile name.",
+               "type":"string"
             },
-            "networkServerID": {
-               "description": "Network-server ID on which the service-profile is provisioned.",
-               "format": "int64",
-               "type": "string"
+            "networkServerID":{
+               "description":"Network-server ID on which the service-profile is provisioned.",
+               "format":"int64",
+               "type":"string"
             },
-            "organizationID": {
-               "description": "Organization ID to which the service-profile is assigned.",
-               "format": "int64",
-               "type": "string"
+            "organizationID":{
+               "description":"Organization ID to which the service-profile is assigned.",
+               "format":"int64",
+               "type":"string"
             },
-            "payloadCodec": {
-               "description": "Payload codec.\nLeave blank to disable the codec feature.",
-               "type": "string"
+            "payloadCodec":{
+               "description":"Payload codec.\nLeave blank to disable the codec feature.",
+               "type":"string"
             },
-            "payloadDecoderScript": {
-               "description": "Payload decoder script.\nDepending the codec, it is possible to provide a script which implements\nthe decoder function.",
-               "type": "string"
+            "payloadDecoderScript":{
+               "description":"Payload decoder script.\nDepending the codec, it is possible to provide a script which implements\nthe decoder function.",
+               "type":"string"
             },
-            "payloadEncoderScript": {
-               "description": "Payload encoder script.\nDepending the codec, it is possible to provide a script which implements\nthe encoder function.",
-               "type": "string"
+            "payloadEncoderScript":{
+               "description":"Payload encoder script.\nDepending the codec, it is possible to provide a script which implements\nthe encoder function.",
+               "type":"string"
             },
-            "pingSlotDR": {
-               "description": "Mandatory if class B mode supported.",
-               "format": "int64",
-               "type": "integer"
+            "pingSlotDR":{
+               "description":"Mandatory if class B mode supported.",
+               "format":"int64",
+               "type":"integer"
             },
-            "pingSlotFreq": {
-               "description": "Mandatory if class B mode supported.",
-               "format": "int64",
-               "type": "integer"
+            "pingSlotFreq":{
+               "description":"Mandatory if class B mode supported.",
+               "format":"int64",
+               "type":"integer"
             },
-            "pingSlotPeriod": {
-               "description": "Mandatory if class B mode supported.",
-               "format": "int64",
-               "type": "integer"
+            "pingSlotPeriod":{
+               "description":"Mandatory if class B mode supported.",
+               "format":"int64",
+               "type":"integer"
             },
-            "regParamsRevision": {
-               "description": "Revision of the Regional Parameters document supported by the End-Device.",
-               "type": "string"
+            "regParamsRevision":{
+               "description":"Revision of the Regional Parameters document supported by the End-Device.",
+               "type":"string"
             },
-            "rfRegion": {
-               "description": "RF region name.",
-               "type": "string"
+            "rfRegion":{
+               "description":"RF region name.",
+               "type":"string"
             },
-            "rxDROffset1": {
-               "description": "RX1 data rate offset (mandatory for ABP).",
-               "format": "int64",
-               "type": "integer"
+            "rxDROffset1":{
+               "description":"RX1 data rate offset (mandatory for ABP).",
+               "format":"int64",
+               "type":"integer"
             },
-            "rxDataRate2": {
-               "description": "RX2 data rate (mandatory for ABP).",
-               "format": "int64",
-               "type": "integer"
+            "rxDataRate2":{
+               "description":"RX2 data rate (mandatory for ABP).",
+               "format":"int64",
+               "type":"integer"
             },
-            "rxDelay1": {
-               "description": "Class A RX1 delay (mandatory for ABP).",
-               "format": "int64",
-               "type": "integer"
+            "rxDelay1":{
+               "description":"Class A RX1 delay (mandatory for ABP).",
+               "format":"int64",
+               "type":"integer"
             },
-            "rxFreq2": {
-               "description": "RX2 channel frequency (mandatory for ABP).",
-               "format": "int64",
-               "type": "integer"
+            "rxFreq2":{
+               "description":"RX2 channel frequency (mandatory for ABP).",
+               "format":"int64",
+               "type":"integer"
             },
-            "supports32BitFCnt": {
-               "description": "End-Device uses 32bit FCnt (mandatory for LoRaWAN 1.0 End-Device).",
-               "type": "boolean"
+            "supports32BitFCnt":{
+               "description":"End-Device uses 32bit FCnt (mandatory for LoRaWAN 1.0 End-Device).",
+               "type":"boolean"
             },
-            "supportsClassB": {
-               "description": "End-Device supports Class B.",
-               "type": "boolean"
+            "supportsClassB":{
+               "description":"End-Device supports Class B.",
+               "type":"boolean"
             },
-            "supportsClassC": {
-               "description": "End-Device supports Class C.",
-               "type": "boolean"
+            "supportsClassC":{
+               "description":"End-Device supports Class C.",
+               "type":"boolean"
             },
             "supportsJoin": {
                "description": "End-Device supports Join (OTAA) or not (ABP).",
@@ -8283,50 +8696,10 @@
                "description": "LoRaWAN PHYPayload.",
                "type": "string"
             },
-            "txInfo": {
-               "$ref": "#/definitions/gwDownlinkTXInfo",
-               "description": "TX information of the downlink."
-            }
-         },
-         "type": "object"
-      },
-      "extapiEmail2FAPassedRequest": {
-         "properties": {
-            "language": {
-               "type": "string"
-            }
-         },
-         "type": "object"
-      },
-      "extapiEmail2FAPassedResponse": {
-         "properties": {
-            "verified": {
-               "type": "boolean"
-            }
-         },
-         "type": "object"
-      },
-      "extapiEmail2FARequestRequest": {
-         "properties": {
-            "language": {
-               "type": "string"
-            }
-         },
-         "type": "object"
-      },
-      "extapiEmail2FARequestResponse": {
-         "properties": {
-            "sent": {
-               "type": "boolean"
-            }
-         },
-         "type": "object"
-      },
-      "extapiEmail2FAVerifyRequest": {
-         "description": "Temporary verifying email for doing sensitive actions",
-         "properties": {
-            "code": {
-               "type": "string"
+            "fPort":{
+               "description":"FPort used (must be > 0)",
+               "format":"int64",
+               "type":"integer"
             },
             "language": {
                "type": "string"
@@ -8334,11 +8707,24 @@
          },
          "type": "object"
       },
-      "extapiEmail2FAVerifyResponse": {
-         "properties": {
-            "remainedAttempts": {
-               "format": "int32",
-               "type": "integer"
+      "extapiDeviceSettingsResponse":{
+         "properties":{
+            "downLink":{
+               "$ref":"#/definitions/extapisettings",
+               "description":"integration settings for sending down link commands"
+            },
+            "uplink":{
+               "$ref":"#/definitions/extapisettings",
+               "description":"integration settings for subscribing to uplink events"
+            }
+         },
+         "type":"object"
+      },
+      "extapiDownlinkFrameLog":{
+         "properties":{
+            "phyPayloadJSON":{
+               "description":"LoRaWAN PHYPayload.",
+               "type":"string"
             },
             "verified": {
                "type": "boolean"
@@ -8753,11 +9139,19 @@
          },
          "type": "object"
       },
-      "extapiGetActiveStakesResponse": {
-         "properties": {
-            "actStake": {
-               "items": {
-                  "$ref": "#/definitions/extapiStake"
+      "extapiGenerateNewTokenResponse":{
+         "properties":{
+            "token":{
+               "type":"string"
+            }
+         },
+         "type":"object"
+      },
+      "extapiGetActiveStakesResponse":{
+         "properties":{
+            "actStake":{
+               "items":{
+                  "$ref":"#/definitions/extapiStake"
                },
                "type": "array"
             }
@@ -8981,11 +9375,12 @@
          },
          "type": "object"
       },
-      "extapiGetJWTRequest": {
-         "properties": {
-            "organizationId": {
-               "format": "int64",
-               "type": "string"
+      "extapiGetJWTRequest":{
+         "description":"Deprecated",
+         "properties":{
+            "organizationId":{
+               "format":"int64",
+               "type":"string"
             },
             "ttlInSeconds": {
                "format": "int64",
@@ -8994,11 +9389,12 @@
          },
          "type": "object"
       },
-      "extapiGetJWTResponse": {
-         "properties": {
-            "jwtMqttAuth": {
-               "description": "jwt generated and used for authenticate mosquitto client",
-               "type": "string"
+      "extapiGetJWTResponse":{
+         "description":"Deprecated",
+         "properties":{
+            "jwtMqttAuth":{
+               "description":"jwt generated and used for authenticate mosquitto client",
+               "type":"string"
             }
          },
          "type": "object"
@@ -9478,18 +9874,12 @@
          },
          "type": "object"
       },
-      "extapiJWTAuthenticationRequest": {
-         "type": "object"
-      },
-      "extapiJWTAuthenticationResponse": {
-         "type": "object"
-      },
-      "extapiListApplicationResponse": {
-         "properties": {
-            "result": {
-               "description": "Applications within this result-set.",
-               "items": {
-                  "$ref": "#/definitions/extapiApplicationListItem"
+      "extapiListApplicationResponse":{
+         "properties":{
+            "result":{
+               "description":"Applications within this result-set.",
+               "items":{
+                  "$ref":"#/definitions/extapiApplicationListItem"
                },
                "type": "array"
             },
@@ -10417,10 +10807,11 @@
          },
          "type": "object"
       },
-      "extapiSendCommandToDeviceResponse": {
-         "properties": {
-            "topic": {
-               "type": "string"
+      "extapiSendCommandToDeviceResponse":{
+         "description":"Deprecated",
+         "properties":{
+            "topic":{
+               "type":"string"
             }
          },
          "type": "object"
@@ -10800,19 +11191,21 @@
          },
          "type": "object"
       },
-      "extapiSubsribeApplicationEventsResponse": {
-         "properties": {
-            "topic": {
-               "type": "string"
+      "extapiSubsribeApplicationEventsResponse":{
+         "description":"Deprecated",
+         "properties":{
+            "topic":{
+               "type":"string"
             }
          },
          "type": "object"
       },
-      "extapiSubsribeDeviceEventsResponse": {
-         "properties": {
-            "topic": {
-               "items": {
-                  "type": "string"
+      "extapiSubsribeDeviceEventsResponse":{
+         "description":"Deprecated",
+         "properties":{
+            "topic":{
+               "items":{
+                  "type":"string"
                },
                "type": "array"
             }
@@ -10887,14 +11280,11 @@
          },
          "type": "object"
       },
-      "extapiTopUpResponse": {
-         "type": "object"
-      },
-      "extapiTransaction": {
-         "properties": {
-            "amount": {
-               "description": "amount, decimal number with up to 18 decimal digits",
-               "type": "string"
+      "extapiTransaction":{
+         "properties":{
+            "amount":{
+               "description":"amount, decimal number with up to 18 decimal digits",
+               "type":"string"
             },
             "detailsJson": {
                "description": "transaction details encoded as JSON",
@@ -11345,10 +11735,44 @@
          },
          "type": "object"
       },
-      "extapiWithdrawResponse": {
-         "properties": {
-            "msg": {
-               "type": "string"
+      "extapisettings":{
+         "properties":{
+            "description":{
+               "description":"description and additional information for mqtt integration",
+               "type":"string"
+            },
+            "example":{
+               "description":"example command line for subscribe/publish with mosquitto client",
+               "type":"string"
+            },
+            "hostname":{
+               "type":"string"
+            },
+            "mqttVersion":{
+               "type":"string"
+            },
+            "port":{
+               "type":"string"
+            },
+            "topics":{
+               "items":{
+                  "$ref":"#/definitions/extapitopic"
+               },
+               "type":"array"
+            },
+            "username":{
+               "type":"string"
+            }
+         },
+         "type":"object"
+      },
+      "extapitopic":{
+         "properties":{
+            "description":{
+               "type":"string"
+            },
+            "topicString":{
+               "type":"string"
             }
          },
          "type": "object"

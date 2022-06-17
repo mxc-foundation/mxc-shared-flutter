@@ -26,12 +26,20 @@ class ColorsTheme {
   // components
   final boxComponents = Colors.white;
 
-  final mxcBlue = const Color(0xFF1C1478);
-  final mxcBlue80 = const Color(0xFF1C1478).withOpacity(0.80);
-  final mxcBlue60 = const Color(0xFF1C1478).withOpacity(0.60);
-  final mxcBlue40 = const Color(0xFF1C1478).withOpacity(0.40);
-  final mxcBlue20 = const Color(0xFF1C1478).withOpacity(0.20);
-  final mxcBlue05 = const Color(0xFF1C1478).withOpacity(0.05);
+  final purpleMain = const Color(0xFF461AB2);
+  final purple600 = const Color(0xFF2A0F69);
+  final purple500 = const Color(0xFF6A47C0);
+  final purple400 = const Color(0xFF8F75D0);
+  final purple300 = const Color(0xFFB3A1DE);
+  final purple200 = const Color(0xFFD8CFEE);
+  final purple100 = const Color(0xFFF2F0F8);
+
+  final mxcPurple = const Color(0xFF6300FF);
+  final mxcPurple500 = const Color(0xFF8132FE);
+  final mxcPurple400 = const Color(0xFFA065FE);
+  final mxcPurple300 = const Color(0xFFBF97FD);
+  final mxcPurple200 = const Color(0xFFDECAFD);
+  final mxcPurple100 = const Color(0xFFF4EFFC);
 
   final dhxBlue = const Color(0xFF4665EA);
   final dhxBlue80 = const Color(0xFF4665EA).withOpacity(0.80);
@@ -59,19 +67,23 @@ class ColorsTheme {
   final success = const Color(0xFF10C469);
   final success20 = const Color(0xFF10C469).withOpacity(0.2);
 
-  final textPrimaryAndIcons = Colors.black.withOpacity(0.87);
+  final textPrimaryAndIcons = const Color(0xFF25282B);
   final textSecondary = const Color(0xFF98A6AD);
   final textLabel = const Color(0xFF98A6AD);
-  final textError = const Color(0xFFFF5B5B);
-  final textError20 = const Color(0xFFFF5B5B).withOpacity(0.2);
+  final textError = const Color(0xFFD22D2D);
 
-  final buttonIconTextColor = Colors.white;
+  final white = Colors.white;
   final buttonDisabledBackground = const Color(0xFFE3E3E5);
   final buttonDisabledLabel = const Color(0xFFBBBFC6);
-  final transparent = Colors.transparent;
 
-  Color get shadow => mxcBlue20;
+  final sliderDisabledKnob = const Color(0xFFBBBFC6);
+  final sliderDisabledBaseActive = const Color(0xFFBBBFC6);
+  final sliderDisabledBaseDefault = const Color(0xFFE3E3E5);
+
+  Color get shadow => purple200;
   Color get shadow2 => Colors.black.withOpacity(0.107);
+
+  Color get dialogOverlay => const Color(0xFF000000).withOpacity(0.35);
 }
 
 class ColorsThemeDark implements ColorsTheme {
@@ -89,22 +101,43 @@ class ColorsThemeDark implements ColorsTheme {
   final boxComponents = const Color(0xFF2C2C2E);
 
   @override
-  final mxcBlue = const Color(0xFF30A78B);
+  final purpleMain = const Color(0xFFA885E0);
 
   @override
-  final mxcBlue80 = const Color(0xFF30A78B).withOpacity(0.8);
+  final purple600 = const Color(0xFFA885E0);
 
   @override
-  final mxcBlue60 = const Color(0xFF30A78B).withOpacity(0.6);
+  final purple500 = const Color(0xFF967BC3);
 
   @override
-  final mxcBlue40 = const Color(0xFF30A78B).withOpacity(0.4);
+  final purple400 = const Color(0xFF78639A);
 
   @override
-  final mxcBlue20 = const Color(0xFF30A78B).withOpacity(0.2);
+  final purple300 = const Color(0xFF594C70);
 
   @override
-  final mxcBlue05 = const Color(0xFF30A78B).withOpacity(0.05);
+  final purple200 = const Color(0xFF3B3447);
+
+  @override
+  final purple100 = const Color(0xFF34313C);
+
+  @override
+  final mxcPurple = const Color(0xFFB593EC);
+
+  @override
+  final mxcPurple500 = const Color(0xFF967BC3);
+
+  @override
+  final mxcPurple400 = const Color(0xFF78639A);
+
+  @override
+  final mxcPurple300 = const Color(0xFF594C70);
+
+  @override
+  final mxcPurple200 = const Color(0xFF3B3447);
+
+  @override
+  final mxcPurple100 = const Color(0xFF242228);
 
   @override
   final dhxBlue = const Color(0xFF7B90E9);
@@ -179,26 +212,32 @@ class ColorsThemeDark implements ColorsTheme {
   final textLabel = const Color(0xFF98A6AD);
 
   @override
-  final textError = const Color(0xFFFF5B5B);
+  final textError = const Color(0xFFFC8383);
 
   @override
-  final textError20 = const Color(0xFFFF5B5B).withOpacity(0.2);
-
-  @override
-  final buttonIconTextColor = Colors.white;
+  final white = Colors.white;
 
   @override
   final buttonDisabledBackground = const Color(0xFF323233);
 
   @override
-  final buttonDisabledLabel = const Color(0xFF4E5659);
+  final buttonDisabledLabel = const Color(0xFF484A4D);
 
   @override
-  final transparent = Colors.transparent;
+  final sliderDisabledKnob = const Color(0xFF484A4D);
 
   @override
-  Color get shadow => mxcBlue20;
+  final sliderDisabledBaseActive = const Color(0xFF484A4D);
+
+  @override
+  final sliderDisabledBaseDefault = const Color(0xFF323233);
+
+  @override
+  Color get shadow => purple200;
 
   @override
   Color get shadow2 => Colors.black.withOpacity(0.107);
+
+  @override
+  Color get dialogOverlay => const Color(0xFFFFFFFF).withOpacity(0.4);
 }

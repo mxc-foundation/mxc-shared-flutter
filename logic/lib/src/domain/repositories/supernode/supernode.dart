@@ -2,6 +2,7 @@ import 'package:mxc_logic/mxc_logic.dart';
 import 'package:mxc_logic/src/data/data.dart';
 
 export 'api/auth.dart';
+export 'api/btc.dart';
 export 'api/device.dart';
 export 'api/dhx.dart';
 export 'api/external_accounts.dart';
@@ -18,6 +19,7 @@ export 'api/wallet.dart';
 export 'api/withdraw.dart';
 
 abstract class SupernodeRepository {
+  BtcRepository get btc;
   WalletRepository get wallet;
   DhxRepository get dhx;
   GatewayRepository get gateways;
@@ -62,6 +64,9 @@ class SupernodeRepositoryDemoDecorator implements SupernodeRepository {
 
   SupernodeRepository get _currentRepository =>
       demoMode ? _demoRepository : _apiRepository;
+
+  @override
+  BtcRepository get btc => _currentRepository.btc;
 
   @override
   DhxRepository get dhx => _currentRepository.dhx;

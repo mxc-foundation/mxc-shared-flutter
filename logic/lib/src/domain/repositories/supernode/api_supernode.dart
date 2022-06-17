@@ -28,6 +28,9 @@ class ApiSupernodeRepository implements SupernodeRepository {
   Stream<void> get onTokenExpired => _client.onTokenExpired;
 
   @override
+  BtcRepository get btc => BtcRepository(_client);
+
+  @override
   DhxRepository get dhx => DhxRepository(_client);
 
   @override

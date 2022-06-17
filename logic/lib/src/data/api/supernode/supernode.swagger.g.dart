@@ -243,6 +243,36 @@ Map<String, dynamic> _$ExtapiApplicationListItemToJson(
       'serviceProfileName': instance.serviceProfileName,
     };
 
+ExtapiApplicationSettingsResponse _$ExtapiApplicationSettingsResponseFromJson(
+        Map<String, dynamic> json) =>
+    ExtapiApplicationSettingsResponse(
+      uplink: json['uplink'] == null
+          ? null
+          : Extapisettings.fromJson(json['uplink'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$ExtapiApplicationSettingsResponseToJson(
+        ExtapiApplicationSettingsResponse instance) =>
+    <String, dynamic>{
+      'uplink': instance.uplink?.toJson(),
+    };
+
+ExtapiAuthenticateUserRequest _$ExtapiAuthenticateUserRequestFromJson(
+        Map<String, dynamic> json) =>
+    ExtapiAuthenticateUserRequest();
+
+Map<String, dynamic> _$ExtapiAuthenticateUserRequestToJson(
+        ExtapiAuthenticateUserRequest instance) =>
+    <String, dynamic>{};
+
+ExtapiAuthenticateUserResponse _$ExtapiAuthenticateUserResponseFromJson(
+        Map<String, dynamic> json) =>
+    ExtapiAuthenticateUserResponse();
+
+Map<String, dynamic> _$ExtapiAuthenticateUserResponseToJson(
+        ExtapiAuthenticateUserResponse instance) =>
+    <String, dynamic>{};
+
 ExtapiAuthenticateWeChatUserRequest
     _$ExtapiAuthenticateWeChatUserRequestFromJson(Map<String, dynamic> json) =>
         ExtapiAuthenticateWeChatUserRequest(
@@ -273,36 +303,35 @@ Map<String, dynamic> _$ExtapiAuthenticateWeChatUserResponseToJson(
       'is2faRequired': instance.is2faRequired,
     };
 
-ExtapiBTCAddLocksRequest _$ExtapiBTCAddLocksRequestFromJson(
+ExtapiBTCDailyMining _$ExtapiBTCDailyMiningFromJson(
         Map<String, dynamic> json) =>
-    ExtapiBTCAddLocksRequest(
-      durationDays: json['durationDays'] as String?,
-      gatewayMac: (json['gatewayMac'] as List<dynamic>?)
-              ?.map((e) => e as String)
-              .toList() ??
-          [],
-      orgId: json['orgId'] as String?,
-      sessionId: json['sessionId'] as String?,
-      totalAmount: json['totalAmount'] as String?,
+    ExtapiBTCDailyMining(
+      amount: json['amount'] as String?,
+      miningDate: json['miningDate'] == null
+          ? null
+          : DateTime.parse(json['miningDate'] as String),
+      miningPower: json['miningPower'] as String?,
     );
 
-Map<String, dynamic> _$ExtapiBTCAddLocksRequestToJson(
-        ExtapiBTCAddLocksRequest instance) =>
+Map<String, dynamic> _$ExtapiBTCDailyMiningToJson(
+        ExtapiBTCDailyMining instance) =>
     <String, dynamic>{
-      'durationDays': instance.durationDays,
-      'gatewayMac': instance.gatewayMac,
-      'orgId': instance.orgId,
-      'sessionId': instance.sessionId,
-      'totalAmount': instance.totalAmount,
+      'amount': instance.amount,
+      'miningDate': instance.miningDate?.toIso8601String(),
+      'miningPower': instance.miningPower,
     };
 
-ExtapiBTCAddLocksResponse _$ExtapiBTCAddLocksResponseFromJson(
-        Map<String, dynamic> json) =>
-    ExtapiBTCAddLocksResponse();
+ExtapiBTCGWMined _$ExtapiBTCGWMinedFromJson(Map<String, dynamic> json) =>
+    ExtapiBTCGWMined(
+      amount: json['amount'] as String?,
+      gatewayMac: json['gatewayMac'] as String?,
+    );
 
-Map<String, dynamic> _$ExtapiBTCAddLocksResponseToJson(
-        ExtapiBTCAddLocksResponse instance) =>
-    <String, dynamic>{};
+Map<String, dynamic> _$ExtapiBTCGWMinedToJson(ExtapiBTCGWMined instance) =>
+    <String, dynamic>{
+      'amount': instance.amount,
+      'gatewayMac': instance.gatewayMac,
+    };
 
 ExtapiBTCListLocksResponse _$ExtapiBTCListLocksResponseFromJson(
         Map<String, dynamic> json) =>
@@ -322,7 +351,9 @@ Map<String, dynamic> _$ExtapiBTCListLocksResponseToJson(
 ExtapiBTCLock _$ExtapiBTCLockFromJson(Map<String, dynamic> json) =>
     ExtapiBTCLock(
       amount: json['amount'] as String?,
-      btcRevenue: json['btcRevenue'] as String?,
+      coolingOffEnds: json['coolingOffEnds'] == null
+          ? null
+          : DateTime.parse(json['coolingOffEnds'] as String),
       created: json['created'] == null
           ? null
           : DateTime.parse(json['created'] as String),
@@ -331,18 +362,85 @@ ExtapiBTCLock _$ExtapiBTCLockFromJson(Map<String, dynamic> json) =>
       lockTill: json['lockTill'] == null
           ? null
           : DateTime.parse(json['lockTill'] as String),
-      sessionId: json['sessionId'] as String?,
+      unlockFrom: json['unlockFrom'] == null
+          ? null
+          : DateTime.parse(json['unlockFrom'] as String),
+      unlocked: json['unlocked'] == null
+          ? null
+          : DateTime.parse(json['unlocked'] as String),
     );
 
 Map<String, dynamic> _$ExtapiBTCLockToJson(ExtapiBTCLock instance) =>
     <String, dynamic>{
       'amount': instance.amount,
-      'btcRevenue': instance.btcRevenue,
+      'coolingOffEnds': instance.coolingOffEnds?.toIso8601String(),
       'created': instance.created?.toIso8601String(),
       'gatewayMac': instance.gatewayMac,
       'id': instance.id,
       'lockTill': instance.lockTill?.toIso8601String(),
-      'sessionId': instance.sessionId,
+      'unlockFrom': instance.unlockFrom?.toIso8601String(),
+      'unlocked': instance.unlocked?.toIso8601String(),
+    };
+
+ExtapiBTCLockRequest _$ExtapiBTCLockRequestFromJson(
+        Map<String, dynamic> json) =>
+    ExtapiBTCLockRequest(
+      amount: json['amount'] as String?,
+      gatewayMac: json['gatewayMac'] as String?,
+      orgId: json['orgId'] as String?,
+    );
+
+Map<String, dynamic> _$ExtapiBTCLockRequestToJson(
+        ExtapiBTCLockRequest instance) =>
+    <String, dynamic>{
+      'amount': instance.amount,
+      'gatewayMac': instance.gatewayMac,
+      'orgId': instance.orgId,
+    };
+
+ExtapiBTCLockResponse _$ExtapiBTCLockResponseFromJson(
+        Map<String, dynamic> json) =>
+    ExtapiBTCLockResponse(
+      lockId: json['lockId'] as String?,
+    );
+
+Map<String, dynamic> _$ExtapiBTCLockResponseToJson(
+        ExtapiBTCLockResponse instance) =>
+    <String, dynamic>{
+      'lockId': instance.lockId,
+    };
+
+ExtapiBTCMinedResponse _$ExtapiBTCMinedResponseFromJson(
+        Map<String, dynamic> json) =>
+    ExtapiBTCMinedResponse(
+      gatewayMining: (json['gatewayMining'] as List<dynamic>?)
+              ?.map((e) => ExtapiBTCGWMined.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      totalAmount: json['totalAmount'] as String?,
+    );
+
+Map<String, dynamic> _$ExtapiBTCMinedResponseToJson(
+        ExtapiBTCMinedResponse instance) =>
+    <String, dynamic>{
+      'gatewayMining': instance.gatewayMining?.map((e) => e.toJson()).toList(),
+      'totalAmount': instance.totalAmount,
+    };
+
+ExtapiBTCMiningHistoryResponse _$ExtapiBTCMiningHistoryResponseFromJson(
+        Map<String, dynamic> json) =>
+    ExtapiBTCMiningHistoryResponse(
+      dailyMining: (json['dailyMining'] as List<dynamic>?)
+              ?.map((e) =>
+                  ExtapiBTCDailyMining.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$ExtapiBTCMiningHistoryResponseToJson(
+        ExtapiBTCMiningHistoryResponse instance) =>
+    <String, dynamic>{
+      'dailyMining': instance.dailyMining?.map((e) => e.toJson()).toList(),
     };
 
 ExtapiBTCMiningSessionResponse _$ExtapiBTCMiningSessionResponseFromJson(
@@ -367,6 +465,34 @@ Map<String, dynamic> _$ExtapiBTCMiningSessionResponseToJson(
       'mxcLockDurationDays': instance.mxcLockDurationDays,
       'sessionId': instance.sessionId,
       'startDate': instance.startDate?.toIso8601String(),
+    };
+
+ExtapiBTCUnlockRequest _$ExtapiBTCUnlockRequestFromJson(
+        Map<String, dynamic> json) =>
+    ExtapiBTCUnlockRequest(
+      lockId: json['lockId'] as String?,
+      orgId: json['orgId'] as String?,
+    );
+
+Map<String, dynamic> _$ExtapiBTCUnlockRequestToJson(
+        ExtapiBTCUnlockRequest instance) =>
+    <String, dynamic>{
+      'lockId': instance.lockId,
+      'orgId': instance.orgId,
+    };
+
+ExtapiBTCUnlockResponse _$ExtapiBTCUnlockResponseFromJson(
+        Map<String, dynamic> json) =>
+    ExtapiBTCUnlockResponse(
+      coolingOffTill: json['coolingOffTill'] == null
+          ? null
+          : DateTime.parse(json['coolingOffTill'] as String),
+    );
+
+Map<String, dynamic> _$ExtapiBTCUnlockResponseToJson(
+        ExtapiBTCUnlockResponse instance) =>
+    <String, dynamic>{
+      'coolingOffTill': instance.coolingOffTill?.toIso8601String(),
     };
 
 ExtapiBatchResetDefaultGatewatConfigRequest
@@ -880,22 +1006,6 @@ Map<String, dynamic> _$ExtapiCreateUserResponseToJson(
         ExtapiCreateUserResponse instance) =>
     <String, dynamic>{
       'id': instance.id,
-    };
-
-ExtapiDFIAuthenticateUserResponse _$ExtapiDFIAuthenticateUserResponseFromJson(
-        Map<String, dynamic> json) =>
-    ExtapiDFIAuthenticateUserResponse(
-      mxcBalance: json['mxcBalance'] as String?,
-      organizationID: json['organizationID'] as String?,
-      userEmail: json['userEmail'] as String?,
-    );
-
-Map<String, dynamic> _$ExtapiDFIAuthenticateUserResponseToJson(
-        ExtapiDFIAuthenticateUserResponse instance) =>
-    <String, dynamic>{
-      'mxcBalance': instance.mxcBalance,
-      'organizationID': instance.organizationID,
-      'userEmail': instance.userEmail,
     };
 
 ExtapiDHXBondInfoRequest _$ExtapiDHXBondInfoRequestFromJson(
@@ -1507,6 +1617,24 @@ Map<String, dynamic> _$ExtapiDeviceQueueItemToJson(
       'jsonObject': instance.jsonObject,
     };
 
+ExtapiDeviceSettingsResponse _$ExtapiDeviceSettingsResponseFromJson(
+        Map<String, dynamic> json) =>
+    ExtapiDeviceSettingsResponse(
+      downLink: json['downLink'] == null
+          ? null
+          : Extapisettings.fromJson(json['downLink'] as Map<String, dynamic>),
+      uplink: json['uplink'] == null
+          ? null
+          : Extapisettings.fromJson(json['uplink'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$ExtapiDeviceSettingsResponseToJson(
+        ExtapiDeviceSettingsResponse instance) =>
+    <String, dynamic>{
+      'downLink': instance.downLink?.toJson(),
+      'uplink': instance.uplink?.toJson(),
+    };
+
 ExtapiDownlinkFrameLog _$ExtapiDownlinkFrameLogFromJson(
         Map<String, dynamic> json) =>
     ExtapiDownlinkFrameLog(
@@ -1928,6 +2056,18 @@ Map<String, dynamic> _$ExtapiGatewayStatsToJson(ExtapiGatewayStats instance) =>
       'timestamp': instance.timestamp?.toIso8601String(),
       'txPacketsEmitted': instance.txPacketsEmitted,
       'txPacketsReceived': instance.txPacketsReceived,
+    };
+
+ExtapiGenerateNewTokenResponse _$ExtapiGenerateNewTokenResponseFromJson(
+        Map<String, dynamic> json) =>
+    ExtapiGenerateNewTokenResponse(
+      token: json['token'] as String?,
+    );
+
+Map<String, dynamic> _$ExtapiGenerateNewTokenResponseToJson(
+        ExtapiGenerateNewTokenResponse instance) =>
+    <String, dynamic>{
+      'token': instance.token,
     };
 
 ExtapiGetActiveStakesResponse _$ExtapiGetActiveStakesResponseFromJson(
@@ -2802,22 +2942,6 @@ Map<String, dynamic> _$ExtapiInsertNewDefaultGatewayConfigResponseToJson(
     <String, dynamic>{
       'status': instance.status,
     };
-
-ExtapiJWTAuthenticationRequest _$ExtapiJWTAuthenticationRequestFromJson(
-        Map<String, dynamic> json) =>
-    ExtapiJWTAuthenticationRequest();
-
-Map<String, dynamic> _$ExtapiJWTAuthenticationRequestToJson(
-        ExtapiJWTAuthenticationRequest instance) =>
-    <String, dynamic>{};
-
-ExtapiJWTAuthenticationResponse _$ExtapiJWTAuthenticationResponseFromJson(
-        Map<String, dynamic> json) =>
-    ExtapiJWTAuthenticationResponse();
-
-Map<String, dynamic> _$ExtapiJWTAuthenticationResponseToJson(
-        ExtapiJWTAuthenticationResponse instance) =>
-    <String, dynamic>{};
 
 ExtapiListApplicationResponse _$ExtapiListApplicationResponseFromJson(
         Map<String, dynamic> json) =>
@@ -4238,13 +4362,6 @@ Map<String, dynamic> _$ExtapiTopUpHistoryToJson(ExtapiTopUpHistory instance) =>
       'txHash': instance.txHash,
     };
 
-ExtapiTopUpResponse _$ExtapiTopUpResponseFromJson(Map<String, dynamic> json) =>
-    ExtapiTopUpResponse();
-
-Map<String, dynamic> _$ExtapiTopUpResponseToJson(
-        ExtapiTopUpResponse instance) =>
-    <String, dynamic>{};
-
 ExtapiTransaction _$ExtapiTransactionFromJson(Map<String, dynamic> json) =>
     ExtapiTransaction(
       amount: json['amount'] as String?,
@@ -4773,16 +4890,40 @@ Map<String, dynamic> _$ExtapiWithdrawHistoryToJson(
       'withdrawFee': instance.withdrawFee,
     };
 
-ExtapiWithdrawResponse _$ExtapiWithdrawResponseFromJson(
-        Map<String, dynamic> json) =>
-    ExtapiWithdrawResponse(
-      msg: json['msg'] as String?,
+Extapisettings _$ExtapisettingsFromJson(Map<String, dynamic> json) =>
+    Extapisettings(
+      description: json['description'] as String?,
+      example: json['example'] as String?,
+      hostname: json['hostname'] as String?,
+      mqttVersion: json['mqttVersion'] as String?,
+      port: json['port'] as String?,
+      topics: (json['topics'] as List<dynamic>?)
+              ?.map((e) => Extapitopic.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      username: json['username'] as String?,
     );
 
-Map<String, dynamic> _$ExtapiWithdrawResponseToJson(
-        ExtapiWithdrawResponse instance) =>
+Map<String, dynamic> _$ExtapisettingsToJson(Extapisettings instance) =>
     <String, dynamic>{
-      'msg': instance.msg,
+      'description': instance.description,
+      'example': instance.example,
+      'hostname': instance.hostname,
+      'mqttVersion': instance.mqttVersion,
+      'port': instance.port,
+      'topics': instance.topics?.map((e) => e.toJson()).toList(),
+      'username': instance.username,
+    };
+
+Extapitopic _$ExtapitopicFromJson(Map<String, dynamic> json) => Extapitopic(
+      description: json['description'] as String?,
+      topicString: json['topicString'] as String?,
+    );
+
+Map<String, dynamic> _$ExtapitopicToJson(Extapitopic instance) =>
+    <String, dynamic>{
+      'description': instance.description,
+      'topicString': instance.topicString,
     };
 
 GwDelayTimingInfo _$GwDelayTimingInfoFromJson(Map<String, dynamic> json) =>

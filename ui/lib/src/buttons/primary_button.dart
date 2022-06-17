@@ -39,7 +39,7 @@ class _MxcPrimaryButtonState extends State<MxcPrimaryButton> {
 
     return Material(
       color: buttonColor,
-      borderRadius: BorderRadius.circular(5),
+      borderRadius: BorderRadius.circular(10),
       child: InkWell(
         onTap: widget.onTap,
         onHover: (hovering) {

@@ -24,7 +24,7 @@ class _MxcOutlinedButtonState extends State<MxcOutlinedButton> {
 
   @override
   Widget build(BuildContext context) {
-    var primaryColor = ColorsTheme.of(context).buttonIconTextColor;
+    var primaryColor = ColorsTheme.of(context).white;
 
     if (widget.onTap == null) {
       primaryColor = ColorsTheme.of(context).textLabel;
