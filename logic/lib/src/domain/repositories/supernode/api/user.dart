@@ -1,6 +1,5 @@
 import 'package:collection/collection.dart';
 import 'package:mxc_logic/mxc_logic.dart';
-import 'package:mxc_logic/src/data/api/client/error_converter.dart';
 import 'package:mxc_logic/src/data/data.dart';
 import 'package:mxc_logic/src/domain/entities/user.dart';
 import 'package:mxc_logic/src/domain/repositories/internal/shared_mappers.dart';

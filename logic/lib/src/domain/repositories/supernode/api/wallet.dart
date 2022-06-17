@@ -89,6 +89,7 @@ class WalletRepository {
     return res.body!.downLinkPrice!;
   }
 
+  @Deprecated('APIs do not support anymore')
   Future<void> btcAddLocks({
     required String durationDays,
     required List<String> listMac,
@@ -96,15 +97,6 @@ class WalletRepository {
     required String totalAmount,
   }) async {
     throw Exception('No bTCAddLocks method');
-    // await _client.bTCMining.bTCAddLocks(
-    //   body: ExtapiBTCAddLocksRequest(
-    //     durationDays: durationDays,
-    //     gatewayMac: listMac,
-    //     orgId: _client.defaultOrganizationId,
-    //     sessionId: sessionId,
-    //     totalAmount: totalAmount,
-    //   ),
-    // );
   }
 
   Future<BtcMiningSession> bTCMiningSession() async {

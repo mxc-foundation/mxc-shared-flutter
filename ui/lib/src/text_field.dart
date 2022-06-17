@@ -605,7 +605,7 @@ class _MxcMiniNonFormTextFieldState extends State<_MxcMiniNonFormTextField> {
         keyboardType: const TextInputType.numberWithOptions(
           decimal: true,
         ),
-        scrollPadding: EdgeInsets.only(bottom: 100),
+        scrollPadding: const EdgeInsets.only(bottom: 100),
       ),
     );
   }
