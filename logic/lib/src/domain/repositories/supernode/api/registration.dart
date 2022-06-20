@@ -72,7 +72,7 @@ class RegistrationRepository {
         userId: userId,
         organizationName: organizationName,
       ),
-      grpcMetadataAuthorization: 'Bearer ' + token!,
+      grpcMetadataAuthorization: 'Bearer ${token!}',
     );
   }
 }

@@ -5,7 +5,7 @@ import 'package:mxc_logic/src/domain/repositories/internal/shared_mappers.dart';
 class DemoDhxRepository implements DhxRepository {
   const DemoDhxRepository();
 
-  static late final Map<int, LockOption> _monthsToOption = {
+  static final Map<int, LockOption> _monthsToOption = {
     for (final o in LockOption.values) o.months: o,
   };
 

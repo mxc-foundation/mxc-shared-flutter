@@ -8,7 +8,7 @@ class DhxRepository {
 
   final SupernodeClient _client;
 
-  static late final Map<int, LockOption> _monthsToOption = {
+  static final Map<int, LockOption> _monthsToOption = {
     for (final o in LockOption.values) o.months: o,
   };
 

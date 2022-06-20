@@ -86,7 +86,7 @@ class CacheZoneSembast implements CacheZone {
   static Future<CacheZoneSembast> load(
     Database db,
     String storeName,
-    _CacheManagerSerializersBucket _cacheManagerSerializersBucket,
+    _CacheManagerSerializersBucket cacheManagerSerializersBucket,
   ) async {
     final store = StoreRef<String, dynamic>(storeName);
     final snapshots = await store.query().getSnapshots(db);
@@ -96,7 +96,7 @@ class CacheZoneSembast implements CacheZone {
       snapshots.asMap().map<String, dynamic>(
             (key, ref) => MapEntry<String, dynamic>(ref.key, ref.value),
           ),
-      _cacheManagerSerializersBucket,
+      cacheManagerSerializersBucket,
     );
   }
 

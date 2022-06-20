@@ -10,9 +10,9 @@ void _addAuthHeader(
 }) {
   const headerName = 'Grpc-Metadata-Authorization';
   if (override) {
-    map[headerName] = 'Bearer ' + value;
+    map[headerName] = 'Bearer $value';
   } else {
-    map[headerName] ??= 'Bearer ' + value;
+    map[headerName] ??= 'Bearer $value';
   }
 }
 
