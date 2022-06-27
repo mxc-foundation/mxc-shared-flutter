@@ -11,7 +11,8 @@ class MxcSlider extends StatelessWidget {
     this.divisions,
     this.max,
     this.enabled = true,
-    this.thumbPadding = 0,
+    this.thumbPadding = 16,
+    this.enableThumbShift = false,
   })  : assert(labels == null || labels.length >= 3),
         super(key: key);
 
@@ -23,7 +24,8 @@ class MxcSlider extends StatelessWidget {
         divisions = null,
         max = null,
         enabled = false,
-        thumbPadding = 0,
+        thumbPadding = 16,
+        enableThumbShift = false,
         super(key: key);
 
   final double? value;
@@ -33,6 +35,7 @@ class MxcSlider extends StatelessWidget {
   final int? divisions;
   final bool enabled;
   final double thumbPadding;
+  final bool enableThumbShift;
 
   @override
   Widget build(BuildContext context) {
@@ -43,9 +46,18 @@ class MxcSlider extends StatelessWidget {
           height: 20,
           child: SliderTheme(
             data: SliderThemeData(
-              trackShape: CustomTrackShape(thumbPadding),
-              thumbShape: CustomThumbShape(thumbPadding),
-              overlayShape: CustomOverlayShape(thumbPadding),
+              trackShape: CustomTrackShape(
+                thumbPadding,
+                enableThumbShift: enableThumbShift,
+              ),
+              thumbShape: CustomThumbShape(
+                thumbPadding,
+                enableThumbShift: enableThumbShift,
+              ),
+              overlayShape: CustomOverlayShape(
+                thumbPadding,
+                enableThumbShift: enableThumbShift,
+              ),
               trackHeight: 6,
               disabledThumbColor: ColorsTheme.of(context).sliderDisabledKnob,
               disabledActiveTrackColor:
@@ -108,10 +120,17 @@ class MxcSlider extends StatelessWidget {
   }
 }
 
+const thumbWidth = 8;
+
 class CustomTrackShape extends RoundedRectSliderTrackShape {
-  CustomTrackShape(this.thumbPadding);
+  CustomTrackShape(
+    this.thumbPadding, {
+    required this.enableThumbShift,
+  });
 
   final double thumbPadding;
+  final bool enableThumbShift;
+
   @override
   Rect getPreferredRect({
     required RenderBox parentBox,
@@ -125,15 +144,23 @@ class CustomTrackShape extends RoundedRectSliderTrackShape {
     final double trackTop =
         offset.dy + (parentBox.size.height - trackHeight) / 2;
     final double trackWidth = parentBox.size.width;
-    return Rect.fromLTWH(trackLeft - thumbPadding, trackTop,
-        trackWidth + thumbPadding, trackHeight);
+    return Rect.fromLTWH(
+      trackLeft + thumbPadding,
+      trackTop,
+      trackWidth - thumbPadding * 2,
+      trackHeight,
+    );
   }
 }
 
 class CustomThumbShape extends RoundSliderThumbShape {
-  CustomThumbShape(this.thumbPadding);
+  CustomThumbShape(
+    this.thumbPadding, {
+    required this.enableThumbShift,
+  });
 
   final double thumbPadding;
+  final bool enableThumbShift;
 
   @override
   void paint(
@@ -166,8 +193,12 @@ class CustomThumbShape extends RoundSliderThumbShape {
       sliderTheme: sliderTheme,
       isDiscrete: isDiscrete,
     );
+
+    final thumbShift = enableThumbShift ? thumbWidth : 0;
     center = Offset(
-      visualPosition * (trackRect.width - thumbPadding * 2),
+      thumbShift +
+          thumbPadding +
+          visualPosition * (trackRect.width - thumbShift * 2),
       trackRect.center.dy,
     );
 
@@ -209,9 +240,13 @@ class CustomThumbShape extends RoundSliderThumbShape {
 }
 
 class CustomOverlayShape extends RoundSliderOverlayShape {
-  CustomOverlayShape(this.thumbPadding);
+  CustomOverlayShape(
+    this.thumbPadding, {
+    required this.enableThumbShift,
+  });
 
   final double thumbPadding;
+  final bool enableThumbShift;
 
   @override
   void paint(
@@ -244,8 +279,12 @@ class CustomOverlayShape extends RoundSliderOverlayShape {
       sliderTheme: sliderTheme,
       isDiscrete: isDiscrete,
     );
+
+    final thumbShift = enableThumbShift ? thumbWidth : 0;
     center = Offset(
-      visualPosition * (trackRect.width - thumbPadding * 2),
+      thumbShift +
+          thumbPadding +
+          visualPosition * (trackRect.width - thumbShift * 2),
       trackRect.center.dy,
     );
     super.paint(
