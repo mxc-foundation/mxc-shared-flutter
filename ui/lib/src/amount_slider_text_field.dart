@@ -126,58 +126,58 @@ class _AmountTextFieldWithSliderState extends State<AmountTextFieldWithSlider> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            ConstrainedBox(
-              constraints: const BoxConstraints(
-                maxWidth: 220,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    widget.text,
-                    style: FontTheme.of(context).subtitle1.label(),
-                  ),
-                  if (widget.errorMsg != null)
-                    Text(widget.errorMsg!,
-                        style: FontTheme.of(context).caption1.error()),
-                ],
-              ),
-            ),
-            const SizedBox(width: 32),
-            Expanded(
-              child: Align(
-                alignment: Alignment.centerRight,
-                child: IntrinsicWidth(
-                  child: Container(
-                    constraints: const BoxConstraints(
-                      minWidth: 64,
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              ConstrainedBox(
+                constraints: const BoxConstraints(
+                  maxWidth: 220,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      widget.text,
+                      style: FontTheme.of(context).subtitle1.label(),
                     ),
-                    child: MxcMiniTextField(
-                      key: null,
-                      controller: controller,
-                      scrollPadding: widget.scrollPadding,
-                      error: widget.errorMsg != null,
-                      disabled: !widget.enabled,
+                    if (widget.errorMsg != null)
+                      Text(widget.errorMsg!,
+                          style: FontTheme.of(context).caption1.error()),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 32),
+              Expanded(
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: IntrinsicWidth(
+                    child: Container(
+                      constraints: const BoxConstraints(
+                        minWidth: 64,
+                      ),
+                      child: MxcMiniTextField(
+                        key: null,
+                        controller: controller,
+                        scrollPadding: widget.scrollPadding,
+                        error: widget.errorMsg != null,
+                        disabled: !widget.enabled,
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
         const SizedBox(height: 3),
-        Padding(
-          padding: const EdgeInsets.only(left: 8),
-          child: MxcSlider(
-            key: null,
-            thumbPadding: 8,
-            value: _sliderValue,
-            onChanged: _onSliderValueChanged,
-            enabled: widget.min >= widget.max ? false : widget.enabled,
-          ),
+        MxcSlider(
+          key: null,
+          enableThumbShift: true,
+          value: _sliderValue,
+          onChanged: _onSliderValueChanged,
+          enabled: widget.min >= widget.max ? false : widget.enabled,
         ),
       ],
     );
