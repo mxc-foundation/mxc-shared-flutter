@@ -1,6 +1,5 @@
 import 'package:decimal/decimal.dart';
 import 'package:mxc_logic/mxc_logic.dart';
-import 'package:mxc_logic/src/data/api/client/error_converter.dart';
 import 'package:mxc_logic/src/data/data.dart';
 import 'package:mxc_logic/src/domain/repositories/internal/shared_mappers.dart';
 
@@ -90,21 +89,14 @@ class WalletRepository {
     return res.body!.downLinkPrice!;
   }
 
+  @Deprecated('APIs do not supper anymore')
   Future<void> btcAddLocks({
     required String durationDays,
     required List<String> listMac,
     required String sessionId,
     required String totalAmount,
   }) async {
-    await _client.bTCMining.bTCAddLocks(
-      body: ExtapiBTCAddLocksRequest(
-        durationDays: durationDays,
-        gatewayMac: listMac,
-        orgId: _client.defaultOrganizationId,
-        sessionId: sessionId,
-        totalAmount: totalAmount,
-      ),
-    );
+    throw Exception('No bTCAddLocks method');
   }
 
   Future<BtcMiningSession> bTCMiningSession() async {
@@ -135,10 +127,14 @@ class WalletRepository {
     return res.body!.lock!
         .map(
           (e) => BtcLock(
+            id: e.id!,
+            created: e.created!,
+            amount: e.amount!.toDecimal(),
             gatewayMac: e.gatewayMac!,
-            sessionId: e.sessionId!,
-            amountLocked: e.amount!.toInt(),
-            btcRevenue: Decimal.tryParse(e.btcRevenue!) ?? Decimal.zero,
+            unlockFrom: e.unlockFrom!,
+            lockTill: e.lockTill!,
+            unlocked: e.unlocked!,
+            coolingOffEnds: e.coolingOffEnds!,
           ),
         )
         .toList();

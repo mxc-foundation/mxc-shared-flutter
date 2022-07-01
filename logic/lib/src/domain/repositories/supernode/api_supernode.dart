@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:mxc_logic/mxc_logic.dart';
 import 'package:mxc_logic/src/data/api/supernode_list_api.dart';
 import 'package:mxc_logic/src/data/data.dart';
@@ -22,6 +24,11 @@ class ApiSupernodeRepository implements SupernodeRepository {
 
   final SupernodeClient _client;
   final SupernodeSetupStore _setupStore;
+
+  Stream<void> get onTokenExpired => _client.onTokenExpired;
+
+  @override
+  BtcRepository get btc => BtcRepository(_client);
 
   @override
   DhxRepository get dhx => DhxRepository(_client);
@@ -89,10 +96,19 @@ class ApiSupernodeRepository implements SupernodeRepository {
   @override
   Future<void> logOut() async {
     await user.logout();
+    invalidateToken();
+  }
+
+  @override
+  void invalidateToken() {
     _setupStore.username = null;
     _setupStore.token = null;
   }
 
   @override
   bool get loggedIn => _setupStore.token != null;
+
+  void dispose() {
+    _client.dispose();
+  }
 }

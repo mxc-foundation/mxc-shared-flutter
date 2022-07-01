@@ -2,6 +2,7 @@ import 'package:mxc_logic/mxc_logic.dart';
 import 'package:mxc_logic/src/data/data.dart';
 
 export 'api/auth.dart';
+export 'api/btc.dart';
 export 'api/device.dart';
 export 'api/dhx.dart';
 export 'api/external_accounts.dart';
@@ -18,6 +19,7 @@ export 'api/wallet.dart';
 export 'api/withdraw.dart';
 
 abstract class SupernodeRepository {
+  BtcRepository get btc;
   WalletRepository get wallet;
   DhxRepository get dhx;
   GatewayRepository get gateways;
@@ -39,23 +41,32 @@ abstract class SupernodeRepository {
 
   bool get loggedIn;
   void logOut();
+  void invalidateToken();
 }
 
 /// This supernode repository gives you access to [ApiSupernodeRepository] or [DemoSupernodeRepository]
 /// depending on [demoMode] field.
 class SupernodeRepositoryDemoDecorator implements SupernodeRepository {
-  SupernodeRepositoryDemoDecorator({required SupernodeSetupStore setupStore})
-      : _apiRepository = ApiSupernodeRepository(setupStore: setupStore);
+  SupernodeRepositoryDemoDecorator({
+    required SupernodeSetupStore setupStore,
+  }) : _apiRepository = ApiSupernodeRepository(
+          setupStore: setupStore,
+        );
 
   final ApiSupernodeRepository _apiRepository;
 
   final DemoSupernodeRepository _demoRepository =
       const DemoSupernodeRepository();
 
+  Stream<void> get onTokenExpired => _apiRepository.onTokenExpired;
+
   bool demoMode = false;
 
   SupernodeRepository get _currentRepository =>
       demoMode ? _demoRepository : _apiRepository;
+
+  @override
+  BtcRepository get btc => _currentRepository.btc;
 
   @override
   DhxRepository get dhx => _currentRepository.dhx;
@@ -121,4 +132,7 @@ class SupernodeRepositoryDemoDecorator implements SupernodeRepository {
 
   @override
   bool get loggedIn => _currentRepository.loggedIn;
+
+  @override
+  void invalidateToken() => _currentRepository.invalidateToken();
 }

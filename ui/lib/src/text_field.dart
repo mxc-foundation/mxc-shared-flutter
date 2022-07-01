@@ -96,6 +96,28 @@ class MxcTextField extends FormField<String> {
           ),
         );
 
+  MxcTextField.multiline({
+    required Key? key,
+    String? label,
+    required TextEditingController this.controller,
+    String? hint,
+  }) : super(
+          key: key,
+          initialValue: controller.text,
+          builder: (field) {
+            return _MxcNonFormTextField(
+              key: null,
+              label: label,
+              controller: controller,
+              hint: hint,
+              obscure: false,
+              readOnly: false,
+              width: double.infinity,
+              maxLines: 7,
+            );
+          },
+        );
+
   final TextEditingController? controller;
 
   @override
@@ -131,6 +153,7 @@ class _MxcNonFormTextField extends StatefulWidget {
     this.readOnly = false,
     this.button,
     this.width = double.infinity,
+    this.maxLines = 1,
     this.focusNode,
     this.keyboardType,
     this.suffixText,
@@ -158,6 +181,7 @@ class _MxcNonFormTextField extends StatefulWidget {
   })  : _initialValue = text,
         readOnly = true,
         _controller = null,
+        maxLines = 1,
         errorText = null,
         onChanged = null,
         super(key: key);
@@ -168,6 +192,7 @@ class _MxcNonFormTextField extends StatefulWidget {
   final TextInputAction? action;
   final TextInputType? keyboardType;
   final double width;
+  final int maxLines;
   final FocusNode? focusNode;
   final MxcTextFieldButton? button;
   final String? suffixText;
@@ -254,46 +279,58 @@ class _MxcNonFormTextFieldState extends State<_MxcNonFormTextField> {
           AnimatedContainer(
             duration: const Duration(milliseconds: 200),
             decoration: BoxDecoration(
-              border: Border(
-                bottom: BorderSide(
-                  width: focused ? 2 : 1,
-                  color: widget.disabled
-                      ? ColorsTheme.of(context).buttonDisabledLabel
-                      : focused
-                          ? MxcScopedTheme.of(context).primaryColor
-                          : ColorsTheme.of(context).textPrimaryAndIcons,
-                ),
-              ),
+              borderRadius: (widget.maxLines == 1)
+                  ? null
+                  : const BorderRadius.all(Radius.circular(10)),
+              border: (widget.maxLines == 1)
+                  ? Border(
+                      bottom: BorderSide(
+                        width: focused ? 2 : 1,
+                        color: widget.disabled
+                            ? ColorsTheme.of(context).buttonDisabledLabel
+                            : focused
+                                ? MxcScopedTheme.of(context).primaryColor
+                                : ColorsTheme.of(context).textPrimaryAndIcons,
+                      ),
+                    )
+                  : Border.all(
+                      color: ColorsTheme.of(context).primaryBackground),
             ),
-            padding: const EdgeInsets.only(bottom: 2),
+            padding: (widget.maxLines == 1)
+                ? const EdgeInsets.only(bottom: 2)
+                : const EdgeInsets.all(16),
             child: Row(
               children: [
                 Expanded(
-                  child: TextField(
-                    readOnly: widget.readOnly,
-                    keyboardType: widget.keyboardType,
-                    focusNode: focusNode,
-                    textInputAction: widget.action,
-                    controller: controller,
-                    cursorColor: ColorsTheme.of(context).textPrimaryAndIcons,
-                    style: (widget.disabled)
-                        ? FontTheme.of(context).subtitle1().copyWith(
-                            color: ColorsTheme.of(context).buttonDisabledLabel)
-                        : FontTheme.of(context).subtitle1(),
-                    obscureText: widget.obscure,
-                    onChanged: widget.onChanged,
-                    decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.fromLTRB(0, 0, 0, 6),
-                      isDense: true,
-                      floatingLabelBehavior: FloatingLabelBehavior.always,
-                      hintText: widget.hint,
-                      hintStyle: FontTheme.of(context).subtitle1.label(),
-                      enabledBorder: InputBorder.none,
-                      focusedBorder: InputBorder.none,
-                      errorBorder: InputBorder.none,
-                      focusedErrorBorder: InputBorder.none,
-                      disabledBorder: InputBorder.none,
-                      suffixText: widget.suffixText,
+                  child: Scrollbar(
+                    child: TextField(
+                      readOnly: widget.readOnly,
+                      keyboardType: widget.keyboardType,
+                      focusNode: focusNode,
+                      maxLines: widget.maxLines,
+                      textInputAction: widget.action,
+                      controller: controller,
+                      cursorColor: ColorsTheme.of(context).textPrimaryAndIcons,
+                      style: (widget.disabled)
+                          ? FontTheme.of(context).subtitle1().copyWith(
+                              color:
+                                  ColorsTheme.of(context).buttonDisabledLabel)
+                          : FontTheme.of(context).subtitle1(),
+                      obscureText: widget.obscure,
+                      onChanged: widget.onChanged,
+                      decoration: InputDecoration(
+                        contentPadding: const EdgeInsets.fromLTRB(0, 0, 0, 6),
+                        isDense: true,
+                        floatingLabelBehavior: FloatingLabelBehavior.always,
+                        hintText: widget.hint,
+                        hintStyle: FontTheme.of(context).subtitle1.label(),
+                        enabledBorder: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                        errorBorder: InputBorder.none,
+                        focusedErrorBorder: InputBorder.none,
+                        disabledBorder: InputBorder.none,
+                        suffixText: widget.suffixText,
+                      ),
                     ),
                   ),
                 ),
@@ -425,4 +462,151 @@ class _MxcTextFieldImageButton extends MxcTextFieldButton {
         height: 16,
         color: color ?? MxcScopedTheme.of(context).primaryColor,
       );
+}
+
+class MxcMiniTextField extends FormField<String> {
+  MxcMiniTextField({
+    required Key? key,
+    this.controller,
+    this.onChanged,
+    FormFieldValidator<String>? validator,
+    bool disabled = false,
+    bool error = false,
+    FocusNode? focusNode,
+    AutovalidateMode? autovalidateMode,
+    EdgeInsets? scrollPadding,
+  }) : super(
+          key: key,
+          initialValue: controller?.text,
+          validator: validator,
+          autovalidateMode: autovalidateMode,
+          builder: (field) {
+            return _MxcMiniNonFormTextField(
+              key: null,
+              controller: controller,
+              onChanged: onChanged,
+              focusNode: focusNode,
+              disabled: disabled,
+              scrollPadding: scrollPadding,
+              error: field.errorText != null || error,
+            );
+          },
+        );
+
+  final TextEditingController? controller;
+  final void Function(String)? onChanged;
+}
+
+class _MxcMiniNonFormTextField extends StatefulWidget {
+  const _MxcMiniNonFormTextField({
+    required Key? key,
+    required this.controller,
+    this.focusNode,
+    this.disabled = false,
+    this.error = false,
+    this.onChanged,
+    this.scrollPadding,
+  }) : super(key: key);
+
+  final FocusNode? focusNode;
+  final bool disabled;
+  final bool error;
+  final EdgeInsets? scrollPadding;
+
+  final TextEditingController? controller;
+  final ValueChanged<String>? onChanged;
+
+  @override
+  State<_MxcMiniNonFormTextField> createState() =>
+      _MxcMiniNonFormTextFieldState();
+}
+
+class _MxcMiniNonFormTextFieldState extends State<_MxcMiniNonFormTextField> {
+  late final FocusNode focusNode;
+  late bool focused;
+  TextEditingController? _internalController;
+
+  @override
+  void initState() {
+    super.initState();
+    focusNode = widget.focusNode ?? FocusNode();
+    if (widget.disabled) {
+      focused = false;
+    } else {
+      focused = focusNode.hasFocus;
+      focusNode.addListener(_focusNodeListener);
+    }
+  }
+
+  void _focusNodeListener() {
+    if (focusNode.hasFocus != focused && !widget.disabled) {
+      setState(() => focused = focusNode.hasFocus);
+    }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _internalController?.dispose();
+    if (widget.focusNode == null) focusNode.dispose();
+  }
+
+  Color getColorBorder() {
+    if (widget.disabled) {
+      return ColorsTheme.of(context).buttonDisabledBackground;
+    }
+    if (widget.error) return ColorsTheme.of(context).textError;
+    if (_internalController != null && _internalController!.text.isEmpty) {
+      return ColorsTheme.of(context).primaryBackground;
+    }
+    if (focused) return ColorsTheme.of(context).purpleMain;
+    return ColorsTheme.of(context).textLabel;
+  }
+
+  Color getColorFont() {
+    if (widget.disabled) return ColorsTheme.of(context).buttonDisabledLabel;
+    if (widget.error) return ColorsTheme.of(context).textError;
+    if (focused) return ColorsTheme.of(context).purpleMain;
+    return ColorsTheme.of(context).textPrimaryAndIcons;
+  }
+
+  bool isThickBorder() => (focused || widget.error);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 36,
+      padding: EdgeInsets.symmetric(
+        vertical: isThickBorder() ? 5 : 6,
+      ),
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.all(Radius.circular(10)),
+        border:
+            Border.all(color: getColorBorder(), width: isThickBorder() ? 2 : 1),
+      ),
+      child: TextField(
+        focusNode: focusNode,
+        controller: widget.controller,
+        cursorColor: getColorFont(),
+        readOnly: widget.disabled,
+        style:
+            FontTheme.of(context).subtitle1().copyWith(color: getColorFont()),
+        textAlign: TextAlign.center,
+        onChanged: widget.onChanged,
+        decoration: const InputDecoration(
+          isDense: true,
+          enabledBorder: InputBorder.none,
+          focusedBorder: InputBorder.none,
+          errorBorder: InputBorder.none,
+          focusedErrorBorder: InputBorder.none,
+          disabledBorder: InputBorder.none,
+          contentPadding: EdgeInsets.symmetric(horizontal: 4),
+        ),
+        keyboardType: const TextInputType.numberWithOptions(
+          decimal: true,
+        ),
+        scrollPadding: const EdgeInsets.only(bottom: 100),
+      ),
+    );
+  }
 }

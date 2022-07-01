@@ -1,6 +1,7 @@
 import 'package:mxc_logic/mxc_logic.dart';
 
 import 'api/demo/auth.dart';
+import 'api/demo/btc.dart';
 import 'api/demo/device.dart';
 import 'api/demo/dhx.dart';
 import 'api/demo/external_accounts.dart';
@@ -27,6 +28,9 @@ class DemoSupernodeRepository implements SupernodeRepository {
     status: 'online',
     name: 'Test',
   );
+
+  @override
+  DemoBtcRepository get btc => const DemoBtcRepository();
 
   @override
   DemoDhxRepository get dhx => const DemoDhxRepository();
@@ -91,4 +95,7 @@ class DemoSupernodeRepository implements SupernodeRepository {
 
   @override
   bool get loggedIn => true;
+
+  @override
+  void invalidateToken() {}
 }

@@ -1,10 +1,21 @@
+## We need to wait while meta xp will be deployed to merge the changes
+
 {
+<<<<<<< HEAD
    "swagger": "2.0",
    "basePath": "",
    "info": {
       "title": "LPWAN App Server REST API",
       "version": "1.0.0",
       "description": "\nFor more information about the usage of the LPWAN App Server (REST) API, see\n[https://docs.loraserver.io/lora-app-server/api/](https://docs.loraserver.io/lora-app-server/api/).\n"
+=======
+   "swagger":"2.0",
+   "basePath":"",
+   "info":{
+      "title":"Supernode API",
+      "version":"1.0.0",
+      "description":"Supernode API"
+>>>>>>> master
    },
    "schemes": null,
    "consumes": [
@@ -122,11 +133,21 @@
                   }
                }
             ],
+<<<<<<< HEAD
             "responses": {
                "200": {
                   "description": "A successful response.",
                   "schema": {
                      "properties": {}
+=======
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
+>>>>>>> master
                   }
                },
                "default": {
@@ -155,11 +176,21 @@
                   "type": "string"
                }
             ],
+<<<<<<< HEAD
             "responses": {
                "200": {
                   "description": "A successful response.",
                   "schema": {
                      "properties": {}
+=======
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
+>>>>>>> master
                   }
                },
                "default": {
@@ -177,6 +208,22 @@
          "get": {
             "operationId": "Get",
             "parameters": [
+<<<<<<< HEAD
+               {
+                  "description": "Application ID.",
+                  "format": "int64",
+                  "in": "path",
+                  "name": "id",
+                  "required": true,
+                  "type": "string"
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "$ref": "#/definitions/extapiGetApplicationResponse"
+=======
                {
                   "description": "Application ID.",
                   "format": "int64",
@@ -203,6 +250,53 @@
             "summary": "Get returns the requested application.",
             "tags": [
                "ApplicationService"
+            ]
+         }
+      },
+      "/api/btc-mining/history":{
+         "get":{
+            "operationId":"BTCMiningHistory",
+            "parameters":[
+               {
+                  "description":"id of the organization for which the history is requested.",
+                  "format":"int64",
+                  "in":"query",
+                  "name":"orgId",
+                  "required":false,
+                  "type":"string"
+               },
+               {
+                  "description":"MAC of the gateway. If not specified then history for all the\norganization's gateways is returned.",
+                  "in":"query",
+                  "name":"gatewayMac",
+                  "required":false,
+                  "type":"string"
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "$ref":"#/definitions/extapiBTCMiningHistoryResponse"
+>>>>>>> master
+                  }
+               },
+               "default": {
+                  "description": "An unexpected error response.",
+                  "schema": {
+                     "$ref": "#/definitions/runtimeError"
+                  }
+               }
+            },
+<<<<<<< HEAD
+            "summary": "Get returns the requested application.",
+            "tags": [
+               "ApplicationService"
+=======
+            "summary":"Returns daily history of BTC mining for organization or for a particular gateway",
+            "tags":[
+               "BTCMining"
+>>>>>>> master
             ]
          }
       },
@@ -233,12 +327,18 @@
                   }
                }
             },
+<<<<<<< HEAD
             "summary": "List the locks that are still open",
             "tags": [
+=======
+            "summary":"List the locks that are still open (that includes the one that were\nreleased already, but are still cooling off)",
+            "tags":[
+>>>>>>> master
                "BTCMining"
             ]
          }
       },
+<<<<<<< HEAD
       "/api/btc-mining/lock": {
          "post": {
             "operationId": "BTCAddLocks",
@@ -257,17 +357,44 @@
                   "description": "A successful response.",
                   "schema": {
                      "$ref": "#/definitions/extapiBTCAddLocksResponse"
+=======
+      "/api/btc-mining/lock":{
+         "post":{
+            "operationId":"BTCLock",
+            "parameters":[
+               {
+                  "in":"body",
+                  "name":"body",
+                  "required":true,
+                  "schema":{
+                     "$ref":"#/definitions/extapiBTCLockRequest"
+                  }
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "$ref":"#/definitions/extapiBTCLockResponse"
+>>>>>>> master
                   }
                },
                "default": {
                   "description": "An unexpected error response.",
                   "schema": {
                      "$ref": "#/definitions/runtimeError"
+<<<<<<< HEAD
                   }
                }
             },
             "summary": "Create locks for current or upcoming mining session",
             "tags": [
+=======
+                  }
+               }
+            },
+            "summary":"Create a new bond for the gateway",
+            "tags":[
                "BTCMining"
             ]
          }
@@ -289,8 +416,114 @@
                   }
                }
             },
+            "summary":"DEPRECATED: only used not to break the app, always returns not found",
+            "tags":[
+>>>>>>> master
+               "BTCMining"
+            ]
+         }
+      },
+<<<<<<< HEAD
+      "/api/btc-mining/session": {
+         "get": {
+            "operationId": "BTCMiningSession",
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "$ref": "#/definitions/extapiBTCMiningSessionResponse"
+=======
+      "/api/btc-mining/totals":{
+         "get":{
+            "operationId":"BTCMined",
+            "parameters":[
+               {
+                  "description":"id of the organization for which the amount is requested.",
+                  "format":"int64",
+                  "in":"query",
+                  "name":"orgId",
+                  "required":false,
+                  "type":"string"
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "$ref":"#/definitions/extapiBTCMinedResponse"
+>>>>>>> master
+                  }
+               },
+               "default": {
+                  "description": "An unexpected error response.",
+                  "schema": {
+                     "$ref": "#/definitions/runtimeError"
+                  }
+               }
+            },
+<<<<<<< HEAD
             "summary": "Request information about the current or upcoming mining session",
             "tags": [
+=======
+            "summary":"Returns total amount mined by organization's gateways",
+            "tags":[
+>>>>>>> master
+               "BTCMining"
+            ]
+         }
+      },
+<<<<<<< HEAD
+      "/api/confirm-external-email": {
+         "post": {
+            "operationId": "ConfirmShopifyEmail",
+            "parameters": [
+               {
+                  "in": "body",
+                  "name": "body",
+                  "required": true,
+                  "schema": {
+                     "$ref": "#/definitions/extapiConfirmShopifyEmailRequest"
+                  }
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "$ref": "#/definitions/extapiConfirmShopifyEmailResponse"
+=======
+      "/api/btc-mining/unlock":{
+         "post":{
+            "operationId":"BTCUnlock",
+            "parameters":[
+               {
+                  "in":"body",
+                  "name":"body",
+                  "required":true,
+                  "schema":{
+                     "$ref":"#/definitions/extapiBTCUnlockRequest"
+                  }
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "$ref":"#/definitions/extapiBTCUnlockResponse"
+>>>>>>> master
+                  }
+               },
+               "default": {
+                  "description": "An unexpected error response.",
+                  "schema": {
+                     "$ref": "#/definitions/runtimeError"
+                  }
+               }
+            },
+<<<<<<< HEAD
+=======
+            "summary":"Release bond for the gateway",
+            "tags":[
                "BTCMining"
             ]
          }
@@ -322,6 +555,7 @@
                   }
                }
             },
+>>>>>>> master
             "summary": "ConfirmShopifyEmail checks given token and bind",
             "tags": [
                "ExternalUserService"
@@ -436,11 +670,21 @@
                   }
                }
             ],
+<<<<<<< HEAD
             "responses": {
                "200": {
                   "description": "A successful response.",
                   "schema": {
                      "properties": {}
+=======
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
+>>>>>>> master
                   }
                },
                "default": {
@@ -468,11 +712,21 @@
                   "type": "string"
                }
             ],
+<<<<<<< HEAD
             "responses": {
                "200": {
                   "description": "A successful response.",
                   "schema": {
                      "properties": {}
+=======
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
+>>>>>>> master
                   }
                },
                "default": {
@@ -625,11 +879,21 @@
                   }
                }
             ],
+<<<<<<< HEAD
             "responses": {
                "200": {
                   "description": "A successful response.",
                   "schema": {
                      "properties": {}
+=======
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
+>>>>>>> master
                   }
                },
                "default": {
@@ -657,11 +921,21 @@
                   "type": "string"
                }
             ],
+<<<<<<< HEAD
             "responses": {
                "200": {
                   "description": "A successful response.",
                   "schema": {
                      "properties": {}
+=======
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
+>>>>>>> master
                   }
                },
                "default": {
@@ -719,11 +993,21 @@
                   "type": "string"
                }
             ],
+<<<<<<< HEAD
             "responses": {
                "200": {
                   "description": "A successful response.",
                   "schema": {
                      "properties": {}
+=======
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
+>>>>>>> master
                   }
                },
                "default": {
@@ -895,11 +1179,21 @@
                   "type": "string"
                }
             ],
+<<<<<<< HEAD
             "responses": {
                "200": {
                   "description": "A successful response.",
                   "schema": {
                      "properties": {}
+=======
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
+>>>>>>> master
                   }
                },
                "default": {
@@ -957,11 +1251,21 @@
                   "type": "string"
                }
             ],
+<<<<<<< HEAD
             "responses": {
                "200": {
                   "description": "A successful response.",
                   "schema": {
                      "properties": {}
+=======
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
+>>>>>>> master
                   }
                },
                "default": {
@@ -1027,11 +1331,21 @@
                   }
                }
             ],
+<<<<<<< HEAD
             "responses": {
                "200": {
                   "description": "A successful response.",
                   "schema": {
                      "properties": {}
+=======
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
+>>>>>>> master
                   }
                },
                "default": {
@@ -1067,11 +1381,21 @@
                   }
                }
             ],
+<<<<<<< HEAD
             "responses": {
                "200": {
                   "description": "A successful response.",
                   "schema": {
                      "properties": {}
+=======
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
+>>>>>>> master
                   }
                },
                "default": {
@@ -1107,11 +1431,21 @@
                   }
                }
             ],
+<<<<<<< HEAD
             "responses": {
                "200": {
                   "description": "A successful response.",
                   "schema": {
                      "properties": {}
+=======
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
+>>>>>>> master
                   }
                },
                "default": {
@@ -1145,11 +1479,21 @@
                   }
                }
             ],
+<<<<<<< HEAD
             "responses": {
                "200": {
                   "description": "A successful response.",
                   "schema": {
                      "properties": {}
+=======
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
+>>>>>>> master
                   }
                },
                "default": {
@@ -1205,14 +1549,34 @@
             ]
          }
       },
+<<<<<<< HEAD
       "/api/dfi/profile": {
          "get": {
             "operationId": "AuthenticateUser",
+=======
+      "/api/dhx-mining/bond":{
+         "post":{
+            "operationId":"DHXBond",
+            "parameters":[
+               {
+                  "in": "body",
+                  "name": "body",
+                  "required": true,
+                  "schema": {
+                     "$ref": "#/definitions/extapiDHXBondRequest"
+                  }
+               }
+            ],
+>>>>>>> master
             "responses": {
                "200": {
                   "description": "A successful response.",
                   "schema": {
+<<<<<<< HEAD
                      "$ref": "#/definitions/extapiDFIAuthenticateUserResponse"
+=======
+                     "$ref": "#/definitions/extapiDHXBondResponse"
+>>>>>>> master
                   }
                },
                "default": {
@@ -1222,6 +1586,7 @@
                   }
                }
             },
+<<<<<<< HEAD
             "summary": "AuthenticateUser authenticates user with given jwt, return necessary user info for DFI service",
             "tags": [
                "DFIService"
@@ -1246,13 +1611,36 @@
                   "name": "amount",
                   "required": false,
                   "type": "string"
+=======
+            "summary": "Bond DHX to mine DHX",
+            "tags": [
+               "DHXServcie"
+            ]
+         }
+      },
+      "/api/dhx-mining/bond-info": {
+         "post": {
+            "operationId": "DHXBondInfo",
+            "parameters": [
+               {
+                  "in": "body",
+                  "name": "body",
+                  "required": true,
+                  "schema": {
+                     "$ref": "#/definitions/extapiDHXBondInfoRequest"
+                  }
+>>>>>>> master
                }
             ],
             "responses": {
                "200": {
                   "description": "A successful response.",
                   "schema": {
+<<<<<<< HEAD
                      "$ref": "#/definitions/extapiTopUpResponse"
+=======
+                     "$ref": "#/definitions/extapiDHXBondInfoResponse"
+>>>>>>> master
                   }
                },
                "default": {
@@ -1262,6 +1650,7 @@
                   }
                }
             },
+<<<<<<< HEAD
             "summary": "TopUp allows user to top up DFI margin wallet from DD wallet/supernode wallet",
             "tags": [
                "DFIService"
@@ -1290,88 +1679,7 @@
                   "name": "DFIPoolBalance",
                   "required": false,
                   "type": "string"
-               }
-            ],
-            "responses": {
-               "200": {
-                  "description": "A successful response.",
-                  "schema": {
-                     "$ref": "#/definitions/extapiWithdrawResponse"
-                  }
-               },
-               "default": {
-                  "description": "An unexpected error response.",
-                  "schema": {
-                     "$ref": "#/definitions/runtimeError"
-                  }
-               }
-            },
-            "summary": "Withdraw allows user to withdraw from DFI margin wallet to DD wallet/supernode wallet",
-            "tags": [
-               "DFIService"
-            ]
-         }
-      },
-      "/api/dhx-mining/bond": {
-         "post": {
-            "operationId": "DHXBond",
-            "parameters": [
-               {
-                  "in": "body",
-                  "name": "body",
-                  "required": true,
-                  "schema": {
-                     "$ref": "#/definitions/extapiDHXBondRequest"
-                  }
-               }
-            ],
-            "responses": {
-               "200": {
-                  "description": "A successful response.",
-                  "schema": {
-                     "$ref": "#/definitions/extapiDHXBondResponse"
-                  }
-               },
-               "default": {
-                  "description": "An unexpected error response.",
-                  "schema": {
-                     "$ref": "#/definitions/runtimeError"
-                  }
-               }
-            },
-            "summary": "Bond DHX to mine DHX",
-            "tags": [
-               "DHXServcie"
-            ]
-         }
-      },
-      "/api/dhx-mining/bond-info": {
-         "post": {
-            "operationId": "DHXBondInfo",
-            "parameters": [
-               {
-                  "in": "body",
-                  "name": "body",
-                  "required": true,
-                  "schema": {
-                     "$ref": "#/definitions/extapiDHXBondInfoRequest"
-                  }
-               }
-            ],
-            "responses": {
-               "200": {
-                  "description": "A successful response.",
-                  "schema": {
-                     "$ref": "#/definitions/extapiDHXBondInfoResponse"
-                  }
-               },
-               "default": {
-                  "description": "An unexpected error response.",
-                  "schema": {
-                     "$ref": "#/definitions/runtimeError"
-                  }
-               }
-            },
+=======
             "summary": "Get info about bonded, cooling off and unbonding DHX",
             "tags": [
                "DHXServcie"
@@ -1389,13 +1697,18 @@
                   "schema": {
                      "$ref": "#/definitions/extapiDHXCreateCouncilRequest"
                   }
+>>>>>>> master
                }
             ],
             "responses": {
                "200": {
                   "description": "A successful response.",
                   "schema": {
+<<<<<<< HEAD
+                     "$ref": "#/definitions/extapiWithdrawResponse"
+=======
                      "$ref": "#/definitions/extapiDHXCreateCouncilResponse"
+>>>>>>> master
                   }
                },
                "default": {
@@ -1405,6 +1718,17 @@
                   }
                }
             },
+<<<<<<< HEAD
+            "summary": "Withdraw allows user to withdraw from DFI margin wallet to DD wallet/supernode wallet",
+            "tags": [
+               "DFIService"
+            ]
+         }
+      },
+      "/api/dhx-mining/bond": {
+         "post": {
+            "operationId": "DHXBond",
+=======
             "summary": "Request to create a new council",
             "tags": [
                "DHXServcie"
@@ -1414,13 +1738,18 @@
       "/api/dhx-mining/create-stake": {
          "post": {
             "operationId": "DHXCreateStake",
+>>>>>>> master
             "parameters": [
                {
                   "in": "body",
                   "name": "body",
                   "required": true,
                   "schema": {
+<<<<<<< HEAD
+                     "$ref": "#/definitions/extapiDHXBondRequest"
+=======
                      "$ref": "#/definitions/extapiDHXCreateStakeRequest"
+>>>>>>> master
                   }
                }
             ],
@@ -1428,7 +1757,11 @@
                "200": {
                   "description": "A successful response.",
                   "schema": {
+<<<<<<< HEAD
+                     "$ref": "#/definitions/extapiDHXBondResponse"
+=======
                      "$ref": "#/definitions/extapiDHXCreateStakeResponse"
+>>>>>>> master
                   }
                },
                "default": {
@@ -1438,12 +1771,29 @@
                   }
                }
             },
+<<<<<<< HEAD
+            "summary": "Bond DHX to mine DHX",
+=======
             "summary": "Request to lockdrop for DHX pre-mining",
+>>>>>>> master
             "tags": [
                "DHXServcie"
             ]
          }
       },
+<<<<<<< HEAD
+      "/api/dhx-mining/bond-info": {
+         "post": {
+            "operationId": "DHXBondInfo",
+            "parameters": [
+               {
+                  "in": "body",
+                  "name": "body",
+                  "required": true,
+                  "schema": {
+                     "$ref": "#/definitions/extapiDHXBondInfoRequest"
+                  }
+=======
       "/api/dhx-mining/dhx-total-mined": {
          "get": {
             "operationId": "DHXTotalMining",
@@ -1455,13 +1805,18 @@
                   "name": "orgId",
                   "required": false,
                   "type": "string"
+>>>>>>> master
                }
             ],
             "responses": {
                "200": {
                   "description": "A successful response.",
                   "schema": {
+<<<<<<< HEAD
+                     "$ref": "#/definitions/extapiDHXBondInfoResponse"
+=======
                      "$ref": "#/definitions/extapiDHXTotalMiningResponse"
+>>>>>>> master
                   }
                },
                "default": {
@@ -1471,12 +1826,29 @@
                   }
                }
             },
+<<<<<<< HEAD
+            "summary": "Get info about bonded, cooling off and unbonding DHX",
+=======
             "summary": "DHXTotalMining returns total amount of DHX mined by the org",
+>>>>>>> master
             "tags": [
                "DHXServcie"
             ]
          }
       },
+<<<<<<< HEAD
+      "/api/dhx-mining/create-council": {
+         "post": {
+            "operationId": "DHXCreateCouncil",
+            "parameters": [
+               {
+                  "in": "body",
+                  "name": "body",
+                  "required": true,
+                  "schema": {
+                     "$ref": "#/definitions/extapiDHXCreateCouncilRequest"
+                  }
+=======
       "/api/dhx-mining/estimate": {
          "get": {
             "operationId": "DHXEstimateMining",
@@ -1488,13 +1860,18 @@
                   "name": "orgId",
                   "required": false,
                   "type": "string"
+>>>>>>> master
                }
             ],
             "responses": {
                "200": {
                   "description": "A successful response.",
                   "schema": {
+<<<<<<< HEAD
+                     "$ref": "#/definitions/extapiDHXCreateCouncilResponse"
+=======
                      "$ref": "#/definitions/extapiDHXEstimateMiningResponse"
+>>>>>>> master
                   }
                },
                "default": {
@@ -1504,12 +1881,29 @@
                   }
                }
             },
+<<<<<<< HEAD
+            "summary": "Request to create a new council",
+=======
             "summary": "DHXEstimateMining estimates organization's mining based on lockdrops,\nbonded DHX and number of gateways",
+>>>>>>> master
             "tags": [
                "DHXServcie"
             ]
          }
       },
+<<<<<<< HEAD
+      "/api/dhx-mining/create-stake": {
+         "post": {
+            "operationId": "DHXCreateStake",
+            "parameters": [
+               {
+                  "in": "body",
+                  "name": "body",
+                  "required": true,
+                  "schema": {
+                     "$ref": "#/definitions/extapiDHXCreateStakeRequest"
+                  }
+=======
       "/api/dhx-mining/history": {
          "get": {
             "operationId": "DHXMiningHistory",
@@ -1537,13 +1931,18 @@
                   "name": "till",
                   "required": false,
                   "type": "string"
+>>>>>>> master
                }
             ],
             "responses": {
                "200": {
                   "description": "A successful response.",
                   "schema": {
+<<<<<<< HEAD
+                     "$ref": "#/definitions/extapiDHXCreateStakeResponse"
+=======
                      "$ref": "#/definitions/extapiDHXMiningHistoryResponse"
+>>>>>>> master
                   }
                },
                "default": {
@@ -1553,18 +1952,31 @@
                   }
                }
             },
+<<<<<<< HEAD
+            "summary": "Request to lockdrop for DHX pre-mining",
+=======
             "summary": "Return info about DHX mining during the specified period",
+>>>>>>> master
             "tags": [
                "DHXServcie"
             ]
          }
       },
+<<<<<<< HEAD
+      "/api/dhx-mining/dhx-total-mined": {
+         "get": {
+            "operationId": "DHXTotalMining",
+            "parameters": [
+               {
+                  "description": "organization id for which the total should be returned.",
+=======
       "/api/dhx-mining/last-mining": {
          "get": {
             "operationId": "DHXGetLastMining",
             "parameters": [
                {
                   "description": "organization id. If specified return details for the given organization and the council it chairs.",
+>>>>>>> master
                   "format": "int64",
                   "in": "query",
                   "name": "orgId",
@@ -1576,7 +1988,11 @@
                "200": {
                   "description": "A successful response.",
                   "schema": {
+<<<<<<< HEAD
+                     "$ref": "#/definitions/extapiDHXTotalMiningResponse"
+=======
                      "$ref": "#/definitions/extapiDHXGetLastMiningResponse"
+>>>>>>> master
                   }
                },
                "default": {
@@ -1586,20 +2002,44 @@
                   }
                }
             },
+<<<<<<< HEAD
+            "summary": "DHXTotalMining returns total amount of DHX mined by the org",
+=======
             "summary": "Return info about the last paid day of DHX mining",
+>>>>>>> master
             "tags": [
                "DHXServcie"
             ]
          }
       },
+<<<<<<< HEAD
+      "/api/dhx-mining/estimate": {
+         "get": {
+            "operationId": "DHXEstimateMining",
+            "parameters": [
+               {
+                  "description": "id of the organization for which estimates should be calculated.",
+                  "format": "int64",
+                  "in": "query",
+                  "name": "orgId",
+                  "required": false,
+                  "type": "string"
+               }
+            ],
+=======
       "/api/dhx-mining/list-councils": {
          "get": {
             "operationId": "DHXListCouncils",
+>>>>>>> master
             "responses": {
                "200": {
                   "description": "A successful response.",
                   "schema": {
+<<<<<<< HEAD
+                     "$ref": "#/definitions/extapiDHXEstimateMiningResponse"
+=======
                      "$ref": "#/definitions/extapiDHXListCouncilsResponse"
+>>>>>>> master
                   }
                },
                "default": {
@@ -1609,12 +2049,190 @@
                   }
                }
             },
+<<<<<<< HEAD
+            "summary": "DHXEstimateMining estimates organization's mining based on lockdrops,\nbonded DHX and number of gateways",
+=======
             "summary": "List all existing councils",
+>>>>>>> master
             "tags": [
                "DHXServcie"
             ]
          }
       },
+<<<<<<< HEAD
+      "/api/dhx-mining/history": {
+         "get": {
+            "operationId": "DHXMiningHistory",
+            "parameters": [
+               {
+                  "description": "organization for which the history is returned.",
+                  "format": "int64",
+                  "in": "query",
+                  "name": "orgId",
+                  "required": false,
+                  "type": "string"
+               },
+               {
+                  "description": "the first day of the period.",
+                  "format": "date-time",
+                  "in": "query",
+                  "name": "from",
+=======
+      "/api/dhx-mining/list-stakes": {
+         "get": {
+            "operationId": "DHXListStakes",
+            "parameters": [
+               {
+                  "description": "if not 0 then return stakes for the council chaired by the specified\norg. Only the council chair should be able to request this.",
+                  "format": "int64",
+                  "in": "query",
+                  "name": "chairOrgId",
+>>>>>>> master
+                  "required": false,
+                  "type": "string"
+               },
+               {
+<<<<<<< HEAD
+                  "description": "the last day of the period.",
+                  "format": "date-time",
+                  "in": "query",
+                  "name": "till",
+=======
+                  "description": "if not 0 then return stakes of the given organization. Only the org user\nshould be able to request this.",
+                  "format": "int64",
+                  "in": "query",
+                  "name": "organizationId",
+>>>>>>> master
+                  "required": false,
+                  "type": "string"
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+<<<<<<< HEAD
+                     "$ref": "#/definitions/extapiDHXMiningHistoryResponse"
+=======
+                     "$ref": "#/definitions/extapiDHXListStakesResponse"
+>>>>>>> master
+                  }
+               },
+               "default": {
+                  "description": "An unexpected error response.",
+                  "schema": {
+                     "$ref": "#/definitions/runtimeError"
+                  }
+               }
+            },
+<<<<<<< HEAD
+            "summary": "Return info about DHX mining during the specified period",
+=======
+            "summary": "List all dhx stakes for the organization",
+>>>>>>> master
+            "tags": [
+               "DHXServcie"
+            ]
+         }
+      },
+<<<<<<< HEAD
+      "/api/dhx-mining/last-mining": {
+         "get": {
+            "operationId": "DHXGetLastMining",
+            "parameters": [
+               {
+                  "description": "organization id. If specified return details for the given organization and the council it chairs.",
+=======
+      "/api/dhx-mining/mxc-locked-total": {
+         "get": {
+            "operationId": "MXCLockdropsTotal",
+            "parameters": [
+               {
+                  "description": "organization id for which the total amount of locked MXC should be returned.",
+>>>>>>> master
+                  "format": "int64",
+                  "in": "query",
+                  "name": "orgId",
+                  "required": false,
+                  "type": "string"
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+<<<<<<< HEAD
+                     "$ref": "#/definitions/extapiDHXGetLastMiningResponse"
+=======
+                     "$ref": "#/definitions/extapiMXCLockdropsTotalResponse"
+>>>>>>> master
+                  }
+               },
+               "default": {
+                  "description": "An unexpected error response.",
+                  "schema": {
+                     "$ref": "#/definitions/runtimeError"
+                  }
+               }
+            },
+<<<<<<< HEAD
+            "summary": "Return info about the last paid day of DHX mining",
+=======
+            "summary": "MXCLockdropsTotal returns total amount of MXC locked for DHX mining",
+>>>>>>> master
+            "tags": [
+               "DHXServcie"
+            ]
+         }
+      },
+<<<<<<< HEAD
+      "/api/dhx-mining/list-councils": {
+         "get": {
+            "operationId": "DHXListCouncils",
+=======
+      "/api/dhx-mining/unbond": {
+         "post": {
+            "operationId": "DHXUnbond",
+            "parameters": [
+               {
+                  "in": "body",
+                  "name": "body",
+                  "required": true,
+                  "schema": {
+                     "$ref": "#/definitions/extapiDHXUnbondRequest"
+                  }
+               }
+            ],
+>>>>>>> master
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+<<<<<<< HEAD
+                     "$ref": "#/definitions/extapiDHXListCouncilsResponse"
+=======
+                     "$ref": "#/definitions/extapiDHXUnbondResponse"
+>>>>>>> master
+                  }
+               },
+               "default": {
+                  "description": "An unexpected error response.",
+                  "schema": {
+                     "$ref": "#/definitions/runtimeError"
+                  }
+               }
+            },
+<<<<<<< HEAD
+            "summary": "List all existing councils",
+=======
+            "summary": "Unbond bonded DHX",
+>>>>>>> master
+            "tags": [
+               "DHXServcie"
+            ]
+         }
+      },
+<<<<<<< HEAD
       "/api/dhx-mining/list-stakes": {
          "get": {
             "operationId": "DHXListStakes",
@@ -1634,13 +2252,30 @@
                   "name": "organizationId",
                   "required": false,
                   "type": "string"
+=======
+      "/api/external-login/authenticate-wechat-user": {
+         "post": {
+            "operationId": "AuthenticateWeChatUser",
+            "parameters": [
+               {
+                  "in": "body",
+                  "name": "body",
+                  "required": true,
+                  "schema": {
+                     "$ref": "#/definitions/extapiAuthenticateWeChatUserRequest"
+                  }
+>>>>>>> master
                }
             ],
             "responses": {
                "200": {
                   "description": "A successful response.",
                   "schema": {
+<<<<<<< HEAD
                      "$ref": "#/definitions/extapiDHXListStakesResponse"
+=======
+                     "$ref": "#/definitions/extapiAuthenticateWeChatUserResponse"
+>>>>>>> master
                   }
                },
                "default": {
@@ -1650,6 +2285,7 @@
                   }
                }
             },
+<<<<<<< HEAD
             "summary": "List all dhx stakes for the organization",
             "tags": [
                "DHXServcie"
@@ -1667,13 +2303,36 @@
                   "name": "orgId",
                   "required": false,
                   "type": "string"
+=======
+            "summary": "AuthenticateWeChatUser interacts with wechat open platform to authenticate wechat user\nthen check binding status of this wechat user",
+            "tags": [
+               "ExternalUserService"
+            ]
+         }
+      },
+      "/api/external-login/bind-external-user": {
+         "post": {
+            "operationId": "BindExternalUser",
+            "parameters": [
+               {
+                  "in": "body",
+                  "name": "body",
+                  "required": true,
+                  "schema": {
+                     "$ref": "#/definitions/extapiBindExternalUserRequest"
+                  }
+>>>>>>> master
                }
             ],
             "responses": {
                "200": {
                   "description": "A successful response.",
                   "schema": {
+<<<<<<< HEAD
                      "$ref": "#/definitions/extapiMXCLockdropsTotalResponse"
+=======
+                     "$ref": "#/definitions/extapiBindExternalUserResponse"
+>>>>>>> master
                   }
                },
                "default": {
@@ -1683,6 +2342,7 @@
                   }
                }
             },
+<<<<<<< HEAD
             "summary": "MXCLockdropsTotal returns total amount of MXC locked for DHX mining",
             "tags": [
                "DHXServcie"
@@ -1692,13 +2352,28 @@
       "/api/dhx-mining/unbond": {
          "post": {
             "operationId": "DHXUnbond",
+=======
+            "summary": "BindExternalUser binds external user id to supernode user",
+            "tags": [
+               "ExternalUserService"
+            ]
+         }
+      },
+      "/api/external-login/debug-authenticate-wechat-user": {
+         "post": {
+            "operationId": "DebugAuthenticateWeChatUser",
+>>>>>>> master
             "parameters": [
                {
                   "in": "body",
                   "name": "body",
                   "required": true,
                   "schema": {
+<<<<<<< HEAD
                      "$ref": "#/definitions/extapiDHXUnbondRequest"
+=======
+                     "$ref": "#/definitions/extapiAuthenticateWeChatUserRequest"
+>>>>>>> master
                   }
                }
             ],
@@ -1706,7 +2381,11 @@
                "200": {
                   "description": "A successful response.",
                   "schema": {
+<<<<<<< HEAD
                      "$ref": "#/definitions/extapiDHXUnbondResponse"
+=======
+                     "$ref": "#/definitions/extapiAuthenticateWeChatUserResponse"
+>>>>>>> master
                   }
                },
                "default": {
@@ -1716,6 +2395,7 @@
                   }
                }
             },
+<<<<<<< HEAD
             "summary": "Unbond bonded DHX",
             "tags": [
                "DHXServcie"
@@ -1725,12 +2405,24 @@
       "/api/external-login/authenticate-wechat-user": {
          "post": {
             "operationId": "AuthenticateWeChatUser",
+=======
+            "summary": "DebugAuthenticateWeChatUser will only be called by debug mode",
+            "tags": [
+               "ExternalUserService"
+            ]
+         }
+      },
+      "/api/external-login/register-external-user": {
+         "post": {
+            "operationId": "RegisterExternalUser",
+>>>>>>> master
             "parameters": [
                {
                   "in": "body",
                   "name": "body",
                   "required": true,
                   "schema": {
+<<<<<<< HEAD
                      "$ref": "#/definitions/extapiAuthenticateWeChatUserRequest"
                   }
                }
@@ -1830,6 +2522,8 @@
                   "name": "body",
                   "required": true,
                   "schema": {
+=======
+>>>>>>> master
                      "$ref": "#/definitions/extapiRegisterExternalUserRequest"
                   }
                }
@@ -1987,11 +2681,21 @@
                   }
                }
             ],
+<<<<<<< HEAD
             "responses": {
                "200": {
                   "description": "A successful response.",
                   "schema": {
                      "properties": {}
+=======
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
+>>>>>>> master
                   }
                },
                "default": {
@@ -2019,11 +2723,21 @@
                   "type": "string"
                }
             ],
+<<<<<<< HEAD
             "responses": {
                "200": {
                   "description": "A successful response.",
                   "schema": {
                      "properties": {}
+=======
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
+>>>>>>> master
                   }
                },
                "default": {
@@ -2152,11 +2866,21 @@
                   }
                }
             ],
+<<<<<<< HEAD
             "responses": {
                "200": {
                   "description": "A successful response.",
                   "schema": {
                      "properties": {}
+=======
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
+>>>>>>> master
                   }
                },
                "default": {
@@ -2576,11 +3300,21 @@
                   }
                }
             ],
+<<<<<<< HEAD
             "responses": {
                "200": {
                   "description": "A successful response.",
                   "schema": {
                      "properties": {}
+=======
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
+>>>>>>> master
                   }
                },
                "default": {
@@ -2736,11 +3470,21 @@
                   "type": "string"
                }
             ],
+<<<<<<< HEAD
             "responses": {
                "200": {
                   "description": "A successful response.",
                   "schema": {
                      "properties": {}
+=======
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
+>>>>>>> master
                   }
                },
                "default": {
@@ -2786,6 +3530,7 @@
             ]
          }
       },
+<<<<<<< HEAD
       "/api/internal/access-token/create": {
          "post": {
             "operationId": "AccessTokenCreate",
@@ -2916,6 +3661,296 @@
                   "description": "A successful response.",
                   "schema": {
                      "$ref": "#/definitions/extapiPasswordResetResp"
+=======
+      "/api/internal/access-token/create":{
+         "post":{
+            "operationId":"AccessTokenCreate",
+            "parameters":[
+               {
+                  "in":"body",
+                  "name":"body",
+                  "required":true,
+                  "schema":{
+                     "$ref":"#/definitions/extapiAccessTokenCreateRequest"
+                  }
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "$ref":"#/definitions/extapiAccessTokenCreateResponse"
+>>>>>>> master
+                  }
+               },
+               "default": {
+                  "description": "An unexpected error response.",
+                  "schema": {
+                     "$ref": "#/definitions/runtimeError"
+                  }
+               }
+            },
+<<<<<<< HEAD
+            "tags": [
+=======
+            "summary":"AccessTokenCreate allows user to create api token for use with scripts",
+            "tags":[
+>>>>>>> master
+               "InternalService"
+            ]
+         }
+      },
+<<<<<<< HEAD
+      "/api/internal/login": {
+         "post": {
+            "operationId": "Login",
+            "parameters": [
+               {
+                  "in": "body",
+                  "name": "body",
+                  "required": true,
+                  "schema": {
+                     "$ref": "#/definitions/extapiLoginRequest"
+                  }
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "$ref": "#/definitions/extapiLoginResponse"
+=======
+      "/api/internal/access-token/list":{
+         "get":{
+            "operationId":"AccessTokenList",
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "$ref":"#/definitions/extapiAccessTokenListResponse"
+>>>>>>> master
+                  }
+               },
+               "default": {
+                  "description": "An unexpected error response.",
+                  "schema": {
+                     "$ref": "#/definitions/runtimeError"
+                  }
+               }
+            },
+<<<<<<< HEAD
+            "summary": "Log the user in, returns API Token",
+            "tags": [
+=======
+            "summary":"AccessTokenList returns the list of api tokens for the user",
+            "tags":[
+>>>>>>> master
+               "InternalService"
+            ]
+         }
+      },
+<<<<<<< HEAD
+      "/api/internal/login-2fa": {
+         "post": {
+            "operationId": "Login2FA",
+            "parameters": [
+               {
+                  "in": "body",
+                  "name": "body",
+                  "required": true,
+                  "schema": {
+                     "$ref": "#/definitions/extapiLogin2FARequest"
+                  }
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "properties": {}
+=======
+      "/api/internal/access-token/revoke":{
+         "post":{
+            "operationId":"AccessTokenRevoke",
+            "parameters":[
+               {
+                  "in":"body",
+                  "name":"body",
+                  "required":true,
+                  "schema":{
+                     "$ref":"#/definitions/extapiAccessTokenRevokeRequest"
+                  }
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "$ref":"#/definitions/extapiAccessTokenRevokeResponse"
+>>>>>>> master
+                  }
+               },
+               "default": {
+                  "description": "An unexpected error response.",
+                  "schema": {
+                     "$ref": "#/definitions/runtimeError"
+                  }
+               }
+            },
+<<<<<<< HEAD
+            "summary": "Validate OTP, returns API Token",
+            "tags": [
+=======
+            "summary":"AccessTokenRevoke revokes api tokens specified in request",
+            "tags":[
+>>>>>>> master
+               "InternalService"
+            ]
+         }
+      },
+<<<<<<< HEAD
+      "/api/internal/logout": {
+         "get": {
+            "operationId": "Logout",
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "$ref": "#/definitions/extapiLogoutResponse"
+=======
+      "/api/internal/branding":{
+         "get":{
+            "operationId":"Branding",
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "$ref":"#/definitions/extapiBrandingResponse"
+>>>>>>> master
+                  }
+               },
+               "default": {
+                  "description": "An unexpected error response.",
+                  "schema": {
+                     "$ref": "#/definitions/runtimeError"
+                  }
+               }
+            },
+<<<<<<< HEAD
+            "summary": "Log the user out, invalidates user's API token",
+=======
+            "summary": "AccessTokenList returns the list of api tokens for the user",
+>>>>>>> master
+            "tags": [
+               "InternalService"
+            ]
+         }
+      },
+<<<<<<< HEAD
+      "/api/internal/profile": {
+         "get": {
+            "operationId": "Profile",
+=======
+      "/api/internal/access-token/revoke": {
+         "post": {
+            "operationId": "AccessTokenRevoke",
+            "parameters": [
+               {
+                  "in": "body",
+                  "name": "body",
+                  "required": true,
+                  "schema": {
+                     "$ref": "#/definitions/extapiAccessTokenRevokeRequest"
+                  }
+               }
+            ],
+>>>>>>> master
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+<<<<<<< HEAD
+                     "$ref": "#/definitions/extapiProfileResponse"
+=======
+                     "$ref": "#/definitions/extapiAccessTokenRevokeResponse"
+>>>>>>> master
+                  }
+               },
+               "default": {
+                  "description": "An unexpected error response.",
+                  "schema": {
+                     "$ref": "#/definitions/runtimeError"
+                  }
+               }
+            },
+<<<<<<< HEAD
+            "summary": "Get the current user's profile",
+=======
+            "summary": "AccessTokenRevoke revokes api tokens specified in request",
+>>>>>>> master
+            "tags": [
+               "InternalService"
+            ]
+         }
+      },
+<<<<<<< HEAD
+      "/api/internal/registration": {
+         "post": {
+            "operationId": "RegisterUser",
+=======
+      "/api/internal/branding": {
+         "get": {
+            "operationId": "Branding",
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "$ref": "#/definitions/extapiBrandingResponse"
+                  }
+               },
+               "default": {
+                  "description": "An unexpected error response.",
+                  "schema": {
+                     "$ref": "#/definitions/runtimeError"
+                  }
+               }
+            },
+            "summary": "Get the branding for the UI",
+            "tags": [
+               "InternalService"
+            ]
+         }
+      },
+      "/api/internal/confirm-password-reset": {
+         "post": {
+            "operationId": "ConfirmPasswordReset",
+>>>>>>> master
+            "parameters": [
+               {
+                  "in": "body",
+                  "name": "body",
+                  "required": true,
+                  "schema": {
+<<<<<<< HEAD
+                     "$ref": "#/definitions/extapiRegisterUserRequest"
+                  }
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "properties": {}
+=======
+                     "$ref": "#/definitions/extapiConfirmPasswordResetReq"
+                  }
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "$ref": "#/definitions/extapiPasswordResetResp"
                   }
                },
                "default": {
@@ -2943,11 +3978,14 @@
                   }
                }
             ],
-            "responses": {
-               "200": {
-                  "description": "A successful response.",
-                  "schema": {
-                     "$ref": "#/definitions/extapiLoginResponse"
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
+>>>>>>> master
                   }
                },
                "default": {
@@ -2957,22 +3995,35 @@
                   }
                }
             },
+<<<<<<< HEAD
+=======
             "summary": "Log the user in, returns API Token",
+>>>>>>> master
             "tags": [
                "InternalService"
             ]
          }
       },
+<<<<<<< HEAD
+      "/api/internal/registration-confirm": {
+         "post": {
+            "operationId": "ConfirmRegistration",
+=======
       "/api/internal/login-2fa": {
          "post": {
             "operationId": "Login2FA",
+>>>>>>> master
             "parameters": [
                {
                   "in": "body",
                   "name": "body",
                   "required": true,
                   "schema": {
+<<<<<<< HEAD
+                     "$ref": "#/definitions/extapiConfirmRegistrationRequest"
+=======
                      "$ref": "#/definitions/extapiLogin2FARequest"
+>>>>>>> master
                   }
                }
             ],
@@ -2980,7 +4031,11 @@
                "200": {
                   "description": "A successful response.",
                   "schema": {
+<<<<<<< HEAD
+                     "$ref": "#/definitions/extapiConfirmRegistrationResponse"
+=======
                      "properties": {}
+>>>>>>> master
                   }
                },
                "default": {
@@ -2990,12 +4045,20 @@
                   }
                }
             },
+<<<<<<< HEAD
+=======
             "summary": "Validate OTP, returns API Token",
+>>>>>>> master
             "tags": [
                "InternalService"
             ]
          }
       },
+<<<<<<< HEAD
+      "/api/internal/registration-finish": {
+         "post": {
+            "operationId": "FinishRegistration",
+=======
       "/api/internal/logout": {
          "get": {
             "operationId": "Logout",
@@ -3045,13 +4108,15 @@
       "/api/internal/registration": {
          "post": {
             "operationId": "RegisterUser",
+>>>>>>> master
             "parameters": [
                {
                   "in": "body",
                   "name": "body",
                   "required": true,
                   "schema": {
-                     "$ref": "#/definitions/extapiRegisterUserRequest"
+<<<<<<< HEAD
+                     "$ref": "#/definitions/extapiFinishRegistrationRequest"
                   }
                }
             ],
@@ -3060,6 +4125,19 @@
                   "description": "A successful response.",
                   "schema": {
                      "properties": {}
+=======
+                     "$ref": "#/definitions/extapiRegisterUserRequest"
+                  }
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
+>>>>>>> master
                   }
                },
                "default": {
@@ -3074,15 +4152,32 @@
             ]
          }
       },
+<<<<<<< HEAD
+      "/api/internal/request-password-reset": {
+         "post": {
+            "operationId": "RequestPasswordReset",
+=======
       "/api/internal/registration-confirm": {
          "post": {
             "operationId": "ConfirmRegistration",
+>>>>>>> master
             "parameters": [
                {
                   "in": "body",
                   "name": "body",
                   "required": true,
                   "schema": {
+<<<<<<< HEAD
+                     "$ref": "#/definitions/extapiPasswordResetReq"
+                  }
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "$ref": "#/definitions/extapiPasswordResetResp"
+=======
                      "$ref": "#/definitions/extapiConfirmRegistrationRequest"
                   }
                }
@@ -3119,11 +4214,14 @@
                   }
                }
             ],
-            "responses": {
-               "200": {
-                  "description": "A successful response.",
-                  "schema": {
-                     "properties": {}
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
+>>>>>>> master
                   }
                },
                "default": {
@@ -3138,6 +4236,18 @@
             ]
          }
       },
+<<<<<<< HEAD
+      "/api/internal/search": {
+         "get": {
+            "operationId": "GlobalSearch",
+            "parameters": [
+               {
+                  "description": "Search query.",
+                  "in": "query",
+                  "name": "search",
+                  "required": false,
+                  "type": "string"
+=======
       "/api/internal/request-password-reset": {
          "post": {
             "operationId": "RequestPasswordReset",
@@ -3157,6 +4267,7 @@
                   "schema": {
                      "$ref": "#/definitions/extapiPasswordResetResp"
                   }
+>>>>>>> master
                },
                "default": {
                   "description": "An unexpected error response.",
@@ -3175,13 +4286,22 @@
             "operationId": "GlobalSearch",
             "parameters": [
                {
+<<<<<<< HEAD
+                  "description": "Max number of results to return.",
+                  "format": "int64",
+                  "in": "query",
+                  "name": "limit",
+=======
                   "description": "Search query.",
                   "in": "query",
                   "name": "search",
+>>>>>>> master
                   "required": false,
                   "type": "string"
                },
                {
+<<<<<<< HEAD
+=======
                   "description": "Max number of results to return.",
                   "format": "int64",
                   "in": "query",
@@ -3190,6 +4310,7 @@
                   "type": "string"
                },
                {
+>>>>>>> master
                   "description": "Offset offset of the result-set (for pagination).",
                   "format": "int64",
                   "in": "query",
@@ -3401,6 +4522,7 @@
             ]
          }
       },
+<<<<<<< HEAD
       "/api/mosquitto-auth/get-user": {
          "post": {
             "operationId": "JWTAuthentication",
@@ -3419,6 +4541,26 @@
                   "description": "A successful response.",
                   "schema": {
                      "$ref": "#/definitions/extapiJWTAuthenticationResponse"
+=======
+      "/api/mosquitto-auth/get-user":{
+         "post":{
+            "operationId":"AuthenticateUser",
+            "parameters":[
+               {
+                  "in":"body",
+                  "name":"body",
+                  "required":true,
+                  "schema":{
+                     "$ref":"#/definitions/extapiAuthenticateUserRequest"
+                  }
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "$ref":"#/definitions/extapiAuthenticateUserResponse"
+>>>>>>> master
                   }
                },
                "default": {
@@ -3461,8 +4603,13 @@
                   }
                }
             },
+<<<<<<< HEAD
             "summary": "Get JWT for mosquitto auth with given org id\nOnly accessible for authenticated supernode user",
             "tags": [
+=======
+            "summary":"Deprecated: Get JWT for mosquitto auth with given org id\nOnly accessible for authenticated supernode user",
+            "tags":[
+>>>>>>> master
                "MosquittoAuthService"
             ]
          }
@@ -3476,6 +4623,8 @@
                   "name": "devEui",
                   "required": false,
                   "type": "string"
+<<<<<<< HEAD
+=======
                },
                {
                   "format": "int64",
@@ -3499,8 +4648,8 @@
                   }
                }
             },
-            "summary": "SendCommandToDevice takes device eui as request paramter,\nreturns topics that can be used to send command to a specific device",
-            "tags": [
+            "summary":"Deprecated: SendCommandToDevice takes device eui as request paramter,\nreturns topics that can be used to send command to a specific device",
+            "tags":[
                "MosquittoAuthService"
             ]
          }
@@ -3515,6 +4664,7 @@
                   "name": "applicationId",
                   "required": false,
                   "type": "string"
+>>>>>>> master
                },
                {
                   "format": "int64",
@@ -3524,11 +4674,19 @@
                   "type": "string"
                }
             ],
+<<<<<<< HEAD
             "responses": {
                "200": {
                   "description": "A successful response.",
                   "schema": {
-                     "$ref": "#/definitions/extapiSubsribeApplicationEventsResponse"
+                     "$ref": "#/definitions/extapiSendCommandToDeviceResponse"
+=======
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "$ref":"#/definitions/extapiSubsribeApplicationEventsResponse"
+>>>>>>> master
                   }
                },
                "default": {
@@ -3538,12 +4696,82 @@
                   }
                }
             },
-            "summary": "SubsribeApplication takes application id as request parameter,\nreturns topics that can be used to subscribe to all devices' events under same application",
+<<<<<<< HEAD
+            "summary": "SendCommandToDevice takes device eui as request paramter,\nreturns topics that can be used to send command to a specific device",
             "tags": [
+=======
+            "summary":"Deprecated: SubsribeApplication takes application id as request parameter,\nreturns topics that can be used to subscribe to all devices' events under same application",
+            "tags":[
+>>>>>>> master
                "MosquittoAuthService"
             ]
          }
       },
+<<<<<<< HEAD
+      "/api/mosquitto-auth/subscribe-application-events": {
+         "get": {
+            "operationId": "SubsribeApplicationEvents",
+            "parameters": [
+               {
+                  "format": "int64",
+                  "in": "query",
+                  "name": "applicationId",
+                  "required": false,
+                  "type": "string"
+=======
+      "/api/mosquitto-auth/subscribe-device-events":{
+         "get":{
+            "operationId":"SubsribeDeviceEvents",
+            "parameters":[
+               {
+                  "in":"query",
+                  "name":"devEui",
+                  "required":false,
+                  "type":"string"
+>>>>>>> master
+               },
+               {
+                  "format": "int64",
+                  "in": "query",
+                  "name": "organizationId",
+                  "required": false,
+                  "type": "string"
+               }
+            ],
+<<<<<<< HEAD
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "$ref": "#/definitions/extapiSubsribeApplicationEventsResponse"
+=======
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "$ref":"#/definitions/extapiSubsribeDeviceEventsResponse"
+>>>>>>> master
+                  }
+               },
+               "default": {
+                  "description": "An unexpected error response.",
+                  "schema": {
+                     "$ref": "#/definitions/runtimeError"
+                  }
+               }
+            },
+<<<<<<< HEAD
+            "summary": "SubsribeApplication takes application id as request parameter,\nreturns topics that can be used to subscribe to all devices' events under same application",
+            "tags": [
+=======
+            "summary":"Deprecated: SubsribeDeviceEvents takes device eui as request parameter,\nreturns topis that can be used to subscribe to all device events or one specific event",
+            "tags":[
+>>>>>>> master
+               "MosquittoAuthService"
+            ]
+         }
+      },
+<<<<<<< HEAD
       "/api/mosquitto-auth/subscribe-device-events": {
          "get": {
             "operationId": "SubsribeDeviceEvents",
@@ -3567,6 +4795,32 @@
                   "description": "A successful response.",
                   "schema": {
                      "$ref": "#/definitions/extapiSubsribeDeviceEventsResponse"
+=======
+      "/api/mqtt-integration/application-settings":{
+         "get":{
+            "operationId":"ApplicationSettings",
+            "parameters":[
+               {
+                  "format":"int64",
+                  "in":"query",
+                  "name":"applicationID",
+                  "required":false,
+                  "type":"string"
+               },
+               {
+                  "format":"int64",
+                  "in":"query",
+                  "name":"organizationID",
+                  "required":false,
+                  "type":"string"
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "$ref":"#/definitions/extapiApplicationSettingsResponse"
+>>>>>>> master
                   }
                },
                "default": {
@@ -3576,9 +4830,155 @@
                   }
                }
             },
+<<<<<<< HEAD
             "summary": "SubsribeDeviceEvents takes device eui as request parameter,\nreturns topis that can be used to subscribe to all device events or one specific event",
             "tags": [
                "MosquittoAuthService"
+            ]
+         }
+      },
+      "/api/network-servers": {
+         "get": {
+            "operationId": "List",
+            "parameters": [
+               {
+                  "description": "Max number of items to return.",
+                  "format": "int64",
+                  "in": "query",
+                  "name": "limit",
+                  "required": false,
+                  "type": "string"
+               },
+               {
+                  "description": "Offset in the result-set (for pagination).",
+                  "format": "int64",
+                  "in": "query",
+                  "name": "offset",
+                  "required": false,
+                  "type": "string"
+               },
+               {
+                  "description": "Organization id to filter on.",
+                  "format": "int64",
+                  "in": "query",
+                  "name": "organizationID",
+                  "required": false,
+                  "type": "string"
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "$ref": "#/definitions/extapiListNetworkServerResponse"
+=======
+            "summary":"ApplicationSettings returns parameters for setting up mqtt integration on application level",
+            "tags":[
+               "MQTTIntegrationService"
+            ]
+         }
+      },
+      "/api/mqtt-integration/device-settings":{
+         "get":{
+            "operationId":"DeviceSettings",
+            "parameters":[
+               {
+                  "in":"query",
+                  "name":"devEUI",
+                  "required":false,
+                  "type":"string"
+               },
+               {
+                  "format":"int64",
+                  "in":"query",
+                  "name":"organizationID",
+                  "required":false,
+                  "type":"string"
+               },
+               {
+                  "format":"int64",
+                  "in":"query",
+                  "name":"applicationID",
+                  "required":false,
+                  "type":"string"
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "$ref":"#/definitions/extapiDeviceSettingsResponse"
+>>>>>>> master
+                  }
+               },
+               "default": {
+                  "description": "An unexpected error response.",
+                  "schema": {
+                     "$ref": "#/definitions/runtimeError"
+                  }
+               }
+            },
+<<<<<<< HEAD
+            "summary": "List lists the available network-servers.",
+            "tags": [
+               "NetworkServerService"
+            ]
+         },
+         "post": {
+            "operationId": "Create",
+            "parameters": [
+               {
+                  "in": "body",
+                  "name": "body",
+                  "required": true,
+                  "schema": {
+                     "$ref": "#/definitions/extapiCreateNetworkServerRequest"
+                  }
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "$ref": "#/definitions/extapiCreateNetworkServerResponse"
+=======
+            "summary":"DeviceSettings returns parameters for setting up mqtt integration on device level",
+            "tags":[
+               "MQTTIntegrationService"
+            ]
+         }
+      },
+      "/api/mqtt-integration/generate-new-token":{
+         "get":{
+            "operationId":"GenerateNewToken",
+            "parameters":[
+               {
+                  "format":"int64",
+                  "in":"query",
+                  "name":"organizationID",
+                  "required":false,
+                  "type":"string"
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "$ref":"#/definitions/extapiGenerateNewTokenResponse"
+>>>>>>> master
+                  }
+               },
+               "default": {
+                  "description": "An unexpected error response.",
+                  "schema": {
+                     "$ref": "#/definitions/runtimeError"
+                  }
+               }
+            },
+<<<<<<< HEAD
+=======
+            "tags":[
+               "MQTTIntegrationService"
             ]
          }
       },
@@ -3656,6 +5056,7 @@
                   }
                }
             },
+>>>>>>> master
             "summary": "Create creates the given network-server.",
             "tags": [
                "NetworkServerService"
@@ -3675,11 +5076,21 @@
                   "type": "string"
                }
             ],
+<<<<<<< HEAD
             "responses": {
                "200": {
                   "description": "A successful response.",
                   "schema": {
                      "properties": {}
+=======
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
+>>>>>>> master
                   }
                },
                "default": {
@@ -3747,11 +5158,21 @@
                   }
                }
             ],
+<<<<<<< HEAD
             "responses": {
                "200": {
                   "description": "A successful response.",
                   "schema": {
                      "properties": {}
+=======
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
+>>>>>>> master
                   }
                },
                "default": {
@@ -3807,6 +5228,7 @@
             ]
          }
       },
+<<<<<<< HEAD
       "/api/nft/get-image": {
          "get": {
             "operationId": "GetNFTEggImage",
@@ -3838,6 +5260,8 @@
             ]
          }
       },
+=======
+>>>>>>> master
       "/api/organizations": {
          "get": {
             "operationId": "List",
@@ -3930,11 +5354,21 @@
                   "type": "string"
                }
             ],
+<<<<<<< HEAD
             "responses": {
                "200": {
                   "description": "A successful response.",
                   "schema": {
                      "properties": {}
+=======
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
+>>>>>>> master
                   }
                },
                "default": {
@@ -4002,11 +5436,21 @@
                   }
                }
             ],
+<<<<<<< HEAD
             "responses": {
                "200": {
                   "description": "A successful response.",
                   "schema": {
                      "properties": {}
+=======
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
+>>>>>>> master
                   }
                },
                "default": {
@@ -4092,11 +5536,21 @@
                   "type": "string"
                }
             ],
+<<<<<<< HEAD
             "responses": {
                "200": {
                   "description": "A successful response.",
                   "schema": {
                      "properties": {}
+=======
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
+>>>>>>> master
                   }
                },
                "default": {
@@ -4172,11 +5626,21 @@
                   }
                }
             ],
+<<<<<<< HEAD
             "responses": {
                "200": {
                   "description": "A successful response.",
                   "schema": {
                      "properties": {}
+=======
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
+>>>>>>> master
                   }
                },
                "default": {
@@ -4221,11 +5685,21 @@
                   }
                }
             ],
+<<<<<<< HEAD
             "responses": {
                "200": {
                   "description": "A successful response.",
                   "schema": {
                      "properties": {}
+=======
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
+>>>>>>> master
                   }
                },
                "default": {
@@ -4581,11 +6055,21 @@
                   "type": "string"
                }
             ],
+<<<<<<< HEAD
             "responses": {
                "200": {
                   "description": "A successful response.",
                   "schema": {
                      "properties": {}
+=======
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
+>>>>>>> master
                   }
                },
                "default": {
@@ -4651,11 +6135,21 @@
                   }
                }
             ],
+<<<<<<< HEAD
             "responses": {
                "200": {
                   "description": "A successful response.",
                   "schema": {
                      "properties": {}
+=======
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
+>>>>>>> master
                   }
                },
                "default": {
@@ -5659,11 +7153,21 @@
                   }
                }
             ],
+<<<<<<< HEAD
             "responses": {
                "200": {
                   "description": "A successful response.",
                   "schema": {
                      "properties": {}
+=======
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
+>>>>>>> master
                   }
                },
                "default": {
@@ -5679,15 +7183,22 @@
             ]
          }
       },
+<<<<<<< HEAD
       "/api/users/email-add": {
          "post": {
             "operationId": "AddEmail",
+=======
+      "/api/users/email-2fa-passed": {
+         "post": {
+            "operationId": "Email2FAPassed",
+>>>>>>> master
             "parameters": [
                {
                   "in": "body",
                   "name": "body",
                   "required": true,
                   "schema": {
+<<<<<<< HEAD
                      "$ref": "#/definitions/extapiAddEmailRequest"
                   }
                }
@@ -5697,6 +7208,19 @@
                   "description": "A successful response.",
                   "schema": {
                      "properties": {}
+=======
+                     "$ref": "#/definitions/extapiEmail2FAPassedRequest"
+                  }
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
+>>>>>>> master
                   }
                },
                "default": {
@@ -5706,21 +7230,32 @@
                   }
                }
             },
+<<<<<<< HEAD
             "summary": "Add a new email address",
+=======
+            "summary": "Email2FAPassed used for verifying current email, to be able to do protected actions for a short period of time",
+>>>>>>> master
             "tags": [
                "UserService"
             ]
          }
       },
+<<<<<<< HEAD
       "/api/users/email-verify": {
          "post": {
             "operationId": "VerifyEmail",
+=======
+      "/api/users/email-2fa-request": {
+         "post": {
+            "operationId": "Email2FARequest",
+>>>>>>> master
             "parameters": [
                {
                   "in": "body",
                   "name": "body",
                   "required": true,
                   "schema": {
+<<<<<<< HEAD
                      "$ref": "#/definitions/extapiVerifyEmailRequest"
                   }
                }
@@ -5730,6 +7265,19 @@
                   "description": "A successful response.",
                   "schema": {
                      "properties": {}
+=======
+                     "$ref": "#/definitions/extapiEmail2FARequestRequest"
+                  }
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
+>>>>>>> master
                   }
                },
                "default": {
@@ -5739,12 +7287,17 @@
                   }
                }
             },
+<<<<<<< HEAD
             "summary": "Verify email address",
+=======
+            "summary": "Email2FARequest used for verifying current email, to be able to do protected actions for a short period of time",
+>>>>>>> master
             "tags": [
                "UserService"
             ]
          }
       },
+<<<<<<< HEAD
       "/api/users/email/{userEmail}": {
          "get": {
             "operationId": "GetUserEmail",
@@ -5754,13 +7307,30 @@
                   "name": "userEmail",
                   "required": true,
                   "type": "string"
+=======
+      "/api/users/email-2fa-verify": {
+         "post": {
+            "operationId": "Email2FAVerify",
+            "parameters": [
+               {
+                  "in": "body",
+                  "name": "body",
+                  "required": true,
+                  "schema": {
+                     "$ref": "#/definitions/extapiEmail2FAVerifyRequest"
+                  }
+>>>>>>> master
                }
             ],
             "responses": {
                "200": {
                   "description": "A successful response.",
                   "schema": {
+<<<<<<< HEAD
                      "$ref": "#/definitions/extapiGetUserEmailResponse"
+=======
+                     "$ref": "#/definitions/extapiEmail2FAVerifyResponse"
+>>>>>>> master
                   }
                },
                "default": {
@@ -5770,6 +7340,181 @@
                   }
                }
             },
+<<<<<<< HEAD
+=======
+            "summary": "Email2FAVerify used for verifying current email, to be able to do protected actions for a short period of time",
+>>>>>>> master
+            "tags": [
+               "UserService"
+            ]
+         }
+      },
+<<<<<<< HEAD
+      "/api/users/set-password": {
+         "post": {
+            "operationId": "SetPassword",
+=======
+      "/api/users/email-add": {
+         "post": {
+            "operationId": "AddEmail",
+>>>>>>> master
+            "parameters": [
+               {
+                  "in": "body",
+                  "name": "body",
+                  "required": true,
+                  "schema": {
+<<<<<<< HEAD
+                     "$ref": "#/definitions/extapiSetPasswordRequest"
+=======
+                     "$ref": "#/definitions/extapiAddEmailRequest"
+>>>>>>> master
+                  }
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+<<<<<<< HEAD
+                     "$ref": "#/definitions/extapiSetPasswordResponse"
+=======
+                     "properties": {}
+>>>>>>> master
+                  }
+               },
+               "default": {
+                  "description": "An unexpected error response.",
+                  "schema": {
+                     "$ref": "#/definitions/runtimeError"
+                  }
+               }
+            },
+<<<<<<< HEAD
+            "summary": "SetPassword saves password to account.\nThis API is only used when account's password was never set before.",
+=======
+            "summary": "Add a new email address",
+>>>>>>> master
+            "tags": [
+               "UserService"
+            ]
+         }
+      },
+<<<<<<< HEAD
+      "/api/users/verify-existing-email": {
+         "post": {
+            "operationId": "VerifyExistingEmail",
+=======
+      "/api/users/email-verify": {
+         "post": {
+            "operationId": "VerifyEmail",
+>>>>>>> master
+            "parameters": [
+               {
+                  "in": "body",
+                  "name": "body",
+                  "required": true,
+                  "schema": {
+<<<<<<< HEAD
+                     "$ref": "#/definitions/extapiVerifyExistingEmailRequest"
+=======
+                     "$ref": "#/definitions/extapiVerifyEmailRequest"
+>>>>>>> master
+                  }
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+<<<<<<< HEAD
+                     "$ref": "#/definitions/extapiVerifyExistingEmailResponse"
+=======
+                     "properties": {}
+>>>>>>> master
+                  }
+               },
+               "default": {
+                  "description": "An unexpected error response.",
+                  "schema": {
+                     "$ref": "#/definitions/runtimeError"
+                  }
+               }
+            },
+<<<<<<< HEAD
+            "summary": "VerifyExistingEmail sends a verification email in case email is not verified",
+=======
+            "summary": "Verify email address",
+>>>>>>> master
+            "tags": [
+               "UserService"
+            ]
+         }
+      },
+<<<<<<< HEAD
+      "/api/users/{id}": {
+         "delete": {
+            "operationId": "Delete",
+            "parameters": [
+               {
+                  "description": "User ID.",
+                  "format": "int64",
+                  "in": "path",
+                  "name": "id",
+=======
+      "/api/users/email/{userEmail}": {
+         "get": {
+            "operationId": "GetUserEmail",
+            "parameters": [
+               {
+                  "in": "path",
+                  "name": "userEmail",
+>>>>>>> master
+                  "required": true,
+                  "type": "string"
+               }
+            ],
+<<<<<<< HEAD
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "properties": {}
+=======
+            "responses":{
+               "200":{
+                  "description":"A successful response.",
+                  "schema":{
+                     "properties":{
+                        
+                     }
+>>>>>>> master
+                  }
+               },
+               "default": {
+                  "description": "An unexpected error response.",
+                  "schema": {
+                     "$ref": "#/definitions/runtimeError"
+                  }
+               }
+            },
+<<<<<<< HEAD
+            "summary": "Delete a user.",
+            "tags": [
+               "UserService"
+            ]
+         },
+         "get": {
+            "operationId": "Get",
+            "parameters": [
+               {
+                  "description": "User ID.",
+                  "format": "int64",
+                  "in": "path",
+                  "name": "id",
+                  "required": true,
+                  "type": "string"
+=======
             "tags": [
                "UserService"
             ]
@@ -5786,13 +7531,18 @@
                   "schema": {
                      "$ref": "#/definitions/extapiSetPasswordRequest"
                   }
+>>>>>>> master
                }
             ],
             "responses": {
                "200": {
                   "description": "A successful response.",
                   "schema": {
+<<<<<<< HEAD
+                     "$ref": "#/definitions/extapiGetUserResponse"
+=======
                      "$ref": "#/definitions/extapiSetPasswordResponse"
+>>>>>>> master
                   }
                },
                "default": {
@@ -5802,12 +7552,29 @@
                   }
                }
             },
+<<<<<<< HEAD
+            "summary": "Get data for a particular user.",
+=======
             "summary": "SetPassword saves password to account.\nThis API is only used when account's password was never set before.",
+>>>>>>> master
             "tags": [
                "UserService"
             ]
          }
       },
+<<<<<<< HEAD
+      "/api/users/{user.id}": {
+         "put": {
+            "operationId": "Update",
+            "parameters": [
+               {
+                  "description": "User ID.\nWill be set automatically on create.",
+                  "format": "int64",
+                  "in": "path",
+                  "name": "user.id",
+                  "required": true,
+                  "type": "string"
+=======
       "/api/users/verify-existing-email": {
          "post": {
             "operationId": "VerifyExistingEmail",
@@ -5827,6 +7594,7 @@
                   "schema": {
                      "$ref": "#/definitions/extapiVerifyExistingEmailResponse"
                   }
+>>>>>>> master
                },
                "default": {
                   "description": "An unexpected error response.",
@@ -5846,6 +7614,13 @@
             "operationId": "Delete",
             "parameters": [
                {
+<<<<<<< HEAD
+                  "in": "body",
+                  "name": "body",
+                  "required": true,
+                  "schema": {
+                     "$ref": "#/definitions/extapiUpdateUserRequest"
+=======
                   "description": "User ID.",
                   "format": "int64",
                   "in": "path",
@@ -5865,6 +7640,7 @@
                   "description": "An unexpected error response.",
                   "schema": {
                      "$ref": "#/definitions/runtimeError"
+>>>>>>> master
                   }
                }
             },
@@ -5889,7 +7665,11 @@
                "200": {
                   "description": "A successful response.",
                   "schema": {
+<<<<<<< HEAD
+                     "$ref": "#/definitions/extapiUpdateUserResponse"
+=======
                      "$ref": "#/definitions/extapiGetUserResponse"
+>>>>>>> master
                   }
                },
                "default": {
@@ -5899,12 +7679,23 @@
                   }
                }
             },
+<<<<<<< HEAD
+            "summary": "Update an existing user.",
+=======
             "summary": "Get data for a particular user.",
+>>>>>>> master
             "tags": [
                "UserService"
             ]
          }
       },
+<<<<<<< HEAD
+      "/api/verify-external-email": {
+         "post": {
+            "operationId": "VerifyShopifyEmail",
+            "parameters": [
+               {
+=======
       "/api/users/{user.id}": {
          "put": {
             "operationId": "Update",
@@ -5918,11 +7709,16 @@
                   "type": "string"
                },
                {
+>>>>>>> master
                   "in": "body",
                   "name": "body",
                   "required": true,
                   "schema": {
+<<<<<<< HEAD
+                     "$ref": "#/definitions/extapiVerifyShopifyEmailRequest"
+=======
                      "$ref": "#/definitions/extapiUpdateUserRequest"
+>>>>>>> master
                   }
                }
             ],
@@ -5930,7 +7726,11 @@
                "200": {
                   "description": "A successful response.",
                   "schema": {
+<<<<<<< HEAD
+                     "$ref": "#/definitions/extapiVerifyShopifyEmailResponse"
+=======
                      "$ref": "#/definitions/extapiUpdateUserResponse"
+>>>>>>> master
                   }
                },
                "default": {
@@ -5940,6 +7740,8 @@
                   }
                }
             },
+<<<<<<< HEAD
+=======
             "summary": "Update an existing user.",
             "tags": [
                "UserService"
@@ -5973,6 +7775,7 @@
                   }
                }
             },
+>>>>>>> master
             "summary": "VerifyShopifyEmail sends email with confirmation message to given address",
             "tags": [
                "ExternalUserService"
@@ -6411,6 +8214,7 @@
          "get": {
             "operationId": "GetWithdrawFee",
             "parameters": [
+<<<<<<< HEAD
                {
                   "description": "type of crypto currency.",
                   "in": "query",
@@ -6423,6 +8227,20 @@
                   "name": "amount",
                   "required": false,
                   "type": "string"
+=======
+               {
+                  "description": "type of crypto currency.",
+                  "in": "query",
+                  "name": "currency",
+                  "required": false,
+                  "type": "string"
+               },
+               {
+                  "in":"query",
+                  "name":"amount",
+                  "required":false,
+                  "type":"string"
+>>>>>>> master
                }
             ],
             "responses": {
@@ -6605,6 +8423,7 @@
             "GEO_RESOLVER_WIFI"
          ],
          "type": "string"
+<<<<<<< HEAD
       },
       "commonModulation": {
          "default": "LORA",
@@ -6709,6 +8528,203 @@
       },
       "extapiAccessTokenRevokeResponse": {
          "type": "object"
+=======
+      },
+      "commonModulation": {
+         "default": "LORA",
+         "description": "- LORA: LoRa\n - FSK: FSK\n - LR_FHSS: LR-FHSS",
+         "enum": [
+            "LORA",
+            "FSK",
+            "LR_FHSS"
+         ],
+         "type": "string"
+      },
+      "extapiAccessToken": {
+         "properties": {
+            "created": {
+               "format": "date-time",
+               "type": "string"
+            },
+            "description": {
+               "type": "string"
+            },
+            "expires": {
+               "format": "date-time",
+               "type": "string"
+            },
+            "id": {
+               "format": "int64",
+               "type": "string"
+            },
+            "lastUsed": {
+               "format": "date-time",
+               "type": "string"
+            },
+            "maxInactiveSeconds": {
+               "format": "uint64",
+               "type": "string"
+            },
+            "scope": {
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            }
+         },
+         "type": "object"
+      },
+      "extapiAccessTokenCreateRequest": {
+         "properties": {
+            "description": {
+               "type": "string"
+            },
+            "expires": {
+               "format": "date-time",
+               "type": "string"
+            },
+            "maxInactiveSeconds": {
+               "format": "uint64",
+               "type": "string"
+            },
+            "organizationId": {
+               "format": "uint64",
+               "type": "string"
+            },
+            "scope": {
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            }
+         },
+         "type": "object"
+      },
+      "extapiAccessTokenCreateResponse": {
+         "properties": {
+            "authToken": {
+               "type": "string"
+            }
+         },
+         "type": "object"
+      },
+      "extapiAccessTokenListResponse": {
+         "properties": {
+            "token": {
+               "items": {
+                  "$ref": "#/definitions/extapiAccessToken"
+               },
+               "type": "array"
+            }
+         },
+         "type": "object"
+      },
+      "extapiAccessTokenRevokeRequest": {
+         "properties": {
+            "id": {
+               "items": {
+                  "format": "int64",
+                  "type": "string"
+               },
+               "type": "array"
+            }
+         },
+         "type": "object"
+      },
+      "extapiAccessToken":{
+         "properties":{
+            "created":{
+               "format":"date-time",
+               "type":"string"
+            },
+            "description":{
+               "type":"string"
+            },
+            "expires":{
+               "format":"date-time",
+               "type":"string"
+            },
+            "id":{
+               "format":"int64",
+               "type":"string"
+            },
+            "lastUsed":{
+               "format":"date-time",
+               "type":"string"
+            },
+            "maxInactiveSeconds":{
+               "format":"uint64",
+               "type":"string"
+            },
+            "scope":{
+               "items":{
+                  "type":"string"
+               },
+               "type":"array"
+            }
+         },
+         "type":"object"
+      },
+      "extapiAccessTokenCreateRequest":{
+         "properties":{
+            "description":{
+               "type":"string"
+            },
+            "expires":{
+               "format":"date-time",
+               "type":"string"
+            },
+            "maxInactiveSeconds":{
+               "format":"uint64",
+               "type":"string"
+            },
+            "organizationId":{
+               "format":"uint64",
+               "type":"string"
+            },
+            "scope":{
+               "items":{
+                  "type":"string"
+               },
+               "type":"array"
+            }
+         },
+         "type":"object"
+      },
+      "extapiAccessTokenCreateResponse":{
+         "properties":{
+            "authToken":{
+               "type":"string"
+            }
+         },
+         "type":"object"
+      },
+      "extapiAccessTokenListResponse":{
+         "properties":{
+            "token":{
+               "items":{
+                  "$ref":"#/definitions/extapiAccessToken"
+               },
+               "type":"array"
+            }
+         },
+         "type":"object"
+      },
+      "extapiAccessTokenRevokeRequest":{
+         "properties":{
+            "id":{
+               "items":{
+                  "format":"int64",
+                  "type":"string"
+               },
+               "type":"array"
+            }
+         },
+         "type":"object"
+      },
+      "extapiAccessTokenRevokeResponse":{
+         "type":"object"
+>>>>>>> master
       },
       "extapiActivateDeviceRequest": {
          "properties": {
@@ -6826,15 +8842,41 @@
             "serviceProfileName": {
                "description": "Service-profile name.",
                "type": "string"
+<<<<<<< HEAD
+=======
             }
          },
          "type": "object"
       },
+      "extapiApplicationSettingsResponse":{
+         "properties":{
+            "uplink":{
+               "$ref":"#/definitions/extapisettings",
+               "description":"integration settings for subscribing to uplink events"
+>>>>>>> master
+            }
+         },
+         "type": "object"
+      },
+<<<<<<< HEAD
       "extapiAuthenticateWeChatUserRequest": {
          "properties": {
             "code": {
                "description": "code is obtained from wechat app for authenticating wechat account",
                "type": "string"
+=======
+      "extapiAuthenticateUserRequest":{
+         "type":"object"
+      },
+      "extapiAuthenticateUserResponse":{
+         "type":"object"
+      },
+      "extapiAuthenticateWeChatUserRequest":{
+         "properties":{
+            "code":{
+               "description":"code is obtained from wechat app for authenticating wechat account",
+               "type":"string"
+>>>>>>> master
             }
          },
          "type": "object"
@@ -6860,6 +8902,7 @@
          },
          "type": "object"
       },
+<<<<<<< HEAD
       "extapiBTCAddLocksRequest": {
          "properties": {
             "durationDays": {
@@ -6887,13 +8930,46 @@
             "totalAmount": {
                "description": "total amount to be locked (it has to match session parameters)",
                "type": "string"
+=======
+      "extapiBTCDailyMining":{
+         "properties":{
+            "amount":{
+               "description":"amount of BTC mined",
+               "type":"string"
+            },
+            "miningDate":{
+               "description":"the date on which the mining happened",
+               "format":"date-time",
+               "type":"string"
+            },
+            "miningPower":{
+               "description":"mining power on that date",
+               "format":"int64",
+               "type":"string"
             }
          },
          "type": "object"
       },
+      "extapiBTCGWMined":{
+         "properties":{
+            "amount":{
+               "description":"amount mined by this gateway",
+               "type":"string"
+            },
+            "gatewayMac":{
+               "description":"gateway's MAC",
+               "type":"string"
+>>>>>>> master
+            }
+         },
+         "type": "object"
+      },
+<<<<<<< HEAD
       "extapiBTCAddLocksResponse": {
          "type": "object"
       },
+=======
+>>>>>>> master
       "extapiBTCListLocksResponse": {
          "properties": {
             "lock": {
@@ -6911,6 +8987,7 @@
             "amount": {
                "description": "amount of MXC locked",
                "type": "string"
+<<<<<<< HEAD
             },
             "btcRevenue": {
                "description": "BTC revenue earned by this lock",
@@ -6939,21 +9016,123 @@
                "description": "btc mining session id",
                "format": "int64",
                "type": "string"
+=======
+            },
+            "coolingOffEnds":{
+               "description":"timestamp when cooling off ends (only for unlocked bonds)",
+               "format":"date-time",
+               "type":"string"
+            },
+            "created": {
+               "description": "timestamp when lock was created",
+               "format": "date-time",
+               "type": "string"
+            },
+            "gatewayMac": {
+               "description": "MAC of the gateway associated with the lock",
+               "type": "string"
+            },
+            "id": {
+               "description": "lock id in database",
+               "format": "int64",
+               "type": "string"
+            },
+            "lockTill":{
+               "description":"timestamp at which current lock period ends",
+               "format":"date-time",
+               "type":"string"
+            },
+            "unlockFrom":{
+               "description":"timestamp from when the unlock can be requested (lock_till shows the end\nof the period during which the unlock can be requested)",
+               "format":"date-time",
+               "type":"string"
+            },
+            "unlocked":{
+               "description":"timestamp when the unlock has been requested",
+               "format":"date-time",
+               "type":"string"
+            }
+         },
+         "type":"object"
+      },
+      "extapiBTCLockRequest":{
+         "properties":{
+            "amount":{
+               "description":"amount to be bonded",
+               "type":"string"
+            },
+            "gatewayMac":{
+               "description":"MAC of the gateways to which MXC will be bonded",
+               "type":"string"
+            },
+            "orgId":{
+               "description":"org that locks the mxc and owns the gateways",
+               "format":"int64",
+               "type":"string"
+            }
+         },
+         "type":"object"
+      },
+      "extapiBTCLockResponse":{
+         "properties":{
+            "lockId":{
+               "description":"internal ID of the lock",
+               "format":"int64",
+               "type":"string"
             }
          },
          "type": "object"
       },
+      "extapiBTCMinedResponse":{
+         "properties":{
+            "gatewayMining":{
+               "description":"amounts mined by individual gateways",
+               "items":{
+                  "$ref":"#/definitions/extapiBTCGWMined"
+               },
+               "type":"array"
+            },
+            "totalAmount":{
+               "description":"total amount of BTC mined by the organization",
+               "type":"string"
+>>>>>>> master
+            }
+         },
+         "type": "object"
+      },
+<<<<<<< HEAD
       "extapiBTCMiningSessionResponse": {
          "properties": {
             "endDate": {
                "description": "last day of the mining session",
                "format": "date-time",
                "type": "string"
+=======
+      "extapiBTCMiningHistoryResponse":{
+         "properties":{
+            "dailyMining":{
+               "description":"mining history records ordered by date",
+               "items":{
+                  "$ref":"#/definitions/extapiBTCDailyMining"
+               },
+               "type":"array"
+            }
+         },
+         "type":"object"
+      },
+      "extapiBTCMiningSessionResponse":{
+         "properties":{
+            "endDate":{
+               "description":"last day of the mining session",
+               "format":"date-time",
+               "type":"string"
+>>>>>>> master
             },
             "mxcLockAmount": {
                "description": "amount of MXC per gateway that the user must lock",
                "format": "int64",
                "type": "string"
+<<<<<<< HEAD
             },
             "mxcLockDurationDays": {
                "description": "number of days for which the MXC has to be locked",
@@ -6969,6 +9148,48 @@
                "description": "first day of the mining session",
                "format": "date-time",
                "type": "string"
+=======
+            },
+            "mxcLockDurationDays": {
+               "description": "number of days for which the MXC has to be locked",
+               "format": "int64",
+               "type": "string"
+            },
+            "sessionId": {
+               "description": "mining session id",
+               "format": "int64",
+               "type": "string"
+            },
+            "startDate": {
+               "description": "first day of the mining session",
+               "format": "date-time",
+               "type": "string"
+            }
+         },
+         "type": "object"
+      },
+      "extapiBTCUnlockRequest":{
+         "properties":{
+            "lockId":{
+               "description":"ID of the lock to release",
+               "format":"int64",
+               "type":"string"
+            },
+            "orgId":{
+               "description":"org to which the lock belongs",
+               "format":"int64",
+               "type":"string"
+            }
+         },
+         "type":"object"
+      },
+      "extapiBTCUnlockResponse":{
+         "properties":{
+            "coolingOffTill":{
+               "description":"timestamp of when the cooling off ends",
+               "format":"date-time",
+               "type":"string"
+>>>>>>> master
             }
          },
          "type": "object"
@@ -7388,6 +9609,7 @@
             "user": {
                "$ref": "#/definitions/extapiUser",
                "description": "User object to create."
+<<<<<<< HEAD
             }
          },
          "type": "object"
@@ -7398,10 +9620,13 @@
                "description": "User ID.",
                "format": "int64",
                "type": "string"
+=======
+>>>>>>> master
             }
          },
          "type": "object"
       },
+<<<<<<< HEAD
       "extapiDFIAuthenticateUserResponse": {
          "properties": {
             "mxcBalance": {
@@ -7413,6 +9638,13 @@
             },
             "userEmail": {
                "description": "for displaying",
+=======
+      "extapiCreateUserResponse": {
+         "properties": {
+            "id": {
+               "description": "User ID.",
+               "format": "int64",
+>>>>>>> master
                "type": "string"
             }
          },
@@ -7976,6 +10208,7 @@
                "format": "float",
                "type": "number"
             },
+<<<<<<< HEAD
             "deviceStatusBatteryLevelUnavailable": {
                "description": "Device battery status is unavailable.",
                "type": "boolean"
@@ -8129,6 +10362,161 @@
             "supportsClassC": {
                "description": "End-Device supports Class C.",
                "type": "boolean"
+=======
+            "deviceStatusBatteryLevelUnavailable":{
+               "description":"Device battery status is unavailable.",
+               "type":"boolean"
+            },
+            "deviceStatusExternalPowerSource":{
+               "description":"Device is connected to an external power source.",
+               "type":"boolean"
+            },
+            "deviceStatusMargin":{
+               "description":"The device margin status\n-32..32: The demodulation SNR ration in dB\n256:     The device-status is not available.",
+               "format":"int32",
+               "type":"integer"
+            },
+            "lastSeenAt":{
+               "description":"The last time the application-server received any data from the device,\nor an empty string when the device never sent any data.",
+               "format":"date-time",
+               "type":"string"
+            },
+            "name":{
+               "description":"Name of the device.",
+               "type":"string"
+            }
+         },
+         "type":"object"
+      },
+      "extapiDeviceProfile":{
+         "properties":{
+            "classBTimeout":{
+               "description":"Maximum delay for the End-Device to answer a MAC request or a confirmed DL frame (mandatory if class B mode supported).",
+               "format":"int64",
+               "type":"integer"
+            },
+            "classCTimeout":{
+               "description":"Maximum delay for the End-Device to answer a MAC request or a confirmed DL frame (mandatory if class C mode supported).",
+               "format":"int64",
+               "type":"integer"
+            },
+            "factoryPresetFreqs":{
+               "description":"List of factory-preset frequencies (mandatory for ABP).",
+               "items":{
+                  "format":"int64",
+                  "type":"integer"
+               },
+               "type":"array"
+            },
+            "geolocBufferTTL":{
+               "description":"Geolocation buffer TTL (in seconds).\nWhen > 0, uplink RX meta-data will be stored in a buffer so that\nthe meta-data of multiple uplinks can be used for geolocation.",
+               "format":"int64",
+               "type":"integer"
+            },
+            "geolocMinBufferSize":{
+               "description":"Geolocation minimum buffer size.\nWhen > 0, geolocation will only be performed when the buffer has\nat least the given size.",
+               "format":"int64",
+               "type":"integer"
+            },
+            "id":{
+               "description":"Device-profile ID (UUID string).",
+               "type":"string"
+            },
+            "macVersion":{
+               "description":"Version of the LoRaWAN supported by the End-Device.",
+               "type":"string"
+            },
+            "maxDutyCycle":{
+               "description":"Maximum duty cycle supported by the End-Device.",
+               "format":"int64",
+               "type":"integer"
+            },
+            "maxEIRP":{
+               "description":"Maximum EIRP supported by the End-Device.",
+               "format":"int64",
+               "type":"integer"
+            },
+            "name":{
+               "description":"Device-profile name.",
+               "type":"string"
+            },
+            "networkServerID":{
+               "description":"Network-server ID on which the service-profile is provisioned.",
+               "format":"int64",
+               "type":"string"
+            },
+            "organizationID":{
+               "description":"Organization ID to which the service-profile is assigned.",
+               "format":"int64",
+               "type":"string"
+            },
+            "payloadCodec":{
+               "description":"Payload codec.\nLeave blank to disable the codec feature.",
+               "type":"string"
+            },
+            "payloadDecoderScript":{
+               "description":"Payload decoder script.\nDepending the codec, it is possible to provide a script which implements\nthe decoder function.",
+               "type":"string"
+            },
+            "payloadEncoderScript":{
+               "description":"Payload encoder script.\nDepending the codec, it is possible to provide a script which implements\nthe encoder function.",
+               "type":"string"
+            },
+            "pingSlotDR":{
+               "description":"Mandatory if class B mode supported.",
+               "format":"int64",
+               "type":"integer"
+            },
+            "pingSlotFreq":{
+               "description":"Mandatory if class B mode supported.",
+               "format":"int64",
+               "type":"integer"
+            },
+            "pingSlotPeriod":{
+               "description":"Mandatory if class B mode supported.",
+               "format":"int64",
+               "type":"integer"
+            },
+            "regParamsRevision":{
+               "description":"Revision of the Regional Parameters document supported by the End-Device.",
+               "type":"string"
+            },
+            "rfRegion":{
+               "description":"RF region name.",
+               "type":"string"
+            },
+            "rxDROffset1":{
+               "description":"RX1 data rate offset (mandatory for ABP).",
+               "format":"int64",
+               "type":"integer"
+            },
+            "rxDataRate2":{
+               "description":"RX2 data rate (mandatory for ABP).",
+               "format":"int64",
+               "type":"integer"
+            },
+            "rxDelay1":{
+               "description":"Class A RX1 delay (mandatory for ABP).",
+               "format":"int64",
+               "type":"integer"
+            },
+            "rxFreq2":{
+               "description":"RX2 channel frequency (mandatory for ABP).",
+               "format":"int64",
+               "type":"integer"
+            },
+            "supports32BitFCnt":{
+               "description":"End-Device uses 32bit FCnt (mandatory for LoRaWAN 1.0 End-Device).",
+               "type":"boolean"
+            },
+            "supportsClassB":{
+               "description":"End-Device supports Class B.",
+               "type":"boolean"
+            },
+            "supportsClassC":{
+               "description":"End-Device supports Class C.",
+               "type":"boolean"
+>>>>>>> master
             },
             "supportsJoin": {
                "description": "End-Device supports Join (OTAA) or not (ABP).",
@@ -8196,6 +10584,17 @@
                "description": "Downlink frame-counter.\nThis will be automatically set on enquue.",
                "format": "int64",
                "type": "integer"
+<<<<<<< HEAD
+            },
+            "fPort": {
+               "description": "FPort used (must be \u003e 0)",
+               "format": "int64",
+               "type": "integer"
+            },
+            "jsonObject": {
+               "description": "JSON object (string).\nOnly use this when an application codec has been configured that can convert\nthis object into binary form.",
+               "type": "string"
+=======
             },
             "fPort": {
                "description": "FPort used (must be \u003e 0)",
@@ -8215,9 +10614,45 @@
                "description": "LoRaWAN PHYPayload.",
                "type": "string"
             },
+            "fPort":{
+               "description":"FPort used (must be > 0)",
+               "format":"int64",
+               "type":"integer"
+            },
+            "language": {
+               "type": "string"
+            }
+         },
+         "type": "object"
+      },
+      "extapiDeviceSettingsResponse":{
+         "properties":{
+            "downLink":{
+               "$ref":"#/definitions/extapisettings",
+               "description":"integration settings for sending down link commands"
+            },
+            "uplink":{
+               "$ref":"#/definitions/extapisettings",
+               "description":"integration settings for subscribing to uplink events"
+>>>>>>> master
+            }
+         },
+         "type": "object"
+      },
+      "extapiDownlinkFrameLog": {
+         "properties": {
+            "phyPayloadJSON": {
+               "description": "LoRaWAN PHYPayload.",
+               "type": "string"
+            },
+<<<<<<< HEAD
             "txInfo": {
                "$ref": "#/definitions/gwDownlinkTXInfo",
                "description": "TX information of the downlink."
+=======
+            "verified": {
+               "type": "boolean"
+>>>>>>> master
             }
          },
          "type": "object"
@@ -8463,6 +10898,7 @@
                "format": "int64",
                "type": "string"
             },
+<<<<<<< HEAD
             "btcRing": {
                "description": "btc ring value 0..1",
                "format": "float",
@@ -8523,6 +10959,42 @@
                "description": "uptime percentage in the last 7 calendar days",
                "format": "float",
                "type": "number"
+=======
+            "health": {
+               "description": "overall health score",
+               "format": "float",
+               "type": "number"
+            },
+            "id": {
+               "description": "MAC of the gateway, called \"id\" for consistency with /api/gateways call",
+               "type": "string"
+            },
+            "miningFuel": {
+               "description": "mining fuel bonded to the gw by the org",
+               "type": "string"
+            },
+            "miningFuelHealth": {
+               "description": "mining fuel health score",
+               "format": "float",
+               "type": "number"
+            },
+            "miningFuelMax": {
+               "description": "mining fuel required for full mining efficiency",
+               "type": "string"
+            },
+            "orgId": {
+               "description": "organization that owns the gateway",
+               "format": "int64",
+               "type": "string"
+            },
+            "totalMined": {
+               "description": "gateway's total mining",
+               "type": "string"
+            },
+            "uptimeHealth": {
+               "description": "uptime percentage in the last 7 calendar days",
+               "format": "float",
+               "type": "number"
             }
          },
          "type": "object"
@@ -8556,10 +11028,47 @@
                "description": "Network-server ID of the gateway-profile.",
                "format": "int64",
                "type": "string"
+>>>>>>> master
             }
          },
          "type": "object"
       },
+<<<<<<< HEAD
+      "extapiGatewayProfile": {
+         "properties": {
+            "channels": {
+               "description": "Default channels (channels specified by the LoRaWAN Regional Parameters\nspecification) enabled for this configuration.",
+               "items": {
+                  "format": "int64",
+                  "type": "integer"
+               },
+               "type": "array"
+            },
+            "extraChannels": {
+               "description": "Extra channels added to the channel-configuration (in case the LoRaWAN\nregion supports adding custom channels).",
+               "items": {
+                  "$ref": "#/definitions/extapiGatewayProfileExtraChannel"
+               },
+               "type": "array"
+            },
+            "id": {
+               "description": "Gateway-profile ID (UUID string).",
+               "type": "string"
+            },
+            "name": {
+               "description": "Name of the gateway-profile.",
+               "type": "string"
+            },
+            "networkServerID": {
+               "description": "Network-server ID of the gateway-profile.",
+               "format": "int64",
+               "type": "string"
+            }
+         },
+         "type": "object"
+      },
+=======
+>>>>>>> master
       "extapiGatewayProfileExtraChannel": {
          "properties": {
             "bandwidth": {
@@ -8650,6 +11159,17 @@
                "description": "Packets received by the gateway for transmission.",
                "format": "int32",
                "type": "integer"
+<<<<<<< HEAD
+=======
+            }
+         },
+         "type": "object"
+      },
+      "extapiGenerateNewTokenResponse":{
+         "properties":{
+            "token":{
+               "type":"string"
+>>>>>>> master
             }
          },
          "type": "object"
@@ -8882,11 +11402,20 @@
          },
          "type": "object"
       },
+<<<<<<< HEAD
       "extapiGetJWTRequest": {
          "properties": {
             "organizationId": {
                "format": "int64",
                "type": "string"
+=======
+      "extapiGetJWTRequest":{
+         "description":"Deprecated",
+         "properties":{
+            "organizationId":{
+               "format":"int64",
+               "type":"string"
+>>>>>>> master
             },
             "ttlInSeconds": {
                "format": "int64",
@@ -8895,11 +11424,20 @@
          },
          "type": "object"
       },
+<<<<<<< HEAD
       "extapiGetJWTResponse": {
          "properties": {
             "jwtMqttAuth": {
                "description": "jwt generated and used for authenticate mosquitto client",
                "type": "string"
+=======
+      "extapiGetJWTResponse":{
+         "description":"Deprecated",
+         "properties":{
+            "jwtMqttAuth":{
+               "description":"jwt generated and used for authenticate mosquitto client",
+               "type":"string"
+>>>>>>> master
             }
          },
          "type": "object"
@@ -8961,6 +11499,7 @@
          },
          "type": "object"
       },
+<<<<<<< HEAD
       "extapiGetNFTEggImageResponse": {
          "properties": {
             "data": {
@@ -8993,6 +11532,28 @@
                "format": "date-time",
                "type": "string"
             },
+=======
+      "extapiGetNetworkServerResponse": {
+         "properties": {
+            "createdAt": {
+               "description": "Created at timestamp.",
+               "format": "date-time",
+               "type": "string"
+            },
+            "networkServer": {
+               "$ref": "#/definitions/extapiNetworkServer",
+               "description": "Network-server object."
+            },
+            "region": {
+               "description": "The LPWAN Server region configured.",
+               "type": "string"
+            },
+            "updatedAt": {
+               "description": "Last update timestamp.",
+               "format": "date-time",
+               "type": "string"
+            },
+>>>>>>> master
             "version": {
                "description": "The LPWAN Server version.",
                "type": "string"
@@ -9390,12 +11951,15 @@
             }
          },
          "type": "object"
+<<<<<<< HEAD
       },
       "extapiJWTAuthenticationRequest": {
          "type": "object"
       },
       "extapiJWTAuthenticationResponse": {
          "type": "object"
+=======
+>>>>>>> master
       },
       "extapiListApplicationResponse": {
          "properties": {
@@ -9690,6 +12254,7 @@
                "description": "average mining fuel health",
                "format": "float",
                "type": "number"
+<<<<<<< HEAD
             },
             "overall": {
                "description": "overall health of the gateways",
@@ -9698,6 +12263,11 @@
             },
             "proximityFactor": {
                "description": "average proximity factor",
+=======
+            },
+            "overall": {
+               "description": "overall health of the gateways",
+>>>>>>> master
                "format": "float",
                "type": "number"
             },
@@ -10335,10 +12905,18 @@
          },
          "type": "object"
       },
+<<<<<<< HEAD
       "extapiSendCommandToDeviceResponse": {
          "properties": {
             "topic": {
                "type": "string"
+=======
+      "extapiSendCommandToDeviceResponse":{
+         "description":"Deprecated",
+         "properties":{
+            "topic":{
+               "type":"string"
+>>>>>>> master
             }
          },
          "type": "object"
@@ -10348,6 +12926,7 @@
             "addGWMetaData": {
                "description": "GW metadata (RSSI, SNR, GW geoloc., etc.) are added to the packet sent to AS.",
                "type": "boolean"
+<<<<<<< HEAD
             },
             "channelMask": {
                "description": "Channel mask. sNS does not have to obey (i.e., informative).",
@@ -10378,6 +12957,38 @@
                "format": "int64",
                "type": "integer"
             },
+=======
+            },
+            "channelMask": {
+               "description": "Channel mask. sNS does not have to obey (i.e., informative).",
+               "format": "byte",
+               "type": "string"
+            },
+            "devStatusReqFreq": {
+               "description": "Frequency to initiate an End-Device status request (request/day).",
+               "format": "int64",
+               "type": "integer"
+            },
+            "dlBucketSize": {
+               "description": "Token bucket burst size.",
+               "format": "int64",
+               "type": "integer"
+            },
+            "dlRate": {
+               "description": "Token bucket filling rate, including ACKs (packet/h).",
+               "format": "int64",
+               "type": "integer"
+            },
+            "dlRatePolicy": {
+               "$ref": "#/definitions/extapiRatePolicy",
+               "description": "Drop or mark when exceeding DLRate."
+            },
+            "drMax": {
+               "description": "Maximum allowed data rate. Used for ADR.",
+               "format": "int64",
+               "type": "integer"
+            },
+>>>>>>> master
             "drMin": {
                "description": "Minimum allowed data rate. Used for ADR.",
                "format": "int64",
@@ -10718,19 +13329,36 @@
          },
          "type": "object"
       },
+<<<<<<< HEAD
       "extapiSubsribeApplicationEventsResponse": {
          "properties": {
             "topic": {
                "type": "string"
+=======
+      "extapiSubsribeApplicationEventsResponse":{
+         "description":"Deprecated",
+         "properties":{
+            "topic":{
+               "type":"string"
+>>>>>>> master
             }
          },
          "type": "object"
       },
+<<<<<<< HEAD
       "extapiSubsribeDeviceEventsResponse": {
          "properties": {
             "topic": {
                "items": {
                   "type": "string"
+=======
+      "extapiSubsribeDeviceEventsResponse":{
+         "description":"Deprecated",
+         "properties":{
+            "topic":{
+               "items":{
+                  "type":"string"
+>>>>>>> master
                },
                "type": "array"
             }
@@ -10804,9 +13432,12 @@
             }
          },
          "type": "object"
+<<<<<<< HEAD
       },
       "extapiTopUpResponse": {
          "type": "object"
+=======
+>>>>>>> master
       },
       "extapiTransaction": {
          "properties": {
@@ -11238,6 +13869,29 @@
       },
       "extapiWithdrawGatewayMiningFuelResponse": {
          "type": "object"
+<<<<<<< HEAD
+      },
+      "extapiWithdrawHistory": {
+         "properties": {
+            "amount": {
+               "type": "string"
+            },
+            "denyComment": {
+               "type": "string"
+            },
+            "timestamp": {
+               "format": "date-time",
+               "type": "string"
+            },
+            "txHash": {
+               "type": "string"
+            },
+            "txStatus": {
+               "type": "string"
+            },
+            "withdrawFee": {
+               "type": "string"
+=======
       },
       "extapiWithdrawHistory": {
          "properties": {
@@ -11263,10 +13917,52 @@
          },
          "type": "object"
       },
+      "extapisettings":{
+         "properties":{
+            "description":{
+               "description":"description and additional information for mqtt integration",
+               "type":"string"
+            },
+            "example":{
+               "description":"example command line for subscribe/publish with mosquitto client",
+               "type":"string"
+            },
+            "hostname":{
+               "type":"string"
+            },
+            "mqttVersion":{
+               "type":"string"
+            },
+            "port":{
+               "type":"string"
+            },
+            "topics":{
+               "items":{
+                  "$ref":"#/definitions/extapitopic"
+               },
+               "type":"array"
+            },
+            "username":{
+               "type":"string"
+>>>>>>> master
+            }
+         },
+         "type": "object"
+      },
+<<<<<<< HEAD
       "extapiWithdrawResponse": {
          "properties": {
             "msg": {
                "type": "string"
+=======
+      "extapitopic":{
+         "properties":{
+            "description":{
+               "type":"string"
+            },
+            "topicString":{
+               "type":"string"
+>>>>>>> master
             }
          },
          "type": "object"

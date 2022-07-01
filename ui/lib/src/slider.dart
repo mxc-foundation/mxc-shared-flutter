@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mxc_ui/mxc_ui.dart';
+import 'dart:math' as math;
 
 class MxcSlider extends StatelessWidget {
   const MxcSlider({
@@ -9,6 +10,8 @@ class MxcSlider extends StatelessWidget {
     this.labels,
     this.divisions,
     this.max,
+    this.enabled = true,
+    this.thumbPadding = 0,
   })  : assert(labels == null || labels.length >= 3),
         super(key: key);
 
@@ -19,6 +22,8 @@ class MxcSlider extends StatelessWidget {
         labels = null,
         divisions = null,
         max = null,
+        enabled = false,
+        thumbPadding = 0,
         super(key: key);
 
   final double? value;
@@ -26,6 +31,8 @@ class MxcSlider extends StatelessWidget {
   final void Function(double)? onChanged;
   final List<String>? labels;
   final int? divisions;
+  final bool enabled;
+  final double thumbPadding;
 
   @override
   Widget build(BuildContext context) {
@@ -36,8 +43,15 @@ class MxcSlider extends StatelessWidget {
           height: 20,
           child: SliderTheme(
             data: SliderThemeData(
-              trackShape: CustomTrackShape(),
-              trackHeight: 5,
+              trackShape: CustomTrackShape(thumbPadding),
+              thumbShape: CustomThumbShape(thumbPadding),
+              overlayShape: CustomOverlayShape(thumbPadding),
+              trackHeight: 6,
+              disabledThumbColor: ColorsTheme.of(context).sliderDisabledKnob,
+              disabledActiveTrackColor:
+                  ColorsTheme.of(context).sliderDisabledBaseActive,
+              disabledInactiveTrackColor:
+                  ColorsTheme.of(context).sliderDisabledBaseDefault,
             ),
             child: value == null || onChanged == null
                 ? Center(
@@ -52,7 +66,7 @@ class MxcSlider extends StatelessWidget {
                   )
                 : Slider(
                     value: value!,
-                    onChanged: onChanged,
+                    onChanged: enabled ? onChanged : null,
                     max: max ?? 1,
                     activeColor: MxcScopedTheme.of(context).primaryColor,
                     divisions: divisions,
@@ -95,6 +109,9 @@ class MxcSlider extends StatelessWidget {
 }
 
 class CustomTrackShape extends RoundedRectSliderTrackShape {
+  CustomTrackShape(this.thumbPadding);
+
+  final double thumbPadding;
   @override
   Rect getPreferredRect({
     required RenderBox parentBox,
@@ -108,6 +125,142 @@ class CustomTrackShape extends RoundedRectSliderTrackShape {
     final double trackTop =
         offset.dy + (parentBox.size.height - trackHeight) / 2;
     final double trackWidth = parentBox.size.width;
-    return Rect.fromLTWH(trackLeft, trackTop, trackWidth, trackHeight);
+    return Rect.fromLTWH(trackLeft - thumbPadding, trackTop,
+        trackWidth + thumbPadding, trackHeight);
+  }
+}
+
+class CustomThumbShape extends RoundSliderThumbShape {
+  CustomThumbShape(this.thumbPadding);
+
+  final double thumbPadding;
+
+  @override
+  void paint(
+    PaintingContext context,
+    Offset center, {
+    required Animation<double> activationAnimation,
+    required Animation<double> enableAnimation,
+    required bool isDiscrete,
+    required TextPainter labelPainter,
+    required RenderBox parentBox,
+    required SliderThemeData sliderTheme,
+    required TextDirection textDirection,
+    required double value,
+    required double textScaleFactor,
+    required Size sizeWithOverflow,
+  }) {
+    final double visualPosition;
+    switch (textDirection) {
+      case TextDirection.rtl:
+        visualPosition = 1.0 - value;
+        break;
+      case TextDirection.ltr:
+        visualPosition = value;
+        break;
+    }
+
+    final Rect trackRect = sliderTheme.trackShape!.getPreferredRect(
+      parentBox: parentBox,
+      offset: Offset.zero,
+      sliderTheme: sliderTheme,
+      isDiscrete: isDiscrete,
+    );
+    center = Offset(
+      visualPosition * (trackRect.width - thumbPadding * 2),
+      trackRect.center.dy,
+    );
+
+    final Canvas canvas = context.canvas;
+    final Tween<double> radiusTween = Tween<double>(
+      begin: disabledThumbRadius ?? enabledThumbRadius,
+      end: enabledThumbRadius,
+    );
+    final ColorTween colorTween = ColorTween(
+      begin: sliderTheme.disabledThumbColor,
+      end: sliderTheme.thumbColor,
+    );
+
+    final Color color = colorTween.evaluate(enableAnimation)!;
+    final double radius = radiusTween.evaluate(enableAnimation);
+
+    final Tween<double> elevationTween = Tween<double>(
+      begin: 0,
+      end: pressedElevation,
+    );
+
+    final double evaluatedElevation = elevationTween
+        .transform((activationAnimation.value + enableAnimation.value) / 2);
+
+    final Path path = Path()
+      ..addArc(
+        Rect.fromCenter(center: center, width: 2 * radius, height: 2 * radius),
+        0,
+        math.pi * 2,
+      );
+    canvas.drawShadow(path, Colors.black, evaluatedElevation, true);
+
+    canvas.drawCircle(
+      center,
+      radius,
+      Paint()..color = color,
+    );
+  }
+}
+
+class CustomOverlayShape extends RoundSliderOverlayShape {
+  CustomOverlayShape(this.thumbPadding);
+
+  final double thumbPadding;
+
+  @override
+  void paint(
+    PaintingContext context,
+    Offset center, {
+    required Animation<double> activationAnimation,
+    required Animation<double> enableAnimation,
+    required bool isDiscrete,
+    required TextPainter labelPainter,
+    required RenderBox parentBox,
+    required SliderThemeData sliderTheme,
+    required TextDirection textDirection,
+    required double value,
+    required double textScaleFactor,
+    required Size sizeWithOverflow,
+  }) {
+    final double visualPosition;
+    switch (textDirection) {
+      case TextDirection.rtl:
+        visualPosition = 1.0 - value;
+        break;
+      case TextDirection.ltr:
+        visualPosition = value;
+        break;
+    }
+
+    final Rect trackRect = sliderTheme.trackShape!.getPreferredRect(
+      parentBox: parentBox,
+      offset: Offset.zero,
+      sliderTheme: sliderTheme,
+      isDiscrete: isDiscrete,
+    );
+    center = Offset(
+      visualPosition * (trackRect.width - thumbPadding * 2),
+      trackRect.center.dy,
+    );
+    super.paint(
+      context,
+      center,
+      activationAnimation: activationAnimation,
+      enableAnimation: enableAnimation,
+      isDiscrete: isDiscrete,
+      labelPainter: labelPainter,
+      parentBox: parentBox,
+      sliderTheme: sliderTheme,
+      textDirection: textDirection,
+      value: value,
+      textScaleFactor: textScaleFactor,
+      sizeWithOverflow: sizeWithOverflow,
+    );
   }
 }

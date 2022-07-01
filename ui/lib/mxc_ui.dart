@@ -14,5 +14,6 @@ export 'src/switch.dart';
 export 'src/tabs/tabs.dart';
 export 'src/text_field.dart';
 export 'src/theme/theme.dart';
+export 'src/amount_slider_text_field.dart';
 
 const mxcUiPackageName = 'mxc_ui';

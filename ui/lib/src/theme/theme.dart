@@ -91,7 +91,7 @@ extension MxcThemeDataExtension on MxcThemeData {
         ),
         bottomNavigationBarTheme: BottomNavigationBarThemeData(
           backgroundColor: colors.secondaryBackground,
-          selectedItemColor: colors.mxcBlue,
+          selectedItemColor: colors.purpleMain,
           unselectedItemColor: colors.textSecondary,
         ),
         iconTheme: IconThemeData(
