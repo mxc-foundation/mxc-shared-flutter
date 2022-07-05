@@ -1,10 +1,10 @@
 {
-   "swagger":"2.0",
-   "basePath":"",
-   "info":{
-      "title":"Supernode API",
-      "version":"1.0.0",
-      "description":"Supernode API"
+   "swagger": "2.0",
+   "basePath": "",
+   "info": {
+      "title": "Supernode API",
+      "version": "1.0.0",
+      "description": "Supernode API"
    },
    "schemes": null,
    "consumes": [
@@ -122,13 +122,11 @@
                   }
                }
             ],
-            "responses":{
-               "200":{
-                  "description":"A successful response.",
-                  "schema":{
-                     "properties":{
-                        
-                     }
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "properties": {}
                   }
                },
                "default": {
@@ -157,13 +155,11 @@
                   "type": "string"
                }
             ],
-            "responses":{
-               "200":{
-                  "description":"A successful response.",
-                  "schema":{
-                     "properties":{
-                        
-                     }
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "properties": {}
                   }
                },
                "default": {
@@ -210,50 +206,50 @@
             ]
          }
       },
-      "/api/btc-mining/history":{
-         "get":{
-            "operationId":"BTCMiningHistory",
-            "parameters":[
+      "/api/btc-mining/history": {
+         "get": {
+            "operationId": "BTCMiningHistory",
+            "parameters": [
                {
-                  "description":"id of the organization for which the history is requested.",
-                  "format":"int64",
-                  "in":"query",
-                  "name":"orgId",
-                  "required":false,
-                  "type":"string"
+                  "description": "id of the organization for which the history is requested.",
+                  "format": "int64",
+                  "in": "query",
+                  "name": "orgId",
+                  "required": false,
+                  "type": "string"
                },
                {
-                  "description":"MAC of the gateway. If not specified then history for all the\norganization's gateways is returned.",
-                  "in":"query",
-                  "name":"gatewayMac",
-                  "required":false,
-                  "type":"string"
+                  "description": "MAC of the gateway. If not specified then history for all the\norganization's gateways is returned.",
+                  "in": "query",
+                  "name": "gatewayMac",
+                  "required": false,
+                  "type": "string"
                }
             ],
-            "responses":{
-               "200":{
-                  "description":"A successful response.",
-                  "schema":{
-                     "$ref":"#/definitions/extapiBTCMiningHistoryResponse"
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "$ref": "#/definitions/extapiBTCMiningHistoryResponse"
                   }
                },
-               "default":{
-                  "description":"An unexpected error response.",
-                  "schema":{
-                     "$ref":"#/definitions/runtimeError"
+               "default": {
+                  "description": "An unexpected error response.",
+                  "schema": {
+                     "$ref": "#/definitions/runtimeError"
                   }
                }
             },
-            "summary":"Returns daily history of BTC mining for organization or for a particular gateway",
-            "tags":[
+            "summary": "Returns daily history of BTC mining for organization or for a particular gateway",
+            "tags": [
                "BTCMining"
             ]
          }
       },
-      "/api/btc-mining/list-locks":{
-         "get":{
-            "operationId":"BTCListLocks",
-            "parameters":[
+      "/api/btc-mining/list-locks": {
+         "get": {
+            "operationId": "BTCListLocks",
+            "parameters": [
                {
                   "description": "org for which the locks must be returned.",
                   "format": "int64",
@@ -277,30 +273,30 @@
                   }
                }
             },
-            "summary":"List the locks that are still open (that includes the one that were\nreleased already, but are still cooling off)",
-            "tags":[
+            "summary": "List the locks that are still open (that includes the one that were\nreleased already, but are still cooling off)",
+            "tags": [
                "BTCMining"
             ]
          }
       },
-      "/api/btc-mining/lock":{
-         "post":{
-            "operationId":"BTCLock",
-            "parameters":[
+      "/api/btc-mining/lock": {
+         "post": {
+            "operationId": "BTCLock",
+            "parameters": [
                {
-                  "in":"body",
-                  "name":"body",
-                  "required":true,
-                  "schema":{
-                     "$ref":"#/definitions/extapiBTCLockRequest"
+                  "in": "body",
+                  "name": "body",
+                  "required": true,
+                  "schema": {
+                     "$ref": "#/definitions/extapiBTCLockRequest"
                   }
                }
             ],
-            "responses":{
-               "200":{
-                  "description":"A successful response.",
-                  "schema":{
-                     "$ref":"#/definitions/extapiBTCLockResponse"
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "$ref": "#/definitions/extapiBTCLockResponse"
                   }
                },
                "default": {
@@ -310,8 +306,8 @@
                   }
                }
             },
-            "summary":"Create a new bond for the gateway",
-            "tags":[
+            "summary": "Create a new bond for the gateway",
+            "tags": [
                "BTCMining"
             ]
          }
@@ -333,74 +329,97 @@
                   }
                }
             },
-            "summary":"DEPRECATED: only used not to break the app, always returns not found",
-            "tags":[
+            "summary": "DEPRECATED: only used not to break the app, always returns not found",
+            "tags": [
                "BTCMining"
             ]
          }
       },
-      "/api/btc-mining/totals":{
-         "get":{
-            "operationId":"BTCMined",
-            "parameters":[
-               {
-                  "description":"id of the organization for which the amount is requested.",
-                  "format":"int64",
-                  "in":"query",
-                  "name":"orgId",
-                  "required":false,
-                  "type":"string"
-               }
-            ],
-            "responses":{
-               "200":{
-                  "description":"A successful response.",
-                  "schema":{
-                     "$ref":"#/definitions/extapiBTCMinedResponse"
+      "/api/btc-mining/status": {
+         "get": {
+            "operationId": "BTCMiningStatus",
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "$ref": "#/definitions/extapiBTCMiningStatusResponse"
                   }
                },
-               "default":{
-                  "description":"An unexpected error response.",
-                  "schema":{
-                     "$ref":"#/definitions/runtimeError"
+               "default": {
+                  "description": "An unexpected error response.",
+                  "schema": {
+                     "$ref": "#/definitions/runtimeError"
                   }
                }
             },
-            "summary":"Returns total amount mined by organization's gateways",
-            "tags":[
+            "summary": "Check the status of BTC mining",
+            "tags": [
                "BTCMining"
             ]
          }
       },
-      "/api/btc-mining/unlock":{
-         "post":{
-            "operationId":"BTCUnlock",
-            "parameters":[
+      "/api/btc-mining/totals": {
+         "get": {
+            "operationId": "BTCMined",
+            "parameters": [
                {
-                  "in":"body",
-                  "name":"body",
-                  "required":true,
-                  "schema":{
-                     "$ref":"#/definitions/extapiBTCUnlockRequest"
-                  }
+                  "description": "id of the organization for which the amount is requested.",
+                  "format": "int64",
+                  "in": "query",
+                  "name": "orgId",
+                  "required": false,
+                  "type": "string"
                }
             ],
-            "responses":{
-               "200":{
-                  "description":"A successful response.",
-                  "schema":{
-                     "$ref":"#/definitions/extapiBTCUnlockResponse"
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "$ref": "#/definitions/extapiBTCMinedResponse"
                   }
                },
-               "default":{
-                  "description":"An unexpected error response.",
-                  "schema":{
-                     "$ref":"#/definitions/runtimeError"
+               "default": {
+                  "description": "An unexpected error response.",
+                  "schema": {
+                     "$ref": "#/definitions/runtimeError"
                   }
                }
             },
-            "summary":"Release bond for the gateway",
-            "tags":[
+            "summary": "Returns total amount mined by organization's gateways",
+            "tags": [
+               "BTCMining"
+            ]
+         }
+      },
+      "/api/btc-mining/unlock": {
+         "post": {
+            "operationId": "BTCUnlock",
+            "parameters": [
+               {
+                  "in": "body",
+                  "name": "body",
+                  "required": true,
+                  "schema": {
+                     "$ref": "#/definitions/extapiBTCUnlockRequest"
+                  }
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "$ref": "#/definitions/extapiBTCUnlockResponse"
+                  }
+               },
+               "default": {
+                  "description": "An unexpected error response.",
+                  "schema": {
+                     "$ref": "#/definitions/runtimeError"
+                  }
+               }
+            },
+            "summary": "Release bond for the gateway",
+            "tags": [
                "BTCMining"
             ]
          }
@@ -546,13 +565,11 @@
                   }
                }
             ],
-            "responses":{
-               "200":{
-                  "description":"A successful response.",
-                  "schema":{
-                     "properties":{
-                        
-                     }
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "properties": {}
                   }
                },
                "default": {
@@ -580,13 +597,11 @@
                   "type": "string"
                }
             ],
-            "responses":{
-               "200":{
-                  "description":"A successful response.",
-                  "schema":{
-                     "properties":{
-                        
-                     }
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "properties": {}
                   }
                },
                "default": {
@@ -739,13 +754,11 @@
                   }
                }
             ],
-            "responses":{
-               "200":{
-                  "description":"A successful response.",
-                  "schema":{
-                     "properties":{
-                        
-                     }
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "properties": {}
                   }
                },
                "default": {
@@ -773,13 +786,11 @@
                   "type": "string"
                }
             ],
-            "responses":{
-               "200":{
-                  "description":"A successful response.",
-                  "schema":{
-                     "properties":{
-                        
-                     }
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "properties": {}
                   }
                },
                "default": {
@@ -837,13 +848,11 @@
                   "type": "string"
                }
             ],
-            "responses":{
-               "200":{
-                  "description":"A successful response.",
-                  "schema":{
-                     "properties":{
-                        
-                     }
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "properties": {}
                   }
                },
                "default": {
@@ -1015,13 +1024,11 @@
                   "type": "string"
                }
             ],
-            "responses":{
-               "200":{
-                  "description":"A successful response.",
-                  "schema":{
-                     "properties":{
-                        
-                     }
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "properties": {}
                   }
                },
                "default": {
@@ -1079,13 +1086,11 @@
                   "type": "string"
                }
             ],
-            "responses":{
-               "200":{
-                  "description":"A successful response.",
-                  "schema":{
-                     "properties":{
-                        
-                     }
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "properties": {}
                   }
                },
                "default": {
@@ -1151,13 +1156,11 @@
                   }
                }
             ],
-            "responses":{
-               "200":{
-                  "description":"A successful response.",
-                  "schema":{
-                     "properties":{
-                        
-                     }
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "properties": {}
                   }
                },
                "default": {
@@ -1193,13 +1196,11 @@
                   }
                }
             ],
-            "responses":{
-               "200":{
-                  "description":"A successful response.",
-                  "schema":{
-                     "properties":{
-                        
-                     }
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "properties": {}
                   }
                },
                "default": {
@@ -1235,13 +1236,11 @@
                   }
                }
             ],
-            "responses":{
-               "200":{
-                  "description":"A successful response.",
-                  "schema":{
-                     "properties":{
-                        
-                     }
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "properties": {}
                   }
                },
                "default": {
@@ -1275,13 +1274,11 @@
                   }
                }
             ],
-            "responses":{
-               "200":{
-                  "description":"A successful response.",
-                  "schema":{
-                     "properties":{
-                        
-                     }
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "properties": {}
                   }
                },
                "default": {
@@ -1337,10 +1334,10 @@
             ]
          }
       },
-      "/api/dhx-mining/bond":{
-         "post":{
-            "operationId":"DHXBond",
-            "parameters":[
+      "/api/dhx-mining/bond": {
+         "post": {
+            "operationId": "DHXBond",
+            "parameters": [
                {
                   "in": "body",
                   "name": "body",
@@ -2012,13 +2009,11 @@
                   }
                }
             ],
-            "responses":{
-               "200":{
-                  "description":"A successful response.",
-                  "schema":{
-                     "properties":{
-                        
-                     }
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "properties": {}
                   }
                },
                "default": {
@@ -2046,13 +2041,11 @@
                   "type": "string"
                }
             ],
-            "responses":{
-               "200":{
-                  "description":"A successful response.",
-                  "schema":{
-                     "properties":{
-                        
-                     }
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "properties": {}
                   }
                },
                "default": {
@@ -2181,13 +2174,11 @@
                   }
                }
             ],
-            "responses":{
-               "200":{
-                  "description":"A successful response.",
-                  "schema":{
-                     "properties":{
-                        
-                     }
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "properties": {}
                   }
                },
                "default": {
@@ -2244,170 +2235,6 @@
                }
             },
             "summary": "ListCells lists all the cells with gateways and the numbers of gateways",
-            "tags": [
-               "GatewayService"
-            ]
-         }
-      },
-      "/api/gateways/default-config/add": {
-         "post": {
-            "operationId": "InsertNewDefaultGatewayConfig",
-            "parameters": [
-               {
-                  "in": "body",
-                  "name": "body",
-                  "required": true,
-                  "schema": {
-                     "$ref": "#/definitions/extapiInsertNewDefaultGatewayConfigRequest"
-                  }
-               }
-            ],
-            "responses": {
-               "200": {
-                  "description": "A successful response.",
-                  "schema": {
-                     "$ref": "#/definitions/extapiInsertNewDefaultGatewayConfigResponse"
-                  }
-               },
-               "default": {
-                  "description": "An unexpected error response.",
-                  "schema": {
-                     "$ref": "#/definitions/runtimeError"
-                  }
-               }
-            },
-            "tags": [
-               "GatewayService"
-            ]
-         }
-      },
-      "/api/gateways/default-config/batch-reset": {
-         "put": {
-            "operationId": "BatchResetDefaultGatewatConfig",
-            "parameters": [
-               {
-                  "in": "body",
-                  "name": "body",
-                  "required": true,
-                  "schema": {
-                     "$ref": "#/definitions/extapiBatchResetDefaultGatewatConfigRequest"
-                  }
-               }
-            ],
-            "responses": {
-               "200": {
-                  "description": "A successful response.",
-                  "schema": {
-                     "$ref": "#/definitions/extapiBatchResetDefaultGatewatConfigResponse"
-                  }
-               },
-               "default": {
-                  "description": "An unexpected error response.",
-                  "schema": {
-                     "$ref": "#/definitions/runtimeError"
-                  }
-               }
-            },
-            "tags": [
-               "GatewayService"
-            ]
-         }
-      },
-      "/api/gateways/default-config/get": {
-         "get": {
-            "operationId": "GetDefaultGatewayConfig",
-            "parameters": [
-               {
-                  "in": "query",
-                  "name": "model",
-                  "required": false,
-                  "type": "string"
-               },
-               {
-                  "in": "query",
-                  "name": "region",
-                  "required": false,
-                  "type": "string"
-               }
-            ],
-            "responses": {
-               "200": {
-                  "description": "A successful response.",
-                  "schema": {
-                     "$ref": "#/definitions/extapiGetDefaultGatewayConfigResponse"
-                  }
-               },
-               "default": {
-                  "description": "An unexpected error response.",
-                  "schema": {
-                     "$ref": "#/definitions/runtimeError"
-                  }
-               }
-            },
-            "tags": [
-               "GatewayService"
-            ]
-         }
-      },
-      "/api/gateways/default-config/reset": {
-         "put": {
-            "operationId": "ResetDefaultGatewatConfigByID",
-            "parameters": [
-               {
-                  "in": "body",
-                  "name": "body",
-                  "required": true,
-                  "schema": {
-                     "$ref": "#/definitions/extapiResetDefaultGatewatConfigByIDRequest"
-                  }
-               }
-            ],
-            "responses": {
-               "200": {
-                  "description": "A successful response.",
-                  "schema": {
-                     "$ref": "#/definitions/extapiResetDefaultGatewatConfigByIDResponse"
-                  }
-               },
-               "default": {
-                  "description": "An unexpected error response.",
-                  "schema": {
-                     "$ref": "#/definitions/runtimeError"
-                  }
-               }
-            },
-            "tags": [
-               "GatewayService"
-            ]
-         }
-      },
-      "/api/gateways/default-config/update": {
-         "put": {
-            "operationId": "UpdateDefaultGatewayConfig",
-            "parameters": [
-               {
-                  "in": "body",
-                  "name": "body",
-                  "required": true,
-                  "schema": {
-                     "$ref": "#/definitions/extapiUpdateDefaultGatewayConfigRequest"
-                  }
-               }
-            ],
-            "responses": {
-               "200": {
-                  "description": "A successful response.",
-                  "schema": {
-                     "$ref": "#/definitions/extapiUpdateDefaultGatewayConfigResponse"
-                  }
-               },
-               "default": {
-                  "description": "An unexpected error response.",
-                  "schema": {
-                     "$ref": "#/definitions/runtimeError"
-                  }
-               }
-            },
             "tags": [
                "GatewayService"
             ]
@@ -2607,13 +2434,11 @@
                   }
                }
             ],
-            "responses":{
-               "200":{
-                  "description":"A successful response.",
-                  "schema":{
-                     "properties":{
-                        
-                     }
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "properties": {}
                   }
                },
                "default": {
@@ -2769,13 +2594,11 @@
                   "type": "string"
                }
             ],
-            "responses":{
-               "200":{
-                  "description":"A successful response.",
-                  "schema":{
-                     "properties":{
-                        
-                     }
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "properties": {}
                   }
                },
                "default": {
@@ -2821,103 +2644,47 @@
             ]
          }
       },
-      "/api/internal/access-token/create":{
-         "post":{
-            "operationId":"AccessTokenCreate",
-            "parameters":[
+      "/api/internal/access-token/create": {
+         "post": {
+            "operationId": "AccessTokenCreate",
+            "parameters": [
                {
-                  "in":"body",
-                  "name":"body",
-                  "required":true,
-                  "schema":{
-                     "$ref":"#/definitions/extapiAccessTokenCreateRequest"
+                  "in": "body",
+                  "name": "body",
+                  "required": true,
+                  "schema": {
+                     "$ref": "#/definitions/extapiAccessTokenCreateRequest"
                   }
                }
             ],
-            "responses":{
-               "200":{
-                  "description":"A successful response.",
-                  "schema":{
-                     "$ref":"#/definitions/extapiAccessTokenCreateResponse"
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "$ref": "#/definitions/extapiAccessTokenCreateResponse"
                   }
                },
-               "default":{
-                  "description":"An unexpected error response.",
-                  "schema":{
-                     "$ref":"#/definitions/runtimeError"
+               "default": {
+                  "description": "An unexpected error response.",
+                  "schema": {
+                     "$ref": "#/definitions/runtimeError"
                   }
                }
             },
-            "summary":"AccessTokenCreate allows user to create api token for use with scripts",
-            "tags":[
+            "summary": "AccessTokenCreate allows user to create api token for use with scripts",
+            "tags": [
                "InternalService"
             ]
          }
       },
-      "/api/internal/access-token/list":{
-         "get":{
-            "operationId":"AccessTokenList",
-            "responses":{
-               "200":{
-                  "description":"A successful response.",
-                  "schema":{
-                     "$ref":"#/definitions/extapiAccessTokenListResponse"
-                  }
-               },
-               "default":{
-                  "description":"An unexpected error response.",
-                  "schema":{
-                     "$ref":"#/definitions/runtimeError"
-                  }
-               }
-            },
-            "summary":"AccessTokenList returns the list of api tokens for the user",
-            "tags":[
-               "InternalService"
-            ]
-         }
-      },
-      "/api/internal/access-token/revoke":{
-         "post":{
-            "operationId":"AccessTokenRevoke",
-            "parameters":[
-               {
-                  "in":"body",
-                  "name":"body",
-                  "required":true,
-                  "schema":{
-                     "$ref":"#/definitions/extapiAccessTokenRevokeRequest"
-                  }
-               }
-            ],
-            "responses":{
-               "200":{
-                  "description":"A successful response.",
-                  "schema":{
-                     "$ref":"#/definitions/extapiAccessTokenRevokeResponse"
-                  }
-               },
-               "default":{
-                  "description":"An unexpected error response.",
-                  "schema":{
-                     "$ref":"#/definitions/runtimeError"
-                  }
-               }
-            },
-            "summary":"AccessTokenRevoke revokes api tokens specified in request",
-            "tags":[
-               "InternalService"
-            ]
-         }
-      },
-      "/api/internal/branding":{
-         "get":{
-            "operationId":"Branding",
-            "responses":{
-               "200":{
-                  "description":"A successful response.",
-                  "schema":{
-                     "$ref":"#/definitions/extapiBrandingResponse"
+      "/api/internal/access-token/list": {
+         "get": {
+            "operationId": "AccessTokenList",
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "$ref": "#/definitions/extapiAccessTokenListResponse"
                   }
                },
                "default": {
@@ -3021,6 +2788,38 @@
             ]
          }
       },
+      "/api/internal/delete-user": {
+         "post": {
+            "operationId": "DeleteUser",
+            "parameters": [
+               {
+                  "in": "body",
+                  "name": "body",
+                  "required": true,
+                  "schema": {
+                     "$ref": "#/definitions/extapiDeleteUserRequest"
+                  }
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "properties": {}
+                  }
+               },
+               "default": {
+                  "description": "An unexpected error response.",
+                  "schema": {
+                     "$ref": "#/definitions/runtimeError"
+                  }
+               }
+            },
+            "tags": [
+               "InternalService"
+            ]
+         }
+      },
       "/api/internal/login": {
          "post": {
             "operationId": "Login",
@@ -3034,13 +2833,11 @@
                   }
                }
             ],
-            "responses":{
-               "200":{
-                  "description":"A successful response.",
-                  "schema":{
-                     "properties":{
-                        
-                     }
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "$ref": "#/definitions/extapiLoginResponse"
                   }
                },
                "default": {
@@ -3148,13 +2945,11 @@
                   }
                }
             ],
-            "responses":{
-               "200":{
-                  "description":"A successful response.",
-                  "schema":{
-                     "properties":{
-                        
-                     }
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "properties": {}
                   }
                },
                "default": {
@@ -3214,13 +3009,11 @@
                   }
                }
             ],
-            "responses":{
-               "200":{
-                  "description":"A successful response.",
-                  "schema":{
-                     "properties":{
-                        
-                     }
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "properties": {}
                   }
                },
                "default": {
@@ -3498,24 +3291,24 @@
             ]
          }
       },
-      "/api/mosquitto-auth/get-user":{
-         "post":{
-            "operationId":"AuthenticateUser",
-            "parameters":[
+      "/api/mosquitto-auth/get-user": {
+         "post": {
+            "operationId": "AuthenticateUser",
+            "parameters": [
                {
-                  "in":"body",
-                  "name":"body",
-                  "required":true,
-                  "schema":{
-                     "$ref":"#/definitions/extapiAuthenticateUserRequest"
+                  "in": "body",
+                  "name": "body",
+                  "required": true,
+                  "schema": {
+                     "$ref": "#/definitions/extapiAuthenticateUserRequest"
                   }
                }
             ],
-            "responses":{
-               "200":{
-                  "description":"A successful response.",
-                  "schema":{
-                     "$ref":"#/definitions/extapiAuthenticateUserResponse"
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "$ref": "#/definitions/extapiAuthenticateUserResponse"
                   }
                },
                "default": {
@@ -3558,8 +3351,8 @@
                   }
                }
             },
-            "summary":"Deprecated: Get JWT for mosquitto auth with given org id\nOnly accessible for authenticated supernode user",
-            "tags":[
+            "summary": "Deprecated: Get JWT for mosquitto auth with given org id\nOnly accessible for authenticated supernode user",
+            "tags": [
                "MosquittoAuthService"
             ]
          }
@@ -3596,8 +3389,8 @@
                   }
                }
             },
-            "summary":"Deprecated: SendCommandToDevice takes device eui as request paramter,\nreturns topics that can be used to send command to a specific device",
-            "tags":[
+            "summary": "Deprecated: SendCommandToDevice takes device eui as request paramter,\nreturns topics that can be used to send command to a specific device",
+            "tags": [
                "MosquittoAuthService"
             ]
          }
@@ -3614,140 +3407,18 @@
                   "type": "string"
                },
                {
-                  "format":"int64",
-                  "in":"query",
-                  "name":"organizationId",
-                  "required":false,
-                  "type":"string"
+                  "format": "int64",
+                  "in": "query",
+                  "name": "organizationId",
+                  "required": false,
+                  "type": "string"
                }
             ],
-            "responses":{
-               "200":{
-                  "description":"A successful response.",
-                  "schema":{
-                     "$ref":"#/definitions/extapiSubsribeApplicationEventsResponse"
-                  }
-               },
-               "default":{
-                  "description":"An unexpected error response.",
-                  "schema":{
-                     "$ref":"#/definitions/runtimeError"
-                  }
-               }
-            },
-            "summary":"Deprecated: SubsribeApplication takes application id as request parameter,\nreturns topics that can be used to subscribe to all devices' events under same application",
-            "tags":[
-               "MosquittoAuthService"
-            ]
-         }
-      },
-      "/api/mosquitto-auth/subscribe-device-events":{
-         "get":{
-            "operationId":"SubsribeDeviceEvents",
-            "parameters":[
-               {
-                  "in":"query",
-                  "name":"devEui",
-                  "required":false,
-                  "type":"string"
-               },
-               {
-                  "format":"int64",
-                  "in":"query",
-                  "name":"organizationId",
-                  "required":false,
-                  "type":"string"
-               }
-            ],
-            "responses":{
-               "200":{
-                  "description":"A successful response.",
-                  "schema":{
-                     "$ref":"#/definitions/extapiSubsribeDeviceEventsResponse"
-                  }
-               },
-               "default":{
-                  "description":"An unexpected error response.",
-                  "schema":{
-                     "$ref":"#/definitions/runtimeError"
-                  }
-               }
-            },
-            "summary":"Deprecated: SubsribeDeviceEvents takes device eui as request parameter,\nreturns topis that can be used to subscribe to all device events or one specific event",
-            "tags":[
-               "MosquittoAuthService"
-            ]
-         }
-      },
-      "/api/mqtt-integration/application-settings":{
-         "get":{
-            "operationId":"ApplicationSettings",
-            "parameters":[
-               {
-                  "format":"int64",
-                  "in":"query",
-                  "name":"applicationID",
-                  "required":false,
-                  "type":"string"
-               },
-               {
-                  "format":"int64",
-                  "in":"query",
-                  "name":"organizationID",
-                  "required":false,
-                  "type":"string"
-               }
-            ],
-            "responses":{
-               "200":{
-                  "description":"A successful response.",
-                  "schema":{
-                     "$ref":"#/definitions/extapiApplicationSettingsResponse"
-                  }
-               },
-               "default":{
-                  "description":"An unexpected error response.",
-                  "schema":{
-                     "$ref":"#/definitions/runtimeError"
-                  }
-               }
-            },
-            "summary":"ApplicationSettings returns parameters for setting up mqtt integration on application level",
-            "tags":[
-               "MQTTIntegrationService"
-            ]
-         }
-      },
-      "/api/mqtt-integration/device-settings":{
-         "get":{
-            "operationId":"DeviceSettings",
-            "parameters":[
-               {
-                  "in":"query",
-                  "name":"devEUI",
-                  "required":false,
-                  "type":"string"
-               },
-               {
-                  "format":"int64",
-                  "in":"query",
-                  "name":"organizationID",
-                  "required":false,
-                  "type":"string"
-               },
-               {
-                  "format":"int64",
-                  "in":"query",
-                  "name":"applicationID",
-                  "required":false,
-                  "type":"string"
-               }
-            ],
-            "responses":{
-               "200":{
-                  "description":"A successful response.",
-                  "schema":{
-                     "$ref":"#/definitions/extapiDeviceSettingsResponse"
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "$ref": "#/definitions/extapiSubsribeApplicationEventsResponse"
                   }
                },
                "default": {
@@ -3757,29 +3428,35 @@
                   }
                }
             },
-            "summary":"DeviceSettings returns parameters for setting up mqtt integration on device level",
-            "tags":[
-               "MQTTIntegrationService"
+            "summary": "Deprecated: SubsribeApplication takes application id as request parameter,\nreturns topics that can be used to subscribe to all devices' events under same application",
+            "tags": [
+               "MosquittoAuthService"
             ]
          }
       },
-      "/api/mqtt-integration/generate-new-token":{
-         "get":{
-            "operationId":"GenerateNewToken",
-            "parameters":[
+      "/api/mosquitto-auth/subscribe-device-events": {
+         "get": {
+            "operationId": "SubsribeDeviceEvents",
+            "parameters": [
                {
-                  "format":"int64",
-                  "in":"query",
-                  "name":"organizationID",
-                  "required":false,
-                  "type":"string"
+                  "in": "query",
+                  "name": "devEui",
+                  "required": false,
+                  "type": "string"
+               },
+               {
+                  "format": "int64",
+                  "in": "query",
+                  "name": "organizationId",
+                  "required": false,
+                  "type": "string"
                }
             ],
-            "responses":{
-               "200":{
-                  "description":"A successful response.",
-                  "schema":{
-                     "$ref":"#/definitions/extapiGenerateNewTokenResponse"
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "$ref": "#/definitions/extapiSubsribeDeviceEventsResponse"
                   }
                },
                "default": {
@@ -3789,7 +3466,123 @@
                   }
                }
             },
-            "tags":[
+            "summary": "Deprecated: SubsribeDeviceEvents takes device eui as request parameter,\nreturns topis that can be used to subscribe to all device events or one specific event",
+            "tags": [
+               "MosquittoAuthService"
+            ]
+         }
+      },
+      "/api/mqtt-integration/application-settings": {
+         "get": {
+            "operationId": "ApplicationSettings",
+            "parameters": [
+               {
+                  "format": "int64",
+                  "in": "query",
+                  "name": "applicationID",
+                  "required": false,
+                  "type": "string"
+               },
+               {
+                  "format": "int64",
+                  "in": "query",
+                  "name": "organizationID",
+                  "required": false,
+                  "type": "string"
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "$ref": "#/definitions/extapiApplicationSettingsResponse"
+                  }
+               },
+               "default": {
+                  "description": "An unexpected error response.",
+                  "schema": {
+                     "$ref": "#/definitions/runtimeError"
+                  }
+               }
+            },
+            "summary": "ApplicationSettings returns parameters for setting up mqtt integration on application level",
+            "tags": [
+               "MQTTIntegrationService"
+            ]
+         }
+      },
+      "/api/mqtt-integration/device-settings": {
+         "get": {
+            "operationId": "DeviceSettings",
+            "parameters": [
+               {
+                  "in": "query",
+                  "name": "devEUI",
+                  "required": false,
+                  "type": "string"
+               },
+               {
+                  "format": "int64",
+                  "in": "query",
+                  "name": "organizationID",
+                  "required": false,
+                  "type": "string"
+               },
+               {
+                  "format": "int64",
+                  "in": "query",
+                  "name": "applicationID",
+                  "required": false,
+                  "type": "string"
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "$ref": "#/definitions/extapiDeviceSettingsResponse"
+                  }
+               },
+               "default": {
+                  "description": "An unexpected error response.",
+                  "schema": {
+                     "$ref": "#/definitions/runtimeError"
+                  }
+               }
+            },
+            "summary": "DeviceSettings returns parameters for setting up mqtt integration on device level",
+            "tags": [
+               "MQTTIntegrationService"
+            ]
+         }
+      },
+      "/api/mqtt-integration/generate-new-token": {
+         "get": {
+            "operationId": "GenerateNewToken",
+            "parameters": [
+               {
+                  "format": "int64",
+                  "in": "query",
+                  "name": "organizationID",
+                  "required": false,
+                  "type": "string"
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "$ref": "#/definitions/extapiGenerateNewTokenResponse"
+                  }
+               },
+               "default": {
+                  "description": "An unexpected error response.",
+                  "schema": {
+                     "$ref": "#/definitions/runtimeError"
+                  }
+               }
+            },
+            "tags": [
                "MQTTIntegrationService"
             ]
          }
@@ -3887,13 +3680,11 @@
                   "type": "string"
                }
             ],
-            "responses":{
-               "200":{
-                  "description":"A successful response.",
-                  "schema":{
-                     "properties":{
-                        
-                     }
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "properties": {}
                   }
                },
                "default": {
@@ -3961,13 +3752,11 @@
                   }
                }
             ],
-            "responses":{
-               "200":{
-                  "description":"A successful response.",
-                  "schema":{
-                     "properties":{
-                        
-                     }
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "properties": {}
                   }
                },
                "default": {
@@ -4115,13 +3904,11 @@
                   "type": "string"
                }
             ],
-            "responses":{
-               "200":{
-                  "description":"A successful response.",
-                  "schema":{
-                     "properties":{
-                        
-                     }
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "properties": {}
                   }
                },
                "default": {
@@ -4189,13 +3976,11 @@
                   }
                }
             ],
-            "responses":{
-               "200":{
-                  "description":"A successful response.",
-                  "schema":{
-                     "properties":{
-                        
-                     }
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "properties": {}
                   }
                },
                "default": {
@@ -4281,13 +4066,11 @@
                   "type": "string"
                }
             ],
-            "responses":{
-               "200":{
-                  "description":"A successful response.",
-                  "schema":{
-                     "properties":{
-                        
-                     }
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "properties": {}
                   }
                },
                "default": {
@@ -4363,13 +4146,11 @@
                   }
                }
             ],
-            "responses":{
-               "200":{
-                  "description":"A successful response.",
-                  "schema":{
-                     "properties":{
-                        
-                     }
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "properties": {}
                   }
                },
                "default": {
@@ -4414,13 +4195,11 @@
                   }
                }
             ],
-            "responses":{
-               "200":{
-                  "description":"A successful response.",
-                  "schema":{
-                     "properties":{
-                        
-                     }
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "properties": {}
                   }
                },
                "default": {
@@ -4776,13 +4555,11 @@
                   "type": "string"
                }
             ],
-            "responses":{
-               "200":{
-                  "description":"A successful response.",
-                  "schema":{
-                     "properties":{
-                        
-                     }
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "properties": {}
                   }
                },
                "default": {
@@ -4848,13 +4625,11 @@
                   }
                }
             ],
-            "responses":{
-               "200":{
-                  "description":"A successful response.",
-                  "schema":{
-                     "properties":{
-                        
-                     }
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "properties": {}
                   }
                },
                "default": {
@@ -5858,13 +5633,11 @@
                   }
                }
             ],
-            "responses":{
-               "200":{
-                  "description":"A successful response.",
-                  "schema":{
-                     "properties":{
-                        
-                     }
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "properties": {}
                   }
                },
                "default": {
@@ -5889,17 +5662,15 @@
                   "name": "body",
                   "required": true,
                   "schema": {
-                     "$ref": "#/definitions/extapiEmail2FAPassedRequest"
+                     "properties": {}
                   }
                }
             ],
-            "responses":{
-               "200":{
-                  "description":"A successful response.",
-                  "schema":{
-                     "properties":{
-                        
-                     }
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "properties": {}
                   }
                },
                "default": {
@@ -5909,7 +5680,7 @@
                   }
                }
             },
-            "summary": "Email2FAPassed used for verifying current email, to be able to do protected actions for a short period of time",
+            "summary": "Email2FAPassed check if email 2fa verification is done in last 1 hour",
             "tags": [
                "UserService"
             ]
@@ -5928,13 +5699,11 @@
                   }
                }
             ],
-            "responses":{
-               "200":{
-                  "description":"A successful response.",
-                  "schema":{
-                     "properties":{
-                        
-                     }
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "properties": {}
                   }
                },
                "default": {
@@ -5967,7 +5736,7 @@
                "200": {
                   "description": "A successful response.",
                   "schema": {
-                     "$ref": "#/definitions/extapiEmail2FAVerifyResponse"
+                     "properties": {}
                   }
                },
                "default": {
@@ -5977,7 +5746,7 @@
                   }
                }
             },
-            "summary": "Email2FAVerify used for verifying current email, to be able to do protected actions for a short period of time",
+            "summary": "Email2FAVerify check if the input email 2fa code is correct, then verify this token for 1 hour",
             "tags": [
                "UserService"
             ]
@@ -6060,13 +5829,11 @@
                   "type": "string"
                }
             ],
-            "responses":{
-               "200":{
-                  "description":"A successful response.",
-                  "schema":{
-                     "properties":{
-                        
-                     }
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "$ref": "#/definitions/extapiGetUserEmailResponse"
                   }
                },
                "default": {
@@ -6148,37 +5915,6 @@
          }
       },
       "/api/users/{id}": {
-         "delete": {
-            "operationId": "Delete",
-            "parameters": [
-               {
-                  "description": "User ID.",
-                  "format": "int64",
-                  "in": "path",
-                  "name": "id",
-                  "required": true,
-                  "type": "string"
-               }
-            ],
-            "responses": {
-               "200": {
-                  "description": "A successful response.",
-                  "schema": {
-                     "properties": {}
-                  }
-               },
-               "default": {
-                  "description": "An unexpected error response.",
-                  "schema": {
-                     "$ref": "#/definitions/runtimeError"
-                  }
-               }
-            },
-            "summary": "Delete a user.",
-            "tags": [
-               "UserService"
-            ]
-         },
          "get": {
             "operationId": "Get",
             "parameters": [
@@ -6725,10 +6461,10 @@
                   "type": "string"
                },
                {
-                  "in":"query",
-                  "name":"amount",
-                  "required":false,
-                  "type":"string"
+                  "in": "query",
+                  "name": "amount",
+                  "required": false,
+                  "type": "string"
                }
             ],
             "responses": {
@@ -7013,104 +6749,13 @@
          },
          "type": "object"
       },
-      "extapiAccessToken":{
-         "properties":{
-            "created":{
-               "format":"date-time",
-               "type":"string"
-            },
-            "description":{
-               "type":"string"
-            },
-            "expires":{
-               "format":"date-time",
-               "type":"string"
-            },
-            "id":{
-               "format":"int64",
-               "type":"string"
-            },
-            "lastUsed":{
-               "format":"date-time",
-               "type":"string"
-            },
-            "maxInactiveSeconds":{
-               "format":"uint64",
-               "type":"string"
-            },
-            "scope":{
-               "items":{
-                  "type":"string"
-               },
-               "type":"array"
-            }
-         },
-         "type":"object"
+      "extapiAccessTokenRevokeResponse": {
+         "type": "object"
       },
-      "extapiAccessTokenCreateRequest":{
-         "properties":{
-            "description":{
-               "type":"string"
-            },
-            "expires":{
-               "format":"date-time",
-               "type":"string"
-            },
-            "maxInactiveSeconds":{
-               "format":"uint64",
-               "type":"string"
-            },
-            "organizationId":{
-               "format":"uint64",
-               "type":"string"
-            },
-            "scope":{
-               "items":{
-                  "type":"string"
-               },
-               "type":"array"
-            }
-         },
-         "type":"object"
-      },
-      "extapiAccessTokenCreateResponse":{
-         "properties":{
-            "authToken":{
-               "type":"string"
-            }
-         },
-         "type":"object"
-      },
-      "extapiAccessTokenListResponse":{
-         "properties":{
-            "token":{
-               "items":{
-                  "$ref":"#/definitions/extapiAccessToken"
-               },
-               "type":"array"
-            }
-         },
-         "type":"object"
-      },
-      "extapiAccessTokenRevokeRequest":{
-         "properties":{
-            "id":{
-               "items":{
-                  "format":"int64",
-                  "type":"string"
-               },
-               "type":"array"
-            }
-         },
-         "type":"object"
-      },
-      "extapiAccessTokenRevokeResponse":{
-         "type":"object"
-      },
-      "extapiActivateDeviceRequest":{
-         "properties":{
-            "deviceActivation":{
-               "$ref":"#/definitions/extapiDeviceActivation"
+      "extapiActivateDeviceRequest": {
+         "properties": {
+            "deviceActivation": {
+               "$ref": "#/definitions/extapiDeviceActivation"
             }
          },
          "type": "object"
@@ -7227,26 +6872,26 @@
          },
          "type": "object"
       },
-      "extapiApplicationSettingsResponse":{
-         "properties":{
-            "uplink":{
-               "$ref":"#/definitions/extapisettings",
-               "description":"integration settings for subscribing to uplink events"
+      "extapiApplicationSettingsResponse": {
+         "properties": {
+            "uplink": {
+               "$ref": "#/definitions/extapisettings",
+               "description": "integration settings for subscribing to uplink events"
             }
          },
-         "type":"object"
+         "type": "object"
       },
-      "extapiAuthenticateUserRequest":{
-         "type":"object"
+      "extapiAuthenticateUserRequest": {
+         "type": "object"
       },
-      "extapiAuthenticateUserResponse":{
-         "type":"object"
+      "extapiAuthenticateUserResponse": {
+         "type": "object"
       },
-      "extapiAuthenticateWeChatUserRequest":{
-         "properties":{
-            "code":{
-               "description":"code is obtained from wechat app for authenticating wechat account",
-               "type":"string"
+      "extapiAuthenticateWeChatUserRequest": {
+         "properties": {
+            "code": {
+               "description": "code is obtained from wechat app for authenticating wechat account",
+               "type": "string"
             }
          },
          "type": "object"
@@ -7272,37 +6917,37 @@
          },
          "type": "object"
       },
-      "extapiBTCDailyMining":{
-         "properties":{
-            "amount":{
-               "description":"amount of BTC mined",
-               "type":"string"
+      "extapiBTCDailyMining": {
+         "properties": {
+            "amount": {
+               "description": "amount of BTC mined",
+               "type": "string"
             },
-            "miningDate":{
-               "description":"the date on which the mining happened",
-               "format":"date-time",
-               "type":"string"
+            "miningDate": {
+               "description": "the date on which the mining happened",
+               "format": "date-time",
+               "type": "string"
             },
-            "miningPower":{
-               "description":"mining power on that date",
-               "format":"int64",
-               "type":"string"
+            "miningPower": {
+               "description": "mining power on that date",
+               "format": "int64",
+               "type": "string"
             }
          },
          "type": "object"
       },
-      "extapiBTCGWMined":{
-         "properties":{
-            "amount":{
-               "description":"amount mined by this gateway",
-               "type":"string"
+      "extapiBTCGWMined": {
+         "properties": {
+            "amount": {
+               "description": "amount mined by this gateway",
+               "type": "string"
             },
-            "gatewayMac":{
-               "description":"gateway's MAC",
-               "type":"string"
+            "gatewayMac": {
+               "description": "gateway's MAC",
+               "type": "string"
             }
          },
-         "type":"object"
+         "type": "object"
       },
       "extapiBTCListLocksResponse": {
          "properties": {
@@ -7322,10 +6967,14 @@
                "description": "amount of MXC locked",
                "type": "string"
             },
-            "coolingOffEnds":{
-               "description":"timestamp when cooling off ends (only for unlocked bonds)",
-               "format":"date-time",
-               "type":"string"
+            "closed": {
+               "description": "true if the lock has been closed and the amount was returned to the user",
+               "type": "boolean"
+            },
+            "coolingOffEnds": {
+               "description": "timestamp when cooling off ends (only for unlocked bonds)",
+               "format": "date-time",
+               "type": "string"
             },
             "created": {
                "description": "timestamp when lock was created",
@@ -7341,86 +6990,86 @@
                "format": "int64",
                "type": "string"
             },
-            "lockTill":{
-               "description":"timestamp at which current lock period ends",
-               "format":"date-time",
-               "type":"string"
+            "lockTill": {
+               "description": "timestamp at which current lock period ends",
+               "format": "date-time",
+               "type": "string"
             },
-            "unlockFrom":{
-               "description":"timestamp from when the unlock can be requested (lock_till shows the end\nof the period during which the unlock can be requested)",
-               "format":"date-time",
-               "type":"string"
+            "unlockFrom": {
+               "description": "timestamp from when the unlock can be requested (lock_till shows the end\nof the period during which the unlock can be requested)",
+               "format": "date-time",
+               "type": "string"
             },
-            "unlocked":{
-               "description":"timestamp when the unlock has been requested",
-               "format":"date-time",
-               "type":"string"
-            }
-         },
-         "type":"object"
-      },
-      "extapiBTCLockRequest":{
-         "properties":{
-            "amount":{
-               "description":"amount to be bonded",
-               "type":"string"
-            },
-            "gatewayMac":{
-               "description":"MAC of the gateways to which MXC will be bonded",
-               "type":"string"
-            },
-            "orgId":{
-               "description":"org that locks the mxc and owns the gateways",
-               "format":"int64",
-               "type":"string"
-            }
-         },
-         "type":"object"
-      },
-      "extapiBTCLockResponse":{
-         "properties":{
-            "lockId":{
-               "description":"internal ID of the lock",
-               "format":"int64",
-               "type":"string"
+            "unlocked": {
+               "description": "timestamp when the unlock has been requested",
+               "format": "date-time",
+               "type": "string"
             }
          },
          "type": "object"
       },
-      "extapiBTCMinedResponse":{
-         "properties":{
-            "gatewayMining":{
-               "description":"amounts mined by individual gateways",
-               "items":{
-                  "$ref":"#/definitions/extapiBTCGWMined"
-               },
-               "type":"array"
+      "extapiBTCLockRequest": {
+         "properties": {
+            "amount": {
+               "description": "amount to be bonded",
+               "type": "string"
             },
-            "totalAmount":{
-               "description":"total amount of BTC mined by the organization",
-               "type":"string"
+            "gatewayMac": {
+               "description": "MAC of the gateways to which MXC will be bonded",
+               "type": "string"
+            },
+            "orgId": {
+               "description": "org that locks the mxc and owns the gateways",
+               "format": "int64",
+               "type": "string"
             }
          },
-         "type":"object"
+         "type": "object"
       },
-      "extapiBTCMiningHistoryResponse":{
-         "properties":{
-            "dailyMining":{
-               "description":"mining history records ordered by date",
-               "items":{
-                  "$ref":"#/definitions/extapiBTCDailyMining"
+      "extapiBTCLockResponse": {
+         "properties": {
+            "lockId": {
+               "description": "internal ID of the lock",
+               "format": "int64",
+               "type": "string"
+            }
+         },
+         "type": "object"
+      },
+      "extapiBTCMinedResponse": {
+         "properties": {
+            "gatewayMining": {
+               "description": "amounts mined by individual gateways",
+               "items": {
+                  "$ref": "#/definitions/extapiBTCGWMined"
                },
-               "type":"array"
+               "type": "array"
+            },
+            "totalAmount": {
+               "description": "total amount of BTC mined by the organization",
+               "type": "string"
             }
          },
-         "type":"object"
+         "type": "object"
       },
-      "extapiBTCMiningSessionResponse":{
-         "properties":{
-            "endDate":{
-               "description":"last day of the mining session",
-               "format":"date-time",
-               "type":"string"
+      "extapiBTCMiningHistoryResponse": {
+         "properties": {
+            "dailyMining": {
+               "description": "mining history records ordered by date",
+               "items": {
+                  "$ref": "#/definitions/extapiBTCDailyMining"
+               },
+               "type": "array"
+            }
+         },
+         "type": "object"
+      },
+      "extapiBTCMiningSessionResponse": {
+         "properties": {
+            "endDate": {
+               "description": "last day of the mining session",
+               "format": "date-time",
+               "type": "string"
             },
             "mxcLockAmount": {
                "description": "amount of MXC per gateway that the user must lock",
@@ -7445,42 +7094,35 @@
          },
          "type": "object"
       },
-      "extapiBTCUnlockRequest":{
-         "properties":{
-            "lockId":{
-               "description":"ID of the lock to release",
-               "format":"int64",
-               "type":"string"
-            },
-            "orgId":{
-               "description":"org to which the lock belongs",
-               "format":"int64",
-               "type":"string"
-            }
-         },
-         "type":"object"
-      },
-      "extapiBTCUnlockResponse":{
-         "properties":{
-            "coolingOffTill":{
-               "description":"timestamp of when the cooling off ends",
-               "format":"date-time",
-               "type":"string"
-            }
-         },
-         "type":"object"
-      },
-      "extapiBatchResetDefaultGatewatConfigRequest":{
-         "properties":{
-            "organizationList":{
-               "type":"string"
+      "extapiBTCMiningStatusResponse": {
+         "description": "Information about BTC mining status",
+         "properties": {
+            "miningEnabled": {
+               "type": "boolean"
             }
          },
          "type": "object"
       },
-      "extapiBatchResetDefaultGatewatConfigResponse": {
+      "extapiBTCUnlockRequest": {
          "properties": {
-            "status": {
+            "lockId": {
+               "description": "ID of the lock to release",
+               "format": "int64",
+               "type": "string"
+            },
+            "orgId": {
+               "description": "org to which the lock belongs",
+               "format": "int64",
+               "type": "string"
+            }
+         },
+         "type": "object"
+      },
+      "extapiBTCUnlockResponse": {
+         "properties": {
+            "coolingOffTill": {
+               "description": "timestamp of when the cooling off ends",
+               "format": "date-time",
                "type": "string"
             }
          },
@@ -7632,10 +7274,6 @@
             },
             "isAdmin": {
                "type": "boolean"
-            },
-            "jwt": {
-               "description": "same as auth_token, legacy name",
-               "type": "string"
             },
             "sessionTTL": {
                "format": "int32",
@@ -7899,12 +7537,12 @@
          },
          "type": "object"
       },
-      "extapiDHXBondInfoRequest":{
-         "properties":{
-            "orgId":{
-               "description":"organization for which the info should be returned",
-               "format":"int64",
-               "type":"string"
+      "extapiDHXBondInfoRequest": {
+         "properties": {
+            "orgId": {
+               "description": "organization for which the info should be returned",
+               "format": "int64",
+               "type": "string"
             }
          },
          "type": "object"
@@ -8310,6 +7948,15 @@
          },
          "type": "object"
       },
+      "extapiDeleteUserRequest": {
+         "properties": {
+            "password": {
+               "description": "Password is required if user hasn't set up 2fa",
+               "type": "string"
+            }
+         },
+         "type": "object"
+      },
       "extapiDevice": {
          "properties": {
             "applicationID": {
@@ -8457,159 +8104,159 @@
                "format": "float",
                "type": "number"
             },
-            "deviceStatusBatteryLevelUnavailable":{
-               "description":"Device battery status is unavailable.",
-               "type":"boolean"
+            "deviceStatusBatteryLevelUnavailable": {
+               "description": "Device battery status is unavailable.",
+               "type": "boolean"
             },
-            "deviceStatusExternalPowerSource":{
-               "description":"Device is connected to an external power source.",
-               "type":"boolean"
+            "deviceStatusExternalPowerSource": {
+               "description": "Device is connected to an external power source.",
+               "type": "boolean"
             },
-            "deviceStatusMargin":{
-               "description":"The device margin status\n-32..32: The demodulation SNR ration in dB\n256:     The device-status is not available.",
-               "format":"int32",
-               "type":"integer"
+            "deviceStatusMargin": {
+               "description": "The device margin status\n-32..32: The demodulation SNR ration in dB\n256:     The device-status is not available.",
+               "format": "int32",
+               "type": "integer"
             },
-            "lastSeenAt":{
-               "description":"The last time the application-server received any data from the device,\nor an empty string when the device never sent any data.",
-               "format":"date-time",
-               "type":"string"
+            "lastSeenAt": {
+               "description": "The last time the application-server received any data from the device,\nor an empty string when the device never sent any data.",
+               "format": "date-time",
+               "type": "string"
             },
-            "name":{
-               "description":"Name of the device.",
-               "type":"string"
+            "name": {
+               "description": "Name of the device.",
+               "type": "string"
             }
          },
-         "type":"object"
+         "type": "object"
       },
-      "extapiDeviceProfile":{
-         "properties":{
-            "classBTimeout":{
-               "description":"Maximum delay for the End-Device to answer a MAC request or a confirmed DL frame (mandatory if class B mode supported).",
-               "format":"int64",
-               "type":"integer"
+      "extapiDeviceProfile": {
+         "properties": {
+            "classBTimeout": {
+               "description": "Maximum delay for the End-Device to answer a MAC request or a confirmed DL frame (mandatory if class B mode supported).",
+               "format": "int64",
+               "type": "integer"
             },
-            "classCTimeout":{
-               "description":"Maximum delay for the End-Device to answer a MAC request or a confirmed DL frame (mandatory if class C mode supported).",
-               "format":"int64",
-               "type":"integer"
+            "classCTimeout": {
+               "description": "Maximum delay for the End-Device to answer a MAC request or a confirmed DL frame (mandatory if class C mode supported).",
+               "format": "int64",
+               "type": "integer"
             },
-            "factoryPresetFreqs":{
-               "description":"List of factory-preset frequencies (mandatory for ABP).",
-               "items":{
-                  "format":"int64",
-                  "type":"integer"
+            "factoryPresetFreqs": {
+               "description": "List of factory-preset frequencies (mandatory for ABP).",
+               "items": {
+                  "format": "int64",
+                  "type": "integer"
                },
-               "type":"array"
+               "type": "array"
             },
-            "geolocBufferTTL":{
-               "description":"Geolocation buffer TTL (in seconds).\nWhen > 0, uplink RX meta-data will be stored in a buffer so that\nthe meta-data of multiple uplinks can be used for geolocation.",
-               "format":"int64",
-               "type":"integer"
+            "geolocBufferTTL": {
+               "description": "Geolocation buffer TTL (in seconds).\nWhen \u003e 0, uplink RX meta-data will be stored in a buffer so that\nthe meta-data of multiple uplinks can be used for geolocation.",
+               "format": "int64",
+               "type": "integer"
             },
-            "geolocMinBufferSize":{
-               "description":"Geolocation minimum buffer size.\nWhen > 0, geolocation will only be performed when the buffer has\nat least the given size.",
-               "format":"int64",
-               "type":"integer"
+            "geolocMinBufferSize": {
+               "description": "Geolocation minimum buffer size.\nWhen \u003e 0, geolocation will only be performed when the buffer has\nat least the given size.",
+               "format": "int64",
+               "type": "integer"
             },
-            "id":{
-               "description":"Device-profile ID (UUID string).",
-               "type":"string"
+            "id": {
+               "description": "Device-profile ID (UUID string).",
+               "type": "string"
             },
-            "macVersion":{
-               "description":"Version of the LoRaWAN supported by the End-Device.",
-               "type":"string"
+            "macVersion": {
+               "description": "Version of the LoRaWAN supported by the End-Device.",
+               "type": "string"
             },
-            "maxDutyCycle":{
-               "description":"Maximum duty cycle supported by the End-Device.",
-               "format":"int64",
-               "type":"integer"
+            "maxDutyCycle": {
+               "description": "Maximum duty cycle supported by the End-Device.",
+               "format": "int64",
+               "type": "integer"
             },
-            "maxEIRP":{
-               "description":"Maximum EIRP supported by the End-Device.",
-               "format":"int64",
-               "type":"integer"
+            "maxEIRP": {
+               "description": "Maximum EIRP supported by the End-Device.",
+               "format": "int64",
+               "type": "integer"
             },
-            "name":{
-               "description":"Device-profile name.",
-               "type":"string"
+            "name": {
+               "description": "Device-profile name.",
+               "type": "string"
             },
-            "networkServerID":{
-               "description":"Network-server ID on which the service-profile is provisioned.",
-               "format":"int64",
-               "type":"string"
+            "networkServerID": {
+               "description": "Network-server ID on which the service-profile is provisioned.",
+               "format": "int64",
+               "type": "string"
             },
-            "organizationID":{
-               "description":"Organization ID to which the service-profile is assigned.",
-               "format":"int64",
-               "type":"string"
+            "organizationID": {
+               "description": "Organization ID to which the service-profile is assigned.",
+               "format": "int64",
+               "type": "string"
             },
-            "payloadCodec":{
-               "description":"Payload codec.\nLeave blank to disable the codec feature.",
-               "type":"string"
+            "payloadCodec": {
+               "description": "Payload codec.\nLeave blank to disable the codec feature.",
+               "type": "string"
             },
-            "payloadDecoderScript":{
-               "description":"Payload decoder script.\nDepending the codec, it is possible to provide a script which implements\nthe decoder function.",
-               "type":"string"
+            "payloadDecoderScript": {
+               "description": "Payload decoder script.\nDepending the codec, it is possible to provide a script which implements\nthe decoder function.",
+               "type": "string"
             },
-            "payloadEncoderScript":{
-               "description":"Payload encoder script.\nDepending the codec, it is possible to provide a script which implements\nthe encoder function.",
-               "type":"string"
+            "payloadEncoderScript": {
+               "description": "Payload encoder script.\nDepending the codec, it is possible to provide a script which implements\nthe encoder function.",
+               "type": "string"
             },
-            "pingSlotDR":{
-               "description":"Mandatory if class B mode supported.",
-               "format":"int64",
-               "type":"integer"
+            "pingSlotDR": {
+               "description": "Mandatory if class B mode supported.",
+               "format": "int64",
+               "type": "integer"
             },
-            "pingSlotFreq":{
-               "description":"Mandatory if class B mode supported.",
-               "format":"int64",
-               "type":"integer"
+            "pingSlotFreq": {
+               "description": "Mandatory if class B mode supported.",
+               "format": "int64",
+               "type": "integer"
             },
-            "pingSlotPeriod":{
-               "description":"Mandatory if class B mode supported.",
-               "format":"int64",
-               "type":"integer"
+            "pingSlotPeriod": {
+               "description": "Mandatory if class B mode supported.",
+               "format": "int64",
+               "type": "integer"
             },
-            "regParamsRevision":{
-               "description":"Revision of the Regional Parameters document supported by the End-Device.",
-               "type":"string"
+            "regParamsRevision": {
+               "description": "Revision of the Regional Parameters document supported by the End-Device.",
+               "type": "string"
             },
-            "rfRegion":{
-               "description":"RF region name.",
-               "type":"string"
+            "rfRegion": {
+               "description": "RF region name.",
+               "type": "string"
             },
-            "rxDROffset1":{
-               "description":"RX1 data rate offset (mandatory for ABP).",
-               "format":"int64",
-               "type":"integer"
+            "rxDROffset1": {
+               "description": "RX1 data rate offset (mandatory for ABP).",
+               "format": "int64",
+               "type": "integer"
             },
-            "rxDataRate2":{
-               "description":"RX2 data rate (mandatory for ABP).",
-               "format":"int64",
-               "type":"integer"
+            "rxDataRate2": {
+               "description": "RX2 data rate (mandatory for ABP).",
+               "format": "int64",
+               "type": "integer"
             },
-            "rxDelay1":{
-               "description":"Class A RX1 delay (mandatory for ABP).",
-               "format":"int64",
-               "type":"integer"
+            "rxDelay1": {
+               "description": "Class A RX1 delay (mandatory for ABP).",
+               "format": "int64",
+               "type": "integer"
             },
-            "rxFreq2":{
-               "description":"RX2 channel frequency (mandatory for ABP).",
-               "format":"int64",
-               "type":"integer"
+            "rxFreq2": {
+               "description": "RX2 channel frequency (mandatory for ABP).",
+               "format": "int64",
+               "type": "integer"
             },
-            "supports32BitFCnt":{
-               "description":"End-Device uses 32bit FCnt (mandatory for LoRaWAN 1.0 End-Device).",
-               "type":"boolean"
+            "supports32BitFCnt": {
+               "description": "End-Device uses 32bit FCnt (mandatory for LoRaWAN 1.0 End-Device).",
+               "type": "boolean"
             },
-            "supportsClassB":{
-               "description":"End-Device supports Class B.",
-               "type":"boolean"
+            "supportsClassB": {
+               "description": "End-Device supports Class B.",
+               "type": "boolean"
             },
-            "supportsClassC":{
-               "description":"End-Device supports Class C.",
-               "type":"boolean"
+            "supportsClassC": {
+               "description": "End-Device supports Class C.",
+               "type": "boolean"
             },
             "supportsJoin": {
                "description": "End-Device supports Join (OTAA) or not (ABP).",
@@ -8690,44 +8337,45 @@
          },
          "type": "object"
       },
+      "extapiDeviceSettingsResponse": {
+         "properties": {
+            "downLink": {
+               "$ref": "#/definitions/extapisettings",
+               "description": "integration settings for sending down link commands"
+            },
+            "uplink": {
+               "$ref": "#/definitions/extapisettings",
+               "description": "integration settings for subscribing to uplink events"
+            }
+         },
+         "type": "object"
+      },
       "extapiDownlinkFrameLog": {
          "properties": {
             "phyPayloadJSON": {
                "description": "LoRaWAN PHYPayload.",
                "type": "string"
             },
-            "fPort":{
-               "description":"FPort used (must be > 0)",
-               "format":"int64",
-               "type":"integer"
-            },
+            "txInfo": {
+               "$ref": "#/definitions/gwDownlinkTXInfo",
+               "description": "TX information of the downlink."
+            }
+         },
+         "type": "object"
+      },
+      "extapiEmail2FARequestRequest": {
+         "properties": {
             "language": {
                "type": "string"
             }
          },
          "type": "object"
       },
-      "extapiDeviceSettingsResponse":{
-         "properties":{
-            "downLink":{
-               "$ref":"#/definitions/extapisettings",
-               "description":"integration settings for sending down link commands"
-            },
-            "uplink":{
-               "$ref":"#/definitions/extapisettings",
-               "description":"integration settings for subscribing to uplink events"
-            }
-         },
-         "type":"object"
-      },
-      "extapiDownlinkFrameLog":{
-         "properties":{
-            "phyPayloadJSON":{
-               "description":"LoRaWAN PHYPayload.",
-               "type":"string"
-            },
-            "verified": {
-               "type": "boolean"
+      "extapiEmail2FAVerifyRequest": {
+         "description": "Temporary verifying email for doing sensitive actions",
+         "properties": {
+            "code": {
+               "type": "string"
             }
          },
          "type": "object"
@@ -9139,19 +8787,19 @@
          },
          "type": "object"
       },
-      "extapiGenerateNewTokenResponse":{
-         "properties":{
-            "token":{
-               "type":"string"
+      "extapiGenerateNewTokenResponse": {
+         "properties": {
+            "token": {
+               "type": "string"
             }
          },
-         "type":"object"
+         "type": "object"
       },
-      "extapiGetActiveStakesResponse":{
-         "properties":{
-            "actStake":{
-               "items":{
-                  "$ref":"#/definitions/extapiStake"
+      "extapiGetActiveStakesResponse": {
+         "properties": {
+            "actStake": {
+               "items": {
+                  "$ref": "#/definitions/extapiStake"
                },
                "type": "array"
             }
@@ -9170,14 +8818,6 @@
       "extapiGetAppserverVersionResponse": {
          "properties": {
             "version": {
-               "type": "string"
-            }
-         },
-         "type": "object"
-      },
-      "extapiGetDefaultGatewayConfigResponse": {
-         "properties": {
-            "defaultConfig": {
                "type": "string"
             }
          },
@@ -9375,12 +9015,12 @@
          },
          "type": "object"
       },
-      "extapiGetJWTRequest":{
-         "description":"Deprecated",
-         "properties":{
-            "organizationId":{
-               "format":"int64",
-               "type":"string"
+      "extapiGetJWTRequest": {
+         "description": "Deprecated",
+         "properties": {
+            "organizationId": {
+               "format": "int64",
+               "type": "string"
             },
             "ttlInSeconds": {
                "format": "int64",
@@ -9389,12 +9029,12 @@
          },
          "type": "object"
       },
-      "extapiGetJWTResponse":{
-         "description":"Deprecated",
-         "properties":{
-            "jwtMqttAuth":{
-               "description":"jwt generated and used for authenticate mosquitto client",
-               "type":"string"
+      "extapiGetJWTResponse": {
+         "description": "Deprecated",
+         "properties": {
+            "jwtMqttAuth": {
+               "description": "jwt generated and used for authenticate mosquitto client",
+               "type": "string"
             }
          },
          "type": "object"
@@ -9852,34 +9492,12 @@
          },
          "type": "object"
       },
-      "extapiInsertNewDefaultGatewayConfigRequest": {
+      "extapiListApplicationResponse": {
          "properties": {
-            "defaultConfig": {
-               "type": "string"
-            },
-            "model": {
-               "type": "string"
-            },
-            "region": {
-               "type": "string"
-            }
-         },
-         "type": "object"
-      },
-      "extapiInsertNewDefaultGatewayConfigResponse": {
-         "properties": {
-            "status": {
-               "type": "string"
-            }
-         },
-         "type": "object"
-      },
-      "extapiListApplicationResponse":{
-         "properties":{
-            "result":{
-               "description":"Applications within this result-set.",
-               "items":{
-                  "$ref":"#/definitions/extapiApplicationListItem"
+            "result": {
+               "description": "Applications within this result-set.",
+               "items": {
+                  "$ref": "#/definitions/extapiApplicationListItem"
                },
                "type": "array"
             },
@@ -10124,10 +9742,6 @@
             "is2faRequired": {
                "description": "Two-factor authentication is required to finish the process",
                "type": "boolean"
-            },
-            "jwt": {
-               "description": "The same API token just with a different name for legacy compatibility",
-               "type": "string"
             }
          },
          "type": "object"
@@ -10771,22 +10385,6 @@
          },
          "type": "object"
       },
-      "extapiResetDefaultGatewatConfigByIDRequest": {
-         "properties": {
-            "id": {
-               "type": "string"
-            }
-         },
-         "type": "object"
-      },
-      "extapiResetDefaultGatewatConfigByIDResponse": {
-         "properties": {
-            "status": {
-               "type": "string"
-            }
-         },
-         "type": "object"
-      },
       "extapiResetPasswordResetLimitRequest": {
          "properties": {
             "reason": {
@@ -10807,11 +10405,11 @@
          },
          "type": "object"
       },
-      "extapiSendCommandToDeviceResponse":{
-         "description":"Deprecated",
-         "properties":{
-            "topic":{
-               "type":"string"
+      "extapiSendCommandToDeviceResponse": {
+         "description": "Deprecated",
+         "properties": {
+            "topic": {
+               "type": "string"
             }
          },
          "type": "object"
@@ -11191,21 +10789,21 @@
          },
          "type": "object"
       },
-      "extapiSubsribeApplicationEventsResponse":{
-         "description":"Deprecated",
-         "properties":{
-            "topic":{
-               "type":"string"
+      "extapiSubsribeApplicationEventsResponse": {
+         "description": "Deprecated",
+         "properties": {
+            "topic": {
+               "type": "string"
             }
          },
          "type": "object"
       },
-      "extapiSubsribeDeviceEventsResponse":{
-         "description":"Deprecated",
-         "properties":{
-            "topic":{
-               "items":{
-                  "type":"string"
+      "extapiSubsribeDeviceEventsResponse": {
+         "description": "Deprecated",
+         "properties": {
+            "topic": {
+               "items": {
+                  "type": "string"
                },
                "type": "array"
             }
@@ -11280,11 +10878,11 @@
          },
          "type": "object"
       },
-      "extapiTransaction":{
-         "properties":{
-            "amount":{
-               "description":"amount, decimal number with up to 18 decimal digits",
-               "type":"string"
+      "extapiTransaction": {
+         "properties": {
+            "amount": {
+               "description": "amount, decimal number with up to 18 decimal digits",
+               "type": "string"
             },
             "detailsJson": {
                "description": "transaction details encoded as JSON",
@@ -11352,28 +10950,6 @@
             "application": {
                "$ref": "#/definitions/extapiApplication",
                "description": "Application object to update."
-            }
-         },
-         "type": "object"
-      },
-      "extapiUpdateDefaultGatewayConfigRequest": {
-         "properties": {
-            "defaultConfig": {
-               "type": "string"
-            },
-            "model": {
-               "type": "string"
-            },
-            "region": {
-               "type": "string"
-            }
-         },
-         "type": "object"
-      },
-      "extapiUpdateDefaultGatewayConfigResponse": {
-         "properties": {
-            "status": {
-               "type": "string"
             }
          },
          "type": "object"
@@ -11488,12 +11064,6 @@
          "type": "object"
       },
       "extapiUpdateUserResponse": {
-         "properties": {
-            "jwt": {
-               "description": "User object to update.",
-               "type": "string"
-            }
-         },
          "type": "object"
       },
       "extapiUplinkFrameLog": {
@@ -11735,44 +11305,44 @@
          },
          "type": "object"
       },
-      "extapisettings":{
-         "properties":{
-            "description":{
-               "description":"description and additional information for mqtt integration",
-               "type":"string"
+      "extapisettings": {
+         "properties": {
+            "description": {
+               "description": "description and additional information for mqtt integration",
+               "type": "string"
             },
-            "example":{
-               "description":"example command line for subscribe/publish with mosquitto client",
-               "type":"string"
+            "example": {
+               "description": "example command line for subscribe/publish with mosquitto client",
+               "type": "string"
             },
-            "hostname":{
-               "type":"string"
+            "hostname": {
+               "type": "string"
             },
-            "mqttVersion":{
-               "type":"string"
+            "mqttVersion": {
+               "type": "string"
             },
-            "port":{
-               "type":"string"
+            "port": {
+               "type": "string"
             },
-            "topics":{
-               "items":{
-                  "$ref":"#/definitions/extapitopic"
+            "topics": {
+               "items": {
+                  "$ref": "#/definitions/extapitopic"
                },
-               "type":"array"
+               "type": "array"
             },
-            "username":{
-               "type":"string"
+            "username": {
+               "type": "string"
             }
          },
-         "type":"object"
+         "type": "object"
       },
-      "extapitopic":{
-         "properties":{
-            "description":{
-               "type":"string"
+      "extapitopic": {
+         "properties": {
+            "description": {
+               "type": "string"
             },
-            "topicString":{
-               "type":"string"
+            "topicString": {
+               "type": "string"
             }
          },
          "type": "object"
