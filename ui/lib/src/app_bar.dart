@@ -1,6 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:mxc_ui/mxc_ui.dart';
 
+void Function() _appBarPopHandlerBuilder(BuildContext context) {
+  return () {
+    final navigator = Navigator.maybeOf(context);
+    if (navigator?.canPop() ?? false) {
+      navigator!.pop();
+      return;
+    }
+    final bottomFlowDialog = BottomFlowDialog.maybeOf(context);
+    if (bottomFlowDialog != null) {
+      bottomFlowDialog.close<void>();
+    }
+  };
+}
+
+void Function() _appBarCloseHandlerBuilder(BuildContext context) {
+  return () {
+    final bottomFlowDialog = BottomFlowDialog.maybeOf(context);
+    if (bottomFlowDialog != null) {
+      bottomFlowDialog.close<void>();
+      return;
+    }
+    final navigator = Navigator.maybeOf(context);
+    if (navigator?.canPop() ?? false) {
+      navigator!.pop();
+    }
+  };
+}
+
 class MxcAppBar extends StatelessWidget {
   MxcAppBar({
     Key? key,
@@ -42,7 +70,7 @@ class MxcAppBar extends StatelessWidget {
           builder: (context) => MxcAppBarButton.icon(
             Icons.arrow_back_ios,
             key: const ValueKey('nav_back'),
-            onTap: () => Navigator.of(context).pop(),
+            onTap: _appBarPopHandlerBuilder(context),
           ),
         ),
         super(key: key);
@@ -62,7 +90,7 @@ class MxcAppBar extends StatelessWidget {
         action = Builder(
           builder: (context) => MxcAppBarButton.icon(
             Icons.close,
-            onTap: () => Navigator.of(context).pop(),
+            onTap: _appBarCloseHandlerBuilder(context),
           ),
         ),
         super(key: key);
@@ -81,7 +109,7 @@ class MxcAppBar extends StatelessWidget {
         leading = Builder(
           builder: (context) => MxcAppBarButton.icon(
             Icons.arrow_back_ios,
-            onTap: () => Navigator.of(context).pop(),
+            onTap: _appBarPopHandlerBuilder(context),
           ),
         ),
         action = MxcAppBarButton.icon(
