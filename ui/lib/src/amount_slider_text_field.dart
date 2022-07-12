@@ -9,7 +9,7 @@ class AmountTextFieldWithSlider extends StatefulWidget {
     required Key? key,
     required this.value,
     required this.onChanged,
-    required this.text,
+    required this.hint,
     this.errorMsg,
     this.enabled = true,
     Decimal? min,
@@ -24,7 +24,7 @@ class AmountTextFieldWithSlider extends StatefulWidget {
   final Decimal max;
   final String? errorMsg;
   final void Function(Decimal?) onChanged;
-  final String text;
+  final Widget hint;
   final bool enabled;
   final int fractionDigits;
   final EdgeInsets? scrollPadding;
@@ -128,22 +128,28 @@ class _AmountTextFieldWithSliderState extends State<AmountTextFieldWithSlider> {
       children: [
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.max,
           children: [
-            ConstrainedBox(
-              constraints: const BoxConstraints(
-                maxWidth: 220,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    widget.text,
-                    style: FontTheme.of(context).subtitle1.label(),
-                  ),
-                  if (widget.errorMsg != null)
-                    Text(widget.errorMsg!,
-                        style: FontTheme.of(context).caption1.error()),
-                ],
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(
+                  maxWidth: 220,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    widget.hint,
+                    if (widget.errorMsg != null)
+                      Text(
+                        widget.errorMsg!,
+                        style: FontTheme.of(context).caption1.error(),
+                      ),
+                  ],
+                ),
               ),
             ),
             const SizedBox(width: 32),
@@ -155,12 +161,15 @@ class _AmountTextFieldWithSliderState extends State<AmountTextFieldWithSlider> {
                     constraints: const BoxConstraints(
                       minWidth: 64,
                     ),
-                    child: MxcMiniTextField(
-                      key: null,
-                      controller: controller,
-                      scrollPadding: widget.scrollPadding,
-                      error: widget.errorMsg != null,
-                      disabled: !widget.enabled,
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 16),
+                      child: MxcMiniTextField(
+                        key: null,
+                        controller: controller,
+                        scrollPadding: widget.scrollPadding,
+                        error: widget.errorMsg != null,
+                        disabled: !widget.enabled,
+                      ),
                     ),
                   ),
                 ),
