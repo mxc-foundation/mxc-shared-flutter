@@ -156,15 +156,12 @@ class _AmountTextFieldWithSliderState extends State<AmountTextFieldWithSlider> {
                     constraints: const BoxConstraints(
                       minWidth: 64,
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(right: 16),
-                      child: MxcMiniTextField(
-                        key: null,
-                        controller: controller,
-                        scrollPadding: widget.scrollPadding,
-                        error: widget.errorMsg != null,
-                        disabled: !widget.enabled,
-                      ),
+                    child: MxcMiniTextField(
+                      key: null,
+                      controller: controller,
+                      scrollPadding: widget.scrollPadding,
+                      error: widget.errorMsg != null,
+                      disabled: !widget.enabled,
                     ),
                   ),
                 ),
