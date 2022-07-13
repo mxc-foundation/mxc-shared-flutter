@@ -131,23 +131,20 @@ class _AmountTextFieldWithSliderState extends State<AmountTextFieldWithSlider> {
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.max,
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: ConstrainedBox(
-                constraints: const BoxConstraints(
-                  maxWidth: 220,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    widget.hint,
-                    if (widget.errorMsg != null)
-                      Text(
-                        widget.errorMsg!,
-                        style: FontTheme.of(context).caption1.error(),
-                      ),
-                  ],
-                ),
+            ConstrainedBox(
+              constraints: const BoxConstraints(
+                maxWidth: 220,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  widget.hint,
+                  if (widget.errorMsg != null)
+                    Text(
+                      widget.errorMsg!,
+                      style: FontTheme.of(context).caption1.error(),
+                    ),
+                ],
               ),
             ),
             const SizedBox(width: 32),
