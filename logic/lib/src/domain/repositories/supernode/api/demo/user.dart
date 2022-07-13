@@ -117,4 +117,7 @@ class DemoUserRepository implements UserRepository {
     // TODO: implement verifyOtpChange
     throw UnimplementedError();
   }
+
+  @override
+  Future<void> deleteAccount({String? otpCode, String? password}) async {}
 }

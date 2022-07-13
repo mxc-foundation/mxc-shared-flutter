@@ -187,6 +187,17 @@ abstract class BTCMiningService extends ChopperService {
       @Header('Grpc-Metadata-Authorization')
           String? grpcMetadataAuthorization});
 
+  ///Check the status of BTC mining
+  ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
+
+  @Get(path: '/api/btc-mining/status')
+  Future<chopper.Response<ExtapiBTCMiningStatusResponse>> bTCMiningStatus(
+      {@Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
+
   ///Returns total amount mined by organization's gateways
   ///@param orgId id of the organization for which the amount is requested.
   ///@param Grpc-Metadata-X-OTP OTP Code
@@ -1180,88 +1191,6 @@ abstract class GatewayService extends ChopperService {
           String? grpcMetadataAuthorization});
 
   ///
-  ///@param body
-  ///@param Grpc-Metadata-X-OTP OTP Code
-  ///@param Grpc-Metadata-Authorization Auth Token
-
-  @Post(path: '/api/gateways/default-config/add')
-  Future<chopper.Response<ExtapiInsertNewDefaultGatewayConfigResponse>>
-      insertNewDefaultGatewayConfig(
-          {@Body()
-          @required
-              ExtapiInsertNewDefaultGatewayConfigRequest? body,
-          @Header('Grpc-Metadata-X-OTP')
-              String? grpcMetadataXOTP,
-          @Header('Grpc-Metadata-Authorization')
-              String? grpcMetadataAuthorization});
-
-  ///
-  ///@param body
-  ///@param Grpc-Metadata-X-OTP OTP Code
-  ///@param Grpc-Metadata-Authorization Auth Token
-
-  @Put(path: '/api/gateways/default-config/batch-reset')
-  Future<chopper.Response<ExtapiBatchResetDefaultGatewatConfigResponse>>
-      batchResetDefaultGatewatConfig(
-          {@Body()
-          @required
-              ExtapiBatchResetDefaultGatewatConfigRequest? body,
-          @Header('Grpc-Metadata-X-OTP')
-              String? grpcMetadataXOTP,
-          @Header('Grpc-Metadata-Authorization')
-              String? grpcMetadataAuthorization});
-
-  ///
-  ///@param model
-  ///@param region
-  ///@param Grpc-Metadata-X-OTP OTP Code
-  ///@param Grpc-Metadata-Authorization Auth Token
-
-  @Get(path: '/api/gateways/default-config/get')
-  Future<chopper.Response<ExtapiGetDefaultGatewayConfigResponse>>
-      getDefaultGatewayConfig(
-          {@Query('model')
-              String? model,
-          @Query('region')
-              String? region,
-          @Header('Grpc-Metadata-X-OTP')
-              String? grpcMetadataXOTP,
-          @Header('Grpc-Metadata-Authorization')
-              String? grpcMetadataAuthorization});
-
-  ///
-  ///@param body
-  ///@param Grpc-Metadata-X-OTP OTP Code
-  ///@param Grpc-Metadata-Authorization Auth Token
-
-  @Put(path: '/api/gateways/default-config/reset')
-  Future<chopper.Response<ExtapiResetDefaultGatewatConfigByIDResponse>>
-      resetDefaultGatewatConfigByID(
-          {@Body()
-          @required
-              ExtapiResetDefaultGatewatConfigByIDRequest? body,
-          @Header('Grpc-Metadata-X-OTP')
-              String? grpcMetadataXOTP,
-          @Header('Grpc-Metadata-Authorization')
-              String? grpcMetadataAuthorization});
-
-  ///
-  ///@param body
-  ///@param Grpc-Metadata-X-OTP OTP Code
-  ///@param Grpc-Metadata-Authorization Auth Token
-
-  @Put(path: '/api/gateways/default-config/update')
-  Future<chopper.Response<ExtapiUpdateDefaultGatewayConfigResponse>>
-      updateDefaultGatewayConfig(
-          {@Body()
-          @required
-              ExtapiUpdateDefaultGatewayConfigRequest? body,
-          @Header('Grpc-Metadata-X-OTP')
-              String? grpcMetadataXOTP,
-          @Header('Grpc-Metadata-Authorization')
-              String? grpcMetadataAuthorization});
-
-  ///
   ///@param gatewayId
   ///@param Grpc-Metadata-X-OTP OTP Code
   ///@param Grpc-Metadata-Authorization Auth Token
@@ -1546,6 +1475,21 @@ abstract class InternalService extends ChopperService {
       {@Body()
       @required
           ExtapiConfirmPasswordResetReq? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
+
+  ///
+  ///@param body
+  ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
+
+  @Post(path: '/api/internal/delete-user')
+  Future<chopper.Response> deleteUser(
+      {@Body()
+      @required
+          ExtapiDeleteUserRequest? body,
       @Header('Grpc-Metadata-X-OTP')
           String? grpcMetadataXOTP,
       @Header('Grpc-Metadata-Authorization')
@@ -3048,16 +2992,16 @@ abstract class UserService extends ChopperService {
       @Header('Grpc-Metadata-Authorization')
           String? grpcMetadataAuthorization});
 
-  ///Email2FAPassed used for verifying current email, to be able to do protected actions for a short period of time
+  ///Email2FAPassed check if email 2fa verification is done in last 1 hour
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
   ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/users/email-2fa-passed')
-  Future<chopper.Response<ExtapiEmail2FAPassedResponse>> email2FAPassed(
+  Future<chopper.Response> email2FAPassed(
       {@Body()
       @required
-          ExtapiEmail2FAPassedRequest? body,
+          Object? body,
       @Header('Grpc-Metadata-X-OTP')
           String? grpcMetadataXOTP,
       @Header('Grpc-Metadata-Authorization')
@@ -3069,7 +3013,7 @@ abstract class UserService extends ChopperService {
   ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/users/email-2fa-request')
-  Future<chopper.Response<ExtapiEmail2FARequestResponse>> email2FARequest(
+  Future<chopper.Response> email2FARequest(
       {@Body()
       @required
           ExtapiEmail2FARequestRequest? body,
@@ -3078,13 +3022,13 @@ abstract class UserService extends ChopperService {
       @Header('Grpc-Metadata-Authorization')
           String? grpcMetadataAuthorization});
 
-  ///Email2FAVerify used for verifying current email, to be able to do protected actions for a short period of time
+  ///Email2FAVerify check if the input email 2fa code is correct, then verify this token for 1 hour
   ///@param body
   ///@param Grpc-Metadata-X-OTP OTP Code
   ///@param Grpc-Metadata-Authorization Auth Token
 
   @Post(path: '/api/users/email-2fa-verify')
-  Future<chopper.Response<ExtapiEmail2FAVerifyResponse>> email2FAVerify(
+  Future<chopper.Response> email2FAVerify(
       {@Body()
       @required
           ExtapiEmail2FAVerifyRequest? body,
@@ -3168,21 +3112,6 @@ abstract class UserService extends ChopperService {
               String? grpcMetadataXOTP,
           @Header('Grpc-Metadata-Authorization')
               String? grpcMetadataAuthorization});
-
-  ///Delete a user.
-  ///@param id User ID.
-  ///@param Grpc-Metadata-X-OTP OTP Code
-  ///@param Grpc-Metadata-Authorization Auth Token
-
-  @Delete(path: '/api/users/{id}')
-  Future<chopper.Response> delete(
-      {@Path('id')
-      @required
-          String? id,
-      @Header('Grpc-Metadata-X-OTP')
-          String? grpcMetadataXOTP,
-      @Header('Grpc-Metadata-Authorization')
-          String? grpcMetadataAuthorization});
 
   ///Get data for a particular user.
   ///@param id User ID.
@@ -3622,12 +3551,9 @@ final Map<Type, Object Function(Map<String, dynamic>)>
       ExtapiBTCMiningHistoryResponse.fromJsonFactory,
   ExtapiBTCMiningSessionResponse:
       ExtapiBTCMiningSessionResponse.fromJsonFactory,
+  ExtapiBTCMiningStatusResponse: ExtapiBTCMiningStatusResponse.fromJsonFactory,
   ExtapiBTCUnlockRequest: ExtapiBTCUnlockRequest.fromJsonFactory,
   ExtapiBTCUnlockResponse: ExtapiBTCUnlockResponse.fromJsonFactory,
-  ExtapiBatchResetDefaultGatewatConfigRequest:
-      ExtapiBatchResetDefaultGatewatConfigRequest.fromJsonFactory,
-  ExtapiBatchResetDefaultGatewatConfigResponse:
-      ExtapiBatchResetDefaultGatewatConfigResponse.fromJsonFactory,
   ExtapiBindExternalUserRequest: ExtapiBindExternalUserRequest.fromJsonFactory,
   ExtapiBindExternalUserResponse:
       ExtapiBindExternalUserResponse.fromJsonFactory,
@@ -3707,6 +3633,7 @@ final Map<Type, Object Function(Map<String, dynamic>)>
   ExtapiDHXUnbonding: ExtapiDHXUnbonding.fromJsonFactory,
   ExtapiDeactivateUserRequest: ExtapiDeactivateUserRequest.fromJsonFactory,
   ExtapiDeactivateUserResponse: ExtapiDeactivateUserResponse.fromJsonFactory,
+  ExtapiDeleteUserRequest: ExtapiDeleteUserRequest.fromJsonFactory,
   ExtapiDevice: ExtapiDevice.fromJsonFactory,
   ExtapiDeviceActivation: ExtapiDeviceActivation.fromJsonFactory,
   ExtapiDeviceKeys: ExtapiDeviceKeys.fromJsonFactory,
@@ -3716,12 +3643,8 @@ final Map<Type, Object Function(Map<String, dynamic>)>
   ExtapiDeviceQueueItem: ExtapiDeviceQueueItem.fromJsonFactory,
   ExtapiDeviceSettingsResponse: ExtapiDeviceSettingsResponse.fromJsonFactory,
   ExtapiDownlinkFrameLog: ExtapiDownlinkFrameLog.fromJsonFactory,
-  ExtapiEmail2FAPassedRequest: ExtapiEmail2FAPassedRequest.fromJsonFactory,
-  ExtapiEmail2FAPassedResponse: ExtapiEmail2FAPassedResponse.fromJsonFactory,
   ExtapiEmail2FARequestRequest: ExtapiEmail2FARequestRequest.fromJsonFactory,
-  ExtapiEmail2FARequestResponse: ExtapiEmail2FARequestResponse.fromJsonFactory,
   ExtapiEmail2FAVerifyRequest: ExtapiEmail2FAVerifyRequest.fromJsonFactory,
-  ExtapiEmail2FAVerifyResponse: ExtapiEmail2FAVerifyResponse.fromJsonFactory,
   ExtapiEnqueueDeviceQueueItemRequest:
       ExtapiEnqueueDeviceQueueItemRequest.fromJsonFactory,
   ExtapiEnqueueDeviceQueueItemResponse:
@@ -3748,8 +3671,6 @@ final Map<Type, Object Function(Map<String, dynamic>)>
   ExtapiGetApplicationResponse: ExtapiGetApplicationResponse.fromJsonFactory,
   ExtapiGetAppserverVersionResponse:
       ExtapiGetAppserverVersionResponse.fromJsonFactory,
-  ExtapiGetDefaultGatewayConfigResponse:
-      ExtapiGetDefaultGatewayConfigResponse.fromJsonFactory,
   ExtapiGetDeviceActivationResponse:
       ExtapiGetDeviceActivationResponse.fromJsonFactory,
   ExtapiGetDeviceKeysResponse: ExtapiGetDeviceKeysResponse.fromJsonFactory,
@@ -3818,10 +3739,6 @@ final Map<Type, Object Function(Map<String, dynamic>)>
   ExtapiGetWithdrawResponse: ExtapiGetWithdrawResponse.fromJsonFactory,
   ExtapiGlobalSearchResponse: ExtapiGlobalSearchResponse.fromJsonFactory,
   ExtapiGlobalSearchResult: ExtapiGlobalSearchResult.fromJsonFactory,
-  ExtapiInsertNewDefaultGatewayConfigRequest:
-      ExtapiInsertNewDefaultGatewayConfigRequest.fromJsonFactory,
-  ExtapiInsertNewDefaultGatewayConfigResponse:
-      ExtapiInsertNewDefaultGatewayConfigResponse.fromJsonFactory,
   ExtapiListApplicationResponse: ExtapiListApplicationResponse.fromJsonFactory,
   ExtapiListCellsResponse: ExtapiListCellsResponse.fromJsonFactory,
   ExtapiListDeviceProfileResponse:
@@ -3902,10 +3819,6 @@ final Map<Type, Object Function(Map<String, dynamic>)>
       ExtapiRequestSupportPermissionResponse.fromJsonFactory,
   ExtapiReset2FAReqeust: ExtapiReset2FAReqeust.fromJsonFactory,
   ExtapiReset2FAResponse: ExtapiReset2FAResponse.fromJsonFactory,
-  ExtapiResetDefaultGatewatConfigByIDRequest:
-      ExtapiResetDefaultGatewatConfigByIDRequest.fromJsonFactory,
-  ExtapiResetDefaultGatewatConfigByIDResponse:
-      ExtapiResetDefaultGatewatConfigByIDResponse.fromJsonFactory,
   ExtapiResetPasswordResetLimitRequest:
       ExtapiResetPasswordResetLimitRequest.fromJsonFactory,
   ExtapiResetPasswordResetLimitResponse:
@@ -3959,10 +3872,6 @@ final Map<Type, Object Function(Map<String, dynamic>)>
   ExtapiUnstakeResponse: ExtapiUnstakeResponse.fromJsonFactory,
   ExtapiUpdateApplicationRequest:
       ExtapiUpdateApplicationRequest.fromJsonFactory,
-  ExtapiUpdateDefaultGatewayConfigRequest:
-      ExtapiUpdateDefaultGatewayConfigRequest.fromJsonFactory,
-  ExtapiUpdateDefaultGatewayConfigResponse:
-      ExtapiUpdateDefaultGatewayConfigResponse.fromJsonFactory,
   ExtapiUpdateDeviceKeysRequest: ExtapiUpdateDeviceKeysRequest.fromJsonFactory,
   ExtapiUpdateDeviceProfileRequest:
       ExtapiUpdateDeviceProfileRequest.fromJsonFactory,
@@ -4948,6 +4857,7 @@ extension $ExtapiBTCListLocksResponseExtension on ExtapiBTCListLocksResponse {
 class ExtapiBTCLock {
   ExtapiBTCLock({
     this.amount,
+    this.closed,
     this.coolingOffEnds,
     this.created,
     this.gatewayMac,
@@ -4962,6 +4872,8 @@ class ExtapiBTCLock {
 
   @JsonKey(name: 'amount')
   final String? amount;
+  @JsonKey(name: 'closed')
+  final bool? closed;
   @JsonKey(name: 'coolingOffEnds')
   final DateTime? coolingOffEnds;
   @JsonKey(name: 'created')
@@ -4986,6 +4898,8 @@ class ExtapiBTCLock {
         (other is ExtapiBTCLock &&
             (identical(other.amount, amount) ||
                 const DeepCollectionEquality().equals(other.amount, amount)) &&
+            (identical(other.closed, closed) ||
+                const DeepCollectionEquality().equals(other.closed, closed)) &&
             (identical(other.coolingOffEnds, coolingOffEnds) ||
                 const DeepCollectionEquality()
                     .equals(other.coolingOffEnds, coolingOffEnds)) &&
@@ -5012,6 +4926,7 @@ class ExtapiBTCLock {
 extension $ExtapiBTCLockExtension on ExtapiBTCLock {
   ExtapiBTCLock copyWith(
       {String? amount,
+      bool? closed,
       DateTime? coolingOffEnds,
       DateTime? created,
       String? gatewayMac,
@@ -5021,6 +4936,7 @@ extension $ExtapiBTCLockExtension on ExtapiBTCLock {
       DateTime? unlocked}) {
     return ExtapiBTCLock(
         amount: amount ?? this.amount,
+        closed: closed ?? this.closed,
         coolingOffEnds: coolingOffEnds ?? this.coolingOffEnds,
         created: created ?? this.created,
         gatewayMac: gatewayMac ?? this.gatewayMac,
@@ -5247,6 +5163,39 @@ extension $ExtapiBTCMiningSessionResponseExtension
 }
 
 @JsonSerializable(explicitToJson: true)
+class ExtapiBTCMiningStatusResponse {
+  ExtapiBTCMiningStatusResponse({
+    this.miningEnabled,
+  });
+
+  factory ExtapiBTCMiningStatusResponse.fromJson(Map<String, dynamic> json) =>
+      _$ExtapiBTCMiningStatusResponseFromJson(json);
+
+  @JsonKey(name: 'miningEnabled')
+  final bool? miningEnabled;
+  static const fromJsonFactory = _$ExtapiBTCMiningStatusResponseFromJson;
+  static const toJsonFactory = _$ExtapiBTCMiningStatusResponseToJson;
+  Map<String, dynamic> toJson() => _$ExtapiBTCMiningStatusResponseToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is ExtapiBTCMiningStatusResponse &&
+            (identical(other.miningEnabled, miningEnabled) ||
+                const DeepCollectionEquality()
+                    .equals(other.miningEnabled, miningEnabled)));
+  }
+}
+
+extension $ExtapiBTCMiningStatusResponseExtension
+    on ExtapiBTCMiningStatusResponse {
+  ExtapiBTCMiningStatusResponse copyWith({bool? miningEnabled}) {
+    return ExtapiBTCMiningStatusResponse(
+        miningEnabled: miningEnabled ?? this.miningEnabled);
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
 class ExtapiBTCUnlockRequest {
   ExtapiBTCUnlockRequest({
     this.lockId,
@@ -5311,80 +5260,6 @@ extension $ExtapiBTCUnlockResponseExtension on ExtapiBTCUnlockResponse {
   ExtapiBTCUnlockResponse copyWith({DateTime? coolingOffTill}) {
     return ExtapiBTCUnlockResponse(
         coolingOffTill: coolingOffTill ?? this.coolingOffTill);
-  }
-}
-
-@JsonSerializable(explicitToJson: true)
-class ExtapiBatchResetDefaultGatewatConfigRequest {
-  ExtapiBatchResetDefaultGatewatConfigRequest({
-    this.organizationList,
-  });
-
-  factory ExtapiBatchResetDefaultGatewatConfigRequest.fromJson(
-          Map<String, dynamic> json) =>
-      _$ExtapiBatchResetDefaultGatewatConfigRequestFromJson(json);
-
-  @JsonKey(name: 'organizationList')
-  final String? organizationList;
-  static const fromJsonFactory =
-      _$ExtapiBatchResetDefaultGatewatConfigRequestFromJson;
-  static const toJsonFactory =
-      _$ExtapiBatchResetDefaultGatewatConfigRequestToJson;
-  Map<String, dynamic> toJson() =>
-      _$ExtapiBatchResetDefaultGatewatConfigRequestToJson(this);
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is ExtapiBatchResetDefaultGatewatConfigRequest &&
-            (identical(other.organizationList, organizationList) ||
-                const DeepCollectionEquality()
-                    .equals(other.organizationList, organizationList)));
-  }
-}
-
-extension $ExtapiBatchResetDefaultGatewatConfigRequestExtension
-    on ExtapiBatchResetDefaultGatewatConfigRequest {
-  ExtapiBatchResetDefaultGatewatConfigRequest copyWith(
-      {String? organizationList}) {
-    return ExtapiBatchResetDefaultGatewatConfigRequest(
-        organizationList: organizationList ?? this.organizationList);
-  }
-}
-
-@JsonSerializable(explicitToJson: true)
-class ExtapiBatchResetDefaultGatewatConfigResponse {
-  ExtapiBatchResetDefaultGatewatConfigResponse({
-    this.status,
-  });
-
-  factory ExtapiBatchResetDefaultGatewatConfigResponse.fromJson(
-          Map<String, dynamic> json) =>
-      _$ExtapiBatchResetDefaultGatewatConfigResponseFromJson(json);
-
-  @JsonKey(name: 'status')
-  final String? status;
-  static const fromJsonFactory =
-      _$ExtapiBatchResetDefaultGatewatConfigResponseFromJson;
-  static const toJsonFactory =
-      _$ExtapiBatchResetDefaultGatewatConfigResponseToJson;
-  Map<String, dynamic> toJson() =>
-      _$ExtapiBatchResetDefaultGatewatConfigResponseToJson(this);
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is ExtapiBatchResetDefaultGatewatConfigResponse &&
-            (identical(other.status, status) ||
-                const DeepCollectionEquality().equals(other.status, status)));
-  }
-}
-
-extension $ExtapiBatchResetDefaultGatewatConfigResponseExtension
-    on ExtapiBatchResetDefaultGatewatConfigResponse {
-  ExtapiBatchResetDefaultGatewatConfigResponse copyWith({String? status}) {
-    return ExtapiBatchResetDefaultGatewatConfigResponse(
-        status: status ?? this.status);
   }
 }
 
@@ -5783,7 +5658,6 @@ class ExtapiConfirmRegistrationResponse {
     this.id,
     this.isActive,
     this.isAdmin,
-    this.jwt,
     this.sessionTTL,
     this.username,
   });
@@ -5800,8 +5674,6 @@ class ExtapiConfirmRegistrationResponse {
   final bool? isActive;
   @JsonKey(name: 'isAdmin')
   final bool? isAdmin;
-  @JsonKey(name: 'jwt')
-  final String? jwt;
   @JsonKey(name: 'sessionTTL')
   final int? sessionTTL;
   @JsonKey(name: 'username')
@@ -5826,8 +5698,6 @@ class ExtapiConfirmRegistrationResponse {
             (identical(other.isAdmin, isAdmin) ||
                 const DeepCollectionEquality()
                     .equals(other.isAdmin, isAdmin)) &&
-            (identical(other.jwt, jwt) ||
-                const DeepCollectionEquality().equals(other.jwt, jwt)) &&
             (identical(other.sessionTTL, sessionTTL) ||
                 const DeepCollectionEquality()
                     .equals(other.sessionTTL, sessionTTL)) &&
@@ -5844,7 +5714,6 @@ extension $ExtapiConfirmRegistrationResponseExtension
       String? id,
       bool? isActive,
       bool? isAdmin,
-      String? jwt,
       int? sessionTTL,
       String? username}) {
     return ExtapiConfirmRegistrationResponse(
@@ -5852,7 +5721,6 @@ extension $ExtapiConfirmRegistrationResponseExtension
         id: id ?? this.id,
         isActive: isActive ?? this.isActive,
         isAdmin: isAdmin ?? this.isAdmin,
-        jwt: jwt ?? this.jwt,
         sessionTTL: sessionTTL ?? this.sessionTTL,
         username: username ?? this.username);
   }
@@ -7729,6 +7597,37 @@ extension $ExtapiDeactivateUserResponseExtension
 }
 
 @JsonSerializable(explicitToJson: true)
+class ExtapiDeleteUserRequest {
+  ExtapiDeleteUserRequest({
+    this.password,
+  });
+
+  factory ExtapiDeleteUserRequest.fromJson(Map<String, dynamic> json) =>
+      _$ExtapiDeleteUserRequestFromJson(json);
+
+  @JsonKey(name: 'password')
+  final String? password;
+  static const fromJsonFactory = _$ExtapiDeleteUserRequestFromJson;
+  static const toJsonFactory = _$ExtapiDeleteUserRequestToJson;
+  Map<String, dynamic> toJson() => _$ExtapiDeleteUserRequestToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is ExtapiDeleteUserRequest &&
+            (identical(other.password, password) ||
+                const DeepCollectionEquality()
+                    .equals(other.password, password)));
+  }
+}
+
+extension $ExtapiDeleteUserRequestExtension on ExtapiDeleteUserRequest {
+  ExtapiDeleteUserRequest copyWith({String? password}) {
+    return ExtapiDeleteUserRequest(password: password ?? this.password);
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
 class ExtapiDevice {
   ExtapiDevice({
     this.applicationID,
@@ -8557,69 +8456,6 @@ extension $ExtapiDownlinkFrameLogExtension on ExtapiDownlinkFrameLog {
 }
 
 @JsonSerializable(explicitToJson: true)
-class ExtapiEmail2FAPassedRequest {
-  ExtapiEmail2FAPassedRequest({
-    this.language,
-  });
-
-  factory ExtapiEmail2FAPassedRequest.fromJson(Map<String, dynamic> json) =>
-      _$ExtapiEmail2FAPassedRequestFromJson(json);
-
-  @JsonKey(name: 'language')
-  final String? language;
-  static const fromJsonFactory = _$ExtapiEmail2FAPassedRequestFromJson;
-  static const toJsonFactory = _$ExtapiEmail2FAPassedRequestToJson;
-  Map<String, dynamic> toJson() => _$ExtapiEmail2FAPassedRequestToJson(this);
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is ExtapiEmail2FAPassedRequest &&
-            (identical(other.language, language) ||
-                const DeepCollectionEquality()
-                    .equals(other.language, language)));
-  }
-}
-
-extension $ExtapiEmail2FAPassedRequestExtension on ExtapiEmail2FAPassedRequest {
-  ExtapiEmail2FAPassedRequest copyWith({String? language}) {
-    return ExtapiEmail2FAPassedRequest(language: language ?? this.language);
-  }
-}
-
-@JsonSerializable(explicitToJson: true)
-class ExtapiEmail2FAPassedResponse {
-  ExtapiEmail2FAPassedResponse({
-    this.verified,
-  });
-
-  factory ExtapiEmail2FAPassedResponse.fromJson(Map<String, dynamic> json) =>
-      _$ExtapiEmail2FAPassedResponseFromJson(json);
-
-  @JsonKey(name: 'verified')
-  final bool? verified;
-  static const fromJsonFactory = _$ExtapiEmail2FAPassedResponseFromJson;
-  static const toJsonFactory = _$ExtapiEmail2FAPassedResponseToJson;
-  Map<String, dynamic> toJson() => _$ExtapiEmail2FAPassedResponseToJson(this);
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is ExtapiEmail2FAPassedResponse &&
-            (identical(other.verified, verified) ||
-                const DeepCollectionEquality()
-                    .equals(other.verified, verified)));
-  }
-}
-
-extension $ExtapiEmail2FAPassedResponseExtension
-    on ExtapiEmail2FAPassedResponse {
-  ExtapiEmail2FAPassedResponse copyWith({bool? verified}) {
-    return ExtapiEmail2FAPassedResponse(verified: verified ?? this.verified);
-  }
-}
-
-@JsonSerializable(explicitToJson: true)
 class ExtapiEmail2FARequestRequest {
   ExtapiEmail2FARequestRequest({
     this.language,
@@ -8652,41 +8488,9 @@ extension $ExtapiEmail2FARequestRequestExtension
 }
 
 @JsonSerializable(explicitToJson: true)
-class ExtapiEmail2FARequestResponse {
-  ExtapiEmail2FARequestResponse({
-    this.sent,
-  });
-
-  factory ExtapiEmail2FARequestResponse.fromJson(Map<String, dynamic> json) =>
-      _$ExtapiEmail2FARequestResponseFromJson(json);
-
-  @JsonKey(name: 'sent')
-  final bool? sent;
-  static const fromJsonFactory = _$ExtapiEmail2FARequestResponseFromJson;
-  static const toJsonFactory = _$ExtapiEmail2FARequestResponseToJson;
-  Map<String, dynamic> toJson() => _$ExtapiEmail2FARequestResponseToJson(this);
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is ExtapiEmail2FARequestResponse &&
-            (identical(other.sent, sent) ||
-                const DeepCollectionEquality().equals(other.sent, sent)));
-  }
-}
-
-extension $ExtapiEmail2FARequestResponseExtension
-    on ExtapiEmail2FARequestResponse {
-  ExtapiEmail2FARequestResponse copyWith({bool? sent}) {
-    return ExtapiEmail2FARequestResponse(sent: sent ?? this.sent);
-  }
-}
-
-@JsonSerializable(explicitToJson: true)
 class ExtapiEmail2FAVerifyRequest {
   ExtapiEmail2FAVerifyRequest({
     this.code,
-    this.language,
   });
 
   factory ExtapiEmail2FAVerifyRequest.fromJson(Map<String, dynamic> json) =>
@@ -8694,8 +8498,6 @@ class ExtapiEmail2FAVerifyRequest {
 
   @JsonKey(name: 'code')
   final String? code;
-  @JsonKey(name: 'language')
-  final String? language;
   static const fromJsonFactory = _$ExtapiEmail2FAVerifyRequestFromJson;
   static const toJsonFactory = _$ExtapiEmail2FAVerifyRequestToJson;
   Map<String, dynamic> toJson() => _$ExtapiEmail2FAVerifyRequestToJson(this);
@@ -8705,58 +8507,13 @@ class ExtapiEmail2FAVerifyRequest {
     return identical(this, other) ||
         (other is ExtapiEmail2FAVerifyRequest &&
             (identical(other.code, code) ||
-                const DeepCollectionEquality().equals(other.code, code)) &&
-            (identical(other.language, language) ||
-                const DeepCollectionEquality()
-                    .equals(other.language, language)));
+                const DeepCollectionEquality().equals(other.code, code)));
   }
 }
 
 extension $ExtapiEmail2FAVerifyRequestExtension on ExtapiEmail2FAVerifyRequest {
-  ExtapiEmail2FAVerifyRequest copyWith({String? code, String? language}) {
-    return ExtapiEmail2FAVerifyRequest(
-        code: code ?? this.code, language: language ?? this.language);
-  }
-}
-
-@JsonSerializable(explicitToJson: true)
-class ExtapiEmail2FAVerifyResponse {
-  ExtapiEmail2FAVerifyResponse({
-    this.remainedAttempts,
-    this.verified,
-  });
-
-  factory ExtapiEmail2FAVerifyResponse.fromJson(Map<String, dynamic> json) =>
-      _$ExtapiEmail2FAVerifyResponseFromJson(json);
-
-  @JsonKey(name: 'remainedAttempts')
-  final int? remainedAttempts;
-  @JsonKey(name: 'verified')
-  final bool? verified;
-  static const fromJsonFactory = _$ExtapiEmail2FAVerifyResponseFromJson;
-  static const toJsonFactory = _$ExtapiEmail2FAVerifyResponseToJson;
-  Map<String, dynamic> toJson() => _$ExtapiEmail2FAVerifyResponseToJson(this);
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is ExtapiEmail2FAVerifyResponse &&
-            (identical(other.remainedAttempts, remainedAttempts) ||
-                const DeepCollectionEquality()
-                    .equals(other.remainedAttempts, remainedAttempts)) &&
-            (identical(other.verified, verified) ||
-                const DeepCollectionEquality()
-                    .equals(other.verified, verified)));
-  }
-}
-
-extension $ExtapiEmail2FAVerifyResponseExtension
-    on ExtapiEmail2FAVerifyResponse {
-  ExtapiEmail2FAVerifyResponse copyWith(
-      {int? remainedAttempts, bool? verified}) {
-    return ExtapiEmail2FAVerifyResponse(
-        remainedAttempts: remainedAttempts ?? this.remainedAttempts,
-        verified: verified ?? this.verified);
+  ExtapiEmail2FAVerifyRequest copyWith({String? code}) {
+    return ExtapiEmail2FAVerifyRequest(code: code ?? this.code);
   }
 }
 
@@ -9881,42 +9638,6 @@ extension $ExtapiGetAppserverVersionResponseExtension
     on ExtapiGetAppserverVersionResponse {
   ExtapiGetAppserverVersionResponse copyWith({String? version}) {
     return ExtapiGetAppserverVersionResponse(version: version ?? this.version);
-  }
-}
-
-@JsonSerializable(explicitToJson: true)
-class ExtapiGetDefaultGatewayConfigResponse {
-  ExtapiGetDefaultGatewayConfigResponse({
-    this.defaultConfig,
-  });
-
-  factory ExtapiGetDefaultGatewayConfigResponse.fromJson(
-          Map<String, dynamic> json) =>
-      _$ExtapiGetDefaultGatewayConfigResponseFromJson(json);
-
-  @JsonKey(name: 'defaultConfig')
-  final String? defaultConfig;
-  static const fromJsonFactory =
-      _$ExtapiGetDefaultGatewayConfigResponseFromJson;
-  static const toJsonFactory = _$ExtapiGetDefaultGatewayConfigResponseToJson;
-  Map<String, dynamic> toJson() =>
-      _$ExtapiGetDefaultGatewayConfigResponseToJson(this);
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is ExtapiGetDefaultGatewayConfigResponse &&
-            (identical(other.defaultConfig, defaultConfig) ||
-                const DeepCollectionEquality()
-                    .equals(other.defaultConfig, defaultConfig)));
-  }
-}
-
-extension $ExtapiGetDefaultGatewayConfigResponseExtension
-    on ExtapiGetDefaultGatewayConfigResponse {
-  ExtapiGetDefaultGatewayConfigResponse copyWith({String? defaultConfig}) {
-    return ExtapiGetDefaultGatewayConfigResponse(
-        defaultConfig: defaultConfig ?? this.defaultConfig);
   }
 }
 
@@ -11862,92 +11583,6 @@ extension $ExtapiGlobalSearchResultExtension on ExtapiGlobalSearchResult {
 }
 
 @JsonSerializable(explicitToJson: true)
-class ExtapiInsertNewDefaultGatewayConfigRequest {
-  ExtapiInsertNewDefaultGatewayConfigRequest({
-    this.defaultConfig,
-    this.model,
-    this.region,
-  });
-
-  factory ExtapiInsertNewDefaultGatewayConfigRequest.fromJson(
-          Map<String, dynamic> json) =>
-      _$ExtapiInsertNewDefaultGatewayConfigRequestFromJson(json);
-
-  @JsonKey(name: 'defaultConfig')
-  final String? defaultConfig;
-  @JsonKey(name: 'model')
-  final String? model;
-  @JsonKey(name: 'region')
-  final String? region;
-  static const fromJsonFactory =
-      _$ExtapiInsertNewDefaultGatewayConfigRequestFromJson;
-  static const toJsonFactory =
-      _$ExtapiInsertNewDefaultGatewayConfigRequestToJson;
-  Map<String, dynamic> toJson() =>
-      _$ExtapiInsertNewDefaultGatewayConfigRequestToJson(this);
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is ExtapiInsertNewDefaultGatewayConfigRequest &&
-            (identical(other.defaultConfig, defaultConfig) ||
-                const DeepCollectionEquality()
-                    .equals(other.defaultConfig, defaultConfig)) &&
-            (identical(other.model, model) ||
-                const DeepCollectionEquality().equals(other.model, model)) &&
-            (identical(other.region, region) ||
-                const DeepCollectionEquality().equals(other.region, region)));
-  }
-}
-
-extension $ExtapiInsertNewDefaultGatewayConfigRequestExtension
-    on ExtapiInsertNewDefaultGatewayConfigRequest {
-  ExtapiInsertNewDefaultGatewayConfigRequest copyWith(
-      {String? defaultConfig, String? model, String? region}) {
-    return ExtapiInsertNewDefaultGatewayConfigRequest(
-        defaultConfig: defaultConfig ?? this.defaultConfig,
-        model: model ?? this.model,
-        region: region ?? this.region);
-  }
-}
-
-@JsonSerializable(explicitToJson: true)
-class ExtapiInsertNewDefaultGatewayConfigResponse {
-  ExtapiInsertNewDefaultGatewayConfigResponse({
-    this.status,
-  });
-
-  factory ExtapiInsertNewDefaultGatewayConfigResponse.fromJson(
-          Map<String, dynamic> json) =>
-      _$ExtapiInsertNewDefaultGatewayConfigResponseFromJson(json);
-
-  @JsonKey(name: 'status')
-  final String? status;
-  static const fromJsonFactory =
-      _$ExtapiInsertNewDefaultGatewayConfigResponseFromJson;
-  static const toJsonFactory =
-      _$ExtapiInsertNewDefaultGatewayConfigResponseToJson;
-  Map<String, dynamic> toJson() =>
-      _$ExtapiInsertNewDefaultGatewayConfigResponseToJson(this);
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is ExtapiInsertNewDefaultGatewayConfigResponse &&
-            (identical(other.status, status) ||
-                const DeepCollectionEquality().equals(other.status, status)));
-  }
-}
-
-extension $ExtapiInsertNewDefaultGatewayConfigResponseExtension
-    on ExtapiInsertNewDefaultGatewayConfigResponse {
-  ExtapiInsertNewDefaultGatewayConfigResponse copyWith({String? status}) {
-    return ExtapiInsertNewDefaultGatewayConfigResponse(
-        status: status ?? this.status);
-  }
-}
-
-@JsonSerializable(explicitToJson: true)
 class ExtapiListApplicationResponse {
   ExtapiListApplicationResponse({
     this.result,
@@ -12586,7 +12221,6 @@ class ExtapiLoginResponse {
   ExtapiLoginResponse({
     this.authToken,
     this.is2faRequired,
-    this.jwt,
   });
 
   factory ExtapiLoginResponse.fromJson(Map<String, dynamic> json) =>
@@ -12596,8 +12230,6 @@ class ExtapiLoginResponse {
   final String? authToken;
   @JsonKey(name: 'is2faRequired')
   final bool? is2faRequired;
-  @JsonKey(name: 'jwt')
-  final String? jwt;
   static const fromJsonFactory = _$ExtapiLoginResponseFromJson;
   static const toJsonFactory = _$ExtapiLoginResponseToJson;
   Map<String, dynamic> toJson() => _$ExtapiLoginResponseToJson(this);
@@ -12611,19 +12243,15 @@ class ExtapiLoginResponse {
                     .equals(other.authToken, authToken)) &&
             (identical(other.is2faRequired, is2faRequired) ||
                 const DeepCollectionEquality()
-                    .equals(other.is2faRequired, is2faRequired)) &&
-            (identical(other.jwt, jwt) ||
-                const DeepCollectionEquality().equals(other.jwt, jwt)));
+                    .equals(other.is2faRequired, is2faRequired)));
   }
 }
 
 extension $ExtapiLoginResponseExtension on ExtapiLoginResponse {
-  ExtapiLoginResponse copyWith(
-      {String? authToken, bool? is2faRequired, String? jwt}) {
+  ExtapiLoginResponse copyWith({String? authToken, bool? is2faRequired}) {
     return ExtapiLoginResponse(
         authToken: authToken ?? this.authToken,
-        is2faRequired: is2faRequired ?? this.is2faRequired,
-        jwt: jwt ?? this.jwt);
+        is2faRequired: is2faRequired ?? this.is2faRequired);
   }
 }
 
@@ -14327,77 +13955,6 @@ extension $ExtapiReset2FAResponseExtension on ExtapiReset2FAResponse {
 }
 
 @JsonSerializable(explicitToJson: true)
-class ExtapiResetDefaultGatewatConfigByIDRequest {
-  ExtapiResetDefaultGatewatConfigByIDRequest({
-    this.id,
-  });
-
-  factory ExtapiResetDefaultGatewatConfigByIDRequest.fromJson(
-          Map<String, dynamic> json) =>
-      _$ExtapiResetDefaultGatewatConfigByIDRequestFromJson(json);
-
-  @JsonKey(name: 'id')
-  final String? id;
-  static const fromJsonFactory =
-      _$ExtapiResetDefaultGatewatConfigByIDRequestFromJson;
-  static const toJsonFactory =
-      _$ExtapiResetDefaultGatewatConfigByIDRequestToJson;
-  Map<String, dynamic> toJson() =>
-      _$ExtapiResetDefaultGatewatConfigByIDRequestToJson(this);
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is ExtapiResetDefaultGatewatConfigByIDRequest &&
-            (identical(other.id, id) ||
-                const DeepCollectionEquality().equals(other.id, id)));
-  }
-}
-
-extension $ExtapiResetDefaultGatewatConfigByIDRequestExtension
-    on ExtapiResetDefaultGatewatConfigByIDRequest {
-  ExtapiResetDefaultGatewatConfigByIDRequest copyWith({String? id}) {
-    return ExtapiResetDefaultGatewatConfigByIDRequest(id: id ?? this.id);
-  }
-}
-
-@JsonSerializable(explicitToJson: true)
-class ExtapiResetDefaultGatewatConfigByIDResponse {
-  ExtapiResetDefaultGatewatConfigByIDResponse({
-    this.status,
-  });
-
-  factory ExtapiResetDefaultGatewatConfigByIDResponse.fromJson(
-          Map<String, dynamic> json) =>
-      _$ExtapiResetDefaultGatewatConfigByIDResponseFromJson(json);
-
-  @JsonKey(name: 'status')
-  final String? status;
-  static const fromJsonFactory =
-      _$ExtapiResetDefaultGatewatConfigByIDResponseFromJson;
-  static const toJsonFactory =
-      _$ExtapiResetDefaultGatewatConfigByIDResponseToJson;
-  Map<String, dynamic> toJson() =>
-      _$ExtapiResetDefaultGatewatConfigByIDResponseToJson(this);
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is ExtapiResetDefaultGatewatConfigByIDResponse &&
-            (identical(other.status, status) ||
-                const DeepCollectionEquality().equals(other.status, status)));
-  }
-}
-
-extension $ExtapiResetDefaultGatewatConfigByIDResponseExtension
-    on ExtapiResetDefaultGatewatConfigByIDResponse {
-  ExtapiResetDefaultGatewatConfigByIDResponse copyWith({String? status}) {
-    return ExtapiResetDefaultGatewatConfigByIDResponse(
-        status: status ?? this.status);
-  }
-}
-
-@JsonSerializable(explicitToJson: true)
 class ExtapiResetPasswordResetLimitRequest {
   ExtapiResetPasswordResetLimitRequest({
     this.reason,
@@ -15977,90 +15534,6 @@ extension $ExtapiUpdateApplicationRequestExtension
 }
 
 @JsonSerializable(explicitToJson: true)
-class ExtapiUpdateDefaultGatewayConfigRequest {
-  ExtapiUpdateDefaultGatewayConfigRequest({
-    this.defaultConfig,
-    this.model,
-    this.region,
-  });
-
-  factory ExtapiUpdateDefaultGatewayConfigRequest.fromJson(
-          Map<String, dynamic> json) =>
-      _$ExtapiUpdateDefaultGatewayConfigRequestFromJson(json);
-
-  @JsonKey(name: 'defaultConfig')
-  final String? defaultConfig;
-  @JsonKey(name: 'model')
-  final String? model;
-  @JsonKey(name: 'region')
-  final String? region;
-  static const fromJsonFactory =
-      _$ExtapiUpdateDefaultGatewayConfigRequestFromJson;
-  static const toJsonFactory = _$ExtapiUpdateDefaultGatewayConfigRequestToJson;
-  Map<String, dynamic> toJson() =>
-      _$ExtapiUpdateDefaultGatewayConfigRequestToJson(this);
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is ExtapiUpdateDefaultGatewayConfigRequest &&
-            (identical(other.defaultConfig, defaultConfig) ||
-                const DeepCollectionEquality()
-                    .equals(other.defaultConfig, defaultConfig)) &&
-            (identical(other.model, model) ||
-                const DeepCollectionEquality().equals(other.model, model)) &&
-            (identical(other.region, region) ||
-                const DeepCollectionEquality().equals(other.region, region)));
-  }
-}
-
-extension $ExtapiUpdateDefaultGatewayConfigRequestExtension
-    on ExtapiUpdateDefaultGatewayConfigRequest {
-  ExtapiUpdateDefaultGatewayConfigRequest copyWith(
-      {String? defaultConfig, String? model, String? region}) {
-    return ExtapiUpdateDefaultGatewayConfigRequest(
-        defaultConfig: defaultConfig ?? this.defaultConfig,
-        model: model ?? this.model,
-        region: region ?? this.region);
-  }
-}
-
-@JsonSerializable(explicitToJson: true)
-class ExtapiUpdateDefaultGatewayConfigResponse {
-  ExtapiUpdateDefaultGatewayConfigResponse({
-    this.status,
-  });
-
-  factory ExtapiUpdateDefaultGatewayConfigResponse.fromJson(
-          Map<String, dynamic> json) =>
-      _$ExtapiUpdateDefaultGatewayConfigResponseFromJson(json);
-
-  @JsonKey(name: 'status')
-  final String? status;
-  static const fromJsonFactory =
-      _$ExtapiUpdateDefaultGatewayConfigResponseFromJson;
-  static const toJsonFactory = _$ExtapiUpdateDefaultGatewayConfigResponseToJson;
-  Map<String, dynamic> toJson() =>
-      _$ExtapiUpdateDefaultGatewayConfigResponseToJson(this);
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is ExtapiUpdateDefaultGatewayConfigResponse &&
-            (identical(other.status, status) ||
-                const DeepCollectionEquality().equals(other.status, status)));
-  }
-}
-
-extension $ExtapiUpdateDefaultGatewayConfigResponseExtension
-    on ExtapiUpdateDefaultGatewayConfigResponse {
-  ExtapiUpdateDefaultGatewayConfigResponse copyWith({String? status}) {
-    return ExtapiUpdateDefaultGatewayConfigResponse(
-        status: status ?? this.status);
-  }
-}
-
-@JsonSerializable(explicitToJson: true)
 class ExtapiUpdateDeviceKeysRequest {
   ExtapiUpdateDeviceKeysRequest({
     this.deviceKeys,
@@ -16467,32 +15940,14 @@ extension $ExtapiUpdateUserRequestExtension on ExtapiUpdateUserRequest {
 
 @JsonSerializable(explicitToJson: true)
 class ExtapiUpdateUserResponse {
-  ExtapiUpdateUserResponse({
-    this.jwt,
-  });
+  ExtapiUpdateUserResponse();
 
   factory ExtapiUpdateUserResponse.fromJson(Map<String, dynamic> json) =>
       _$ExtapiUpdateUserResponseFromJson(json);
 
-  @JsonKey(name: 'jwt')
-  final String? jwt;
   static const fromJsonFactory = _$ExtapiUpdateUserResponseFromJson;
   static const toJsonFactory = _$ExtapiUpdateUserResponseToJson;
   Map<String, dynamic> toJson() => _$ExtapiUpdateUserResponseToJson(this);
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is ExtapiUpdateUserResponse &&
-            (identical(other.jwt, jwt) ||
-                const DeepCollectionEquality().equals(other.jwt, jwt)));
-  }
-}
-
-extension $ExtapiUpdateUserResponseExtension on ExtapiUpdateUserResponse {
-  ExtapiUpdateUserResponse copyWith({String? jwt}) {
-    return ExtapiUpdateUserResponse(jwt: jwt ?? this.jwt);
-  }
 }
 
 @JsonSerializable(explicitToJson: true)

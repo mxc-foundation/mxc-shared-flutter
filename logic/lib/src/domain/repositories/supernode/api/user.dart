@@ -138,10 +138,10 @@ class UserRepository {
 
   Future<bool> needConfirmationToOtpChange() async {
     try {
-      final res = await client.userService.email2FAPassed(
-        body: ExtapiEmail2FAPassedRequest(language: 'en'),
+      await client.userService.email2FAPassed(
+        body: null,
       );
-      return res.body?.verified == false;
+      return false;
     } on ApiException catch (e) {
       if (e.message == 'authentication failed: email 2FA required') return true;
       rethrow;
@@ -156,15 +156,24 @@ class UserRepository {
 
   Future<bool> verifyOtpChange(String code) async {
     try {
-      final res = await client.userService.email2FAVerify(
-        body: ExtapiEmail2FAVerifyRequest(code: code, language: 'en'),
+      await client.userService.email2FAVerify(
+        body: ExtapiEmail2FAVerifyRequest(code: code),
       );
-      if (res.body?.verified == null) return true;
-      return res.body?.verified == true;
+      return true;
     } on ApiException catch (e) {
       if (e.message == 'invalid code') return false;
       rethrow;
     }
+  }
+
+  Future<void> deleteAccount({String? otpCode, String? password}) async {
+    if (otpCode == null && password == null) {
+      throw ArgumentError.notNull('otpCode or password');
+    }
+    await client.internalService.deleteUser(
+      body: ExtapiDeleteUserRequest(password: password),
+      grpcMetadataXOTP: otpCode,
+    );
   }
 
   Future<void> logout() async {

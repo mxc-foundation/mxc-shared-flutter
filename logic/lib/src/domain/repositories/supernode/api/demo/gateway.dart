@@ -4,6 +4,8 @@ import 'package:decimal/decimal.dart';
 import 'package:mxc_logic/mxc_logic.dart';
 import 'package:mxc_logic/src/domain/repositories/internal/shared_mappers.dart';
 
+ListWithTotal<Gateway>? _innerList;
+
 class DemoGatewayRepository implements GatewayRepository {
   const DemoGatewayRepository();
 
@@ -14,11 +16,15 @@ class DemoGatewayRepository implements GatewayRepository {
     int? offset,
     String? organizationId,
   }) async {
+    if (_innerList != null) {
+      return _innerList!;
+    }
+
     const total = 40;
     offset ??= 0;
     limit ??= total;
     await Future<void>.delayed(const Duration(seconds: 3));
-    return [
+    final result = [
       for (var i = offset; i < min(offset + limit, total); i++)
         Gateway(
           id: 'DemoId$i',
@@ -34,6 +40,8 @@ class DemoGatewayRepository implements GatewayRepository {
           reseller: false,
         ),
     ].withTotal(total);
+    _innerList = result;
+    return result;
   }
 
   @override
@@ -55,8 +63,9 @@ class DemoGatewayRepository implements GatewayRepository {
     required String networkServerId,
     required String? profileId,
     String? orgId,
-  }) =>
-      throw UnimplementedError();
+  }) {
+    throw UnimplementedError();
+  }
 
   @override
   Future<GatewayRegisterResult> register({
@@ -131,7 +140,12 @@ class DemoGatewayRepository implements GatewayRepository {
   }
 
   @override
-  Future<void> delete(String id) => throw UnimplementedError();
+  Future<void> delete(String id) async {
+    final newList =
+        ListWithTotal(_innerList!.total - 1, _innerList!.innerSource);
+    newList.removeWhere((element) => element.id == id);
+    _innerList = newList;
+  }
 
   @override
   Future<GatewayHealthSummary> health({
@@ -141,7 +155,7 @@ class DemoGatewayRepository implements GatewayRepository {
       GatewayHealth(
         id: 'DemoId1',
         ageSeconds: 1,
-        health: 99,
+        health: .99,
         miningFuel: '100'.toDecimal(),
         miningFuelHealth: 100,
         miningFuelMax: '100'.toDecimal(),
@@ -155,7 +169,7 @@ class DemoGatewayRepository implements GatewayRepository {
       GatewayHealth(
         id: 'DemoId2',
         ageSeconds: 1,
-        health: 99,
+        health: .99,
         miningFuel: '100'.toDecimal(),
         miningFuelHealth: 100,
         miningFuelMax: '100'.toDecimal(),
@@ -169,7 +183,7 @@ class DemoGatewayRepository implements GatewayRepository {
       GatewayHealth(
         id: 'DemoId3',
         ageSeconds: 1,
-        health: 99,
+        health: .99,
         miningFuel: '100'.toDecimal(),
         miningFuelHealth: 100,
         miningFuelMax: '100'.toDecimal(),

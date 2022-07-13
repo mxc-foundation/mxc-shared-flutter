@@ -35,23 +35,26 @@ class FontTheme {
   TextStylePack get body2 => TextStylePack(_colorsTheme,
       _baseTextStyle.copyWith(fontWeight: FontWeight.w500, fontSize: 16));
 
-  TextStylePack get h2 => TextStylePack(_colorsTheme,
+  TextStylePack get h1 => TextStylePack(_colorsTheme,
       _baseTextStyle.copyWith(fontSize: 60, fontWeight: FontWeight.w300));
 
-  TextStylePack get h3 =>
-      TextStylePack(_colorsTheme, _baseTextStyle.copyWith(fontSize: 48));
+  TextStylePack get h2 => TextStylePack(_colorsTheme,
+      _baseTextStyle.copyWith(fontSize: 48, fontWeight: FontWeight.w400));
 
-  TextStylePack get h4 =>
+  TextStylePack get h3 =>
       TextStylePack(_colorsTheme, _baseTextStyle.copyWith(fontSize: 34));
 
-  TextStylePack get h5 =>
+  TextStylePack get h4 =>
       TextStylePack(_colorsTheme, _baseTextStyle.copyWith(fontSize: 24));
 
-  TextStylePack get h6 => TextStylePack(_colorsTheme,
+  TextStylePack get h4_2 => TextStylePack(_colorsTheme,
+      _baseTextStyle.copyWith(fontSize: 24, fontWeight: FontWeight.w700));
+
+  TextStylePack get h5 => TextStylePack(_colorsTheme,
       _baseTextStyle.copyWith(fontSize: 20, fontWeight: FontWeight.w500));
 
-  TextStylePack get h7 => TextStylePack(_colorsTheme,
-      _baseTextStyle.copyWith(fontSize: 12, fontWeight: FontWeight.w500));
+  TextStylePack get h6 =>
+      TextStylePack(_colorsTheme, _baseTextStyle.copyWith(fontSize: 20));
 
   /// FontSize: 12
   @Deprecated('Use caption1 - h7 styles')
