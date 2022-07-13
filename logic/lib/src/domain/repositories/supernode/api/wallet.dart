@@ -89,7 +89,7 @@ class WalletRepository {
     return res.body!.downLinkPrice!;
   }
 
-  @Deprecated('APIs do not supper anymore')
+  @Deprecated('APIs do not support anymore')
   Future<void> btcAddLocks({
     required String durationDays,
     required List<String> listMac,
