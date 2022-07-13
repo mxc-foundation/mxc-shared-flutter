@@ -16,6 +16,7 @@ class AmountTextFieldWithSlider extends StatefulWidget {
     required this.max,
     this.fractionDigits = 8,
     this.scrollPadding,
+    this.thumbPadding = 0,
   })  : min = min ?? Decimal.zero,
         super(key: key);
 
@@ -28,6 +29,7 @@ class AmountTextFieldWithSlider extends StatefulWidget {
   final bool enabled;
   final int fractionDigits;
   final EdgeInsets? scrollPadding;
+  final double thumbPadding;
 
   @override
   State<AmountTextFieldWithSlider> createState() =>
@@ -173,6 +175,7 @@ class _AmountTextFieldWithSliderState extends State<AmountTextFieldWithSlider> {
         MxcSlider(
           key: null,
           enableThumbShift: true,
+          thumbPadding: widget.thumbPadding,
           value: _sliderValue,
           onChanged: _onSliderValueChanged,
           enabled: widget.min >= widget.max ? false : widget.enabled,
