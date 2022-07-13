@@ -139,8 +139,6 @@ class _AmountTextFieldWithSliderState extends State<AmountTextFieldWithSlider> {
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.max,
                   children: [
                     widget.hint,
                     if (widget.errorMsg != null)
