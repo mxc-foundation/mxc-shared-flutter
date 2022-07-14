@@ -351,6 +351,7 @@ Map<String, dynamic> _$ExtapiBTCListLocksResponseToJson(
 ExtapiBTCLock _$ExtapiBTCLockFromJson(Map<String, dynamic> json) =>
     ExtapiBTCLock(
       amount: json['amount'] as String?,
+      closed: json['closed'] as bool?,
       coolingOffEnds: json['coolingOffEnds'] == null
           ? null
           : DateTime.parse(json['coolingOffEnds'] as String),
@@ -373,6 +374,7 @@ ExtapiBTCLock _$ExtapiBTCLockFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$ExtapiBTCLockToJson(ExtapiBTCLock instance) =>
     <String, dynamic>{
       'amount': instance.amount,
+      'closed': instance.closed,
       'coolingOffEnds': instance.coolingOffEnds?.toIso8601String(),
       'created': instance.created?.toIso8601String(),
       'gatewayMac': instance.gatewayMac,
@@ -467,6 +469,18 @@ Map<String, dynamic> _$ExtapiBTCMiningSessionResponseToJson(
       'startDate': instance.startDate?.toIso8601String(),
     };
 
+ExtapiBTCMiningStatusResponse _$ExtapiBTCMiningStatusResponseFromJson(
+        Map<String, dynamic> json) =>
+    ExtapiBTCMiningStatusResponse(
+      miningEnabled: json['miningEnabled'] as bool?,
+    );
+
+Map<String, dynamic> _$ExtapiBTCMiningStatusResponseToJson(
+        ExtapiBTCMiningStatusResponse instance) =>
+    <String, dynamic>{
+      'miningEnabled': instance.miningEnabled,
+    };
+
 ExtapiBTCUnlockRequest _$ExtapiBTCUnlockRequestFromJson(
         Map<String, dynamic> json) =>
     ExtapiBTCUnlockRequest(
@@ -493,32 +507,6 @@ Map<String, dynamic> _$ExtapiBTCUnlockResponseToJson(
         ExtapiBTCUnlockResponse instance) =>
     <String, dynamic>{
       'coolingOffTill': instance.coolingOffTill?.toIso8601String(),
-    };
-
-ExtapiBatchResetDefaultGatewatConfigRequest
-    _$ExtapiBatchResetDefaultGatewatConfigRequestFromJson(
-            Map<String, dynamic> json) =>
-        ExtapiBatchResetDefaultGatewatConfigRequest(
-          organizationList: json['organizationList'] as String?,
-        );
-
-Map<String, dynamic> _$ExtapiBatchResetDefaultGatewatConfigRequestToJson(
-        ExtapiBatchResetDefaultGatewatConfigRequest instance) =>
-    <String, dynamic>{
-      'organizationList': instance.organizationList,
-    };
-
-ExtapiBatchResetDefaultGatewatConfigResponse
-    _$ExtapiBatchResetDefaultGatewatConfigResponseFromJson(
-            Map<String, dynamic> json) =>
-        ExtapiBatchResetDefaultGatewatConfigResponse(
-          status: json['status'] as String?,
-        );
-
-Map<String, dynamic> _$ExtapiBatchResetDefaultGatewatConfigResponseToJson(
-        ExtapiBatchResetDefaultGatewatConfigResponse instance) =>
-    <String, dynamic>{
-      'status': instance.status,
     };
 
 ExtapiBindExternalUserRequest _$ExtapiBindExternalUserRequestFromJson(
@@ -668,7 +656,6 @@ ExtapiConfirmRegistrationResponse _$ExtapiConfirmRegistrationResponseFromJson(
       id: json['id'] as String?,
       isActive: json['isActive'] as bool?,
       isAdmin: json['isAdmin'] as bool?,
-      jwt: json['jwt'] as String?,
       sessionTTL: json['sessionTTL'] as int?,
       username: json['username'] as String?,
     );
@@ -680,7 +667,6 @@ Map<String, dynamic> _$ExtapiConfirmRegistrationResponseToJson(
       'id': instance.id,
       'isActive': instance.isActive,
       'isAdmin': instance.isAdmin,
-      'jwt': instance.jwt,
       'sessionTTL': instance.sessionTTL,
       'username': instance.username,
     };
@@ -1389,6 +1375,18 @@ Map<String, dynamic> _$ExtapiDeactivateUserResponseToJson(
       'message': instance.message,
     };
 
+ExtapiDeleteUserRequest _$ExtapiDeleteUserRequestFromJson(
+        Map<String, dynamic> json) =>
+    ExtapiDeleteUserRequest(
+      password: json['password'] as String?,
+    );
+
+Map<String, dynamic> _$ExtapiDeleteUserRequestToJson(
+        ExtapiDeleteUserRequest instance) =>
+    <String, dynamic>{
+      'password': instance.password,
+    };
+
 ExtapiDevice _$ExtapiDeviceFromJson(Map<String, dynamic> json) => ExtapiDevice(
       applicationID: json['applicationID'] as String?,
       description: json['description'] as String?,
@@ -1651,30 +1649,6 @@ Map<String, dynamic> _$ExtapiDownlinkFrameLogToJson(
       'txInfo': instance.txInfo?.toJson(),
     };
 
-ExtapiEmail2FAPassedRequest _$ExtapiEmail2FAPassedRequestFromJson(
-        Map<String, dynamic> json) =>
-    ExtapiEmail2FAPassedRequest(
-      language: json['language'] as String?,
-    );
-
-Map<String, dynamic> _$ExtapiEmail2FAPassedRequestToJson(
-        ExtapiEmail2FAPassedRequest instance) =>
-    <String, dynamic>{
-      'language': instance.language,
-    };
-
-ExtapiEmail2FAPassedResponse _$ExtapiEmail2FAPassedResponseFromJson(
-        Map<String, dynamic> json) =>
-    ExtapiEmail2FAPassedResponse(
-      verified: json['verified'] as bool?,
-    );
-
-Map<String, dynamic> _$ExtapiEmail2FAPassedResponseToJson(
-        ExtapiEmail2FAPassedResponse instance) =>
-    <String, dynamic>{
-      'verified': instance.verified,
-    };
-
 ExtapiEmail2FARequestRequest _$ExtapiEmail2FARequestRequestFromJson(
         Map<String, dynamic> json) =>
     ExtapiEmail2FARequestRequest(
@@ -1687,44 +1661,16 @@ Map<String, dynamic> _$ExtapiEmail2FARequestRequestToJson(
       'language': instance.language,
     };
 
-ExtapiEmail2FARequestResponse _$ExtapiEmail2FARequestResponseFromJson(
-        Map<String, dynamic> json) =>
-    ExtapiEmail2FARequestResponse(
-      sent: json['sent'] as bool?,
-    );
-
-Map<String, dynamic> _$ExtapiEmail2FARequestResponseToJson(
-        ExtapiEmail2FARequestResponse instance) =>
-    <String, dynamic>{
-      'sent': instance.sent,
-    };
-
 ExtapiEmail2FAVerifyRequest _$ExtapiEmail2FAVerifyRequestFromJson(
         Map<String, dynamic> json) =>
     ExtapiEmail2FAVerifyRequest(
       code: json['code'] as String?,
-      language: json['language'] as String?,
     );
 
 Map<String, dynamic> _$ExtapiEmail2FAVerifyRequestToJson(
         ExtapiEmail2FAVerifyRequest instance) =>
     <String, dynamic>{
       'code': instance.code,
-      'language': instance.language,
-    };
-
-ExtapiEmail2FAVerifyResponse _$ExtapiEmail2FAVerifyResponseFromJson(
-        Map<String, dynamic> json) =>
-    ExtapiEmail2FAVerifyResponse(
-      remainedAttempts: json['remainedAttempts'] as int?,
-      verified: json['verified'] as bool?,
-    );
-
-Map<String, dynamic> _$ExtapiEmail2FAVerifyResponseToJson(
-        ExtapiEmail2FAVerifyResponse instance) =>
-    <String, dynamic>{
-      'remainedAttempts': instance.remainedAttempts,
-      'verified': instance.verified,
     };
 
 ExtapiEnqueueDeviceQueueItemRequest
@@ -2110,19 +2056,6 @@ Map<String, dynamic> _$ExtapiGetAppserverVersionResponseToJson(
         ExtapiGetAppserverVersionResponse instance) =>
     <String, dynamic>{
       'version': instance.version,
-    };
-
-ExtapiGetDefaultGatewayConfigResponse
-    _$ExtapiGetDefaultGatewayConfigResponseFromJson(
-            Map<String, dynamic> json) =>
-        ExtapiGetDefaultGatewayConfigResponse(
-          defaultConfig: json['defaultConfig'] as String?,
-        );
-
-Map<String, dynamic> _$ExtapiGetDefaultGatewayConfigResponseToJson(
-        ExtapiGetDefaultGatewayConfigResponse instance) =>
-    <String, dynamic>{
-      'defaultConfig': instance.defaultConfig,
     };
 
 ExtapiGetDeviceActivationResponse _$ExtapiGetDeviceActivationResponseFromJson(
@@ -2913,36 +2846,6 @@ Map<String, dynamic> _$ExtapiGlobalSearchResultToJson(
       'score': instance.score,
     };
 
-ExtapiInsertNewDefaultGatewayConfigRequest
-    _$ExtapiInsertNewDefaultGatewayConfigRequestFromJson(
-            Map<String, dynamic> json) =>
-        ExtapiInsertNewDefaultGatewayConfigRequest(
-          defaultConfig: json['defaultConfig'] as String?,
-          model: json['model'] as String?,
-          region: json['region'] as String?,
-        );
-
-Map<String, dynamic> _$ExtapiInsertNewDefaultGatewayConfigRequestToJson(
-        ExtapiInsertNewDefaultGatewayConfigRequest instance) =>
-    <String, dynamic>{
-      'defaultConfig': instance.defaultConfig,
-      'model': instance.model,
-      'region': instance.region,
-    };
-
-ExtapiInsertNewDefaultGatewayConfigResponse
-    _$ExtapiInsertNewDefaultGatewayConfigResponseFromJson(
-            Map<String, dynamic> json) =>
-        ExtapiInsertNewDefaultGatewayConfigResponse(
-          status: json['status'] as String?,
-        );
-
-Map<String, dynamic> _$ExtapiInsertNewDefaultGatewayConfigResponseToJson(
-        ExtapiInsertNewDefaultGatewayConfigResponse instance) =>
-    <String, dynamic>{
-      'status': instance.status,
-    };
-
 ExtapiListApplicationResponse _$ExtapiListApplicationResponseFromJson(
         Map<String, dynamic> json) =>
     ExtapiListApplicationResponse(
@@ -3228,7 +3131,6 @@ ExtapiLoginResponse _$ExtapiLoginResponseFromJson(Map<String, dynamic> json) =>
     ExtapiLoginResponse(
       authToken: json['authToken'] as String?,
       is2faRequired: json['is2faRequired'] as bool?,
-      jwt: json['jwt'] as String?,
     );
 
 Map<String, dynamic> _$ExtapiLoginResponseToJson(
@@ -3236,7 +3138,6 @@ Map<String, dynamic> _$ExtapiLoginResponseToJson(
     <String, dynamic>{
       'authToken': instance.authToken,
       'is2faRequired': instance.is2faRequired,
-      'jwt': instance.jwt,
     };
 
 ExtapiLogoutResponse _$ExtapiLogoutResponseFromJson(
@@ -3836,32 +3737,6 @@ Map<String, dynamic> _$ExtapiReset2FAResponseToJson(
       'message': instance.message,
     };
 
-ExtapiResetDefaultGatewatConfigByIDRequest
-    _$ExtapiResetDefaultGatewatConfigByIDRequestFromJson(
-            Map<String, dynamic> json) =>
-        ExtapiResetDefaultGatewatConfigByIDRequest(
-          id: json['id'] as String?,
-        );
-
-Map<String, dynamic> _$ExtapiResetDefaultGatewatConfigByIDRequestToJson(
-        ExtapiResetDefaultGatewatConfigByIDRequest instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-    };
-
-ExtapiResetDefaultGatewatConfigByIDResponse
-    _$ExtapiResetDefaultGatewatConfigByIDResponseFromJson(
-            Map<String, dynamic> json) =>
-        ExtapiResetDefaultGatewatConfigByIDResponse(
-          status: json['status'] as String?,
-        );
-
-Map<String, dynamic> _$ExtapiResetDefaultGatewatConfigByIDResponseToJson(
-        ExtapiResetDefaultGatewatConfigByIDResponse instance) =>
-    <String, dynamic>{
-      'status': instance.status,
-    };
-
 ExtapiResetPasswordResetLimitRequest
     _$ExtapiResetPasswordResetLimitRequestFromJson(Map<String, dynamic> json) =>
         ExtapiResetPasswordResetLimitRequest(
@@ -4449,36 +4324,6 @@ Map<String, dynamic> _$ExtapiUpdateApplicationRequestToJson(
       'application': instance.application?.toJson(),
     };
 
-ExtapiUpdateDefaultGatewayConfigRequest
-    _$ExtapiUpdateDefaultGatewayConfigRequestFromJson(
-            Map<String, dynamic> json) =>
-        ExtapiUpdateDefaultGatewayConfigRequest(
-          defaultConfig: json['defaultConfig'] as String?,
-          model: json['model'] as String?,
-          region: json['region'] as String?,
-        );
-
-Map<String, dynamic> _$ExtapiUpdateDefaultGatewayConfigRequestToJson(
-        ExtapiUpdateDefaultGatewayConfigRequest instance) =>
-    <String, dynamic>{
-      'defaultConfig': instance.defaultConfig,
-      'model': instance.model,
-      'region': instance.region,
-    };
-
-ExtapiUpdateDefaultGatewayConfigResponse
-    _$ExtapiUpdateDefaultGatewayConfigResponseFromJson(
-            Map<String, dynamic> json) =>
-        ExtapiUpdateDefaultGatewayConfigResponse(
-          status: json['status'] as String?,
-        );
-
-Map<String, dynamic> _$ExtapiUpdateDefaultGatewayConfigResponseToJson(
-        ExtapiUpdateDefaultGatewayConfigResponse instance) =>
-    <String, dynamic>{
-      'status': instance.status,
-    };
-
 ExtapiUpdateDeviceKeysRequest _$ExtapiUpdateDeviceKeysRequestFromJson(
         Map<String, dynamic> json) =>
     ExtapiUpdateDeviceKeysRequest(
@@ -4654,15 +4499,11 @@ Map<String, dynamic> _$ExtapiUpdateUserRequestToJson(
 
 ExtapiUpdateUserResponse _$ExtapiUpdateUserResponseFromJson(
         Map<String, dynamic> json) =>
-    ExtapiUpdateUserResponse(
-      jwt: json['jwt'] as String?,
-    );
+    ExtapiUpdateUserResponse();
 
 Map<String, dynamic> _$ExtapiUpdateUserResponseToJson(
         ExtapiUpdateUserResponse instance) =>
-    <String, dynamic>{
-      'jwt': instance.jwt,
-    };
+    <String, dynamic>{};
 
 ExtapiUplinkFrameLog _$ExtapiUplinkFrameLogFromJson(
         Map<String, dynamic> json) =>
