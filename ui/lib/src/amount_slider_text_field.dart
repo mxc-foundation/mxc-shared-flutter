@@ -126,48 +126,51 @@ class _AmountTextFieldWithSliderState extends State<AmountTextFieldWithSlider> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            ConstrainedBox(
-              constraints: const BoxConstraints(
-                maxWidth: 220,
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              ConstrainedBox(
+                constraints: const BoxConstraints(
+                  maxWidth: 220,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    widget.hint,
+                    if (widget.errorMsg != null)
+                      Text(
+                        widget.errorMsg!,
+                        style: FontTheme.of(context).caption1.error(),
+                      ),
+                  ],
+                ),
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  widget.hint,
-                  if (widget.errorMsg != null)
-                    Text(
-                      widget.errorMsg!,
-                      style: FontTheme.of(context).caption1.error(),
-                    ),
-                ],
-              ),
-            ),
-            const SizedBox(width: 32),
-            Expanded(
-              child: Align(
-                alignment: Alignment.centerRight,
-                child: IntrinsicWidth(
-                  child: Container(
-                    constraints: const BoxConstraints(
-                      minWidth: 64,
-                    ),
-                    child: MxcMiniTextField(
-                      key: null,
-                      controller: controller,
-                      scrollPadding: widget.scrollPadding,
-                      error: widget.errorMsg != null,
-                      disabled: !widget.enabled,
+              const SizedBox(width: 32),
+              Expanded(
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: IntrinsicWidth(
+                    child: Container(
+                      constraints: const BoxConstraints(
+                        minWidth: 64,
+                      ),
+                      child: MxcMiniTextField(
+                        key: null,
+                        controller: controller,
+                        scrollPadding: widget.scrollPadding,
+                        error: widget.errorMsg != null,
+                        disabled: !widget.enabled,
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
         const SizedBox(height: 3),
         MxcSlider(
