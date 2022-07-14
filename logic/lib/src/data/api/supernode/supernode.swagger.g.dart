@@ -619,6 +619,44 @@ Map<String, dynamic> _$ExtapiCheckACLResponseToJson(
         ExtapiCheckACLResponse instance) =>
     <String, dynamic>{};
 
+ExtapiCheckParticipantsResponse _$ExtapiCheckParticipantsResponseFromJson(
+        Map<String, dynamic> json) =>
+    ExtapiCheckParticipantsResponse(
+      participation: (json['participation'] as List<dynamic>?)
+              ?.map(
+                  (e) => Extapiparticipant.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$ExtapiCheckParticipantsResponseToJson(
+        ExtapiCheckParticipantsResponse instance) =>
+    <String, dynamic>{
+      'participation': instance.participation?.map((e) => e.toJson()).toList(),
+    };
+
+ExtapiClaimRewardRequest _$ExtapiClaimRewardRequestFromJson(
+        Map<String, dynamic> json) =>
+    ExtapiClaimRewardRequest(
+      details: json['details'] as String?,
+      participantID: json['participantID'] as String?,
+    );
+
+Map<String, dynamic> _$ExtapiClaimRewardRequestToJson(
+        ExtapiClaimRewardRequest instance) =>
+    <String, dynamic>{
+      'details': instance.details,
+      'participantID': instance.participantID,
+    };
+
+ExtapiClaimRewardResponse _$ExtapiClaimRewardResponseFromJson(
+        Map<String, dynamic> json) =>
+    ExtapiClaimRewardResponse();
+
+Map<String, dynamic> _$ExtapiClaimRewardResponseToJson(
+        ExtapiClaimRewardResponse instance) =>
+    <String, dynamic>{};
+
 ExtapiConfirmPasswordResetReq _$ExtapiConfirmPasswordResetReqFromJson(
         Map<String, dynamic> json) =>
     ExtapiConfirmPasswordResetReq(
@@ -2879,6 +2917,22 @@ Map<String, dynamic> _$ExtapiListCellsResponseToJson(
       'cell': instance.cell?.map((e) => e.toJson()).toList(),
     };
 
+ExtapiListCurrentActivitiesResponse
+    _$ExtapiListCurrentActivitiesResponseFromJson(Map<String, dynamic> json) =>
+        ExtapiListCurrentActivitiesResponse(
+          activities: (json['activities'] as List<dynamic>?)
+                  ?.map(
+                      (e) => Extapiactivity.fromJson(e as Map<String, dynamic>))
+                  .toList() ??
+              [],
+        );
+
+Map<String, dynamic> _$ExtapiListCurrentActivitiesResponseToJson(
+        ExtapiListCurrentActivitiesResponse instance) =>
+    <String, dynamic>{
+      'activities': instance.activities?.map((e) => e.toJson()).toList(),
+    };
+
 ExtapiListDeviceProfileResponse _$ExtapiListDeviceProfileResponseFromJson(
         Map<String, dynamic> json) =>
     ExtapiListDeviceProfileResponse(
@@ -3491,6 +3545,36 @@ Map<String, dynamic> _$ExtapiOrganizationUserListItemToJson(
       'username': instance.username,
     };
 
+ExtapiParticipateRequest _$ExtapiParticipateRequestFromJson(
+        Map<String, dynamic> json) =>
+    ExtapiParticipateRequest(
+      amount: json['amount'] as String?,
+      organizationID: json['organizationID'] as String?,
+      tierID: json['tierID'] as String?,
+    );
+
+Map<String, dynamic> _$ExtapiParticipateRequestToJson(
+        ExtapiParticipateRequest instance) =>
+    <String, dynamic>{
+      'amount': instance.amount,
+      'organizationID': instance.organizationID,
+      'tierID': instance.tierID,
+    };
+
+ExtapiParticipateResponse _$ExtapiParticipateResponseFromJson(
+        Map<String, dynamic> json) =>
+    ExtapiParticipateResponse(
+      participantID: json['participantID'] as String?,
+      transactionID: json['transactionID'] as String?,
+    );
+
+Map<String, dynamic> _$ExtapiParticipateResponseToJson(
+        ExtapiParticipateResponse instance) =>
+    <String, dynamic>{
+      'participantID': instance.participantID,
+      'transactionID': instance.transactionID,
+    };
+
 ExtapiPasswordResetReq _$ExtapiPasswordResetReqFromJson(
         Map<String, dynamic> json) =>
     ExtapiPasswordResetReq(
@@ -3908,6 +3992,7 @@ ExtapiStake _$ExtapiStakeFromJson(Map<String, dynamic> json) => ExtapiStake(
       active: json['active'] as bool?,
       amount: json['amount'] as String?,
       boost: json['boost'] as String?,
+      claimedReward: json['claimedReward'] as bool?,
       endTime: json['endTime'] == null
           ? null
           : DateTime.parse(json['endTime'] as String),
@@ -3915,6 +4000,7 @@ ExtapiStake _$ExtapiStakeFromJson(Map<String, dynamic> json) => ExtapiStake(
       lockTill: json['lockTill'] == null
           ? null
           : DateTime.parse(json['lockTill'] as String),
+      participantID: json['participantID'] as String?,
       revenue: json['revenue'] as String?,
       startTime: json['startTime'] == null
           ? null
@@ -3926,9 +4012,11 @@ Map<String, dynamic> _$ExtapiStakeToJson(ExtapiStake instance) =>
       'active': instance.active,
       'amount': instance.amount,
       'boost': instance.boost,
+      'claimedReward': instance.claimedReward,
       'endTime': instance.endTime?.toIso8601String(),
       'id': instance.id,
       'lockTill': instance.lockTill?.toIso8601String(),
+      'participantID': instance.participantID,
       'revenue': instance.revenue,
       'startTime': instance.startTime?.toIso8601String(),
     };
@@ -4731,6 +4819,53 @@ Map<String, dynamic> _$ExtapiWithdrawHistoryToJson(
       'withdrawFee': instance.withdrawFee,
     };
 
+Extapiactivity _$ExtapiactivityFromJson(Map<String, dynamic> json) =>
+    Extapiactivity(
+      activityID: json['activityID'] as String?,
+      activityName: json['activityName'] as String?,
+      banners: (json['banners'] as List<dynamic>?)
+              ?.map((e) => Extapibanner.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      tiers: (json['tiers'] as List<dynamic>?)
+              ?.map((e) => Extapitier.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$ExtapiactivityToJson(Extapiactivity instance) =>
+    <String, dynamic>{
+      'activityID': instance.activityID,
+      'activityName': instance.activityName,
+      'banners': instance.banners?.map((e) => e.toJson()).toList(),
+      'tiers': instance.tiers?.map((e) => e.toJson()).toList(),
+    };
+
+Extapibanner _$ExtapibannerFromJson(Map<String, dynamic> json) => Extapibanner(
+      imageLink: json['imageLink'] as String?,
+      name: json['name'] as String?,
+    );
+
+Map<String, dynamic> _$ExtapibannerToJson(Extapibanner instance) =>
+    <String, dynamic>{
+      'imageLink': instance.imageLink,
+      'name': instance.name,
+    };
+
+Extapiparticipant _$ExtapiparticipantFromJson(Map<String, dynamic> json) =>
+    Extapiparticipant(
+      participantID: json['participantID'] as String?,
+      rewardClaimed: json['rewardClaimed'] as bool?,
+      tierID: json['tierID'] as String?,
+    );
+
+Map<String, dynamic> _$ExtapiparticipantToJson(Extapiparticipant instance) =>
+    <String, dynamic>{
+      'participantID': instance.participantID,
+      'rewardClaimed': instance.rewardClaimed,
+      'tierID': instance.tierID,
+    };
+
 Extapisettings _$ExtapisettingsFromJson(Map<String, dynamic> json) =>
     Extapisettings(
       description: json['description'] as String?,
@@ -4754,6 +4889,21 @@ Map<String, dynamic> _$ExtapisettingsToJson(Extapisettings instance) =>
       'port': instance.port,
       'topics': instance.topics?.map((e) => e.toJson()).toList(),
       'username': instance.username,
+    };
+
+Extapitier _$ExtapitierFromJson(Map<String, dynamic> json) => Extapitier(
+      details: json['details'] as String?,
+      id: json['id'] as String?,
+      slots: json['slots'] as String?,
+      slotsUsed: json['slotsUsed'] as String?,
+    );
+
+Map<String, dynamic> _$ExtapitierToJson(Extapitier instance) =>
+    <String, dynamic>{
+      'details': instance.details,
+      'id': instance.id,
+      'slots': instance.slots,
+      'slotsUsed': instance.slotsUsed,
     };
 
 Extapitopic _$ExtapitopicFromJson(Map<String, dynamic> json) => Extapitopic(
