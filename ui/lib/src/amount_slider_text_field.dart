@@ -170,15 +170,12 @@ class _AmountTextFieldWithSliderState extends State<AmountTextFieldWithSlider> {
           ],
         ),
         const SizedBox(height: 3),
-        Padding(
-          padding: const EdgeInsets.only(left: 8),
-          child: MxcSlider(
-            key: null,
-            thumbPadding: 8,
-            value: _sliderValue,
-            onChanged: _onSliderValueChanged,
-            enabled: widget.min >= widget.max ? false : widget.enabled,
-          ),
+        MxcSlider(
+          key: null,
+          enableThumbShift: true,
+          value: _sliderValue,
+          onChanged: _onSliderValueChanged,
+          enabled: widget.min >= widget.max ? false : widget.enabled,
         ),
       ],
     );
