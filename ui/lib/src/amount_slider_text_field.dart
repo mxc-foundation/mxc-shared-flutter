@@ -9,7 +9,7 @@ class AmountTextFieldWithSlider extends StatefulWidget {
     required Key? key,
     required this.value,
     required this.onChanged,
-    required this.text,
+    required this.hint,
     this.errorMsg,
     this.enabled = true,
     Decimal? min,
@@ -24,7 +24,7 @@ class AmountTextFieldWithSlider extends StatefulWidget {
   final Decimal max;
   final String? errorMsg;
   final void Function(Decimal?) onChanged;
-  final String text;
+  final Widget hint;
   final bool enabled;
   final int fractionDigits;
   final EdgeInsets? scrollPadding;
@@ -130,6 +130,8 @@ class _AmountTextFieldWithSliderState extends State<AmountTextFieldWithSlider> {
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
             children: [
               ConstrainedBox(
                 constraints: const BoxConstraints(
@@ -138,13 +140,12 @@ class _AmountTextFieldWithSliderState extends State<AmountTextFieldWithSlider> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      widget.text,
-                      style: FontTheme.of(context).subtitle1.label(),
-                    ),
+                    widget.hint,
                     if (widget.errorMsg != null)
-                      Text(widget.errorMsg!,
-                          style: FontTheme.of(context).caption1.error()),
+                      Text(
+                        widget.errorMsg!,
+                        style: FontTheme.of(context).caption1.error(),
+                      ),
                   ],
                 ),
               ),
