@@ -16,7 +16,6 @@ class AmountTextFieldWithSlider extends StatefulWidget {
     required this.max,
     this.fractionDigits = 8,
     this.scrollPadding,
-    this.thumbPadding = 0,
   })  : min = min ?? Decimal.zero,
         super(key: key);
 
@@ -29,7 +28,6 @@ class AmountTextFieldWithSlider extends StatefulWidget {
   final bool enabled;
   final int fractionDigits;
   final EdgeInsets? scrollPadding;
-  final double thumbPadding;
 
   @override
   State<AmountTextFieldWithSlider> createState() =>
@@ -128,54 +126,56 @@ class _AmountTextFieldWithSliderState extends State<AmountTextFieldWithSlider> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            ConstrainedBox(
-              constraints: const BoxConstraints(
-                maxWidth: 220,
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              ConstrainedBox(
+                constraints: const BoxConstraints(
+                  maxWidth: 220,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    widget.hint,
+                    if (widget.errorMsg != null)
+                      Text(
+                        widget.errorMsg!,
+                        style: FontTheme.of(context).caption1.error(),
+                      ),
+                  ],
+                ),
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  widget.hint,
-                  if (widget.errorMsg != null)
-                    Text(
-                      widget.errorMsg!,
-                      style: FontTheme.of(context).caption1.error(),
-                    ),
-                ],
-              ),
-            ),
-            const SizedBox(width: 32),
-            Expanded(
-              child: Align(
-                alignment: Alignment.centerRight,
-                child: IntrinsicWidth(
-                  child: Container(
-                    constraints: const BoxConstraints(
-                      minWidth: 64,
-                    ),
-                    child: MxcMiniTextField(
-                      key: null,
-                      controller: controller,
-                      scrollPadding: widget.scrollPadding,
-                      error: widget.errorMsg != null,
-                      disabled: !widget.enabled,
+              const SizedBox(width: 32),
+              Expanded(
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: IntrinsicWidth(
+                    child: Container(
+                      constraints: const BoxConstraints(
+                        minWidth: 64,
+                      ),
+                      child: MxcMiniTextField(
+                        key: null,
+                        controller: controller,
+                        scrollPadding: widget.scrollPadding,
+                        error: widget.errorMsg != null,
+                        disabled: !widget.enabled,
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
         const SizedBox(height: 3),
         MxcSlider(
           key: null,
           enableThumbShift: true,
-          thumbPadding: widget.thumbPadding,
           value: _sliderValue,
           onChanged: _onSliderValueChanged,
           enabled: widget.min >= widget.max ? false : widget.enabled,
