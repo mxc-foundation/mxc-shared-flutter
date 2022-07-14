@@ -2398,20 +2398,6 @@ Map<String, dynamic> _$ExtapiGetMxprotocolServerVersionResponseToJson(
       'version': instance.version,
     };
 
-ExtapiGetNFTEggImageResponse _$ExtapiGetNFTEggImageResponseFromJson(
-        Map<String, dynamic> json) =>
-    ExtapiGetNFTEggImageResponse(
-      data: json['data'] as String?,
-      finish: json['finish'] as bool?,
-    );
-
-Map<String, dynamic> _$ExtapiGetNFTEggImageResponseToJson(
-        ExtapiGetNFTEggImageResponse instance) =>
-    <String, dynamic>{
-      'data': instance.data,
-      'finish': instance.finish,
-    };
-
 ExtapiGetNetworkServerResponse _$ExtapiGetNetworkServerResponseFromJson(
         Map<String, dynamic> json) =>
     ExtapiGetNetworkServerResponse(
@@ -5130,25 +5116,6 @@ ApiGatewaysGatewayIDFramesGet$Response
 
 Map<String, dynamic> _$ApiGatewaysGatewayIDFramesGet$ResponseToJson(
         ApiGatewaysGatewayIDFramesGet$Response instance) =>
-    <String, dynamic>{
-      'error': instance.error?.toJson(),
-      'result': instance.result?.toJson(),
-    };
-
-ApiNftGetImageGet$Response _$ApiNftGetImageGet$ResponseFromJson(
-        Map<String, dynamic> json) =>
-    ApiNftGetImageGet$Response(
-      error: json['error'] == null
-          ? null
-          : RuntimeStreamError.fromJson(json['error'] as Map<String, dynamic>),
-      result: json['result'] == null
-          ? null
-          : ExtapiGetNFTEggImageResponse.fromJson(
-              json['result'] as Map<String, dynamic>),
-    );
-
-Map<String, dynamic> _$ApiNftGetImageGet$ResponseToJson(
-        ApiNftGetImageGet$Response instance) =>
     <String, dynamic>{
       'error': instance.error?.toJson(),
       'result': instance.result?.toJson(),

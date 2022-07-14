@@ -1982,32 +1982,6 @@ abstract class NetworkServerService extends ChopperService {
 }
 
 @ChopperApi()
-abstract class NFTService extends ChopperService {
-  static NFTService createService([ChopperClient? client]) {
-    if (client != null) {
-      return _$NFTService(client);
-    }
-
-    final newClient = ChopperClient(
-      services: [_$NFTService()],
-      converter: chopper.JsonConverter(), /*baseUrl: YOUR_BASE_URL*/
-    );
-    return _$NFTService(newClient);
-  }
-
-  ///
-  ///@param Grpc-Metadata-X-OTP OTP Code
-  ///@param Grpc-Metadata-Authorization Auth Token
-
-  @Get(path: '/api/nft/get-image')
-  Future<chopper.Response<ApiNftGetImageGet$Response>> getNFTEggImage(
-      {@Header('Grpc-Metadata-X-OTP')
-          String? grpcMetadataXOTP,
-      @Header('Grpc-Metadata-Authorization')
-          String? grpcMetadataAuthorization});
-}
-
-@ChopperApi()
 abstract class OrganizationService extends ChopperService {
   static OrganizationService createService([ChopperClient? client]) {
     if (client != null) {
@@ -3464,7 +3438,6 @@ extension SupernodeSwaggerExtension on ChopperClient {
       getService<MQTTIntegrationService>();
   NetworkServerService get networkServerService =>
       getService<NetworkServerService>();
-  NFTService get nFTService => getService<NFTService>();
   OrganizationService get organizationService =>
       getService<OrganizationService>();
   ReportService get reportService => getService<ReportService>();
@@ -3496,7 +3469,6 @@ List<ChopperService> get supernodeServices => [
       MosquittoAuthService.createService(),
       MQTTIntegrationService.createService(),
       NetworkServerService.createService(),
-      NFTService.createService(),
       OrganizationService.createService(),
       ReportService.createService(),
       ServerInfoService.createService(),
@@ -3698,7 +3670,6 @@ final Map<Type, Object Function(Map<String, dynamic>)>
   ExtapiGetMiningInfoResponse: ExtapiGetMiningInfoResponse.fromJsonFactory,
   ExtapiGetMxprotocolServerVersionResponse:
       ExtapiGetMxprotocolServerVersionResponse.fromJsonFactory,
-  ExtapiGetNFTEggImageResponse: ExtapiGetNFTEggImageResponse.fromJsonFactory,
   ExtapiGetNetworkServerResponse:
       ExtapiGetNetworkServerResponse.fromJsonFactory,
   ExtapiGetOrdersByUserResponse: ExtapiGetOrdersByUserResponse.fromJsonFactory,
@@ -3932,7 +3903,6 @@ final Map<Type, Object Function(Map<String, dynamic>)>
       ApiDevicesDevEUIFramesGet$Response.fromJsonFactory,
   ApiGatewaysGatewayIDFramesGet$Response:
       ApiGatewaysGatewayIDFramesGet$Response.fromJsonFactory,
-  ApiNftGetImageGet$Response: ApiNftGetImageGet$Response.fromJsonFactory,
   ApiReportMiningIncomeCsvGet$Response:
       ApiReportMiningIncomeCsvGet$Response.fromJsonFactory,
   ApiReportMiningIncomePdfGet$Response:
@@ -4133,6 +4103,57 @@ class ExtapiAccessTokenCreateRequest {
   }
 }
 
+extension $ExtapiAccessTokenCreateRequestExtension
+    on ExtapiAccessTokenCreateRequest {
+  ExtapiAccessTokenCreateRequest copyWith(
+      {String? description,
+      DateTime? expires,
+      String? maxInactiveSeconds,
+      String? organizationId,
+      List<String>? scope}) {
+    return ExtapiAccessTokenCreateRequest(
+        description: description ?? this.description,
+        expires: expires ?? this.expires,
+        maxInactiveSeconds: maxInactiveSeconds ?? this.maxInactiveSeconds,
+        organizationId: organizationId ?? this.organizationId,
+        scope: scope ?? this.scope);
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class ExtapiAccessTokenCreateResponse {
+  ExtapiAccessTokenCreateResponse({
+    this.authToken,
+  });
+
+  factory ExtapiAccessTokenCreateResponse.fromJson(Map<String, dynamic> json) =>
+      _$ExtapiAccessTokenCreateResponseFromJson(json);
+
+  @JsonKey(name: 'authToken')
+  final String? authToken;
+  static const fromJsonFactory = _$ExtapiAccessTokenCreateResponseFromJson;
+  static const toJsonFactory = _$ExtapiAccessTokenCreateResponseToJson;
+  Map<String, dynamic> toJson() =>
+      _$ExtapiAccessTokenCreateResponseToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is ExtapiAccessTokenCreateResponse &&
+            (identical(other.authToken, authToken) ||
+                const DeepCollectionEquality()
+                    .equals(other.authToken, authToken)));
+  }
+}
+
+extension $ExtapiAccessTokenCreateResponseExtension
+    on ExtapiAccessTokenCreateResponse {
+  ExtapiAccessTokenCreateResponse copyWith({String? authToken}) {
+    return ExtapiAccessTokenCreateResponse(
+        authToken: authToken ?? this.authToken);
+  }
+}
+
 @JsonSerializable(explicitToJson: true)
 class ExtapiAccessTokenListResponse {
   ExtapiAccessTokenListResponse({
@@ -4206,57 +4227,6 @@ class ExtapiAccessTokenRevokeResponse {
   static const toJsonFactory = _$ExtapiAccessTokenRevokeResponseToJson;
   Map<String, dynamic> toJson() =>
       _$ExtapiAccessTokenRevokeResponseToJson(this);
-}
-
-extension $ExtapiAccessTokenCreateRequestExtension
-    on ExtapiAccessTokenCreateRequest {
-  ExtapiAccessTokenCreateRequest copyWith(
-      {String? description,
-      DateTime? expires,
-      String? maxInactiveSeconds,
-      String? organizationId,
-      List<String>? scope}) {
-    return ExtapiAccessTokenCreateRequest(
-        description: description ?? this.description,
-        expires: expires ?? this.expires,
-        maxInactiveSeconds: maxInactiveSeconds ?? this.maxInactiveSeconds,
-        organizationId: organizationId ?? this.organizationId,
-        scope: scope ?? this.scope);
-  }
-}
-
-@JsonSerializable(explicitToJson: true)
-class ExtapiAccessTokenCreateResponse {
-  ExtapiAccessTokenCreateResponse({
-    this.authToken,
-  });
-
-  factory ExtapiAccessTokenCreateResponse.fromJson(Map<String, dynamic> json) =>
-      _$ExtapiAccessTokenCreateResponseFromJson(json);
-
-  @JsonKey(name: 'authToken')
-  final String? authToken;
-  static const fromJsonFactory = _$ExtapiAccessTokenCreateResponseFromJson;
-  static const toJsonFactory = _$ExtapiAccessTokenCreateResponseToJson;
-  Map<String, dynamic> toJson() =>
-      _$ExtapiAccessTokenCreateResponseToJson(this);
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is ExtapiAccessTokenCreateResponse &&
-            (identical(other.authToken, authToken) ||
-                const DeepCollectionEquality()
-                    .equals(other.authToken, authToken)));
-  }
-}
-
-extension $ExtapiAccessTokenCreateResponseExtension
-    on ExtapiAccessTokenCreateResponse {
-  ExtapiAccessTokenCreateResponse copyWith({String? authToken}) {
-    return ExtapiAccessTokenCreateResponse(
-        authToken: authToken ?? this.authToken);
-  }
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -10411,43 +10381,6 @@ extension $ExtapiGetMxprotocolServerVersionResponseExtension
   ExtapiGetMxprotocolServerVersionResponse copyWith({String? version}) {
     return ExtapiGetMxprotocolServerVersionResponse(
         version: version ?? this.version);
-  }
-}
-
-@JsonSerializable(explicitToJson: true)
-class ExtapiGetNFTEggImageResponse {
-  ExtapiGetNFTEggImageResponse({
-    this.data,
-    this.finish,
-  });
-
-  factory ExtapiGetNFTEggImageResponse.fromJson(Map<String, dynamic> json) =>
-      _$ExtapiGetNFTEggImageResponseFromJson(json);
-
-  @JsonKey(name: 'data')
-  final String? data;
-  @JsonKey(name: 'finish')
-  final bool? finish;
-  static const fromJsonFactory = _$ExtapiGetNFTEggImageResponseFromJson;
-  static const toJsonFactory = _$ExtapiGetNFTEggImageResponseToJson;
-  Map<String, dynamic> toJson() => _$ExtapiGetNFTEggImageResponseToJson(this);
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is ExtapiGetNFTEggImageResponse &&
-            (identical(other.data, data) ||
-                const DeepCollectionEquality().equals(other.data, data)) &&
-            (identical(other.finish, finish) ||
-                const DeepCollectionEquality().equals(other.finish, finish)));
-  }
-}
-
-extension $ExtapiGetNFTEggImageResponseExtension
-    on ExtapiGetNFTEggImageResponse {
-  ExtapiGetNFTEggImageResponse copyWith({String? data, bool? finish}) {
-    return ExtapiGetNFTEggImageResponse(
-        data: data ?? this.data, finish: finish ?? this.finish);
   }
 }
 
@@ -17645,43 +17578,6 @@ extension $ApiGatewaysGatewayIDFramesGet$ResponseExtension
       {RuntimeStreamError? error,
       ExtapiStreamGatewayFrameLogsResponse? result}) {
     return ApiGatewaysGatewayIDFramesGet$Response(
-        error: error ?? this.error, result: result ?? this.result);
-  }
-}
-
-@JsonSerializable(explicitToJson: true)
-class ApiNftGetImageGet$Response {
-  ApiNftGetImageGet$Response({
-    this.error,
-    this.result,
-  });
-
-  factory ApiNftGetImageGet$Response.fromJson(Map<String, dynamic> json) =>
-      _$ApiNftGetImageGet$ResponseFromJson(json);
-
-  @JsonKey(name: 'error')
-  final RuntimeStreamError? error;
-  @JsonKey(name: 'result')
-  final ExtapiGetNFTEggImageResponse? result;
-  static const fromJsonFactory = _$ApiNftGetImageGet$ResponseFromJson;
-  static const toJsonFactory = _$ApiNftGetImageGet$ResponseToJson;
-  Map<String, dynamic> toJson() => _$ApiNftGetImageGet$ResponseToJson(this);
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is ApiNftGetImageGet$Response &&
-            (identical(other.error, error) ||
-                const DeepCollectionEquality().equals(other.error, error)) &&
-            (identical(other.result, result) ||
-                const DeepCollectionEquality().equals(other.result, result)));
-  }
-}
-
-extension $ApiNftGetImageGet$ResponseExtension on ApiNftGetImageGet$Response {
-  ApiNftGetImageGet$Response copyWith(
-      {RuntimeStreamError? error, ExtapiGetNFTEggImageResponse? result}) {
-    return ApiNftGetImageGet$Response(
         error: error ?? this.error, result: result ?? this.result);
   }
 }

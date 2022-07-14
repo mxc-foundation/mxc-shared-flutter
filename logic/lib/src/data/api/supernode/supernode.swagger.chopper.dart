@@ -2262,32 +2262,6 @@ class _$NetworkServerService extends NetworkServerService {
 }
 
 // ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations, unnecessary_brace_in_string_interps
-class _$NFTService extends NFTService {
-  _$NFTService([ChopperClient? client]) {
-    if (client == null) return;
-    this.client = client;
-  }
-
-  @override
-  final definitionType = NFTService;
-
-  @override
-  Future<Response<ApiNftGetImageGet$Response>> getNFTEggImage(
-      {String? grpcMetadataXOTP, String? grpcMetadataAuthorization}) {
-    final $url = '/api/nft/get-image';
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $request = Request('GET', $url, client.baseUrl, headers: $headers);
-    return client
-        .send<ApiNftGetImageGet$Response, ApiNftGetImageGet$Response>($request);
-  }
-}
-
-// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations, unnecessary_brace_in_string_interps
 class _$OrganizationService extends OrganizationService {
   _$OrganizationService([ChopperClient? client]) {
     if (client == null) return;
