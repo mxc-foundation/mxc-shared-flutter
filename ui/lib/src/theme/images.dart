@@ -435,11 +435,6 @@ class ImagesTheme {
         package: mxcUiPackageName,
       );
 
-  ImageProvider get nftEgg => const AssetImage(
-        'assets/images/gateway/nft-egg.png',
-        package: mxcUiPackageName,
-      );
-
   ImageProvider get nftEggDefault => const AssetImage(
         'assets/images/gateway/nft-egg-default.png',
         package: mxcUiPackageName,
