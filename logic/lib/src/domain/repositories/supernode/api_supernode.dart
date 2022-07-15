@@ -80,6 +80,9 @@ class ApiSupernodeRepository implements SupernodeRepository {
   DeviceRepository get device => DeviceRepository(_client);
 
   @override
+  CampaignRepository get campaign => CampaignRepository(_client);
+
+  @override
   Future<Map<String, List<Supernode>>> listSupernodes() {
     return SupernodeGithubApi(_client).listSupernodes();
   }

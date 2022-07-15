@@ -3,6 +3,7 @@ import 'package:mxc_logic/src/data/data.dart';
 
 export 'api/auth.dart';
 export 'api/btc.dart';
+export 'api/campaign.dart';
 export 'api/device.dart';
 export 'api/dhx.dart';
 export 'api/external_accounts.dart';
@@ -35,6 +36,7 @@ abstract class SupernodeRepository {
   RegistrationRepository get register;
   ReportRepository get report;
   DeviceRepository get device;
+  CampaignRepository get campaign;
   Future<Map<String, List<Supernode>>> listSupernodes();
 
   Future<Supernode> getSupernode();
@@ -113,6 +115,9 @@ class SupernodeRepositoryDemoDecorator implements SupernodeRepository {
 
   @override
   DeviceRepository get device => _currentRepository.device;
+
+  @override
+  CampaignRepository get campaign => _currentRepository.campaign;
 
   @override
   Future<Map<String, List<Supernode>>> listSupernodes() =>
