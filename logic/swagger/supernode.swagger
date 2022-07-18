@@ -11531,6 +11531,9 @@
                },
                "type": "array"
             },
+            "currency": {
+               "type": "string"
+            },
             "tiers": {
                "items": {
                   "$ref": "#/definitions/extapitier"

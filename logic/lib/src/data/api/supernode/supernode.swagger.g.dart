@@ -4827,6 +4827,7 @@ Extapiactivity _$ExtapiactivityFromJson(Map<String, dynamic> json) =>
               ?.map((e) => Extapibanner.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
+      currency: json['currency'] as String?,
       tiers: (json['tiers'] as List<dynamic>?)
               ?.map((e) => Extapitier.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -4838,6 +4839,7 @@ Map<String, dynamic> _$ExtapiactivityToJson(Extapiactivity instance) =>
       'activityID': instance.activityID,
       'activityName': instance.activityName,
       'banners': instance.banners?.map((e) => e.toJson()).toList(),
+      'currency': instance.currency,
       'tiers': instance.tiers?.map((e) => e.toJson()).toList(),
     };
 

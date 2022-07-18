@@ -16806,6 +16806,7 @@ class Extapiactivity {
     this.activityID,
     this.activityName,
     this.banners,
+    this.currency,
     this.tiers,
   });
 
@@ -16818,6 +16819,8 @@ class Extapiactivity {
   final String? activityName;
   @JsonKey(name: 'banners', defaultValue: <Extapibanner>[])
   final List<Extapibanner>? banners;
+  @JsonKey(name: 'currency')
+  final String? currency;
   @JsonKey(name: 'tiers', defaultValue: <Extapitier>[])
   final List<Extapitier>? tiers;
   static const fromJsonFactory = _$ExtapiactivityFromJson;
@@ -16837,6 +16840,9 @@ class Extapiactivity {
             (identical(other.banners, banners) ||
                 const DeepCollectionEquality()
                     .equals(other.banners, banners)) &&
+            (identical(other.currency, currency) ||
+                const DeepCollectionEquality()
+                    .equals(other.currency, currency)) &&
             (identical(other.tiers, tiers) ||
                 const DeepCollectionEquality().equals(other.tiers, tiers)));
   }
@@ -16847,11 +16853,13 @@ extension $ExtapiactivityExtension on Extapiactivity {
       {String? activityID,
       String? activityName,
       List<Extapibanner>? banners,
+      String? currency,
       List<Extapitier>? tiers}) {
     return Extapiactivity(
         activityID: activityID ?? this.activityID,
         activityName: activityName ?? this.activityName,
         banners: banners ?? this.banners,
+        currency: currency ?? this.currency,
         tiers: tiers ?? this.tiers);
   }
 }
