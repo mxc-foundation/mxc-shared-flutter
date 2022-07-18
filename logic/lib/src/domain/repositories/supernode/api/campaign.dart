@@ -1,3 +1,4 @@
+import 'package:mxc_logic/mxc_logic.dart';
 import 'package:mxc_logic/src/data/data.dart';
 import 'package:mxc_logic/src/domain/entities/campaign.dart';
 
@@ -15,6 +16,8 @@ class CampaignRepository {
           (e) => CampaignActivity(
               activityId: e.activityID!,
               activityName: e.activityName!,
+              token:
+                  (e.currency! == 'ETH_MXC') ? Token.mxc : Token.supernodeDhx,
               campaignBanners: e.banners!
                   .map((b) => CampaignBanner(
                       imageName: b.name!, imageLink: b.imageLink!))

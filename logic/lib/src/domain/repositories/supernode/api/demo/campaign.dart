@@ -9,6 +9,7 @@ class DemoCampaignRepository implements CampaignRepository {
       CampaignActivity(
           activityId: '1',
           activityName: 'staking rally',
+          token: Token.mxc,
           campaignBanners: [],
           campaignTiers: []),
     ];

@@ -1,13 +1,17 @@
+import 'package:mxc_logic/mxc_logic.dart';
+
 class CampaignActivity {
   CampaignActivity({
     required this.activityId,
     required this.activityName,
+    required this.token,
     required this.campaignBanners,
     required this.campaignTiers,
   });
 
   final String activityId;
   final String activityName;
+  final Token token;
   final List<CampaignBanner> campaignBanners;
   final List<CampaignTier> campaignTiers;
 }
