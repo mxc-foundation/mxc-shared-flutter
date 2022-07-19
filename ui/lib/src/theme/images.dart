@@ -439,6 +439,21 @@ class ImagesTheme {
         'assets/images/gateway/nft-egg-default.png',
         package: mxcUiPackageName,
       );
+
+  ImageProvider get miner32 => const AssetImage(
+        'assets/images/home/miner-32.png',
+        package: mxcUiPackageName,
+      );
+
+  ImageProvider get fuel32 => const AssetImage(
+        'assets/images/home/fuel-32.png',
+        package: mxcUiPackageName,
+      );
+
+  ImageProvider get lock32 => const AssetImage(
+        'assets/images/home/lock-32.png',
+        package: mxcUiPackageName,
+      );
 }
 
 class ImagesThemeDark extends ImagesTheme {
@@ -524,6 +539,12 @@ class ImagesThemeDark extends ImagesTheme {
   @override
   ImageProvider get uptime => const AssetImage(
         'assets/images/gateway/uptime-dark.png',
+        package: mxcUiPackageName,
+      );
+
+  @override
+  ImageProvider get metaXpLeaderboardSoon => const AssetImage(
+        'assets/images/map/meta-leaderboard-soon-dark.png',
         package: mxcUiPackageName,
       );
 }

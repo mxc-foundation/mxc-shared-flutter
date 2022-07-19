@@ -88,6 +88,8 @@ class ColorsTheme {
   Color get bottomFlowDialogBackgroundColor => primaryBackground;
 
   Color get nftEggShadow => const Color(0xFF98A6AD).withOpacity(0.3);
+
+  Color get nftEggShadow2 => const Color(0xFF98A6AD).withOpacity(0.3);
 }
 
 class ColorsThemeDark implements ColorsTheme {
@@ -250,4 +252,7 @@ class ColorsThemeDark implements ColorsTheme {
 
   @override
   Color get nftEggShadow => const Color(0xFF98A6AD).withOpacity(0.1);
+
+  @override
+  Color get nftEggShadow2 => const Color(0xFF98A6AD).withOpacity(0.3);
 }
