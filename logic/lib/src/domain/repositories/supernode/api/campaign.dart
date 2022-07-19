@@ -38,10 +38,10 @@ class CampaignRepository {
         .toList();
   }
 
-  Future<List<CampaignParticipant>> checkParticipants(String activityId) async {
+  Future<List<CampaignParticipant>> checkParticipants(int campaignId) async {
     final res = await _client.campaign.checkParticipants(
       organizationID: _client.defaultOrganizationId,
-      activityID: activityId,
+      activityID: campaignId.toString(),
     );
     return res.body!.participation!
         .map((e) => CampaignParticipant(

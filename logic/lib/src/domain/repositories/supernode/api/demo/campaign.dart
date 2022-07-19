@@ -16,7 +16,7 @@ class DemoCampaignRepository implements CampaignRepository {
   }
 
   @override
-  Future<List<CampaignParticipant>> checkParticipants(String activityId) async {
+  Future<List<CampaignParticipant>> checkParticipants(int activityId) async {
     return [
       CampaignParticipant(
         tierId: '1',
