@@ -37,4 +37,18 @@ class CampaignRepository {
         )
         .toList();
   }
+
+  Future<List<CampaignParticipant>> checkParticipants(String activityId) async {
+    final res = await _client.campaign.checkParticipants(
+      organizationID: _client.defaultOrganizationId,
+      activityID: activityId,
+    );
+    return res.body!.participation!
+        .map((e) => CampaignParticipant(
+              tierId: e.tierID!,
+              participantId: e.participantID!,
+              rewardClaimed: e.rewardClaimed ?? false,
+            ))
+        .toList();
+  }
 }

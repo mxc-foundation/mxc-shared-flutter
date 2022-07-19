@@ -47,3 +47,15 @@ class CampaignTier {
   final int slots;
   final int slotsUsed;
 }
+
+class CampaignParticipant {
+  CampaignParticipant({
+    required this.tierId,
+    required this.participantId,
+    required this.rewardClaimed,
+  });
+
+  final String tierId;
+  final String participantId;
+  final bool rewardClaimed;
+}
