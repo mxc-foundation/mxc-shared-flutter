@@ -7,7 +7,7 @@ class DemoCampaignRepository implements CampaignRepository {
   Future<List<Campaign>> listCurrent() async {
     return [
       Campaign(
-          campaignId: '1',
+          campaignId: 1,
           campaignName: 'staking rally',
           token: Token.mxc,
           campaignBanners: [],

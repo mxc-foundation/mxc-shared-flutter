@@ -9,7 +9,7 @@ class Campaign {
     required this.campaignTiers,
   });
 
-  final String campaignId;
+  final int campaignId;
   final String campaignName;
   final Token token;
   final List<CampaignBanner> campaignBanners;

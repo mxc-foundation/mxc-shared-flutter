@@ -14,7 +14,7 @@ class CampaignRepository {
     return res.body!.campaigns!
         .map(
           (e) => Campaign(
-              campaignId: e.campaignID!,
+              campaignId: int.parse(e.campaignID!),
               campaignName: e.campaignName!,
               token:
                   (e.currency! == 'ETH_MXC') ? Token.mxc : Token.supernodeDhx,
