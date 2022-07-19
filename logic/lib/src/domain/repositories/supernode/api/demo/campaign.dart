@@ -4,11 +4,11 @@ class DemoCampaignRepository implements CampaignRepository {
   const DemoCampaignRepository();
 
   @override
-  Future<List<CampaignActivity>> listCurrent() async {
+  Future<List<Campaign>> listCurrent() async {
     return [
-      CampaignActivity(
-          activityId: '1',
-          activityName: 'staking rally',
+      Campaign(
+          campaignId: '1',
+          campaignName: 'staking rally',
           token: Token.mxc,
           campaignBanners: [],
           campaignTiers: []),

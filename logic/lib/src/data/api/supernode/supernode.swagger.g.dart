@@ -2917,20 +2917,19 @@ Map<String, dynamic> _$ExtapiListCellsResponseToJson(
       'cell': instance.cell?.map((e) => e.toJson()).toList(),
     };
 
-ExtapiListCurrentActivitiesResponse
-    _$ExtapiListCurrentActivitiesResponseFromJson(Map<String, dynamic> json) =>
-        ExtapiListCurrentActivitiesResponse(
-          activities: (json['activities'] as List<dynamic>?)
-                  ?.map(
-                      (e) => Extapiactivity.fromJson(e as Map<String, dynamic>))
-                  .toList() ??
-              [],
-        );
+ExtapiListCurrentCampaignsResponse _$ExtapiListCurrentCampaignsResponseFromJson(
+        Map<String, dynamic> json) =>
+    ExtapiListCurrentCampaignsResponse(
+      campaigns: (json['campaigns'] as List<dynamic>?)
+              ?.map((e) => Extapicampaign.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
 
-Map<String, dynamic> _$ExtapiListCurrentActivitiesResponseToJson(
-        ExtapiListCurrentActivitiesResponse instance) =>
+Map<String, dynamic> _$ExtapiListCurrentCampaignsResponseToJson(
+        ExtapiListCurrentCampaignsResponse instance) =>
     <String, dynamic>{
-      'activities': instance.activities?.map((e) => e.toJson()).toList(),
+      'campaigns': instance.campaigns?.map((e) => e.toJson()).toList(),
     };
 
 ExtapiListDeviceProfileResponse _$ExtapiListDeviceProfileResponseFromJson(
@@ -4819,30 +4818,6 @@ Map<String, dynamic> _$ExtapiWithdrawHistoryToJson(
       'withdrawFee': instance.withdrawFee,
     };
 
-Extapiactivity _$ExtapiactivityFromJson(Map<String, dynamic> json) =>
-    Extapiactivity(
-      activityID: json['activityID'] as String?,
-      activityName: json['activityName'] as String?,
-      banners: (json['banners'] as List<dynamic>?)
-              ?.map((e) => Extapibanner.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          [],
-      currency: json['currency'] as String?,
-      tiers: (json['tiers'] as List<dynamic>?)
-              ?.map((e) => Extapitier.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          [],
-    );
-
-Map<String, dynamic> _$ExtapiactivityToJson(Extapiactivity instance) =>
-    <String, dynamic>{
-      'activityID': instance.activityID,
-      'activityName': instance.activityName,
-      'banners': instance.banners?.map((e) => e.toJson()).toList(),
-      'currency': instance.currency,
-      'tiers': instance.tiers?.map((e) => e.toJson()).toList(),
-    };
-
 Extapibanner _$ExtapibannerFromJson(Map<String, dynamic> json) => Extapibanner(
       imageLink: json['imageLink'] as String?,
       name: json['name'] as String?,
@@ -4852,6 +4827,30 @@ Map<String, dynamic> _$ExtapibannerToJson(Extapibanner instance) =>
     <String, dynamic>{
       'imageLink': instance.imageLink,
       'name': instance.name,
+    };
+
+Extapicampaign _$ExtapicampaignFromJson(Map<String, dynamic> json) =>
+    Extapicampaign(
+      banners: (json['banners'] as List<dynamic>?)
+              ?.map((e) => Extapibanner.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      campaignID: json['campaignID'] as String?,
+      campaignName: json['campaignName'] as String?,
+      currency: json['currency'] as String?,
+      tiers: (json['tiers'] as List<dynamic>?)
+              ?.map((e) => Extapitier.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$ExtapicampaignToJson(Extapicampaign instance) =>
+    <String, dynamic>{
+      'banners': instance.banners?.map((e) => e.toJson()).toList(),
+      'campaignID': instance.campaignID,
+      'campaignName': instance.campaignName,
+      'currency': instance.currency,
+      'tiers': instance.tiers?.map((e) => e.toJson()).toList(),
     };
 
 Extapiparticipant _$ExtapiparticipantFromJson(Map<String, dynamic> json) =>
@@ -4894,16 +4893,24 @@ Map<String, dynamic> _$ExtapisettingsToJson(Extapisettings instance) =>
     };
 
 Extapitier _$ExtapitierFromJson(Map<String, dynamic> json) => Extapitier(
-      details: json['details'] as String?,
+      amount: json['amount'] as String?,
       id: json['id'] as String?,
+      imageLink: json['imageLink'] as String?,
+      lockPeriod: json['lockPeriod'] as String?,
+      monthlyRate: (json['monthlyRate'] as num?)?.toDouble(),
+      reward: json['reward'] as String?,
       slots: json['slots'] as String?,
       slotsUsed: json['slotsUsed'] as String?,
     );
 
 Map<String, dynamic> _$ExtapitierToJson(Extapitier instance) =>
     <String, dynamic>{
-      'details': instance.details,
+      'amount': instance.amount,
       'id': instance.id,
+      'imageLink': instance.imageLink,
+      'lockPeriod': instance.lockPeriod,
+      'monthlyRate': instance.monthlyRate,
+      'reward': instance.reward,
       'slots': instance.slots,
       'slotsUsed': instance.slotsUsed,
     };

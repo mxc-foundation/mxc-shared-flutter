@@ -304,11 +304,11 @@ class _$CampaignService extends CampaignService {
   }
 
   @override
-  Future<Response<ExtapiListCurrentActivitiesResponse>> listCurrentActivities(
+  Future<Response<ExtapiListCurrentCampaignsResponse>> listCurrentCampaigns(
       {String? organizationID,
       String? grpcMetadataXOTP,
       String? grpcMetadataAuthorization}) {
-    final $url = '/api/campaign/list-current-activities';
+    final $url = '/api/campaign/list-current-campaigns';
     final $params = <String, dynamic>{'organizationID': organizationID};
     final $headers = {
       if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
@@ -318,8 +318,8 @@ class _$CampaignService extends CampaignService {
 
     final $request = Request('GET', $url, client.baseUrl,
         parameters: $params, headers: $headers);
-    return client.send<ExtapiListCurrentActivitiesResponse,
-        ExtapiListCurrentActivitiesResponse>($request);
+    return client.send<ExtapiListCurrentCampaignsResponse,
+        ExtapiListCurrentCampaignsResponse>($request);
   }
 
   @override

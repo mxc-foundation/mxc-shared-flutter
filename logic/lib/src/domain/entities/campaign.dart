@@ -1,16 +1,16 @@
 import 'package:mxc_logic/mxc_logic.dart';
 
-class CampaignActivity {
-  CampaignActivity({
-    required this.activityId,
-    required this.activityName,
+class Campaign {
+  Campaign({
+    required this.campaignId,
+    required this.campaignName,
     required this.token,
     required this.campaignBanners,
     required this.campaignTiers,
   });
 
-  final String activityId;
-  final String activityName;
+  final String campaignId;
+  final String campaignName;
   final Token token;
   final List<CampaignBanner> campaignBanners;
   final List<CampaignTier> campaignTiers;
@@ -29,13 +29,21 @@ class CampaignBanner {
 class CampaignTier {
   CampaignTier({
     required this.id,
-    required this.details,
+    required this.amount,
+    required this.lockPeriod,
+    required this.monthlyRate,
+    required this.reward,
+    required this.imageLink,
     required this.slots,
     required this.slotsUsed,
   });
 
   final String id;
-  final String details;
-  final String slots;
-  final String slotsUsed;
+  final int amount;
+  final int lockPeriod;
+  final double monthlyRate;
+  final String reward;
+  final String imageLink;
+  final int slots;
+  final int slotsUsed;
 }

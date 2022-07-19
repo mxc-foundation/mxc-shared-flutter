@@ -496,9 +496,9 @@
             ]
          }
       },
-      "/api/campaign/list-current-activities": {
+      "/api/campaign/list-current-campaigns": {
          "get": {
-            "operationId": "ListCurrentActivities",
+            "operationId": "ListCurrentCampaigns",
             "parameters": [
                {
                   "format": "int64",
@@ -512,7 +512,7 @@
                "200": {
                   "description": "A successful response.",
                   "schema": {
-                     "$ref": "#/definitions/extapiListCurrentActivitiesResponse"
+                     "$ref": "#/definitions/extapiListCurrentCampaignsResponse"
                   }
                },
                "default": {
@@ -522,7 +522,7 @@
                   }
                }
             },
-            "summary": "ListCurrentActivities returns all campaign activities for supernode which are running now",
+            "summary": "ListCurrentCampaigns returns all campaign activities for supernode which are running now",
             "tags": [
                "Campaign"
             ]
@@ -9684,11 +9684,11 @@
          },
          "type": "object"
       },
-      "extapiListCurrentActivitiesResponse": {
+      "extapiListCurrentCampaignsResponse": {
          "properties": {
-            "activities": {
+            "campaigns": {
                "items": {
-                  "$ref": "#/definitions/extapiactivity"
+                  "$ref": "#/definitions/extapicampaign"
                },
                "type": "array"
             }
@@ -11516,20 +11516,31 @@
          },
          "type": "object"
       },
-      "extapiactivity": {
+      "extapibanner": {
          "properties": {
-            "activityID": {
-               "format": "int64",
+            "imageLink": {
                "type": "string"
             },
-            "activityName": {
+            "name": {
                "type": "string"
-            },
+            }
+         },
+         "type": "object"
+      },
+      "extapicampaign": {
+         "properties": {
             "banners": {
                "items": {
                   "$ref": "#/definitions/extapibanner"
                },
                "type": "array"
+            },
+            "campaignID": {
+               "format": "int64",
+               "type": "string"
+            },
+            "campaignName": {
+               "type": "string"
             },
             "currency": {
                "type": "string"
@@ -11539,17 +11550,6 @@
                   "$ref": "#/definitions/extapitier"
                },
                "type": "array"
-            }
-         },
-         "type": "object"
-      },
-      "extapibanner": {
-         "properties": {
-            "imageLink": {
-               "type": "string"
-            },
-            "name": {
-               "type": "string"
             }
          },
          "type": "object"
@@ -11603,11 +11603,25 @@
       },
       "extapitier": {
          "properties": {
-            "details": {
+            "amount": {
                "type": "string"
             },
             "id": {
                "format": "int64",
+               "type": "string"
+            },
+            "imageLink": {
+               "type": "string"
+            },
+            "lockPeriod": {
+               "format": "int64",
+               "type": "string"
+            },
+            "monthlyRate": {
+               "format": "double",
+               "type": "number"
+            },
+            "reward": {
                "type": "string"
             },
             "slots": {

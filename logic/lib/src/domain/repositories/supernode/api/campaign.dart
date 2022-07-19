@@ -7,15 +7,15 @@ class CampaignRepository {
 
   final SupernodeClient _client;
 
-  Future<List<CampaignActivity>> listCurrent() async {
-    final res = await _client.campaign.listCurrentActivities(
+  Future<List<Campaign>> listCurrent() async {
+    final res = await _client.campaign.listCurrentCampaigns(
       organizationID: _client.defaultOrganizationId,
     );
-    return res.body!.activities!
+    return res.body!.campaigns!
         .map(
-          (e) => CampaignActivity(
-              activityId: e.activityID!,
-              activityName: e.activityName!,
+          (e) => Campaign(
+              campaignId: e.campaignID!,
+              campaignName: e.campaignName!,
               token:
                   (e.currency! == 'ETH_MXC') ? Token.mxc : Token.supernodeDhx,
               campaignBanners: e.banners!
@@ -24,10 +24,15 @@ class CampaignRepository {
                   .toList(),
               campaignTiers: e.tiers!
                   .map((t) => CampaignTier(
-                      id: t.id!,
-                      details: t.details!,
-                      slots: t.slots!,
-                      slotsUsed: t.slotsUsed!))
+                        id: t.id!,
+                        amount: int.parse(t.amount!.toString()),
+                        lockPeriod: int.parse(t.amount!.toString()),
+                        monthlyRate: double.parse(t.monthlyRate!.toString()),
+                        reward: t.reward!,
+                        imageLink: t.imageLink!,
+                        slots: int.parse(t.slots!.toString()),
+                        slotsUsed: int.parse(t.slotsUsed!.toString()),
+                      ))
                   .toList()),
         )
         .toList();
