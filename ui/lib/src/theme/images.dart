@@ -226,11 +226,6 @@ class ImagesTheme {
         package: mxcUiPackageName,
       );
 
-  ImageProvider get wechat => const AssetImage(
-        'assets/images/login/wechat.png',
-        package: mxcUiPackageName,
-      );
-
   ImageProvider get datadashLogo => const AssetImage(
         'assets/images/app/datadash-logo.png',
         package: mxcUiPackageName,
