@@ -26,7 +26,7 @@ class CampaignRepository {
                   .map((t) => CampaignTier(
                         id: t.id!,
                         amount: int.parse(t.amount!.toString()),
-                        lockPeriod: int.parse(t.amount!.toString()),
+                        lockPeriod: int.parse(t.lockPeriod!.toString()),
                         monthlyRate: double.parse(t.monthlyRate!.toString()),
                         reward: t.reward!,
                         imageLink: t.imageLink!,
