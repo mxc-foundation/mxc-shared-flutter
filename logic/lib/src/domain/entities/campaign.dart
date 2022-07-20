@@ -55,7 +55,7 @@ class CampaignParticipant {
     required this.rewardClaimed,
   });
 
-  final String tierId;
-  final String participantId;
+  final int tierId;
+  final int participantId;
   final bool rewardClaimed;
 }

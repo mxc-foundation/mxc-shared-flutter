@@ -45,8 +45,8 @@ class CampaignRepository {
     );
     return res.body!.participation!
         .map((e) => CampaignParticipant(
-              tierId: e.tierID!,
-              participantId: e.participantID!,
+              tierId: int.parse(e.tierID!),
+              participantId: int.parse(e.participantID!),
               rewardClaimed: e.rewardClaimed ?? false,
             ))
         .toList();

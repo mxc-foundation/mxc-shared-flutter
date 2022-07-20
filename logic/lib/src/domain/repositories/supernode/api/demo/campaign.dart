@@ -19,8 +19,8 @@ class DemoCampaignRepository implements CampaignRepository {
   Future<List<CampaignParticipant>> checkParticipants(int activityId) async {
     return [
       CampaignParticipant(
-        tierId: '1',
-        participantId: '2',
+        tierId: 1,
+        participantId: 2,
         rewardClaimed: true,
       )
     ];
