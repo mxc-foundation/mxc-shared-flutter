@@ -9,6 +9,7 @@ abstract class MxcCircleButton extends StatelessWidget {
     required VoidCallback? onTap,
     bool filled,
     String? title,
+    double size,
   }) = _MxcCircleChildButton;
 
   const MxcCircleButton._({
@@ -18,6 +19,7 @@ abstract class MxcCircleButton extends StatelessWidget {
     this.title,
     this.color,
     this.titleStyle,
+    this.size = 52,
   }) : super(key: key);
 
   const factory MxcCircleButton.image({
@@ -54,6 +56,7 @@ abstract class MxcCircleButton extends StatelessWidget {
   final String? title;
   final Color? color;
   final TextStyle? titleStyle;
+  final double size;
 
   Color _contentColor(BuildContext context) {
     Color color;
@@ -96,8 +99,8 @@ abstract class MxcCircleButton extends StatelessWidget {
                 ),
             ],
           ),
-          width: 52,
-          height: 52,
+          width: size,
+          height: size,
           child: buildChild(context),
         ),
       ),
@@ -128,12 +131,14 @@ class _MxcCircleChildButton extends MxcCircleButton {
     required VoidCallback? onTap,
     bool filled = false,
     String? title,
+    double size = 52,
   }) : super._(
           key: key,
           filled: filled,
           onTap: onTap,
           title: title,
           color: null,
+          size: size,
         );
 
   final Widget child;
