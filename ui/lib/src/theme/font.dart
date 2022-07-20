@@ -20,8 +20,8 @@ class FontTheme {
         decoration: TextDecoration.none,
       );
 
-  TextStylePack get caption1 =>
-      TextStylePack(_colorsTheme, _baseTextStyle.copyWith(fontSize: 12));
+  TextStylePack get caption1 => TextStylePack(
+      _colorsTheme, _baseTextStyle.copyWith(fontSize: 12, height: 16.8 / 12));
   TextStylePack get caption2 => TextStylePack(_colorsTheme,
       _baseTextStyle.copyWith(fontWeight: FontWeight.w500, fontSize: 12));
 

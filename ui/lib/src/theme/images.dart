@@ -409,11 +409,6 @@ class ImagesTheme {
         package: mxcUiPackageName,
       );
 
-  ImageProvider get metaXpLeaderboardSoon => const AssetImage(
-        'assets/images/map/meta-leaderboard-soon.png',
-        package: mxcUiPackageName,
-      );
-
   ImageProvider get metaXp => const AssetImage(
         'assets/images/gateway/meta-xp.png',
         package: mxcUiPackageName,
@@ -534,12 +529,6 @@ class ImagesThemeDark extends ImagesTheme {
   @override
   ImageProvider get uptime => const AssetImage(
         'assets/images/gateway/uptime-dark.png',
-        package: mxcUiPackageName,
-      );
-
-  @override
-  ImageProvider get metaXpLeaderboardSoon => const AssetImage(
-        'assets/images/map/meta-leaderboard-soon-dark.png',
         package: mxcUiPackageName,
       );
 }

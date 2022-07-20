@@ -34,11 +34,17 @@ class ColorsTheme {
   final purple200 = const Color(0xFFD8CFEE);
   final purple100 = const Color(0xFFF2F0F8);
 
+  @Deprecated('Use purpleMain or purpleXXX instead')
   final mxcPurple = const Color(0xFF6300FF);
+  @Deprecated('Use purpleMain or purpleXXX instead')
   final mxcPurple500 = const Color(0xFF8132FE);
+  @Deprecated('Use purpleMain or purpleXXX instead')
   final mxcPurple400 = const Color(0xFFA065FE);
+  @Deprecated('Use purpleMain or purpleXXX instead')
   final mxcPurple300 = const Color(0xFFBF97FD);
+  @Deprecated('Use purpleMain or purpleXXX instead')
   final mxcPurple200 = const Color(0xFFDECAFD);
+  @Deprecated('Use purpleMain or purpleXXX instead')
   final mxcPurple100 = const Color(0xFFF4EFFC);
 
   final dhxBlue = const Color(0xFF4665EA);
