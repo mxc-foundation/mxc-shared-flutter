@@ -81,6 +81,10 @@ class GatewayHealth {
     required this.miningFuelMax,
     required this.totalMined,
     required this.uptimeHealth,
+    required this.proximityFactor,
+    required this.mxcRing,
+    required this.dhxRing,
+    required this.btcRing,
   });
 
   final String id;
@@ -91,6 +95,11 @@ class GatewayHealth {
   final Decimal miningFuelMax;
   final Decimal totalMined;
   final double uptimeHealth;
+  final double proximityFactor;
+
+  final double mxcRing;
+  final double dhxRing;
+  final double btcRing;
 }
 
 class GatewayAverageHealth {
@@ -98,11 +107,18 @@ class GatewayAverageHealth {
     required this.miningFuelHealth,
     required this.uptimeHealth,
     required this.health,
+    required this.mxcRing,
+    required this.btcRing,
+    required this.dhxRing,
   });
 
   final double miningFuelHealth;
   final double uptimeHealth;
   final double health;
+
+  final double mxcRing;
+  final double btcRing;
+  final double dhxRing;
 }
 
 class GatewayHealthSummary {

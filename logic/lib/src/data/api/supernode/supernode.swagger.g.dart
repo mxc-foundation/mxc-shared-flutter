@@ -1885,12 +1885,17 @@ ExtapiGatewayMiningHealth _$ExtapiGatewayMiningHealthFromJson(
         Map<String, dynamic> json) =>
     ExtapiGatewayMiningHealth(
       ageSeconds: json['ageSeconds'] as String?,
+      btcRing: (json['btcRing'] as num?)?.toDouble(),
+      dhxRing: (json['dhxRing'] as num?)?.toDouble(),
       health: (json['health'] as num?)?.toDouble(),
       id: json['id'] as String?,
+      metaXp: (json['metaXp'] as num?)?.toDouble(),
       miningFuel: json['miningFuel'] as String?,
       miningFuelHealth: (json['miningFuelHealth'] as num?)?.toDouble(),
       miningFuelMax: json['miningFuelMax'] as String?,
+      mxcRing: (json['mxcRing'] as num?)?.toDouble(),
       orgId: json['orgId'] as String?,
+      proximityFactor: (json['proximityFactor'] as num?)?.toDouble(),
       totalMined: json['totalMined'] as String?,
       uptimeHealth: (json['uptimeHealth'] as num?)?.toDouble(),
     );
@@ -1899,12 +1904,17 @@ Map<String, dynamic> _$ExtapiGatewayMiningHealthToJson(
         ExtapiGatewayMiningHealth instance) =>
     <String, dynamic>{
       'ageSeconds': instance.ageSeconds,
+      'btcRing': instance.btcRing,
+      'dhxRing': instance.dhxRing,
       'health': instance.health,
       'id': instance.id,
+      'metaXp': instance.metaXp,
       'miningFuel': instance.miningFuel,
       'miningFuelHealth': instance.miningFuelHealth,
       'miningFuelMax': instance.miningFuelMax,
+      'mxcRing': instance.mxcRing,
       'orgId': instance.orgId,
+      'proximityFactor': instance.proximityFactor,
       'totalMined': instance.totalMined,
       'uptimeHealth': instance.uptimeHealth,
     };
@@ -3195,6 +3205,7 @@ ExtapiMiningHealthAverage _$ExtapiMiningHealthAverageFromJson(
     ExtapiMiningHealthAverage(
       miningFuelHealth: (json['miningFuelHealth'] as num?)?.toDouble(),
       overall: (json['overall'] as num?)?.toDouble(),
+      proximityFactor: (json['proximityFactor'] as num?)?.toDouble(),
       uptimeHealth: (json['uptimeHealth'] as num?)?.toDouble(),
     );
 
@@ -3203,6 +3214,7 @@ Map<String, dynamic> _$ExtapiMiningHealthAverageToJson(
     <String, dynamic>{
       'miningFuelHealth': instance.miningFuelHealth,
       'overall': instance.overall,
+      'proximityFactor': instance.proximityFactor,
       'uptimeHealth': instance.uptimeHealth,
     };
 

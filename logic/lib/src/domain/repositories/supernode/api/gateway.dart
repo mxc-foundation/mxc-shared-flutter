@@ -150,25 +150,44 @@ class GatewayRepository {
     final res = await _client.walletService.getGatewayMiningHealth(
       orgId: orgId ?? _client.defaultOrganizationId,
     );
-    final gatewayHealths = res.body!.gatewayHealth!
-        .map(
-          (e) => GatewayHealth(
-            id: e.id!,
-            ageSeconds: e.ageSeconds.toInt(),
-            health: e.health.orDefault(),
-            miningFuel: e.miningFuel.toDecimal(),
-            miningFuelHealth: e.miningFuelHealth.orDefault(),
-            miningFuelMax: e.miningFuelMax.toDecimal(),
-            totalMined: e.totalMined.toDecimal(),
-            uptimeHealth: e.uptimeHealth.orDefault(),
-          ),
-        )
-        .toList();
+
+    final gatewayHealths = <GatewayHealth>[];
+    double mxcRingValue = 0;
+    double dhxRingValue = 0;
+    double btcRingValue = 0;
+    for (final e in res.body!.gatewayHealth!) {
+      gatewayHealths.add(GatewayHealth(
+        id: e.id!,
+        ageSeconds: e.ageSeconds.toInt(),
+        health: e.health.orDefault(),
+        miningFuel: e.miningFuel.toDecimal(),
+        miningFuelHealth: e.miningFuelHealth.orDefault(),
+        miningFuelMax: e.miningFuelMax.toDecimal(),
+        totalMined: e.totalMined.toDecimal(),
+        uptimeHealth: e.uptimeHealth.orDefault(),
+        proximityFactor: e.proximityFactor.orDefault(),
+        btcRing: e.btcRing.orDefault(),
+        dhxRing: e.dhxRing.orDefault(),
+        mxcRing: e.mxcRing.orDefault(),
+      ));
+      mxcRingValue += e.mxcRing.orDefault();
+      dhxRingValue += e.dhxRing.orDefault();
+      btcRingValue += e.btcRing.orDefault();
+    }
+    if (gatewayHealths.isNotEmpty) {
+      mxcRingValue /= gatewayHealths.length;
+      dhxRingValue /= gatewayHealths.length;
+      btcRingValue /= gatewayHealths.length;
+    }
+
     final gatewayAvgHealth = GatewayAverageHealth(
       miningFuelHealth:
           res.body!.miningHealthAverage!.miningFuelHealth.orDefault(),
       uptimeHealth: res.body!.miningHealthAverage!.uptimeHealth.orDefault(),
       health: res.body!.miningHealthAverage!.overall.orDefault(),
+      mxcRing: mxcRingValue,
+      dhxRing: dhxRingValue,
+      btcRing: btcRingValue,
     );
     var totalFuel = Decimal.zero;
     for (final health in gatewayHealths) {

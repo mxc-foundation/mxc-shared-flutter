@@ -8621,6 +8621,16 @@
                "format": "int64",
                "type": "string"
             },
+            "btcRing": {
+               "description": "btc ring value 0..1",
+               "format": "float",
+               "type": "number"
+            },
+            "dhxRing": {
+               "description": "dhx ring value 0..1",
+               "format": "float",
+               "type": "number"
+            },
             "health": {
                "description": "overall health score",
                "format": "float",
@@ -8629,6 +8639,11 @@
             "id": {
                "description": "MAC of the gateway, called \"id\" for consistency with /api/gateways call",
                "type": "string"
+            },
+            "metaXp": {
+               "description": "metaxp value",
+               "format": "float",
+               "type": "number"
             },
             "miningFuel": {
                "description": "mining fuel bonded to the gw by the org",
@@ -8643,10 +8658,20 @@
                "description": "mining fuel required for full mining efficiency",
                "type": "string"
             },
+            "mxcRing": {
+               "description": "mxc ring value 0..1",
+               "format": "float",
+               "type": "number"
+            },
             "orgId": {
                "description": "organization that owns the gateway",
                "format": "int64",
                "type": "string"
+            },
+            "proximityFactor": {
+               "description": "proximity factor for the gateway",
+               "format": "float",
+               "type": "number"
             },
             "totalMined": {
                "description": "gateway's total mining",
@@ -9784,6 +9809,11 @@
             },
             "overall": {
                "description": "overall health of the gateways",
+               "format": "float",
+               "type": "number"
+            },
+            "proximityFactor": {
+               "description": "average proximity factor",
                "format": "float",
                "type": "number"
             },

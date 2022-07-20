@@ -161,6 +161,10 @@ class DemoGatewayRepository implements GatewayRepository {
         miningFuelMax: '100'.toDecimal(),
         totalMined: '100'.toDecimal(),
         uptimeHealth: 100,
+        proximityFactor: 0,
+        btcRing: 0.6,
+        mxcRing: 0.6,
+        dhxRing: 0.6,
       ),
       GatewayHealth(
         id: 'DemoId2',
@@ -171,6 +175,10 @@ class DemoGatewayRepository implements GatewayRepository {
         miningFuelMax: '100'.toDecimal(),
         totalMined: '100'.toDecimal(),
         uptimeHealth: 100,
+        proximityFactor: 0,
+        btcRing: 0.6,
+        mxcRing: 0.6,
+        dhxRing: 0.6,
       ),
       GatewayHealth(
         id: 'DemoId3',
@@ -181,6 +189,10 @@ class DemoGatewayRepository implements GatewayRepository {
         miningFuelMax: '100'.toDecimal(),
         totalMined: '100'.toDecimal(),
         uptimeHealth: 100,
+        proximityFactor: 0,
+        btcRing: 0.6,
+        mxcRing: 0.6,
+        dhxRing: 0.6,
       ),
       GatewayHealth(
         id: 'DemoId15',
@@ -191,6 +203,10 @@ class DemoGatewayRepository implements GatewayRepository {
         miningFuelMax: '100'.toDecimal(),
         totalMined: '100'.toDecimal(),
         uptimeHealth: 100,
+        proximityFactor: 0,
+        btcRing: 0.6,
+        mxcRing: 0.6,
+        dhxRing: 0.6,
       ),
     ];
 
@@ -198,6 +214,9 @@ class DemoGatewayRepository implements GatewayRepository {
       miningFuelHealth: 0.99,
       uptimeHealth: 0.88,
       health: 0.98,
+      btcRing: 0.6,
+      mxcRing: 0.6,
+      dhxRing: 0.6,
     );
     var totalFuel = Decimal.zero;
     for (final health in gatewayHealths) {

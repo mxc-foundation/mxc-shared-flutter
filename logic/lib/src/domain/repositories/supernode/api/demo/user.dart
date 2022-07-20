@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:mxc_logic/mxc_logic.dart';
 import 'package:mxc_logic/src/data/data.dart';
 import 'package:mxc_logic/src/domain/repositories/internal/shared_mappers.dart';
@@ -95,6 +97,9 @@ class DemoUserRepository implements UserRepository {
       {required String verificationCode}) async {
     throw UnimplementedError();
   }
+
+  @override
+  Future<Uint8List> nftImage() => Future.value(Uint8List(0));
 
   @override
   Future<bool> needConfirmationToOtpChange() {

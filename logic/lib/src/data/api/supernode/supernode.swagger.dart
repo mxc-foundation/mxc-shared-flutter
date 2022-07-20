@@ -9081,12 +9081,17 @@ extension $ExtapiGatewayMiningFuelChangeExtension
 class ExtapiGatewayMiningHealth {
   ExtapiGatewayMiningHealth({
     this.ageSeconds,
+    this.btcRing,
+    this.dhxRing,
     this.health,
     this.id,
+    this.metaXp,
     this.miningFuel,
     this.miningFuelHealth,
     this.miningFuelMax,
+    this.mxcRing,
     this.orgId,
+    this.proximityFactor,
     this.totalMined,
     this.uptimeHealth,
   });
@@ -9096,18 +9101,28 @@ class ExtapiGatewayMiningHealth {
 
   @JsonKey(name: 'ageSeconds')
   final String? ageSeconds;
+  @JsonKey(name: 'btcRing')
+  final double? btcRing;
+  @JsonKey(name: 'dhxRing')
+  final double? dhxRing;
   @JsonKey(name: 'health')
   final double? health;
   @JsonKey(name: 'id')
   final String? id;
+  @JsonKey(name: 'metaXp')
+  final double? metaXp;
   @JsonKey(name: 'miningFuel')
   final String? miningFuel;
   @JsonKey(name: 'miningFuelHealth')
   final double? miningFuelHealth;
   @JsonKey(name: 'miningFuelMax')
   final String? miningFuelMax;
+  @JsonKey(name: 'mxcRing')
+  final double? mxcRing;
   @JsonKey(name: 'orgId')
   final String? orgId;
+  @JsonKey(name: 'proximityFactor')
+  final double? proximityFactor;
   @JsonKey(name: 'totalMined')
   final String? totalMined;
   @JsonKey(name: 'uptimeHealth')
@@ -9123,10 +9138,18 @@ class ExtapiGatewayMiningHealth {
             (identical(other.ageSeconds, ageSeconds) ||
                 const DeepCollectionEquality()
                     .equals(other.ageSeconds, ageSeconds)) &&
+            (identical(other.btcRing, btcRing) ||
+                const DeepCollectionEquality()
+                    .equals(other.btcRing, btcRing)) &&
+            (identical(other.dhxRing, dhxRing) ||
+                const DeepCollectionEquality()
+                    .equals(other.dhxRing, dhxRing)) &&
             (identical(other.health, health) ||
                 const DeepCollectionEquality().equals(other.health, health)) &&
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
+            (identical(other.metaXp, metaXp) ||
+                const DeepCollectionEquality().equals(other.metaXp, metaXp)) &&
             (identical(other.miningFuel, miningFuel) ||
                 const DeepCollectionEquality()
                     .equals(other.miningFuel, miningFuel)) &&
@@ -9136,8 +9159,14 @@ class ExtapiGatewayMiningHealth {
             (identical(other.miningFuelMax, miningFuelMax) ||
                 const DeepCollectionEquality()
                     .equals(other.miningFuelMax, miningFuelMax)) &&
+            (identical(other.mxcRing, mxcRing) ||
+                const DeepCollectionEquality()
+                    .equals(other.mxcRing, mxcRing)) &&
             (identical(other.orgId, orgId) ||
                 const DeepCollectionEquality().equals(other.orgId, orgId)) &&
+            (identical(other.proximityFactor, proximityFactor) ||
+                const DeepCollectionEquality()
+                    .equals(other.proximityFactor, proximityFactor)) &&
             (identical(other.totalMined, totalMined) ||
                 const DeepCollectionEquality()
                     .equals(other.totalMined, totalMined)) &&
@@ -9150,22 +9179,32 @@ class ExtapiGatewayMiningHealth {
 extension $ExtapiGatewayMiningHealthExtension on ExtapiGatewayMiningHealth {
   ExtapiGatewayMiningHealth copyWith(
       {String? ageSeconds,
+      double? btcRing,
+      double? dhxRing,
       double? health,
       String? id,
+      double? metaXp,
       String? miningFuel,
       double? miningFuelHealth,
       String? miningFuelMax,
+      double? mxcRing,
       String? orgId,
+      double? proximityFactor,
       String? totalMined,
       double? uptimeHealth}) {
     return ExtapiGatewayMiningHealth(
         ageSeconds: ageSeconds ?? this.ageSeconds,
+        btcRing: btcRing ?? this.btcRing,
+        dhxRing: dhxRing ?? this.dhxRing,
         health: health ?? this.health,
         id: id ?? this.id,
+        metaXp: metaXp ?? this.metaXp,
         miningFuel: miningFuel ?? this.miningFuel,
         miningFuelHealth: miningFuelHealth ?? this.miningFuelHealth,
         miningFuelMax: miningFuelMax ?? this.miningFuelMax,
+        mxcRing: mxcRing ?? this.mxcRing,
         orgId: orgId ?? this.orgId,
+        proximityFactor: proximityFactor ?? this.proximityFactor,
         totalMined: totalMined ?? this.totalMined,
         uptimeHealth: uptimeHealth ?? this.uptimeHealth);
   }
@@ -12265,6 +12304,7 @@ class ExtapiMiningHealthAverage {
   ExtapiMiningHealthAverage({
     this.miningFuelHealth,
     this.overall,
+    this.proximityFactor,
     this.uptimeHealth,
   });
 
@@ -12275,6 +12315,8 @@ class ExtapiMiningHealthAverage {
   final double? miningFuelHealth;
   @JsonKey(name: 'overall')
   final double? overall;
+  @JsonKey(name: 'proximityFactor')
+  final double? proximityFactor;
   @JsonKey(name: 'uptimeHealth')
   final double? uptimeHealth;
   static const fromJsonFactory = _$ExtapiMiningHealthAverageFromJson;
@@ -12291,6 +12333,9 @@ class ExtapiMiningHealthAverage {
             (identical(other.overall, overall) ||
                 const DeepCollectionEquality()
                     .equals(other.overall, overall)) &&
+            (identical(other.proximityFactor, proximityFactor) ||
+                const DeepCollectionEquality()
+                    .equals(other.proximityFactor, proximityFactor)) &&
             (identical(other.uptimeHealth, uptimeHealth) ||
                 const DeepCollectionEquality()
                     .equals(other.uptimeHealth, uptimeHealth)));
@@ -12299,10 +12344,14 @@ class ExtapiMiningHealthAverage {
 
 extension $ExtapiMiningHealthAverageExtension on ExtapiMiningHealthAverage {
   ExtapiMiningHealthAverage copyWith(
-      {double? miningFuelHealth, double? overall, double? uptimeHealth}) {
+      {double? miningFuelHealth,
+      double? overall,
+      double? proximityFactor,
+      double? uptimeHealth}) {
     return ExtapiMiningHealthAverage(
         miningFuelHealth: miningFuelHealth ?? this.miningFuelHealth,
         overall: overall ?? this.overall,
+        proximityFactor: proximityFactor ?? this.proximityFactor,
         uptimeHealth: uptimeHealth ?? this.uptimeHealth);
   }
 }

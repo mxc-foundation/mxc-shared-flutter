@@ -402,9 +402,46 @@ class ImagesTheme {
         package: mxcUiPackageName,
       );
 
+  // meta xp
+
+  AssetImage get mapTitleRectangleBox => const AssetImage(
+        'assets/images/map/map_title_rectangle_box.png',
+        package: mxcUiPackageName,
+      );
+
+  ImageProvider get metaXp => const AssetImage(
+        'assets/images/gateway/meta-xp.png',
+        package: mxcUiPackageName,
+      );
+
+  ImageProvider get metaXpMapIcon => const AssetImage(
+        'assets/images/map/meta-xp-map-icon.png',
+        package: mxcUiPackageName,
+      );
+
   //withdraw
   ImageProvider get address => const AssetImage(
         'assets/images/withdraw/address.png',
+        package: mxcUiPackageName,
+      );
+
+  ImageProvider get nftEggDefault => const AssetImage(
+        'assets/images/gateway/nft-egg-default.png',
+        package: mxcUiPackageName,
+      );
+
+  ImageProvider get miner32 => const AssetImage(
+        'assets/images/home/miner-32.png',
+        package: mxcUiPackageName,
+      );
+
+  ImageProvider get fuel32 => const AssetImage(
+        'assets/images/home/fuel-32.png',
+        package: mxcUiPackageName,
+      );
+
+  ImageProvider get lock32 => const AssetImage(
+        'assets/images/home/lock-32.png',
         package: mxcUiPackageName,
       );
 }
