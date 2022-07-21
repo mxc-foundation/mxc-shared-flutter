@@ -75,6 +75,8 @@ class StakeRepository {
               boost: e.stake!.boost.toDouble(),
               revenue: e.stake!.revenue.toDouble(),
               option: _mapStakeOption(e.stake!.startTime, e.stake!.lockTill),
+              participantId: e.stake!.participantID!,
+              claimedReward: e.stake!.claimedReward!,
             ),
           ),
         )
@@ -114,6 +116,8 @@ class StakeRepository {
             revenue: e.revenue.toDouble(),
             startTime: e.startTime!,
             option: _mapStakeOption(e.startTime, e.lockTill),
+            participantId: e.participantID!,
+            claimedReward: e.claimedReward!,
           ),
         )
         .toList();
