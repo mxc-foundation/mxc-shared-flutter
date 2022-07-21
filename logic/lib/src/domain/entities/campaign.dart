@@ -38,7 +38,7 @@ class CampaignTier {
     required this.slotsUsed,
   });
 
-  final String id;
+  final int id;
   final int amount;
   final int lockPeriod;
   final double monthlyRate;
