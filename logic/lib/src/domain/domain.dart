@@ -1,4 +1,5 @@
 export 'entities/btc.dart';
+export 'entities/campaign.dart';
 export 'entities/common.dart';
 export 'entities/currencies.dart';
 export 'entities/device.dart';

@@ -229,6 +229,83 @@ abstract class BTCMiningService extends ChopperService {
 }
 
 @ChopperApi()
+abstract class CampaignService extends ChopperService {
+  static CampaignService createService([ChopperClient? client]) {
+    if (client != null) {
+      return _$CampaignService(client);
+    }
+
+    final newClient = ChopperClient(
+      services: [_$CampaignService()],
+      converter: chopper.JsonConverter(), /*baseUrl: YOUR_BASE_URL*/
+    );
+    return _$CampaignService(newClient);
+  }
+
+  ///CheckParticipants checks whether a user has participated a specific activity
+  ///@param activityID
+  ///@param organizationID
+  ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
+
+  @Get(path: '/api/campaign/check-participant')
+  Future<chopper.Response<ExtapiCheckParticipantsResponse>> checkParticipants(
+      {@Query('activityID')
+          String? activityID,
+      @Query('organizationID')
+          String? organizationID,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
+
+  ///ClaimReward submits client's address for receiving the reward, server will send confirmation email to both user  and marketing team
+  ///@param body
+  ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
+
+  @Post(path: '/api/campaign/claim-reward')
+  Future<chopper.Response<ExtapiClaimRewardResponse>> claimReward(
+      {@Body()
+      @required
+          ExtapiClaimRewardRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
+
+  ///ListCurrentCampaigns returns all campaign activities for supernode which are running now
+  ///@param organizationID
+  ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
+
+  @Get(path: '/api/campaign/list-current-campaigns')
+  Future<chopper.Response<ExtapiListCurrentCampaignsResponse>>
+      listCurrentCampaigns(
+          {@Query('organizationID')
+              String? organizationID,
+          @Header('Grpc-Metadata-X-OTP')
+              String? grpcMetadataXOTP,
+          @Header('Grpc-Metadata-Authorization')
+              String? grpcMetadataAuthorization});
+
+  ///Participate submits client's request to participate specific campaign activity
+  ///@param body
+  ///@param Grpc-Metadata-X-OTP OTP Code
+  ///@param Grpc-Metadata-Authorization Auth Token
+
+  @Post(path: '/api/campaign/participate')
+  Future<chopper.Response<ExtapiParticipateResponse>> participate(
+      {@Body()
+      @required
+          ExtapiParticipateRequest? body,
+      @Header('Grpc-Metadata-X-OTP')
+          String? grpcMetadataXOTP,
+      @Header('Grpc-Metadata-Authorization')
+          String? grpcMetadataAuthorization});
+}
+
+@ChopperApi()
 abstract class ExternalUserService extends ChopperService {
   static ExternalUserService createService([ChopperClient? client]) {
     if (client != null) {
@@ -3419,6 +3496,7 @@ abstract class WithdrawService extends ChopperService {
 extension SupernodeSwaggerExtension on ChopperClient {
   ApplicationService get applicationService => getService<ApplicationService>();
   BTCMiningService get bTCMining => getService<BTCMiningService>();
+  CampaignService get campaign => getService<CampaignService>();
   ExternalUserService get externalUserService =>
       getService<ExternalUserService>();
   DeviceProfileService get deviceProfileService =>
@@ -3457,6 +3535,7 @@ extension SupernodeSwaggerExtension on ChopperClient {
 List<ChopperService> get supernodeServices => [
       ApplicationService.createService(),
       BTCMiningService.createService(),
+      CampaignService.createService(),
       ExternalUserService.createService(),
       DeviceProfileService.createService(),
       DeviceProvisioningService.createService(),
@@ -3536,6 +3615,10 @@ final Map<Type, Object Function(Map<String, dynamic>)>
   ExtapiChangePasswordResponse: ExtapiChangePasswordResponse.fromJsonFactory,
   ExtapiCheckACLRequest: ExtapiCheckACLRequest.fromJsonFactory,
   ExtapiCheckACLResponse: ExtapiCheckACLResponse.fromJsonFactory,
+  ExtapiCheckParticipantsResponse:
+      ExtapiCheckParticipantsResponse.fromJsonFactory,
+  ExtapiClaimRewardRequest: ExtapiClaimRewardRequest.fromJsonFactory,
+  ExtapiClaimRewardResponse: ExtapiClaimRewardResponse.fromJsonFactory,
   ExtapiConfirmPasswordResetReq: ExtapiConfirmPasswordResetReq.fromJsonFactory,
   ExtapiConfirmRegistrationRequest:
       ExtapiConfirmRegistrationRequest.fromJsonFactory,
@@ -3712,6 +3795,8 @@ final Map<Type, Object Function(Map<String, dynamic>)>
   ExtapiGlobalSearchResult: ExtapiGlobalSearchResult.fromJsonFactory,
   ExtapiListApplicationResponse: ExtapiListApplicationResponse.fromJsonFactory,
   ExtapiListCellsResponse: ExtapiListCellsResponse.fromJsonFactory,
+  ExtapiListCurrentCampaignsResponse:
+      ExtapiListCurrentCampaignsResponse.fromJsonFactory,
   ExtapiListDeviceProfileResponse:
       ExtapiListDeviceProfileResponse.fromJsonFactory,
   ExtapiListDeviceQueueItemsResponse:
@@ -3765,6 +3850,8 @@ final Map<Type, Object Function(Map<String, dynamic>)>
   ExtapiOrganizationUser: ExtapiOrganizationUser.fromJsonFactory,
   ExtapiOrganizationUserListItem:
       ExtapiOrganizationUserListItem.fromJsonFactory,
+  ExtapiParticipateRequest: ExtapiParticipateRequest.fromJsonFactory,
+  ExtapiParticipateResponse: ExtapiParticipateResponse.fromJsonFactory,
   ExtapiPasswordResetReq: ExtapiPasswordResetReq.fromJsonFactory,
   ExtapiPasswordResetResp: ExtapiPasswordResetResp.fromJsonFactory,
   ExtapiPingRX: ExtapiPingRX.fromJsonFactory,
@@ -3881,7 +3968,11 @@ final Map<Type, Object Function(Map<String, dynamic>)>
   ExtapiWithdrawGatewayMiningFuelResponse:
       ExtapiWithdrawGatewayMiningFuelResponse.fromJsonFactory,
   ExtapiWithdrawHistory: ExtapiWithdrawHistory.fromJsonFactory,
+  Extapibanner: Extapibanner.fromJsonFactory,
+  Extapicampaign: Extapicampaign.fromJsonFactory,
+  Extapiparticipant: Extapiparticipant.fromJsonFactory,
   Extapisettings: Extapisettings.fromJsonFactory,
+  Extapitier: Extapitier.fromJsonFactory,
   Extapitopic: Extapitopic.fromJsonFactory,
   GwDelayTimingInfo: GwDelayTimingInfo.fromJsonFactory,
   GwDownlinkTXInfo: GwDownlinkTXInfo.fromJsonFactory,
@@ -5533,6 +5624,92 @@ class ExtapiCheckACLResponse {
   static const fromJsonFactory = _$ExtapiCheckACLResponseFromJson;
   static const toJsonFactory = _$ExtapiCheckACLResponseToJson;
   Map<String, dynamic> toJson() => _$ExtapiCheckACLResponseToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class ExtapiCheckParticipantsResponse {
+  ExtapiCheckParticipantsResponse({
+    this.participation,
+  });
+
+  factory ExtapiCheckParticipantsResponse.fromJson(Map<String, dynamic> json) =>
+      _$ExtapiCheckParticipantsResponseFromJson(json);
+
+  @JsonKey(name: 'participation', defaultValue: <Extapiparticipant>[])
+  final List<Extapiparticipant>? participation;
+  static const fromJsonFactory = _$ExtapiCheckParticipantsResponseFromJson;
+  static const toJsonFactory = _$ExtapiCheckParticipantsResponseToJson;
+  Map<String, dynamic> toJson() =>
+      _$ExtapiCheckParticipantsResponseToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is ExtapiCheckParticipantsResponse &&
+            (identical(other.participation, participation) ||
+                const DeepCollectionEquality()
+                    .equals(other.participation, participation)));
+  }
+}
+
+extension $ExtapiCheckParticipantsResponseExtension
+    on ExtapiCheckParticipantsResponse {
+  ExtapiCheckParticipantsResponse copyWith(
+      {List<Extapiparticipant>? participation}) {
+    return ExtapiCheckParticipantsResponse(
+        participation: participation ?? this.participation);
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class ExtapiClaimRewardRequest {
+  ExtapiClaimRewardRequest({
+    this.details,
+    this.participantID,
+  });
+
+  factory ExtapiClaimRewardRequest.fromJson(Map<String, dynamic> json) =>
+      _$ExtapiClaimRewardRequestFromJson(json);
+
+  @JsonKey(name: 'details')
+  final String? details;
+  @JsonKey(name: 'participantID')
+  final String? participantID;
+  static const fromJsonFactory = _$ExtapiClaimRewardRequestFromJson;
+  static const toJsonFactory = _$ExtapiClaimRewardRequestToJson;
+  Map<String, dynamic> toJson() => _$ExtapiClaimRewardRequestToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is ExtapiClaimRewardRequest &&
+            (identical(other.details, details) ||
+                const DeepCollectionEquality()
+                    .equals(other.details, details)) &&
+            (identical(other.participantID, participantID) ||
+                const DeepCollectionEquality()
+                    .equals(other.participantID, participantID)));
+  }
+}
+
+extension $ExtapiClaimRewardRequestExtension on ExtapiClaimRewardRequest {
+  ExtapiClaimRewardRequest copyWith({String? details, String? participantID}) {
+    return ExtapiClaimRewardRequest(
+        details: details ?? this.details,
+        participantID: participantID ?? this.participantID);
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class ExtapiClaimRewardResponse {
+  ExtapiClaimRewardResponse();
+
+  factory ExtapiClaimRewardResponse.fromJson(Map<String, dynamic> json) =>
+      _$ExtapiClaimRewardResponseFromJson(json);
+
+  static const fromJsonFactory = _$ExtapiClaimRewardResponseFromJson;
+  static const toJsonFactory = _$ExtapiClaimRewardResponseToJson;
+  Map<String, dynamic> toJson() => _$ExtapiClaimRewardResponseToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -11547,6 +11724,42 @@ extension $ExtapiListCellsResponseExtension on ExtapiListCellsResponse {
 }
 
 @JsonSerializable(explicitToJson: true)
+class ExtapiListCurrentCampaignsResponse {
+  ExtapiListCurrentCampaignsResponse({
+    this.campaigns,
+  });
+
+  factory ExtapiListCurrentCampaignsResponse.fromJson(
+          Map<String, dynamic> json) =>
+      _$ExtapiListCurrentCampaignsResponseFromJson(json);
+
+  @JsonKey(name: 'campaigns', defaultValue: <Extapicampaign>[])
+  final List<Extapicampaign>? campaigns;
+  static const fromJsonFactory = _$ExtapiListCurrentCampaignsResponseFromJson;
+  static const toJsonFactory = _$ExtapiListCurrentCampaignsResponseToJson;
+  Map<String, dynamic> toJson() =>
+      _$ExtapiListCurrentCampaignsResponseToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is ExtapiListCurrentCampaignsResponse &&
+            (identical(other.campaigns, campaigns) ||
+                const DeepCollectionEquality()
+                    .equals(other.campaigns, campaigns)));
+  }
+}
+
+extension $ExtapiListCurrentCampaignsResponseExtension
+    on ExtapiListCurrentCampaignsResponse {
+  ExtapiListCurrentCampaignsResponse copyWith(
+      {List<Extapicampaign>? campaigns}) {
+    return ExtapiListCurrentCampaignsResponse(
+        campaigns: campaigns ?? this.campaigns);
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
 class ExtapiListDeviceProfileResponse {
   ExtapiListDeviceProfileResponse({
     this.result,
@@ -13173,6 +13386,91 @@ extension $ExtapiOrganizationUserListItemExtension
 }
 
 @JsonSerializable(explicitToJson: true)
+class ExtapiParticipateRequest {
+  ExtapiParticipateRequest({
+    this.amount,
+    this.organizationID,
+    this.tierID,
+  });
+
+  factory ExtapiParticipateRequest.fromJson(Map<String, dynamic> json) =>
+      _$ExtapiParticipateRequestFromJson(json);
+
+  @JsonKey(name: 'amount')
+  final String? amount;
+  @JsonKey(name: 'organizationID')
+  final String? organizationID;
+  @JsonKey(name: 'tierID')
+  final String? tierID;
+  static const fromJsonFactory = _$ExtapiParticipateRequestFromJson;
+  static const toJsonFactory = _$ExtapiParticipateRequestToJson;
+  Map<String, dynamic> toJson() => _$ExtapiParticipateRequestToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is ExtapiParticipateRequest &&
+            (identical(other.amount, amount) ||
+                const DeepCollectionEquality().equals(other.amount, amount)) &&
+            (identical(other.organizationID, organizationID) ||
+                const DeepCollectionEquality()
+                    .equals(other.organizationID, organizationID)) &&
+            (identical(other.tierID, tierID) ||
+                const DeepCollectionEquality().equals(other.tierID, tierID)));
+  }
+}
+
+extension $ExtapiParticipateRequestExtension on ExtapiParticipateRequest {
+  ExtapiParticipateRequest copyWith(
+      {String? amount, String? organizationID, String? tierID}) {
+    return ExtapiParticipateRequest(
+        amount: amount ?? this.amount,
+        organizationID: organizationID ?? this.organizationID,
+        tierID: tierID ?? this.tierID);
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class ExtapiParticipateResponse {
+  ExtapiParticipateResponse({
+    this.participantID,
+    this.transactionID,
+  });
+
+  factory ExtapiParticipateResponse.fromJson(Map<String, dynamic> json) =>
+      _$ExtapiParticipateResponseFromJson(json);
+
+  @JsonKey(name: 'participantID')
+  final String? participantID;
+  @JsonKey(name: 'transactionID')
+  final String? transactionID;
+  static const fromJsonFactory = _$ExtapiParticipateResponseFromJson;
+  static const toJsonFactory = _$ExtapiParticipateResponseToJson;
+  Map<String, dynamic> toJson() => _$ExtapiParticipateResponseToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is ExtapiParticipateResponse &&
+            (identical(other.participantID, participantID) ||
+                const DeepCollectionEquality()
+                    .equals(other.participantID, participantID)) &&
+            (identical(other.transactionID, transactionID) ||
+                const DeepCollectionEquality()
+                    .equals(other.transactionID, transactionID)));
+  }
+}
+
+extension $ExtapiParticipateResponseExtension on ExtapiParticipateResponse {
+  ExtapiParticipateResponse copyWith(
+      {String? participantID, String? transactionID}) {
+    return ExtapiParticipateResponse(
+        participantID: participantID ?? this.participantID,
+        transactionID: transactionID ?? this.transactionID);
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
 class ExtapiPasswordResetReq {
   ExtapiPasswordResetReq({
     this.captcha,
@@ -14355,9 +14653,11 @@ class ExtapiStake {
     this.active,
     this.amount,
     this.boost,
+    this.claimedReward,
     this.endTime,
     this.id,
     this.lockTill,
+    this.participantID,
     this.revenue,
     this.startTime,
   });
@@ -14371,12 +14671,16 @@ class ExtapiStake {
   final String? amount;
   @JsonKey(name: 'boost')
   final String? boost;
+  @JsonKey(name: 'claimedReward')
+  final bool? claimedReward;
   @JsonKey(name: 'endTime')
   final DateTime? endTime;
   @JsonKey(name: 'id')
   final String? id;
   @JsonKey(name: 'lockTill')
   final DateTime? lockTill;
+  @JsonKey(name: 'participantID')
+  final String? participantID;
   @JsonKey(name: 'revenue')
   final String? revenue;
   @JsonKey(name: 'startTime')
@@ -14395,6 +14699,9 @@ class ExtapiStake {
                 const DeepCollectionEquality().equals(other.amount, amount)) &&
             (identical(other.boost, boost) ||
                 const DeepCollectionEquality().equals(other.boost, boost)) &&
+            (identical(other.claimedReward, claimedReward) ||
+                const DeepCollectionEquality()
+                    .equals(other.claimedReward, claimedReward)) &&
             (identical(other.endTime, endTime) ||
                 const DeepCollectionEquality()
                     .equals(other.endTime, endTime)) &&
@@ -14403,6 +14710,9 @@ class ExtapiStake {
             (identical(other.lockTill, lockTill) ||
                 const DeepCollectionEquality()
                     .equals(other.lockTill, lockTill)) &&
+            (identical(other.participantID, participantID) ||
+                const DeepCollectionEquality()
+                    .equals(other.participantID, participantID)) &&
             (identical(other.revenue, revenue) ||
                 const DeepCollectionEquality()
                     .equals(other.revenue, revenue)) &&
@@ -14417,18 +14727,22 @@ extension $ExtapiStakeExtension on ExtapiStake {
       {bool? active,
       String? amount,
       String? boost,
+      bool? claimedReward,
       DateTime? endTime,
       String? id,
       DateTime? lockTill,
+      String? participantID,
       String? revenue,
       DateTime? startTime}) {
     return ExtapiStake(
         active: active ?? this.active,
         amount: amount ?? this.amount,
         boost: boost ?? this.boost,
+        claimedReward: claimedReward ?? this.claimedReward,
         endTime: endTime ?? this.endTime,
         id: id ?? this.id,
         lockTill: lockTill ?? this.lockTill,
+        participantID: participantID ?? this.participantID,
         revenue: revenue ?? this.revenue,
         startTime: startTime ?? this.startTime);
   }
@@ -16487,6 +16801,153 @@ extension $ExtapiWithdrawHistoryExtension on ExtapiWithdrawHistory {
 }
 
 @JsonSerializable(explicitToJson: true)
+class Extapibanner {
+  Extapibanner({
+    this.imageLink,
+    this.name,
+  });
+
+  factory Extapibanner.fromJson(Map<String, dynamic> json) =>
+      _$ExtapibannerFromJson(json);
+
+  @JsonKey(name: 'imageLink')
+  final String? imageLink;
+  @JsonKey(name: 'name')
+  final String? name;
+  static const fromJsonFactory = _$ExtapibannerFromJson;
+  static const toJsonFactory = _$ExtapibannerToJson;
+  Map<String, dynamic> toJson() => _$ExtapibannerToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is Extapibanner &&
+            (identical(other.imageLink, imageLink) ||
+                const DeepCollectionEquality()
+                    .equals(other.imageLink, imageLink)) &&
+            (identical(other.name, name) ||
+                const DeepCollectionEquality().equals(other.name, name)));
+  }
+}
+
+extension $ExtapibannerExtension on Extapibanner {
+  Extapibanner copyWith({String? imageLink, String? name}) {
+    return Extapibanner(
+        imageLink: imageLink ?? this.imageLink, name: name ?? this.name);
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class Extapicampaign {
+  Extapicampaign({
+    this.banners,
+    this.campaignID,
+    this.campaignName,
+    this.currency,
+    this.tiers,
+  });
+
+  factory Extapicampaign.fromJson(Map<String, dynamic> json) =>
+      _$ExtapicampaignFromJson(json);
+
+  @JsonKey(name: 'banners', defaultValue: <Extapibanner>[])
+  final List<Extapibanner>? banners;
+  @JsonKey(name: 'campaignID')
+  final String? campaignID;
+  @JsonKey(name: 'campaignName')
+  final String? campaignName;
+  @JsonKey(name: 'currency')
+  final String? currency;
+  @JsonKey(name: 'tiers', defaultValue: <Extapitier>[])
+  final List<Extapitier>? tiers;
+  static const fromJsonFactory = _$ExtapicampaignFromJson;
+  static const toJsonFactory = _$ExtapicampaignToJson;
+  Map<String, dynamic> toJson() => _$ExtapicampaignToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is Extapicampaign &&
+            (identical(other.banners, banners) ||
+                const DeepCollectionEquality()
+                    .equals(other.banners, banners)) &&
+            (identical(other.campaignID, campaignID) ||
+                const DeepCollectionEquality()
+                    .equals(other.campaignID, campaignID)) &&
+            (identical(other.campaignName, campaignName) ||
+                const DeepCollectionEquality()
+                    .equals(other.campaignName, campaignName)) &&
+            (identical(other.currency, currency) ||
+                const DeepCollectionEquality()
+                    .equals(other.currency, currency)) &&
+            (identical(other.tiers, tiers) ||
+                const DeepCollectionEquality().equals(other.tiers, tiers)));
+  }
+}
+
+extension $ExtapicampaignExtension on Extapicampaign {
+  Extapicampaign copyWith(
+      {List<Extapibanner>? banners,
+      String? campaignID,
+      String? campaignName,
+      String? currency,
+      List<Extapitier>? tiers}) {
+    return Extapicampaign(
+        banners: banners ?? this.banners,
+        campaignID: campaignID ?? this.campaignID,
+        campaignName: campaignName ?? this.campaignName,
+        currency: currency ?? this.currency,
+        tiers: tiers ?? this.tiers);
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class Extapiparticipant {
+  Extapiparticipant({
+    this.participantID,
+    this.rewardClaimed,
+    this.tierID,
+  });
+
+  factory Extapiparticipant.fromJson(Map<String, dynamic> json) =>
+      _$ExtapiparticipantFromJson(json);
+
+  @JsonKey(name: 'participantID')
+  final String? participantID;
+  @JsonKey(name: 'rewardClaimed')
+  final bool? rewardClaimed;
+  @JsonKey(name: 'tierID')
+  final String? tierID;
+  static const fromJsonFactory = _$ExtapiparticipantFromJson;
+  static const toJsonFactory = _$ExtapiparticipantToJson;
+  Map<String, dynamic> toJson() => _$ExtapiparticipantToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is Extapiparticipant &&
+            (identical(other.participantID, participantID) ||
+                const DeepCollectionEquality()
+                    .equals(other.participantID, participantID)) &&
+            (identical(other.rewardClaimed, rewardClaimed) ||
+                const DeepCollectionEquality()
+                    .equals(other.rewardClaimed, rewardClaimed)) &&
+            (identical(other.tierID, tierID) ||
+                const DeepCollectionEquality().equals(other.tierID, tierID)));
+  }
+}
+
+extension $ExtapiparticipantExtension on Extapiparticipant {
+  Extapiparticipant copyWith(
+      {String? participantID, bool? rewardClaimed, String? tierID}) {
+    return Extapiparticipant(
+        participantID: participantID ?? this.participantID,
+        rewardClaimed: rewardClaimed ?? this.rewardClaimed,
+        tierID: tierID ?? this.tierID);
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
 class Extapisettings {
   Extapisettings({
     this.description,
@@ -16562,6 +17023,91 @@ extension $ExtapisettingsExtension on Extapisettings {
         port: port ?? this.port,
         topics: topics ?? this.topics,
         username: username ?? this.username);
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class Extapitier {
+  Extapitier({
+    this.amount,
+    this.id,
+    this.imageLink,
+    this.lockPeriod,
+    this.monthlyRate,
+    this.reward,
+    this.slots,
+    this.slotsUsed,
+  });
+
+  factory Extapitier.fromJson(Map<String, dynamic> json) =>
+      _$ExtapitierFromJson(json);
+
+  @JsonKey(name: 'amount')
+  final String? amount;
+  @JsonKey(name: 'id')
+  final String? id;
+  @JsonKey(name: 'imageLink')
+  final String? imageLink;
+  @JsonKey(name: 'lockPeriod')
+  final String? lockPeriod;
+  @JsonKey(name: 'monthlyRate')
+  final double? monthlyRate;
+  @JsonKey(name: 'reward')
+  final String? reward;
+  @JsonKey(name: 'slots')
+  final String? slots;
+  @JsonKey(name: 'slotsUsed')
+  final String? slotsUsed;
+  static const fromJsonFactory = _$ExtapitierFromJson;
+  static const toJsonFactory = _$ExtapitierToJson;
+  Map<String, dynamic> toJson() => _$ExtapitierToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is Extapitier &&
+            (identical(other.amount, amount) ||
+                const DeepCollectionEquality().equals(other.amount, amount)) &&
+            (identical(other.id, id) ||
+                const DeepCollectionEquality().equals(other.id, id)) &&
+            (identical(other.imageLink, imageLink) ||
+                const DeepCollectionEquality()
+                    .equals(other.imageLink, imageLink)) &&
+            (identical(other.lockPeriod, lockPeriod) ||
+                const DeepCollectionEquality()
+                    .equals(other.lockPeriod, lockPeriod)) &&
+            (identical(other.monthlyRate, monthlyRate) ||
+                const DeepCollectionEquality()
+                    .equals(other.monthlyRate, monthlyRate)) &&
+            (identical(other.reward, reward) ||
+                const DeepCollectionEquality().equals(other.reward, reward)) &&
+            (identical(other.slots, slots) ||
+                const DeepCollectionEquality().equals(other.slots, slots)) &&
+            (identical(other.slotsUsed, slotsUsed) ||
+                const DeepCollectionEquality()
+                    .equals(other.slotsUsed, slotsUsed)));
+  }
+}
+
+extension $ExtapitierExtension on Extapitier {
+  Extapitier copyWith(
+      {String? amount,
+      String? id,
+      String? imageLink,
+      String? lockPeriod,
+      double? monthlyRate,
+      String? reward,
+      String? slots,
+      String? slotsUsed}) {
+    return Extapitier(
+        amount: amount ?? this.amount,
+        id: id ?? this.id,
+        imageLink: imageLink ?? this.imageLink,
+        lockPeriod: lockPeriod ?? this.lockPeriod,
+        monthlyRate: monthlyRate ?? this.monthlyRate,
+        reward: reward ?? this.reward,
+        slots: slots ?? this.slots,
+        slotsUsed: slotsUsed ?? this.slotsUsed);
   }
 }
 

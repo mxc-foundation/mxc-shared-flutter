@@ -424,6 +424,143 @@
             ]
          }
       },
+      "/api/campaign/check-participant": {
+         "get": {
+            "operationId": "CheckParticipants",
+            "parameters": [
+               {
+                  "format": "int64",
+                  "in": "query",
+                  "name": "activityID",
+                  "required": false,
+                  "type": "string"
+               },
+               {
+                  "format": "int64",
+                  "in": "query",
+                  "name": "organizationID",
+                  "required": false,
+                  "type": "string"
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "$ref": "#/definitions/extapiCheckParticipantsResponse"
+                  }
+               },
+               "default": {
+                  "description": "An unexpected error response.",
+                  "schema": {
+                     "$ref": "#/definitions/runtimeError"
+                  }
+               }
+            },
+            "summary": "CheckParticipants checks whether a user has participated a specific activity",
+            "tags": [
+               "Campaign"
+            ]
+         }
+      },
+      "/api/campaign/claim-reward": {
+         "post": {
+            "operationId": "ClaimReward",
+            "parameters": [
+               {
+                  "in": "body",
+                  "name": "body",
+                  "required": true,
+                  "schema": {
+                     "$ref": "#/definitions/extapiClaimRewardRequest"
+                  }
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "$ref": "#/definitions/extapiClaimRewardResponse"
+                  }
+               },
+               "default": {
+                  "description": "An unexpected error response.",
+                  "schema": {
+                     "$ref": "#/definitions/runtimeError"
+                  }
+               }
+            },
+            "summary": "ClaimReward submits client's address for receiving the reward, server will send confirmation email to both user\n and marketing team",
+            "tags": [
+               "Campaign"
+            ]
+         }
+      },
+      "/api/campaign/list-current-campaigns": {
+         "get": {
+            "operationId": "ListCurrentCampaigns",
+            "parameters": [
+               {
+                  "format": "int64",
+                  "in": "query",
+                  "name": "organizationID",
+                  "required": false,
+                  "type": "string"
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "$ref": "#/definitions/extapiListCurrentCampaignsResponse"
+                  }
+               },
+               "default": {
+                  "description": "An unexpected error response.",
+                  "schema": {
+                     "$ref": "#/definitions/runtimeError"
+                  }
+               }
+            },
+            "summary": "ListCurrentCampaigns returns all campaign activities for supernode which are running now",
+            "tags": [
+               "Campaign"
+            ]
+         }
+      },
+      "/api/campaign/participate": {
+         "post": {
+            "operationId": "Participate",
+            "parameters": [
+               {
+                  "in": "body",
+                  "name": "body",
+                  "required": true,
+                  "schema": {
+                     "$ref": "#/definitions/extapiParticipateRequest"
+                  }
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "A successful response.",
+                  "schema": {
+                     "$ref": "#/definitions/extapiParticipateResponse"
+                  }
+               },
+               "default": {
+                  "description": "An unexpected error response.",
+                  "schema": {
+                     "$ref": "#/definitions/runtimeError"
+                  }
+               }
+            },
+            "summary": "Participate submits client's request to participate specific campaign activity",
+            "tags": [
+               "Campaign"
+            ]
+         }
+      },
       "/api/confirm-external-email": {
          "post": {
             "operationId": "ConfirmShopifyEmail",
@@ -7232,6 +7369,32 @@
       "extapiCheckACLResponse": {
          "type": "object"
       },
+      "extapiCheckParticipantsResponse": {
+         "properties": {
+            "participation": {
+               "items": {
+                  "$ref": "#/definitions/extapiparticipant"
+               },
+               "type": "array"
+            }
+         },
+         "type": "object"
+      },
+      "extapiClaimRewardRequest": {
+         "properties": {
+            "details": {
+               "type": "string"
+            },
+            "participantID": {
+               "format": "int64",
+               "type": "string"
+            }
+         },
+         "type": "object"
+      },
+      "extapiClaimRewardResponse": {
+         "type": "object"
+      },
       "extapiConfirmPasswordResetReq": {
          "properties": {
             "newPassword": {
@@ -9644,6 +9807,17 @@
          },
          "type": "object"
       },
+      "extapiListCurrentCampaignsResponse": {
+         "properties": {
+            "campaigns": {
+               "items": {
+                  "$ref": "#/definitions/extapicampaign"
+               },
+               "type": "array"
+            }
+         },
+         "type": "object"
+      },
       "extapiListDeviceProfileResponse": {
          "properties": {
             "result": {
@@ -10281,6 +10455,35 @@
          },
          "type": "object"
       },
+      "extapiParticipateRequest": {
+         "properties": {
+            "amount": {
+               "type": "string"
+            },
+            "organizationID": {
+               "format": "int64",
+               "type": "string"
+            },
+            "tierID": {
+               "format": "int64",
+               "type": "string"
+            }
+         },
+         "type": "object"
+      },
+      "extapiParticipateResponse": {
+         "properties": {
+            "participantID": {
+               "format": "int64",
+               "type": "string"
+            },
+            "transactionID": {
+               "format": "int64",
+               "type": "string"
+            }
+         },
+         "type": "object"
+      },
       "extapiPasswordResetReq": {
          "properties": {
             "captcha": {
@@ -10724,6 +10927,9 @@
                "description": "boost [0, 1]",
                "type": "string"
             },
+            "claimedReward": {
+               "type": "boolean"
+            },
             "endTime": {
                "description": "when stake was withdrawn",
                "format": "date-time",
@@ -10736,6 +10942,11 @@
             "lockTill": {
                "description": "the time till which the stake is locked and can't be withdrawn",
                "format": "date-time",
+               "type": "string"
+            },
+            "participantID": {
+               "description": "If participantID is zero, then this is a normal stake not a promotion stake.",
+               "format": "int64",
                "type": "string"
             },
             "revenue": {
@@ -11428,6 +11639,60 @@
          },
          "type": "object"
       },
+      "extapibanner": {
+         "properties": {
+            "imageLink": {
+               "type": "string"
+            },
+            "name": {
+               "type": "string"
+            }
+         },
+         "type": "object"
+      },
+      "extapicampaign": {
+         "properties": {
+            "banners": {
+               "items": {
+                  "$ref": "#/definitions/extapibanner"
+               },
+               "type": "array"
+            },
+            "campaignID": {
+               "format": "int64",
+               "type": "string"
+            },
+            "campaignName": {
+               "type": "string"
+            },
+            "currency": {
+               "type": "string"
+            },
+            "tiers": {
+               "items": {
+                  "$ref": "#/definitions/extapitier"
+               },
+               "type": "array"
+            }
+         },
+         "type": "object"
+      },
+      "extapiparticipant": {
+         "properties": {
+            "participantID": {
+               "format": "int64",
+               "type": "string"
+            },
+            "rewardClaimed": {
+               "type": "boolean"
+            },
+            "tierID": {
+               "format": "int64",
+               "type": "string"
+            }
+         },
+         "type": "object"
+      },
       "extapisettings": {
          "properties": {
             "description": {
@@ -11454,6 +11719,40 @@
                "type": "array"
             },
             "username": {
+               "type": "string"
+            }
+         },
+         "type": "object"
+      },
+      "extapitier": {
+         "properties": {
+            "amount": {
+               "type": "string"
+            },
+            "id": {
+               "format": "int64",
+               "type": "string"
+            },
+            "imageLink": {
+               "type": "string"
+            },
+            "lockPeriod": {
+               "format": "int64",
+               "type": "string"
+            },
+            "monthlyRate": {
+               "format": "double",
+               "type": "number"
+            },
+            "reward": {
+               "type": "string"
+            },
+            "slots": {
+               "format": "int64",
+               "type": "string"
+            },
+            "slotsUsed": {
+               "format": "int64",
                "type": "string"
             }
          },
