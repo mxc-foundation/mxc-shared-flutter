@@ -59,3 +59,13 @@ class CampaignParticipant {
   final int participantId;
   final bool rewardClaimed;
 }
+
+class CampaignParticipateResult {
+  CampaignParticipateResult({
+    required this.participantId,
+    required this.transactionId,
+  });
+
+  final int participantId;
+  final int transactionId;
+}

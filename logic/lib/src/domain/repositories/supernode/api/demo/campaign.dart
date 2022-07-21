@@ -4,7 +4,7 @@ class DemoCampaignRepository implements CampaignRepository {
   const DemoCampaignRepository();
 
   @override
-  Future<List<Campaign>> listCurrent() async {
+  Future<List<Campaign>> listCurrent([int? organizationId]) async {
     return [
       Campaign(
           campaignId: 1,
@@ -16,7 +16,8 @@ class DemoCampaignRepository implements CampaignRepository {
   }
 
   @override
-  Future<List<CampaignParticipant>> checkParticipants(int activityId) async {
+  Future<List<CampaignParticipant>> checkParticipants(int campaignId,
+      [int? organizationId]) async {
     return [
       CampaignParticipant(
         tierId: 1,
@@ -25,4 +26,15 @@ class DemoCampaignRepository implements CampaignRepository {
       )
     ];
   }
+
+  @override
+  Future<CampaignParticipateResult> participate({
+    required int amount,
+    required int tierId,
+    int? organizationId,
+  }) async =>
+      CampaignParticipateResult(
+        transactionId: 1,
+        participantId: 2,
+      );
 }

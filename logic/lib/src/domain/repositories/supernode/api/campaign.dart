@@ -1,15 +1,15 @@
 import 'package:mxc_logic/mxc_logic.dart';
 import 'package:mxc_logic/src/data/data.dart';
-import 'package:mxc_logic/src/domain/entities/campaign.dart';
 
 class CampaignRepository {
   CampaignRepository(this._client);
 
   final SupernodeClient _client;
 
-  Future<List<Campaign>> listCurrent() async {
+  Future<List<Campaign>> listCurrent([int? organizationId]) async {
     final res = await _client.campaign.listCurrentCampaigns(
-      organizationID: _client.defaultOrganizationId,
+      organizationID:
+          organizationId?.toString() ?? _client.defaultOrganizationId,
     );
     return res.body!.campaigns!
         .map(
@@ -38,9 +38,11 @@ class CampaignRepository {
         .toList();
   }
 
-  Future<List<CampaignParticipant>> checkParticipants(int campaignId) async {
+  Future<List<CampaignParticipant>> checkParticipants(int campaignId,
+      [int? organizationId]) async {
     final res = await _client.campaign.checkParticipants(
-      organizationID: _client.defaultOrganizationId,
+      organizationID:
+          organizationId?.toString() ?? _client.defaultOrganizationId,
       activityID: campaignId.toString(),
     );
     return res.body!.participation!
@@ -50,5 +52,26 @@ class CampaignRepository {
               rewardClaimed: e.rewardClaimed ?? false,
             ))
         .toList();
+  }
+
+  Future<CampaignParticipateResult> participate({
+    required int amount,
+    required int tierId,
+    int? organizationId,
+  }) async {
+    final res = await _client.campaign.participate(
+      body: ExtapiParticipateRequest(
+        amount: amount.toString(),
+        organizationID:
+            organizationId?.toString() ?? _client.defaultOrganizationId,
+        tierID: tierId.toString(),
+      ),
+    );
+
+    final data = res.body!;
+    return CampaignParticipateResult(
+      transactionId: int.parse(data.transactionID!),
+      participantId: int.parse(data.participantID!),
+    );
   }
 }
