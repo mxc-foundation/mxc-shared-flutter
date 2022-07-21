@@ -27,6 +27,8 @@ class Stake {
     required this.boost,
     required this.revenue,
     required this.option,
+    required this.participantId,
+    required this.claimedReward,
   });
 
   final String id;
@@ -38,6 +40,8 @@ class Stake {
   final double boost;
   final double revenue;
   final StakeOption option;
+  final String participantId;
+  final bool claimedReward;
 
   late final Decimal totalSum = amount + Decimal.parse(revenue.toString());
 
