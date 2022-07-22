@@ -4,7 +4,7 @@ class DemoCampaignRepository implements CampaignRepository {
   const DemoCampaignRepository();
 
   @override
-  Future<List<Campaign>> listCurrent([int? organizationId]) async {
+  Future<List<Campaign>> listCurrent({int? organizationId}) async {
     return [
       Campaign(
           campaignId: 1,

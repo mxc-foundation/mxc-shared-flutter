@@ -6,7 +6,7 @@ class CampaignRepository {
 
   final SupernodeClient _client;
 
-  Future<List<Campaign>> listCurrent([int? organizationId]) async {
+  Future<List<Campaign>> listCurrent({int? organizationId}) async {
     final res = await _client.campaign.listCurrentCampaigns(
       organizationID:
           organizationId?.toString() ?? _client.defaultOrganizationId,
