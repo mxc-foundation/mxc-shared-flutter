@@ -16,6 +16,7 @@ class CampaignRepository {
           (e) => Campaign(
               campaignId: int.parse(e.campaignID!),
               campaignName: e.campaignName!,
+              campaignType: e.campaignType!,
               token:
                   (e.currency! == 'ETH_MXC') ? Token.mxc : Token.supernodeDhx,
               campaignBanners: e.banners!
@@ -43,7 +44,7 @@ class CampaignRepository {
     final res = await _client.campaign.checkParticipants(
       organizationID:
           organizationId?.toString() ?? _client.defaultOrganizationId,
-      activityID: campaignId.toString(),
+      campaignID: campaignId.toString(),
     );
     return res.body!.participation!
         .map((e) => CampaignParticipant(

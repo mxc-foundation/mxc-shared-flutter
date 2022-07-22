@@ -263,13 +263,13 @@ class _$CampaignService extends CampaignService {
 
   @override
   Future<Response<ExtapiCheckParticipantsResponse>> checkParticipants(
-      {String? activityID,
+      {String? campaignID,
       String? organizationID,
       String? grpcMetadataXOTP,
       String? grpcMetadataAuthorization}) {
     final $url = '/api/campaign/check-participant';
     final $params = <String, dynamic>{
-      'activityID': activityID,
+      'campaignID': campaignID,
       'organizationID': organizationID
     };
     final $headers = {

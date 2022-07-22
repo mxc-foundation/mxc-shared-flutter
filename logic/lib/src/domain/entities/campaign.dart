@@ -4,6 +4,7 @@ class Campaign {
   Campaign({
     required this.campaignId,
     required this.campaignName,
+    required this.campaignType,
     required this.token,
     required this.campaignBanners,
     required this.campaignTiers,
@@ -11,6 +12,7 @@ class Campaign {
 
   final int campaignId;
   final String campaignName;
+  final String campaignType;
   final Token token;
   final List<CampaignBanner> campaignBanners;
   final List<CampaignTier> campaignTiers;

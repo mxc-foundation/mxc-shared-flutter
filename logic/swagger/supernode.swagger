@@ -431,7 +431,7 @@
                {
                   "format": "int64",
                   "in": "query",
-                  "name": "activityID",
+                  "name": "campaignID",
                   "required": false,
                   "type": "string"
                },
@@ -11540,6 +11540,9 @@
                "type": "string"
             },
             "campaignName": {
+               "type": "string"
+            },
+            "campaignType": {
                "type": "string"
             },
             "currency": {

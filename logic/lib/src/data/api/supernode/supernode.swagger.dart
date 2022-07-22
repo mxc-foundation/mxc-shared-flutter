@@ -243,15 +243,15 @@ abstract class CampaignService extends ChopperService {
   }
 
   ///CheckParticipants checks whether a user has participated a specific activity
-  ///@param activityID
+  ///@param campaignID
   ///@param organizationID
   ///@param Grpc-Metadata-X-OTP OTP Code
   ///@param Grpc-Metadata-Authorization Auth Token
 
   @Get(path: '/api/campaign/check-participant')
   Future<chopper.Response<ExtapiCheckParticipantsResponse>> checkParticipants(
-      {@Query('activityID')
-          String? activityID,
+      {@Query('campaignID')
+          String? campaignID,
       @Query('organizationID')
           String? organizationID,
       @Header('Grpc-Metadata-X-OTP')
@@ -16843,6 +16843,7 @@ class Extapicampaign {
     this.banners,
     this.campaignID,
     this.campaignName,
+    this.campaignType,
     this.currency,
     this.tiers,
   });
@@ -16856,6 +16857,8 @@ class Extapicampaign {
   final String? campaignID;
   @JsonKey(name: 'campaignName')
   final String? campaignName;
+  @JsonKey(name: 'campaignType')
+  final String? campaignType;
   @JsonKey(name: 'currency')
   final String? currency;
   @JsonKey(name: 'tiers', defaultValue: <Extapitier>[])
@@ -16877,6 +16880,9 @@ class Extapicampaign {
             (identical(other.campaignName, campaignName) ||
                 const DeepCollectionEquality()
                     .equals(other.campaignName, campaignName)) &&
+            (identical(other.campaignType, campaignType) ||
+                const DeepCollectionEquality()
+                    .equals(other.campaignType, campaignType)) &&
             (identical(other.currency, currency) ||
                 const DeepCollectionEquality()
                     .equals(other.currency, currency)) &&
@@ -16890,12 +16896,14 @@ extension $ExtapicampaignExtension on Extapicampaign {
       {List<Extapibanner>? banners,
       String? campaignID,
       String? campaignName,
+      String? campaignType,
       String? currency,
       List<Extapitier>? tiers}) {
     return Extapicampaign(
         banners: banners ?? this.banners,
         campaignID: campaignID ?? this.campaignID,
         campaignName: campaignName ?? this.campaignName,
+        campaignType: campaignType ?? this.campaignType,
         currency: currency ?? this.currency,
         tiers: tiers ?? this.tiers);
   }

@@ -4837,6 +4837,7 @@ Extapicampaign _$ExtapicampaignFromJson(Map<String, dynamic> json) =>
           [],
       campaignID: json['campaignID'] as String?,
       campaignName: json['campaignName'] as String?,
+      campaignType: json['campaignType'] as String?,
       currency: json['currency'] as String?,
       tiers: (json['tiers'] as List<dynamic>?)
               ?.map((e) => Extapitier.fromJson(e as Map<String, dynamic>))
@@ -4849,6 +4850,7 @@ Map<String, dynamic> _$ExtapicampaignToJson(Extapicampaign instance) =>
       'banners': instance.banners?.map((e) => e.toJson()).toList(),
       'campaignID': instance.campaignID,
       'campaignName': instance.campaignName,
+      'campaignType': instance.campaignType,
       'currency': instance.currency,
       'tiers': instance.tiers?.map((e) => e.toJson()).toList(),
     };
