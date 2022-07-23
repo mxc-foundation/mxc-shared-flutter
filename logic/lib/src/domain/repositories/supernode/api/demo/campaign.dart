@@ -4,25 +4,30 @@ class DemoCampaignRepository implements CampaignRepository {
   const DemoCampaignRepository();
 
   @override
-  Future<List<Campaign>> listCurrent() async {
+  Future<List<Campaign>> listCurrent({int? organizationId}) async {
     return [
       Campaign(
-          campaignId: 1,
-          campaignName: 'staking rally',
-          token: Token.mxc,
-          campaignBanners: [],
-          campaignTiers: []),
+        campaignId: 1,
+        campaignName: 'staking rally',
+        campaignType: 'stake',
+        token: Token.mxc,
+        bannerImage: '',
+        campaignTiers: [],
+        participated: false,
+        rewardClaimed: false,
+        participant: CampaignParticipantEmpty(),
+      ),
     ];
   }
 
   @override
-  Future<List<CampaignParticipant>> checkParticipants(int activityId) async {
-    return [
-      CampaignParticipant(
-        tierId: 1,
+  Future<CampaignParticipateResult> participate({
+    required int amount,
+    required int tierId,
+    int? organizationId,
+  }) async =>
+      CampaignParticipateResult(
+        transactionId: 1,
         participantId: 2,
-        rewardClaimed: true,
-      )
-    ];
-  }
+      );
 }

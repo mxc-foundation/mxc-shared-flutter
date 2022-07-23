@@ -8,5 +8,5 @@ targets:
       swagger_dart_code_generator:
         options:
           with_base_url: false
-          input_folder: swagger
+          input_folder: swagger/
           output_folder: lib/src/data/api/supernode/
