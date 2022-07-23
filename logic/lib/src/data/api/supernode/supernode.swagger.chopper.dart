@@ -262,29 +262,6 @@ class _$CampaignService extends CampaignService {
   final definitionType = CampaignService;
 
   @override
-  Future<Response<ExtapiCheckParticipantsResponse>> checkParticipants(
-      {String? campaignID,
-      String? organizationID,
-      String? grpcMetadataXOTP,
-      String? grpcMetadataAuthorization}) {
-    final $url = '/api/campaign/check-participant';
-    final $params = <String, dynamic>{
-      'campaignID': campaignID,
-      'organizationID': organizationID
-    };
-    final $headers = {
-      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
-      if (grpcMetadataAuthorization != null)
-        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
-    };
-
-    final $request = Request('GET', $url, client.baseUrl,
-        parameters: $params, headers: $headers);
-    return client.send<ExtapiCheckParticipantsResponse,
-        ExtapiCheckParticipantsResponse>($request);
-  }
-
-  @override
   Future<Response<ExtapiClaimRewardResponse>> claimReward(
       {ExtapiClaimRewardRequest? body,
       String? grpcMetadataXOTP,

@@ -17,12 +17,18 @@ class CampaignRepository {
               campaignId: int.parse(e.campaignID!),
               campaignName: e.campaignName!,
               campaignType: e.campaignType!,
+              participated: e.participated!,
+              rewardClaimed: e.rewardClaimed!,
+              participant: e.participant != null
+                  ? CampaignParticipant(
+                      tierId: int.parse(e.participant!.tierID!),
+                      participantId: int.parse(e.participant!.participantID!),
+                    )
+                  : CampaignParticipantEmpty(),
               token:
                   (e.currency! == 'ETH_MXC') ? Token.mxc : Token.supernodeDhx,
-              campaignBanners: e.banners!
-                  .map((b) => CampaignBanner(
-                      imageName: b.name!, imageLink: b.imageLink!))
-                  .toList(),
+              bannerImage:
+                  e.participated! ? e.banners!.claimReward! : e.banners!.$new!,
               campaignTiers: e.tiers!
                   .map((t) => CampaignTier(
                         id: int.parse(t.id!),
@@ -36,22 +42,6 @@ class CampaignRepository {
                       ))
                   .toList()),
         )
-        .toList();
-  }
-
-  Future<List<CampaignParticipant>> checkParticipants(int campaignId,
-      [int? organizationId]) async {
-    final res = await _client.campaign.checkParticipants(
-      organizationID:
-          organizationId?.toString() ?? _client.defaultOrganizationId,
-      campaignID: campaignId.toString(),
-    );
-    return res.body!.participation!
-        .map((e) => CampaignParticipant(
-              tierId: int.parse(e.tierID!),
-              participantId: int.parse(e.participantID!),
-              rewardClaimed: e.rewardClaimed ?? false,
-            ))
         .toList();
   }
 

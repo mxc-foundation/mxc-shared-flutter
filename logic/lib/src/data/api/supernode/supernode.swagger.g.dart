@@ -619,22 +619,6 @@ Map<String, dynamic> _$ExtapiCheckACLResponseToJson(
         ExtapiCheckACLResponse instance) =>
     <String, dynamic>{};
 
-ExtapiCheckParticipantsResponse _$ExtapiCheckParticipantsResponseFromJson(
-        Map<String, dynamic> json) =>
-    ExtapiCheckParticipantsResponse(
-      participation: (json['participation'] as List<dynamic>?)
-              ?.map(
-                  (e) => Extapiparticipant.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          [],
-    );
-
-Map<String, dynamic> _$ExtapiCheckParticipantsResponseToJson(
-        ExtapiCheckParticipantsResponse instance) =>
-    <String, dynamic>{
-      'participation': instance.participation?.map((e) => e.toJson()).toList(),
-    };
-
 ExtapiClaimRewardRequest _$ExtapiClaimRewardRequestFromJson(
         Map<String, dynamic> json) =>
     ExtapiClaimRewardRequest(
@@ -4819,26 +4803,31 @@ Map<String, dynamic> _$ExtapiWithdrawHistoryToJson(
     };
 
 Extapibanner _$ExtapibannerFromJson(Map<String, dynamic> json) => Extapibanner(
-      imageLink: json['imageLink'] as String?,
-      name: json['name'] as String?,
+      claimReward: json['claimReward'] as String?,
+      $new: json['new'] as String?,
     );
 
 Map<String, dynamic> _$ExtapibannerToJson(Extapibanner instance) =>
     <String, dynamic>{
-      'imageLink': instance.imageLink,
-      'name': instance.name,
+      'claimReward': instance.claimReward,
+      'new': instance.$new,
     };
 
 Extapicampaign _$ExtapicampaignFromJson(Map<String, dynamic> json) =>
     Extapicampaign(
-      banners: (json['banners'] as List<dynamic>?)
-              ?.map((e) => Extapibanner.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          [],
+      banners: json['banners'] == null
+          ? null
+          : Extapibanner.fromJson(json['banners'] as Map<String, dynamic>),
       campaignID: json['campaignID'] as String?,
       campaignName: json['campaignName'] as String?,
       campaignType: json['campaignType'] as String?,
       currency: json['currency'] as String?,
+      participant: json['participant'] == null
+          ? null
+          : Extapiparticipant.fromJson(
+              json['participant'] as Map<String, dynamic>),
+      participated: json['participated'] as bool?,
+      rewardClaimed: json['rewardClaimed'] as bool?,
       tiers: (json['tiers'] as List<dynamic>?)
               ?.map((e) => Extapitier.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -4847,25 +4836,26 @@ Extapicampaign _$ExtapicampaignFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$ExtapicampaignToJson(Extapicampaign instance) =>
     <String, dynamic>{
-      'banners': instance.banners?.map((e) => e.toJson()).toList(),
+      'banners': instance.banners?.toJson(),
       'campaignID': instance.campaignID,
       'campaignName': instance.campaignName,
       'campaignType': instance.campaignType,
       'currency': instance.currency,
+      'participant': instance.participant?.toJson(),
+      'participated': instance.participated,
+      'rewardClaimed': instance.rewardClaimed,
       'tiers': instance.tiers?.map((e) => e.toJson()).toList(),
     };
 
 Extapiparticipant _$ExtapiparticipantFromJson(Map<String, dynamic> json) =>
     Extapiparticipant(
       participantID: json['participantID'] as String?,
-      rewardClaimed: json['rewardClaimed'] as bool?,
       tierID: json['tierID'] as String?,
     );
 
 Map<String, dynamic> _$ExtapiparticipantToJson(Extapiparticipant instance) =>
     <String, dynamic>{
       'participantID': instance.participantID,
-      'rewardClaimed': instance.rewardClaimed,
       'tierID': instance.tierID,
     };
 
