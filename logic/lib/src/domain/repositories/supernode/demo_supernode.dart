@@ -2,6 +2,7 @@ import 'package:mxc_logic/mxc_logic.dart';
 
 import 'api/demo/auth.dart';
 import 'api/demo/btc.dart';
+import 'api/demo/campaign.dart';
 import 'api/demo/device.dart';
 import 'api/demo/dhx.dart';
 import 'api/demo/external_accounts.dart';
@@ -79,6 +80,9 @@ class DemoSupernodeRepository implements SupernodeRepository {
 
   @override
   DemoDeviceRepository get device => const DemoDeviceRepository();
+
+  @override
+  DemoCampaignRepository get campaign => const DemoCampaignRepository();
 
   @override
   Future<Map<String, List<Supernode>>> listSupernodes() async => {

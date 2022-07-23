@@ -56,6 +56,8 @@ class DemoStakeRepository implements StakeRepository {
             DateTime.now().add(const Duration(days: -2)),
             DateTime.now(),
           ),
+          participantId: '0',
+          claimedReward: false,
         ),
       ),
       StakeHistoryFrame(
@@ -75,6 +77,8 @@ class DemoStakeRepository implements StakeRepository {
             DateTime.now().add(const Duration(days: -1)),
             DateTime.now(),
           ),
+          participantId: '1',
+          claimedReward: true,
         ),
       ),
     ];
@@ -96,6 +100,8 @@ class DemoStakeRepository implements StakeRepository {
           DateTime.now().add(const Duration(days: -1)),
           DateTime.now(),
         ),
+        participantId: '3',
+        claimedReward: true,
       ),
       Stake(
         id: 'DemoStakeId2',
@@ -110,6 +116,8 @@ class DemoStakeRepository implements StakeRepository {
           DateTime.now().add(const Duration(days: -1)),
           DateTime.now(),
         ),
+        participantId: '0',
+        claimedReward: false,
       ),
     ];
   }
@@ -133,6 +141,8 @@ class DemoStakeRepository implements StakeRepository {
           DateTime.now().add(const Duration(days: -1)),
           DateTime.now(),
         ),
+        participantId: '0',
+        claimedReward: false,
       ),
       Stake(
         id: 'DemoStakeId2',
@@ -147,6 +157,8 @@ class DemoStakeRepository implements StakeRepository {
           DateTime.now().add(const Duration(days: -1)),
           DateTime.now(),
         ),
+        participantId: '6',
+        claimedReward: true,
       ),
     ];
   }

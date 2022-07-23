@@ -252,6 +252,74 @@ class _$BTCMiningService extends BTCMiningService {
 }
 
 // ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations, unnecessary_brace_in_string_interps
+class _$CampaignService extends CampaignService {
+  _$CampaignService([ChopperClient? client]) {
+    if (client == null) return;
+    this.client = client;
+  }
+
+  @override
+  final definitionType = CampaignService;
+
+  @override
+  Future<Response<ExtapiClaimRewardResponse>> claimReward(
+      {ExtapiClaimRewardRequest? body,
+      String? grpcMetadataXOTP,
+      String? grpcMetadataAuthorization}) {
+    final $url = '/api/campaign/claim-reward';
+    final $headers = {
+      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
+      if (grpcMetadataAuthorization != null)
+        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
+    };
+
+    final $body = body;
+    final $request =
+        Request('POST', $url, client.baseUrl, body: $body, headers: $headers);
+    return client
+        .send<ExtapiClaimRewardResponse, ExtapiClaimRewardResponse>($request);
+  }
+
+  @override
+  Future<Response<ExtapiListCurrentCampaignsResponse>> listCurrentCampaigns(
+      {String? organizationID,
+      String? grpcMetadataXOTP,
+      String? grpcMetadataAuthorization}) {
+    final $url = '/api/campaign/list-current-campaigns';
+    final $params = <String, dynamic>{'organizationID': organizationID};
+    final $headers = {
+      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
+      if (grpcMetadataAuthorization != null)
+        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
+    };
+
+    final $request = Request('GET', $url, client.baseUrl,
+        parameters: $params, headers: $headers);
+    return client.send<ExtapiListCurrentCampaignsResponse,
+        ExtapiListCurrentCampaignsResponse>($request);
+  }
+
+  @override
+  Future<Response<ExtapiParticipateResponse>> participate(
+      {ExtapiParticipateRequest? body,
+      String? grpcMetadataXOTP,
+      String? grpcMetadataAuthorization}) {
+    final $url = '/api/campaign/participate';
+    final $headers = {
+      if (grpcMetadataXOTP != null) 'Grpc-Metadata-X-OTP': grpcMetadataXOTP,
+      if (grpcMetadataAuthorization != null)
+        'Grpc-Metadata-Authorization': grpcMetadataAuthorization,
+    };
+
+    final $body = body;
+    final $request =
+        Request('POST', $url, client.baseUrl, body: $body, headers: $headers);
+    return client
+        .send<ExtapiParticipateResponse, ExtapiParticipateResponse>($request);
+  }
+}
+
+// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations, unnecessary_brace_in_string_interps
 class _$ExternalUserService extends ExternalUserService {
   _$ExternalUserService([ChopperClient? client]) {
     if (client == null) return;
